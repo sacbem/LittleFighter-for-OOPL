@@ -123,7 +123,7 @@
 #include <string.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "mygame.h"
+#include "CGameState.h"
 
 namespace game_framework {
 

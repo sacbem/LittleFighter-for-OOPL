@@ -68,7 +68,7 @@ C++ ，並先安裝DirectX SDK (版本視complier而定)，電腦配備則視遊
 了。
 
 要設計一個新的遊戲，基本上就是改寫CGameStateInit、CGameStateRun、以及
-CGameStateOver這三個class(在mygame.h及mygame.cpp)，這三個class分別代表
+CGameStateOver這三個class(在CGameState.h及mygame.cpp)，這三個class分別代表
 遊戲的起始畫面、遊戲的執行及遊戲結束畫面等三個狀態，在每個狀態中最主要
 的動作分為：OnMove()及OnShow()，由OnMove()負責移動遊戲中的物件，再由
 OnShow()負責顯示各個物件至螢幕。請參考Game網頁所提供的練習及相關資料:

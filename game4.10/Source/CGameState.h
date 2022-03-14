@@ -1,5 +1,5 @@
 /*
- * mygame.h: 本檔案儲遊戲本身的class的interface
+ * CGameState.h: 本檔案儲遊戲本身的class的interface
  * Copyright (C) 2002-2008 Woei-Kae Chen <wkc@csie.ntut.edu.tw>
  *
  * This file is part of game, a free game development framework for windows.
