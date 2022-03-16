@@ -4,76 +4,71 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "CGameState.h"
-
+#include "CGameStateInit.h"
 namespace game_framework {
-    /////////////////////////////////////////////////////////////////////////////
-    // é€™å€‹classç‚ºéŠæˆ²çš„éŠæˆ²é–‹é ­ç•«é¢ç‰©ä»¶
-    /////////////////////////////////////////////////////////////////////////////
+	CGameStateInit::CGameStateInit(CGame* g)
+		: CGameState(g)
+	{
+	}
 
-    CGameStateInit::CGameStateInit(CGame *g)
-        : CGameState(g)
-    {
-    }
+	void CGameStateInit::OnInit()
+	{
+		//
+		// ·í¹Ï«Ü¦h®É¡AOnInit¸ü¤J©Ò¦³ªº¹Ï­nªá«Ü¦h®É¶¡¡C¬°Á×§Kª±¹CÀ¸ªº¤H
+		//     µ¥ªº¤£­@·Ð¡A¹CÀ¸·|¥X²{¡uLoading ...¡v¡AÅã¥ÜLoadingªº¶i«×¡C
+		//
+		ShowInitProgress(0);	// ¤@¶}©lªºloading¶i«×¬°0%
+		//
+		// ¶}©l¸ü¤J¸ê®Æ
+		//
+		logo.LoadBitmap(IDB_BITMAP5);
+		Sleep(300);				// ©ñºC¡A¥H«K¬Ý²M·¡¶i«×¡A¹ê»Ú¹CÀ¸½Ð§R°£¦¹Sleep
+		//
+		// ¦¹OnInit°Ê§@·|±µ¨ìCGameStaterRun::OnInit()¡A©Ò¥H¶i«×ÁÙ¨S¨ì100%
+		//
+	}
 
-    void CGameStateInit::OnInit()
-    {
-        //
-        // ç•¶åœ–å¾ˆå¤šæ™‚ï¼ŒOnInitè¼‰å…¥æ‰€æœ‰çš„åœ–è¦èŠ±å¾ˆå¤šæ™‚é–“ã€‚ç‚ºé¿å…çŽ©éŠæˆ²çš„äºº
-        //     ç­‰çš„ä¸è€ç…©ï¼ŒéŠæˆ²æœƒå‡ºç¾ã€ŒLoading ...ã€ï¼Œé¡¯ç¤ºLoadingçš„é€²åº¦ã€‚
-        //
-        ShowInitProgress(0);	// ä¸€é–‹å§‹çš„loadingé€²åº¦ç‚º0%
-        //
-        // é–‹å§‹è¼‰å…¥è³‡æ–™
-        //
-        logo.LoadBitmap(IDB_BACKGROUND);
-        Sleep(300);				// æ”¾æ…¢ï¼Œä»¥ä¾¿çœ‹æ¸…æ¥šé€²åº¦ï¼Œå¯¦éš›éŠæˆ²è«‹åˆªé™¤æ­¤Sleep
-        //
-        // æ­¤OnInitå‹•ä½œæœƒæŽ¥åˆ°CGameStaterRun::OnInit()ï¼Œæ‰€ä»¥é€²åº¦é‚„æ²’åˆ°100%
-        //
-    }
+	void CGameStateInit::OnBeginState()
+	{
+	}
 
-    void CGameStateInit::OnBeginState()
-    {
-    }
+	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+	{
+		const char KEY_ESC = 27;
+		const char KEY_SPACE = ' ';
+		if (nChar == KEY_SPACE)
+			GotoGameState(GAME_STATE_RUN);						// ¤Á´«¦ÜGAME_STATE_RUN
+		else if (nChar == KEY_ESC)								// Demo Ãö³¬¹CÀ¸ªº¤èªk
+			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// Ãö³¬¹CÀ¸
+	}
 
-    void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
-    {
-        const char KEY_ESC = 27;
-        const char KEY_SPACE = ' ';
-        if (nChar == KEY_SPACE)
-            GotoGameState(GAME_STATE_RUN);						// åˆ‡æ›è‡³GAME_STATE_RUN
-        else if (nChar == KEY_ESC)								// Demo é—œé–‰éŠæˆ²çš„æ–¹æ³•
-            PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// é—œé–‰éŠæˆ²
-    }
+	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
+	{
+		GotoGameState(GAME_STATE_RUN);		// ¤Á´«¦ÜGAME_STATE_RUN
+	}
 
-    void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
-    {
-        GotoGameState(GAME_STATE_RUN);		// åˆ‡æ›è‡³GAME_STATE_RUN
-    }
-
-    void CGameStateInit::OnShow()
-    {
-        //
-        // è²¼ä¸Šlogo
-        //
-        logo.SetTopLeft((SIZE_X - logo.Width()) / 2, SIZE_Y / 8);
-        logo.ShowBitmap();
-        //
-        // Demoèž¢å¹•å­—åž‹çš„ä½¿ç”¨ï¼Œä¸éŽé–‹ç™¼æ™‚è«‹ç›¡é‡é¿å…ç›´æŽ¥ä½¿ç”¨å­—åž‹ï¼Œæ”¹ç”¨CMovingBitmapæ¯”è¼ƒå¥½
-        //
-        CDC *pDC = CDDraw::GetBackCDC();			// å–å¾— Back Plain çš„ CDC 
-        CFont f, *fp;
-        f.CreatePointFont(160, "Times New Roman");	// ç”¢ç”Ÿ font f; 160è¡¨ç¤º16 pointçš„å­—
-        fp = pDC->SelectObject(&f);					// é¸ç”¨ font f
-        pDC->SetBkColor(RGB(0, 0, 0));
-        pDC->SetTextColor(RGB(255, 255, 0));
-        pDC->TextOut(120, 220, "Please click mouse or press SPACE to begin.");
-        pDC->TextOut(5, 395, "Press Ctrl-F to switch in between window mode and full screen mode.");
-        if (ENABLE_GAME_PAUSE)
-            pDC->TextOut(5, 425, "Press Ctrl-Q to pause the Game.");
-        pDC->TextOut(5, 455, "Press Alt-F4 or ESC to Quit.");
-        pDC->SelectObject(fp);						// æ”¾æŽ‰ font f (åƒè¬ä¸è¦æ¼äº†æ”¾æŽ‰)
-        CDDraw::ReleaseBackCDC();					// æ”¾æŽ‰ Back Plain çš„ CDC
-    }
+	void CGameStateInit::OnShow()
+	{
+		//
+		// ¶K¤Wlogo
+		//
+		logo.SetTopLeft(0, 0);
+		logo.ShowBitmap();
+		//
+		// Demo¿Ã¹õ¦r«¬ªº¨Ï¥Î¡A¤£¹L¶}µo®É½ÐºÉ¶qÁ×§Kª½±µ¨Ï¥Î¦r«¬¡A§ï¥ÎCMovingBitmap¤ñ¸û¦n
+		//
+		CDC* pDC = CDDraw::GetBackCDC();			// ¨ú±o Back Plain ªº CDC 
+		CFont f, * fp;
+		f.CreatePointFont(160, "Times New Roman");	// ²£¥Í font f; 160ªí¥Ü16 pointªº¦r
+		fp = pDC->SelectObject(&f);					// ¿ï¥Î font f
+		pDC->SetBkColor(RGB(0, 0, 0));
+		pDC->SetTextColor(RGB(255, 255, 0));
+		pDC->TextOut(50, 220, "Please click mouse or press SPACE to begin.");
+		pDC->TextOut(5, 395, "Press Ctrl-F to switch in between window mode and full screen mode.");
+		if (ENABLE_GAME_PAUSE)
+			pDC->TextOut(5, 425, "Press Ctrl-Q to pause the Game.");
+		pDC->TextOut(5, 455, "Press Alt-F4 or ESC to Quit.");
+		pDC->SelectObject(fp);						// ©ñ±¼ font f (¤d¸U¤£­nº|¤F©ñ±¼)
+		CDDraw::ReleaseBackCDC();					// ©ñ±¼ Back Plain ªº CDC
+	}
 }

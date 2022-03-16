@@ -13,10 +13,10 @@ namespace game_framework {
 
 	CBouncingBall::CBouncingBall()
 	{
-		const int INITIAL_VELOCITY = 20;	// åˆå§‹ä¸Šå‡é€Ÿåº¦
-		const int FLOOR = 400;				// åœ°æ¿åº§æ¨™
+		const int INITIAL_VELOCITY = 20;	// ªì©l¤W¤É³t«×
+		const int FLOOR = 400;				// ¦aªO®y¼Ğ
 		floor = FLOOR;
-		x = 95; y = FLOOR - 1;				// yåº§æ¨™æ¯”åœ°æ¿é«˜1é»(ç«™åœ¨åœ°æ¿ä¸Š)
+		x = 95; y = FLOOR - 1;				// y®y¼Ğ¤ñ¦aªO°ª1ÂI(¯¸¦b¦aªO¤W)
 		rising = true;
 		initial_velocity = INITIAL_VELOCITY;
 		velocity = initial_velocity;
@@ -25,34 +25,34 @@ namespace game_framework {
 	void CBouncingBall::LoadBitmap()
 	{
 		char *filename[4] = { ".\\bitmaps\\ball1.bmp",".\\bitmaps\\ball2.bmp",".\\bitmaps\\ball3.bmp",".\\bitmaps\\ball4.bmp" };
-		for (int i = 0; i < 4; i++)	// è¼‰å…¥å‹•ç•«(ç”±4å¼µåœ–å½¢æ§‹æˆ)
+		for (int i = 0; i < 4; i++)	// ¸ü¤J°Êµe(¥Ñ4±i¹Ï§Îºc¦¨)
 			animation.AddBitmap(filename[i], RGB(0, 0, 0));
 	}
 
 	void CBouncingBall::OnMove()
 	{
-		if (rising) {			// ä¸Šå‡ç‹€æ…‹
+		if (rising) {			// ¤W¤Éª¬ºA
 			if (velocity > 0) {
-				y -= velocity;	// ç•¶é€Ÿåº¦ > 0æ™‚ï¼Œyè»¸ä¸Šå‡(ç§»å‹•velocityå€‹é»ï¼Œvelocityçš„å–®ä½ç‚º é»/æ¬¡)
-				velocity--;		// å—é‡åŠ›å½±éŸ¿ï¼Œä¸‹æ¬¡çš„ä¸Šå‡é€Ÿåº¦é™ä½
+				y -= velocity;	// ·í³t«× > 0®É¡Ay¶b¤W¤É(²¾°Êvelocity­ÓÂI¡Avelocityªº³æ¦ì¬° ÂI/¦¸)
+				velocity--;		// ¨ü­«¤O¼vÅT¡A¤U¦¸ªº¤W¤É³t«×­°§C
 			}
 			else {
-				rising = false; // ç•¶é€Ÿåº¦ <= 0ï¼Œä¸Šå‡çµ‚æ­¢ï¼Œä¸‹æ¬¡æ”¹ç‚ºä¸‹é™
-				velocity = 1;	// ä¸‹é™çš„åˆé€Ÿ(velocity)ç‚º1
+				rising = false; // ·í³t«× <= 0¡A¤W¤É²×¤î¡A¤U¦¸§ï¬°¤U­°
+				velocity = 1;	// ¤U­°ªºªì³t(velocity)¬°1
 			}
 		}
-		else {				// ä¸‹é™ç‹€æ…‹
-			if (y < floor - 1) {  // ç•¶yåº§æ¨™é‚„æ²’ç¢°åˆ°åœ°æ¿
-				y += velocity;	// yè»¸ä¸‹é™(ç§»å‹•velocityå€‹é»ï¼Œvelocityçš„å–®ä½ç‚º é»/æ¬¡)
-				velocity++;		// å—é‡åŠ›å½±éŸ¿ï¼Œä¸‹æ¬¡çš„ä¸‹é™é€Ÿåº¦å¢åŠ 
+		else {				// ¤U­°ª¬ºA
+			if (y < floor - 1) {  // ·íy®y¼ĞÁÙ¨S¸I¨ì¦aªO
+				y += velocity;	// y¶b¤U­°(²¾°Êvelocity­ÓÂI¡Avelocityªº³æ¦ì¬° ÂI/¦¸)
+				velocity++;		// ¨ü­«¤O¼vÅT¡A¤U¦¸ªº¤U­°³t«×¼W¥[
 			}
 			else {
-				y = floor - 1;  // ç•¶yåº§æ¨™ä½æ–¼åœ°æ¿ï¼Œæ›´æ­£ç‚ºåœ°æ¿ä¸Š
-				rising = true;	// æ¢åº•åå½ˆï¼Œä¸‹æ¬¡æ”¹ç‚ºä¸Šå‡
-				velocity = initial_velocity; // é‡è¨­ä¸Šå‡åˆå§‹é€Ÿåº¦
+				y = floor - 1;  // ·íy®y¼Ğ§C©ó¦aªO¡A§ó¥¿¬°¦aªO¤W
+				rising = true;	// ±´©³¤Ï¼u¡A¤U¦¸§ï¬°¤W¤É
+				velocity = initial_velocity; // ­«³]¤W¤Éªì©l³t«×
 			}
 		}
-		animation.OnMove();		// åŸ·è¡Œä¸€æ¬¡animation.OnMove()ï¼Œanimationæ‰æœƒæ›åœ–
+		animation.OnMove();		// °õ¦æ¤@¦¸animation.OnMove()¡Aanimation¤~·|´«¹Ï
 	}
 
 	void CBouncingBall::OnShow()
