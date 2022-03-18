@@ -16,79 +16,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Res\ball.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\bmp0.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\bmp1.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\bmp10.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\bmp2.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\bmp3.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\bmp4.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\bmp5.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\bmp6.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\bmp7.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\bmp8.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\bmp9.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\center.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="RES\continue.bmp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Res\corner.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\eraser1.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\eraser2.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\eraser3.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\game.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\game.rc2">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\gamecurs.cur">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\gameDoc.ico">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="RES\help.bmp">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="RES\loading.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\ntutcsie.bmp">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\Toolbar.bmp">
@@ -120,12 +57,6 @@
     <ClCompile Include="Source\CEraser.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CBall.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CBouncingBall.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\CGameStateInit.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
@@ -133,6 +64,9 @@
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\CGameStateRun.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InitalPageMenu.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -164,12 +98,6 @@
     <ClInclude Include="Source\CEraser.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CBall.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CBouncingBall.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\CGameStateInit.h">
       <Filter>MyGame</Filter>
     </ClInclude>
@@ -177,6 +105,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\CGameStateRun.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InitalPageMenu.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
@@ -189,10 +120,28 @@
     <Image Include="..\..\OOPL_bg\InitPage_1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\bitmap4.bmp">
+    <Image Include="RES\InitPage_1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="RES\InitPage_1.bmp">
+    <Image Include="RES\inital_btn_setting.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\inital_btn_setting2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\inital_btn_start.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\inital_btn_start2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\OOP_game\game4.10\RES\InitPage_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\MENU_CLIP_BOX.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
