@@ -34,10 +34,8 @@ namespace game_framework {
     }
 
     void  StartBtn::Load(){
-        
         Btn[0].LoadBitmap(IDB_BITMAP8);
         Btn[1].LoadBitmap(IDB_BITMAP9);
-        //btnNClick.LoadBitmapA(IDB_BITMAP8);
     }
     void StartBtn::buttonTouch() {
         Btn[1].SetTopLeft(posistion_XY[0][0], posistion_XY[0][1]);
