@@ -53,7 +53,25 @@ namespace game_framework {
         const char KEY_S = 83;
         const char KEY_D = 68;
  
-        
+        switch (nChar)
+        {
+        case KEY_W:
+            ++keyCount;
+            break;
+        case KEY_S:
+            ++keyCount;
+            break;
+        case KEY_ENTER:
+            if ((keyCount % 2) == 1) {
+                GotoGameState(GAME_STATE_RUN);  // ¤Á´«¦ÜGAME_STATE_RUN
+            }
+            else if ((keyCount % 2) == 0) {
+                PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// Ãö³¬¹CÀ¸
+            }
+            break;
+        default:
+            break;
+        }
 	}
 
 	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
@@ -88,7 +106,16 @@ namespace game_framework {
 
         startBtn->OnShow();
         settingBtn->OnShow();
-
+        switch (keyCount % 2) {
+            case 0:          
+                startBtn->buttonTouch();
+                settingBtn->OnShow();
+                break;
+            case 1:
+                settingBtn->buttonTouch();
+                startBtn->OnShow();
+                break;
+        }
         if (cursorXY[0]>= 545 && cursorXY[0] <= 745) {
             if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
                 startBtn->buttonTouch();
