@@ -144,5 +144,14 @@
     <Image Include="RES\MENU_CLIP_BOX.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\bitmap11.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\quit2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\quit1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

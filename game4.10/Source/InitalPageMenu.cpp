@@ -16,8 +16,9 @@ namespace game_framework {
         posistion_XY.resize(posXY.end() - posXY.begin());
         int ind_x =0;
         for (auto i : posXY) {
-            for (auto o : i)
+            for (auto o : i) {
                 posistion_XY[ind_x].push_back(o);
+            }  
             ind_x++;
         }
     }
@@ -58,8 +59,8 @@ namespace game_framework {
         Initialize(posistion_XY);
     }
     void  SettingBtn::Load() {
-        Btn[0].LoadBitmapA(IDB_BITMAP6);
-        Btn[1].LoadBitmapA(IDB_BITMAP7);
+        Btn[0].LoadBitmapA(IDB_BITMAP12);
+        Btn[1].LoadBitmapA(IDB_BITMAP11);
     }
     void SettingBtn::OnShow() {
         Btn[0].SetTopLeft(posistion_XY[0][0], posistion_XY[0][1]);
