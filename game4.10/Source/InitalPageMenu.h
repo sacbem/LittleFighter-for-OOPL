@@ -9,13 +9,11 @@ namespace game_framework {
     {
     public:
         MenuBtn();
-        void Initialize(vector<vector<int>> positionXY);				// 設定圖形初始值
+        void Initialize(vector<vector<int>> positionXY);// 設定圖形初始值
         virtual void OnShow()= 0;					// 將圖形貼到畫面
         virtual void buttonTouch() = 0;
         virtual void Load() = 0;
-                    			    // 載入圖形
-        //void SetXY(int nx, int ny);		// 設定左上角座標
-       
+    
     protected:
         vector<vector<int>> posistion_XY;					// 圖形左上角座標  
         vector <CMovingBitmap> Btn;
@@ -24,8 +22,6 @@ namespace game_framework {
     };
 
     class StartBtn :public MenuBtn {
-    private:
-
     public:
         StartBtn();
         virtual void buttonTouch() override;

@@ -36,29 +36,47 @@ namespace game_framework {
 
 	void CGameStateInit::OnBeginState()
 	{
-        
+        keyCount = 0;
+        cursorClickLift = 0;
 	}
-
+    
+    void CGameStateInit:: OnMouseMove(UINT nFlags, CPoint point) {
+        cursorXY[0] = point.x;
+        cursorXY[1] = point.y;
+    }
 	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
 		const char KEY_ESC = 27;
-		const char KEY_SPACE = ' ';
-		if (nChar == KEY_SPACE )
-			GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
-		else if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
-			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+		const char KEY_ENTER = 13;
+        const char KEY_W = 87;
+        const char KEY_A = 65;
+        const char KEY_S = 83;
+        const char KEY_D = 68;
+ 
+        
 	}
 
 	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 	{
-        //POINT p;
-        //GetCursorPos(&p);
-        //if (p.x >= 410 && p.x <= (410 + 255)) {
-        //    if (p.y >= 310 && p.y <= (330 + 31)) {
-        //        GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
-        //    }
-        //}   
+        //TRACE("The value of nFlags is %d\n",  nFlags);
+        cursorClickLift = nFlags;
+
+        if (point.x >= 545 && point.x <= 745) {
+            if (point.y >= 260 && point.y <= 280) {
+                if (nFlags == 1) {
+                    GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+                } 
+            }
+        }
+        else if (point.x >= 525 && point.x <= 765) {
+            if (point.y >= 300 && point.y <= 320) {
+                if (nFlags == 1) {
+                    PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+                }
+            }
+        }
 	}
+
 
 	void CGameStateInit::OnShow()
 	{
@@ -70,6 +88,21 @@ namespace game_framework {
 
         startBtn->OnShow();
         settingBtn->OnShow();
+
+        if (cursorXY[0]>= 545 && cursorXY[0] <= 745) {
+            if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
+                startBtn->buttonTouch();
+                settingBtn->OnShow();
+            }
+        }
+        if (cursorXY[0] >= 525 && cursorXY[0] <= 765) {
+            if (cursorXY[1] >= 300 && cursorXY[1] <= 320) {
+                settingBtn->buttonTouch();
+                startBtn->OnShow();
+            }
+        }
+    
+
 		//
 		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
 		//
@@ -79,11 +112,7 @@ namespace game_framework {
 		fp = pDC->SelectObject(&f);					// 選用 font f
 		pDC->SetBkColor(RGB(0, 0, 0));
 		pDC->SetTextColor(RGB(255, 255, 0));
-		////pDC->TextOut(50, 220, "Please click mouse or press SPACE to begin.");
-		//pDC->TextOut(5, 395, "Press Ctrl-F to switch in between window mode and full screen mode.");
-		//if (ENABLE_GAME_PAUSE)
-		//	pDC->TextOut(5, 425, "Press Ctrl-Q to pause the Game.");
-		//pDC->TextOut(5, 455, "Press Alt-F4 or ESC to Quit.");
+
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	}
