@@ -67,7 +67,8 @@ namespace game_framework {
 		//
 		logo.SetTopLeft(0, 0);
 		logo.ShowBitmap();
-        
+
+        startBtn->OnShow();
         settingBtn->OnShow();
 		//
 		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
