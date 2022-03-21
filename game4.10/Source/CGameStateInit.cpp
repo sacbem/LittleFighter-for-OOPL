@@ -15,20 +15,20 @@ namespace game_framework {
 
 	void CGameStateInit::OnInit(){
 		/*
-		// ·í¹Ï«Ü¦h®É¡AOnInit¸ü¤J©Ò¦³ªº¹Ï­nªá«Ü¦h®É¶¡¡C¬°Á×§Kª±¹CÀ¸ªº¤H
-		//     µ¥ªº¤£­@·Ğ¡A¹CÀ¸·|¥X²{¡uLoading ...¡v¡AÅã¥ÜLoadingªº¶i«×¡C
+		// ç•¶åœ–å¾ˆå¤šæ™‚ï¼ŒOnInitè¼‰å…¥æ‰€æœ‰çš„åœ–è¦èŠ±å¾ˆå¤šæ™‚é–“ã€‚ç‚ºé¿å…ç©éŠæˆ²çš„äºº
+		//     ç­‰çš„ä¸è€ç…©ï¼ŒéŠæˆ²æœƒå‡ºç¾ã€ŒLoading ...ã€ï¼Œé¡¯ç¤ºLoadingçš„é€²åº¦ã€‚
 		*/
-		ShowInitProgress(0);	// ¤@¶}©lªºloading¶i«×¬°0%
+		ShowInitProgress(0);	// ä¸€é–‹å§‹çš„loadingé€²åº¦ç‚º0%
 		/*
-            ¶}©l¸ü¤J¸ê®Æ
+            é–‹å§‹è¼‰å…¥è³‡æ–™
         */
 	
-        startBtn->Load();
-        settingBtn->Load();
+        	startBtn->Load();
+        	settingBtn->Load();
 		logo.LoadBitmap(IDB_BITMAP3);
-		Sleep(300);				// ©ñºC¡A¥H«K¬İ²M·¡¶i«×¡A¹ê»Ú¹CÀ¸½Ğ§R°£¦¹Sleep
+		Sleep(300);				// æ”¾æ…¢ï¼Œä»¥ä¾¿çœ‹æ¸…æ¥šé€²åº¦ï¼Œå¯¦éš›éŠæˆ²è«‹åˆªé™¤æ­¤Sleep
 		/*
-         ¦¹OnInit°Ê§@·|±µ¨ìCGameStaterRun::OnInit()¡A©Ò¥H¶i«×ÁÙ¨S¨ì100%
+         æ­¤OnInitå‹•ä½œæœƒæ¥åˆ°CGameStaterRun::OnInit()ï¼Œæ‰€ä»¥é€²åº¦é‚„æ²’åˆ°100%
         */
 
 	}
@@ -39,6 +39,7 @@ namespace game_framework {
         mouseEnable = false;
 	}
 
+<<<<<<< HEAD
     void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point) {
         mouseEnable = true;
         cursorXY[0] = point.x;
@@ -81,32 +82,76 @@ namespace game_framework {
                 break;
         }
 	}
+=======
+    	void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point) {
 
-	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point){
+		cursorXY[0] = point.x;
+		cursorXY[1] = point.y;
+		if (cursorXY[0] >= 545 && cursorXY[0] <= 745) {
+		    if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
+			keyCount = 0;                   //å›æ­¸æ­£å¸¸è¨ˆæ•¸
+		    }
+		}
+		if (cursorXY[0] >= 525 && cursorXY[0] <= 765) {
+		    if (cursorXY[1] >= 300 && cursorXY[1] <= 320) {
+			keyCount = 1;                   //å›æ­¸æ­£å¸¸è¨ˆæ•¸
+		    }
+		}
+    	}
+     void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
+          const char KEY_ESC = 27;
+          const char KEY_ENTER = 13;
+          const char KEY_W = 87;
+          const char KEY_A = 65;
+          const char KEY_S = 83;
+          const char KEY_D = 68;
+          switch (nChar){
+               case KEY_W:
+                    ++keyCount;  
+               break;
+               case KEY_S:
+               ++keyCount;
+               break;
+               case KEY_ENTER:
+                    if ((keyCount % 2) == 0) {
+                        GotoGameState(GAME_STATE_RUN);  // åˆ‡æ›è‡³GAME_STATE_RUN
+                    }
+                    if ((keyCount % 2) == 1) {
+                        PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// é—œé–‰éŠæˆ²
+                    }
+               break;
+               default:
+                    break;
+          }
+     }
+>>>>>>> f9a7a2b16a459f360c427e9f0853b2af5a84e637
 
-        if (point.x >= 545 && point.x <= 745) {
-            if (point.y >= 260 && point.y <= 280) {
-                if (nFlags == 1) {
-                    GotoGameState(GAME_STATE_RUN);		// ¤Á´«¦ÜGAME_STATE_RUN
-                } 
-            }
-        }
-        if (point.x >= 525 && point.x <= 765) {
-            if (point.y >= 300 && point.y <= 320) {
-                if (nFlags == 1) {
-                    PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// Ãö³¬¹CÀ¸
-                }
-            }
-        }
-	}
+void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point){
+
+     if (point.x >= 545 && point.x <= 745) {
+          if (point.y >= 260 && point.y <= 280) {
+               if (nFlags == 1) {
+                    GotoGameState(GAME_STATE_RUN);		// åˆ‡æ›è‡³GAME_STATE_RUN
+               } 
+          }
+     }
+     if (point.x >= 525 && point.x <= 765) {
+          if (point.y >= 300 && point.y <= 320) {
+                    if (nFlags == 1) {
+                         PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// é—œé–‰éŠæˆ²
+                    }
+               }
+          }
+     }
 
 
-	void CGameStateInit::OnShow()
+     void CGameStateInit::OnShow()
 	{
 		/*
-         ¶K¤Wlogo
+         è²¼ä¸Šlogo
         */
 
+<<<<<<< HEAD
 		logo.SetTopLeft(0, 0);
 		logo.ShowBitmap();
 
@@ -138,24 +183,52 @@ namespace game_framework {
                 break;
             }
         }
+=======
+          logo.SetTopLeft(0, 0);
+          logo.ShowBitmap();
+          startBtn->OnShow();
+          settingBtn->OnShow();
+          switch (keyCount % 2) {
+               case 0:          
+                    startBtn->buttonTouch();
+                    settingBtn->OnShow();
+               break;
+               case 1:
+                    settingBtn->buttonTouch();
+                    startBtn->OnShow();
+          break;
+          }
+          if (cursorXY[0]>= 545 && cursorXY[0] <= 745) {
+               if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
+                    startBtn->buttonTouch();
+                    settingBtn->OnShow();
+               }
+        }
+        if (cursorXY[0] >= 525 && cursorXY[0] <= 765) {
+             if (cursorXY[1] >= 300 && cursorXY[1] <= 320) {
+               settingBtn->buttonTouch();
+               startBtn->OnShow();
+          }
+     }
+>>>>>>> f9a7a2b16a459f360c427e9f0853b2af5a84e637
     
 		/*
-         Demo¿Ã¹õ¦r«¬ªº¨Ï¥Î¡A¤£¹L¶}µo®É½ĞºÉ¶qÁ×§Kª½±µ¨Ï¥Î¦r«¬¡A§ï¥ÎCMovingBitmap¤ñ¸û¦n
+         Demoè¢å¹•å­—å‹çš„ä½¿ç”¨ï¼Œä¸éé–‹ç™¼æ™‚è«‹ç›¡é‡é¿å…ç›´æ¥ä½¿ç”¨å­—å‹ï¼Œæ”¹ç”¨CMovingBitmapæ¯”è¼ƒå¥½
         */
 	
-		CDC* pDC = CDDraw::GetBackCDC();			// ¨ú±o Back Plain ªº CDC 
-		CFont f, * fp;
-		f.CreatePointFont(160, "Times New Roman");	// ²£¥Í font f; 160ªí¥Ü16 pointªº¦r
-		fp = pDC->SelectObject(&f);					// ¿ï¥Î font f
-		pDC->SetBkColor(RGB(0, 0, 0));
-		pDC->SetTextColor(RGB(255, 255, 0));
+     CDC* pDC = CDDraw::GetBackCDC();			// å–å¾— Back Plain çš„ CDC 
+     CFont f, * fp;
+     f.CreatePointFont(160, "Times New Roman");	// ç”¢ç”Ÿ font f; 160è¡¨ç¤º16 pointçš„å­—
+     fp = pDC->SelectObject(&f);					// é¸ç”¨ font f
+     pDC->SetBkColor(RGB(0, 0, 0));
+     pDC->SetTextColor(RGB(255, 255, 0));
 
-		pDC->SelectObject(fp);						// ©ñ±¼ font f (¤d¸U¤£­nº|¤F©ñ±¼)
-		CDDraw::ReleaseBackCDC();					// ©ñ±¼ Back Plain ªº CDC
+     pDC->SelectObject(fp);						// æ”¾æ‰ font f (åƒè¬ä¸è¦æ¼äº†æ”¾æ‰)
+     CDDraw::ReleaseBackCDC();					// æ”¾æ‰ Back Plain çš„ CDC
 	}
 
     CGameStateInit::~CGameStateInit(){
-        delete startBtn;
-        delete settingBtn;
+          delete startBtn;
+          delete settingBtn;
     }
 }
