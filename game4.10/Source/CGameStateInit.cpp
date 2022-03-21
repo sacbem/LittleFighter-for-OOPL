@@ -23,8 +23,8 @@ namespace game_framework {
             開始載入資料
         */
 	
-        	startBtn->Load();
-        	settingBtn->Load();
+        startBtn->Load();
+        settingBtn->Load();
 		logo.LoadBitmap(IDB_BITMAP3);
 		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		/*
@@ -36,12 +36,14 @@ namespace game_framework {
 	void CGameStateInit::OnBeginState(){
         keyCount = 0;
         cursorClickLift = 0;
+        mouseEnable = false;
 	}
 
     	void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point) {
 
 		cursorXY[0] = point.x;
 		cursorXY[1] = point.y;
+        mouseEnable = true;
 		if (cursorXY[0] >= 545 && cursorXY[0] <= 745) {
 		    if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
 			keyCount = 0;                   //回歸正常計數
@@ -60,12 +62,13 @@ namespace game_framework {
           const char KEY_A = 65;
           const char KEY_S = 83;
           const char KEY_D = 68;
+          mouseEnable = false;
           switch (nChar){
                case KEY_W:
                     ++keyCount;  
                break;
                case KEY_S:
-               ++keyCount;
+                    ++keyCount;
                break;
                case KEY_ENTER:
                     if ((keyCount % 2) == 0) {
@@ -99,8 +102,7 @@ void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point){
      }
 
 
-     void CGameStateInit::OnShow()
-	{
+     void CGameStateInit::OnShow(){
 		/*
          貼上logo
         */
@@ -109,28 +111,33 @@ void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point){
           logo.ShowBitmap();
           startBtn->OnShow();
           settingBtn->OnShow();
-          switch (keyCount % 2) {
-               case 0:          
-                    startBtn->buttonTouch();
-                    settingBtn->OnShow();
-               break;
-               case 1:
-                    settingBtn->buttonTouch();
-                    startBtn->OnShow();
-          break;
+          if (mouseEnable) {
+              if (cursorXY[0] >= 545 && cursorXY[0] <= 745) {
+                  if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
+                      startBtn->buttonTouch();
+                      settingBtn->OnShow();
+                  }
+              }
+              if (cursorXY[0] >= 525 && cursorXY[0] <= 765) {
+                  if (cursorXY[1] >= 300 && cursorXY[1] <= 320) {
+                      settingBtn->buttonTouch();
+                      startBtn->OnShow();
+                  }
+              }
           }
-          if (cursorXY[0]>= 545 && cursorXY[0] <= 745) {
-               if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
-                    startBtn->buttonTouch();
-                    settingBtn->OnShow();
-               }
-        }
-        if (cursorXY[0] >= 525 && cursorXY[0] <= 765) {
-             if (cursorXY[1] >= 300 && cursorXY[1] <= 320) {
-               settingBtn->buttonTouch();
-               startBtn->OnShow();
+          else {
+              switch (keyCount % 2) {
+              case 0:
+                  startBtn->buttonTouch();
+                  settingBtn->OnShow();
+                  break;
+              case 1:
+                  settingBtn->buttonTouch();
+                  startBtn->OnShow();
+                  break;
+              }
           }
-     }
+          
     
 		/*
          Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
