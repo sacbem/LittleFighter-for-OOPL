@@ -39,7 +39,6 @@ namespace game_framework {
         mouseEnable = false;
 	}
 
-<<<<<<< HEAD
     void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point) {
         mouseEnable = true;
         cursorXY[0] = point.x;
@@ -72,59 +71,16 @@ namespace game_framework {
                 break;
             case KEY_ENTER:
                 if (keyCount == 0) {
-                    GotoGameState(GAME_STATE_RUN);  // ¤Á´«¦ÜGAME_STATE_RUN
+                    GotoGameState(GAME_STATE_RUN);  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½GAME_STATE_RUN
                 }
                 if (keyCount == 1) {
-                    PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// Ãö³¬¹CÀ¸
+                    PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½
                 }
                 break;
             default:
                 break;
         }
 	}
-=======
-    	void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point) {
-
-		cursorXY[0] = point.x;
-		cursorXY[1] = point.y;
-		if (cursorXY[0] >= 545 && cursorXY[0] <= 745) {
-		    if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
-			keyCount = 0;                   //å›žæ­¸æ­£å¸¸è¨ˆæ•¸
-		    }
-		}
-		if (cursorXY[0] >= 525 && cursorXY[0] <= 765) {
-		    if (cursorXY[1] >= 300 && cursorXY[1] <= 320) {
-			keyCount = 1;                   //å›žæ­¸æ­£å¸¸è¨ˆæ•¸
-		    }
-		}
-    	}
-     void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
-          const char KEY_ESC = 27;
-          const char KEY_ENTER = 13;
-          const char KEY_W = 87;
-          const char KEY_A = 65;
-          const char KEY_S = 83;
-          const char KEY_D = 68;
-          switch (nChar){
-               case KEY_W:
-                    ++keyCount;  
-               break;
-               case KEY_S:
-               ++keyCount;
-               break;
-               case KEY_ENTER:
-                    if ((keyCount % 2) == 0) {
-                        GotoGameState(GAME_STATE_RUN);  // åˆ‡æ›è‡³GAME_STATE_RUN
-                    }
-                    if ((keyCount % 2) == 1) {
-                        PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// é—œé–‰éŠæˆ²
-                    }
-               break;
-               default:
-                    break;
-          }
-     }
->>>>>>> f9a7a2b16a459f360c427e9f0853b2af5a84e637
 
 void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point){
 
