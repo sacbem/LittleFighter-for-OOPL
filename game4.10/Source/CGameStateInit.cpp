@@ -139,34 +139,6 @@ void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point){
                 break;
             }
         }
-=======
-          logo.SetTopLeft(0, 0);
-          logo.ShowBitmap();
-          startBtn->OnShow();
-          settingBtn->OnShow();
-          switch (keyCount % 2) {
-               case 0:          
-                    startBtn->buttonTouch();
-                    settingBtn->OnShow();
-               break;
-               case 1:
-                    settingBtn->buttonTouch();
-                    startBtn->OnShow();
-          break;
-          }
-          if (cursorXY[0]>= 545 && cursorXY[0] <= 745) {
-               if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
-                    startBtn->buttonTouch();
-                    settingBtn->OnShow();
-               }
-        }
-        if (cursorXY[0] >= 525 && cursorXY[0] <= 765) {
-             if (cursorXY[1] >= 300 && cursorXY[1] <= 320) {
-               settingBtn->buttonTouch();
-               startBtn->OnShow();
-          }
-     }
->>>>>>> f9a7a2b16a459f360c427e9f0853b2af5a84e637
     
 		/*
          Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
