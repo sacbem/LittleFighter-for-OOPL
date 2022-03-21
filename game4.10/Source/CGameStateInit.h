@@ -19,5 +19,6 @@ namespace game_framework {
         int keyCount;
         int cursorXY[2];
         int cursorClickLift;
+        bool mouseEnable;
 	};
 }
