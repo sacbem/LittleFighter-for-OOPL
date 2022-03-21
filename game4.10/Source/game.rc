@@ -82,9 +82,37 @@ IDB_BITMAP10            BITMAP                  "..\\res\\MENU_CLIP_BOX.bmp"
 
 IDB_BITMAP7             BITMAP                  "..\\res\\inital_btn_setting2.bmp"
 
-IDB_BITMAP11            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\quit2.bmp"
+IDB_BITMAP11            BITMAP                  "..\\res\\quit2.bmp"
 
-IDB_BITMAP12            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\quit1.bmp"
+IDB_BITMAP12            BITMAP                  "..\\res\\quit1.bmp"
+
+IDB_PLAYER1_NORMAL1     BITMAP                  "..\\res\\player1_0.bmp"
+
+IDB_PLAYER1_NORMAL2     BITMAP                  "..\\res\\player1_1.bmp"
+
+IDB_PLAYER1_NORMAL3     BITMAP                  "..\\res\\player1_2.bmp"
+
+IDB_PLAYER1_NORMAL4     BITMAP                  "..\\res\\player1_3.bmp"
+
+IDB_PLAYER1_WALK1       BITMAP                  "..\\res\\player1_4.bmp"
+
+IDB_PLAYER1_WALK2       BITMAP                  "..\\res\\player1_5.bmp"
+
+IDB_PLAYER1_WALK3       BITMAP                  "..\\res\\player1_6.bmp"
+
+IDB_PLAYER1_WALK4       BITMAP                  "..\\res\\player1_7.bmp"
+
+IDB_PLAYER1_ATTACK1     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\player1_10.bmp"
+
+IDB_PLAYER1_ATTACK2     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\player1_11.bmp"
+
+IDB_PLAYER1_ATTACK3     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\player1_12.bmp"
+
+IDB_PLAYER1_ATTACK4     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\player1_13.bmp"
+
+IDB_PLAYER1_ATTACK5     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\player1_14.bmp"
+
+IDB_PLAYER1_ATTACK6     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\player1_15.bmp"
 
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////

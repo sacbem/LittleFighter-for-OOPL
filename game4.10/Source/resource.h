@@ -45,6 +45,21 @@
 #define IDB_BITMAP10                    165
 #define IDB_BITMAP11                    169
 #define IDB_BITMAP12                    170
+#define IDB_PLAYER1_NORMAL1             171
+#define IDB_PLAYER7                     172
+#define IDB_PLAYER1_WALK4               172
+#define IDB_PLAYER1_NORMAL2             173
+#define IDB_PLAYER1_NORMAL3             174
+#define IDB_PLAYER1_NORMAL4             175
+#define IDB_PLAYER1_WALK1               176
+#define IDB_PLAYER1_WALK2               177
+#define IDB_PLAYER1_WALK3               178
+#define IDB_PLAYER1_ATTACK1             179
+#define IDB_PLAYER1_ATTACK2             180
+#define IDB_PLAYER1_ATTACK3             181
+#define IDB_PLAYER1_ATTACK4             182
+#define IDB_PLAYER1_ATTACK5             183
+#define IDB_PLAYER1_ATTACK6             184
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -57,7 +72,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        171
+#define _APS_NEXT_RESOURCE_VALUE        185
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

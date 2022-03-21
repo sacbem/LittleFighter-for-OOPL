@@ -36,51 +36,49 @@ namespace game_framework {
 	void CGameStateInit::OnBeginState(){
         keyCount = 0;
         cursorClickLift = 0;
-        mouseEnable = false;
 	}
 
-    void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point) {
-        mouseEnable = true;
-        cursorXY[0] = point.x;
-        cursorXY[1] = point.y;
-        if (cursorXY[0] >= 545 && cursorXY[0] <= 745) {
-            if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
-                keyCount = 0;                  
-            }
-        }
-        if (cursorXY[0] >= 525 && cursorXY[0] <= 765) {
-            if (cursorXY[1] >= 300 && cursorXY[1] <= 320) {
-                keyCount = 1;                   
-            }
-        }
-    }
-	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
-        const char KEY_ESC = 27;
-		const char KEY_ENTER = 13;
-        const char KEY_W = 87;
-        const char KEY_A = 65;
-        const char KEY_S = 83;
-        const char KEY_D = 68;
-        mouseEnable = false;
-        switch (nChar){
-            case KEY_W:
-                keyCount = 0;
-                break;
-            case KEY_S:
-                keyCount = 1;
-                break;
-            case KEY_ENTER:
-                if (keyCount == 0) {
-                    GotoGameState(GAME_STATE_RUN);  // ������GAME_STATE_RUN
-                }
-                if (keyCount == 1) {
-                    PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// �����C��
-                }
-                break;
-            default:
-                break;
-        }
-	}
+    	void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point) {
+
+		cursorXY[0] = point.x;
+		cursorXY[1] = point.y;
+		if (cursorXY[0] >= 545 && cursorXY[0] <= 745) {
+		    if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
+			keyCount = 0;                   //回歸正常計數
+		    }
+		}
+		if (cursorXY[0] >= 525 && cursorXY[0] <= 765) {
+		    if (cursorXY[1] >= 300 && cursorXY[1] <= 320) {
+			keyCount = 1;                   //回歸正常計數
+		    }
+		}
+    	}
+     void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
+          const char KEY_ESC = 27;
+          const char KEY_ENTER = 13;
+          const char KEY_W = 87;
+          const char KEY_A = 65;
+          const char KEY_S = 83;
+          const char KEY_D = 68;
+          switch (nChar){
+               case KEY_W:
+                    ++keyCount;  
+               break;
+               case KEY_S:
+               ++keyCount;
+               break;
+               case KEY_ENTER:
+                    if ((keyCount % 2) == 0) {
+                        GotoGameState(GAME_STATE_RUN);  // 切換至GAME_STATE_RUN
+                    }
+                    if ((keyCount % 2) == 1) {
+                        PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+                    }
+               break;
+               default:
+                    break;
+          }
+     }
 
 void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point){
 
@@ -107,38 +105,32 @@ void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point){
          貼上logo
         */
 
-<<<<<<< HEAD
-		logo.SetTopLeft(0, 0);
-		logo.ShowBitmap();
-
-        startBtn->OnShow();
-        settingBtn->OnShow();
-        if (mouseEnable) {
-            if (cursorXY[0] >= 545 && cursorXY[0] <= 745) {
-                if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
+          logo.SetTopLeft(0, 0);
+          logo.ShowBitmap();
+          startBtn->OnShow();
+          settingBtn->OnShow();
+          switch (keyCount % 2) {
+               case 0:          
                     startBtn->buttonTouch();
                     settingBtn->OnShow();
-                }
-            }
-            if (cursorXY[0] >= 525 && cursorXY[0] <= 765) {
-                if (cursorXY[1] >= 300 && cursorXY[1] <= 320) {
+               break;
+               case 1:
                     settingBtn->buttonTouch();
                     startBtn->OnShow();
-                }
-            }
+          break;
+          }
+          if (cursorXY[0]>= 545 && cursorXY[0] <= 745) {
+               if (cursorXY[1] >= 260 && cursorXY[1] <= 280) {
+                    startBtn->buttonTouch();
+                    settingBtn->OnShow();
+               }
         }
-        else {
-            switch (keyCount) {
-            case 0:
-                startBtn->buttonTouch();
-                settingBtn->OnShow();
-                break;
-            case 1:
-                settingBtn->buttonTouch();
-                startBtn->OnShow();
-                break;
-            }
-        }
+        if (cursorXY[0] >= 525 && cursorXY[0] <= 765) {
+             if (cursorXY[1] >= 300 && cursorXY[1] <= 320) {
+               settingBtn->buttonTouch();
+               startBtn->OnShow();
+          }
+     }
     
 		/*
          Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好

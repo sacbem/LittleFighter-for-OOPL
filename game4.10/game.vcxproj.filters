@@ -69,6 +69,9 @@
     <ClCompile Include="Source\InitalPageMenu.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Character.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -108,6 +111,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\InitalPageMenu.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Character.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
@@ -151,6 +157,48 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="RES\quit1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\player1_0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\player1_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\player1_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\player1_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\player1_4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\player1_5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\player1_6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\player1_7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\player1_10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\player1_11.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\player1_12.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\player1_13.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\player1_14.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\player1_15.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -10,19 +10,22 @@ namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g)
 		: CGameState(g)
 	{
+		PlayerTest = new Character();
 	}
 
 	CGameStateRun::~CGameStateRun()
 	{
+		delete PlayerTest;
 	}
 
 	void CGameStateRun::OnBeginState()
 	{
+		PlayerTest->Initialize();
 	}
 
 	void CGameStateRun::OnMove()						// 移動遊戲元素
 	{
-
+		PlayerTest->OnMove();
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -41,6 +44,8 @@ namespace game_framework {
 		//
 		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 		//
+
+		PlayerTest->LoadBitmap();
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -49,12 +54,31 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
+		const char KEY_SPACE = 0x20; // keyboard SPACE
 		//if (nChar == KEY_LEFT)
 			
 		//if (nChar == KEY_RIGHT)
 			//sister.SetMovingRight(true);
 		// if (nChar == KEY_UP)
 			// sister.SetJumpimg(true);
+		if (nChar == KEY_LEFT) {
+			PlayerTest->SetMovingLeft(true);
+			PlayerTest->SetRunning(true);
+		}
+		if (nChar == KEY_RIGHT) {
+			PlayerTest->SetMovingRight(true);
+			PlayerTest->SetRunning(true);
+		}
+		if (nChar == KEY_UP) {
+			PlayerTest->SetMovingUp(true);
+			PlayerTest->SetRunning(true);
+		}
+		if (nChar == KEY_DOWN) {
+			PlayerTest->SetMovingDown(true);
+			PlayerTest->SetRunning(true);
+		}
+		if (nChar == KEY_SPACE)
+			PlayerTest->SetAttack(true);
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -63,10 +87,30 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
+		const char KEY_SPACE = 0x20; // keyboard SPACE
 		//if (nChar == KEY_LEFT)
 			//sister.SetMovingLeft(false);
 		//if (nChar == KEY_RIGHT)
 			//sister.SetMovingRight(false);
+
+		if (nChar == KEY_LEFT) {
+			PlayerTest->SetMovingLeft(false);
+			PlayerTest->SetRunning(false);
+		}
+		if (nChar == KEY_RIGHT) {
+			PlayerTest->SetMovingRight(false);
+			PlayerTest->SetRunning(false);
+		}
+		if (nChar == KEY_UP) {
+			PlayerTest->SetMovingUp(false);
+			PlayerTest->SetRunning(false);
+		}
+		if (nChar == KEY_DOWN) {
+			PlayerTest->SetMovingDown(false);
+			PlayerTest->SetRunning(false);
+		}
+		if (nChar == KEY_SPACE)
+			PlayerTest->SetAttack(false);
 	}
 
 	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
@@ -98,5 +142,6 @@ namespace game_framework {
 	{
 		//map.OnShow(); // 顯示地圖
 		//sister.OnShow();
+		PlayerTest->OnShow();
 	}
 }
