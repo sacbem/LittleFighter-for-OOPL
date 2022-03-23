@@ -225,5 +225,26 @@
     <Image Include="RES\henry_f.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\CM1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\CM2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\CM3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\CM4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\CM5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\CMA2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\black.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

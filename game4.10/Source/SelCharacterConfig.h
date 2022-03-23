@@ -8,9 +8,8 @@ namespace  game_framework {
     protected:
         vector<vector<int>> posistion_XY;					// 圖形左上角座標  
         vector <CMovingBitmap> characterPic;
-        CAnimation flash;
-        CMovingBitmap **pic;
+        vector<CMovingBitmap> Picture;
         void Initialize();
-        
+     
     };
 }

@@ -310,8 +310,15 @@
     <Image Include="res\bitmap10.bmp" />
     <Image Include="res\bitmap11.bmp" />
     <Image Include="res\bitmap13.bmp" />
+    <Image Include="RES\black.bmp" />
     <Image Include="RES\CHARMENU.bmp" />
+    <Image Include="RES\CM1.bmp" />
+    <Image Include="RES\CM2.bmp" />
+    <Image Include="RES\CM3.bmp" />
+    <Image Include="RES\CM4.bmp" />
+    <Image Include="RES\CM5.bmp" />
     <Image Include="RES\CMA.bmp" />
+    <Image Include="RES\CMA2.bmp" />
     <Image Include="RES\firzen_f.bmp" />
     <Image Include="RES\freeze_f.bmp" />
     <Image Include="RES\henry_f.bmp" />

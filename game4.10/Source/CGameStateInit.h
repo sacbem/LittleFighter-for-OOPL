@@ -1,5 +1,5 @@
 #include "InitalPageMenu.h"
-
+#include <memory>
 namespace game_framework {
 	class CGameStateInit : public CGameState {
 	public:
@@ -13,14 +13,15 @@ namespace game_framework {
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		CMovingBitmap logo;								// csie的logo
-        CMovingBitmap selectCharacterMenu;
-        SettingBtn *settingBtn;
-        StartBtn * startBtn;
+		CMovingBitmap logo, selectCharacterMenu,black;	// csie的logo
+        shared_ptr<StartBtn> startBtn;
+        shared_ptr<SettingBtn> settingBtn;
         vector<int> bitmap;
+        CAnimation attackScreen;
         int keyCount;
         int cursorXY[2];
         int cursorClickLift;
         boolean mouseEnable;
+        boolean selectEnter;
 	};
 }
