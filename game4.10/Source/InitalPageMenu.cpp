@@ -12,17 +12,6 @@ namespace game_framework {
 
     }
 
-    void MenuBtn::Initialize(vector<vector<int>> posXY) {
-        posistion_XY.resize(posXY.end() - posXY.begin());
-        int ind_x =0;
-        for (auto i : posXY) {
-            for (auto o : i) {
-                posistion_XY[ind_x].push_back(o);
-            }  
-            ind_x++;
-        }
-    }
-
     /////////////////////////////////////// StartBtn ///////////////////////////////////////
    
     StartBtn::StartBtn() {
@@ -31,7 +20,6 @@ namespace game_framework {
         posistion_XY.resize(1);
         posistion_XY[0].push_back(520);
         posistion_XY[0].push_back(255);
-        Initialize(posistion_XY);
     }
 
     void  StartBtn::Load(){
@@ -56,7 +44,6 @@ namespace game_framework {
         posistion_XY.resize(1);
         posistion_XY[0].push_back(520);
         posistion_XY[0].push_back(300);
-        Initialize(posistion_XY);
     }
     void  SettingBtn::Load() {
         Btn[0].LoadBitmapA(IDB_BITMAP12);

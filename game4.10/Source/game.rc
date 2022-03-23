@@ -114,6 +114,16 @@ IDB_PLAYER1_ATTACK5     BITMAP                  "..\\res\\player1_14.bmp"
 
 IDB_PLAYER1_ATTACK6     BITMAP                  "..\\res\\player1_15.bmp"
 
+IDB_BITMAP13            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\CHARMENU.bmp"
+
+IDB_BITMAP14            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\CMA.bmp"
+
+IDB_BITMAP15            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\firzen_f.bmp"
+
+IDB_BITMAP16            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\freeze_f.bmp"
+
+IDB_BITMAP17            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\henry_f.bmp"
+
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////
 

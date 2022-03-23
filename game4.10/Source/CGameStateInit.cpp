@@ -4,6 +4,7 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
+#include <typeinfo>
 #include "CGameStateInit.h"
 //#include "InitalPageMenu.h"
 
@@ -26,6 +27,7 @@ namespace game_framework {
         startBtn->Load();
         settingBtn->Load();
 		logo.LoadBitmap(IDB_BITMAP3);
+        //selectCharacterMenu.LoadBitmap(IDB_BITMAP13);
 		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		/*
          此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%

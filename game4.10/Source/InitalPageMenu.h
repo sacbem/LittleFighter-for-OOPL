@@ -9,7 +9,6 @@ namespace game_framework {
     {
     public:
         MenuBtn();
-        void Initialize(vector<vector<int>> positionXY);// 設定圖形初始值
         virtual void OnShow()= 0;					// 將圖形貼到畫面
         virtual void buttonTouch() = 0;
         virtual void Load() = 0;

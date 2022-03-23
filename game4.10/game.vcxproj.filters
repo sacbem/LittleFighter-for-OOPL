@@ -72,6 +72,9 @@
     <ClCompile Include="Source\Character.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SelCharacterConfig.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -114,6 +117,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Character.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SelCharacterConfig.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
@@ -199,6 +205,24 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="RES\player1_15.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap13.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\CHARMENU.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\CMA.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\firzen_f.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\freeze_f.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\henry_f.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

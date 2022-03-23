@@ -263,6 +263,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="Source\SelCharacterConfig.cpp" />
     <ClCompile Include="Source\StdAfx.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -292,6 +293,7 @@
     <ClInclude Include="Source\InitalPageMenu.h" />
     <ClInclude Include="Source\MainFrm.h" />
     <ClInclude Include="Source\Resource.h" />
+    <ClInclude Include="Source\SelCharacterConfig.h" />
     <ClInclude Include="Source\StdAfx.h" />
     <ClInclude Include="Source\gamelib.h" />
   </ItemGroup>
@@ -307,6 +309,12 @@
     <Image Include="..\..\OOP_game\game4.10\RES\InitPage_1.bmp" />
     <Image Include="res\bitmap10.bmp" />
     <Image Include="res\bitmap11.bmp" />
+    <Image Include="res\bitmap13.bmp" />
+    <Image Include="RES\CHARMENU.bmp" />
+    <Image Include="RES\CMA.bmp" />
+    <Image Include="RES\firzen_f.bmp" />
+    <Image Include="RES\freeze_f.bmp" />
+    <Image Include="RES\henry_f.bmp" />
     <Image Include="RES\inital_btn_setting.bmp" />
     <Image Include="RES\inital_btn_setting2.bmp" />
     <Image Include="RES\inital_btn_start.bmp" />
