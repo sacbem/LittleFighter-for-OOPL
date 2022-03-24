@@ -10,9 +10,7 @@
 
 namespace game_framework {
 	CGameStateInit::CGameStateInit(CGame* g): CGameState(g){
-        //settingBtn = new SettingBtn();
-        //startBtn = new StartBtn();
-        startBtn =make_shared<StartBtn>(StartBtn());
+        startBtn = make_shared<StartBtn>(StartBtn());
         settingBtn = make_shared<SettingBtn>(SettingBtn());
 	}
 
@@ -45,7 +43,10 @@ namespace game_framework {
         mouseEnable = false;
         selectEnter = false;
 	}
-
+    void CGameStateInit::ScreenClear() {
+        black.SetTopLeft(0, 0);   //清除畫面用
+        black.ShowBitmap();       //
+    }
     void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point) {
 
 		cursorXY[0] = point.x;
@@ -71,24 +72,30 @@ namespace game_framework {
           const char KEY_S = 83;
           const char KEY_D = 68;
           mouseEnable = false;
-          switch (nChar){
-               case KEY_W:
-                    ++keyCount;  
-               break;
-               case KEY_S:
-                    ++keyCount;
-               break;
-               case KEY_ENTER:
-                    if ((keyCount % 2) == 0) {
-                        selectEnter = true;
-                    }
-                    if ((keyCount % 2) == 1) {
-                        PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
-                    }
-               break;
-               default:
-                    break;
+          if (selectEnter) {
+              switch (nChar) {
+              case KEY_W:
+                  ++keyCount;
+                  break;
+              case KEY_S:
+                  ++keyCount;
+                  break;
+              case KEY_ENTER:
+                  if ((keyCount % 2) == 0) {
+                      selectEnter = true;
+                  }
+                  if ((keyCount % 2) == 1) {
+                      PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+                  }
+                  break;
+              default:
+                  break;
+              }
           }
+          else {
+
+          }
+
      }
 
     void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point){
@@ -114,7 +121,18 @@ namespace game_framework {
             ///
         }
     }
-
+    void  CGameStateInit::SetAnimation() {
+        for (int i = 0; i < 4; i++) {               //上排
+            attackScreen.SetTopLeft(155 + 152 * i, 136);
+            attackScreen.OnMove();
+            attackScreen.OnShow();
+        }
+        for (int i = 0; i < 4; i++) {               //上排
+            attackScreen.SetTopLeft(155 + 152 * i, 358);
+            attackScreen.OnMove();
+            attackScreen.OnShow();
+        }
+    }
 
     void CGameStateInit::OnShow(){
 		/*
@@ -154,13 +172,11 @@ namespace game_framework {
               }
           }
           else {
-              black.SetTopLeft(0, 0);
-              black.ShowBitmap();
+              ScreenClear();
               selectCharacterMenu.SetTopLeft((SIZE_X - 704) / 2, (SIZE_Y-487)/2);
               selectCharacterMenu.ShowBitmap();
-              attackScreen.SetTopLeft(155, 136);
-              attackScreen.OnMove();
-              attackScreen.OnShow();
+              SetAnimation();
+
               //GotoGameState(GAME_STATE_RUN);  // 切換至GAME_STATE_RUN
           }
 

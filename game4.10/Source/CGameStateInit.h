@@ -9,6 +9,9 @@ namespace game_framework {
 		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
 		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
         void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作
+        void ScreenClear();
+        void SetAnimation();
+       // void LoadphotoSticker();
         ~CGameStateInit();
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面

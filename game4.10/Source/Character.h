@@ -24,6 +24,7 @@ namespace game_framework {
 		void SetXY(int X, int Y);
 
 	protected:
+        CMovingBitmap photoSticker;
 		CAnimation Animation;
 		CAnimation Walking;
 		CAnimation Attacking;
