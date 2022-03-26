@@ -10,9 +10,13 @@
 
 namespace game_framework {
 	CGameStateInit::CGameStateInit(CGame* g): CGameState(g){
-        startBtn = make_shared<StartBtn>(StartBtn());
-        settingBtn = make_shared<SettingBtn>(SettingBtn());
-	}
+        startBtn = new StartBtn();
+        settingBtn = new SettingBtn();
+        selectCharacterMenu = new SelectCharacterMenu();
+        photoSticker_1P = new PhotoSticker(0);
+        photoSticker_2P = new PhotoSticker(1);
+        photoSticker_seclecter = new Seclecter(0);
+    }
 
 	void CGameStateInit::OnInit(){
 		/*
@@ -23,25 +27,34 @@ namespace game_framework {
 		/*
             開始載入資料
         */
-        attackScreen.AddBitmap(IDB_BITMAP23,RGB(0,0,0));
-        attackScreen.AddBitmap(IDB_BITMAP14, RGB(0,0,0));
-        black.LoadBitmap(IDB_BITMAP24);
+
         startBtn->Load();
         settingBtn->Load();
+       
+        attackScreen.AddBitmap(IDB_BITMAP23, RGB(0, 0, 0));
+        attackScreen.AddBitmap(IDB_BITMAP14, RGB(0, 0, 0));
+        black.LoadBitmap(IDB_BITMAP24);
 		logo.LoadBitmap(IDB_BITMAP3);
-        selectCharacterMenu.LoadBitmap(IDB_BITMAP13);
+        selectCharacterMenu->Load(IDB_BITMAP13);
+        photoSticker_seclecter->Load(picStickers);
+
 		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		/*
          此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
         */
 
 	}
-
     void CGameStateInit::OnBeginState(){
         keyCount = 0;
         cursorClickLift = 0;
-        mouseEnable = false;
-        selectEnter = false;
+        characterIsSeclected = 0;
+        loadMap = 0;
+        MOUSE_ENABLE = false;
+        SELECT_ENTER = false;
+        SELECTOR_ENABLE = false;
+        for (int i = 0; i < 3;i++) {
+            characterID[i] = 0;
+        }
 	}
     void CGameStateInit::ScreenClear() {
         black.SetTopLeft(0, 0);   //清除畫面用
@@ -51,8 +64,8 @@ namespace game_framework {
 
 		cursorXY[0] = point.x;
 		cursorXY[1] = point.y;
-        mouseEnable = true;
-        TRACE("posX: %d posY: %d\n", point.x, point.y);
+        MOUSE_ENABLE = true;
+        //TRACE("posX: %d posY: %d\n", point.x, point.y);
 		if (cursorXY[0] >= 545 * (0.81) + 20 && cursorXY[0] <= 745 * (0.81) + 20) {
 		    if (cursorXY[1] >= 260 * (0.94) && cursorXY[1] <= 280 * (0.94)) {
 			keyCount = 0;                   //回歸正常計數
@@ -71,8 +84,8 @@ namespace game_framework {
           const char KEY_A = 65;
           const char KEY_S = 83;
           const char KEY_D = 68;
-          mouseEnable = false;
-          if (selectEnter) {
+          MOUSE_ENABLE = false;
+          if (!SELECT_ENTER) {
               switch (nChar) {
               case KEY_W:
                   ++keyCount;
@@ -82,7 +95,8 @@ namespace game_framework {
                   break;
               case KEY_ENTER:
                   if ((keyCount % 2) == 0) {
-                      selectEnter = true;
+                      SELECT_ENTER = true;
+                      SELECTOR_ENABLE = true;
                   }
                   if ((keyCount % 2) == 1) {
                       PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
@@ -93,18 +107,41 @@ namespace game_framework {
               }
           }
           else {
-
+              if (SELECT_ENTER) {
+                  switch (nChar) {
+                  case KEY_W:
+                      characterID[characterIsSeclected]++;
+                      if (characterID[characterIsSeclected] > 2) {
+                          characterID[characterIsSeclected] = 0;
+                      }
+                      photoSticker_seclecter->IsSeclected(characterID[characterIsSeclected]);
+                      break;
+                  case KEY_S:
+                      characterID[characterIsSeclected]--;
+                      if (characterID[characterIsSeclected] < 0) {
+                          characterID[characterIsSeclected] = 2;
+                      }
+                      photoSticker_seclecter->IsSeclected(characterID[characterIsSeclected]);
+                      break;
+                  case KEY_ENTER:
+                      if (SELECTOR_ENABLE) {
+                          characterIsSeclected++;
+                      }
+                      break;
+                  }
+              }
           }
 
      }
 
     void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point){
-        if (!selectEnter) {
+        if (!SELECT_ENTER) {
             if (point.x >= 545 * (0.81) + 20 && point.x <= 745 * (0.81) + 20) {
                 if (point.y >= 260 * (0.94) && point.y <= 280 * (0.94)) {
                     if (nFlags == 1) {
                         //GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
-                        selectEnter = true;
+                        SELECT_ENTER = true;
+                        SELECTOR_ENABLE = true;
                     }
                 }
             }
@@ -118,33 +155,58 @@ namespace game_framework {
             }
         }
         else {
-            ///
+
         }
     }
-    void  CGameStateInit::SetAnimation() {
+    void CGameStateInit::SetAnimation() {
         for (int i = 0; i < 4; i++) {               //上排
             attackScreen.SetTopLeft(155 + 152 * i, 136);
             attackScreen.OnMove();
             attackScreen.OnShow();
         }
-        for (int i = 0; i < 4; i++) {               //上排
+        for (int i = 0; i < 4; i++) {               //下排
             attackScreen.SetTopLeft(155 + 152 * i, 358);
             attackScreen.OnMove();
             attackScreen.OnShow();
         }
     }
+    void CGameStateInit::SetPhotoStickers() {
+        if (SELECTOR_ENABLE) {
+            switch (characterIsSeclected) {
+            case 1:
+                if (loadMap < characterIsSeclected) {
+                    photoSticker_1P->Load(picStickers[photoSticker_seclecter->GetCharacterID()]);
+                    photoSticker_seclecter->SetXY(307, 136-20);
+                    loadMap++;
+                }
+                photoSticker_1P->OnShow();
+                break;
+            case 2:
+                if (loadMap < characterIsSeclected) {
+                    photoSticker_2P->Load(picStickers[photoSticker_seclecter->GetCharacterID()]);
+                    loadMap++;
+                }
+                photoSticker_2P->OnShow();
+                SELECTOR_ENABLE = false;
+                break;
+            }
+            photoSticker_seclecter->OnShow();
+        }
+        else {
 
-    void CGameStateInit::OnShow(){
-		/*
-         貼上logo
-        */
+            photoSticker_1P->OnShow();
+            photoSticker_2P->OnShow();
+        }
+    }
+  
+    void CGameStateInit::OnShow() {
 
           logo.SetTopLeft(0, 0);
           logo.ShowBitmap();
           startBtn->OnShow();
           settingBtn->OnShow();
-          if (!selectEnter) {
-              if (mouseEnable) {
+          if (!SELECT_ENTER) {
+              if (MOUSE_ENABLE) {
                   if (cursorXY[0] >= 545*(0.81) + 20 && cursorXY[0] <= 745 * (0.81) + 20) {
                       if (cursorXY[1] >= 260 * (0.94) && cursorXY[1] <= 280 * (0.94)) {
                           startBtn->buttonTouch();
@@ -173,11 +235,12 @@ namespace game_framework {
           }
           else {
               ScreenClear();
-              selectCharacterMenu.SetTopLeft((SIZE_X - 704) / 2, (SIZE_Y-487)/2);
-              selectCharacterMenu.ShowBitmap();
+              selectCharacterMenu->OnShow();
               SetAnimation();
-
-              //GotoGameState(GAME_STATE_RUN);  // 切換至GAME_STATE_RUN
+              SetPhotoStickers();
+              if (!SELECTOR_ENABLE) {  //結束選角
+                  GotoGameState(GAME_STATE_RUN);
+              }
           }
 
           
@@ -198,6 +261,11 @@ namespace game_framework {
 	}
 
     CGameStateInit::~CGameStateInit(){
-
+        delete startBtn;
+        delete settingBtn ;
+        delete selectCharacterMenu ;
+        delete photoSticker_1P ;
+        delete photoSticker_2P ;
+        delete photoSticker_seclecter ;
     }
 }
