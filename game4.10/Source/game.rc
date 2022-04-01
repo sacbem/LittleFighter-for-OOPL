@@ -140,6 +140,20 @@ IDB_BITMAP24            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_O
 
 IDB_BITMAP25            BITMAP                  "C:\\Users\\Dell\\Desktop\\OOPL_bg\\ui\\CM1.bmp"
 
+IDB_BITMAP26            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\0.bmp"
+
+IDB_BITMAP27            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\1.bmp"
+
+IDB_BITMAP28            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\2.bmp"
+
+IDB_BITMAP29            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\3.bmp"
+
+IDB_BITMAP30            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\Firzen.bmp"
+
+IDB_BITMAP31            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\Freeze.bmp"
+
+IDB_BITMAP32            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\Henry.bmp"
+
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////
 

@@ -35,9 +35,9 @@ namespace game_framework {
         Picture.reserve(3);         //Beta =>info.resize(1);->info.resize(3);
         seclectedID = 0;
         posID = ind;
-        Picture.push_back(PicA);
-        Picture.push_back(PicB);
-        Picture.push_back(PicC);
+        Picture.push_back(PicA); Picture.push_back(PicB); Picture.push_back(PicC);
+        Id.push_back(idA); Id.push_back(idB); Id.push_back(idC);
+        Name.push_back(nameA); Name.push_back(nameB); Name.push_back(nameC);
         Initialize(posID);
     }
     void Seclecter::Initialize(int ind) {
@@ -68,36 +68,46 @@ namespace game_framework {
         for (auto &i : Picture) {
             i.SetTopLeft(x, y);
         }
+        for (auto &i : Id) {
+            i.SetTopLeft(x + 60, 241);
+        }
+        for (auto &i : Name) {
+            i.SetTopLeft(x + 40, 261);
+        }
     }
-    void Seclecter::Load(vector<int> data) { //(int => vector<int>) /// 需處理 Picture[i] 大小與data的問題
-         /*
-             int cnt = 0;
-             for (auto &i : Picture) {
-         //    TRACE("data value : %d\n",cnt);
-         //    TRACE("Picture size : %d\n", Picture.size());
-         //    //i.LoadBitmap(data[cnt]);
-         //    cnt++;
-         //}*/
+   
+    void Seclecter::Load(vector<int> data, vector<int> picID, vector<int> picName) { //(int => vector<int>) /// 需處理 Picture[i] 大小與data的問題
+         
+         
         int cnt = 0;
         for (auto &i :Picture) {
             i.LoadBitmap(data[cnt]);
             i.SetTopLeft(photoSticker_XY[0], photoSticker_XY[1] - 20);
             cnt++;
         }
+        cnt = 0;
+        for (auto &i : Id) {
+            i.LoadBitmap(picID[cnt]);     
+            i.SetTopLeft(photoSticker_XY[0] + 60, 241);
+            cnt++;
+        }
+        cnt = 0;
+        for (auto &i : Name){
+            i.LoadBitmap(picName[cnt]);
+            i.SetTopLeft(photoSticker_XY[0] + 40, 261);
+            cnt++;
+        }
     }
+    
+
     void Seclecter::IsSeclected(int characterIsSeclected) {
         seclectedID = characterIsSeclected;
     }
     void Seclecter::OnShow() {
-
-        /* Picture[0].SetTopLeft(photoSticker_XY[0], photoSticker_XY[1]);// 頭貼位置設定
-         for (int i = 1; i < 3; i++) {  // 名字 與 ID 位置設定
-         //    Picture[i].SetTopLeft(posistion_XY[i][0], posistion_XY[i][1]);
-         }
-         */
        
         Picture[seclectedID].ShowBitmap();
-        
+        Name[seclectedID].ShowBitmap();
+        Id[seclectedID].ShowBitmap();
     }
     int Seclecter::GetCharacterID() {
         return seclectedID;
@@ -114,6 +124,12 @@ namespace game_framework {
         posID = ind;
         Initialize(posID);
     }
+    void PhotoSticker::Load(int bitmap, int picID, int picName) {
+        pic.LoadBitmap(bitmap);
+        id.LoadBitmap(picID);
+        name.LoadBitmap(picName);
+
+    }
     void PhotoSticker::Initialize(int ind) {
         /* Beta
         //for (int i = 0; i < 3; i++) {
@@ -128,6 +144,7 @@ namespace game_framework {
         else {
             photoSticker_XY.push_back(155 + posID * 152);
             photoSticker_XY.push_back(136);
+
         }
      /*  for (auto &i : posistion_XY) {// 名字 與 ID 位置初始化
      //    if (ind > 3) {
@@ -142,12 +159,13 @@ namespace game_framework {
     }
 
     void PhotoSticker::OnShow() {
-         /*for (int i = 1; i < 3; i++) {  // 名字 與 ID 位置設定
-         //    Picture[i].SetTopLeft(posistion_XY[i][0], posistion_XY[i][1]);
-         }
-         */
         pic.SetTopLeft(photoSticker_XY[0], photoSticker_XY[1]-20);// 頭貼位置設定
+        id.SetTopLeft(photoSticker_XY[0] + 60,241);
+        name.SetTopLeft(photoSticker_XY[0] + 40, 261);
+
         pic.ShowBitmap();
+        id.ShowBitmap();
+        name.ShowBitmap();
     }
     PhotoSticker::~PhotoSticker() {
         TRACE("~PhotoSticker");

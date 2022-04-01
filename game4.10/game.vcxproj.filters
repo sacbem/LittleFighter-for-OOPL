@@ -249,5 +249,26 @@
     <Image Include="..\..\OOPL_bg\ui\CM1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Firzen.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Freeze.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Henry.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

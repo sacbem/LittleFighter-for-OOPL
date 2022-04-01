@@ -40,7 +40,7 @@ namespace game_framework {
         black.LoadBitmap(IDB_BITMAP24);
 		logo.LoadBitmap(IDB_BITMAP3);
         selectCharacterMenu->Load(IDB_BITMAP13);
-        photoSticker_seclecter->Load(picStickers);
+        photoSticker_seclecter->Load(picStickers,picIDs,picNames);
 
 		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		/*
@@ -66,7 +66,7 @@ namespace game_framework {
 		cursorXY[0] = point.x;
 		cursorXY[1] = point.y;
         MOUSE_ENABLE = true;
-        //TRACE("posX: %d posY: %d\n", point.x, point.y);
+        TRACE("posX: %d posY: %d\n", point.x, point.y);
 		if (cursorXY[0] >= 545 * (0.81) + 20 && cursorXY[0] <= 745 * (0.81) + 20) {
 		    if (cursorXY[1] >= 260 * (0.94) && cursorXY[1] <= 280 * (0.94)) {
 			keyCount = 0;                   //回歸正常計數
@@ -185,10 +185,11 @@ namespace game_framework {
     }
     void CGameStateInit::SetPhotoStickers() {
         if (SELECTOR_ENABLE) {
+            int idGet = photoSticker_seclecter->GetCharacterID();
             switch (characterIsSeclected) {
             case 1:
                 if (loadMap < characterIsSeclected) {
-                    photoSticker_1P->Load(picStickers[photoSticker_seclecter->GetCharacterID()]);
+                    photoSticker_1P->Load(picStickers[idGet], picIDs[idGet],picNames[idGet]);
                     photoSticker_seclecter->SetXY(307, 136-20);
                     loadMap++;
                 }
@@ -196,7 +197,7 @@ namespace game_framework {
                 break;
             case 2:
                 if (loadMap < characterIsSeclected) {
-                    photoSticker_2P->Load(picStickers[photoSticker_seclecter->GetCharacterID()]);
+                    photoSticker_2P->Load(picStickers[idGet], picIDs[idGet], picNames[idGet]);
                     loadMap++;
                 }
                 photoSticker_2P->OnShow();
@@ -254,6 +255,7 @@ namespace game_framework {
 
               if (!SELECTOR_ENABLE) {  //結束選角
                   SetCountdownAni();
+                  
                   if(countDown.IsFinalBitmap())GotoGameState(GAME_STATE_RUN);
               }
               else { 
