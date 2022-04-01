@@ -30,6 +30,10 @@ namespace game_framework {
 
         startBtn->Load();
         settingBtn->Load();
+        countDown.AddBitmap(IDB_BITMAP25, RGB(0, 0, 0));
+        for (int i = 4; i >=0 ; i--) {
+            countDown.AddBitmap( 195- i , RGB(0, 0, 0));
+        }
        
         attackScreen.AddBitmap(IDB_BITMAP23, RGB(0, 0, 0));
         attackScreen.AddBitmap(IDB_BITMAP14, RGB(0, 0, 0));
@@ -45,13 +49,10 @@ namespace game_framework {
 
 	}
     void CGameStateInit::OnBeginState(){
-        keyCount = 0;
-        cursorClickLift = 0;
-        characterIsSeclected = 0;
-        loadMap = 0;
-        MOUSE_ENABLE = false;
-        SELECT_ENTER = false;
-        SELECTOR_ENABLE = false;
+        keyCount = cursorClickLift = 0;;     
+        loadMap = characterIsSeclected = 0;
+        //countDown.SetDelayCount(50);
+        MOUSE_ENABLE = SELECT_ENTER = SELECTOR_ENABLE = false;
         for (int i = 0; i < 3;i++) {
             characterID[i] = 0;
         }
@@ -133,7 +134,6 @@ namespace game_framework {
           }
 
      }
-
     void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point){
         if (!SELECT_ENTER) {
             if (point.x >= 545 * (0.81) + 20 && point.x <= 745 * (0.81) + 20) {
@@ -161,14 +161,27 @@ namespace game_framework {
     void CGameStateInit::SetAnimation() {
         for (int i = 0; i < 4; i++) {               //上排
             attackScreen.SetTopLeft(155 + 152 * i, 136);
-            attackScreen.OnMove();
             attackScreen.OnShow();
         }
+       
         for (int i = 0; i < 4; i++) {               //下排
             attackScreen.SetTopLeft(155 + 152 * i, 358);
-            attackScreen.OnMove();
             attackScreen.OnShow();
         }
+        attackScreen.OnMove();
+       
+    }
+    void CGameStateInit::SetCountdownAni() {
+        for (int i = 2; i < 4; i++) {               //上排
+            countDown.SetTopLeft(190 + 152 * i, 150);
+            countDown.OnShow();
+        }
+        for (int i = 0; i < 4; i++) {               //下排
+            countDown.SetTopLeft(190 + 152 * i, 372);
+            countDown.OnShow();
+        }
+        countDown.OnMove();
+
     }
     void CGameStateInit::SetPhotoStickers() {
         if (SELECTOR_ENABLE) {
@@ -203,9 +216,10 @@ namespace game_framework {
 
           logo.SetTopLeft(0, 0);
           logo.ShowBitmap();
-          startBtn->OnShow();
-          settingBtn->OnShow();
+
           if (!SELECT_ENTER) {
+              startBtn->OnShow();
+              settingBtn->OnShow();
               if (MOUSE_ENABLE) {
                   if (cursorXY[0] >= 545*(0.81) + 20 && cursorXY[0] <= 745 * (0.81) + 20) {
                       if (cursorXY[1] >= 260 * (0.94) && cursorXY[1] <= 280 * (0.94)) {
@@ -234,13 +248,18 @@ namespace game_framework {
               }
           }
           else {
+
               ScreenClear();
               selectCharacterMenu->OnShow();
-              SetAnimation();
-              SetPhotoStickers();
+
               if (!SELECTOR_ENABLE) {  //結束選角
-                  GotoGameState(GAME_STATE_RUN);
+                  SetCountdownAni();
+                  if(countDown.IsFinalBitmap())GotoGameState(GAME_STATE_RUN);
               }
+              else { 
+                  SetAnimation();
+              }
+              SetPhotoStickers();
           }
 
           
@@ -262,7 +281,7 @@ namespace game_framework {
 
     CGameStateInit::~CGameStateInit(){
         delete startBtn;
-        delete settingBtn ;
+        delete settingBtn;
         delete selectCharacterMenu ;
         delete photoSticker_1P ;
         delete photoSticker_2P ;

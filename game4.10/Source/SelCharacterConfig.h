@@ -23,6 +23,7 @@ namespace  game_framework {
         void Initialize(int );
         ~Seclecter();
     protected:
+
         vector<int>photoSticker_XY;
         vector<CMovingBitmap> Picture;
         CMovingBitmap PicA, PicB, PicC;

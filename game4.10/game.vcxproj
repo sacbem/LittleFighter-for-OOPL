@@ -306,6 +306,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\OOPL_bg\InitPage_1.bmp" />
+    <Image Include="..\..\OOPL_bg\ui\CM1.bmp" />
     <Image Include="..\..\OOP_game\game4.10\RES\InitPage_1.bmp" />
     <Image Include="res\bitmap10.bmp" />
     <Image Include="res\bitmap11.bmp" />

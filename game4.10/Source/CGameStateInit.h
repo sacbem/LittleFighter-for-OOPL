@@ -12,6 +12,7 @@ namespace game_framework {
         void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作
         void ScreenClear();
         void SetAnimation();
+        void SetCountdownAni();
         void SetPhotoStickers();
         ~CGameStateInit();
 	protected:
@@ -25,7 +26,7 @@ namespace game_framework {
         //shared_ptr<StartBtn> startBtn;
         */
 		CMovingBitmap logo,black;	// csie的logo
-        CAnimation attackScreen; //需改名 還沒選角的動畫 
+        CAnimation attackScreen,countDown; //需改名 還沒選角的動畫 
         StartBtn * startBtn;
         SettingBtn * settingBtn;
         SelectCharacterMenu* selectCharacterMenu;

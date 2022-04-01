@@ -146,26 +146,34 @@ namespace game_framework {
 	void Character::OnShow() {
 		if (isAttacking == true || (isAttacking==true && isRunning==true)) {
 			Animation.SetTopLeft(xPos + 10000, yPos + 10000);
+            //Animation.OnMove();
 			Animation.OnShow();
 			Walking.SetTopLeft(xPos + 10000, yPos + 10000);
+            Animation.OnMove();
+
+            Walking.OnMove();
 			Walking.OnShow();
+
 			Attacking.SetTopLeft(xPos, yPos);
+            //Animation.OnMove();
 			Attacking.OnShow();
 		}
 		else if (isRunning == true && isAttacking==false) {
 			Animation.SetTopLeft(xPos + 10000, yPos + 10000);
+
 			Animation.OnShow();
 			Walking.SetTopLeft(xPos, yPos);
 			Walking.OnShow();
+
 			Attacking.SetTopLeft(xPos + 10000, yPos + 10000);
 			Attacking.OnShow();
 		}
 		else {
-			Animation.SetTopLeft(xPos, yPos);
+            Animation.SetTopLeft(xPos, yPos); 
 			Animation.OnShow();
 			Walking.SetTopLeft(xPos + 10000, yPos + 10000);
 			Walking.OnShow();
-			Attacking.SetTopLeft(xPos + 10000, yPos + 10000);
+			Attacking.SetTopLeft(xPos + 10000, yPos + 10000); 
 			Attacking.OnShow();
 
 		}

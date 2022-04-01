@@ -148,7 +148,8 @@ void CAnimation::AddBitmap(int IDB_BITMAP, COLORREF colorkey)
 {
 	CMovingBitmap add_bmp;
 	add_bmp.LoadBitmap(IDB_BITMAP, colorkey);
-	bmp.insert(bmp.end(), add_bmp);
+    bmp.insert(bmp.begin(), add_bmp);
+	//bmp.insert(bmp.end(), add_bmp);
 	Reset();
 }
 
@@ -156,7 +157,8 @@ void CAnimation::AddBitmap(char *filename, COLORREF colorkey)
 {
 	CMovingBitmap add_bmp;
 	add_bmp.LoadBitmap(filename, colorkey);
-	bmp.insert(bmp.end(), add_bmp);
+	bmp.insert(bmp.begin(), add_bmp);
+    //bmp.push_back(add_bmp);
 	Reset();
 }
 

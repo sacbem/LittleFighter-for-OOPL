@@ -37,7 +37,7 @@ namespace game_framework {
     StartBtn::~StartBtn() {
 
     }
-    /////////////////////////////////////// SettingBtn ///////////////////////////////////////
+    /////////////////////////////////////// SettingBtn(Derived) ///////////////////////////////////////
     SettingBtn::SettingBtn() {
         Btn.push_back(btnNClick);
         Btn.push_back(btnClick);
