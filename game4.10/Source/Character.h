@@ -47,8 +47,11 @@ namespace game_framework {
 		bool isDefending;
 
 	protected:
+
+        CMovingBitmap photoSticker;
 		CAnimation Animation;		// normal state
 		CAnimation AnimationReverse;// normal state reverse
+
 		CAnimation Walking;
 		CAnimation WalkingReverse;
 		CAnimation Attacking;

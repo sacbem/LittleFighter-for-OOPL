@@ -231,6 +231,7 @@
     <Image Include="RES\henry_f.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+<<<<<<< HEAD
     <Image Include="RES\Player1\Player1_Reverse\player1_re_6.bmp">
       <Filter>Resource Files</Filter>
     </Image>
@@ -595,6 +596,51 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\Player0\player0_reverse\player0_re_49.bmp">
+=======
+    <Image Include="RES\CM1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\CM2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\CM3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\CM4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\CM5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\CMA2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\black.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\OOPL_bg\ui\CM1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Firzen.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Freeze.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Henry.bmp">
+>>>>>>> c172075c8a617b7fb684a1e281521930110adfce
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

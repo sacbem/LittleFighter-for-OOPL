@@ -304,6 +304,36 @@ IDB_PLAYER0_KNOCKBACK2_REVERSE BITMAP                  "..\\res\\Player0\\player
 
 IDB_PLAYER0_KNOCKBACK1_REVERSE BITMAP                  "..\\res\\Player0\\player0_reverse\\player0_re_49.bmp"
 
+IDB_BITMAP18            BITMAP                  "..\\res\\CM1.bmp"
+
+IDB_BITMAP19            BITMAP                  "..\\res\\CM2.bmp"
+
+IDB_BITMAP20            BITMAP                  "..\\res\\CM3.bmp"
+
+IDB_BITMAP21            BITMAP                  "..\\res\\CM4.bmp"
+
+IDB_BITMAP22            BITMAP                  "..\\res\\CM5.bmp"
+
+IDB_BITMAP23            BITMAP                  "..\\res\\CMA2.bmp"
+
+IDB_BITMAP24            BITMAP                  "..\\res\\black.bmp"
+
+IDB_BITMAP25            BITMAP                  "..\\res\\CM1.bmp"
+
+IDB_BITMAP26            BITMAP                  "..\\res\\0.bmp"
+
+IDB_BITMAP27            BITMAP                  "..\\res\\1.bmp"
+
+IDB_BITMAP28            BITMAP                  "..\\res\\2.bmp"
+
+IDB_BITMAP29            BITMAP                  "..\\res\\3.bmp"
+
+IDB_BITMAP30            BITMAP                  "..\\res\\Firzen.bmp"
+
+IDB_BITMAP31            BITMAP                  "..\\res\\Freeze.bmp"
+
+IDB_BITMAP32            BITMAP                  "..\\res\\Henry.bmp"
+
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////
 

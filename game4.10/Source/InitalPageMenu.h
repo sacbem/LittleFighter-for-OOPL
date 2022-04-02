@@ -1,9 +1,6 @@
 #include <vector>
 namespace game_framework {
-    /////////////////////////////////////////////////////////////////////////////
-    // 這個class提供可以用鍵盤或滑鼠控制的擦子
-    // 看懂就可以改寫成自己的程式了
-    /////////////////////////////////////////////////////////////////////////////
+
 
     class MenuBtn
     {
@@ -19,7 +16,7 @@ namespace game_framework {
         CMovingBitmap btnNClick;
         CMovingBitmap btnClick;
     };
-
+    /////////////////////////////////////// StartBtn(Derived) ///////////////////////////////////////
     class StartBtn :public MenuBtn {
     public:
         StartBtn();
@@ -29,6 +26,7 @@ namespace game_framework {
         ~StartBtn();
     
     };
+    /////////////////////////////////////// SettingBtn(Derived) ///////////////////////////////////////
     class SettingBtn :public MenuBtn {
     public:
         SettingBtn();

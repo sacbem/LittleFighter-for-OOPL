@@ -77,16 +77,16 @@ namespace game_framework {
 
 	void Enemy::LoadBitmap() {
 		//Normal
-		Animation.AddBitmap(IDB_PLAYER0_NORMAL1, RGB(0, 0, 0));
-		Animation.AddBitmap(IDB_PLAYER0_NORMAL2, RGB(0, 0, 0));
-		Animation.AddBitmap(IDB_PLAYER0_NORMAL3, RGB(0, 0, 0));
 		Animation.AddBitmap(IDB_PLAYER0_NORMAL4, RGB(0, 0, 0));
+		Animation.AddBitmap(IDB_PLAYER0_NORMAL3, RGB(0, 0, 0));
+		Animation.AddBitmap(IDB_PLAYER0_NORMAL2, RGB(0, 0, 0));
+		Animation.AddBitmap(IDB_PLAYER0_NORMAL1, RGB(0, 0, 0));
 
 		//Normal Reverse
-		AnimationReverse.AddBitmap(IDB_PLAYER1_NORMAL1_REVERSE, RGB(0, 0, 0));
-		AnimationReverse.AddBitmap(IDB_PLAYER1_NORMAL2_REVERSE, RGB(0, 0, 0));
-		AnimationReverse.AddBitmap(IDB_PLAYER1_NORMAL3_REVERSE, RGB(0, 0, 0));
 		AnimationReverse.AddBitmap(IDB_PLAYER1_NORMAL4_REVERSE, RGB(0, 0, 0));
+		AnimationReverse.AddBitmap(IDB_PLAYER1_NORMAL3_REVERSE, RGB(0, 0, 0));
+		AnimationReverse.AddBitmap(IDB_PLAYER1_NORMAL2_REVERSE, RGB(0, 0, 0));
+		AnimationReverse.AddBitmap(IDB_PLAYER1_NORMAL1_REVERSE, RGB(0, 0, 0));
 
 		//Walking
 		Walking.AddBitmap(IDB_PLAYER0_WALK1, RGB(0, 0, 0));
@@ -107,104 +107,104 @@ namespace game_framework {
 		WalkingReverse.AddBitmap(IDB_PLAYER0_WALK1_REVERSE, RGB(0, 0, 0));
 
 		//Attack
-		Attacking.AddBitmap(IDB_PLAYER1_ATTACK1, RGB(0, 0, 0));
-		Attacking.AddBitmap(IDB_PLAYER1_ATTACK2, RGB(0, 0, 0));
-		Attacking.AddBitmap(IDB_PLAYER1_ATTACK3, RGB(0, 0, 0));
-		Attacking.AddBitmap(IDB_PLAYER1_ATTACK4, RGB(0, 0, 0));
-		Attacking.AddBitmap(IDB_PLAYER1_ATTACK5, RGB(0, 0, 0));
 		Attacking.AddBitmap(IDB_PLAYER1_ATTACK6, RGB(0, 0, 0));
+		Attacking.AddBitmap(IDB_PLAYER1_ATTACK5, RGB(0, 0, 0));
+		Attacking.AddBitmap(IDB_PLAYER1_ATTACK4, RGB(0, 0, 0));
+		Attacking.AddBitmap(IDB_PLAYER1_ATTACK3, RGB(0, 0, 0));
+		Attacking.AddBitmap(IDB_PLAYER1_ATTACK2, RGB(0, 0, 0));
+		Attacking.AddBitmap(IDB_PLAYER1_ATTACK1, RGB(0, 0, 0));
 
 		//Attack Reverse
-		AttackingReverse.AddBitmap(IDB_PLAYER1_ATTACK1_REVERSE, RGB(0, 0, 0));
-		AttackingReverse.AddBitmap(IDB_PLAYER1_ATTACK2_REVERSE, RGB(0, 0, 0));
-		AttackingReverse.AddBitmap(IDB_PLAYER1_ATTACK3_REVERSE, RGB(0, 0, 0));
-		AttackingReverse.AddBitmap(IDB_PLAYER1_ATTACK4_REVERSE, RGB(0, 0, 0));
-		AttackingReverse.AddBitmap(IDB_PLAYER1_ATTACK5_REVERSE, RGB(0, 0, 0));
 		AttackingReverse.AddBitmap(IDB_PLAYER1_ATTACK6_REVERSE, RGB(0, 0, 0));
+		AttackingReverse.AddBitmap(IDB_PLAYER1_ATTACK5_REVERSE, RGB(0, 0, 0));
+		AttackingReverse.AddBitmap(IDB_PLAYER1_ATTACK4_REVERSE, RGB(0, 0, 0));
+		AttackingReverse.AddBitmap(IDB_PLAYER1_ATTACK3_REVERSE, RGB(0, 0, 0));
+		AttackingReverse.AddBitmap(IDB_PLAYER1_ATTACK2_REVERSE, RGB(0, 0, 0));
+		AttackingReverse.AddBitmap(IDB_PLAYER1_ATTACK1_REVERSE, RGB(0, 0, 0));
 
 		//Jump
-		Jump.AddBitmap(IDB_PLAYER1_JUMP3, RGB(0, 0, 0));
-		Jump.AddBitmap(IDB_PLAYER1_JUMP3, RGB(0, 0, 0));
-		Jump.AddBitmap(IDB_PLAYER1_JUMP3, RGB(0, 0, 0));
-		Jump.AddBitmap(IDB_PLAYER1_JUMP3, RGB(0, 0, 0));
-		Jump.AddBitmap(IDB_PLAYER1_JUMP3, RGB(0, 0, 0));
-		Jump.AddBitmap(IDB_PLAYER1_JUMP3, RGB(0, 0, 0));
 		Jump.AddBitmap(IDB_PLAYER1_JUMP1, RGB(0, 0, 0));
 		Jump.AddBitmap(IDB_PLAYER1_JUMP2, RGB(0, 0, 0));
 		Jump.AddBitmap(IDB_PLAYER1_JUMP1, RGB(0, 0, 0));
+		Jump.AddBitmap(IDB_PLAYER1_JUMP3, RGB(0, 0, 0));
+		Jump.AddBitmap(IDB_PLAYER1_JUMP3, RGB(0, 0, 0));
+		Jump.AddBitmap(IDB_PLAYER1_JUMP3, RGB(0, 0, 0));
+		Jump.AddBitmap(IDB_PLAYER1_JUMP3, RGB(0, 0, 0));
+		Jump.AddBitmap(IDB_PLAYER1_JUMP3, RGB(0, 0, 0));
+		Jump.AddBitmap(IDB_PLAYER1_JUMP3, RGB(0, 0, 0));
 
 		//Jump Reverse
-		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP3_REVERSE, RGB(0, 0, 0));
-		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP3_REVERSE, RGB(0, 0, 0));
-		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP3_REVERSE, RGB(0, 0, 0));
-		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP3_REVERSE, RGB(0, 0, 0));
-		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP3_REVERSE, RGB(0, 0, 0));
-		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP3_REVERSE, RGB(0, 0, 0));
 		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP1_REVERSE, RGB(0, 0, 0));
 		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP2_REVERSE, RGB(0, 0, 0));
 		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP1_REVERSE, RGB(0, 0, 0));
+		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP3_REVERSE, RGB(0, 0, 0));
+		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP3_REVERSE, RGB(0, 0, 0));
+		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP3_REVERSE, RGB(0, 0, 0));
+		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP3_REVERSE, RGB(0, 0, 0));
+		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP3_REVERSE, RGB(0, 0, 0));
+		JumpReverse.AddBitmap(IDB_PLAYER1_JUMP3_REVERSE, RGB(0, 0, 0));
 
 		//Running
-		Running.AddBitmap(IDB_PLAYER1_RUN1, RGB(0, 0, 0));
 		Running.AddBitmap(IDB_PLAYER1_RUN2, RGB(0, 0, 0));
 		Running.AddBitmap(IDB_PLAYER1_RUN3, RGB(0, 0, 0));
 		Running.AddBitmap(IDB_PLAYER1_RUN2, RGB(0, 0, 0));
+		Running.AddBitmap(IDB_PLAYER1_RUN1, RGB(0, 0, 0));
 
 		//Running Reverse
-		RunningReverse.AddBitmap(IDB_PLAYER1_RUN1_REVERSE, RGB(0, 0, 0));
 		RunningReverse.AddBitmap(IDB_PLAYER1_RUN2_REVERSE, RGB(0, 0, 0));
 		RunningReverse.AddBitmap(IDB_PLAYER1_RUN3_REVERSE, RGB(0, 0, 0));
 		RunningReverse.AddBitmap(IDB_PLAYER1_RUN2_REVERSE, RGB(0, 0, 0));
+		RunningReverse.AddBitmap(IDB_PLAYER1_RUN1_REVERSE, RGB(0, 0, 0));
 
 		//Knock
-		Knock.AddBitmap(IDB_PLAYER0_KNOCK1, RGB(0, 0, 0));
-		Knock.AddBitmap(IDB_PLAYER0_KNOCK2, RGB(0, 0, 0));
-		Knock.AddBitmap(IDB_PLAYER0_KNOCK3, RGB(0, 0, 0));
+		Knock.AddBitmap(IDB_PLAYER0_KNOCK5, RGB(0, 0, 0));
+		Knock.AddBitmap(IDB_PLAYER0_KNOCK5, RGB(0, 0, 0));
 		Knock.AddBitmap(IDB_PLAYER0_KNOCK4, RGB(0, 0, 0));
-		Knock.AddBitmap(IDB_PLAYER0_KNOCK5, RGB(0, 0, 0));
-		Knock.AddBitmap(IDB_PLAYER0_KNOCK5, RGB(0, 0, 0));
+		Knock.AddBitmap(IDB_PLAYER0_KNOCK3, RGB(0, 0, 0));
+		Knock.AddBitmap(IDB_PLAYER0_KNOCK2, RGB(0, 0, 0));
+		Knock.AddBitmap(IDB_PLAYER0_KNOCK1, RGB(0, 0, 0));
 
-		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK1_REVERSE, RGB(0, 0, 0));
-		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK2_REVERSE, RGB(0, 0, 0));
-		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK3_REVERSE, RGB(0, 0, 0));
+		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK5_REVERSE, RGB(0, 0, 0));
+		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK5_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK4_REVERSE, RGB(0, 0, 0));
-		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK5_REVERSE, RGB(0, 0, 0));
-		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK5_REVERSE, RGB(0, 0, 0));
+		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK3_REVERSE, RGB(0, 0, 0));
+		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK2_REVERSE, RGB(0, 0, 0));
+		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK1_REVERSE, RGB(0, 0, 0));
 
-		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK1, RGB(0, 0, 0));
-		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK2, RGB(0, 0, 0));
-		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK3, RGB(0, 0, 0));
+		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK5, RGB(0, 0, 0));
+		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK5, RGB(0, 0, 0));
 		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK4, RGB(0, 0, 0));
-		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK5, RGB(0, 0, 0));
-		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK5, RGB(0, 0, 0));
+		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK3, RGB(0, 0, 0));
+		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK2, RGB(0, 0, 0));
+		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK1, RGB(0, 0, 0));
 
-		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK1_REVERSE, RGB(0, 0, 0));
-		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK2_REVERSE, RGB(0, 0, 0));
-		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK3_REVERSE, RGB(0, 0, 0));
+		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
+		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK4_REVERSE, RGB(0, 0, 0));
-		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
-		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
+		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK3_REVERSE, RGB(0, 0, 0));
+		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK2_REVERSE, RGB(0, 0, 0));
+		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK1_REVERSE, RGB(0, 0, 0));
 
 		//getup
-		Getup.AddBitmap(IDB_PLAYER0_KNOCK5, RGB(0, 0, 0));
+		Getup.AddBitmap(IDB_PLAYER0_GETUP2, RGB(0, 0, 0));
+		Getup.AddBitmap(IDB_PLAYER0_GETUP2, RGB(0, 0, 0));
 		Getup.AddBitmap(IDB_PLAYER0_GETUP1, RGB(0, 0, 0));
-		Getup.AddBitmap(IDB_PLAYER0_GETUP2, RGB(0, 0, 0));
-		Getup.AddBitmap(IDB_PLAYER0_GETUP2, RGB(0, 0, 0));
+		Getup.AddBitmap(IDB_PLAYER0_KNOCK5, RGB(0, 0, 0));
 
-		GetupReverse.AddBitmap(IDB_PLAYER0_KNOCK5_REVERSE, RGB(0, 0, 0));
+		GetupReverse.AddBitmap(IDB_PLAYER0_GETUP2_REVERSE, RGB(0, 0, 0));
+		GetupReverse.AddBitmap(IDB_PLAYER0_GETUP2_REVERSE, RGB(0, 0, 0));
 		GetupReverse.AddBitmap(IDB_PLAYER0_GETUP1_REVERSE, RGB(0, 0, 0));
-		GetupReverse.AddBitmap(IDB_PLAYER0_GETUP2_REVERSE, RGB(0, 0, 0));
-		GetupReverse.AddBitmap(IDB_PLAYER0_GETUP2_REVERSE, RGB(0, 0, 0));
+		GetupReverse.AddBitmap(IDB_PLAYER0_KNOCK5_REVERSE, RGB(0, 0, 0));
 
-		GetupBack.AddBitmap(IDB_PLAYER0_KNOCKBACK5, RGB(0, 0, 0));
+		GetupBack.AddBitmap(IDB_PLAYER0_GETUP2, RGB(0, 0, 0));
+		GetupBack.AddBitmap(IDB_PLAYER0_GETUP2, RGB(0, 0, 0));
 		GetupBack.AddBitmap(IDB_PLAYER0_GETUPBACK1, RGB(0, 0, 0));
-		GetupBack.AddBitmap(IDB_PLAYER0_GETUP2, RGB(0, 0, 0));
-		GetupBack.AddBitmap(IDB_PLAYER0_GETUP2, RGB(0, 0, 0));
+		GetupBack.AddBitmap(IDB_PLAYER0_KNOCKBACK5, RGB(0, 0, 0));
 
-		GetupBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
+		GetupBackReverse.AddBitmap(IDB_PLAYER0_GETUP2_REVERSE, RGB(0, 0, 0));
+		GetupBackReverse.AddBitmap(IDB_PLAYER0_GETUP2_REVERSE, RGB(0, 0, 0));
 		GetupBackReverse.AddBitmap(IDB_PLAYER0_GETUP1_REVERSE, RGB(0, 0, 0));
-		GetupBackReverse.AddBitmap(IDB_PLAYER0_GETUP2_REVERSE, RGB(0, 0, 0));
-		GetupBackReverse.AddBitmap(IDB_PLAYER0_GETUP2_REVERSE, RGB(0, 0, 0));
+		GetupBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 	}
 
 	void Enemy::OnMove() {

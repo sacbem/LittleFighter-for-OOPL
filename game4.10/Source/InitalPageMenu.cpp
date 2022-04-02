@@ -18,8 +18,8 @@ namespace game_framework {
         Btn.push_back(btnNClick);
         Btn.push_back(btnClick);
         posistion_XY.resize(1);
-        posistion_XY[0].push_back(520);
-        posistion_XY[0].push_back(255);
+        posistion_XY[0].push_back(520*0.81 + 20);
+        posistion_XY[0].push_back(255*0.94);
     }
 
     void  StartBtn::Load(){
@@ -37,13 +37,13 @@ namespace game_framework {
     StartBtn::~StartBtn() {
 
     }
-    /////////////////////////////////////// SettingBtn ///////////////////////////////////////
+    /////////////////////////////////////// SettingBtn(Derived) ///////////////////////////////////////
     SettingBtn::SettingBtn() {
         Btn.push_back(btnNClick);
         Btn.push_back(btnClick);
         posistion_XY.resize(1);
-        posistion_XY[0].push_back(520);
-        posistion_XY[0].push_back(300);
+        posistion_XY[0].push_back(520 * 0.81 + 20);
+        posistion_XY[0].push_back(300 * 0.94);
     }
     void  SettingBtn::Load() {
         Btn[0].LoadBitmapA(IDB_BITMAP12);
