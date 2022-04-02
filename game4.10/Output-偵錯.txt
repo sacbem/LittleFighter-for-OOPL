@@ -1,0 +1,87 @@
+﻿game.exe' (Win32): 已載入 'C:\Users\User\Desktop\OOP_code\game4.10\Debug\game.exe'。已載入符號。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\ntdll.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\kernel32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\KernelBase.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\user32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\ddraw.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\mfc140d.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\winmm.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\win32u.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\gdi32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\advapi32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\msvcrt.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\msvcrt.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已卸載 'C:\Windows\SysWOW64\msvcrt.dll'
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\gdi32full.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\sechost.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\dxgi.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\kernel.appcore.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\rpcrt4.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\msvcp_win.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\ucrtbase.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\ole32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\dciman32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\vcruntime140d.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\combase.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\oleaut32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\shlwapi.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\ws2_32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\imm32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\ucrtbased.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\ucrtbased.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已卸載 'C:\Windows\SysWOW64\ucrtbased.dll'
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\uxtheme.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\msvcp140d.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_5.82.19041.1110_none_c0da534e38c01f4d\comctl32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\tmumh\20019\AddOn\8.53.0.1118\TmUmEvt.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\psapi.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\tmumh\20019\TmMon\2.8.0.1050\tmmon.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\ProgramData\A-Volute\A-Volute.Nahimic\Modules\Scheduled\AudioDevProps2.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\shell32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\msctf.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\TextShaping.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_3e62be9c39fb0007\igdumdim32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_3e62be9c39fb0007\igd9dxva32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_3e62be9c39fb0007\igdgmm32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已卸載 'C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_3e62be9c39fb0007\igd9dxva32.dll'
+game.exe' (Win32): 已卸載 'C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_3e62be9c39fb0007\igdgmm32.dll'
+game.exe' (Win32): 已載入 'C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_3e62be9c39fb0007\igd9dxva32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_3e62be9c39fb0007\igdgmm32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_3e62be9c39fb0007\igdinfo32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_3e62be9c39fb0007\igc32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\DXCore.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\cfgmgr32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\winmmbase.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\mciqtz32.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\quartz.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\bcrypt.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\windows.storage.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\wldp.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\bcryptprimitives.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已卸載 'C:\Windows\SysWOW64\wldp.dll'
+game.exe' (Win32): 已卸載 'C:\Windows\SysWOW64\windows.storage.dll'
+game.exe' (Win32): 已卸載 'C:\Windows\SysWOW64\quartz.dll'
+game.exe' (Win32): 已卸載 'C:\Windows\SysWOW64\mciqtz32.dll'
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\TextInputFramework.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\CoreUIComponents.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\SHCore.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\CoreMessaging.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\ntmarta.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\WinTypes.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\clbcatq.dll'。找不到或無法開啟 PDB 檔案。
+game.exe' (Win32): 已載入 'C:\Windows\SysWOW64\dwmapi.dll'。找不到或無法開啟 PDB 檔案。
+0x3910 執行緒以返回碼 0 (0x0) 結束。
+0x8784 執行緒以返回碼 0 (0x0) 結束。
+0x415c 執行緒以返回碼 0 (0x0) 結束。
+0x511c 執行緒以返回碼 0 (0x0) 結束。
+c:\users\user\desktop\oop_code\game4.10\source\gamelib.cpp(789) : atlTraceGeneral - ~CDDraw()
+c:\users\user\desktop\oop_code\game4.10\source\audio.cpp(183) : atlTraceGeneral - Exit MCI command thread
+0x3818 執行緒以返回碼 2179072 (0x214000) 結束。
+c:\users\user\desktop\oop_code\game4.10\source\audio.cpp(96) : atlTraceGeneral - ~CAudio()
+0x5d4c 執行緒以返回碼 0 (0x0) 結束。
+0x6648 執行緒以返回碼 0 (0x0) 結束。
+0x1e74 執行緒以返回碼 0 (0x0) 結束。
+0x1eb0 執行緒以返回碼 0 (0x0) 結束。
+0x4218 執行緒以返回碼 0 (0x0) 結束。
+0x7e04 執行緒以返回碼 0 (0x0) 結束。
+'[14588] game.exe' 程式以返回碼 0 (0x0) 結束。

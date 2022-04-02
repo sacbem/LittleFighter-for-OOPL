@@ -1,5 +1,6 @@
+#include "Enemy.h"
 #include "Character.h"
-
+#include <ctime>
 namespace game_framework {
 	class CGameStateRun : public CGameState {
 	public:
@@ -18,6 +19,14 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
+		//timer
+		time_t KeyBoardInputTime= time(NULL);
+		time_t Diff=time(NULL);							//計時器
+		UINT LastInput;									//上一個輸入
+		
+		//Player & other
 		Character *PlayerTest;
+		Enemy *EnemyTest;
+		int CleanCounter=0;
 	};
 }

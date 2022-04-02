@@ -75,6 +75,9 @@
     <ClCompile Include="Source\SelCharacterConfig.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -120,6 +123,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\SelCharacterConfig.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
@@ -223,6 +229,372 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="RES\henry_f.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_11.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_12.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_13.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_14.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\Player1_Normal\player1_15.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_14.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_15.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_16.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_17.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_18.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_19.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Normal\player1_60.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Normal\player1_61.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Normal\player1_62.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_67.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_68.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_69.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Normal\player1_20.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Normal\player1_21.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Normal\player1_22.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_27.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_28.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_29.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_30.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_31.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_32.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_33.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_34.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_35.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_36.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_32.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_33.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_34.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_35.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_36.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_37.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_38.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_39.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_40.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_41.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_42.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_43.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_44.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_normal\player0_45.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_44.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_45.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_46.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_47.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_48.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Player0\player0_reverse\player0_49.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_30.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_31.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_32.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_33.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_34.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_35.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_36.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_33.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_34.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_35.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_36.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_37.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_38.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_39.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_40.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_41.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_42.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_43.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_44.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_normal\player1_45.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_44.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_45.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_46.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_47.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_48.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player1\player1_reverse\player1_re_49.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_33.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_34.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_35.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_36.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_37.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_38.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_39.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_44.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_45.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_46.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_47.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_48.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Player0\player0_reverse\player0_re_49.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
