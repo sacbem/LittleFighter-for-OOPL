@@ -30,14 +30,14 @@ namespace game_framework {
 
         startBtn->Load();
         settingBtn->Load();
-        countDown.AddBitmap(IDB_BITMAP25, RGB(0, 0, 0));
+        countDown.AddBitmap(BITMAP_COUNTDOWN_BACK, RGB(0, 0, 0));
         for (int i = 4; i >=0 ; i--) {
-            countDown.AddBitmap( 287- i , RGB(0, 0, 0));
+            countDown.AddBitmap( BITMAP_COUNTDOWN_5- i , RGB(0, 0, 0));
         }
        
-        attackScreen.AddBitmap(IDB_BITMAP23, RGB(0, 0, 0));
-        attackScreen.AddBitmap(IDB_BITMAP14, RGB(0, 0, 0));
-        black.LoadBitmap(IDB_BITMAP24);
+        attackScreen.AddBitmap(BITMAP_PRESSATTACK_0, RGB(0, 0, 0));
+        attackScreen.AddBitmap(BITMAP_PRESSATTACK_1, RGB(0, 0, 0));
+        black.LoadBitmap(BITMAP_BLACKSCREEN);
 		logo.LoadBitmap(IDB_BITMAP3);
         selectCharacterMenu->Load(IDB_BITMAP13);
         photoSticker_seclecter->Load(picStickers,picIDs,picNames);

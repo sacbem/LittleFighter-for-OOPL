@@ -116,13 +116,13 @@ IDB_PLAYER1_ATTACK6     BITMAP                  "..\\res\\Player1\\Player1_Norma
 
 IDB_BITMAP13            BITMAP                  "..\\res\\CHARMENU.bmp"
 
-IDB_BITMAP14            BITMAP                  "..\\res\\CMA.bmp"
+BITMAP_PRESSATTACK_0    BITMAP                  "..\\res\\CMA.bmp"
 
-IDB_BITMAP15            BITMAP                  "..\\res\\firzen_f.bmp"
+PHOTOSTICKER_FIRZEN     BITMAP                  "..\\res\\firzen_f.bmp"
 
-IDB_BITMAP16            BITMAP                  "..\\res\\freeze_f.bmp"
+PHOTOSTICKER_FREEZE     BITMAP                  "..\\res\\freeze_f.bmp"
 
-IDB_BITMAP17            BITMAP                  "..\\res\\henry_f.bmp"
+PHOTOSTICKER_HENRY      BITMAP                  "..\\res\\henry_f.bmp"
 
 IDB_PLAYER1_NORMAL4_REVERSE BITMAP                  "..\\res\\Player1\\Player1_Reverse\\player1_re_6.bmp"
 
@@ -304,35 +304,35 @@ IDB_PLAYER0_KNOCKBACK2_REVERSE BITMAP                  "..\\res\\Player0\\player
 
 IDB_PLAYER0_KNOCKBACK1_REVERSE BITMAP                  "..\\res\\Player0\\player0_reverse\\player0_re_49.bmp"
 
-IDB_BITMAP18            BITMAP                  "..\\res\\CM1.bmp"
+BITMAP_COUNTDOWN_1      BITMAP                  "..\\res\\CM1.bmp"
 
-IDB_BITMAP19            BITMAP                  "..\\res\\CM2.bmp"
+BITMAP_COUNTDOWN_2      BITMAP                  "..\\res\\CM2.bmp"
 
-IDB_BITMAP20            BITMAP                  "..\\res\\CM3.bmp"
+BITMAP_COUNTDOWN_3      BITMAP                  "..\\res\\CM3.bmp"
 
-IDB_BITMAP21            BITMAP                  "..\\res\\CM4.bmp"
+BITMAP_COUNTDOWN_4      BITMAP                  "..\\res\\CM4.bmp"
 
-IDB_BITMAP22            BITMAP                  "..\\res\\CM5.bmp"
+BITMAP_COUNTDOWN_5      BITMAP                  "..\\res\\CM5.bmp"
 
-IDB_BITMAP23            BITMAP                  "..\\res\\CMA2.bmp"
+BITMAP_PRESSATTACK_1    BITMAP                  "..\\res\\CMA2.bmp"
 
-IDB_BITMAP24            BITMAP                  "..\\res\\black.bmp"
+BITMAP_BLACKSCREEN      BITMAP                  "..\\res\\black.bmp"
 
-IDB_BITMAP25            BITMAP                  "..\\res\\CM1.bmp"
+BITMAP_COUNTDOWN_BACK   BITMAP                  "..\\res\\CM1.bmp"
 
-IDB_BITMAP26            BITMAP                  "..\\res\\0.bmp"
+BITMAP_NUMBER_0         BITMAP                  "..\\res\\0.bmp"
 
-IDB_BITMAP27            BITMAP                  "..\\res\\1.bmp"
+BITMAP_NUMBER_1         BITMAP                  "..\\res\\1.bmp"
 
-IDB_BITMAP28            BITMAP                  "..\\res\\2.bmp"
+BITMAP_NUMBER_2         BITMAP                  "..\\res\\2.bmp"
 
-IDB_BITMAP29            BITMAP                  "..\\res\\3.bmp"
+BITMAP_NUMBER_3         BITMAP                  "..\\res\\3.bmp"
 
-IDB_BITMAP30            BITMAP                  "..\\res\\Firzen.bmp"
+NAME_FIRZEN             BITMAP                  "..\\res\\Firzen.bmp"
 
-IDB_BITMAP31            BITMAP                  "..\\res\\Freeze.bmp"
+NAME_FREEZE             BITMAP                  "..\\res\\Freeze.bmp"
 
-IDB_BITMAP32            BITMAP                  "..\\res\\Henry.bmp"
+NAME_HENRY              BITMAP                  "..\\res\\Henry.bmp"
 
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////

@@ -62,9 +62,13 @@
 #define IDB_PLAYER1_ATTACK6             184
 #define IDB_BITMAP13                    186
 #define IDB_BITMAP14                    187
+#define BITMAP_PRESSATTACK_0            187
 #define IDB_BITMAP15                    188
+#define PHOTOSTICKER_FIRZEN             188
 #define IDB_BITMAP16                    189
+#define PHOTOSTICKER_FREEZE             189
 #define IDB_BITMAP17                    190
+#define PHOTOSTICKER_HENRY              190
 #define IDB_PLAYER1_NORMAL4_REVERSE     191
 #define IDB_PLAYER1_NORMAL3_REVERSE     192
 #define IDB_PLAYER1_NORMAL2_REVERSE     193
@@ -109,7 +113,6 @@
 #define IDB_PLAYER0_KNOCK4              232
 #define IDB_PLAYER0_KNOCK5              233
 #define IDB_PLAYER0_GETUP1              234
-//#define IDB_BITMAP19                    235
 #define IDB_PLAYER0_GETUP2              235
 #define IDB_PLAYER0_GETUP2_REVERSE      237
 #define IDB_PLAYER0_GETUP1_REVERSE      238
@@ -124,7 +127,6 @@
 #define IDB_PLAYER0_KNOCKBACK4          247
 #define IDB_PLAYER0_KNOCKBACK5          248
 #define IDB_PLAYER0_GETUPBACK1          249
-//#define IDB_BITMAP18                    250
 #define IDB_PLAYER0_GETUPBACK1_REVERSE  251
 #define IDB_PLAYER0_KNOCKBACK5_REVERSE  252
 #define IDB_PLAYER0_KNOCKBACK4_REVERSE  253
@@ -158,26 +160,42 @@
 #define IDB_PLAYER1_KNOCKBACK3          281
 #define IDB_PLAYER1_KNOCKBACK3_REVERSE  282
 #define IDB_BITMAP18                    283
+#define BITMAP_COUNTDOWN_1              283
 #define IDB_BITMAP19                    284
+#define BITMAP_COUNTDOWN_2              284
 #define IDB_BITMAP20                    285
+#define BITMAP_COUNTDOWN_3              285
 #define IDB_BITMAP21                    286
+#define BITMAP_COUNTDOWN_4              286
 #define IDB_BITMAP22                    287
+#define BITMAP_COUNTDOWN_5              287
 #define IDB_BITMAP23                    288
+#define BITMAP_PRESSATTACK_1            288
 #define IDB_BITMAP24                    289
+#define BITMAP_BLACKSCREEN              289
 #define IDB_BITMAP25                    290
+#define BITMAP_NUMBER_1                 290
 #define IDB_BITMAP26                    291
+#define BITMAP_NUMBER_0                 291
 #define IDB_BITMAP27                    292
 #define IDB_BITMAP28                    293
+#define BITMAP_NUMBER_2                 293
 #define IDB_BITMAP29                    294
+#define BITMAP_NUMBER_3                 294
 #define IDB_BITMAP30                    295
+#define BITMAP_NAME_FIRZEN              295
+#define NAME_FIRZEN                     295
 #define IDB_BITMAP31                    296
+#define NAME_FREEZE                     296
 #define IDB_BITMAP32                    297
+#define NAME_HENRY                      297
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
 #define ID_BUTTON_FULLSCREEN            32773
 #define ID_BUTTON_PAUSE                 32774
 #define ID_BUTTON_UNITTEST              32775
+#define BITMAP_COUNTDOWN_BACK           57664
 
 // Next default values for new objects
 // 
@@ -185,7 +203,6 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        282
-#define _APS_NEXT_RESOURCE_VALUE        206
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

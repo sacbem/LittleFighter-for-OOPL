@@ -33,7 +33,7 @@ namespace game_framework {
         PhotoSticker *photoSticker_1P, *photoSticker_2P;
         Seclecter* photoSticker_seclecter;
         vector<int> bitmap;
-        vector<int> picStickers{ 188,189,190 }, picIDs{ 292,293,294 }, picNames{295,296,297};
+        vector<int> picStickers{ PHOTOSTICKER_FIRZEN,PHOTOSTICKER_FREEZE,PHOTOSTICKER_HENRY }, picIDs{ BITMAP_NUMBER_0,BITMAP_NUMBER_1,BITMAP_NUMBER_2 }, picNames{NAME_FIRZEN,NAME_FREEZE,NAME_HENRY};
         int keyCount;
         int cursorXY[2];
         int cursorClickLift;
