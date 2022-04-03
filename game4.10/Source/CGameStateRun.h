@@ -20,8 +20,11 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		//timer
-		time_t KeyBoardInputTime= time(NULL);
-		time_t Diff=time(NULL);							//計時器
+		//time_t KeyBoardInputTime= time(NULL);
+		//time_t Diff=time(NULL);							//計時器
+
+		int KeyBoardInputTime;
+		int Diff;
 		UINT LastInput;									//上一個輸入
 		
 		//Player & other

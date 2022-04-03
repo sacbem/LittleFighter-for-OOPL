@@ -25,6 +25,7 @@ namespace game_framework {
 	{
 		PlayerTest->Initialize();
 		EnemyTest->Initialize();
+		KeyBoardInputTime = 0;
 	}
 
 	void CGameStateRun::OnMove()						// 移動遊戲元素
@@ -86,8 +87,9 @@ namespace game_framework {
 		pDC->SetBkColor(RGB(0, 0, 0));
 		pDC->SetTextColor(RGB(255, 255, 0));
 
+		KeyBoardInputTime++;
 		CString str;
-		str.Format("%d", EnemyTest->GetHealth());
+		str.Format("%d", KeyBoardInputTime);
 		CString str2;
 		str2.Format("%d , %d", PlayerTest->GetX1(), PlayerTest->GetY1());
 		pDC->TextOut(120, 220, str);
@@ -119,8 +121,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		time_t LastTime = KeyBoardInputTime;
-		time(&KeyBoardInputTime);
+		int LastTime = KeyBoardInputTime;
 		Diff = KeyBoardInputTime - LastTime;
 
 		const char KEY_LEFT = 0x41; // keyboard左箭頭 0x25
@@ -136,7 +137,7 @@ namespace game_framework {
 		// if (nChar == KEY_UP)
 			// sister.SetJumpimg(true);
 
-		if (Diff <= 0) {
+		if (Diff <= 3) {
 			if (nChar == KEY_LEFT && LastInput == KEY_LEFT) {
 				PlayerTest->SetMovingLeft(true);
 				PlayerTest->SetRunning(true);
@@ -148,25 +149,21 @@ namespace game_framework {
 		}
 		if (nChar == KEY_LEFT) {
 			PlayerTest->SetMovingLeft(true);
-			PlayerTest->SetWalking(true);
 
 			//EnemyTest->SetMovingLeft(true);
 			//EnemyTest->SetWalking(true);
 		}
 		if (nChar == KEY_RIGHT) {
 			PlayerTest->SetMovingRight(true);
-			PlayerTest->SetWalking(true);
 			
 			//EnemyTest-> SetMovingRight(true);
 			//EnemyTest-> SetWalking(true);
 		}
 		if (nChar == KEY_UP) {
 			PlayerTest->SetMovingUp(true);
-			PlayerTest->SetWalking(true);
 		}
 		if (nChar == KEY_DOWN) {
 			PlayerTest->SetMovingDown(true);
-			PlayerTest->SetWalking(true);
 		}
 		if (nChar == KEY_SPACE) {
 			PlayerTest->SetAttack(true);
@@ -217,7 +214,6 @@ namespace game_framework {
 		if (nChar == KEY_UP) {
 			PlayerTest->SetMovingUp(false);
 			PlayerTest->SetWalking(false);
-			PlayerTest->SetRunning(false);
 		}
 		if (nChar == KEY_DOWN) {
 			PlayerTest->SetMovingDown(false);
