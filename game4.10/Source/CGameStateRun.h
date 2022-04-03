@@ -24,6 +24,7 @@ namespace game_framework {
 		//time_t Diff=time(NULL);							//計時器
 
 		int KeyBoardInputTime;
+		int LastInputTime;
 		int Diff;
 		UINT LastInput;									//上一個輸入
 		

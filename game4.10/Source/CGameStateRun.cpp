@@ -26,6 +26,7 @@ namespace game_framework {
 		PlayerTest->Initialize();
 		EnemyTest->Initialize();
 		KeyBoardInputTime = 0;
+		LastInputTime = 0;
 	}
 
 	void CGameStateRun::OnMove()						// 移動遊戲元素
@@ -89,7 +90,7 @@ namespace game_framework {
 
 		KeyBoardInputTime++;
 		CString str;
-		str.Format("%d", KeyBoardInputTime);
+		str.Format("%d", Diff);
 		CString str2;
 		str2.Format("%d , %d", PlayerTest->GetX1(), PlayerTest->GetY1());
 		pDC->TextOut(120, 220, str);
@@ -121,8 +122,8 @@ namespace game_framework {
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		int LastTime = KeyBoardInputTime;
-		Diff = KeyBoardInputTime - LastTime;
+		Diff = KeyBoardInputTime - LastInputTime;
+		LastInputTime = KeyBoardInputTime;
 
 		const char KEY_LEFT = 0x41; // keyboard左箭頭 0x25
 		const char KEY_UP = 0x57; // keyboard上箭頭 0x26
@@ -130,6 +131,23 @@ namespace game_framework {
 		const char KEY_DOWN = 0x53; // keyboard下箭頭 0x28
 		const char KEY_SPACE = 0x20; // keyboard SPACE
 		const char KEY_CTRL = 0x11; //keyboard ctrl
+
+		if (nChar == KEY_LEFT) {
+			if (PlayerTest->isRunning == true) {
+				PlayerTest->SetMovingLeft(false);
+				PlayerTest->SetMovingRight(false);
+				PlayerTest->SetWalking(false);
+				PlayerTest->SetRunning(false);
+			}
+		}
+		if (nChar == KEY_RIGHT) {
+			if (PlayerTest->isRunning == true) {
+				PlayerTest->SetMovingLeft(false);
+				PlayerTest->SetMovingRight(false);
+				PlayerTest->SetWalking(false);
+				PlayerTest->SetRunning(false);
+			}
+		}
 		//if (nChar == KEY_LEFT)
 			
 		//if (nChar == KEY_RIGHT)
@@ -137,7 +155,7 @@ namespace game_framework {
 		// if (nChar == KEY_UP)
 			// sister.SetJumpimg(true);
 
-		if (Diff <= 3) {
+		if (Diff <= 5) {
 			if (nChar == KEY_LEFT && LastInput == KEY_LEFT) {
 				PlayerTest->SetMovingLeft(true);
 				PlayerTest->SetRunning(true);
@@ -149,13 +167,11 @@ namespace game_framework {
 		}
 		if (nChar == KEY_LEFT) {
 			PlayerTest->SetMovingLeft(true);
-
 			//EnemyTest->SetMovingLeft(true);
 			//EnemyTest->SetWalking(true);
 		}
 		if (nChar == KEY_RIGHT) {
-			PlayerTest->SetMovingRight(true);
-			
+			PlayerTest->SetMovingRight(true);			
 			//EnemyTest-> SetMovingRight(true);
 			//EnemyTest-> SetWalking(true);
 		}
@@ -185,29 +201,21 @@ namespace game_framework {
 		//if (nChar == KEY_RIGHT)
 			//sister.SetMovingRight(false);
 
-		if (Diff <= 0) {
-			if (nChar == KEY_LEFT && LastInput == KEY_LEFT) {
-				PlayerTest->SetMovingLeft(false);
-				PlayerTest->SetRunning(false);
-			}
-			else if (nChar == KEY_RIGHT && LastInput == KEY_RIGHT) {
-				PlayerTest->SetMovingRight(false);
-				PlayerTest->SetRunning(false);
-			}
-		}
 		if (nChar == KEY_LEFT) {
-			PlayerTest->SetMovingLeft(false);
-			PlayerTest->SetWalking(false);
-			PlayerTest->SetRunning(false);
+			if(PlayerTest->isRunning == false){
+				PlayerTest->SetMovingLeft(false);
+				PlayerTest->SetWalking(false);
+			}
 
 			EnemyTest->SetMovingLeft(false);
 			EnemyTest->SetWalking(false);
 		}
 		if (nChar == KEY_RIGHT) {
-			PlayerTest->SetMovingRight(false);
-			PlayerTest->SetRunning(false);
-			PlayerTest->SetWalking(false);
-
+			if (PlayerTest->isRunning == false) {
+				PlayerTest->SetMovingRight(false);
+				PlayerTest->SetWalking(false);
+			}
+			
 			EnemyTest->SetMovingRight(false);
 			EnemyTest->SetWalking(false);
 		}

@@ -97,7 +97,7 @@ namespace game_framework {
 		yPos = 200;
 		InitialVelocity = 10;
 		YVelocity = InitialVelocity;
-		isGettingUp = isGettingHit = isDefending = isAttacking = isJumpping = isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+		isRunning = isGettingUp = isGettingHit = isDefending = isAttacking = isJumpping = isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 		direction = 1;
 
 		HealthPoint = 1000;
