@@ -8,37 +8,62 @@
 #include "MapGenerator.h"
 namespace game_framework {
     MapGenerator::MapGenerator(){
-        //CMovingBitmap *obj1, *obj2, *obj3, *obj4, *obj5, *obj6;
-        //obj1 = new CMovingBitmap; obj2 = new CMovingBitmap; obj3 = new CMovingBitmap;
-        //obj4 = new CMovingBitmap; obj5 = new CMovingBitmap; obj6 = new CMovingBitmap;
-        //CMovingBitmap obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8, obj9, obj10, obj11, obj12;
-        weed1 = new CMovingBitmap(); weed2 = new CMovingBitmap();
-        weed3 = new CMovingBitmap(); weed4 = new CMovingBitmap();
+
         weeds.reserve(4);
+        trees.reserve(4);
+        mountains.reserve(2);
+        sky.reserve(2);
+       
+        backGreen = new CMovingBitmap();
         //landsPosXY.reserve(4);
         //wallPosXY.reserve(4);
-        
     }
     void MapGenerator::Initialize(int) {
-        weeds.push_back(weed1); weeds.push_back(weed2);
-        weeds.push_back(weed3); weeds.push_back(weed4);
-       
-        //SetWallsPosition();
+     
+        for (int i = 0; i < 4; i++) {
+            trees.push_back(new CMovingBitmap());
+            weeds.push_back(new CMovingBitmap());
+       }
+        for (int i = 0; i < 2; i++) {
+            mountains.push_back(new CMovingBitmap());
+        }
+        for (int i = 0; i < 3; i++) {
+            sky.push_back(new CMovingBitmap());
+        }
+
     }
     void MapGenerator::Load(int) {
         Initialize(0);
-        int cnt = 0;
-        backGreen.LoadBitmap(BITMAP_GREEN);
-        for (auto &i : weeds) {
-            i->LoadBitmap(BITMAP_FOREST_L1 + cnt);
-            cnt++;
+       
+        backGreen->LoadBitmap(BITMAP_GREEN);
+        for (auto &i : sky) {
+            i->LoadBitmap(BITMAP_FOREST_M5);
         }
-        backGreen.SetTopLeft(0, 300);
-        weeds[0]->SetTopLeft(0, 300);
-        weeds[1]->SetTopLeft(210, 390);
-        weeds[2]->SetTopLeft(385, 374);
-        weeds[3]->SetTopLeft(170, 385);
+        for (int i = 0; i < 4;i++) {
+            trees[i]->LoadBitmap(BITMAP_FOREST_T1, RGB(0, 0, 0));
+            weeds[i]->LoadBitmap(BITMAP_FOREST_L1 + i);
+        }
+        mountains[0]->LoadBitmap(BITMAP_FOREST_Mex, RGB(0, 0, 0));
+        mountains[1]->LoadBitmap(BITMAP_FOREST_M2, RGB(0, 0, 0));
 
+
+        for (int i = 0; i < 4; i++) {
+            trees[i]->SetTopLeft(250*i, 125);
+            if (i < 2) {
+                mountains[i]->SetTopLeft(500 * i, 75 - 5 * i);
+            }
+            if (i < 3) {
+                sky[i]->SetTopLeft(skyPosXY[i], 50);
+            }
+        }
+
+        weeds[0]->SetTopLeft(0, 280);
+        weeds[1]->SetTopLeft(210, 370);
+        weeds[2]->SetTopLeft(385, 250);
+        weeds[3]->SetTopLeft(170, 365);
+
+        backGreen->SetTopLeft(0, 280);
+        
         
     }
     void  MapGenerator::SetLandPosition() {
@@ -55,43 +80,83 @@ namespace game_framework {
         }
 
     }
-    void MapGenerator::SetWallPosition() {
+    void MapGenerator::SetSkyPosition() {
+        int cnt = 0;
+        for (auto &i : sky) {
+            i->SetTopLeft(skyPosXY[cnt], 50);
+            cnt++;
+        }
 
     }
     void MapGenerator::PrintMap() {
-        backGreen.ShowBitmap();
+        backGreen->ShowBitmap();
+       
         for (auto i : weeds) {
+            i->ShowBitmap();
+        }
+        for (auto i : sky) {
+            i->ShowBitmap();
+        }
+        for (auto i : mountains) {
+            i->ShowBitmap();
+        }
+
+        for (auto i : trees) {
             i->ShowBitmap();
         }
     }
     void MapGenerator::ScenesCamera(boolean ISLEFT,int type) {
-        if (type == 0) {
+        if (type == 0) {    //  跑步時移動場景
             for (int x = 0; x < 4; x++) {
                 if (ISLEFT) {
                     landsPosXY[x][0] -= 10;
+                    if (x < 3) { 
+                        skyPosXY[x] -= 5; 
+                        if (skyPosXY[x] < -1600) {
+                            skyPosXY[x] = 800;
+                        }
+                    }
                     if (landsPosXY[x][0] < 0) {
                         landsPosXY[x][0] = 750;
                     }
                 }
                 else {
                     landsPosXY[x][0] += 10;
+                    if (x < 3) { 
+                        skyPosXY[x] += 5; 
+                        if (skyPosXY[x] > 1600) {
+                            skyPosXY[x] = -800;
+                        }
+                    }
                     if (landsPosXY[x][0] >= 800) {
                         landsPosXY[x][0] = 0;
                     }
                 }
             }
         }
-        else if (type == 1) {
-            for (int x = 0; x < 50; x++) {
+        else if (type == 1) {       //  走路時 走一定距離移動場景
+            for (int x = 0; x < 50; x++) {  
                 for (int i = 0; i < 4; i++) {
                     if (ISLEFT) {
                         landsPosXY[i][0] -= 1;
+                        if (i < 3) {
+                            skyPosXY[i] -= 0.5;
+                            if (skyPosXY[i] < -1600) {
+                                skyPosXY[i] = 800;
+                            }
+                        }
                         if (landsPosXY[i][0] < 0) {
                             landsPosXY[i][0] = 750;
                         }
                     }
                     else {
                         landsPosXY[i][0] += 1;
+                        if (i < 3) { 
+                            skyPosXY[i] += 0.5; 
+                            if (skyPosXY[i] > 1600) {
+                                skyPosXY[i] = -800;
+                            }
+                        }
                         if (landsPosXY[i][0] >= 800) {
                             landsPosXY[i][0] = 0;
                         }
@@ -99,12 +164,27 @@ namespace game_framework {
                 }
             }
         }
-
+        SetSkyPosition();
         SetLandPosition();
     }
 
-    MapGenerator::~MapGenerator() {
-        delete weed1, weed2, weed3, weed4;
+    MapGenerator::~MapGenerator() { 
+        delete backGreen;
+
+        for (int i = 0; i < 4; i++) {
+            if (i < 2) {
+                delete mountains[i];
+            }
+            if (i < 3) {
+                delete sky[i];
+            }    
+            delete trees[i];
+            delete weeds[i];
+           
+          
+        }
+
+
     }
 }
 

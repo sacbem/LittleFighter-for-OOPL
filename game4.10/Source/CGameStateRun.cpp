@@ -55,7 +55,6 @@ namespace game_framework {
 		}
 
 		PlayerTest->OnMove();
-        TRACE("------------Distance------------:%d\n", PlayerTest->GetDistance());
 		EnemyTest->OnMove();
         MapSlide();
 		

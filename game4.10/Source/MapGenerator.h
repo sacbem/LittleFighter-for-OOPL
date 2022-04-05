@@ -11,12 +11,12 @@ namespace game_framework {
         //vector<CMovingBitmap*>  lands, walls;
         //
         vector<CMovingBitmap>lands, walls;
-        vector<vector<int>>landsPosXY{ {0, 300},{210, 390},{385, 374},{170, 385} }, wallPosXY;
+        vector<vector<int>>landsPosXY{ {0, 300},{210, 390},{385, 374},{170, 385} };
+        vector<double>skyPosXY{ -800,0 ,800};
         void SetLandPosition();
         void Initialize(int);
-        void SetWallPosition();
-        CMovingBitmap backGreen;
-        CMovingBitmap *weed1,* weed2, *weed3, *weed4;
-        vector<CMovingBitmap*> weeds;
+        void SetSkyPosition();
+        CMovingBitmap *backGreen;
+        vector<CMovingBitmap*> weeds,trees,mountains, sky;
     };
 }
