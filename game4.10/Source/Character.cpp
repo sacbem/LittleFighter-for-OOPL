@@ -6,16 +6,14 @@
 #include "gamelib.h"
 #include "Enemy.h"
 #include "Character.h"
-
+#include <cmath>
 namespace game_framework {
 	
 	Character::Character() {
 		Initialize();
 	}
 
-	Character::~Character() {
-
-	}
+	
 
 	int Character::HitEnemy(Enemy *enemy) {
 		DelayCounter--;
@@ -95,6 +93,7 @@ namespace game_framework {
 
 		xPos = 200;
 		yPos = 200;
+        xAccumulator = yAccumulator = 200;
 		InitialVelocity = 10;
 		YVelocity = InitialVelocity;
 		isRunning = isGettingUp = isGettingHit = isDefending = isAttacking = isJumpping = isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
@@ -103,6 +102,8 @@ namespace game_framework {
 		HealthPoint = 1000;
 		AttackPoint = 10;
 		DefencePoint = 5;
+        walkedDistance = 0;
+        isRunning = 0;
 	}
 
 	void Character::LoadBitmap() {
@@ -236,6 +237,19 @@ namespace game_framework {
 		GetupBackReverse.AddBitmap(IDB_PLAYER1_GETUP1_REVERSE, RGB(0, 0, 0));
 		GetupBackReverse.AddBitmap(IDB_PLAYER1_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 	}
+    void Character::DistaceAccumulator() {
+        walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
+        TRACE("walkedDistance:%d\n", walkedDistance);
+    }
+    int Character::GetDistance() {
+        return walkedDistance;
+    }
+    void Character::SetAccumulator(int x, int y) {
+        walkedDistance = 0;
+        xAccumulator = x;
+        yAccumulator = y;
+        TRACE("***********************************\n");
+    }
 
 	void Character::OnMove() {
 		int speed = 5;
@@ -544,4 +558,7 @@ namespace game_framework {
 			ShowNormal(direction);
 		}
 	}
+    Character::~Character() {
+
+    }
 }

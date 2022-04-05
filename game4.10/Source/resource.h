@@ -178,17 +178,32 @@
 #define IDB_BITMAP26                    291
 #define BITMAP_NUMBER_0                 291
 #define IDB_BITMAP27                    292
+#define BITMAP_FOREST_M1                292
 #define IDB_BITMAP28                    293
 #define BITMAP_NUMBER_2                 293
 #define IDB_BITMAP29                    294
 #define BITMAP_NUMBER_3                 294
 #define IDB_BITMAP30                    295
-#define BITMAP_NAME_FIRZEN              295
 #define NAME_FIRZEN                     295
 #define IDB_BITMAP31                    296
 #define NAME_FREEZE                     296
 #define IDB_BITMAP32                    297
 #define NAME_HENRY                      297
+#define BITMAP_FOREST_M2                298
+#define BITMAP_FOREST_M3                299
+#define BITMAP_FOREST_M4                300
+#define BITMAP_FOREST_M5                301
+#define BITMAP_FOREST_T1                302
+#define BITMAP_FOREST_L1                303
+#define BITMAP_FOREST_L2                304
+#define BITMAP_FOREST_L3                305
+#define BITMAP_FOREST_L4                306
+#define BITMAP_FOREST_S1                307
+#define BITMAP_FOREST_B                 308
+#define IDB_BITMAP33                    309
+#define IDB_BITMAP34                    310
+#define IDB_BITMAP35                    311
+#define BITMAP_GREEN                    311
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -202,7 +217,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        282
+#define _APS_NEXT_RESOURCE_VALUE        312
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

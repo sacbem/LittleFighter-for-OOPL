@@ -29,6 +29,8 @@ namespace game_framework {
 		void SetGettingUp(bool flag);
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
+        int GetDistance();
+        void SetAccumulator(int, int);
 		//basic informtion
 		int HealthPoint;
 		int AttackPoint;
@@ -76,10 +78,12 @@ namespace game_framework {
 		void ShowRun(int Dir);
 		void ShowGettingUP(int Dir);
 		void ShowKnock(int Dir, int HitDir);
-		
+        void DistaceAccumulator();
+
 		int DelayCounter;
 		int Delay;
 		int xPos, yPos;
+        int xAccumulator, yAccumulator;
 		//judge
 		//direction
 		int direction;				// 0=Left 1=Right
@@ -94,6 +98,7 @@ namespace game_framework {
 		int JumpYposTemp;
 		int YVelocity;
 		int InitialVelocity;
+        int walkedDistance;
 	private:
 		int HitRectangle(int tx1, int ty1, int tx2, int ty2);
 

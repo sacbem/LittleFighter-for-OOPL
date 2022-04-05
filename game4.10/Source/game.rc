@@ -334,6 +334,33 @@ NAME_FREEZE             BITMAP                  "..\\res\\Freeze.bmp"
 
 NAME_HENRY              BITMAP                  "..\\res\\Henry.bmp"
 
+BITMAP_FOREST_M1        BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\forestm1.bmp"
+
+BITMAP_FOREST_M2        BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\forestm2.bmp"
+
+BITMAP_FOREST_M3        BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\forestm3.bmp"
+
+BITMAP_FOREST_M4        BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\forestm4.bmp"
+
+BITMAP_FOREST_M5        BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\forests.bmp"
+
+BITMAP_FOREST_T1        BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\forestt.bmp"
+
+BITMAP_FOREST_L1        BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\land1.bmp"
+
+BITMAP_FOREST_L2        BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\land2.bmp"
+
+BITMAP_FOREST_L3        BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\land3.bmp"
+
+BITMAP_FOREST_L4        BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\land4.bmp"
+
+BITMAP_FOREST_S1        BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\s.bmp"
+
+BITMAP_FOREST_B         BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\iftest.bmp"
+
+
+BITMAP_GREEN            BITMAP                  "C:\\Users\\Dell\\Desktop\\110_OOPL\\game4.10\\RES\\lf\\green.bmp"
+
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////
 
