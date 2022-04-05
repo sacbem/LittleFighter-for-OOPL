@@ -309,11 +309,13 @@ namespace game_framework {
 
 		if (isMovingLeft) {
 			xPos -= speed;
+            DistaceAccumulator();
 			isWalking = true;
 			direction = 0;
 		}
 		if (isMovingRight) {
 			xPos += speed;
+            DistaceAccumulator();
 			isWalking = true;
 			direction = 1;
 		}

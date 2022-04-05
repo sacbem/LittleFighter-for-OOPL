@@ -15,7 +15,8 @@ namespace game_framework {
         void SetLandPosition();
         void Initialize(int);
         void SetWallPosition();
-        CMovingBitmap backGreen, weed1, weed2, weed3, weed4 ;
-        vector<CMovingBitmap> weeds;
+        CMovingBitmap backGreen;
+        CMovingBitmap *weed1,* weed2, *weed3, *weed4;
+        vector<CMovingBitmap*> weeds;
     };
 }

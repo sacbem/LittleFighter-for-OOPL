@@ -33,6 +33,7 @@ namespace game_framework {
 
         }
         else if (PlayerTest->GetDistance() > 50) {
+          
             if (PlayerTest->GetDir()) {
                 maps->ScenesCamera(true, 1);
             }
@@ -54,6 +55,7 @@ namespace game_framework {
 		}
 
 		PlayerTest->OnMove();
+        TRACE("------------Distance------------:%d\n", PlayerTest->GetDistance());
 		EnemyTest->OnMove();
         MapSlide();
 		
@@ -176,6 +178,7 @@ namespace game_framework {
 		}
 		if (nChar == KEY_LEFT) {
 			PlayerTest->SetMovingLeft(true);
+            
 			//EnemyTest->SetMovingLeft(true);
 			//EnemyTest->SetWalking(true);
 		}

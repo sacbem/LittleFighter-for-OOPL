@@ -12,8 +12,9 @@ namespace game_framework {
         //obj1 = new CMovingBitmap; obj2 = new CMovingBitmap; obj3 = new CMovingBitmap;
         //obj4 = new CMovingBitmap; obj5 = new CMovingBitmap; obj6 = new CMovingBitmap;
         //CMovingBitmap obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8, obj9, obj10, obj11, obj12;
-       
-
+        weed1 = new CMovingBitmap(); weed2 = new CMovingBitmap();
+        weed3 = new CMovingBitmap(); weed4 = new CMovingBitmap();
+        weeds.reserve(4);
         //landsPosXY.reserve(4);
         //wallPosXY.reserve(4);
         
@@ -29,14 +30,14 @@ namespace game_framework {
         int cnt = 0;
         backGreen.LoadBitmap(BITMAP_GREEN);
         for (auto &i : weeds) {
-            i.LoadBitmap(BITMAP_FOREST_L1 + cnt);
+            i->LoadBitmap(BITMAP_FOREST_L1 + cnt);
             cnt++;
         }
         backGreen.SetTopLeft(0, 300);
-        weeds[0].SetTopLeft(0, 300);
-        weeds[1].SetTopLeft(210, 390);
-        weeds[2].SetTopLeft(385, 374);
-        weeds[3].SetTopLeft(170, 385);
+        weeds[0]->SetTopLeft(0, 300);
+        weeds[1]->SetTopLeft(210, 390);
+        weeds[2]->SetTopLeft(385, 374);
+        weeds[3]->SetTopLeft(170, 385);
 
         
     }
@@ -49,7 +50,7 @@ namespace game_framework {
         //t :253*162
         int cnt = 0;
         for (auto &i : weeds) {
-            i.SetTopLeft(landsPosXY[cnt][0], landsPosXY[cnt][1]);
+            i->SetTopLeft(landsPosXY[cnt][0], landsPosXY[cnt][1]);
             cnt++;
         }
 
@@ -60,7 +61,7 @@ namespace game_framework {
     void MapGenerator::PrintMap() {
         backGreen.ShowBitmap();
         for (auto i : weeds) {
-            i.ShowBitmap();
+            i->ShowBitmap();
         }
     }
     void MapGenerator::ScenesCamera(boolean ISLEFT,int type) {
@@ -102,7 +103,9 @@ namespace game_framework {
         SetLandPosition();
     }
 
-    MapGenerator::~MapGenerator() {}
+    MapGenerator::~MapGenerator() {
+        delete weed1, weed2, weed3, weed4;
+    }
 }
 
 /*
