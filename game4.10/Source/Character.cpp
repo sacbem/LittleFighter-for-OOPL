@@ -6,16 +6,12 @@
 #include "gamelib.h"
 #include "Enemy.h"
 #include "Character.h"
-
+#include <cmath>
 namespace game_framework {
 	
 	Character::Character(int num) {
 		characterNumber = num;
 		Initialize();
-	}
-
-	Character::~Character() {
-
 	}
 
 	int Character::HitEnemy(Character *enemy) {
@@ -99,6 +95,7 @@ namespace game_framework {
 
 		xPos = 200;
 		yPos = 200;
+        xAccumulator = yAccumulator = 200;
 		InitialVelocity = 10;
 		YVelocity = InitialVelocity;
 		isRunning = isGettingUp = isGettingHit = isDefending = isAttacking = isJumpping = isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
@@ -107,7 +104,24 @@ namespace game_framework {
 		HealthPoint = 1000;
 		AttackPoint = 10;
 		DefencePoint = 5;
+        walkedDistance = 0;
+        isRunning = 0;
 	}
+
+
+    void Character::DistaceAccumulator() {
+        walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
+        TRACE("walkedDistance:%d\n", walkedDistance);
+    }
+    int Character::GetDistance() {
+        return walkedDistance;
+    }
+    void Character::SetAccumulator(int x, int y) {
+        walkedDistance = 0;
+        xAccumulator = x;
+        yAccumulator = y;
+        TRACE("***********************************\n");
+    }
 
 	void Character::LoadPlayer0() {
 		//Normal
@@ -682,16 +696,12 @@ namespace game_framework {
 		Attacking.AddBitmap(HENRY_ATTACK4, RGB(0, 0, 0));
 		Attacking.AddBitmap(HENRY_ATTACK3, RGB(0, 0, 0));
 		Attacking.AddBitmap(HENRY_ATTACK2, RGB(0, 0, 0));
-		Attacking.AddBitmap(HENRY_ATTACK2, RGB(0, 0, 0));
-		Attacking.AddBitmap(HENRY_ATTACK1, RGB(0, 0, 0));
 		Attacking.AddBitmap(HENRY_ATTACK1, RGB(0, 0, 0));
 
 		//Attack Reverse
 		AttackingReverse.AddBitmap(HENRY_ATTACK4_REVERSE, RGB(0, 0, 0));
 		AttackingReverse.AddBitmap(HENRY_ATTACK3_REVERSE, RGB(0, 0, 0));
 		AttackingReverse.AddBitmap(HENRY_ATTACK2_REVERSE, RGB(0, 0, 0));
-		AttackingReverse.AddBitmap(HENRY_ATTACK2_REVERSE, RGB(0, 0, 0));
-		AttackingReverse.AddBitmap(HENRY_ATTACK1_REVERSE, RGB(0, 0, 0));
 		AttackingReverse.AddBitmap(HENRY_ATTACK1_REVERSE, RGB(0, 0, 0));
 
 		//Jump
@@ -858,11 +868,13 @@ namespace game_framework {
 
 		if (isMovingLeft) {
 			xPos -= speed;
+            DistaceAccumulator();
 			isWalking = true;
 			direction = 0;
 		}
 		if (isMovingRight) {
 			xPos += speed;
+            DistaceAccumulator();
 			isWalking = true;
 			direction = 1;
 		}
@@ -1133,4 +1145,7 @@ namespace game_framework {
 			ShowNormal(direction);
 		}
 	}
+    Character::~Character() {
+
+    }
 }

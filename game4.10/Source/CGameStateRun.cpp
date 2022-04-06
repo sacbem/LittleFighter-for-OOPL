@@ -11,25 +11,43 @@ namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g)
 		: CGameState(g)
 	{
-		PlayerTest = new Character(2);
+		PlayerTest = new Character(1);
 		EnemyTest = new Character(4);
-	}
-
-	CGameStateRun::~CGameStateRun()
-	{
-		delete PlayerTest;
-		delete EnemyTest;
+        maps = new MapGenerator();
 	}
 
 	void CGameStateRun::OnBeginState()
 	{
 		PlayerTest->Initialize();
 		EnemyTest->Initialize();
-		PlayerTest->SetXY(500, 200);
+		PlayerTest->SetXY(200, 200);
+		EnemyTest->SetXY(500, 200);
 		KeyBoardInputTime = 0;
 		LastInputTime = 0;
 	}
+    void  CGameStateRun::MapSlide() {
+        if (PlayerTest->isRunning) {
+            //TRACE("--------------- %d -------------%d \n", PlayerTest->isRunning, PlayerTest->GetDistance());
+            if (PlayerTest->GetDir()) {
+                maps->ScenesCamera(true, 0);
+            }
+            else {
+                maps->ScenesCamera(false, 0);
+            }
 
+        }
+        else if (PlayerTest->GetDistance() > 50) {
+          
+            if (PlayerTest->GetDir()) {
+                maps->ScenesCamera(true, 1);
+            }
+            else {
+                maps->ScenesCamera(false, 1);
+            }
+            PlayerTest->SetAccumulator(PlayerTest->GetX1(), PlayerTest->GetY1());
+
+        }
+    }
 	void CGameStateRun::OnMove()						// 移動遊戲元素
 	{
 		CleanCounter++;
@@ -42,6 +60,7 @@ namespace game_framework {
 
 		PlayerTest->OnMove();
 		EnemyTest->OnMove();
+        MapSlide();
 		
 		
 		//x bound
@@ -117,6 +136,7 @@ namespace game_framework {
 		//
 		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 		//
+        maps->Load(0);
 		PlayerTest->SetCharacter();
 		EnemyTest->SetCharacter();
 	}
@@ -224,36 +244,14 @@ namespace game_framework {
 		LastInput = nChar;
 	}
 
-	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
-	{
 
-	}
+	void CGameStateRun::OnShow(){
 
-	void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
-	{
-
-	}
-
-	void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
-	{
-
-	}
-
-	void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
-	{
-
-	}
-
-	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
-	{
-
-	}
-
-	void CGameStateRun::OnShow()
-	{
-		//map.OnShow(); // 顯示地圖
-		//sister.OnShow();
+        maps->PrintMap();
 		PlayerTest->OnShow();
 		EnemyTest->OnShow();
 	}
+    CGameStateRun::~CGameStateRun(){
+        delete PlayerTest, EnemyTest,maps;
+    }
 }

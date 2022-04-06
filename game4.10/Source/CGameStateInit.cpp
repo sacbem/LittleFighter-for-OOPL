@@ -220,6 +220,8 @@ namespace game_framework {
           logo.SetTopLeft(0, 0);
           logo.ShowBitmap();
 
+          //test
+          GotoGameState(GAME_STATE_RUN);
           if (!SELECT_ENTER) {
               startBtn->OnShow();
               settingBtn->OnShow();

@@ -263,6 +263,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="Source\MapGenerator.cpp" />
     <ClCompile Include="Source\SelCharacterConfig.cpp" />
     <ClCompile Include="Source\StdAfx.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -292,6 +293,7 @@
     <ClInclude Include="Source\gameView.h" />
     <ClInclude Include="Source\InitalPageMenu.h" />
     <ClInclude Include="Source\MainFrm.h" />
+    <ClInclude Include="Source\MapGenerator.h" />
     <ClInclude Include="Source\Resource.h" />
     <ClInclude Include="Source\SelCharacterConfig.h" />
     <ClInclude Include="Source\StdAfx.h" />
@@ -551,6 +553,23 @@
     <Image Include="RES\inital_btn_start.bmp" />
     <Image Include="RES\inital_btn_start2.bmp" />
     <Image Include="RES\InitPage_1.bmp" />
+    <Image Include="RES\lf\forestm1.bmp" />
+    <Image Include="RES\lf\forestm2.bmp" />
+    <Image Include="RES\lf\forestm3.bmp" />
+    <Image Include="RES\lf\forestm4.bmp" />
+    <Image Include="RES\lf\forests.bmp" />
+    <Image Include="RES\lf\forestt.bmp" />
+    <Image Include="RES\lf\green.bmp" />
+    <Image Include="RES\lf\iftest.bmp" />
+    <Image Include="RES\lf\land1.bmp" />
+    <Image Include="RES\lf\land2.bmp" />
+    <Image Include="RES\lf\land3.bmp" />
+    <Image Include="RES\lf\land4.bmp" />
+    <Image Include="RES\lf\m_test.bmp" />
+    <Image Include="RES\lf\m_test2.bmp" />
+    <Image Include="RES\lf\s.bmp" />
+    <Image Include="RES\lf\t_test.bmp" />
+    <Image Include="RES\lf\t_test2.bmp" />
     <Image Include="RES\MENU_CLIP_BOX.bmp" />
     <Image Include="RES\Player0\player0_normal\player0_0.bmp" />
     <Image Include="RES\Player0\player0_normal\player0_1.bmp" />
