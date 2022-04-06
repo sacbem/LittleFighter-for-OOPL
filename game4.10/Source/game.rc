@@ -334,6 +334,478 @@ NAME_FREEZE             BITMAP                  "..\\res\\Freeze.bmp"
 
 NAME_HENRY              BITMAP                  "..\\res\\Henry.bmp"
 
+IDB_PLAYER0_NORMAL4_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_6.bmp"
+
+IDB_PLAYER0_NORMAL3_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_7.bmp"
+
+IDB_PLAYER0_NORMAL2_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_8.bmp"
+
+IDB_PLAYER0_NORMAL1_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_9.bmp"
+
+IDB_PLAYER0_ATTACK1     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_10.bmp"
+
+IDB_PLAYER0_ATTACK2     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_11.bmp"
+
+IDB_PLAYER0_ATTACK3     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_12.bmp"
+
+IDB_PLAYER0_ATTACK4     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_13.bmp"
+
+IDB_PLAYER0_ATTACK5     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_14.bmp"
+
+IDB_PLAYER0_ATTACK6     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_15.bmp"
+
+IDB_PLAYER0_ATTACK7     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_16.bmp"
+
+IDB_PLAYER0_ATTACK8     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_17.bmp"
+
+IDB_PLAYER0_ATTACK8_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_12.bmp"
+
+IDB_PLAYER0_ATTACK7_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_13.bmp"
+
+IDB_PLAYER0_ATTACK6_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_14.bmp"
+
+IDB_PLAYER0_ATTACK5_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_15.bmp"
+
+IDB_PLAYER0_ATTACK4_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_16.bmp"
+
+IDB_PLAYER0_ATTACK3_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_17.bmp"
+
+IDB_PLAYER0_ATTACK2_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_18.bmp"
+
+IDB_PLAYER0_ATTACK1_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_19.bmp"
+
+IDB_PLAYER0_JUMP1       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_60.bmp"
+
+IDB_PLAYER0_JUMP2       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_61.bmp"
+
+IDB_PLAYER0_JUMP3       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_62.bmp"
+
+IDB_PLAYER0_JUMP3_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_67.bmp"
+
+IDB_PLAYER0_JUMP2_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_68.bmp"
+
+IDB_PLAYER0_JUMP1_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_69.bmp"
+
+IDB_PLAYER0_RUN1        BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_20.bmp"
+
+IDB_PLAYER0_RUN2        BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_21.bmp"
+
+IDB_PLAYER0_RUN3        BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_normal\\player0_22.bmp"
+
+IDB_PLAYER0_RUN1_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_27.bmp"
+
+IDB_PLAYER0_RUN2_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_28.bmp"
+
+IDB_PLAYER0_RUN3_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\player0_reverse\\player0_re_29.bmp"
+
+FIRZEN_NORMAL1          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_0.bmp"
+
+FIRZEN_NORMAL2          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_1.bmp"
+
+FIRZEN_NORMAL3          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_2.bmp"
+
+FIRZEN_NORMAL4          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_3.bmp"
+
+FIRZEN_NORMAL4_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_6.bmp"
+
+FIRZEN_NORMAL3_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_7.bmp"
+
+FIRZEN_NORMAL2_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_8.bmp"
+
+FIRZEN_NORMAL1_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_9.bmp"
+
+FIRZEN_WALK1            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_4.bmp"
+
+FIRZEN_WALK2            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_5.bmp"
+
+FIRZEN_WALK3            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_6.bmp"
+
+FIRZEN_WALK4            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_7.bmp"
+
+FIRZEN_WALK4_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_2.bmp"
+
+FIRZEN_WALK3_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_3.bmp"
+
+FIRZEN_WALK2_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_4.bmp"
+
+FIRZEN_WALK1_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_5.bmp"
+
+FIRZEN_ATTACK1          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_10.bmp"
+
+FIRZEN_ATTACK2          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_11.bmp"
+
+FIRZEN_ATTACK3          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_12.bmp"
+
+FIRZEN_ATTACK4          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_13.bmp"
+
+FIRZEN_ATTACK5          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_14.bmp"
+
+FIRZEN_ATTACK6          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_15.bmp"
+
+FIRZEN_ATTACK7          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_16.bmp"
+
+FIRZEN_JUMP1            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_17.bmp"
+
+FIRZEN_JUMP2            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_18.bmp"
+
+FIRZEN_JUMP3            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_19.bmp"
+
+FIRZEN_JUMP3_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_10.bmp"
+
+FIRZEN_JUMP2_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_11.bmp"
+
+FIRZEN_JUMP1_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_12.bmp"
+
+FIRZEN_ATTACK7_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_13.bmp"
+
+FIRZEN_ATTACK6_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_14.bmp"
+
+FIRZEN_ATTACK5_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_15.bmp"
+
+FIRZEN_ATTACK4_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_16.bmp"
+
+FIRZEN_ATTACK3_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_17.bmp"
+
+FIRZEN_ATTACK2_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_18.bmp"
+
+FIRZEN_ATTACK1_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_19.bmp"
+
+FIRZEN_RUN1             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_20.bmp"
+
+FIRZEN_RUN2             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_21.bmp"
+
+FIRZEN_RUN3             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_22.bmp"
+
+FIRZEN_RUN3_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_27.bmp"
+
+FIRZEN_RUN2_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_28.bmp"
+
+FIRZEN_RUN1_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_29.bmp"
+
+FIRZEN_KNOCK1           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_30.bmp"
+
+FIRZEN_KNOCK2           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_31.bmp"
+
+FIRZEN_KNOCK3           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_32.bmp"
+
+FIRZEN_KNOCK4           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_33.bmp"
+
+FIRZEN_KNOCK5           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_34.bmp"
+
+FIRZEN_KNOCK5_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_35.bmp"
+
+FIRZEN_KNOCK4_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_36.bmp"
+
+FIRZEN_KNOCK3_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_37.bmp"
+
+FIRZEN_KNOCK2_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_38.bmp"
+
+FIRZEN_KNOCK1_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_39.bmp"
+
+FIRZEN_KNOCKBACK1       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_40.bmp"
+
+FIRZEN_KNOCKBACK2       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_41.bmp"
+
+FIRZEN_KNOCKBACK3       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_42.bmp"
+
+FIRZEN_KNOCKBACK4       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_43.bmp"
+
+FIRZEN_KNOCKBACK5       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_44.bmp"
+
+FIRZEN_KNOCKBACK5_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_45.bmp"
+
+FIRZEN_KNOCKBACK4_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_46.bmp"
+
+FIRZEN_KNOCKBACK3_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_47.bmp"
+
+FIRZEN_KNOCKBACK2_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_48.bmp"
+
+FIRZEN_KNOCKBACK1_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_49.bmp"
+
+FIRZEN_GETUP1           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_35.bmp"
+
+FIRZEN_GETUP2           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_36.bmp"
+
+FIRZEN_GETUP2_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_33.bmp"
+
+FIRZEN_GETUP1_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_34.bmp"
+
+FIRZEN_GETUPBACK1       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0\\firzen_0_45.bmp"
+
+FIRZEN_GETUPBACK1_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_44.bmp"
+
+FREEZE_NORMAL1          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_0.bmp"
+
+FREEZE_NORMAL2          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_1.bmp"
+
+FREEZE_NORMAL3          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_2.bmp"
+
+FREEZE_NORMAL4          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_3.bmp"
+
+FREEZE_NORMAL4_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_6.bmp"
+
+FREEZE_NORMAL3_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_7.bmp"
+
+FREEZE_NORMAL2_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_8.bmp"
+
+FREEZE_NORMAL1_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_9.bmp"
+
+FREEZE_WALK1            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_4.bmp"
+
+FREEZE_WALK2            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_5.bmp"
+
+FREEZE_WALK3            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_6.bmp"
+
+FREEZE_WALK4            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_7.bmp"
+
+FREEZE_WALK4_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_2.bmp"
+
+FREEZE_WALK3_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_3.bmp"
+
+FREEZE_WALK2_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_4.bmp"
+
+FREEZE_WALK1_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_5.bmp"
+
+FREEZE_ATTACK1          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_10.bmp"
+
+FREEZE_ATTACK2          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_11.bmp"
+
+FREEZE_ATTACK3          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_12.bmp"
+
+FREEZE_ATTACK4          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_13.bmp"
+
+FREEZE_ATTACK5          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_14.bmp"
+
+FREEZE_ATTACK6          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_15.bmp"
+
+FREEZE_ATTACK7          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_16.bmp"
+
+FREEZE_ATTACK8          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_17.bmp"
+
+FREEZE_ATTACK9          BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_18.bmp"
+
+FREEZE_ATTACK10         BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_19.bmp"
+
+FREEZE_ATTACK10_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_10.bmp"
+
+FREEZE_ATTACK9_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_11.bmp"
+
+FREEZE_ATTACK8_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_12.bmp"
+
+FREEZE_ATTACK7_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_13.bmp"
+
+FREEZE_ATTACK6_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_14.bmp"
+
+FREEZE_ATTACK5_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_15.bmp"
+
+FREEZE_ATTACK4_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_16.bmp"
+
+FREEZE_ATTACK3_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_17.bmp"
+
+FREEZE_ATTACK2_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_18.bmp"
+
+FREEZE_ATTACK1_REVERSE  BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_19.bmp"
+
+FREEZE_JUMP1            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_60.bmp"
+
+FREEZE_JUMP2            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_61.bmp"
+
+FREEZE_JUMP3            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_62.bmp"
+
+FREEZE_JUMP3_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_67.bmp"
+
+FREEZE_JUMP2_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_68.bmp"
+
+FREEZE_JUMP1_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_69.bmp"
+
+FREEZE_RUN1             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_20.bmp"
+
+FREEZE_RUN2             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_21.bmp"
+
+FREEZE_RUN3             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_22.bmp"
+
+FREEZE_RUN3_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_27.bmp"
+
+FREEZE_RUN2_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_28.bmp"
+
+FREEZE_RUN1_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_29.bmp"
+
+FREEZE_KNOCK1           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_30.bmp"
+
+FREEZE_KNOCK2           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_31.bmp"
+
+FREEZE_KNOCK3           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_32.bmp"
+
+FREEZE_KNOCK4           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_33.bmp"
+
+FREEZE_KNOCK5           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_34.bmp"
+
+FREEZE_KNOCK5_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_35.bmp"
+
+FREEZE_KNOCK4_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_36.bmp"
+
+FREEZE_KNOCK3_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_37.bmp"
+
+FREEZE_KNOCK2_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_38.bmp"
+
+FREEZE_KNOCK1_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_39.bmp"
+
+FREEZE_KNOCKBACK1       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_40.bmp"
+
+FREEZE_KNOCKBACK2       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_41.bmp"
+
+FREEZE_KNOCKBACK3       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_42.bmp"
+
+FREEZE_KNOCKBACK4       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_43.bmp"
+
+FREEZE_KNOCKBACK5       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_44.bmp"
+
+FREEZE_KNOCKBACK1_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_41.bmp"
+
+FREEZE_KNOCKBACK2_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_42.bmp"
+
+FREEZE_KNOCKBACK3_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_43.bmp"
+
+FREEZE_KNOCKBACK4_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_44.bmp"
+
+FREEZE_KNOCKBACK5_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_45.bmp"
+
+FREEZE_GETUP1           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_35.bmp"
+
+FREEZE_GETUP2           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_36.bmp"
+
+FREEZE_GETUP2_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_33.bmp"
+
+FREEZE_GETUP1_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_34.bmp"
+
+FREEZE_GETUPBACK1       BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0\\freeze_0_45.bmp"
+
+FREEZE_GETUPBACK1_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_47.bmp"
+
+HENRY_NORMAL1           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_0.bmp"
+
+HENRY_NORMAL2           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_1.bmp"
+
+HENRY_NORMAL3           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_2.bmp"
+
+HENRY_NORMAL4           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_3.bmp"
+
+HENRY_NORMAL4_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_6.bmp"
+
+HENRY_NORMAL3_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_7.bmp"
+
+HENRY_NORMAL2_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_8.bmp"
+
+HENRY_NORMAL1_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_9.bmp"
+
+HENRY_WALK1             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_4.bmp"
+
+HENRY_WALK2             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_5.bmp"
+
+HENRY_WALK3             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_6.bmp"
+
+HENRY_WALK4             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_7.bmp"
+
+HENRY_WALK4_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_2.bmp"
+
+HENRY_WALK3_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_3.bmp"
+
+HENRY_WALK2_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_4.bmp"
+
+HENRY_WALK1_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_5.bmp"
+
+HENRY_ATTACK1           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_37.bmp"
+
+HENRY_ATTACK3           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_38.bmp"
+
+HENRY_ATTACK4           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_39.bmp"
+
+HENRY_ATTACK4_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_30.bmp"
+
+HENRY_ATTACK3_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_31.bmp"
+
+HENRY_ATTACK1_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_32.bmp"
+
+HENRY_JUMP1             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_60.bmp"
+
+HENRY_JUMP2             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_61.bmp"
+
+HENRY_JUMP3             BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_62.bmp"
+
+HENRY_JUMP3_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_67.bmp"
+
+HENRY_JUMP2_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_68.bmp"
+
+HENRY_JUMP1_REVERSE     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_69.bmp"
+
+HENRY_RUN1              BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_20.bmp"
+
+HENRY_RUN2              BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_21.bmp"
+
+HENRY_RUN3              BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_22.bmp"
+
+HENRY_RUN3_REVERSE      BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_27.bmp"
+
+HENRY_RUN2_REVERSE      BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_28.bmp"
+
+HENRY_RUN1_REVERSE      BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_29.bmp"
+
+HENRY_ATTACK2           BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_29.bmp"
+
+HENRY_ATTACK2_REVERSE   BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_20.bmp"
+
+HENRY_KNOCK1            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_30.bmp"
+
+HENRY_KNOCK2            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_31.bmp"
+
+HENRY_KNOCK3            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_32.bmp"
+
+HENRY_KNOCK4            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_33.bmp"
+
+HENRY_KNOCK5            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_34.bmp"
+
+HENRY_KNOCK5_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_35.bmp"
+
+HENRY_KNOCK4_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_36.bmp"
+
+HENRY_KNOCK3_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_37.bmp"
+
+HENRY_KNOCK2_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_38.bmp"
+
+HENRY_KNOCK1_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_39.bmp"
+
+HENRY_KNOCKBACK1        BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_40.bmp"
+
+HENRY_KNOCKBACK2        BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_41.bmp"
+
+HENRY_KNOCKBACK3        BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_42.bmp"
+
+HENRY_KNOCKBACK4        BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_43.bmp"
+
+HENRY_KNOCKBACK5        BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_44.bmp"
+
+HENRY_KNOCKBACK5_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_45.bmp"
+
+HENRY_KNOCKBACK4_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_46.bmp"
+
+HENRY_KNOCKBACK3_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_47.bmp"
+
+HENRY_KNOCKBACK2_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_48.bmp"
+
+HENRY_KNOCKBACK1_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_49.bmp"
+
+HENRY_GETUP1            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_35.bmp"
+
+HENRY_GETUP2            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_36.bmp"
+
+HENRY_GETUP2_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_33.bmp"
+
+HENRY_GETUP1_REVERSE    BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_34.bmp"
+
+HENRY_GETUPBACK1        BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0\\henry_0_45.bmp"
+
+HENRY_GETUPBACK1_REVERSE BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\Henry_0_reverse\\henry_0_reverse_44.bmp"
+
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////
 

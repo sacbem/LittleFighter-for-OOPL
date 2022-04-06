@@ -214,6 +214,8 @@ namespace game_framework {
     }
   
     void CGameStateInit::OnShow() {
+		c1 = characterID[0];
+		c2 = characterID[1];
 
           logo.SetTopLeft(0, 0);
           logo.ShowBitmap();
@@ -249,14 +251,13 @@ namespace game_framework {
               }
           }
           else {
-
               ScreenClear();
               selectCharacterMenu->OnShow();
-
               if (!SELECTOR_ENABLE) {  //結束選角
                   SetCountdownAni();
-                  
-                  if(countDown.IsFinalBitmap())GotoGameState(GAME_STATE_RUN);
+				  if (countDown.IsFinalBitmap()){
+					  GotoGameState(GAME_STATE_RUN);
+				  }
               }
               else { 
                   SetAnimation();

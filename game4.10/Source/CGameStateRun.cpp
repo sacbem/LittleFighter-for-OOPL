@@ -11,8 +11,8 @@ namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g)
 		: CGameState(g)
 	{
-		PlayerTest = new Character();
-		EnemyTest = new Enemy();
+		PlayerTest = new Character(2);
+		EnemyTest = new Character(4);
 	}
 
 	CGameStateRun::~CGameStateRun()
@@ -25,6 +25,7 @@ namespace game_framework {
 	{
 		PlayerTest->Initialize();
 		EnemyTest->Initialize();
+		PlayerTest->SetXY(500, 200);
 		KeyBoardInputTime = 0;
 		LastInputTime = 0;
 	}
@@ -41,6 +42,7 @@ namespace game_framework {
 
 		PlayerTest->OnMove();
 		EnemyTest->OnMove();
+		
 		
 		//x bound
 		if (PlayerTest->GetX1() <= 0) {
@@ -90,7 +92,7 @@ namespace game_framework {
 
 		KeyBoardInputTime++;
 		CString str;
-		str.Format("%d", Diff);
+		str.Format("%d", PlayerTest->GetDir());
 		CString str2;
 		str2.Format("%d , %d", PlayerTest->GetX1(), PlayerTest->GetY1());
 		pDC->TextOut(120, 220, str);
@@ -115,9 +117,8 @@ namespace game_framework {
 		//
 		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 		//
-
-		PlayerTest->LoadBitmap();
-		EnemyTest->LoadBitmap();
+		PlayerTest->SetCharacter();
+		EnemyTest->SetCharacter();
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -148,12 +149,6 @@ namespace game_framework {
 				PlayerTest->SetRunning(false);
 			}
 		}
-		//if (nChar == KEY_LEFT)
-			
-		//if (nChar == KEY_RIGHT)
-			//sister.SetMovingRight(true);
-		// if (nChar == KEY_UP)
-			// sister.SetJumpimg(true);
 
 		if (Diff <= 5) {
 			if (nChar == KEY_LEFT && LastInput == KEY_LEFT) {
@@ -167,13 +162,9 @@ namespace game_framework {
 		}
 		if (nChar == KEY_LEFT) {
 			PlayerTest->SetMovingLeft(true);
-			//EnemyTest->SetMovingLeft(true);
-			//EnemyTest->SetWalking(true);
 		}
 		if (nChar == KEY_RIGHT) {
 			PlayerTest->SetMovingRight(true);			
-			//EnemyTest-> SetMovingRight(true);
-			//EnemyTest-> SetWalking(true);
 		}
 		if (nChar == KEY_UP) {
 			PlayerTest->SetMovingUp(true);

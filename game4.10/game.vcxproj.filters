@@ -1,647 +1,465 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{1a913106-0be0-4476-b0ce-2aa855072614}</UniqueIdentifier>
-      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe</Extensions>
-    </Filter>
-    <Filter Include="MFC">
-      <UniqueIdentifier>{da904ee8-7f59-4a6c-b3ff-b91b6fb6d0ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameLibrary">
-      <UniqueIdentifier>{df7aa532-3fdf-46a0-b3fc-8f5922e8d9e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="MyGame">
-      <UniqueIdentifier>{0c798913-b7d2-4e26-8241-0f83266cd626}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="Source\audio.cpp" />
+    <ClCompile Include="Source\CEraser.cpp" />
+    <ClCompile Include="Source\CGameStateInit.cpp" />
+    <ClCompile Include="Source\CGameStateOver.cpp" />
+    <ClCompile Include="Source\CGameStateRun.cpp" />
+    <ClCompile Include="Source\Character.cpp" />
+    <ClCompile Include="Source\game.cpp" />
+    <ClCompile Include="Source\gameDoc.cpp" />
+    <ClCompile Include="Source\gameView.cpp" />
+    <ClCompile Include="Source\InitalPageMenu.cpp" />
+    <ClCompile Include="Source\MainFrm.cpp" />
+    <ClCompile Include="Source\SelCharacterConfig.cpp" />
+    <ClCompile Include="Source\StdAfx.cpp" />
+    <ClCompile Include="Source\gamelib.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="RES\continue.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\game.rc2">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\help.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\loading.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Toolbar.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
+    <ClInclude Include="Source\audio.h" />
+    <ClInclude Include="Source\CEraser.h" />
+    <ClInclude Include="Source\CGameStateInit.h" />
+    <ClInclude Include="Source\CGameStateOver.h" />
+    <ClInclude Include="Source\CGameStateRun.h" />
+    <ClInclude Include="Source\Character.h" />
+    <ClInclude Include="Source\game.h" />
+    <ClInclude Include="Source\gameDoc.h" />
+    <ClInclude Include="Source\gameView.h" />
+    <ClInclude Include="Source\InitalPageMenu.h" />
+    <ClInclude Include="Source\MainFrm.h" />
+    <ClInclude Include="Source\Resource.h" />
+    <ClInclude Include="Source\SelCharacterConfig.h" />
+    <ClInclude Include="Source\StdAfx.h" />
+    <ClInclude Include="Source\gamelib.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\audio.cpp">
-      <Filter>GameLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\game.cpp">
-      <Filter>MFC</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\gameDoc.cpp">
-      <Filter>MFC</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\gamelib.cpp">
-      <Filter>GameLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\gameView.cpp">
-      <Filter>MFC</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MainFrm.cpp">
-      <Filter>MFC</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\StdAfx.cpp">
-      <Filter>MFC</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CEraser.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CGameStateInit.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CGameStateOver.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CGameStateRun.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\InitalPageMenu.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Character.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SelCharacterConfig.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Enemy.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
+    <ResourceCompile Include="Source\game.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\audio.h">
-      <Filter>GameLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\game.h">
-      <Filter>MFC</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\gameDoc.h">
-      <Filter>MFC</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\gamelib.h">
-      <Filter>GameLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\gameView.h">
-      <Filter>MFC</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MainFrm.h">
-      <Filter>MFC</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Resource.h">
-      <Filter>MFC</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StdAfx.h">
-      <Filter>MFC</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CEraser.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CGameStateInit.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CGameStateOver.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CGameStateRun.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\InitalPageMenu.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Character.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SelCharacterConfig.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Enemy.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
+    <Image Include="..\..\OOPL_bg\InitPage_1.bmp" />
+    <Image Include="..\..\OOPL_bg\ui\CM1.bmp" />
+    <Image Include="..\..\OOP_game\game4.10\RES\InitPage_1.bmp" />
+    <Image Include="RES\0.bmp" />
+    <Image Include="RES\1.bmp" />
+    <Image Include="RES\2.bmp" />
+    <Image Include="RES\3.bmp" />
+    <Image Include="res\bitmap10.bmp" />
+    <Image Include="res\bitmap11.bmp" />
+    <Image Include="res\bitmap13.bmp" />
+    <Image Include="RES\black.bmp" />
+    <Image Include="RES\CHARMENU.bmp" />
+    <Image Include="RES\CM1.bmp" />
+    <Image Include="RES\CM2.bmp" />
+    <Image Include="RES\CM3.bmp" />
+    <Image Include="RES\CM4.bmp" />
+    <Image Include="RES\CM5.bmp" />
+    <Image Include="RES\CMA.bmp" />
+    <Image Include="RES\CMA2.bmp" />
+    <Image Include="RES\Firzen.bmp" />
+    <Image Include="RES\firzen_f.bmp" />
+    <Image Include="RES\Freeze.bmp" />
+    <Image Include="RES\freeze_f.bmp" />
+    <Image Include="RES\Henry.bmp" />
+    <Image Include="RES\henry_f.bmp" />
+    <Image Include="RES\inital_btn_setting.bmp" />
+    <Image Include="RES\inital_btn_setting2.bmp" />
+    <Image Include="RES\inital_btn_start.bmp" />
+    <Image Include="RES\inital_btn_start2.bmp" />
+    <Image Include="RES\InitPage_1.bmp" />
+    <Image Include="RES\MENU_CLIP_BOX.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_0.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_1.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_2.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_3.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_30.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_31.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_32.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_33.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_34.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_35.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_36.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_4.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_40.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_41.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_42.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_43.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_44.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_45.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_5.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_6.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_7.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_2.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_3.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_32.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_33.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_34.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_35.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_36.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_37.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_38.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_39.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_4.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_44.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_45.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_46.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_47.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_48.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_49.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_5.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_2.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_3.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_33.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_34.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_35.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_36.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_37.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_38.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_39.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_4.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_44.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_45.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_46.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_47.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_48.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_49.bmp" />
+    <Image Include="res\Player0\player0_reverse\player0_re_5.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_0.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_1.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_10.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_11.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_12.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_13.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_14.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_15.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_2.bmp" />
+    <Image Include="RES\Player1\Player1_Normal\player1_20.bmp" />
+    <Image Include="RES\Player1\Player1_Normal\player1_21.bmp" />
+    <Image Include="RES\Player1\Player1_Normal\player1_22.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_3.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_30.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_31.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_32.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_33.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_34.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_35.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_36.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_4.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_40.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_41.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_42.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_43.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_44.bmp" />
+    <Image Include="res\Player1\player1_normal\player1_45.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_5.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_6.bmp" />
+    <Image Include="RES\Player1\Player1_Normal\player1_60.bmp" />
+    <Image Include="RES\Player1\Player1_Normal\player1_61.bmp" />
+    <Image Include="RES\Player1\Player1_Normal\player1_62.bmp" />
+    <Image Include="res\Player1\Player1_Normal\player1_7.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_14.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_15.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_16.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_17.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_18.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_19.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_2.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_27.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_28.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_29.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_3.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_33.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_34.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_35.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_36.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_37.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_38.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_39.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_4.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_44.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_45.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_46.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_47.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_48.bmp" />
+    <Image Include="res\Player1\player1_reverse\player1_re_49.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_5.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_6.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_67.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_68.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_69.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_7.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_8.bmp" />
+    <Image Include="RES\Player1\Player1_Reverse\player1_re_9.bmp" />
+    <Image Include="res\player1_0.bmp" />
+    <Image Include="res\player1_1.bmp" />
+    <Image Include="RES\player1_10.bmp" />
+    <Image Include="RES\player1_11.bmp" />
+    <Image Include="RES\player1_12.bmp" />
+    <Image Include="RES\player1_13.bmp" />
+    <Image Include="RES\player1_14.bmp" />
+    <Image Include="RES\player1_15.bmp" />
+    <Image Include="res\player1_2.bmp" />
+    <Image Include="res\player1_3.bmp" />
+    <Image Include="res\player1_4.bmp" />
+    <Image Include="res\player1_5.bmp" />
+    <Image Include="res\player1_6.bmp" />
+    <Image Include="res\player1_7.bmp" />
+    <Image Include="RES\quit1.bmp" />
+    <Image Include="RES\quit2.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_6.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_7.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_8.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_9.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_10.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_11.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_12.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_13.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_14.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_15.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_16.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_17.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_12.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_13.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_14.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_15.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_16.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_17.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_18.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_19.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_60.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_61.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_62.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_67.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_68.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_69.bmp" />
+    <Image Include="res\bitmap33.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_20.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_21.bmp" />
+    <Image Include="RES\Player0\player0_normal\player0_22.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_27.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_28.bmp" />
+    <Image Include="RES\Player0\player0_reverse\player0_re_29.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_0.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_1.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_2.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_3.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_6.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_7.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_8.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_9.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_4.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_5.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_6.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_7.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_2.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_3.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_4.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_5.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_15.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_10.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_11.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_12.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_13.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_14.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_16.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_17.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_18.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_19.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_10.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_11.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_12.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_13.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_14.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_15.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_16.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_17.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_18.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_19.bmp" />
+    <Image Include="res\bitmap34.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_20.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_21.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_22.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_27.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_28.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_29.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_30.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_31.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_32.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_33.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_34.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_35.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_36.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_37.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_38.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_39.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_40.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_41.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_42.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_43.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_44.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_45.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_46.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_47.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_48.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_49.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_35.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_36.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_33.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_34.bmp" />
+    <Image Include="RES\Firzen\Firzen_0\firzen_0_45.bmp" />
+    <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_44.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_2.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_3.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_4.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_5.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_10.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_11.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_12.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_13.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_14.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_15.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_16.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_17.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_18.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_19.bmp" />
+    <Image Include="res\firzen\firzen_0\bitmap33.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_10.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_11.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_12.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_13.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_14.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_15.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_16.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_17.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_18.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_19.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_0.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_1.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_2.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_3.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_6.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_7.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_8.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_9.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_4.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_5.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_6.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_7.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_60.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_61.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_62.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_67.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_68.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_69.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_20.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_21.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_22.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_27.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_28.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_29.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_30.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_30.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_31.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_32.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_33.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_34.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_35.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_36.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_37.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_38.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_39.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_40.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_41.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_42.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_43.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_44.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_41.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_42.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_43.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_44.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_45.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_35.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_36.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_33.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_34.bmp" />
+    <Image Include="RES\Freeze\Freeze_0\freeze_0_45.bmp" />
+    <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_47.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_0.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_1.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_2.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_3.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_6.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_7.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_8.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_9.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_4.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_5.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_6.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_7.bmp" />
+    <Image Include="res\freeze\freeze_0_reverse\bitmap33.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_2.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_3.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_4.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_5.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_10.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_11.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_12.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_13.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_14.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_15.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_37.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_38.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_39.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_30.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_31.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_32.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_60.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_61.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_62.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_67.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_68.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_69.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_20.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_21.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_22.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_27.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_28.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_29.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_29.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_20.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_30.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_31.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_32.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_33.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_34.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_35.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_36.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_37.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_38.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_39.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_40.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_41.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_42.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_43.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_44.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_45.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_46.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_47.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_48.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_49.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_35.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_36.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_33.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_34.bmp" />
+    <Image Include="RES\Henry\Henry_0\henry_0_45.bmp" />
+    <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_44.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Source\game.rc">
-      <Filter>MFC</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\OOPL_bg\InitPage_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\InitPage_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\inital_btn_setting.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\inital_btn_setting2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\inital_btn_start.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\inital_btn_start2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\OOP_game\game4.10\RES\InitPage_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\bitmap10.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\MENU_CLIP_BOX.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\bitmap11.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\quit2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\quit1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\player1_0.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\player1_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\player1_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\player1_3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\player1_4.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\player1_5.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\player1_6.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\player1_7.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\player1_10.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\player1_11.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\player1_12.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\player1_13.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\player1_14.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\player1_15.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\bitmap13.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\CHARMENU.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\CMA.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\firzen_f.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\freeze_f.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\henry_f.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-<<<<<<< HEAD
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_6.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_7.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_8.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_9.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_0.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_4.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_5.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_6.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_7.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_10.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_11.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_12.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_13.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_14.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\Player1_Normal\player1_15.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_4.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_5.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_14.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_15.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_16.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_17.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_18.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_19.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Normal\player1_60.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Normal\player1_61.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Normal\player1_62.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_67.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_68.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_69.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Normal\player1_20.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Normal\player1_21.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Normal\player1_22.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_27.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_28.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player1\Player1_Reverse\player1_re_29.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_0.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_4.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_5.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_6.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_7.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_4.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_5.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_30.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_31.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_32.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_33.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_34.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_35.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_36.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_32.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_33.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_34.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_35.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_36.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_37.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_38.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_39.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_40.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_41.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_42.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_43.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_44.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_normal\player0_45.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_44.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_45.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_46.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_47.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_48.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Player0\player0_reverse\player0_49.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_30.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_31.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_32.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_33.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_34.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_35.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_36.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_33.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_34.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_35.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_36.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_37.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_38.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_39.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_40.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_41.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_42.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_43.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_44.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_normal\player1_45.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_44.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_45.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_46.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_47.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_48.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player1\player1_reverse\player1_re_49.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_4.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_5.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_33.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_34.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_35.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_36.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_37.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_38.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_39.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_44.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_45.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_46.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_47.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_48.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\Player0\player0_reverse\player0_re_49.bmp">
-=======
-    <Image Include="RES\CM1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\CM2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\CM3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\CM4.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\CM5.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\CMA2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\black.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\OOPL_bg\ui\CM1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\0.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Firzen.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Freeze.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\Henry.bmp">
->>>>>>> c172075c8a617b7fb684a1e281521930110adfce
-      <Filter>Resource Files</Filter>
-    </Image>
+    <None Include="RES\continue.bmp" />
+    <None Include="res\game.rc2" />
+    <None Include="RES\help.bmp" />
+    <None Include="RES\loading.bmp" />
+    <None Include="res\Toolbar.bmp" />
   </ItemGroup>
 </Project>

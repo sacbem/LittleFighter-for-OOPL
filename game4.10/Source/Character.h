@@ -2,9 +2,9 @@ namespace game_framework {
 	class Character
 	{
 	public:
-		Character();
+		Character(int num);
 		~Character();
-		int HitEnemy(Enemy* enemy);
+		int HitEnemy(Character* enemy);
 		bool GetAlive();
 		int  GetX1();					// Chracter左上角 x 座標
 		int  GetY1();					// Chracter左上角 y 座標
@@ -13,7 +13,12 @@ namespace game_framework {
 		int	 GetDir();
 		int	 GetHealth();
 		void Initialize();
-		void LoadBitmap();
+		void SetCharacter();
+		void LoadPlayer0();
+		void LoadPlayer1();
+		void LoadFirzen();
+		void LoadFreeze();
+		void LoadHenry();
 		void OnShow();
 		void OnMove();
 		void SetMovingDown(bool flag);
@@ -30,24 +35,25 @@ namespace game_framework {
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
 		//basic informtion
+		int characterNumber;
+		string name;
 		int HealthPoint;
 		int AttackPoint;
 		int DefencePoint;
 		bool isAlive;
-		bool isGettingHit; // 0 = not hit 1=hit by right 2=hit by left
+		bool isGettingHit;
 		bool isGettingUp;
 
 		//Jumping
 		bool isJumpping;
 		//Running
-		bool isRunning;				//0=false 1=true
+		bool isRunning;
 		//Attack
 		bool isAttacking;
 		//Defend
 		bool isDefending;
 
 	protected:
-
         CMovingBitmap photoSticker;
 		CAnimation Animation;		// normal state
 		CAnimation AnimationReverse;// normal state reverse
@@ -74,7 +80,7 @@ namespace game_framework {
 		void ShowAttacking(int Dir);
 		void ShowJump(int Dir);
 		void ShowRun(int Dir);
-		void ShowGettingUP(int Dir);
+		void ShowGettingUP(int Dir,int HitDir);
 		void ShowKnock(int Dir, int HitDir);
 		
 		int DelayCounter;
@@ -96,6 +102,5 @@ namespace game_framework {
 		int InitialVelocity;
 	private:
 		int HitRectangle(int tx1, int ty1, int tx2, int ty2);
-
 	};
 }
