@@ -840,6 +840,8 @@ IDB_BITMAP38            BITMAP                  "..\\res\\lf\\t_test.bmp"
 
 IDB_BITMAP39            BITMAP                  "..\\res\\lf\\t_test2.bmp"
 
+BITMAP_SELECTMENU       BITMAP                  "C:\\Users\\xxx50\\Desktop\\game_dev\\110_OOPL\\素材\\CHARMENU_3.bmp"
+
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////
 

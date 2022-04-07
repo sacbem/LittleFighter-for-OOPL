@@ -361,6 +361,8 @@
 #define HENRY_WALK2                     487
 #define HENRY_WALK3                     488
 #define HENRY_WALK4                     489
+#define IDB_BITMAP41                    490
+#define BITMAP_SELECTMENU               490
 #define HENRY_WALK4_REVERSE             491
 #define HENRY_WALK3_REVERSE             492
 #define HENRY_WALK2_REVERSE             493
@@ -459,8 +461,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        547
-#define _APS_NEXT_RESOURCE_VALUE        316
+#define _APS_NEXT_RESOURCE_VALUE        491
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

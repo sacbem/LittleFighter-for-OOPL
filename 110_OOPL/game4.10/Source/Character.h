@@ -34,6 +34,7 @@ namespace game_framework {
 		void SetGettingUp(bool flag);
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
+		void SetMapBorder(int mapID);
         int GetDistance();
         void SetAccumulator(int, int);
 		//basic informtion
@@ -92,6 +93,8 @@ namespace game_framework {
 		int DelayCounter;
 		int Delay;
 		int xPos, yPos;
+		int xMapBorderMax, yMapBorderMax;
+		int xMapBorderMin, yMapBorderMin;
         int xAccumulator, yAccumulator;
 		//judge
 		//direction
