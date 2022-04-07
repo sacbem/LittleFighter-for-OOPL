@@ -90,7 +90,6 @@ namespace game_framework {
 		GetupReverse.SetDelayCount(5);
 		GetupBack.SetDelayCount(5);
 		GetupBackReverse.SetDelayCount(5);
-		SetMapBorder(0);
 		xPos = 200;
 		yPos = 200;
         xAccumulator = yAccumulator = 200;
@@ -110,6 +109,7 @@ namespace game_framework {
 
     void Character::DistaceAccumulator() {
         walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
+        TRACE("walkedDistance:%d\n", walkedDistance);
     }
     int Character::GetDistance() {
         return walkedDistance;
@@ -118,7 +118,7 @@ namespace game_framework {
         walkedDistance = 0;
         xAccumulator = x;
         yAccumulator = y;
-      
+        TRACE("***********************************\n");
     }
 
 	void Character::LoadPlayer0() {
@@ -867,8 +867,7 @@ namespace game_framework {
 			JumpReverse.OnMove();
 			if (isRising) {
 				if (YVelocity > 0) {
-					//yPos -= YVelocity;
-					this->SetXY(xPos,yPos - YVelocity);
+					yPos -= YVelocity;
 					YVelocity--;
 				}
 				else {
@@ -878,13 +877,11 @@ namespace game_framework {
 			}
 			else if (!isRising) {
 				if (yPos < JumpYposTemp - 1) {
-					//yPos += YVelocity;
-					this->SetXY(xPos, yPos + YVelocity);
+					yPos += YVelocity;
 					YVelocity++;
 				}
 				else {
-					//yPos = JumpYposTemp - 1;
-					this->SetXY(xPos, JumpYposTemp--);
+					yPos = JumpYposTemp - 1;
 					YVelocity = InitialVelocity;
 					if (isGettingHit == true) {
 						isGettingHit = false;
@@ -895,27 +892,23 @@ namespace game_framework {
 		}
 
 		if (isMovingLeft) {
-			//xPos -= speed;
-			this->SetXY(xPos - speed, yPos);
+			xPos -= speed;
             DistaceAccumulator();
 			isWalking = true;
 			direction = 0;
 		}
 		if (isMovingRight) {
-			//xPos += speed;
-			this->SetXY(xPos + speed, yPos);
+			xPos += speed;
             DistaceAccumulator();
 			isWalking = true;
 			direction = 1;
 		}
 		if (isMovingUp && !isJumpping) {
-			//yPos -= speed;
-			this->SetXY(xPos , yPos - speed);
+			yPos -= speed;
 			isWalking = true;
 		}
 		if (isMovingDown && !isJumpping) {
-			//yPos += speed;
-			this->SetXY(xPos, yPos + speed);
+			yPos += speed;
 			isWalking = true;
 		}
 		if (isWalking) {
@@ -927,26 +920,14 @@ namespace game_framework {
 		}
 		if (isGettingHit) {
 			if (hitDirection) {
-				//xPos += 7;
-				this->SetXY(xPos + 7, yPos);
+				xPos += 7;
 			}
 			else if(!hitDirection){
-				//xPos -= 7;
-				this->SetXY(xPos - 7, yPos);
+				xPos -= 7;
 			}
 		}
 	}
-	void  Character::SetMapBorder(int mapID) {
-		switch (mapID){
-		case 0:
-			xMapBorderMax = 720;
-			yMapBorderMax = 500;
-			xMapBorderMin = 0;
-			yMapBorderMin = 200;
-		default:
-			break;
-		}
-	}
+
 	void Character::SetMovingDown(bool flag) {
 		isMovingDown = flag;
 	}
@@ -1021,10 +1002,8 @@ namespace game_framework {
 	}
 
 	void Character::SetXY(int X, int Y) {
-		xPos = X > xMapBorderMax   ? xMapBorderMax : X;
-		xPos = xMapBorderMin > xPos ? xMapBorderMin : xPos;
-		yPos = Y > yMapBorderMax  ? yMapBorderMax : Y;
-		yPos = yMapBorderMin > yPos ? yMapBorderMin : yPos;
+		xPos = X;
+		yPos = Y;
 	}
 
 	void Character::ShowNormal(int Dir) {

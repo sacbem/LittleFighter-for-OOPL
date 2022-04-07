@@ -19,8 +19,9 @@ namespace game_framework {
 	{
 		PlayerTest = new Character();
 		EnemyTest = new Character();
+
         maps = new MapGenerator();
-		
+		//_CrtDumpMemoryLeaks();
 	}
 
 	void CGameStateRun::OnBeginState()
@@ -29,7 +30,7 @@ namespace game_framework {
 		EnemyTest->SetXY(500, 200);
 		KeyBoardInputTime = 0;
 		LastInputTime = 0;
-		
+		//_CrtDumpMemoryLeaks();
 
 	}
     void  CGameStateRun::MapSlide() {
@@ -112,6 +113,26 @@ namespace game_framework {
 				EnemyTest->HealthPoint -= PlayerTest->AttackPoint;
 			}
 		}
+		
+		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
+		CFont f, *fp;
+		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+		fp = pDC->SelectObject(&f);					// 選用 font f
+		pDC->SetBkColor(RGB(0, 0, 0));
+		pDC->SetTextColor(RGB(255, 255, 0));
+
+		KeyBoardInputTime++;
+		CString str;
+		str.Format("%d", PlayerTest->GetDir());
+		CString str2;
+		str2.Format("%d , %d", PlayerTest->GetX1(), PlayerTest->GetY1());
+		pDC->TextOut(120, 220, str);
+		pDC->TextOut(120, 320, str2);
+		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+		CDDraw::ReleaseBackCDC();
+
+		//_CrtDumpMemoryLeaks();
+
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -263,22 +284,7 @@ namespace game_framework {
         maps->PrintMap();
 		PlayerTest->OnShow();
 		EnemyTest->OnShow();
-		CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
-		CFont f, * fp;
-		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-		fp = pDC->SelectObject(&f);					// 選用 font f
-		pDC->SetBkColor(RGB(0, 0, 0));
-		pDC->SetTextColor(RGB(255, 255, 0));
-
-		KeyBoardInputTime++;
-		//CString str;
-		//str.Format("%d", PlayerTest->GetDir());
-		//CString str2;
-		//str2.Format("%d , %d", PlayerTest->GetX1(), PlayerTest->GetY1());
-		//pDC->TextOut(120, 220, str);
-		//pDC->TextOut(120, 320, str2);
-		//pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		//CDDraw::ReleaseBackCDC();
+		//_CrtDumpMemoryLeaks();
 	}
     CGameStateRun::~CGameStateRun(){
         delete PlayerTest, EnemyTest,maps;
