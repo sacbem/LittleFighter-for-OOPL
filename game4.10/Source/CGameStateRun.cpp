@@ -21,6 +21,8 @@ namespace game_framework {
 		EnemyTest = new Character();
 
         maps = new MapGenerator();
+		HealthPlayer1 = new HealthBar();
+		HealthPlayer2 = new HealthBar();
 		//_CrtDumpMemoryLeaks();
 	}
 
@@ -28,6 +30,8 @@ namespace game_framework {
 	{
 		PlayerTest->SetXY(200, 200);
 		EnemyTest->SetXY(500, 200);
+		//HealthPlayer1->SetXY(0, 0);
+		//HealthPlayer2->SetXY(400, 0);
 		KeyBoardInputTime = 0;
 		LastInputTime = 0;
 		//_CrtDumpMemoryLeaks();
@@ -113,7 +117,8 @@ namespace game_framework {
 				EnemyTest->HealthPoint -= PlayerTest->AttackPoint;
 			}
 		}
-		
+		KeyBoardInputTime++;
+		/*
 		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
 		CFont f, *fp;
 		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
@@ -121,17 +126,17 @@ namespace game_framework {
 		pDC->SetBkColor(RGB(0, 0, 0));
 		pDC->SetTextColor(RGB(255, 255, 0));
 
-		KeyBoardInputTime++;
 		CString str;
-		str.Format("%d", PlayerTest->GetDir());
+		str.Format("%d", PlayerTest->GetHealth());
 		CString str2;
-		str2.Format("%d , %d", PlayerTest->GetX1(), PlayerTest->GetY1());
-		pDC->TextOut(120, 220, str);
-		pDC->TextOut(120, 320, str2);
+		str2.Format("%d", EnemyTest->GetHealth());
+		pDC->TextOut(400, 0, str);
+		pDC->TextOut(600, 0, str2);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();
 
 		//_CrtDumpMemoryLeaks();
+		*/
 
 	}
 
@@ -153,6 +158,10 @@ namespace game_framework {
 		//
 
         maps->Load(0);
+		HealthPlayer1->init();
+		HealthPlayer2->init();
+		HealthPlayer1->OnLoad(0,0);
+		HealthPlayer2->OnLoad(400,0);
 
 		//_CrtDumpMemoryLeaks();
 
@@ -268,7 +277,6 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnShow(){
-		//get character
 		if (PlayerTest->getCharacter == false && EnemyTest->getCharacter == false) {
 			ifstream ifs;
 			char buffer[2];
@@ -279,14 +287,20 @@ namespace game_framework {
 			EnemyTest->SetCharacter(buffer[1] - '0');
 			PlayerTest->getCharacter = true;
 			EnemyTest->getCharacter = true;
+			//load HealthBar small character
+			HealthPlayer1->loadSmallImg(buffer[0] - '0');
+			HealthPlayer2->loadSmallImg(buffer[1] - '0');
 		}
+		//get character
 
         maps->PrintMap();
 		PlayerTest->OnShow();
 		EnemyTest->OnShow();
+		HealthPlayer1->OnShow(PlayerTest->HealthPoint);
+		HealthPlayer2->OnShow(EnemyTest->HealthPoint);
 		//_CrtDumpMemoryLeaks();
 	}
     CGameStateRun::~CGameStateRun(){
-        delete PlayerTest, EnemyTest,maps;
+		delete PlayerTest, EnemyTest, maps, HealthPlayer1, HealthPlayer2;
     }
 }

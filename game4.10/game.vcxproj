@@ -22,26 +22,26 @@
     <ProjectGuid>{DDD280D7-4B85-4B03-BBC4-C46CA9BECCCB}</ProjectGuid>
     <RootNamespace>game</RootNamespace>
     <Keyword>MFCProj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Dynamic</UseOfMfc>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Dynamic</UseOfMfc>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Dynamic</UseOfMfc>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -401,7 +401,9 @@
     <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_7.bmp" />
     <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_8.bmp" />
     <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_9.bmp" />
+    <Image Include="RES\Firzen\firzen_s.bmp" />
     <Image Include="RES\firzen_f.bmp" />
+    <Image Include="RES\FRAME.bmp" />
     <Image Include="RES\Freeze.bmp" />
     <Image Include="RES\Freeze\Freeze_0\freeze_0_0.bmp" />
     <Image Include="RES\Freeze\Freeze_0\freeze_0_1.bmp" />
@@ -479,7 +481,9 @@
     <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_7.bmp" />
     <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_8.bmp" />
     <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_9.bmp" />
+    <Image Include="RES\Freeze\freeze_s.bmp" />
     <Image Include="RES\freeze_f.bmp" />
+    <Image Include="RES\HealthBar.bmp" />
     <Image Include="RES\Henry.bmp" />
     <Image Include="RES\Henry\Henry_0\henry_0_0.bmp" />
     <Image Include="RES\Henry\Henry_0\henry_0_1.bmp" />
@@ -549,6 +553,7 @@
     <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_7.bmp" />
     <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_8.bmp" />
     <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_9.bmp" />
+    <Image Include="RES\Henry\henry_s.bmp" />
     <Image Include="RES\henry_f.bmp" />
     <Image Include="RES\inital_btn_setting.bmp" />
     <Image Include="RES\inital_btn_setting2.bmp" />
@@ -573,6 +578,7 @@
     <Image Include="RES\lf\t_test.bmp" />
     <Image Include="RES\lf\t_test2.bmp" />
     <Image Include="RES\MENU_CLIP_BOX.bmp" />
+    <Image Include="RES\PAUSE.bmp" />
     <Image Include="RES\Player0\player0_normal\player0_0.bmp" />
     <Image Include="RES\Player0\player0_normal\player0_1.bmp" />
     <Image Include="RES\Player0\player0_normal\player0_10.bmp" />
@@ -661,6 +667,7 @@
     <Image Include="RES\Player0\player0_reverse\player0_re_7.bmp" />
     <Image Include="RES\Player0\player0_reverse\player0_re_8.bmp" />
     <Image Include="RES\Player0\player0_reverse\player0_re_9.bmp" />
+    <Image Include="RES\Player0\s.bmp" />
     <Image Include="res\Player1\Player1_Normal\player1_0.bmp" />
     <Image Include="res\Player1\Player1_Normal\player1_1.bmp" />
     <Image Include="res\Player1\Player1_Normal\player1_10.bmp" />
@@ -743,6 +750,7 @@
     <Image Include="res\player1_7.bmp" />
     <Image Include="RES\quit1.bmp" />
     <Image Include="RES\quit2.bmp" />
+    <Image Include="RES\red.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

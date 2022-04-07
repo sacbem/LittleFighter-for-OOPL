@@ -97,13 +97,27 @@ namespace game_framework {
 		YVelocity = InitialVelocity;
 		isRunning = isGettingUp = isGettingHit = isDefending = isAttacking = isJumpping = isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 		direction = 1;
-		getCharacter = false;
+		hitDirection = 0;
 
-		HealthPoint = 10;
+		isRising = false;
+		
+		getCharacter = false;
+		characterNumber = 5;
+		name = "";
+
+		HealthPoint = 360;
 		AttackPoint = 10;
 		DefencePoint = 5;
         walkedDistance = 0;
-        isRunning = 0;
+		isAlive = true;
+        isRunning = false;
+		isAttacking = false;
+		isDefending = false;
+
+		JumpYposTemp=0;
+		YVelocity=0;
+		InitialVelocity=0;
+		walkedDistance=0;
 	}
 
 

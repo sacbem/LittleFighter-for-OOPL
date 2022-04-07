@@ -62,7 +62,7 @@ END
 // Bitmap
 //
 
-IDB_CONTINUE            BITMAP                  "..\\res\\continue.bmp"
+IDB_CONTINUE2           BITMAP                  "..\\res\\continue.bmp"
 
 IDB_HELP                BITMAP                  "..\\res\\help.bmp"
 
@@ -839,6 +839,22 @@ IDB_BITMAP37            BITMAP                  "..\\res\\lf\\m_test2.bmp"
 IDB_BITMAP38            BITMAP                  "..\\res\\lf\\t_test.bmp"
 
 IDB_BITMAP39            BITMAP                  "..\\res\\lf\\t_test2.bmp"
+
+BITMAP_HEALTHBAR        BITMAP                  "..\\RES\\FRAME.bmp"
+
+IDB_CONTINUE            BITMAP                  "..\\res\\PAUSE.bmp"
+
+BITMAP_HEALTHBAR2       BITMAP                  "..\\res\\HealthBar.bmp"
+
+RED                     BITMAP                  "..\\res\\red.bmp"
+
+FIRZEN_S                BITMAP                  "..\\res\\Firzen\\firzen_s.bmp"
+
+FREEZE_S                BITMAP                  "..\\res\\Freeze\\freeze_s.bmp"
+
+HENRY_S                 BITMAP                  "..\\res\\Henry\\henry_s.bmp"
+
+PLAYER0_S               BITMAP                  "..\\res\\Player0\\s.bmp"
 
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////

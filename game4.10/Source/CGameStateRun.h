@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "MapGenerator.h"
+#include "HealthBar.h"
 #include <ctime>
 namespace game_framework {
 	class CGameStateRun : public CGameState {
@@ -24,7 +25,8 @@ namespace game_framework {
 		Character* PlayerTest;
 		Character* EnemyTest;
         MapGenerator* maps;
-
+		HealthBar* HealthPlayer1;
+		HealthBar* HealthPlayer2;
 		int CleanCounter=0;
 	};
 }

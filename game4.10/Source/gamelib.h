@@ -91,6 +91,7 @@ enum GAME_STATES {
 /////////////////////////////////////////////////////////////////////////////
 
 #include <list>
+#include <string>
 #include <vector>
 #include <map>
 using namespace std;

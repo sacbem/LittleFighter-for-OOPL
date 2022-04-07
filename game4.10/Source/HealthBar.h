@@ -4,13 +4,15 @@ namespace game_framework {
 	public:
 		HealthBar();
 		~HealthBar();
-		void GetHealth(int n);
-		void SetXY(int X, int Y);
-		void OnShow();
-		void OnLoad();
+		void init();
+		void OnShow(int hp);
+		void OnLoad(int X, int Y);
+		void loadSmallImg(int id);
 	protected:
 		vector<int> posistion_XY;
 		CMovingBitmap img;
-		int life;
+		CMovingBitmap red;
+		CMovingBitmap imgCharacter;
+		vector<CMovingBitmap*> imgHealth;
 	};
 }
