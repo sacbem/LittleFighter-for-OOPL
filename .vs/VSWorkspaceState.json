@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\game4.10",
-    "\\game4.10\\RES",
-    "\\game4.10\\RES\\lf",
     "\\game4.10\\Source"
   ],
-  "SelectedNode": "\\game4.10\\Source\\CGameStateRun.cpp",
+  "SelectedNode": "\\game4.10\\Source\\Character.cpp",
   "PreviewInSolutionExplorer": false
 }

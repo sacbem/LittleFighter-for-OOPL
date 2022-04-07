@@ -4,13 +4,11 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "Enemy.h"
 #include "Character.h"
 #include <cmath>
 namespace game_framework {
 	
-	Character::Character(int num) {
-		characterNumber = num;
+	Character::Character() {
 		Initialize();
 	}
 
@@ -73,7 +71,7 @@ namespace game_framework {
 	void Character::Initialize() {
 		DelayCounter = 0;
 		Delay = 7;
-
+		
 		Animation.SetDelayCount(5);
 		AnimationReverse.SetDelayCount(5);
 		Walking.SetDelayCount(5);
@@ -92,7 +90,6 @@ namespace game_framework {
 		GetupReverse.SetDelayCount(5);
 		GetupBack.SetDelayCount(5);
 		GetupBackReverse.SetDelayCount(5);
-
 		xPos = 200;
 		yPos = 200;
         xAccumulator = yAccumulator = 200;
@@ -100,8 +97,9 @@ namespace game_framework {
 		YVelocity = InitialVelocity;
 		isRunning = isGettingUp = isGettingHit = isDefending = isAttacking = isJumpping = isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 		direction = 1;
+		getCharacter = false;
 
-		HealthPoint = 1000;
+		HealthPoint = 10;
 		AttackPoint = 10;
 		DefencePoint = 5;
         walkedDistance = 0;
@@ -209,12 +207,14 @@ namespace game_framework {
 		Knock.AddBitmap(IDB_PLAYER0_KNOCK5, RGB(0, 0, 0));
 		Knock.AddBitmap(IDB_PLAYER0_KNOCK4, RGB(0, 0, 0));
 		Knock.AddBitmap(IDB_PLAYER0_KNOCK3, RGB(0, 0, 0));
+		Knock.AddBitmap(IDB_PLAYER0_KNOCK3, RGB(0, 0, 0));
 		Knock.AddBitmap(IDB_PLAYER0_KNOCK2, RGB(0, 0, 0));
 		Knock.AddBitmap(IDB_PLAYER0_KNOCK1, RGB(0, 0, 0));
 
 		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK5_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK5_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK4_REVERSE, RGB(0, 0, 0));
+		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK3_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK3_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK2_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(IDB_PLAYER0_KNOCK1_REVERSE, RGB(0, 0, 0));
@@ -223,12 +223,14 @@ namespace game_framework {
 		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK5, RGB(0, 0, 0));
 		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK4, RGB(0, 0, 0));
 		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK3, RGB(0, 0, 0));
+		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK3, RGB(0, 0, 0));
 		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK2, RGB(0, 0, 0));
 		KnockBack.AddBitmap(IDB_PLAYER0_KNOCKBACK1, RGB(0, 0, 0));
 
 		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK4_REVERSE, RGB(0, 0, 0));
+		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK3_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK3_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK2_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(IDB_PLAYER0_KNOCKBACK1_REVERSE, RGB(0, 0, 0));
@@ -341,12 +343,14 @@ namespace game_framework {
 		Knock.AddBitmap(IDB_PLAYER1_KNOCK5, RGB(0, 0, 0));
 		Knock.AddBitmap(IDB_PLAYER1_KNOCK4, RGB(0, 0, 0));
 		Knock.AddBitmap(IDB_PLAYER1_KNOCK3, RGB(0, 0, 0));
+		Knock.AddBitmap(IDB_PLAYER1_KNOCK3, RGB(0, 0, 0));
 		Knock.AddBitmap(IDB_PLAYER1_KNOCK2, RGB(0, 0, 0));
 		Knock.AddBitmap(IDB_PLAYER1_KNOCK1, RGB(0, 0, 0));
 
 		KnockReverse.AddBitmap(IDB_PLAYER1_KNOCK5_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(IDB_PLAYER1_KNOCK5_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(IDB_PLAYER1_KNOCK4_REVERSE, RGB(0, 0, 0));
+		KnockReverse.AddBitmap(IDB_PLAYER1_KNOCK3_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(IDB_PLAYER1_KNOCK3_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(IDB_PLAYER1_KNOCK2_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(IDB_PLAYER1_KNOCK1_REVERSE, RGB(0, 0, 0));
@@ -355,12 +359,14 @@ namespace game_framework {
 		KnockBack.AddBitmap(IDB_PLAYER1_KNOCKBACK5, RGB(0, 0, 0));
 		KnockBack.AddBitmap(IDB_PLAYER1_KNOCKBACK4, RGB(0, 0, 0));
 		KnockBack.AddBitmap(IDB_PLAYER1_KNOCKBACK3, RGB(0, 0, 0));
+		KnockBack.AddBitmap(IDB_PLAYER1_KNOCKBACK3, RGB(0, 0, 0));
 		KnockBack.AddBitmap(IDB_PLAYER1_KNOCKBACK2, RGB(0, 0, 0));
 		KnockBack.AddBitmap(IDB_PLAYER1_KNOCKBACK1, RGB(0, 0, 0));
 
 		KnockBackReverse.AddBitmap(IDB_PLAYER1_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(IDB_PLAYER1_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(IDB_PLAYER1_KNOCKBACK4_REVERSE, RGB(0, 0, 0));
+		KnockBackReverse.AddBitmap(IDB_PLAYER1_KNOCKBACK3_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(IDB_PLAYER1_KNOCKBACK3_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(IDB_PLAYER1_KNOCKBACK2_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(IDB_PLAYER1_KNOCKBACK1_REVERSE, RGB(0, 0, 0));
@@ -475,12 +481,14 @@ namespace game_framework {
 		Knock.AddBitmap(FIRZEN_KNOCK5, RGB(0, 0, 0));
 		Knock.AddBitmap(FIRZEN_KNOCK4, RGB(0, 0, 0));
 		Knock.AddBitmap(FIRZEN_KNOCK3, RGB(0, 0, 0));
+		Knock.AddBitmap(FIRZEN_KNOCK3, RGB(0, 0, 0));
 		Knock.AddBitmap(FIRZEN_KNOCK2, RGB(0, 0, 0));
 		Knock.AddBitmap(FIRZEN_KNOCK1, RGB(0, 0, 0));
 
 		KnockReverse.AddBitmap(FIRZEN_KNOCK5_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(FIRZEN_KNOCK5_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(FIRZEN_KNOCK4_REVERSE, RGB(0, 0, 0));
+		KnockReverse.AddBitmap(FIRZEN_KNOCK3_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(FIRZEN_KNOCK3_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(FIRZEN_KNOCK2_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(FIRZEN_KNOCK1_REVERSE, RGB(0, 0, 0));
@@ -489,12 +497,14 @@ namespace game_framework {
 		KnockBack.AddBitmap(FIRZEN_KNOCKBACK5, RGB(0, 0, 0));
 		KnockBack.AddBitmap(FIRZEN_KNOCKBACK4, RGB(0, 0, 0));
 		KnockBack.AddBitmap(FIRZEN_KNOCKBACK3, RGB(0, 0, 0));
+		KnockBack.AddBitmap(FIRZEN_KNOCKBACK3, RGB(0, 0, 0));
 		KnockBack.AddBitmap(FIRZEN_KNOCKBACK2, RGB(0, 0, 0));
 		KnockBack.AddBitmap(FIRZEN_KNOCKBACK1, RGB(0, 0, 0));
 
 		KnockBackReverse.AddBitmap(FIRZEN_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(FIRZEN_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(FIRZEN_KNOCKBACK4_REVERSE, RGB(0, 0, 0));
+		KnockBackReverse.AddBitmap(FIRZEN_KNOCKBACK3_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(FIRZEN_KNOCKBACK3_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(FIRZEN_KNOCKBACK2_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(FIRZEN_KNOCKBACK1_REVERSE, RGB(0, 0, 0));
@@ -615,12 +625,14 @@ namespace game_framework {
 		Knock.AddBitmap(FREEZE_KNOCK5, RGB(0, 0, 0));
 		Knock.AddBitmap(FREEZE_KNOCK4, RGB(0, 0, 0));
 		Knock.AddBitmap(FREEZE_KNOCK3, RGB(0, 0, 0));
+		Knock.AddBitmap(FREEZE_KNOCK3, RGB(0, 0, 0));
 		Knock.AddBitmap(FREEZE_KNOCK2, RGB(0, 0, 0));
 		Knock.AddBitmap(FREEZE_KNOCK1, RGB(0, 0, 0));
 
 		KnockReverse.AddBitmap(FREEZE_KNOCK5_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(FREEZE_KNOCK5_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(FREEZE_KNOCK4_REVERSE, RGB(0, 0, 0));
+		KnockReverse.AddBitmap(FREEZE_KNOCK3_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(FREEZE_KNOCK3_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(FREEZE_KNOCK2_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(FREEZE_KNOCK1_REVERSE, RGB(0, 0, 0));
@@ -629,12 +641,14 @@ namespace game_framework {
 		KnockBack.AddBitmap(FREEZE_KNOCKBACK5, RGB(0, 0, 0));
 		KnockBack.AddBitmap(FREEZE_KNOCKBACK4, RGB(0, 0, 0));
 		KnockBack.AddBitmap(FREEZE_KNOCKBACK3, RGB(0, 0, 0));
+		KnockBack.AddBitmap(FREEZE_KNOCKBACK3, RGB(0, 0, 0));
 		KnockBack.AddBitmap(FREEZE_KNOCKBACK2, RGB(0, 0, 0));
 		KnockBack.AddBitmap(FREEZE_KNOCKBACK1, RGB(0, 0, 0));
 
 		KnockBackReverse.AddBitmap(FREEZE_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(FREEZE_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(FREEZE_KNOCKBACK4_REVERSE, RGB(0, 0, 0));
+		KnockBackReverse.AddBitmap(FREEZE_KNOCKBACK3_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(FREEZE_KNOCKBACK3_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(FREEZE_KNOCKBACK2_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(FREEZE_KNOCKBACK1_REVERSE, RGB(0, 0, 0));
@@ -750,6 +764,7 @@ namespace game_framework {
 		KnockReverse.AddBitmap(HENRY_KNOCK5_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(HENRY_KNOCK4_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(HENRY_KNOCK3_REVERSE, RGB(0, 0, 0));
+		KnockReverse.AddBitmap(HENRY_KNOCK3_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(HENRY_KNOCK2_REVERSE, RGB(0, 0, 0));
 		KnockReverse.AddBitmap(HENRY_KNOCK1_REVERSE, RGB(0, 0, 0));
 
@@ -757,12 +772,14 @@ namespace game_framework {
 		KnockBack.AddBitmap(HENRY_KNOCKBACK5, RGB(0, 0, 0));
 		KnockBack.AddBitmap(HENRY_KNOCKBACK4, RGB(0, 0, 0));
 		KnockBack.AddBitmap(HENRY_KNOCKBACK3, RGB(0, 0, 0));
+		KnockBack.AddBitmap(HENRY_KNOCKBACK3, RGB(0, 0, 0));
 		KnockBack.AddBitmap(HENRY_KNOCKBACK2, RGB(0, 0, 0));
 		KnockBack.AddBitmap(HENRY_KNOCKBACK1, RGB(0, 0, 0));
 
 		KnockBackReverse.AddBitmap(HENRY_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(HENRY_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(HENRY_KNOCKBACK4_REVERSE, RGB(0, 0, 0));
+		KnockBackReverse.AddBitmap(HENRY_KNOCKBACK3_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(HENRY_KNOCKBACK3_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(HENRY_KNOCKBACK2_REVERSE, RGB(0, 0, 0));
 		KnockBackReverse.AddBitmap(HENRY_KNOCKBACK1_REVERSE, RGB(0, 0, 0));
@@ -789,23 +806,29 @@ namespace game_framework {
 		GetupBackReverse.AddBitmap(HENRY_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 	}
 
-	void Character::SetCharacter(){
+	void Character::SetCharacter(int num){
+		characterNumber = num;
 		switch (characterNumber)
 		{
 		case 0:
 			LoadFirzen();
+			name = "Firzen";
 			break;
 		case 1:
 			LoadFreeze();
+			name = "Freeze";
 			break;
 		case 2:
 			LoadHenry();
+			name = "Henry";
 			break;
 		case 3:
 			LoadPlayer1();
+			name = "Player1";
 			break;
 		default:
 			LoadPlayer0();
+			name = "Player0";
 			break;
 		};
 	}
@@ -833,8 +856,10 @@ namespace game_framework {
 		}
 
 		if (isGettingUp) {
-			Getup.OnMove();
-			GetupBack.OnMove();
+			if (isAlive) {
+				Getup.OnMove();
+				GetupBack.OnMove();
+			}
 		}
 
 		if (isJumpping || isGettingHit) {
@@ -1087,38 +1112,38 @@ namespace game_framework {
 	}
 
 	void Character::ShowGettingUP(int Dir,int HitDir) {
-		if (Dir == 0) {
-			if (HitDir == 1) {
-				GetupBackReverse.SetTopLeft(xPos, yPos);
-				GetupBackReverse.OnShow();
-				if (GetupBackReverse.IsFinalBitmap()) {
-					isGettingUp = false;
+			if (Dir == 0) {
+				if (HitDir == 1) {
+						GetupBackReverse.SetTopLeft(xPos, yPos);
+						GetupBackReverse.OnShow();
+						if (GetupBackReverse.IsFinalBitmap()) {
+							isGettingUp = false;
+						}
+				}
+				else if (HitDir == 0) {
+						GetupReverse.SetTopLeft(xPos, yPos);
+						GetupReverse.OnShow();
+						if (GetupReverse.IsFinalBitmap()) {
+							isGettingUp = false;
+						}
 				}
 			}
-			else if (HitDir == 0) {
-				GetupReverse.SetTopLeft(xPos, yPos);
-				GetupReverse.OnShow();
-				if (GetupReverse.IsFinalBitmap()) {
-					isGettingUp = false;
+			else if (Dir == 1) {
+				if (HitDir == 1) {
+					GetupBack.SetTopLeft(xPos, yPos);
+					GetupBack.OnShow();
+					if (GetupBack.IsFinalBitmap()) {
+						isGettingUp = false;
+					}
+				}
+				else if (HitDir == 0) {
+					Getup.SetTopLeft(xPos, yPos);
+					Getup.OnShow();
+					if (Getup.IsFinalBitmap()) {
+						isGettingUp = false;
+					}
 				}
 			}
-		}
-		else if (Dir == 1) {
-			if (HitDir == 1) {
-				GetupBack.SetTopLeft(xPos, yPos);
-				GetupBack.OnShow();
-				if (GetupBack.IsFinalBitmap()) {
-					isGettingUp = false;
-				}
-			}
-			else if (HitDir == 0) {
-				Getup.SetTopLeft(xPos, yPos);
-				Getup.OnShow();
-				if (Getup.IsFinalBitmap()) {
-					isGettingUp = false;
-				}
-			}
-		}
 	}
 
 	void Character::OnShow() {
@@ -1145,7 +1170,8 @@ namespace game_framework {
 			ShowNormal(direction);
 		}
 	}
-    Character::~Character() {
 
-    }
+	Character::~Character() {
+
+	}
 }

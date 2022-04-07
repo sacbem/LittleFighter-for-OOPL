@@ -2,7 +2,7 @@ namespace game_framework {
 	class Character
 	{
 	public:
-		Character(int num);
+		Character();
 		~Character();
 		int HitEnemy(Character* enemy);
 		bool GetAlive();
@@ -13,7 +13,7 @@ namespace game_framework {
 		int	 GetDir();
 		int	 GetHealth();
 		void Initialize();
-		void SetCharacter();
+		void SetCharacter(int num);
 		void LoadPlayer0();
 		void LoadPlayer1();
 		void LoadFirzen();
@@ -37,6 +37,7 @@ namespace game_framework {
         int GetDistance();
         void SetAccumulator(int, int);
 		//basic informtion
+		bool getCharacter;
 		int characterNumber;
 		string name;
 		int HealthPoint;
@@ -56,6 +57,8 @@ namespace game_framework {
 		bool isDefending;
 
 	protected:
+		//CMovingBitmap shadow;
+		//CMovingBitmap nameImg;
         CMovingBitmap photoSticker;
 		CAnimation Animation;		// normal state
 		CAnimation AnimationReverse;// normal state reverse

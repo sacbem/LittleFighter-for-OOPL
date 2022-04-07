@@ -6,24 +6,32 @@
 #include "gamelib.h"
 #include <string> 
 #include "CGameStateRun.h"
+#include <fstream>
+#include <string>
+using namespace std;
+#define  _CRTDBG_MAP_ALLOC
+#include  < stdlib.h >
+#include  < crtdbg.h >
 
 namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g)
 		: CGameState(g)
 	{
-		PlayerTest = new Character(1);
-		EnemyTest = new Character(4);
+		PlayerTest = new Character();
+		EnemyTest = new Character();
+
         maps = new MapGenerator();
+		//_CrtDumpMemoryLeaks();
 	}
 
 	void CGameStateRun::OnBeginState()
 	{
-		PlayerTest->Initialize();
-		EnemyTest->Initialize();
 		PlayerTest->SetXY(200, 200);
 		EnemyTest->SetXY(500, 200);
 		KeyBoardInputTime = 0;
 		LastInputTime = 0;
+		//_CrtDumpMemoryLeaks();
+
 	}
     void  CGameStateRun::MapSlide() {
         if (PlayerTest->isRunning) {
@@ -47,6 +55,8 @@ namespace game_framework {
             PlayerTest->SetAccumulator(PlayerTest->GetX1(), PlayerTest->GetY1());
 
         }
+		//_CrtDumpMemoryLeaks();
+
     }
 	void CGameStateRun::OnMove()						// 移動遊戲元素
 	{
@@ -62,7 +72,6 @@ namespace game_framework {
 		EnemyTest->OnMove();
         MapSlide();
 		
-		
 		//x bound
 		if (PlayerTest->GetX1() <= 0) {
 			PlayerTest->SetXY(0, PlayerTest->GetY1());
@@ -71,8 +80,10 @@ namespace game_framework {
 			PlayerTest->SetXY(800-(PlayerTest->GetX2()-PlayerTest->GetX1()), PlayerTest->GetY1());
 		}
 		//y bound
-		if(PlayerTest->GetY1() <= 0) {
-			PlayerTest->SetXY(PlayerTest->GetX1(),0);
+		if(PlayerTest->GetY1() <= 200) {
+			if (PlayerTest->isJumpping==false) {
+				PlayerTest->SetXY(PlayerTest->GetX1(), 200);
+			}
 		}
 		else if (PlayerTest->GetY2() >= 600) {
 			PlayerTest->SetXY(PlayerTest->GetX1(),600- (PlayerTest->GetY2() - PlayerTest->GetY1()));
@@ -86,13 +97,14 @@ namespace game_framework {
 			EnemyTest->SetXY(800 - (EnemyTest->GetX2() - EnemyTest->GetX1()), EnemyTest->GetY1());
 		}
 		//y bound
-		if (EnemyTest->GetY1() <= 0) {
-			EnemyTest->SetXY(EnemyTest->GetX1(), 0);
+		if (EnemyTest->GetY1() <= 200) {
+			if (EnemyTest->isJumpping==false) {
+				EnemyTest->SetXY(EnemyTest->GetX1(), 200);
+			}
 		}
 		else if (EnemyTest->GetY2() >= 600) {
 			EnemyTest->SetXY(EnemyTest->GetX1(), 600 - (EnemyTest->GetY2() - EnemyTest->GetY1()));
 		}
-
 
 		if (PlayerTest->HitEnemy(EnemyTest) && PlayerTest->isAttacking) {
 			if (EnemyTest->HealthPoint>0) {
@@ -118,6 +130,9 @@ namespace game_framework {
 		pDC->TextOut(120, 320, str2);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();
+
+		//_CrtDumpMemoryLeaks();
+
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -136,9 +151,11 @@ namespace game_framework {
 		//
 		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 		//
+
         maps->Load(0);
-		PlayerTest->SetCharacter();
-		EnemyTest->SetCharacter();
+
+		//_CrtDumpMemoryLeaks();
+
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -198,6 +215,9 @@ namespace game_framework {
 		if (nChar == KEY_CTRL) {
 			PlayerTest->SetJump(true);
 		}
+
+		//_CrtDumpMemoryLeaks();
+
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -242,14 +262,29 @@ namespace game_framework {
 			PlayerTest->SetAttack(false);
 		}
 		LastInput = nChar;
+
+		//_CrtDumpMemoryLeaks();
+
 	}
 
-
 	void CGameStateRun::OnShow(){
+		//get character
+		if (PlayerTest->getCharacter == false && EnemyTest->getCharacter == false) {
+			ifstream ifs;
+			char buffer[2];
+			ifs.open("CharacterSelected.txt");
+			ifs.read(buffer, sizeof(buffer));
+			ifs.close();
+			PlayerTest->SetCharacter(buffer[0] - '0');
+			EnemyTest->SetCharacter(buffer[1] - '0');
+			PlayerTest->getCharacter = true;
+			EnemyTest->getCharacter = true;
+		}
 
         maps->PrintMap();
 		PlayerTest->OnShow();
 		EnemyTest->OnShow();
+		//_CrtDumpMemoryLeaks();
 	}
     CGameStateRun::~CGameStateRun(){
         delete PlayerTest, EnemyTest,maps;

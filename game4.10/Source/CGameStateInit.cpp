@@ -6,6 +6,10 @@
 #include "gamelib.h"
 #include <typeinfo>
 #include "CGameStateInit.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
 //#include "InitalPageMenu.h"
 
 namespace game_framework {
@@ -132,7 +136,6 @@ namespace game_framework {
                   }
               }
           }
-
      }
     void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point){
         if (!SELECT_ENTER) {
@@ -181,7 +184,6 @@ namespace game_framework {
             countDown.OnShow();
         }
         countDown.OnMove();
-
     }
     void CGameStateInit::SetPhotoStickers() {
         if (SELECTOR_ENABLE) {
@@ -214,14 +216,11 @@ namespace game_framework {
     }
   
     void CGameStateInit::OnShow() {
-		c1 = characterID[0];
-		c2 = characterID[1];
-
           logo.SetTopLeft(0, 0);
           logo.ShowBitmap();
 
           //test
-          GotoGameState(GAME_STATE_RUN);
+          //GotoGameState(GAME_STATE_RUN);
           if (!SELECT_ENTER) {
               startBtn->OnShow();
               settingBtn->OnShow();
@@ -258,6 +257,11 @@ namespace game_framework {
               if (!SELECTOR_ENABLE) {  //結束選角
                   SetCountdownAni();
 				  if (countDown.IsFinalBitmap()){
+					  string text(string(std::to_string(characterID[0]) + std::to_string(characterID[1])));
+					  string filename3("CharacterSelected.txt");
+					  FILE *o_file = fopen(filename3.c_str(), "w+");
+					  fwrite(text.c_str(), 1, text.size(), o_file);
+					  fclose(o_file);
 					  GotoGameState(GAME_STATE_RUN);
 				  }
               }
@@ -265,10 +269,7 @@ namespace game_framework {
                   SetAnimation();
               }
               SetPhotoStickers();
-          }
-
-          
-    
+          }         
 		/*
          Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
         */

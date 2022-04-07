@@ -168,24 +168,30 @@ namespace game_framework {
         SetLandPosition();
     }
 
-    MapGenerator::~MapGenerator() { 
-        delete backGreen;
+	MapGenerator::~MapGenerator() {
+		delete backGreen;
 
-        for (int i = 0; i < 4; i++) {
-            if (i < 2) {
-                delete mountains[i];
-            }
-            if (i < 3) {
-                delete sky[i];
-            }    
-            delete trees[i];
-            delete weeds[i];
-           
-          
-        }
-
-
-    }
+		for (size_t i = 0; i < mountains.size(); ++i)
+		{
+			delete mountains[i];
+		}
+		mountains.clear();
+		for (size_t i = 0; i < trees.size(); ++i)
+		{
+			delete trees[i];
+		}
+		trees.clear();
+		for (size_t i = 0; i < sky.size(); ++i)
+		{
+			delete sky[i];
+		}
+		sky.clear();
+		for (size_t i = 0; i < weeds.size(); ++i)
+		{
+			delete weeds[i];
+		}
+		weeds.clear();
+	}
 }
 
 /*

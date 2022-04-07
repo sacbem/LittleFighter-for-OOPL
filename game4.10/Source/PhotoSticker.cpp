@@ -69,5 +69,6 @@ namespace game_framework {
        
     }
     PhotoSticker::~PhotoSticker() {
+
     }
 }

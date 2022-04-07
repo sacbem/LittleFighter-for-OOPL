@@ -21,8 +21,8 @@ namespace game_framework {
 		UINT LastInput;									//上一個輸入
 		
 		//Player & other
-		Character *PlayerTest;
-		Character *EnemyTest;
+		Character* PlayerTest;
+		Character* EnemyTest;
         MapGenerator* maps;
 
 		int CleanCounter=0;
