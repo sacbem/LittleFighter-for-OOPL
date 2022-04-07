@@ -43,7 +43,7 @@ namespace game_framework {
         attackScreen.AddBitmap(BITMAP_PRESSATTACK_1, RGB(0, 0, 0));
         black.LoadBitmap(BITMAP_BLACKSCREEN);
 		logo.LoadBitmap(IDB_BITMAP3);
-        selectCharacterMenu->Load(IDB_BITMAP13);
+        selectCharacterMenu->Load(BITMAP_SELECTMENU);
         photoSticker_seclecter->Load(picStickers,picIDs,picNames);
 
 		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
@@ -54,7 +54,7 @@ namespace game_framework {
 	}
     void CGameStateInit::OnBeginState(){
         keyCount = cursorClickLift = 0;;     
-        loadMap = characterIsSeclected = 0;
+        loadMap = characterIsSeclected = enterCounter = 0;
         //countDown.SetDelayCount(50);
         MOUSE_ENABLE = SELECT_ENTER = SELECTOR_ENABLE = false;
         for (int i = 0; i < 3;i++) {
@@ -112,26 +112,27 @@ namespace game_framework {
               }
           }
           else {
-              if (SELECT_ENTER) {
+              if (SELECT_ENTER) { 
                   switch (nChar) {
                   case KEY_W:
-                      characterID[characterIsSeclected]++;
-                      if (characterID[characterIsSeclected] > 2) {
-                          characterID[characterIsSeclected] = 0;
-                      }
-                      photoSticker_seclecter->IsSeclected(characterID[characterIsSeclected]);
+                     
+                          characterID[characterIsSeclected]++;
+                          if (characterID[characterIsSeclected] > 2) {
+                              characterID[characterIsSeclected] = 0;
+                          }
+                          photoSticker_seclecter->IsSeclected(characterID[characterIsSeclected]);
                       break;
                   case KEY_S:
-                      characterID[characterIsSeclected]--;
-                      if (characterID[characterIsSeclected] < 0) {
-                          characterID[characterIsSeclected] = 2;
-                      }
-                      photoSticker_seclecter->IsSeclected(characterID[characterIsSeclected]);
+                          characterID[characterIsSeclected]--;
+                          if (characterID[characterIsSeclected] < 0) {
+                              characterID[characterIsSeclected] = 2;
+                          }
+                          photoSticker_seclecter->IsSeclected(characterID[characterIsSeclected]);
                       break;
                   case KEY_ENTER:
-                      if (SELECTOR_ENABLE) {
-                          characterIsSeclected++;
-                      }
+                          if (SELECTOR_ENABLE) {
+                              characterIsSeclected++;
+                          }
                       break;
                   }
               }
@@ -162,25 +163,16 @@ namespace game_framework {
         }
     }
     void CGameStateInit::SetAnimation() {
-        for (int i = 0; i < 4; i++) {               //上排
-            attackScreen.SetTopLeft(155 + 152 * i, 136);
-            attackScreen.OnShow();
-        }
-       
-        for (int i = 0; i < 4; i++) {               //下排
-            attackScreen.SetTopLeft(155 + 152 * i, 358);
+        for (int i = 0; i < 3; i++) {               
+            attackScreen.SetTopLeft(165 + 169 * i, 210);
             attackScreen.OnShow();
         }
         attackScreen.OnMove();
        
     }
     void CGameStateInit::SetCountdownAni() {
-        for (int i = 2; i < 4; i++) {               //上排
-            countDown.SetTopLeft(190 + 152 * i, 150);
-            countDown.OnShow();
-        }
-        for (int i = 0; i < 4; i++) {               //下排
-            countDown.SetTopLeft(190 + 152 * i, 372);
+        for (int i = 2; i < 3; i++) {               
+            countDown.SetTopLeft(200 + 169 * i, 220);
             countDown.OnShow();
         }
         countDown.OnMove();
@@ -192,7 +184,7 @@ namespace game_framework {
             case 1:
                 if (loadMap < characterIsSeclected) {
                     photoSticker_1P->Load(picStickers[idGet], picIDs[idGet],picNames[idGet]);
-                    photoSticker_seclecter->SetXY(307, 136-20);
+                    photoSticker_seclecter->SetXY(336, 195);
                     loadMap++;
                 }
                 photoSticker_1P->OnShow();

@@ -13,9 +13,8 @@ namespace game_framework {
     }
     void SelectCharacterMenu::Initialize() {
 
-        posistion_XY[0].push_back(((SIZE_X - 704) / 2));
-        posistion_XY[0].push_back((SIZE_Y - 487) / 2);
-        TRACE("posistion_XY: %d ,%d\n", posistion_XY[0][0], posistion_XY[0][1]);
+        posistion_XY[0].push_back(((SIZE_X - 776) / 2));
+        posistion_XY[0].push_back((SIZE_Y - 536) / 2);
     }
     void SelectCharacterMenu::Load(int bitmap) {
         pic.LoadBitmap(bitmap);
@@ -42,25 +41,10 @@ namespace game_framework {
     }
     void Seclecter::Initialize(int ind) {
         int cnt = 0;
-        if (ind > 3) {      // 頭貼位置初始化
-            photoSticker_XY.push_back(155 + ind * 152);
-            photoSticker_XY.push_back(358);
-        }
-        else {
-            photoSticker_XY.push_back(155 + ind * 152);
-            photoSticker_XY.push_back(136);
-        }
-
-        //for (auto &i : posistion_XY) {// 名字 與 ID 位置初始化
-        //    if (ind > 3) {
-        //        i.push_back(154 * (ind - 4));
-        //    }
-        //    else {
-        //        i.push_back(154 * ind);
-        //    }
-        //    i.push_back(240 + 20 * cnt);
-        //    cnt++;
-        //}
+        // 頭貼位置初始化
+        photoSticker_XY.push_back(167 + ind * 169);
+        photoSticker_XY.push_back(195);
+        
     }
     void Seclecter::SetXY(int x ,int y) {
         this->photoSticker_XY[0] = x;
@@ -69,10 +53,10 @@ namespace game_framework {
             i.SetTopLeft(x, y);
         }
         for (auto &i : Id) {
-            i.SetTopLeft(x + 60, 241);
+            i.SetTopLeft(x + 60, 291 + 40);
         }
         for (auto &i : Name) {
-            i.SetTopLeft(x + 40, 261);
+            i.SetTopLeft(x + 40, 315 + 40);
         }
     }
    
@@ -82,19 +66,19 @@ namespace game_framework {
         int cnt = 0;
         for (auto &i :Picture) {
             i.LoadBitmap(data[cnt]);
-            i.SetTopLeft(photoSticker_XY[0], photoSticker_XY[1] - 20);
+            i.SetTopLeft(photoSticker_XY[0], photoSticker_XY[1]);
             cnt++;
         }
         cnt = 0;
         for (auto &i : Id) {
             i.LoadBitmap(picID[cnt]);     
-            i.SetTopLeft(photoSticker_XY[0] + 60, 241);
+            i.SetTopLeft(photoSticker_XY[0] + 60, 291 + 40);
             cnt++;
         }
         cnt = 0;
         for (auto &i : Name){
             i.LoadBitmap(picName[cnt]);
-            i.SetTopLeft(photoSticker_XY[0] + 40, 261);
+            i.SetTopLeft(photoSticker_XY[0] + 40, 315 + 40);
             cnt++;
         }
     }
@@ -113,7 +97,7 @@ namespace game_framework {
         return seclectedID;
     }
     Seclecter::~Seclecter(){
-        TRACE("~Seclecter");
+ 
     }
     ////////////////////////////////////////////// PhotoSticker (Derived) //////////////////////////////////////////////
     PhotoSticker::PhotoSticker(int ind) {
@@ -131,37 +115,16 @@ namespace game_framework {
 
     }
     void PhotoSticker::Initialize(int ind) {
-        /* Beta
-        //for (int i = 0; i < 3; i++) {
-        //    info.push_back(new CMovingBitmap);
-        //}
-        //int cnt = 0;
-        */
-        if (ind > 3) {      // 頭貼位置初始化
-            photoSticker_XY.push_back(155 + posID * 152);
-            photoSticker_XY.push_back(358);
-        }
-        else {
-            photoSticker_XY.push_back(155 + posID * 152);
-            photoSticker_XY.push_back(136);
+         // 頭貼位置初始化
+        photoSticker_XY.push_back(167 + posID * 169);
+        photoSticker_XY.push_back(195);
 
-        }
-     /*  for (auto &i : posistion_XY) {// 名字 與 ID 位置初始化
-     //    if (ind > 3) {
-     //        i.push_back(154 * (ind - 4));
-     //    }
-     //    else {
-     //        i.push_back(154 * ind);
-     //    }
-     //    i.push_back(240 + 20 * cnt);
-     //    cnt++;
-     //}*/
     }
 
     void PhotoSticker::OnShow() {
-        pic.SetTopLeft(photoSticker_XY[0], photoSticker_XY[1]-20);// 頭貼位置設定
-        id.SetTopLeft(photoSticker_XY[0] + 60,241);
-        name.SetTopLeft(photoSticker_XY[0] + 40, 261);
+        pic.SetTopLeft(photoSticker_XY[0], photoSticker_XY[1]);// 頭貼位置設定
+        id.SetTopLeft(photoSticker_XY[0] + 60 ,291 + 40);
+        name.SetTopLeft(photoSticker_XY[0] + 40, 315 + 40);
 
         pic.ShowBitmap();
         id.ShowBitmap();

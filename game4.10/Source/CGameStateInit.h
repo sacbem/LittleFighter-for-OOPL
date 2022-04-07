@@ -40,6 +40,7 @@ namespace game_framework {
         int characterID[2];
         int characterIsSeclected ;
         int loadMap;
+        int enterCounter;
         boolean MOUSE_ENABLE,SELECT_ENTER,SELECTOR_ENABLE;
  
         
