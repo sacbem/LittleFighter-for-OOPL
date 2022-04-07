@@ -32,7 +32,6 @@
 #define IDB_ERASER3                     151
 #define IDB_CONTINUE                    152
 #define IDC_GAMECURSOR                  153
-#define IDB_CONTINUE2                   154
 #define IDB_HELP                        155
 #define IDB_BITMAP2                     156
 #define IDB_LOADING                     156
@@ -302,8 +301,6 @@
 #define FREEZE_ATTACK8                  425
 #define FREEZE_ATTACK9                  426
 #define FREEZE_ATTACK10                 427
-#define IDB_BITMAP41                    428
-#define BITMAP_HEALTHBAR                428
 #define FREEZE_ATTACK10_REVERSE         429
 #define FREEZE_ATTACK9_REVERSE          430
 #define FREEZE_ATTACK8_REVERSE          431
@@ -326,8 +323,6 @@
 #define FREEZE_RUN3_REVERSE             448
 #define FREEZE_RUN2_REVERSE             449
 #define FREEZE_RUN1_REVERSE             450
-#define IDB_BITMAP42                    451
-#define IDB_CONTINU                     451
 #define FREEZE_KNOCK1                   452
 #define FREEZE_KNOCK2                   453
 #define FREEZE_KNOCK3                   454
@@ -366,13 +361,15 @@
 #define HENRY_WALK2                     487
 #define HENRY_WALK3                     488
 #define HENRY_WALK4                     489
+#define IDB_BITMAP41                    490
+#define BITMAP_SELECTMENU               490
 #define HENRY_WALK4_REVERSE             491
 #define HENRY_WALK3_REVERSE             492
 #define HENRY_WALK2_REVERSE             493
 #define HENRY_WALK1_REVERSE             494
-#define BITMAP_HEALTHBAR2               495
+#define BITMAP_HEALTHBAR                495
 #define RED                             496
-#define IDB_BITMAP43                    497
+#define IDB_BITMAP42                    497
 #define FIRZEN_S                        497
 #define FREEZE_S                        498
 #define HENRY_S                         499

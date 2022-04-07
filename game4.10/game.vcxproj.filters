@@ -475,10 +475,12 @@
     <Image Include="res\player1_7.bmp" />
     <Image Include="RES\quit1.bmp" />
     <Image Include="RES\quit2.bmp" />
-    <Image Include="RES\FRAME.bmp" />
-    <Image Include="RES\PAUSE.bmp" />
+    <Image Include="res\freeze\freeze_0_reverse\bitmap41.bmp" />
+    <Image Include="res\freeze\freeze_0_reverse\bitmap42.bmp" />
+    <Image Include="..\素材\CHARMENU_3.bmp" />
     <Image Include="RES\HealthBar.bmp" />
     <Image Include="RES\red.bmp" />
+    <Image Include="res\CHARMENU_3.bmp" />
     <Image Include="RES\Firzen\firzen_s.bmp" />
     <Image Include="RES\Freeze\freeze_s.bmp" />
     <Image Include="RES\Henry\henry_s.bmp" />

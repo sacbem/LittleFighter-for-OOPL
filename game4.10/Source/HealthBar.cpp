@@ -33,11 +33,11 @@ namespace game_framework {
 		img.SetTopLeft(posistion_XY[0], posistion_XY[1]);
 		img.ShowBitmap();
 
-		imgCharacter.SetTopLeft(posistion_XY[0]+40, posistion_XY[1]+10);
+		imgCharacter.SetTopLeft(posistion_XY[0] + 40, posistion_XY[1] + 10);
 		imgCharacter.ShowBitmap();
 
 		for (int i = 0; i < 36; i++) {
-			if ((i + 1) <= hp / 10){
+			if ((i + 1) <= hp / 10) {
 				imgHealth[i]->ShowBitmap();
 			}
 		}
@@ -49,14 +49,14 @@ namespace game_framework {
 		*/
 	}
 
-	void HealthBar::OnLoad(int X,int Y) {
+	void HealthBar::OnLoad(int X, int Y) {
 		posistion_XY[0] = X;
 		posistion_XY[1] = Y;
-		img.LoadBitmap(BITMAP_HEALTHBAR2);
+		img.LoadBitmap(BITMAP_HEALTHBAR);
 		//147, 44
 		for (int i = 0; i < 36; i++) {
 			imgHealth[i]->LoadBitmap(RED);
-			imgHealth[i]->SetTopLeft(posistion_XY[0] +177+(i*5), 21);
+			imgHealth[i]->SetTopLeft(posistion_XY[0] + 177 + (i * 5), 21);
 		}
 	}
 
@@ -64,7 +64,7 @@ namespace game_framework {
 		switch (id)
 		{
 		case 0:
-			imgCharacter.LoadBitmap(FIRZEN_S,RGB(224,68,60));
+			imgCharacter.LoadBitmap(FIRZEN_S, RGB(224, 68, 60));
 			break;
 		case 1:
 			imgCharacter.LoadBitmap(FREEZE_S, RGB(224, 68, 60));

@@ -62,7 +62,7 @@ END
 // Bitmap
 //
 
-IDB_CONTINUE2           BITMAP                  "..\\res\\continue.bmp"
+IDB_CONTINUE            BITMAP                  "..\\res\\continue.bmp"
 
 IDB_HELP                BITMAP                  "..\\res\\help.bmp"
 
@@ -840,21 +840,19 @@ IDB_BITMAP38            BITMAP                  "..\\res\\lf\\t_test.bmp"
 
 IDB_BITMAP39            BITMAP                  "..\\res\\lf\\t_test2.bmp"
 
-BITMAP_HEALTHBAR        BITMAP                  "..\\RES\\FRAME.bmp"
+BITMAP_SELECTMENU       BITMAP                  "..\\res\\CHARMENU_3.bmp"
 
-IDB_CONTINUE            BITMAP                  "..\\res\\PAUSE.bmp"
+BITMAP_HEALTHBAR        BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\HealthBar.bmp"
 
-BITMAP_HEALTHBAR2       BITMAP                  "..\\res\\HealthBar.bmp"
+RED                     BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\red.bmp"
 
-RED                     BITMAP                  "..\\res\\red.bmp"
+FIRZEN_S                BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Firzen\\firzen_s.bmp"
 
-FIRZEN_S                BITMAP                  "..\\res\\Firzen\\firzen_s.bmp"
+FREEZE_S                BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Freeze\\freeze_s.bmp"
 
-FREEZE_S                BITMAP                  "..\\res\\Freeze\\freeze_s.bmp"
+HENRY_S                 BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\henry_s.bmp"
 
-HENRY_S                 BITMAP                  "..\\res\\Henry\\henry_s.bmp"
-
-PLAYER0_S               BITMAP                  "..\\res\\Player0\\s.bmp"
+PLAYER0_S               BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Player0\\s.bmp"
 
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////

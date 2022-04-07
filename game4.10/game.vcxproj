@@ -312,6 +312,7 @@
     <Image Include="..\..\OOPL_bg\InitPage_1.bmp" />
     <Image Include="..\..\OOPL_bg\ui\CM1.bmp" />
     <Image Include="..\..\OOP_game\game4.10\RES\InitPage_1.bmp" />
+    <Image Include="..\素材\CHARMENU_3.bmp" />
     <Image Include="RES\0.bmp" />
     <Image Include="RES\1.bmp" />
     <Image Include="RES\2.bmp" />
@@ -323,6 +324,7 @@
     <Image Include="res\bitmap34.bmp" />
     <Image Include="RES\black.bmp" />
     <Image Include="RES\CHARMENU.bmp" />
+    <Image Include="res\CHARMENU_3.bmp" />
     <Image Include="RES\CM1.bmp" />
     <Image Include="RES\CM2.bmp" />
     <Image Include="RES\CM3.bmp" />
@@ -403,7 +405,6 @@
     <Image Include="RES\Firzen\Firzen_0_reverse\firzen_0_reverse_9.bmp" />
     <Image Include="RES\Firzen\firzen_s.bmp" />
     <Image Include="RES\firzen_f.bmp" />
-    <Image Include="RES\FRAME.bmp" />
     <Image Include="RES\Freeze.bmp" />
     <Image Include="RES\Freeze\Freeze_0\freeze_0_0.bmp" />
     <Image Include="RES\Freeze\Freeze_0\freeze_0_1.bmp" />
@@ -443,6 +444,8 @@
     <Image Include="RES\Freeze\Freeze_0\freeze_0_62.bmp" />
     <Image Include="RES\Freeze\Freeze_0\freeze_0_7.bmp" />
     <Image Include="res\freeze\freeze_0_reverse\bitmap33.bmp" />
+    <Image Include="res\freeze\freeze_0_reverse\bitmap41.bmp" />
+    <Image Include="res\freeze\freeze_0_reverse\bitmap42.bmp" />
     <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_10.bmp" />
     <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_11.bmp" />
     <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_12.bmp" />
@@ -578,7 +581,6 @@
     <Image Include="RES\lf\t_test.bmp" />
     <Image Include="RES\lf\t_test2.bmp" />
     <Image Include="RES\MENU_CLIP_BOX.bmp" />
-    <Image Include="RES\PAUSE.bmp" />
     <Image Include="RES\Player0\player0_normal\player0_0.bmp" />
     <Image Include="RES\Player0\player0_normal\player0_1.bmp" />
     <Image Include="RES\Player0\player0_normal\player0_10.bmp" />

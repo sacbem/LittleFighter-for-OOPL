@@ -1,6 +1,6 @@
 #include <vector>
 namespace game_framework {
-	class HealthBar{
+	class HealthBar {
 	public:
 		HealthBar();
 		~HealthBar();
