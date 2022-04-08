@@ -7,17 +7,17 @@
 #include "Character.h"
 #include <cmath>
 namespace game_framework {
-	
+
 	Character::Character() {
 		Initialize();
 	}
 
-	int Character::HitEnemy(Character *enemy) {
+	int Character::HitEnemy(Character* enemy) {
 		DelayCounter--;
 
-		if(DelayCounter<0){
+		if (DelayCounter < 0) {
 			DelayCounter = Delay;
-			return HitRectangle(enemy->GetX1()+20, enemy->GetY1()+20, enemy->GetX2()-20, enemy->GetY2()-20);
+			return HitRectangle(enemy->GetX1() + 20, enemy->GetY1() + 20, enemy->GetX2() - 20, enemy->GetY2() - 20);
 		}
 		else {
 			return 0;
@@ -71,7 +71,7 @@ namespace game_framework {
 	void Character::Initialize() {
 		DelayCounter = 0;
 		Delay = 7;
-		
+
 		Animation.SetDelayCount(5);
 		AnimationReverse.SetDelayCount(5);
 		Walking.SetDelayCount(5);
@@ -92,7 +92,7 @@ namespace game_framework {
 		GetupBackReverse.SetDelayCount(5);
 		xPos = 200;
 		yPos = 200;
-        xAccumulator = yAccumulator = 200;
+		xAccumulator = yAccumulator = 200;
 		InitialVelocity = 10;
 		YVelocity = InitialVelocity;
 		isRunning = isGettingUp = isGettingHit = isDefending = isAttacking = isJumpping = isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
@@ -102,24 +102,23 @@ namespace game_framework {
 		HealthPoint = 360;
 		AttackPoint = 10;
 		DefencePoint = 5;
-        walkedDistance = 0;
-        isRunning = 0;
+		walkedDistance = 0;
+		isRunning = 0;
+		SetMapBorder(0);
 	}
 
 
-    void Character::DistaceAccumulator() {
-        walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
-        TRACE("walkedDistance:%d\n", walkedDistance);
-    }
-    int Character::GetDistance() {
-        return walkedDistance;
-    }
-    void Character::SetAccumulator(int x, int y) {
-        walkedDistance = 0;
-        xAccumulator = x;
-        yAccumulator = y;
-        TRACE("***********************************\n");
-    }
+	void Character::DistaceAccumulator() {
+		walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
+	}
+	int Character::GetDistance() {
+		return walkedDistance;
+	}
+	void Character::SetAccumulator(int x, int y) {
+		walkedDistance = 0;
+		xAccumulator = x;
+		yAccumulator = y;
+	}
 
 	void Character::LoadPlayer0() {
 		//Normal
@@ -337,7 +336,7 @@ namespace game_framework {
 		RunningReverse.AddBitmap(IDB_PLAYER1_RUN3_REVERSE, RGB(0, 0, 0));
 		RunningReverse.AddBitmap(IDB_PLAYER1_RUN2_REVERSE, RGB(0, 0, 0));
 		RunningReverse.AddBitmap(IDB_PLAYER1_RUN1_REVERSE, RGB(0, 0, 0));
-		
+
 		//Knock
 		Knock.AddBitmap(IDB_PLAYER1_KNOCK5, RGB(0, 0, 0));
 		Knock.AddBitmap(IDB_PLAYER1_KNOCK5, RGB(0, 0, 0));
@@ -806,7 +805,7 @@ namespace game_framework {
 		GetupBackReverse.AddBitmap(HENRY_KNOCKBACK5_REVERSE, RGB(0, 0, 0));
 	}
 
-	void Character::SetCharacter(int num){
+	void Character::SetCharacter(int num) {
 		characterNumber = num;
 		switch (characterNumber)
 		{
@@ -867,7 +866,8 @@ namespace game_framework {
 			JumpReverse.OnMove();
 			if (isRising) {
 				if (YVelocity > 0) {
-					yPos -= YVelocity;
+					//yPos -= YVelocity;
+					this->SetXY(xPos, yPos - YVelocity);
 					YVelocity--;
 				}
 				else {
@@ -877,11 +877,13 @@ namespace game_framework {
 			}
 			else if (!isRising) {
 				if (yPos < JumpYposTemp - 1) {
-					yPos += YVelocity;
+					//yPos += YVelocity;
+					this->SetXY(xPos, yPos + YVelocity);
 					YVelocity++;
 				}
 				else {
-					yPos = JumpYposTemp - 1;
+					//yPos = JumpYposTemp - 1;
+					this->SetXY(xPos, JumpYposTemp--);
 					YVelocity = InitialVelocity;
 					if (isGettingHit == true) {
 						isGettingHit = false;
@@ -892,38 +894,42 @@ namespace game_framework {
 		}
 
 		if (isMovingLeft) {
-			xPos -= speed;
-            DistaceAccumulator();
+			//xPos -= speed;
+			this->SetXY(xPos - speed, yPos);
+			DistaceAccumulator();
 			isWalking = true;
 			direction = 0;
 		}
 		if (isMovingRight) {
-			xPos += speed;
-            DistaceAccumulator();
+			//xPos += speed;
+			this->SetXY(xPos + speed, yPos);
+			DistaceAccumulator();
 			isWalking = true;
 			direction = 1;
 		}
 		if (isMovingUp && !isJumpping) {
-			yPos -= speed;
+			//yPos -= speed;
+			this->SetXY(xPos, yPos - speed);
 			isWalking = true;
 		}
 		if (isMovingDown && !isJumpping) {
-			yPos += speed;
+			this->SetXY(xPos, yPos + speed);
 			isWalking = true;
 		}
 		if (isWalking) {
 			Walking.OnMove();
 			WalkingReverse.OnMove();
 		}
-		if (isMovingLeft==false && isMovingRight == false && isMovingUp == false && isMovingDown == false) {
+		if (isMovingLeft == false && isMovingRight == false && isMovingUp == false && isMovingDown == false) {
 			isWalking = false;
 		}
 		if (isGettingHit) {
 			if (hitDirection) {
-				xPos += 7;
+				this->SetXY(xPos + 7, yPos);
 			}
-			else if(!hitDirection){
+			else if (!hitDirection) {
 				xPos -= 7;
+				this->SetXY(xPos - 7, yPos);
 			}
 		}
 	}
@@ -970,13 +976,25 @@ namespace game_framework {
 		RunningReverse.Reset();
 	}
 
+	void Character::SetMapBorder(int mapID) {
+		xMapBorderMin = 0;
+		xMapBorderMax = 800;
+		switch (mapID) {
+		case 0:
+			yMapBorderMin = 200;
+			yMapBorderMax = 500;
+		default:
+			break;
+		}
+	}
+
 	void Character::SetJump(bool flag) {
 		if (!isJumpping) {
 			Jump.Reset();
 			JumpReverse.Reset();
 			isJumpping = flag;
 			YVelocity = 10;
-			JumpYposTemp = yPos+1;
+			JumpYposTemp = yPos + 1;
 			isRising = true;
 		}
 	}
@@ -987,7 +1005,7 @@ namespace game_framework {
 			Knock.Reset();
 			KnockReverse.Reset();
 			KnockBack.Reset();
-			KnockBackReverse.Reset();	
+			KnockBackReverse.Reset();
 			//give
 			isGettingHit = flag;
 			hitDirection = Dir;
@@ -1002,8 +1020,10 @@ namespace game_framework {
 	}
 
 	void Character::SetXY(int X, int Y) {
-		xPos = X;
-		yPos = Y;
+		xPos = X > xMapBorderMax ? xMapBorderMax : X;
+		xPos = xPos < xMapBorderMin ? xMapBorderMin : xPos;
+		yPos = Y > yMapBorderMax ? yMapBorderMax : Y;
+		yPos = yPos < yMapBorderMin ? yMapBorderMin : yPos;
 	}
 
 	void Character::ShowNormal(int Dir) {
@@ -1111,39 +1131,39 @@ namespace game_framework {
 		}
 	}
 
-	void Character::ShowGettingUP(int Dir,int HitDir) {
-			if (Dir == 0) {
-				if (HitDir == 1) {
-						GetupBackReverse.SetTopLeft(xPos, yPos);
-						GetupBackReverse.OnShow();
-						if (GetupBackReverse.IsFinalBitmap()) {
-							isGettingUp = false;
-						}
-				}
-				else if (HitDir == 0) {
-						GetupReverse.SetTopLeft(xPos, yPos);
-						GetupReverse.OnShow();
-						if (GetupReverse.IsFinalBitmap()) {
-							isGettingUp = false;
-						}
+	void Character::ShowGettingUP(int Dir, int HitDir) {
+		if (Dir == 0) {
+			if (HitDir == 1) {
+				GetupBackReverse.SetTopLeft(xPos, yPos);
+				GetupBackReverse.OnShow();
+				if (GetupBackReverse.IsFinalBitmap()) {
+					isGettingUp = false;
 				}
 			}
-			else if (Dir == 1) {
-				if (HitDir == 1) {
-					GetupBack.SetTopLeft(xPos, yPos);
-					GetupBack.OnShow();
-					if (GetupBack.IsFinalBitmap()) {
-						isGettingUp = false;
-					}
-				}
-				else if (HitDir == 0) {
-					Getup.SetTopLeft(xPos, yPos);
-					Getup.OnShow();
-					if (Getup.IsFinalBitmap()) {
-						isGettingUp = false;
-					}
+			else if (HitDir == 0) {
+				GetupReverse.SetTopLeft(xPos, yPos);
+				GetupReverse.OnShow();
+				if (GetupReverse.IsFinalBitmap()) {
+					isGettingUp = false;
 				}
 			}
+		}
+		else if (Dir == 1) {
+			if (HitDir == 1) {
+				GetupBack.SetTopLeft(xPos, yPos);
+				GetupBack.OnShow();
+				if (GetupBack.IsFinalBitmap()) {
+					isGettingUp = false;
+				}
+			}
+			else if (HitDir == 0) {
+				Getup.SetTopLeft(xPos, yPos);
+				Getup.OnShow();
+				if (Getup.IsFinalBitmap()) {
+					isGettingUp = false;
+				}
+			}
+		}
 	}
 
 	void Character::OnShow() {
@@ -1163,7 +1183,7 @@ namespace game_framework {
 			ShowKnock(direction, hitDirection);
 		}
 		else if (isGettingUp) {
-			ShowGettingUP(direction,hitDirection);
+			ShowGettingUP(direction, hitDirection);
 		}
 		else {
 			//Normal Animation
