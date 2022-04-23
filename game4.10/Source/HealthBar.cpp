@@ -41,12 +41,6 @@ namespace game_framework {
 				imgHealth[i]->ShowBitmap();
 			}
 		}
-
-		/*
-		for (auto i : imgHealth) {
-			i->ShowBitmap();
-		}
-		*/
 	}
 
 	void HealthBar::OnLoad(int X, int Y) {

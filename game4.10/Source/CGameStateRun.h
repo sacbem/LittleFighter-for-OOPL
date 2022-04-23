@@ -16,17 +16,12 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		int KeyBoardInputTime;
-		int LastInputTime;
-		int Diff;
-		UINT LastInput;									//上一個輸入
-		
 		//Player & other
-		Character* PlayerTest;
-		Character* EnemyTest;
+		Character PlayerTest;
+		//Character* EnemyTest;
         MapGenerator* maps;
 		HealthBar* HealthPlayer1;
-		HealthBar* HealthPlayer2;
+		//HealthBar* HealthPlayer2;
 		int CleanCounter=0;
 	};
 }

@@ -3,6 +3,7 @@ namespace game_framework {
 	{
 	public:
 		Character();
+		//Character(Character const& other);
 		~Character();
 		int HitEnemy(Character* enemy);
 		bool GetAlive();
@@ -14,24 +15,19 @@ namespace game_framework {
 		int	 GetHealth();
 		void Initialize();
 		void SetCharacter(int num);
-		void LoadPlayer0();
-		void LoadPlayer1();
-		void LoadFirzen();
-		void LoadFreeze();
-		void LoadHenry();
+		void LoadCharacter();
 		void OnShow();
 		void OnMove();
 		void SetMovingDown(bool flag);
 		void SetMovingLeft(bool flag);
 		void SetMovingRight(bool flag);
 		void SetMovingUp(bool flag);
-		void SetWalking(bool flag);
-		void SetJump(bool flag);
 		void SetRunning(bool flag);
-		void SetAttack(bool flag);
+		void SetJumpping(bool flag);
 		void SetDefense(bool flag);
-		void SetGettingHit(bool flag, int Dir);
-		void SetGettingUp(bool flag);
+		void InputKeyDown(UINT nChar);
+		void InputKeyUp(UINT nChar);
+		
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
         int GetDistance();
@@ -45,49 +41,15 @@ namespace game_framework {
 		int AttackPoint;
 		int DefencePoint;
 		bool isAlive;
-		bool isGettingHit;
-		bool isGettingUp;
-
-		//Jumping
-		bool isJumpping;
-		//Running
+		bool isWalking;
 		bool isRunning;
-		//Attack
-		bool isAttacking;
-		//Defend
-		bool isDefending;
+		bool StopRun;
 
 	protected:
 		//CMovingBitmap shadow;
 		//CMovingBitmap nameImg;
         CMovingBitmap photoSticker;
-		CAnimation Animation;		// normal state
-		CAnimation AnimationReverse;// normal state reverse
 
-		CAnimation Walking;
-		CAnimation WalkingReverse;
-		CAnimation Attacking;
-		CAnimation AttackingReverse;
-		CAnimation Jump;
-		CAnimation JumpReverse;
-		CAnimation Running;
-		CAnimation RunningReverse;
-		CAnimation Knock;
-		CAnimation KnockReverse;
-		CAnimation KnockBack;
-		CAnimation KnockBackReverse;
-		CAnimation Getup;
-		CAnimation GetupReverse;
-		CAnimation GetupBack;
-		CAnimation GetupBackReverse;
-
-		void ShowNormal(int Dir);
-		void ShowWalking(int Dir);
-		void ShowAttacking(int Dir);
-		void ShowJump(int Dir);
-		void ShowRun(int Dir);
-		void ShowGettingUP(int Dir,int HitDir);
-		void ShowKnock(int Dir, int HitDir);
         void DistaceAccumulator();
 
 		int DelayCounter;
@@ -101,17 +63,61 @@ namespace game_framework {
 		int direction;				// 0=Left 1=Right
 		int hitDirection;
 		//basic movement
-		bool isWalking;
 		bool isMovingDown;			// 是否正在往下移動
 		bool isMovingLeft;			// 是否正在往左移動
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingUp;			// 是否正在往上移動
+        int walkedDistance;
+
+		bool UnMovable;
+		//for jump
+		bool isJumpping;
 		bool isRising;
 		int JumpYposTemp;
 		int YVelocity;
 		int InitialVelocity;
-        int walkedDistance;
+		bool island;
+		//Defense
+		bool isDefense;
+
+		//Animation Properties
+		//normal state
+		CAnimation Normal[2];
+		CAnimation Walk[2];
+		CAnimation Run[2];
+		CMovingBitmap RunStop[2];
+		CMovingBitmap Jump[2][4];
+		CMovingBitmap Defense[2][2];
+		CMovingBitmap Roll[2][3];
 	private:
+		int AnimationState=0;
+		//Jump
+		int JumpCount = 0;
+		int JumpCountTemp = 0;
+		//Run
+		int RunCount = 0;
+		//Defense
+		int DefenseCount = 0;
+		//Roll
+		int RollCount = 0;
+		//basic function
+		void SetMoving();
+
+		//basic information
+		int speed=2;
+
+		//hit box
 		int HitRectangle(int tx1, int ty1, int tx2, int ty2);
+
+		//keyInput
+		int KeyBoardInputTime;
+		int LastInputTime;
+		int Diff;
+		UINT LastInput;									//上一個輸入
 	};
+	/*
+	class Firzen : public Character{
+		virtual void LoadCharacter() override;
+	};
+	*/
 }
