@@ -853,6 +853,13 @@ FREEZE_S                BITMAP                  "..\\res\\Freeze\\freeze_s.bmp"
 HENRY_S                 BITMAP                  "..\\res\\Henry\\henry_s.bmp"
 
 PLAYER0_S               BITMAP                  "..\\res\\Player0\\s.bmp"
+
+BITMAP_FOREST_Mex2      BITMAP                  "C:\\Users\\xxx50\\Desktop\\game_dev\\game4.10\\RES\\lf\\m_test2.bmp"
+
+IDB_BITMAP43            BITMAP                  "..\\res\\freeze\\freeze_0_reverse\\bitmap43.bmp"
+
+BITMAP_BACKSCENE_FOREST BITMAP                  "C:\\Users\\xxx50\\Desktop\\game_dev\\game4.10\\RES\\lf\\backscene_forest.bmp"
+
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////
 

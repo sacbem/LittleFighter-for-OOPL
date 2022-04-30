@@ -66,8 +66,21 @@ namespace game_framework {
 	int Character::GetDir() {
 		return direction;
 	}
-
-
+	void Character::SetStatic() {
+		isStatic = true;
+		isWalking = isRunning = false;
+	}
+	int Character::GetState() {
+		if (!isWalking && !isRunning) {
+			return 1;
+		}
+		else if (isWalking) {
+			return 2;
+		}
+		else if (isRunning) {
+			return 3;
+		}
+	}
 	void Character::Initialize() {
 		DelayCounter = 0;
 		Delay = 7;
@@ -107,17 +120,18 @@ namespace game_framework {
 		SetMapBorder(0);
 	}
 
-
 	void Character::DistaceAccumulator() {
 		walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
 	}
 	int Character::GetDistance() {
 		return walkedDistance;
 	}
-	void Character::SetAccumulator(int x, int y) {
-		walkedDistance = 0;
-		xAccumulator = x;
-		yAccumulator = y;
+	void Character::SetAccumulator(int x, int y, boolean resetSignal) {
+		if (resetSignal) {
+			walkedDistance = 0;
+			xAccumulator = x;
+			yAccumulator = y;
+		}
 	}
 
 	void Character::LoadPlayer0() {
@@ -977,11 +991,11 @@ namespace game_framework {
 	}
 
 	void Character::SetMapBorder(int mapID) {
-		xMapBorderMin = 0;
-		xMapBorderMax = 800;
+		xMapBorderMin = -100;
+		xMapBorderMax = 900;
 		switch (mapID) {
 		case 0:
-			yMapBorderMin = 200;
+			yMapBorderMin = 300;
 			yMapBorderMax = 500;
 		default:
 			break;

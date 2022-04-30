@@ -17,6 +17,8 @@
     <ClCompile Include="Source\StdAfx.cpp" />
     <ClCompile Include="Source\gamelib.cpp" />
     <ClCompile Include="Source\HealthBar.cpp" />
+    <ClCompile Include="Source\Map.cpp" />
+    <ClCompile Include="Source\GameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
@@ -36,6 +38,8 @@
     <ClInclude Include="Source\StdAfx.h" />
     <ClInclude Include="Source\gamelib.h" />
     <ClInclude Include="Source\HealthBar.h" />
+    <ClInclude Include="Source\Map.h" />
+    <ClInclude Include="Source\GameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\game.rc" />
@@ -485,6 +489,8 @@
     <Image Include="RES\Freeze\freeze_s.bmp" />
     <Image Include="RES\Henry\henry_s.bmp" />
     <Image Include="RES\Player0\s.bmp" />
+    <Image Include="res\freeze\freeze_0_reverse\bitmap43.bmp" />
+    <Image Include="RES\lf\backscene_forest.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp" />

@@ -34,8 +34,10 @@ namespace game_framework {
 		void SetGettingUp(bool flag);
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
+		void SetStatic();
+		int GetState() ; //static :1 walking :2 running : 3
         int GetDistance();
-        void SetAccumulator(int, int);
+        void SetAccumulator(int, int,boolean resetSignal);
 		void SetMapBorder(int mapID);
 		//basic informtion
 		bool getCharacter;
@@ -47,7 +49,7 @@ namespace game_framework {
 		bool isAlive;
 		bool isGettingHit;
 		bool isGettingUp;
-
+		boolean isStatic;
 		//Jumping
 		bool isJumpping;
 		//Running
@@ -57,6 +59,10 @@ namespace game_framework {
 		//Defend
 		bool isDefending;
 
+		int KeyBoardInputTime;
+		int LastInputTime;
+		int Diff;
+		UINT LastInput;                                    //上一個輸入
 	protected:
 		//CMovingBitmap shadow;
 		//CMovingBitmap nameImg;

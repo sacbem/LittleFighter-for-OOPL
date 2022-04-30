@@ -252,6 +252,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\gameView.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -264,6 +265,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\MapGenerator.cpp" />
     <ClCompile Include="Source\SelCharacterConfig.cpp" />
     <ClCompile Include="Source\StdAfx.cpp">
@@ -291,10 +293,12 @@
     <ClInclude Include="Source\Character.h" />
     <ClInclude Include="Source\game.h" />
     <ClInclude Include="Source\gameDoc.h" />
+    <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\gameView.h" />
     <ClInclude Include="Source\HealthBar.h" />
     <ClInclude Include="Source\InitalPageMenu.h" />
     <ClInclude Include="Source\MainFrm.h" />
+    <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\MapGenerator.h" />
     <ClInclude Include="Source\Resource.h" />
     <ClInclude Include="Source\SelCharacterConfig.h" />
@@ -446,6 +450,7 @@
     <Image Include="res\freeze\freeze_0_reverse\bitmap33.bmp" />
     <Image Include="res\freeze\freeze_0_reverse\bitmap41.bmp" />
     <Image Include="res\freeze\freeze_0_reverse\bitmap42.bmp" />
+    <Image Include="res\freeze\freeze_0_reverse\bitmap43.bmp" />
     <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_10.bmp" />
     <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_11.bmp" />
     <Image Include="RES\Freeze\Freeze_0_reverse\freeze_0_reverse_12.bmp" />
@@ -563,6 +568,7 @@
     <Image Include="RES\inital_btn_start.bmp" />
     <Image Include="RES\inital_btn_start2.bmp" />
     <Image Include="RES\InitPage_1.bmp" />
+    <Image Include="RES\lf\backscene_forest.bmp" />
     <Image Include="RES\lf\forestm1.bmp" />
     <Image Include="RES\lf\forestm2.bmp" />
     <Image Include="RES\lf\forestm3.bmp" />
