@@ -45,6 +45,14 @@ namespace game_framework {
 	int Character::GetX1() {
 		return xPos;
 	}
+	boolean Character::IsStatic() {
+		if (!this->AnimationState) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 	int Character::GetX2() {
 		return xPos + Normal[0].Width();
@@ -64,21 +72,6 @@ namespace game_framework {
 
 	int Character::GetDir() {
 		return direction;
-	}
-	void Character::SetStatic() {
-		isStatic = true;
-		isWalking = isRunning = false;
-	}
-	int Character::GetState() {
-		if (!isWalking && !isRunning) {
-			return 1;
-		}
-		else if (isWalking) {
-			return 2;
-		}
-		else if (isRunning) {
-			return 3;
-		}
 	}
 	void Character::Initialize() {
 		DelayCounter = 0;

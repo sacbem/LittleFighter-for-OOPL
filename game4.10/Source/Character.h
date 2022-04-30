@@ -30,8 +30,8 @@ namespace game_framework {
 		
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
-		void SetStatic();
-		int GetState() ; //static :1 walking :2 running : 3
+		//void SetStatic();
+		//int GetState() ; //static :1 walking :2 running : 3
         int GetDistance();
         void SetAccumulator(int, int,boolean resetSignal);
 		void SetMapBorder(int mapID);
@@ -46,11 +46,7 @@ namespace game_framework {
 		bool isWalking;
 		bool isRunning;
 		bool StopRun;
-
-		int KeyBoardInputTime;
-		int LastInputTime;
-		int Diff;
-		UINT LastInput;                                    //�W�@�ӿ�J
+                                  //�W�@�ӿ�J
 	protected:
 		//CMovingBitmap shadow;
 		//CMovingBitmap nameImg;
