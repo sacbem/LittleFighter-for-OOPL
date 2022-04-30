@@ -7,26 +7,21 @@ namespace game_framework {
 	public:
 		CGameStateRun(CGame* g);
 		~CGameStateRun();
-		void OnBeginState();							// ³]©w¨C¦¸­«ª±©Ò»ÝªºÅÜ¼Æ
-		void OnInit();  								// ¹CÀ¸ªºªì­È¤Î¹Ï§Î³]©w
+		void OnBeginState();							// ï¿½]ï¿½wï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ýªï¿½ï¿½Ü¼ï¿½
+		void OnInit();  								// ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¤Î¹Ï§Î³]ï¿½w
 		void OnKeyDown(UINT, UINT, UINT);
 		void OnKeyUp(UINT, UINT, UINT);
         //void MapSlide();
 	protected:
-		void OnMove();									// ²¾°Ê¹CÀ¸¤¸¯À
-		void OnShow();									// Åã¥Ü³o­Óª¬ºAªº¹CÀ¸µe­±
+		void OnMove();									// ï¿½ï¿½ï¿½Ê¹Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		void OnShow();									// ï¿½ï¿½Ü³oï¿½Óªï¿½ï¿½Aï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½eï¿½ï¿½
 	private:
-		int KeyBoardInputTime;
-		int LastInputTime;
-		int Diff;
-		UINT LastInput;									//¤W¤@­Ó¿é¤J
-		
 		//Player & other
 		Character* PlayerTest;
 		Character* EnemyTest;
 		Map* maps;
 		HealthBar* HealthPlayer1;
-		HealthBar* HealthPlayer2;
+		//HealthBar* HealthPlayer2;
 		int CleanCounter=0;
 	};
 }

@@ -16,56 +16,119 @@ using namespace std;
 namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g): CGameState(g)
 	{
-		PlayerTest = new Character();
-		EnemyTest = new Character();
+		PlayerTest = Character();
+		//EnemyTest = Character();
 		HealthPlayer1 = new HealthBar();
-		HealthPlayer2 = new HealthBar();
-        maps = new Map(100);
+		//HealthPlayer2 = new HealthBar();
+        maps = new MapGenerator();
 		//_CrtDumpMemoryLeaks();
 	}
-	void CGameStateRun::OnBeginState(){
-		PlayerTest->SetXY(200, 200);
-		EnemyTest->SetXY(500, 200);
-		KeyBoardInputTime = 0;
-		LastInputTime = 0;
+
+	void CGameStateRun::OnBeginState()
+	{
+		PlayerTest.SetXY(200, 200);
+		//EnemyTest->SetXY(500, 200);
 		//_CrtDumpMemoryLeaks();
 
 	}
-	void CGameStateRun::OnMove()						// ²¾°Ê¹CÀ¸¤¸¯À
+    void  CGameStateRun::MapSlide() {
+        if (PlayerTest.isWalking) {
+            //TRACE("--------------- %d -------------%d \n", PlayerTest.isRunning, PlayerTest.GetDistance());
+            if (PlayerTest.GetDir()) {
+                maps->ScenesCamera(true, 0);
+            }
+            else {
+                maps->ScenesCamera(false, 0);
+            }
+
+        }
+        else if (PlayerTest.GetDistance() > 50) {
+          
+            if (PlayerTest.GetDir()) {
+                maps->ScenesCamera(true, 1);
+            }
+            else {
+                maps->ScenesCamera(false, 1);
+            }
+            PlayerTest.SetAccumulator(PlayerTest.GetX1(), PlayerTest.GetY1());
+
+        }
+		//_CrtDumpMemoryLeaks();
+
+    }
+	void CGameStateRun::OnMove()						// ï¿½ï¿½ï¿½Ê¹Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 		CleanCounter++;
 		if (CleanCounter >= 10) {
 			CleanCounter = 0;
+			/*
 			if (EnemyTest->GetHealth() <= 0) {
 				EnemyTest->SetAlive(false);
 			}
+			*/
 		}
 
-		PlayerTest->OnMove();
-		EnemyTest->OnMove();
-
-		if (PlayerTest->HitEnemy(EnemyTest) && PlayerTest->isAttacking) {
-			if (EnemyTest->HealthPoint>0) {
-				int hitDirection = PlayerTest->GetDir();
-				EnemyTest->SetGettingHit(true, hitDirection);
-				EnemyTest->HealthPoint -= PlayerTest->AttackPoint;
+		PlayerTest.OnMove();
+		//EnemyTest->OnMove();
+        MapSlide();
+		/*
+		//x bound
+		if (PlayerTest.GetX1() <= 0) {
+			PlayerTest.SetXY(0, PlayerTest.GetY1());
+		}
+		else if (PlayerTest.GetX2()>=800) {
+			PlayerTest.SetXY(800-(PlayerTest.GetX2()-PlayerTest.GetX1()), PlayerTest.GetY1());
+		}
+		//y bound
+		if(PlayerTest.GetY1() <= 200) {
+			PlayerTest.SetXY(PlayerTest.GetX1(), 200);
+			
+		}
+		else if (PlayerTest.GetY2() >= 580) {
+			PlayerTest.SetXY(PlayerTest.GetX1(),580- (PlayerTest.GetY2() - PlayerTest.GetY1()));
+		}
+		*/
+		//x bound
+		/*
+		if (EnemyTest->GetX1() <= 0) {
+			EnemyTest->SetXY(0, EnemyTest->GetY1());
+		}
+		else if (EnemyTest->GetX2() >= 800) {
+			EnemyTest->SetXY(800 - (EnemyTest->GetX2() - EnemyTest->GetX1()), EnemyTest->GetY1());
+		}
+		//y bound
+		if (EnemyTest->GetY1() <= 200) {
+			if (EnemyTest->isJumpping==false) {
+				EnemyTest->SetXY(EnemyTest->GetX1(), 200);
 			}
 		}
+		else if (EnemyTest->GetY2() >= 580) {
+			EnemyTest->SetXY(EnemyTest->GetX1(), 580 - (EnemyTest->GetY2() - EnemyTest->GetY1()));
+		}
+		if (PlayerTest.HitEnemy(EnemyTest) && PlayerTest.isAttacking) {
+			if (EnemyTest->HealthPoint>0) {
+				int hitDirection = PlayerTest.GetDir();
+				EnemyTest->SetGettingHit(true, hitDirection);
+				EnemyTest->HealthPoint -= PlayerTest.AttackPoint;
+			}
+		}
+		*/
+
 		
 		/*
-		CDC* pDC = CDDraw::GetBackCDC();			// ¨ú±o Back Plain ªº CDC
+		CDC* pDC = CDDraw::GetBackCDC();			// ï¿½ï¿½ï¿½o Back Plain ï¿½ï¿½ CDC
 		CFont f, *fp;
-		f.CreatePointFont(160, "Times New Roman");	// ²£¥Í font f; 160ªí¥Ü16 pointªº¦r
-		fp = pDC->SelectObject(&f);					// ¿ï¥Î font f
+		f.CreatePointFont(160, "Times New Roman");	// ï¿½ï¿½ï¿½ï¿½ font f; 160ï¿½ï¿½ï¿½ï¿½16 pointï¿½ï¿½ï¿½r
+		fp = pDC->SelectObject(&f);					// ï¿½ï¿½ï¿½ font f
 		pDC->SetBkColor(RGB(0, 0, 0));
 		pDC->SetTextColor(RGB(255, 255, 0));
 		CString str;
-		str.Format("%d", PlayerTest->GetDir());
+		str.Format("%d", PlayerTest.GetDir());
 		CString str2;
-		str2.Format("%d , %d", PlayerTest->GetX1(), PlayerTest->GetY1());
+		str2.Format("%d , %d", PlayerTest.GetX1(), PlayerTest.GetY1());
 		pDC->TextOut(120, 220, str);
 		pDC->TextOut(120, 320, str2);
-		pDC->SelectObject(fp);						// ©ñ±¼ font f (¤d¸U¤£­nº|¤F©ñ±¼)
+		pDC->SelectObject(fp);						// ï¿½ï¿½ font f (ï¿½dï¿½Uï¿½ï¿½ï¿½nï¿½|ï¿½Fï¿½ï¿½)
 		CDDraw::ReleaseBackCDC();
 
 		//_CrtDumpMemoryLeaks();
@@ -76,165 +139,68 @@ namespace game_framework {
 		//maps->ScenesCamera(PlayerTest->isRunning, PlayerTest->GetDir(), PlayerTest->GetDistance());
 	}
 
-	void CGameStateRun::OnInit()  								// ¹CÀ¸ªºªì­È¤Î¹Ï§Î³]©w
+	void CGameStateRun::OnInit()  								// ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¤Î¹Ï§Î³]ï¿½w
 	{
-		ShowInitProgress(33);	// ±µ­Ó«e¤@­Óª¬ºAªº¶i«×¡A¦¹³B¶i«×µø¬°33%
+		ShowInitProgress(33);	// ï¿½ï¿½ï¿½Ó«eï¿½@ï¿½Óªï¿½ï¿½Aï¿½ï¿½ï¿½iï¿½×¡Aï¿½ï¿½ï¿½Bï¿½iï¿½×µï¿½ï¿½ï¿½33%
 		//
-		// ¶}©l¸ü¤J¸ê®Æ
+		// ï¿½}ï¿½lï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½
 		//
-		// §¹¦¨³¡¤ÀLoading°Ê§@¡A´£°ª¶i«×
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Loadingï¿½Ê§@ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½iï¿½ï¿½
 		//
 		ShowInitProgress(50);
-		Sleep(300); // ©ñºC¡A¥H«K¬Ý²M·¡¶i«×¡A¹ê»Ú¹CÀ¸½Ð§R°£¦¹Sleep							
+		Sleep(300); // ï¿½ï¿½Cï¿½Aï¿½Hï¿½Kï¿½Ý²Mï¿½ï¿½ï¿½iï¿½×¡Aï¿½ï¿½Ú¹Cï¿½ï¿½ï¿½Ð§Rï¿½ï¿½ï¿½ï¿½Sleep							
 
 		//
-		// ¦¹OnInit°Ê§@·|±µ¨ìCGameStaterOver::OnInit()¡A©Ò¥H¶i«×ÁÙ¨S¨ì100%
+		// ï¿½ï¿½OnInitï¿½Ê§@ï¿½|ï¿½ï¿½ï¿½ï¿½CGameStaterOver::OnInit()ï¿½Aï¿½Ò¥Hï¿½iï¿½ï¿½ï¿½Ù¨Sï¿½ï¿½100%
 		//
 
         maps->Load(Forest);
 		HealthPlayer1->init();
-		HealthPlayer2->init();
+		//HealthPlayer2->init();
 		HealthPlayer1->OnLoad(0, 0);
-		HealthPlayer2->OnLoad(400, 0);
+		//HealthPlayer2->OnLoad(400, 0);
 		//_CrtDumpMemoryLeaks();
 
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		Diff = KeyBoardInputTime - LastInputTime;
-		LastInputTime = KeyBoardInputTime;
-
-		const char KEY_LEFT = 0x41; // keyboard¥ª½bÀY 0x25
-		const char KEY_UP = 0x57; // keyboard¤W½bÀY 0x26
-		const char KEY_RIGHT = 0x44; // keyboard¥k½bÀY 0x27
-		const char KEY_DOWN = 0x53; // keyboard¤U½bÀY 0x28
-		const char KEY_SPACE = 0x20; // keyboard SPACE
-		const char KEY_CTRL = 0x11; //keyboard ctrl
-
-		if (nChar == KEY_LEFT) {
-			if (PlayerTest->isRunning == true) {
-				PlayerTest->SetMovingLeft(false);
-				PlayerTest->SetMovingRight(false);
-				PlayerTest->SetWalking(false);
-				PlayerTest->SetRunning(false);
-			}
-		}
-		if (nChar == KEY_RIGHT) {
-			if (PlayerTest->isRunning == true) {
-				PlayerTest->SetMovingLeft(false);
-				PlayerTest->SetMovingRight(false);
-				PlayerTest->SetWalking(false);
-				PlayerTest->SetRunning(false);
-			}
-		}
-
-		if (Diff <= 5) {
-			if (nChar == KEY_LEFT && LastInput == KEY_LEFT) {
-				PlayerTest->SetMovingLeft(true);
-				PlayerTest->SetRunning(true);
-			}
-			else if (nChar == KEY_RIGHT && LastInput == KEY_RIGHT) {
-				PlayerTest->SetMovingRight(true);
-				PlayerTest->SetRunning(true);
-			}
-		}
-		if (nChar == KEY_LEFT) {
-			PlayerTest->SetMovingLeft(true);
-		}
-		if (nChar == KEY_RIGHT) {
-			PlayerTest->SetMovingRight(true);			
-		}
-		if (nChar == KEY_UP) {
-			PlayerTest->SetMovingUp(true);
-		}
-		if (nChar == KEY_DOWN) {
-			PlayerTest->SetMovingDown(true);
-		}
-		if (nChar == KEY_SPACE) {
-			PlayerTest->SetAttack(true);
-		}
-		if (nChar == KEY_CTRL) {
-			PlayerTest->SetJump(true);
-		}
-
-		//_CrtDumpMemoryLeaks();
-
+		PlayerTest.InputKeyDown(nChar);
 	}
-	//int GetScenesPos(Map& map, const string type) {//¨ú±o¸Óª«¥ó·í«e¦bGameScenceªº¦ì¸m
+	//int GetScenesPos(Map& map, const string type) {//ï¿½ï¿½ï¿½oï¿½Óªï¿½ï¿½ï¿½ï¿½ï¿½eï¿½bGameScenceï¿½ï¿½ï¿½ï¿½m
 	//	return type == "X" ? map.gameScenesPos_X : map.gameScenesPos_Y;
 	//}
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		const char KEY_LEFT = 0x41; // keyboard¥ª½bÀY 0x25
-		const char KEY_UP = 0x57; // keyboard¤W½bÀY 0x26
-		const char KEY_RIGHT = 0x44; // keyboard¥k½bÀY 0x27
-		const char KEY_DOWN = 0x53; // keyboard¤U½bÀY 0x28
-		const char KEY_SPACE = 0x20; // keyboard SPACE
-
-
-		if (nChar == KEY_LEFT) {
-			if(PlayerTest->isRunning == false){
-				PlayerTest->SetMovingLeft(false);
-				PlayerTest->SetWalking(false);
-			}
-
-			EnemyTest->SetMovingLeft(false);
-			EnemyTest->SetWalking(false);
-		}
-		if (nChar == KEY_RIGHT) {
-			if (PlayerTest->isRunning == false) {
-				PlayerTest->SetMovingRight(false);
-				PlayerTest->SetWalking(false);
-			}
-			
-			EnemyTest->SetMovingRight(false);
-			EnemyTest->SetWalking(false);
-		}
-		if (nChar == KEY_UP) {
-			PlayerTest->SetMovingUp(false);
-			PlayerTest->SetWalking(false);
-		}
-		if (nChar == KEY_DOWN) {
-			PlayerTest->SetMovingDown(false);
-			PlayerTest->SetWalking(false);
-		}
-		if (nChar == KEY_SPACE) {
-			PlayerTest->SetAttack(false);
-		}
-		LastInput = nChar;
-		PlayerTest->SetStatic();
-		//_CrtDumpMemoryLeaks();
-
+		PlayerTest.InputKeyUp(nChar);
 	}
 
 	void CGameStateRun::OnShow(){
 		
 		//get character
-		if (PlayerTest->getCharacter == false && EnemyTest->getCharacter == false) {
+		if (PlayerTest.getCharacter == false ){ // && EnemyTest->getCharacter == false) {
 			ifstream ifs;
 			char buffer[2];
 			ifs.open("CharacterSelected.txt");
 			ifs.read(buffer, sizeof(buffer));
 			ifs.close();
-			PlayerTest->SetCharacter(buffer[0] - '0');
-			EnemyTest->SetCharacter(buffer[1] - '0');
-			PlayerTest->getCharacter = true;
-			EnemyTest->getCharacter = true;
+			PlayerTest.SetCharacter(buffer[0] - '0');
+			//EnemyTest->SetCharacter(buffer[1] - '0');
+			PlayerTest.getCharacter = true;
+			//EnemyTest->getCharacter = true;
 			//load HealthBar small character
 			HealthPlayer1->loadSmallImg(buffer[0] - '0');
-			HealthPlayer2->loadSmallImg(buffer[1] - '0');
+			//HealthPlayer2->loadSmallImg(buffer[1] - '0');
 		}
 
         maps->PrintMap();
-		maps->DynamicScence(PlayerTest->GetDir(), PlayerTest->GetDistance());
-		PlayerTest->OnShow();
-		EnemyTest->OnShow();
-		HealthPlayer1->OnShow(PlayerTest->HealthPoint);
-		HealthPlayer2->OnShow(EnemyTest->HealthPoint);
+		PlayerTest.OnShow();
+		//EnemyTest->OnShow();
+		HealthPlayer1->OnShow(PlayerTest.HealthPoint);
+		//HealthPlayer2->OnShow(EnemyTest->HealthPoint);
 		//_CrtDumpMemoryLeaks();
 	}
     CGameStateRun::~CGameStateRun(){
-        delete PlayerTest, EnemyTest,maps, HealthPlayer1, HealthPlayer2;
+		delete maps, HealthPlayer1;//, HealthPlayer2;
     }
 }

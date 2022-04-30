@@ -3,35 +3,31 @@ namespace game_framework {
 	{
 	public:
 		Character();
+		//Character(Character const& other);
 		~Character();
 		int HitEnemy(Character* enemy);
 		bool GetAlive();
-		int  GetX1();					// Chracter¥ª¤W¨¤ x ®y¼Ð
-		int  GetY1();					// Chracter¥ª¤W¨¤ y ®y¼Ð
-		int  GetX2();					// Chracter¥k¤U¨¤ x ®y¼Ð
-		int  GetY2();					// Chracter¥k¤U¨¤ y ®y¼Ð
+		int  GetX1();					// Chracterï¿½ï¿½ï¿½Wï¿½ï¿½ x ï¿½yï¿½ï¿½
+		int  GetY1();					// Chracterï¿½ï¿½ï¿½Wï¿½ï¿½ y ï¿½yï¿½ï¿½
+		int  GetX2();					// Chracterï¿½kï¿½Uï¿½ï¿½ x ï¿½yï¿½ï¿½
+		int  GetY2();					// Chracterï¿½kï¿½Uï¿½ï¿½ y ï¿½yï¿½ï¿½
 		int	 GetDir();
 		int	 GetHealth();
 		void Initialize();
 		void SetCharacter(int num);
-		void LoadPlayer0();
-		void LoadPlayer1();
-		void LoadFirzen();
-		void LoadFreeze();
-		void LoadHenry();
+		void LoadCharacter();
 		void OnShow();
 		void OnMove();
 		void SetMovingDown(bool flag);
 		void SetMovingLeft(bool flag);
 		void SetMovingRight(bool flag);
 		void SetMovingUp(bool flag);
-		void SetWalking(bool flag);
-		void SetJump(bool flag);
 		void SetRunning(bool flag);
-		void SetAttack(bool flag);
+		void SetJumpping(bool flag);
 		void SetDefense(bool flag);
-		void SetGettingHit(bool flag, int Dir);
-		void SetGettingUp(bool flag);
+		void InputKeyDown(UINT nChar);
+		void InputKeyUp(UINT nChar);
+		
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
 		void SetStatic();
@@ -47,53 +43,19 @@ namespace game_framework {
 		int AttackPoint;
 		int DefencePoint;
 		bool isAlive;
-		bool isGettingHit;
-		bool isGettingUp;
-		boolean isStatic;
-		//Jumping
-		bool isJumpping;
-		//Running
+		bool isWalking;
 		bool isRunning;
-		//Attack
-		bool isAttacking;
-		//Defend
-		bool isDefending;
+		bool StopRun;
 
 		int KeyBoardInputTime;
 		int LastInputTime;
 		int Diff;
-		UINT LastInput;                                    //¤W¤@­Ó¿é¤J
+		UINT LastInput;                                    //ï¿½Wï¿½@ï¿½Ó¿ï¿½J
 	protected:
 		//CMovingBitmap shadow;
 		//CMovingBitmap nameImg;
         CMovingBitmap photoSticker;
-		CAnimation Animation;		// normal state
-		CAnimation AnimationReverse;// normal state reverse
 
-		CAnimation Walking;
-		CAnimation WalkingReverse;
-		CAnimation Attacking;
-		CAnimation AttackingReverse;
-		CAnimation Jump;
-		CAnimation JumpReverse;
-		CAnimation Running;
-		CAnimation RunningReverse;
-		CAnimation Knock;
-		CAnimation KnockReverse;
-		CAnimation KnockBack;
-		CAnimation KnockBackReverse;
-		CAnimation Getup;
-		CAnimation GetupReverse;
-		CAnimation GetupBack;
-		CAnimation GetupBackReverse;
-
-		void ShowNormal(int Dir);
-		void ShowWalking(int Dir);
-		void ShowAttacking(int Dir);
-		void ShowJump(int Dir);
-		void ShowRun(int Dir);
-		void ShowGettingUP(int Dir,int HitDir);
-		void ShowKnock(int Dir, int HitDir);
         void DistaceAccumulator();
 
 		int DelayCounter;
@@ -107,17 +69,61 @@ namespace game_framework {
 		int direction;				// 0=Left 1=Right
 		int hitDirection;
 		//basic movement
-		bool isWalking;
-		bool isMovingDown;			// ¬O§_¥¿¦b©¹¤U²¾°Ê
-		bool isMovingLeft;			// ¬O§_¥¿¦b©¹¥ª²¾°Ê
-		bool isMovingRight;			// ¬O§_¥¿¦b©¹¥k²¾°Ê
-		bool isMovingUp;			// ¬O§_¥¿¦b©¹¤W²¾°Ê
+		bool isMovingDown;			// ï¿½Oï¿½_ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½Uï¿½ï¿½ï¿½ï¿½
+		bool isMovingLeft;			// ï¿½Oï¿½_ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		bool isMovingRight;			// ï¿½Oï¿½_ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½kï¿½ï¿½ï¿½ï¿½
+		bool isMovingUp;			// ï¿½Oï¿½_ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½
+        int walkedDistance;
+
+		bool UnMovable;
+		//for jump
+		bool isJumpping;
 		bool isRising;
 		int JumpYposTemp;
 		int YVelocity;
 		int InitialVelocity;
-        int walkedDistance;
+		bool island;
+		//Defense
+		bool isDefense;
+
+		//Animation Properties
+		//normal state
+		CAnimation Normal[2];
+		CAnimation Walk[2];
+		CAnimation Run[2];
+		CMovingBitmap RunStop[2];
+		CMovingBitmap Jump[2][4];
+		CMovingBitmap Defense[2][2];
+		CMovingBitmap Roll[2][3];
 	private:
+		int AnimationState=0;
+		//Jump
+		int JumpCount = 0;
+		int JumpCountTemp = 0;
+		//Run
+		int RunCount = 0;
+		//Defense
+		int DefenseCount = 0;
+		//Roll
+		int RollCount = 0;
+		//basic function
+		void SetMoving();
+
+		//basic information
+		int speed=2;
+
+		//hit box
 		int HitRectangle(int tx1, int ty1, int tx2, int ty2);
+
+		//keyInput
+		int KeyBoardInputTime;
+		int LastInputTime;
+		int Diff;
+		UINT LastInput;									//ï¿½Wï¿½@ï¿½Ó¿ï¿½J
 	};
+	/*
+	class Firzen : public Character{
+		virtual void LoadCharacter() override;
+	};
+	*/
 }

@@ -11,7 +11,7 @@ namespace game_framework {
 
         weeds.reserve(4);
         trees.reserve(4);
-        mountains.reserve(2);
+        mountains.reserve(1);
         sky.reserve(2);
        
         backGreen = new CMovingBitmap();
@@ -24,7 +24,7 @@ namespace game_framework {
             trees.push_back(new CMovingBitmap());
             weeds.push_back(new CMovingBitmap());
        }
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 1; i++) {
             mountains.push_back(new CMovingBitmap());
         }
         for (int i = 0; i < 3; i++) {
@@ -43,14 +43,14 @@ namespace game_framework {
             trees[i]->LoadBitmap(BITMAP_FOREST_T1, RGB(0, 0, 0));
             weeds[i]->LoadBitmap(BITMAP_FOREST_L1 + i);
         }
-        mountains[0]->LoadBitmap(BITMAP_FOREST_Mex, RGB(0, 0, 0));
-        mountains[1]->LoadBitmap(BITMAP_FOREST_M2, RGB(0, 0, 0));
-
+        mountains[0]->LoadBitmap(".\\res\\backscene_forest.bmp", RGB(0, 0, 0));
+        //mountains[1]->LoadBitmap(BITMAP_FOREST_M2, RGB(0, 0, 0));
+        
 
         for (int i = 0; i < 4; i++) {
             trees[i]->SetTopLeft(250*i, 125);
-            if (i < 2) {
-                mountains[i]->SetTopLeft(500 * i, 75 - 5 * i);
+            if (i < 1) {
+                mountains[i]->SetTopLeft(-800, 75 - 5 * i);
             }
             if (i < 3) {
                 sky[i]->SetTopLeft(skyPosXY[i], 50);
@@ -90,7 +90,6 @@ namespace game_framework {
     }
     void MapGenerator::PrintMap() {
         backGreen->ShowBitmap();
-       
         for (auto i : weeds) {
             i->ShowBitmap();
         }
