@@ -242,6 +242,7 @@
     <ClCompile Include="Source\CGameStateOver.cpp" />
     <ClCompile Include="Source\CGameStateRun.cpp" />
     <ClCompile Include="Source\Character.cpp" />
+    <ClCompile Include="Source\CharacterAnimation.cpp" />
     <ClCompile Include="Source\game.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -289,6 +290,7 @@
     <ClInclude Include="Source\CGameStateOver.h" />
     <ClInclude Include="Source\CGameStateRun.h" />
     <ClInclude Include="Source\Character.h" />
+    <ClInclude Include="Source\CharacterAnimation.h" />
     <ClInclude Include="Source\game.h" />
     <ClInclude Include="Source\gameDoc.h" />
     <ClInclude Include="Source\gameView.h" />

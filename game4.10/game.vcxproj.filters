@@ -17,6 +17,7 @@
     <ClCompile Include="Source\StdAfx.cpp" />
     <ClCompile Include="Source\gamelib.cpp" />
     <ClCompile Include="Source\HealthBar.cpp" />
+    <ClCompile Include="Source\CharacterAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
@@ -36,6 +37,7 @@
     <ClInclude Include="Source\StdAfx.h" />
     <ClInclude Include="Source\gamelib.h" />
     <ClInclude Include="Source\HealthBar.h" />
+    <ClInclude Include="Source\CharacterAnimation.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\game.rc" />

@@ -12,30 +12,8 @@ namespace game_framework {
 		Initialize();
 	}
 
-	int Character::HitEnemy(Character* enemy) {
-		DelayCounter--;
-
-		if (DelayCounter < 0) {
-			DelayCounter = Delay;
-			return HitRectangle(enemy->GetX1() + 20, enemy->GetY1() + 20, enemy->GetX2() - 20, enemy->GetY2() - 20);
-		}
-		else {
-			return 0;
-		}
-	}
-
-	int Character::HitRectangle(int tx1, int ty1, int tx2, int ty2) {
-		int x1 = xPos;
-		int y1 = yPos;
-		int x2 = x1 + Normal[0].Width();
-		int y2 = y1 + Normal[0].Height();
-
-		if (tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+	Character::Character(Character const & other): name(other.name) {
+		Initialize();
 	}
 
 	bool Character::GetAlive() {
@@ -45,9 +23,17 @@ namespace game_framework {
 	int Character::GetX1() {
 		return xPos;
 	}
+	boolean Character::IsStatic() {
+		if (!this->AnimationState) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 	int Character::GetX2() {
-		return xPos + Normal[0].Width();
+		return xPos + Animation.Normal[0].Width();
 	}
 
 	int Character::GetY1() {
@@ -55,7 +41,7 @@ namespace game_framework {
 	}
 
 	int Character::GetY2() {
-		return yPos + Normal[0].Height();
+		return yPos + Animation.Normal[0].Height();
 	}
 
 	int Character::GetHealth() {
@@ -126,19 +112,21 @@ namespace game_framework {
 		Diff = KeyBoardInputTime - LastInputTime;
 		LastInputTime = KeyBoardInputTime;
 		if (!UnMovable) {
-			if (nChar == KEY_LEFT || nChar == KEY_RIGHT) {
-				if (nChar == KEY_LEFT && LastInput == KEY_RIGHT) {
-					if (isRunning) {
+			//here has a problem
+			if (isRunning) {
+				if (direction==0) {
+					if (nChar == KEY_LEFT) {
 						SetRunning(false);
 					}
 				}
-				if (nChar == KEY_RIGHT && LastInput == KEY_LEFT) {
-					if (isRunning) {
+				else if (direction == 1) {
+					if (nChar == KEY_RIGHT) {
 						SetRunning(false);
 					}
 				}
 			}
-			if (Diff <= 15) {
+			
+			if (Diff <= 10) {
 				if (nChar == KEY_LEFT && LastInput == KEY_LEFT) {
 					SetMovingLeft(true);
 					SetRunning(true);
@@ -206,88 +194,14 @@ namespace game_framework {
 		LastInput = nChar;
 	}
 
-	void Character::LoadCharacter() {
-		//normal state right
-		Normal[0].AddBitmap(FIRZEN_NORMAL4, RGB(0, 0, 0));
-		Normal[0].AddBitmap(FIRZEN_NORMAL3, RGB(0, 0, 0));
-		Normal[0].AddBitmap(FIRZEN_NORMAL2, RGB(0, 0, 0));
-		Normal[0].AddBitmap(FIRZEN_NORMAL1, RGB(0, 0, 0));
-		//normal state left
-		Normal[1].AddBitmap(FIRZEN_NORMAL4_REVERSE, RGB(0, 0, 0));
-		Normal[1].AddBitmap(FIRZEN_NORMAL3_REVERSE, RGB(0, 0, 0));
-		Normal[1].AddBitmap(FIRZEN_NORMAL2_REVERSE, RGB(0, 0, 0));
-		Normal[1].AddBitmap(FIRZEN_NORMAL1_REVERSE, RGB(0, 0, 0));
-		//walk right
-		Walk[0].AddBitmap(FIRZEN_WALK1, RGB(0, 0, 0));
-		Walk[0].AddBitmap(FIRZEN_WALK2, RGB(0, 0, 0));
-		Walk[0].AddBitmap(FIRZEN_WALK3, RGB(0, 0, 0));
-		Walk[0].AddBitmap(FIRZEN_WALK4, RGB(0, 0, 0));
-		Walk[0].AddBitmap(FIRZEN_WALK3, RGB(0, 0, 0));
-		Walk[0].AddBitmap(FIRZEN_WALK2, RGB(0, 0, 0));
-		//walk left
-		Walk[1].AddBitmap(FIRZEN_WALK1_REVERSE, RGB(0, 0, 0));
-		Walk[1].AddBitmap(FIRZEN_WALK2_REVERSE, RGB(0, 0, 0));
-		Walk[1].AddBitmap(FIRZEN_WALK3_REVERSE, RGB(0, 0, 0));
-		Walk[1].AddBitmap(FIRZEN_WALK4_REVERSE, RGB(0, 0, 0));
-		Walk[1].AddBitmap(FIRZEN_WALK3_REVERSE, RGB(0, 0, 0));
-		Walk[1].AddBitmap(FIRZEN_WALK2_REVERSE, RGB(0, 0, 0));
-
-		//Run right
-		Run[0].AddBitmap(FIRZEN_RUN1, RGB(0, 0, 0));
-		Run[0].AddBitmap(FIRZEN_RUN2, RGB(0, 0, 0));
-		Run[0].AddBitmap(FIRZEN_RUN3, RGB(0, 0, 0));
-		Run[0].AddBitmap(FIRZEN_RUN2, RGB(0, 0, 0));
-		//run left
-		Run[1].AddBitmap(FIRZEN_RUN1_REVERSE, RGB(0, 0, 0));
-		Run[1].AddBitmap(FIRZEN_RUN2_REVERSE, RGB(0, 0, 0));
-		Run[1].AddBitmap(FIRZEN_RUN3_REVERSE, RGB(0, 0, 0));
-		Run[1].AddBitmap(FIRZEN_RUN2_REVERSE, RGB(0, 0, 0));
-
-		RunStop[0].LoadBitmapA(".\\res\\Firzen\\Firzen_1\\firzen_1_19.bmp", RGB(0, 0, 0));
-		RunStop[1].LoadBitmapA(".\\res\\Firzen\\Firzen_1_reverse\\firzen_1_reverse_10.bmp", RGB(0, 0, 0));
-
-		//jump
-		Jump[0][0].LoadBitmapA(".\\res\\Firzen\\Firzen_0\\firzen_0_60.bmp", RGB(0, 0, 0));
-		Jump[0][1].LoadBitmapA(".\\res\\Firzen\\Firzen_0\\firzen_0_61.bmp", RGB(0, 0, 0));
-		Jump[0][2].LoadBitmapA(".\\res\\Firzen\\Firzen_0\\firzen_0_62.bmp", RGB(0, 0, 0));
-		Jump[0][3].LoadBitmapA(".\\res\\Firzen\\Firzen_0\\firzen_0_63.bmp", RGB(0, 0, 0));
-
-		Jump[1][0].LoadBitmapA(".\\res\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_69.bmp", RGB(0, 0, 0));
-		Jump[1][1].LoadBitmapA(".\\res\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_68.bmp", RGB(0, 0, 0));
-		Jump[1][2].LoadBitmapA(".\\res\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_67.bmp", RGB(0, 0, 0));
-		Jump[1][3].LoadBitmapA(".\\res\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_66.bmp", RGB(0, 0, 0));
-
-		Defense[0][0].LoadBitmapA(".\\res\\Firzen\\Firzen_0\\firzen_0_56.bmp", RGB(0, 0, 0));
-		Defense[0][1].LoadBitmapA(".\\res\\Firzen\\Firzen_0\\firzen_0_57.bmp", RGB(0, 0, 0));
-		Defense[1][0].LoadBitmapA(".\\res\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_53.bmp", RGB(0, 0, 0));
-		Defense[1][1].LoadBitmapA(".\\res\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_52.bmp", RGB(0, 0, 0));
-
-		Roll[0][0].LoadBitmapA(".\\res\\Firzen\\Firzen_0\\firzen_0_58.bmp", RGB(0, 0, 0));
-		Roll[0][1].LoadBitmapA(".\\res\\Firzen\\Firzen_0\\firzen_0_59.bmp", RGB(0, 0, 0));
-		Roll[0][2].LoadBitmapA(".\\res\\Firzen\\Firzen_0\\firzen_0_69.bmp", RGB(0, 0, 0));
-		Roll[1][0].LoadBitmapA(".\\res\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_51.bmp", RGB(0, 0, 0));
-		Roll[1][1].LoadBitmapA(".\\res\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_50.bmp", RGB(0, 0, 0));
-		Roll[1][2].LoadBitmapA(".\\res\\Firzen\\Firzen_0_reverse\\firzen_0_reverse_60.bmp", RGB(0, 0, 0));
-	}
-
-	void Character::SetCharacter(int num) {
-		characterNumber = num;
-		switch (characterNumber)
-		{
-		case 0:
-			LoadCharacter();
-			name = "Firzen";
-			break;
-		};
-	}
-
 	void Character::OnMove() {
+		AnimationCount++;
+		TRACE("Count %d\n", AnimationCount);
+		TRACE("Count %d\n", AnimationState);
+		
 		SetMoving();
 		if (isJumpping) {
 			JumpCount++;
-			TRACE("%d\n", JumpCount);
-			TRACE("isRun %d\n", isRunning);
-			TRACE("isJump %d\n", isJumpping);
 		}
 		//calculate input time diff
 		KeyBoardInputTime++;
@@ -303,19 +217,32 @@ namespace game_framework {
 
 	void Character::SetMovingLeft(bool flag) {
 		if (!isRunning) {
-			isMovingLeft = flag;
+			if (flag == true) {
+				isMovingLeft = flag;
+				isMovingRight = false;
+			}
+			else {
+				isMovingLeft = flag;
+			}
 		}
 	}
 
 	void Character::SetMovingRight(bool flag) {
 		if (!isRunning) {
-			isMovingRight = flag;
+			if (flag == true) {
+				isMovingRight = flag;
+				isMovingLeft = false;
+			}
+			else {
+				isMovingRight = flag;
+			}
 		}
 	}
 
 	void Character::SetRunning(bool flag) {
 		if (flag==true) {
 			isRunning = flag;
+			isWalking = false;
 		}
 		else {
 			isRunning = flag;
@@ -370,13 +297,13 @@ namespace game_framework {
 		}
 		if (isMovingUp) {
 			if (!isJumpping) {
-				this->SetXY(xPos, yPos - speed);
+				this->SetXY(xPos, yPos - 1);
 				isWalking = true;
 			}
 		}
 		if (isMovingDown) {
 			if (!isJumpping) {
-				this->SetXY(xPos, yPos + speed);
+				this->SetXY(xPos, yPos + 1);
 				isWalking = true;
 			}
 		}
@@ -394,6 +321,9 @@ namespace game_framework {
 			else {
 				AnimationState = 1;
 			}
+		}
+		else {
+			AnimationState = 0;
 		}
 
 		if (isDefense) {
@@ -537,63 +467,62 @@ namespace game_framework {
 	}
 
 	void Character::OnShow() {
-		//each animation
 		switch (AnimationState)
 		{
 		case 0:
-			Normal[direction].OnMove();
-			Normal[direction].SetTopLeft(xPos, yPos);
-			Normal[direction].OnShow();
+			Animation.Normal[direction].OnMove();
+			Animation.Normal[direction].SetTopLeft(xPos, yPos);
+			Animation.Normal[direction].OnShow();
 			break;
 		case 1:
-			Walk[direction].OnMove();
-			Walk[direction].SetTopLeft(xPos, yPos);
-			Walk[direction].OnShow();
+			Animation.Walk[direction].OnMove();
+			Animation.Walk[direction].SetTopLeft(xPos, yPos);
+			Animation.Walk[direction].OnShow();
 			break;
 		case 2:
-			Run[direction].OnMove();
-			Run[direction].SetTopLeft(xPos, yPos);
-			Run[direction].OnShow();
+			Animation.Run[direction].OnMove();
+			Animation.Run[direction].SetTopLeft(xPos, yPos);
+			Animation.Run[direction].OnShow();
 			break;
 		case 3:
-			RunStop[direction].SetTopLeft(xPos, yPos);
-			RunStop[direction].ShowBitmap();
+			Animation.RunStop[direction].SetTopLeft(xPos, yPos);
+			Animation.RunStop[direction].ShowBitmap();
 			break;
 		case 4:
-			Jump[direction][0].SetTopLeft(xPos, yPos);
-			Jump[direction][0].ShowBitmap();
+			Animation.Jump[direction][0].SetTopLeft(xPos, yPos);
+			Animation.Jump[direction][0].ShowBitmap();
 			break;
 		case 5:
 			//land
-			Jump[direction][1].SetTopLeft(xPos, yPos);
-			Jump[direction][1].ShowBitmap();
+			Animation.Jump[direction][1].SetTopLeft(xPos, yPos);
+			Animation.Jump[direction][1].ShowBitmap();
 			break;
 		case 6:
 			if (isRunning) {
-				Jump[direction][3].SetTopLeft(xPos, yPos);
-				Jump[direction][3].ShowBitmap();
+				Animation.Jump[direction][3].SetTopLeft(xPos, yPos);
+				Animation.Jump[direction][3].ShowBitmap();
 				break;
 			}
 			else {
-				Jump[direction][2].SetTopLeft(xPos, yPos);
-				Jump[direction][2].ShowBitmap();
+				Animation.Jump[direction][2].SetTopLeft(xPos, yPos);
+				Animation.Jump[direction][2].ShowBitmap();
 				break;
 			}
 		case 7:
-			Defense[direction][0].SetTopLeft(xPos, yPos);
-			Defense[direction][0].ShowBitmap();
+			Animation.Defense[direction][0].SetTopLeft(xPos, yPos);
+			Animation.Defense[direction][0].ShowBitmap();
 			break;
 		case 8:
-			Defense[direction][1].SetTopLeft(xPos, yPos);
-			Defense[direction][1].ShowBitmap();
+			Animation.Defense[direction][1].SetTopLeft(xPos, yPos);
+			Animation.Defense[direction][1].ShowBitmap();
 			break;
 		case 9:
-			Roll[direction][0].SetTopLeft(xPos, yPos);
-			Roll[direction][0].ShowBitmap();
+			Animation.Roll[direction][0].SetTopLeft(xPos, yPos);
+			Animation.Roll[direction][0].ShowBitmap();
 			break;
 		case 10:
-			Roll[direction][1].SetTopLeft(xPos, yPos);
-			Roll[direction][1].ShowBitmap();
+			Animation.Roll[direction][1].SetTopLeft(xPos, yPos);
+			Animation.Roll[direction][1].ShowBitmap();
 			break;
 		default:
 			break;
@@ -603,4 +532,37 @@ namespace game_framework {
 	Character::~Character() {
 		
 	}
+
+	int Freeze::HitEnemy(Character* enemy) {
+		DelayCounter--;
+
+		if (DelayCounter < 0) {
+			DelayCounter = Delay;
+			return HitRectangle(enemy->GetX1() + 20, enemy->GetY1() + 20, enemy->GetX2() - 20, enemy->GetY2() - 20);
+		}
+		else {
+			return 0;
+		}
+	}
+
+	int Freeze::HitRectangle(int tx1, int ty1, int tx2, int ty2) {
+		int x1 = xPos;
+		int y1 = yPos;
+		int x2 = x1 + Animation.Normal[0].Width();
+		int y2 = y1 + Animation.Normal[0].Height();
+
+		if (tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+
+	void Freeze::SetCharacter(){
+		Animation.LoadFreeze();
+		name = "Firzen";
+	}
+	//void Firzen::
 }
+

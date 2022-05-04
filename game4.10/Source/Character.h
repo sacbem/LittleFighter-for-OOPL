@@ -1,11 +1,13 @@
+#include "CharacterAnimation.h"
 namespace game_framework {
 	class Character
 	{
 	public:
 		Character();
-		//Character(Character const& other);
+		Character(Character const & other);
 		~Character();
-		int HitEnemy(Character* enemy);
+		//int HitEnemy(Character* enemy);
+		virtual int HitEnemy(Character* enemy)=0;
 		bool GetAlive();
 		int  GetX1();					// Chracter左上角 x 座標
 		int  GetY1();					// Chracter左上角 y 座標
@@ -14,8 +16,7 @@ namespace game_framework {
 		int	 GetDir();
 		int	 GetHealth();
 		void Initialize();
-		void SetCharacter(int num);
-		void LoadCharacter();
+		virtual void SetCharacter() = 0;
 		void OnShow();
 		void OnMove();
 		void SetMovingDown(bool flag);
@@ -27,6 +28,7 @@ namespace game_framework {
 		void SetDefense(bool flag);
 		void InputKeyDown(UINT nChar);
 		void InputKeyUp(UINT nChar);
+		boolean IsStatic();
 		
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
@@ -36,7 +38,6 @@ namespace game_framework {
 		//basic informtion
 		bool getCharacter;
 		int characterNumber;
-		string name;
 		int HealthPoint;
 		int AttackPoint;
 		int DefencePoint;
@@ -44,14 +45,9 @@ namespace game_framework {
 		bool isWalking;
 		bool isRunning;
 		bool StopRun;
-
 	protected:
-		//CMovingBitmap shadow;
-		//CMovingBitmap nameImg;
         CMovingBitmap photoSticker;
-
         void DistaceAccumulator();
-
 		int DelayCounter;
 		int Delay;
 		int xPos, yPos;
@@ -79,18 +75,15 @@ namespace game_framework {
 		bool island;
 		//Defense
 		bool isDefense;
-
-		//Animation Properties
-		//normal state
-		CAnimation Normal[2];
-		CAnimation Walk[2];
-		CAnimation Run[2];
-		CMovingBitmap RunStop[2];
-		CMovingBitmap Jump[2][4];
-		CMovingBitmap Defense[2][2];
-		CMovingBitmap Roll[2][3];
+		CharacterAnimation Animation;
+		string name;
 	private:
+		//CMovingBitmap shadow;
+		//CMovingBitmap nameImg;
+		
+		//Animation Properties
 		int AnimationState=0;
+		int AnimationCount = 0;
 		//Jump
 		int JumpCount = 0;
 		int JumpCountTemp = 0;
@@ -105,9 +98,9 @@ namespace game_framework {
 
 		//basic information
 		int speed=2;
-
 		//hit box
-		int HitRectangle(int tx1, int ty1, int tx2, int ty2);
+		//int HitRectangle(int tx1, int ty1, int tx2, int ty2);
+		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) = 0;
 
 		//keyInput
 		int KeyBoardInputTime;
@@ -115,9 +108,26 @@ namespace game_framework {
 		int Diff;
 		UINT LastInput;									//上一個輸入
 	};
-	/*
-	class Firzen : public Character{
-		virtual void LoadCharacter() override;
+	
+	class Freeze:public Character {
+	public:
+		//change to freeze
+
+		CMovingBitmap NormalAttack[2][4]; //0_10 ~ 13
+		CMovingBitmap NormalAttack2[2][3]; //0_50 ~ 52
+		CMovingBitmap HeavyAttack[2][4]; //0_17 0_18 0_19 0_29
+		CMovingBitmap JumpAttack[2][3]; //0_14 0_15 0_16
+		CMovingBitmap AttackLand[2][2]; //0_39  0_49
+
+		int AttackPoint;
+		int AttackState = 0;
+		void setAttack(bool flag);
+		void ShowAttack();
+		virtual void SetCharacter() override;
+		virtual int HitEnemy(Character* enemy) override;
+	private:
+		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
 	};
-	*/
+	
+	
 }
