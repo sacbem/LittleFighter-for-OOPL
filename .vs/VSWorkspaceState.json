@@ -2,6 +2,10 @@
   "ExpandedNodes": [
     ""
   ],
+<<<<<<< HEAD
   "SelectedNode": "\\game.sln",
+=======
+  "SelectedNode": "\\game4.10\\Source\\gamelib.cpp",
+>>>>>>> cf418fa7cc3413431111296508f76fb6b831125b
   "PreviewInSolutionExplorer": false
 }

@@ -51,8 +51,6 @@ namespace game_framework {
 	int Character::GetDir() {
 		return direction;
 	}
-
-
 	void Character::Initialize() {
 		DelayCounter = 0;
 		Delay = 7;
@@ -87,25 +85,26 @@ namespace game_framework {
 		LastInputTime = 0;
 	}
 
-
 	void Character::DistaceAccumulator() {
 		walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
 	}
 	int Character::GetDistance() {
 		return walkedDistance;
 	}
-	void Character::SetAccumulator(int x, int y) {
-		walkedDistance = 0;
-		xAccumulator = x;
-		yAccumulator = y;
+	void Character::SetAccumulator(int x, int y, boolean resetSignal) {
+		if (resetSignal) {
+			walkedDistance = 0;
+			xAccumulator = x;
+			yAccumulator = y;
+		}
 	}
 
 	void Character::InputKeyDown(UINT nChar) {
 
-		const char KEY_LEFT = 0x41; // keyboard¥ª½bÀY 0x25
-		const char KEY_UP = 0x57; // keyboard¤W½bÀY 0x26
-		const char KEY_RIGHT = 0x44; // keyboard¥k½bÀY 0x27
-		const char KEY_DOWN = 0x53; // keyboard¤U½bÀY 0x28
+		const char KEY_LEFT = 0x41; // keyboardï¿½ï¿½ï¿½bï¿½Y 0x25
+		const char KEY_UP = 0x57; // keyboardï¿½Wï¿½bï¿½Y 0x26
+		const char KEY_RIGHT = 0x44; // keyboardï¿½kï¿½bï¿½Y 0x27
+		const char KEY_DOWN = 0x53; // keyboardï¿½Uï¿½bï¿½Y 0x28
 		const char KEY_SPACE = 0x20; // keyboard SPACE
 		const char KEY_CTRL = 0x11; //keyboard ctrl
 
@@ -158,10 +157,10 @@ namespace game_framework {
 	}
 
 	void Character::InputKeyUp(UINT nChar) {
-		const char KEY_LEFT = 0x41; // keyboard¥ª½bÀY 0x25
-		const char KEY_UP = 0x57; // keyboard¤W½bÀY 0x26
-		const char KEY_RIGHT = 0x44; // keyboard¥k½bÀY 0x27
-		const char KEY_DOWN = 0x53; // keyboard¤U½bÀY 0x28
+		const char KEY_LEFT = 0x41; // keyboardï¿½ï¿½ï¿½bï¿½Y 0x25
+		const char KEY_UP = 0x57; // keyboardï¿½Wï¿½bï¿½Y 0x26
+		const char KEY_RIGHT = 0x44; // keyboardï¿½kï¿½bï¿½Y 0x27
+		const char KEY_DOWN = 0x53; // keyboardï¿½Uï¿½bï¿½Y 0x28
 		const char KEY_SPACE = 0x20; // keyboard SPACE
 
 		if (nChar == KEY_LEFT) {
@@ -446,7 +445,7 @@ namespace game_framework {
 		xMapBorderMax = 750;
 		switch (mapID) {
 		case 0:
-			yMapBorderMin = 200;
+			yMapBorderMin = 300;
 			yMapBorderMax = 500;
 		default:
 			break;

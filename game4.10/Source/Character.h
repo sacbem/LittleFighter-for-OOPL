@@ -9,10 +9,10 @@ namespace game_framework {
 		//int HitEnemy(Character* enemy);
 		virtual int HitEnemy(Character* enemy)=0;
 		bool GetAlive();
-		int  GetX1();					// Chracter¥ª¤W¨¤ x ®y¼Ð
-		int  GetY1();					// Chracter¥ª¤W¨¤ y ®y¼Ð
-		int  GetX2();					// Chracter¥k¤U¨¤ x ®y¼Ð
-		int  GetY2();					// Chracter¥k¤U¨¤ y ®y¼Ð
+		int  GetX1();					// Chracterï¿½ï¿½ï¿½Wï¿½ï¿½ x ï¿½yï¿½ï¿½
+		int  GetY1();					// Chracterï¿½ï¿½ï¿½Wï¿½ï¿½ y ï¿½yï¿½ï¿½
+		int  GetX2();					// Chracterï¿½kï¿½Uï¿½ï¿½ x ï¿½yï¿½ï¿½
+		int  GetY2();					// Chracterï¿½kï¿½Uï¿½ï¿½ y ï¿½yï¿½ï¿½
 		int	 GetDir();
 		int	 GetHealth();
 		void Initialize();
@@ -32,11 +32,13 @@ namespace game_framework {
 		
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
+		//void SetStatic();
+		//int GetState() ; //static :1 walking :2 running : 3
         int GetDistance();
-        void SetAccumulator(int, int);
+        void SetAccumulator(int, int,boolean resetSignal);
 		void SetMapBorder(int mapID);
 		//basic informtion
-		bool getCharacter;
+		bool getCharacter=false;
 		int characterNumber;
 		int HealthPoint;
 		int AttackPoint;
@@ -59,10 +61,10 @@ namespace game_framework {
 		int direction;				// 0=Left 1=Right
 		int hitDirection;
 		//basic movement
-		bool isMovingDown;			// ¬O§_¥¿¦b©¹¤U²¾°Ê
-		bool isMovingLeft;			// ¬O§_¥¿¦b©¹¥ª²¾°Ê
-		bool isMovingRight;			// ¬O§_¥¿¦b©¹¥k²¾°Ê
-		bool isMovingUp;			// ¬O§_¥¿¦b©¹¤W²¾°Ê
+		bool isMovingDown;			// ï¿½Oï¿½_ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½Uï¿½ï¿½ï¿½ï¿½
+		bool isMovingLeft;			// ï¿½Oï¿½_ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		bool isMovingRight;			// ï¿½Oï¿½_ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½kï¿½ï¿½ï¿½ï¿½
+		bool isMovingUp;			// ï¿½Oï¿½_ï¿½ï¿½ï¿½bï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½
         int walkedDistance;
 
 		bool UnMovable;
@@ -106,7 +108,7 @@ namespace game_framework {
 		int KeyBoardInputTime;
 		int LastInputTime;
 		int Diff;
-		UINT LastInput;									//¤W¤@­Ó¿é¤J
+		UINT LastInput;									//ï¿½Wï¿½@ï¿½Ó¿ï¿½J
 	};
 	
 	class Freeze:public Character {

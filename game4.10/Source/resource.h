@@ -432,8 +432,12 @@
 #define BITMAP_FOREST_S1                556
 #define BITMAP_FOREST_B                 557
 #define IDB_BITMAP33                    558
+#define BITMAP_FOREST_Mex2              558
 #define IDB_BITMAP34                    559
+#define IDB_BITMAP43                    559
 #define IDB_BITMAP35                    560
+#define BITMAP_BACKSCENE                560
+#define BITMAP_BACKSCENE_FOREST         560
 #define BITMAP_GREEN                    561
 #define IDB_BITMAP36                    562
 #define BITMAP_FOREST_Mex               563
@@ -468,7 +472,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        501
+#define _APS_NEXT_RESOURCE_VALUE        561
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

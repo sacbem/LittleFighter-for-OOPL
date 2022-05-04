@@ -17,7 +17,12 @@
     <ClCompile Include="Source\StdAfx.cpp" />
     <ClCompile Include="Source\gamelib.cpp" />
     <ClCompile Include="Source\HealthBar.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Source\CharacterAnimation.cpp" />
+=======
+    <ClCompile Include="Source\Map.cpp" />
+    <ClCompile Include="Source\GameObject.cpp" />
+>>>>>>> cf418fa7cc3413431111296508f76fb6b831125b
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
@@ -37,7 +42,12 @@
     <ClInclude Include="Source\StdAfx.h" />
     <ClInclude Include="Source\gamelib.h" />
     <ClInclude Include="Source\HealthBar.h" />
+<<<<<<< HEAD
     <ClInclude Include="Source\CharacterAnimation.h" />
+=======
+    <ClInclude Include="Source\Map.h" />
+    <ClInclude Include="Source\GameObject.h" />
+>>>>>>> cf418fa7cc3413431111296508f76fb6b831125b
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\game.rc" />
@@ -487,6 +497,8 @@
     <Image Include="RES\Freeze\freeze_s.bmp" />
     <Image Include="RES\Henry\henry_s.bmp" />
     <Image Include="RES\Player0\s.bmp" />
+    <Image Include="res\freeze\freeze_0_reverse\bitmap43.bmp" />
+    <Image Include="RES\lf\backscene_forest.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp" />

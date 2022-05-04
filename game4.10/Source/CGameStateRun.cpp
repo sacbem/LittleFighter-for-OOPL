@@ -12,7 +12,7 @@ using namespace std;
 #define  _CRTDBG_MAP_ALLOC
 #include  < stdlib.h >
 #include  < crtdbg.h >
-
+#define Forest 100
 namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g)
 		: CGameState(g)
@@ -20,43 +20,17 @@ namespace game_framework {
 		//EnemyTest = new Character();
 		HealthPlayer1 = new HealthBar();
 		//HealthPlayer2 = new HealthBar();
-        maps = new MapGenerator();
+        maps = new Map(Forest);
 		//_CrtDumpMemoryLeaks();
 	}
 
 	void CGameStateRun::OnBeginState()
 	{
-		
 		//EnemyTest->SetXY(500, 200);
 		//_CrtDumpMemoryLeaks();
-
 	}
-    void  CGameStateRun::MapSlide() {
-        if (PlayerTest->isWalking) {
-            //TRACE("--------------- %d -------------%d \n", PlayerTest->isRunning, PlayerTest->GetDistance());
-            if (PlayerTest->GetDir()) {
-                maps->ScenesCamera(true, 0);
-            }
-            else {
-                maps->ScenesCamera(false, 0);
-            }
-
-        }
-        else if (PlayerTest->GetDistance() > 50) {
-          
-            if (PlayerTest->GetDir()) {
-                maps->ScenesCamera(true, 1);
-            }
-            else {
-                maps->ScenesCamera(false, 1);
-            }
-            PlayerTest->SetAccumulator(PlayerTest->GetX1(), PlayerTest->GetY1());
-
-        }
-		//_CrtDumpMemoryLeaks();
-
-    }
-	void CGameStateRun::OnMove()						// ²¾°Ê¹CÀ¸¤¸¯À
+   
+	void CGameStateRun::OnMove()						// ç§»å‹•éŠæˆ²å…ƒç´ 
 	{
 		CleanCounter++;
 		if (CleanCounter >= 10) {
@@ -70,28 +44,17 @@ namespace game_framework {
 
 		PlayerTest->OnMove();
 		//EnemyTest->OnMove();
-        MapSlide();
-
+		maps->ResetCharactAccumulator(PlayerTest->GetDistance(), PlayerTest->GetDistance());
+		maps->ScenesCamera(PlayerTest->isRunning, PlayerTest->GetDir(), PlayerTest->GetDistance());
 	}
 
-	void CGameStateRun::OnInit()  								// ¹CÀ¸ªºªì­È¤Î¹Ï§Î³]©w
+	void CGameStateRun::OnInit()  								// éŠæˆ²çš„åˆå€¼åŠåœ–å½¢è¨­å®š
 	{
-		ShowInitProgress(33);	// ±µ­Ó«e¤@­Óª¬ºAªº¶i«×¡A¦¹³B¶i«×µø¬°33%
-		//
-		// ¶}©l¸ü¤J¸ê®Æ
-		//
-
-		//
-		// §¹¦¨³¡¤ÀLoading°Ê§@¡A´£°ª¶i«×
-		//
+		ShowInitProgress(33);	// æŽ¥å€‹å‰ä¸€å€‹ç‹€æ…‹çš„é€²åº¦ï¼Œæ­¤è™•é€²åº¦è¦–ç‚º33%
 		ShowInitProgress(50);
-		Sleep(300); // ©ñºC¡A¥H«K¬Ý²M·¡¶i«×¡A¹ê»Ú¹CÀ¸½Ð§R°£¦¹Sleep							
+		Sleep(300);
 
-		//
-		// ¦¹OnInit°Ê§@·|±µ¨ìCGameStaterOver::OnInit()¡A©Ò¥H¶i«×ÁÙ¨S¨ì100%
-		//
-
-        maps->Load(0);
+        maps->Load(Forest);
 		HealthPlayer1->init();
 		//HealthPlayer2->init();
 		HealthPlayer1->OnLoad(0, 0);
@@ -111,6 +74,7 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnShow(){
+		
 		//get character
 		if (GetCharacter == false ){ // && EnemyTest->getCharacter == false) {
 			ifstream ifs;
