@@ -9,6 +9,7 @@ namespace game_framework {
         void Load(int bitmap);
         void Load(int bitmap, int RGB); //¥h­I¥Î
         void SetTopLeft(int x, int y);
+        void SetTopLeftSpical(int x, int y);
         string GetClassification();
         int GetPositionXY(const string type);
  

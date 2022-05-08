@@ -15,8 +15,7 @@ using namespace std;
 #define Forest 100
 namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
-		PlayerTest = new Character();
-		//EnemyTest = Character();
+		//EnemyTest = new Character();
 		HealthPlayer1 = new HealthBar();
 		//HealthPlayer2 = new HealthBar();
         maps = new Map(Forest);
@@ -24,11 +23,12 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnBeginState(){
-		PlayerTest->SetXY(200, 200);
 		//EnemyTest->SetXY(500, 200);
 		//_CrtDumpMemoryLeaks();
 	}
-	void CGameStateRun::OnMove(){						// ���ʹC������
+   
+	void CGameStateRun::OnMove()						// 移動遊戲元素
+	{
 		CleanCounter++;
 		if (CleanCounter >= 10) {
 			CleanCounter = 0;
@@ -41,35 +41,13 @@ namespace game_framework {
 
 		PlayerTest->OnMove();
 		//EnemyTest->OnMove();
-
-		
-		/*
-		CDC* pDC = CDDraw::GetBackCDC();			// ���o Back Plain �� CDC
-		CFont f, *fp;
-		f.CreatePointFont(160, "Times New Roman");	// ���� font f; 160����16 point���r
-		fp = pDC->SelectObject(&f);					// ��� font f
-		pDC->SetBkColor(RGB(0, 0, 0));
-		pDC->SetTextColor(RGB(255, 255, 0));
-		CString str;
-		str.Format("%d", PlayerTest->GetDir());
-		CString str2;
-		str2.Format("%d , %d", PlayerTest->GetX1(), PlayerTest->GetY1());
-		pDC->TextOut(120, 220, str);
-		pDC->TextOut(120, 320, str2);
-		pDC->SelectObject(fp);						// �� font f (�d�U���n�|�F��)
-		CDDraw::ReleaseBackCDC();
-
-		//_CrtDumpMemoryLeaks();
-		*/
-		
-		
-		maps->ResetCharactAccumulator(PlayerTest->GetDistance(), PlayerTest->GetDistance());
+		PlayerTest->DistanceAccumulatorReset();
 		maps->ScenesCamera(PlayerTest->isRunning, PlayerTest->GetDir(), PlayerTest->GetDistance());
 	}
 
-	void CGameStateRun::OnInit(){
-		ShowInitProgress(33);	
-	
+	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
+	{
+		ShowInitProgress(33);	// 接個前一個狀態的進度，此處進度視為33%
 		ShowInitProgress(50);
 		Sleep(300);
 
@@ -82,13 +60,10 @@ namespace game_framework {
 
 	}
 
-	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
-	{
+	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags){
 		PlayerTest->InputKeyDown(nChar);
 	}
-	//int GetScenesPos(Map& map, const string type) {
-	//	return type == "X" ? map.gameScenesPos_X : map.gameScenesPos_Y;
-	//}
+
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
 		PlayerTest->InputKeyUp(nChar);
 	}
@@ -96,27 +71,45 @@ namespace game_framework {
 	void CGameStateRun::OnShow(){
 		
 		//get character
-		if (PlayerTest->getCharacter == false ){ // && EnemyTest->getCharacter == false) {
+		if (GetCharacter == false ){ // && EnemyTest->getCharacter == false) {
 			ifstream ifs;
 			char buffer[2];
 			ifs.open("CharacterSelected.txt");
 			ifs.read(buffer, sizeof(buffer));
 			ifs.close();
-			PlayerTest->SetCharacter(buffer[0] - '0');
+			//if (selectCharacterID==0) {
+			//	PlayerTest = new Freeze();
+			//}
+			PlayerTest = new Freeze();
+			PlayerTest->SetXY(200, 200);
+			PlayerTest->SetCharacter();
+
 			//EnemyTest->SetCharacter(buffer[1] - '0');
 			PlayerTest->getCharacter = true;
+			GetCharacter = true;
 			//EnemyTest->getCharacter = true;
 			//load HealthBar small character
-			HealthPlayer1->loadSmallImg(buffer[0] - '0');
+			HealthPlayer1->loadSmallImg(1);
 			//HealthPlayer2->loadSmallImg(buffer[1] - '0');
 		}
 
         maps->PrintMap();
 		PlayerTest->OnShow();
+		maps->DynamicScence(PlayerTest->GetDir(), PlayerTest->GetDistance());
 		
+		CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
+		CFont f, * fp;
+		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+		fp = pDC->SelectObject(&f);					// 選用 font f
+		pDC->SetBkColor(RGB(0, 0, 0));
+		pDC->SetTextColor(RGB(255, 255, 0));
+
+		CString str;
+		str.Format("%d", PlayerTest->GetDistance());
+		pDC->TextOut(120, 220, str);
+		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+		CDDraw::ReleaseBackCDC();
 		HealthPlayer1->OnShow(PlayerTest->HealthPoint);
-		//HealthPlayer2->OnShow(EnemyTest->HealthPoint);
-		//_CrtDumpMemoryLeaks();
 	}
     CGameStateRun::~CGameStateRun(){
 		delete maps, HealthPlayer1;//, HealthPlayer2;

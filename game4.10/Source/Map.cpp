@@ -2,16 +2,18 @@
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
+#include <utility>
 #include "audio.h"
 #include "gamelib.h"
 #include "Map.h"
+
 #define Forest 100
 #define MapWidth 3200* 0.75
 #define BoundaryMin 
 constexpr auto forestSky_dx = MapWidth / 800 * 0.75;
 constexpr auto forestMountain_dx1 = MapWidth / 1100 * 0.75;
 constexpr auto forestMountain_dx2 = MapWidth / 1400 * 0.75;
-constexpr auto forestTree_dx = MapWidth / 2900 * 0.75;
+constexpr auto forestTree_dx = 1.5 * MapWidth / 2900 * 0.75;
 constexpr auto forestLand_dx1 = MapWidth / 2950 * 0.75;
 constexpr auto forestLand_dx2 = MapWidth / 3070 * 0.75;
 constexpr auto forestLand_dx3 = MapWidth / 3200 * 0.75;
@@ -28,7 +30,9 @@ namespace game_framework {
     }
     void Map::InitializeAllObjs(int mapID) {
         ////初始遊戲鏡頭位置
-        gameScenesPos_X = gameScenesPos_Y = 0;
+        rubberMode = 0;
+        gameScencePos.first = 0; 
+        gameScencePos.second = 794;
         //// 初始化地圖內容
         for (auto& i : map) {
             for (int o = 0; o < 10; o++) {
@@ -53,9 +57,6 @@ namespace game_framework {
             for (int skyNum = 0; skyNum < 3; skyNum++) {
                 backgroundSkyObjs.push_back(new GameObject("Scenes", skyNum));
             }
-            //for (int skyNum = 0; skyNum < 1; skyNum++) {
-            //    backgroundSkyObjs.push_back(new GameObject("Scenes"));
-            //}
             break;
         default:
             break;
@@ -69,6 +70,7 @@ namespace game_framework {
                 floorObjs[i]->Load(BITMAP_FOREST_L1 + i);
             }
             floorObjs[2]->Load(BITMAP_FOREST_L4);
+
             for (auto& tree : backgroundFrontObjs) {
                 tree->Load(BITMAP_FOREST_T1, RGB(0, 0, 0));
             }
@@ -121,23 +123,61 @@ namespace game_framework {
                     cnt++;
                 }
                 ////mountains
-                backgroundBackObjs[0]->SetTopLeft(-800, 100);
+                backgroundBackObjs[0]->SetTopLeft(-800, 90);
                 break;
         }
 
     }
-    void Map::StopDynamic() {  
-        if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size()-1]->GetPositionXY("X") == -800) {
+    //void Map:: DynamicScenceManager(boolean isLeft, int distance) {
+    //    for (auto &iter : mapBordary) {
+    //        if (!iter) {
+    //            if (gameScencePos.first == -800) {  ///左底場景判斷
+    //                if (!isLeft && distance!=0) {  /// 左底往右走
+    //                    iter = true;
+    //                }
+    //            }
+    //            else if (gameScencePos.first == 800) {
+    //                if (isLeft && distance != 0) {  /// 右底往左走
+    //                    iter = true;
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
+    void Map::StopDynamic(boolean isLeft, int distance) {
+        if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0) {/// 左/右底場景判斷
             mapBordary[0] = false;
+            if (distance != 0) {
+                if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// 左底場景 往右走
+                    mapBordary[0] = true;
+                }
+                else if (backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0 && isLeft) {/// 右底場景 往左走
+                    mapBordary[0] = true;
+                }
+            }
         }
-        if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 || backgroundFrontObjs[backgroundFrontObjs.size()-1]->GetPositionXY("X") == -800) {
+        if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 || backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547) {/// 左/右底場景判斷
             mapBordary[1] = false;
-        }
-        if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size()-1]->GetPositionXY("X") == -800) {
-            mapBordary[2] = false;
-        }
-        if (backgroundBackObjs[0]->GetPositionXY("X") == 0 || backgroundBackObjs[backgroundBackObjs.size() - 1]->GetPositionXY("X") == -1600) {
-            mapBordary[3] = false;
+            if (distance != 0) {
+                if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// 左底場景 往右走
+                    mapBordary[1] = true;
+                }
+                else if (backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547 && isLeft) {/// 右底場景 往左走
+                    mapBordary[1] = true;
+                }
+            }
+            //if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size()-1]->GetPositionXY("X") == -800) {
+            //    mapBordary[2] = false;
+            //}
+            if (backgroundBackObjs[0]->GetPositionXY("X") == 0 || backgroundBackObjs[backgroundBackObjs.size() - 1]->GetPositionXY("X") == -1600) {
+                mapBordary[3] = false;
+                if (backgroundBackObjs[0]->GetPositionXY("X") == 0  && !isLeft) {
+                    mapBordary[3] = true;
+                }
+                else if (backgroundBackObjs[backgroundBackObjs.size() - 1]->GetPositionXY("X") == -1600 && isLeft) {
+                    mapBordary[3] = true;
+                }
+            }
         }
     }
     boolean Map::ResetCharactAccumulator(int distance1, int distance2) {
@@ -149,7 +189,7 @@ namespace game_framework {
         }
     }
     void Map::DynamicScence(boolean IsLeft,int walkedDistance) {
-        StopDynamic();
+        StopDynamic(IsLeft, walkedDistance);
         int direction = IsLeft ? 1 : -1; // 往右 : 1 往左 : -1 
         if (mapBordary[0]) {
             if (walkedDistance > forestSky_dx) {
@@ -161,48 +201,43 @@ namespace game_framework {
         if (mapBordary[1]) {
             if (walkedDistance > forestTree_dx) {
                 for (auto& i : backgroundFrontObjs) {
-                    //TRACE("1---------Dir %d    %d\n", i->GetPositionXY("X"), i->GetPositionXY("Y"));
                     i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
-                    //TRACE("2---------Dir %d    %d\n", i->GetPositionXY("X"), i->GetPositionXY("Y"));
                 }
             }
         }
         if (mapBordary[2]) {
             if (walkedDistance > forestTree_dx) {
-                floorObjs[0]->SetTopLeft(floorObjs[0]->GetPositionXY("X") + 1 * direction, floorObjs[0]->GetPositionXY("Y"));
-            }
-            if (walkedDistance > forestTree_dx) {
-                floorObjs[1]->SetTopLeft(floorObjs[1]->GetPositionXY("X") + 1 * direction, floorObjs[1]->GetPositionXY("Y"));
-            }
-            if (walkedDistance > forestTree_dx) {
-                floorObjs[2]->SetTopLeft(floorObjs[2]->GetPositionXY("X") + 1 * direction, floorObjs[2]->GetPositionXY("Y"));
+                for (auto& i : floorObjs) {
+                    i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+                }
             }
         }
         if (mapBordary[3]) {
             if (walkedDistance > forestMountain_dx2) {
-                backgroundBackObjs[0]->SetTopLeft(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
+                backgroundBackObjs[0]->SetTopLeftSpical(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
+                TRACE("%d 000000000000000000000000000000000000000000\n", direction);
             }
          }      
     }
 
     void Map::ScenesCamera(boolean IsRunning, boolean IsLeft, int walkedDistance) {
         int direction = IsLeft  ?  1 : -1; // 往右 : 1 往左 : -1 
-        if (IsLeft) {
-            if (IsRunning) {    //往左跑
-                gameScenesPos_X++;
-            }
-            else if (!IsRunning && walkedDistance > 20) { //往左走
-                gameScenesPos_X++;
-            }
-        }
-        else if (!IsLeft) {
-            if (IsRunning) {  //往右跑
-                gameScenesPos_X--;
-            }
-            else if (!IsRunning && walkedDistance > 20) { //往右走
-                gameScenesPos_X--;
-            }
-        }
+        //if (IsLeft) {
+        //    if (IsRunning) {    //往左跑
+        //        gameScenesPos_X++;
+        //    }
+        //    else if (!IsRunning && walkedDistance > 20) { //往左走
+        //        gameScenesPos_X++;
+        //    }
+        //}
+        //else if (!IsLeft) {
+        //    if (IsRunning) {  //往右跑
+        //        gameScenesPos_X--;
+        //    }
+        //    else if (!IsRunning && walkedDistance > 20) { //往右走
+        //        gameScenesPos_X--;
+        //    }
+        //}
 
     }
 
@@ -223,6 +258,18 @@ namespace game_framework {
         for (auto i : floorObjs) {
             i->OnShow();
         }
+        CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
+        CFont f, * fp;
+        f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+        fp = pDC->SelectObject(&f);					// 選用 font f
+        pDC->SetBkColor(RGB(0, 0, 0));
+        pDC->SetTextColor(RGB(255, 255, 0));
+
+        CString str;
+        str.Format("%d", backgroundBackObjs[0]->GetPositionXY("X"));
+        pDC->TextOut(120, 290, str);
+        pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+        CDDraw::ReleaseBackCDC();
 
     }
     Map::~Map() {

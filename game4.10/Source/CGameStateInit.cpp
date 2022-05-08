@@ -70,7 +70,7 @@ namespace game_framework {
 		cursorXY[0] = point.x;
 		cursorXY[1] = point.y;
         MOUSE_ENABLE = true;
-        TRACE("posX: %d posY: %d\n", point.x, point.y);
+       /* TRACE("posX: %d posY: %d\n", point.x, point.y);*/
 		if (cursorXY[0] >= 545 * (0.81) + 20 && cursorXY[0] <= 745 * (0.81) + 20) {
 		    if (cursorXY[1] >= 260 * (0.94) && cursorXY[1] <= 280 * (0.94)) {
 			keyCount = 0;                   //回歸正常計數
@@ -180,12 +180,14 @@ namespace game_framework {
     void CGameStateInit::SetPhotoStickers() {
         if (SELECTOR_ENABLE) {
             int idGet = photoSticker_seclecter->GetCharacterID();
+            /*selectCharacterID = 0;*/
             switch (characterIsSeclected) {
             case 1:
                 if (loadMap < characterIsSeclected) {
                     photoSticker_1P->Load(picStickers[idGet], picIDs[idGet],picNames[idGet]);
                     photoSticker_seclecter->SetXY(336, 195);
                     loadMap++;
+                    /*selectCharacterID = idGet;*/
                 }
                 photoSticker_1P->OnShow();
                 break;

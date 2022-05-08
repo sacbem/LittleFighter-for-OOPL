@@ -15,16 +15,19 @@ namespace game_framework{
         void DynamicScence(boolean IsLeft,int walkedDistance);
         boolean ResetCharactAccumulator(int distance1,int distance2);
         ~Map();
-        
+      
     private:
         void InitializeAllObjs(int mapID);
-        void StopDynamic();
+      /*  void DynamicScenceManager(boolean isLeft,int distance);*/
+        void StopDynamic(boolean isLeft, int distance);
         void InitializeMap(int mapID);
-        //int rubberBandAccumulator(boolean IsRunning, boolean InBorder);
+        int rubberBandAccumulator(boolean IsRunning, boolean InBorder);
         //boolean CharacterDetector(Character character);
-        int gameScenesPos_X, gameScenesPos_Y;
-        vector<vector<int>> map;  // 2400*600 80*60 per blank;  30 * 10
+        int rubberMode; // rubberMode:  0 => Mode => 1 => Mode : Walking, 2 => Mode : Runing
+        pair <int, int> gameScencePos; // first -> ScenceMinPosition; second -> ScenceMaxPosition 
         vector<boolean>mapBordary;//1:sky 2:tree 3:land 4: mountain
+        vector<vector<int>> map;  // 2400*600 80*60 per blank;  30 * 10
+        
         vector<boolean> characterInBorder;
         vector<GameObject*> floors, floorObjs, backgroundFrontObjs, backgroundBackObjs, backgroundSkyObjs;
         /// <summary>

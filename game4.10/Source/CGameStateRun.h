@@ -16,10 +16,11 @@ namespace game_framework {
 		void OnMove();									// ���ʹC������
 		void OnShow();									// ��ܳo�Ӫ��A���C���e��
 	private:
+		bool GetCharacter = false;
 		//Player & other
-		Character* PlayerTest;
-		Character* EnemyTest;
-		Map* maps;
+		Character *PlayerTest;
+		//Character* EnemyTest;
+        Map* maps;
 		HealthBar* HealthPlayer1;
 		//HealthBar* HealthPlayer2;
 		int CleanCounter=0;

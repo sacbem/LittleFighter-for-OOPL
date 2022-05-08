@@ -35,7 +35,7 @@ namespace game_framework {
     void MapGenerator::Load(int) {
         Initialize(0);
        
-        backGreen->LoadBitmap(BITMAP_GREEN);
+        backGreen->LoadBitmap(".\\res\\lf\\green2.bmp");
         for (auto &i : sky) {
             i->LoadBitmap(BITMAP_FOREST_M5);
         }
