@@ -17,12 +17,13 @@ namespace game_framework {
 		void OnShow();									// ��ܳo�Ӫ��A���C���e��
 	private:
 		bool GetCharacter = false;
+		vector<Character*> CharacterList;
 		//Player & other
 		Character *PlayerTest;
-		//Character* EnemyTest;
+		Character *EnemyTest;
         Map* maps;
 		HealthBar* HealthPlayer1;
-		//HealthBar* HealthPlayer2;
+		HealthBar* HealthPlayer2;
 		int CleanCounter=0;
 	};
 }

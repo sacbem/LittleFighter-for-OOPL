@@ -17,16 +17,16 @@ namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g)
 		: CGameState(g)
 	{
-		//EnemyTest = new Character();
+		CharacterList.reserve(2);
+
 		HealthPlayer1 = new HealthBar();
-		//HealthPlayer2 = new HealthBar();
+		HealthPlayer2 = new HealthBar();
         maps = new Map(Forest);
 		//_CrtDumpMemoryLeaks();
 	}
 
 	void CGameStateRun::OnBeginState()
 	{
-		//EnemyTest->SetXY(500, 200);
 		//_CrtDumpMemoryLeaks();
 	}
    
@@ -35,15 +35,20 @@ namespace game_framework {
 		CleanCounter++;
 		if (CleanCounter >= 10) {
 			CleanCounter = 0;
-			/*
 			if (EnemyTest->GetHealth() <= 0) {
 				EnemyTest->SetAlive(false);
 			}
-			*/
 		}
 
 		PlayerTest->OnMove();
-		//EnemyTest->OnMove();
+		EnemyTest->OnMove();
+		if (PlayerTest->HitEnemy(EnemyTest) && PlayerTest->isAttacking) {
+			if (EnemyTest->HealthPoint > 0) {
+				//int hitDirection = PlayerTest->GetDir();
+				EnemyTest->SetKnock(true, PlayerTest->GetDir(), PlayerTest->AttackState);
+				EnemyTest->isGettingDamage(PlayerTest->AttackPoint);
+			}
+		}
 		maps->ResetCharactAccumulator(PlayerTest->GetDistance(), PlayerTest->GetDistance());
 		maps->ScenesCamera(PlayerTest->isRunning, PlayerTest->GetDir(), PlayerTest->GetDistance());
 	}
@@ -56,10 +61,10 @@ namespace game_framework {
 
         maps->Load(Forest);
 		HealthPlayer1->init();
-		//HealthPlayer2->init();
+		HealthPlayer2->init();
+
 		HealthPlayer1->OnLoad(0, 0);
-		//HealthPlayer2->OnLoad(400, 0);
-		//_CrtDumpMemoryLeaks();
+		HealthPlayer2->OnLoad(400, 0);
 
 	}
 
@@ -82,26 +87,38 @@ namespace game_framework {
 			ifs.open("CharacterSelected.txt");
 			ifs.read(buffer, sizeof(buffer));
 			ifs.close();
+
+			CharacterList.push_back(new Freeze());
+
 			PlayerTest = new Freeze();
 			PlayerTest->SetXY(200, 200);
 			PlayerTest->SetCharacter();
-			//EnemyTest->SetCharacter(buffer[1] - '0');
+
+			EnemyTest = new Freeze();
+			EnemyTest->SetXY(400,200);
+			EnemyTest->SetCharacter();
+			
 			PlayerTest->getCharacter = true;
+			EnemyTest->getCharacter = true;
+			
 			GetCharacter = true;
-			//EnemyTest->getCharacter = true;
 			//load HealthBar small character
 			HealthPlayer1->loadSmallImg(1);
-			//HealthPlayer2->loadSmallImg(buffer[1] - '0');
+			HealthPlayer2->loadSmallImg(1);
 		}
 
         maps->PrintMap();
 		PlayerTest->OnShow();
-		//EnemyTest->OnShow();
-		HealthPlayer1->OnShow(PlayerTest->HealthPoint);
-		//HealthPlayer2->OnShow(EnemyTest->HealthPoint);
+		EnemyTest->OnShow();
+		HealthPlayer1->OnShow(PlayerTest->HealthPoint, PlayerTest->InnerHealPoint, PlayerTest->Mana, PlayerTest->InnerMana);
+		HealthPlayer2->OnShow(EnemyTest->HealthPoint, EnemyTest->InnerHealPoint, EnemyTest->Mana, EnemyTest->InnerMana);
 		//_CrtDumpMemoryLeaks();
 	}
     CGameStateRun::~CGameStateRun(){
-		delete maps, HealthPlayer1;//, HealthPlayer2;
+		delete maps, HealthPlayer1, HealthPlayer2, PlayerTest, EnemyTest;
+
+		for (auto& i : CharacterList) {
+			delete i;
+		}
     }
 }
