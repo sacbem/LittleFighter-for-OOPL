@@ -31,13 +31,19 @@ namespace game_framework {
         img.LoadBitmap(bitmap, RGB);
     }
     void GameObject::SetTopLeft(int x, int y) { 
-        //xPos = x>=1600 ? 1600 :x;  xPos = x <= -800 ? -800 : x;
-        //yPos = x >= 600 ? 600 : y;
-        xPos = x; 
+        xPos = x>=1600 ? 1600 :x; 
+        xPos = x <= -800 ? -800 : x;
+       /* yPos = x >= 600 ? 600 : y;
+        xPos = x; */
         yPos = y;
         img.SetTopLeft(xPos, yPos);
     }
-
+    void GameObject::SetTopLeftSpical(int x, int y) {
+        xPos = x >= 1600 ? 1600 : x;
+        xPos = x <= -1600 ? -1600 : x;
+        yPos = y;
+        img.SetTopLeft(xPos, yPos);
+    }
     string GameObject::GetClassification() {
         if (IsWeapon) {
             return "Weapon";

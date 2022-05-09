@@ -122,7 +122,7 @@ namespace game_framework {
 // 這個class提供時間、錯誤等控制
 // 一般的遊戲並不需直接操作這個物件，因此可以不管這個class的使用方法
 /////////////////////////////////////////////////////////////////////////////
-
+static int selectCharacterID;
 class CSpecialEffect {
 public:
 	static void  SetCurrentTime();					// 儲存目前的時間至ctime
@@ -344,6 +344,7 @@ private:
 	CGameState		*gameState;			// pointer指向目前的遊戲狀態
 	CGameState		*gameStateTable[3];	// 遊戲狀態物件的pointer
 	static CGame	instance;			// 遊戲唯一的instance
+	
 };
 
 }

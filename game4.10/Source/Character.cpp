@@ -25,12 +25,7 @@ namespace game_framework {
 		return xPos;
 	}
 	boolean Character::IsStatic() {
-		if (!this->AnimationState) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return this->AnimationState ? false : true;
 	}
 
 	int Character::GetX2() {
@@ -93,15 +88,27 @@ namespace game_framework {
 
 	void Character::DistaceAccumulator() {
 		walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
+		
 	}
 	int Character::GetDistance() {
 		return walkedDistance;
 	}
-	void Character::SetAccumulator(int x, int y, boolean resetSignal) {
-		if (resetSignal) {
+	//void Character::SetAccumulator(int x, int y, boolean resetSignal) {
+	//	if (resetSignal) {
+	//		walkedDistance = 0;
+	//		xAccumulator = x;
+	//		yAccumulator = y;
+	//	}
+	//}
+	boolean Character::DistanceAccumulatorReset() {
+		if (this->AnimationState) {
+			return false;
+		}
+		else {
 			walkedDistance = 0;
-			xAccumulator = x;
-			yAccumulator = y;
+			xAccumulator = xPos;
+			yAccumulator = yPos;
+			return true;
 		}
 	}
 

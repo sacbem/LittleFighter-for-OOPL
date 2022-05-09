@@ -32,14 +32,14 @@ namespace game_framework {
 		void InputKeyDown(UINT nChar);
 		void InputKeyUp(UINT nChar);
 		boolean IsStatic();
-		
+		boolean  DistanceAccumulatorReset();
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
 		void isGettingDamage(int Damage);
 		//void SetStatic();
 		//int GetState() ; //static :1 walking :2 running : 3
         int GetDistance();
-        void SetAccumulator(int, int,boolean resetSignal);
+        //void SetAccumulator(int, int,boolean resetSignal);
 		void SetMapBorder(int mapID);
 		//basic informtion
 		bool getCharacter=false;
