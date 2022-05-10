@@ -32,10 +32,8 @@ namespace game_framework {
 		boolean  DistanceAccumulatorReset();
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
-		//void SetStatic();
-		//int GetState() ; //static :1 walking :2 running : 3
         int GetDistance();
-        //void SetAccumulator(int, int,boolean resetSignal);
+		int GetMovingTime(boolean isLeft);
 		void SetMapBorder(int mapID);
 		//basic informtion
 		bool getCharacter=false;
@@ -47,6 +45,12 @@ namespace game_framework {
 		bool isWalking;
 		bool isRunning;
 		bool StopRun;
+		int leftTime = 0;
+		int rightTime = 0;
+		time_t L_start, L_finish;
+		time_t R_start, R_finish;
+
+		friend class SkillEffect;
 	protected:
         CMovingBitmap photoSticker;
         void DistaceAccumulator();
@@ -129,6 +133,7 @@ namespace game_framework {
 		virtual int HitEnemy(Character* enemy) override;
 	private:
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
+		vector <SkillEffect> frozenWaves, frozenPunchs, frozenSwords, frozenStorms;
 	};
 	
 	

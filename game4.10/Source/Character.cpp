@@ -6,6 +6,7 @@
 #include "gamelib.h"
 #include "Character.h"
 #include <cmath>
+#include <time.h>
 namespace game_framework {
 
 	Character::Character() {
@@ -87,15 +88,11 @@ namespace game_framework {
 	int Character::GetDistance() {
 		return walkedDistance;
 	}
-	//void Character::SetAccumulator(int x, int y, boolean resetSignal) {
-	//	if (resetSignal) {
-	//		walkedDistance = 0;
-	//		xAccumulator = x;
-	//		yAccumulator = y;
-	//	}
-	//}
+	int Character::GetMovingTime(boolean isLeft){
+		return isLeft ? leftTime : rightTime;
+	}
 	boolean Character::DistanceAccumulatorReset() {
-		if (this->AnimationState) {
+		if (this->AnimationState  || walkedDistance < 3) {
 			return false;
 		}
 		else {
@@ -143,9 +140,11 @@ namespace game_framework {
 			}
 			if (nChar == KEY_LEFT) {
 				SetMovingLeft(true);
+				L_start = clock();
 			}
 			if (nChar == KEY_RIGHT) {
 				SetMovingRight(true);
+				R_start = clock();
 			}
 			if (nChar == KEY_UP) {
 				SetMovingUp(true);
@@ -285,12 +284,16 @@ namespace game_framework {
 			speed = 2;
 		}
 		if (isMovingLeft) {
+			L_finish = clock();
+			leftTime = (L_finish - L_start) / 1000;
 			this->SetXY(xPos - speed, yPos);
 			DistaceAccumulator();
 			isWalking = true;
 			direction = 1;
 		}
 		if (isMovingRight) {
+			R_finish = clock();
+			rightTime = (R_finish - R_start) / 1000;
 			this->SetXY(xPos + speed, yPos);
 			DistaceAccumulator();
 			isWalking = true;
