@@ -127,6 +127,7 @@ namespace game_framework {
 		const char KEY_SPACE = 0x20; // keyboard SPACE
 		const char KEY_CTRL = 0x11; //keyboard ctrl
 		const char KEY_ENTER = 0x0D; // keyboard ENTER
+		const char KEY_J = 0x4A;
 
 
 		Diff = KeyBoardInputTime - LastInputTime;
@@ -143,6 +144,13 @@ namespace game_framework {
 					if (nChar == KEY_RIGHT) {
 						SetRunning(false);
 					}
+				}
+			}
+			else if (!isRunning) {
+				//Sp
+				if (nChar == KEY_J) {
+					TRACE("Sp \n");
+					SpecialAttackState = 1;
 				}
 			}
 			//detect double click
@@ -189,6 +197,7 @@ namespace game_framework {
 		const char KEY_DOWN = 0x53; // keyboard�U�b�Y 0x28
 		const char KEY_SPACE = 0x20; // keyboard SPACE
 		const char KEY_ENTER = 0x0D; // keyboard ENTER
+		const char KEY_J = 0x4A;
 
 		if (nChar == KEY_LEFT) {
 			if (isRunning == false) {
@@ -225,84 +234,6 @@ namespace game_framework {
 		LastInput = nChar;
 	}
 
-	void Character::OnMove() {
-		AnimationCount++;
-		if (!isAttacking) {
-			AttackLong = 0;
-		}
-		else {
-			AttackLong++;
-		}
-		//Heal
-		if (AnimationCount % 150 == 0) {
-			if (HealthPoint <= InnerHealPoint) {
-				HealthPoint += 30;
-				if (HealthPoint >= 1800) {
-					HealthPoint = 1800;
-				}
-			}
-		}
-		if (AnimationCount % 30 == 0) {
-			if (Mana <= InnerMana) {
-				Mana += 10;
-				if (Mana >= 1800) {
-					Mana = 1800;
-				}
-			}
-		}
-		//Reset Damage
-		if (AttackLong >= 50) {
-			AttackAccumulator = 0;
-		}
-		if (DamageAccumulator >= 400) {
-			DamageAccumulator = 0;
-		}
-
-		TRACE("d %d\n", direction);
-		TRACE("E d %d\n", hitDirection);
-		//some basic movement
-
-		/*
-		if (isGettingHit) {
-		}
-		*/
-		SetMoving();
-		if (isJumpping) {
-			JumpCount++;
-		}
-		if (isDefense) {
-			ShowDefense();
-		}
-		if (isAttacking) {
-			ShowAttack();
-		}
-		if (isRunning && isDefense) {
-			ShowRoll();
-		}
-		if (isGettingHit) {
-			ShowKnock();
-
-			if (direction == 0) {
-				if (hitDirection == 0) {
-					this->SetXY(xPos - 1, yPos);
-				}
-				else if (hitDirection == 1) {
-					this->SetXY(xPos + 1, yPos);
-				}
-			}
-			else if (direction == 1) {
-				if (hitDirection == 0) {
-					this->SetXY(xPos + 1, yPos);
-				}
-				else if (hitDirection == 1) {
-					this->SetXY(xPos - 1, yPos);
-				}
-			}
-		}
-
-		//calculate input time diff
-		KeyBoardInputTime++;
-	}
 
 	void Character::SetMovingDown(bool flag) {
 		isMovingDown = flag;
@@ -545,222 +476,6 @@ namespace game_framework {
 		}
 	}
 
-	void Character::OnShow() {
-		switch (AnimationState)
-		{
-		case 0:
-			Animation.Normal[direction].OnMove();
-			Animation.Normal[direction].SetTopLeft(xPos, yPos);
-			Animation.Normal[direction].OnShow();
-			break;
-		case 1:
-			Animation.Walk[direction].OnMove();
-			Animation.Walk[direction].SetTopLeft(xPos, yPos);
-			Animation.Walk[direction].OnShow();
-			break;
-		case 2:
-			Animation.Run[direction].OnMove();
-			Animation.Run[direction].SetTopLeft(xPos, yPos);
-			Animation.Run[direction].OnShow();
-			break;
-		case 3:
-			Animation.RunStop[direction].SetTopLeft(xPos, yPos);
-			Animation.RunStop[direction].ShowBitmap();
-			break;
-		case 4:
-			Animation.Jump[direction][0].SetTopLeft(xPos, yPos);
-			Animation.Jump[direction][0].ShowBitmap();
-			break;
-		case 5:
-			//land
-			Animation.Jump[direction][1].SetTopLeft(xPos, yPos);
-			Animation.Jump[direction][1].ShowBitmap();
-			break;
-		case 6:
-			if (isRunning) {
-				Animation.Jump[direction][3].SetTopLeft(xPos, yPos);
-				Animation.Jump[direction][3].ShowBitmap();
-				break;
-			}
-			else {
-				Animation.Jump[direction][2].SetTopLeft(xPos, yPos);
-				Animation.Jump[direction][2].ShowBitmap();
-				break;
-			}
-		case 7:
-			Animation.Defense[direction][0].SetTopLeft(xPos, yPos);
-			Animation.Defense[direction][0].ShowBitmap();
-			break;
-		case 8:
-			Animation.Defense[direction][1].SetTopLeft(xPos, yPos);
-			Animation.Defense[direction][1].ShowBitmap();
-			break;
-		case 9:
-			Animation.Roll[direction][0].SetTopLeft(xPos, yPos);
-			Animation.Roll[direction][0].ShowBitmap();
-			break;
-		case 10:
-			Animation.Roll[direction][1].SetTopLeft(xPos, yPos);
-			Animation.Roll[direction][1].ShowBitmap();
-			break;
-			//Attack
-		case 11:
-			Animation.NormalAttack1[direction][0].SetTopLeft(xPos, yPos);
-			Animation.NormalAttack1[direction][0].ShowBitmap();
-			break;
-		case 12:
-			Animation.NormalAttack1[direction][1].SetTopLeft(xPos, yPos);
-			Animation.NormalAttack1[direction][1].ShowBitmap();
-			break;
-		case 13:
-			Animation.NormalAttack2[direction][0].SetTopLeft(xPos, yPos);
-			Animation.NormalAttack2[direction][0].ShowBitmap();
-			break;
-		case 14:
-			Animation.NormalAttack2[direction][1].SetTopLeft(xPos, yPos);
-			Animation.NormalAttack2[direction][1].ShowBitmap();
-			break;
-		case 15:
-			Animation.NormalAttack3[direction][0].SetTopLeft(xPos, yPos);
-			Animation.NormalAttack3[direction][0].ShowBitmap();
-			break;
-		case 16:
-			Animation.NormalAttack3[direction][1].SetTopLeft(xPos, yPos);
-			Animation.NormalAttack3[direction][1].ShowBitmap();
-			break;
-		case 17:
-			Animation.NormalAttack3[direction][2].SetTopLeft(xPos, yPos);
-			Animation.NormalAttack3[direction][2].ShowBitmap();
-			break;
-		case 18:
-			Animation.HeavyAttack[direction][0].SetTopLeft(xPos, yPos);
-			Animation.HeavyAttack[direction][0].ShowBitmap();
-			break;
-		case 19:
-			Animation.HeavyAttack[direction][1].SetTopLeft(xPos, yPos);
-			Animation.HeavyAttack[direction][1].ShowBitmap();
-			break;
-		case 20:
-			Animation.HeavyAttack[direction][2].SetTopLeft(xPos, yPos);
-			Animation.HeavyAttack[direction][2].ShowBitmap();
-			break;
-		case 21:
-			Animation.HeavyAttack[direction][3].SetTopLeft(xPos, yPos);
-			Animation.HeavyAttack[direction][3].ShowBitmap();
-			break;
-		case 22:
-			Animation.HeavyAttack[direction][4].SetTopLeft(xPos, yPos);
-			Animation.HeavyAttack[direction][4].ShowBitmap();
-			break;
-		case 23:
-			Animation.JumpAttack[direction][0].SetTopLeft(xPos, yPos);
-			Animation.JumpAttack[direction][0].ShowBitmap();
-			break;
-		case 24:
-			Animation.JumpAttack[direction][1].SetTopLeft(xPos, yPos);
-			Animation.JumpAttack[direction][1].ShowBitmap();
-			break;
-		case 25:
-			Animation.JumpAttack[direction][2].SetTopLeft(xPos, yPos);
-			Animation.JumpAttack[direction][2].ShowBitmap();
-			break;
-		case 26:
-			Animation.JumpHeavyAttack[direction][0].SetTopLeft(xPos, yPos);
-			Animation.JumpHeavyAttack[direction][0].ShowBitmap();
-			break;
-		case 27:
-			Animation.JumpHeavyAttack[direction][1].SetTopLeft(xPos, yPos);
-			Animation.JumpHeavyAttack[direction][1].ShowBitmap();
-			break;
-		case 28:
-			Animation.JumpHeavyAttack[direction][2].SetTopLeft(xPos, yPos);
-			Animation.JumpHeavyAttack[direction][2].ShowBitmap();
-			break;
-			//Since Knock is complicated, so begin at 100
-		case 100:
-			Animation.Knock[direction][0].SetTopLeft(xPos, yPos);
-			Animation.Knock[direction][0].ShowBitmap();
-			break;
-		case 101:
-			Animation.Knock[direction][1].SetTopLeft(xPos, yPos);
-			Animation.Knock[direction][1].ShowBitmap();
-			break;
-		case 102:
-			Animation.Knock[direction][2].SetTopLeft(xPos, yPos);
-			Animation.Knock[direction][2].ShowBitmap();
-			break;
-		case 103:
-			Animation.Knock2[direction][0].SetTopLeft(xPos, yPos);
-			Animation.Knock2[direction][0].ShowBitmap();
-			break;
-		case 104:
-			Animation.Knock2[direction][1].SetTopLeft(xPos, yPos);
-			Animation.Knock2[direction][1].ShowBitmap();
-			break;
-		case 105:
-			Animation.Knock2[direction][2].SetTopLeft(xPos, yPos);
-			Animation.Knock2[direction][2].ShowBitmap();
-			break;
-		case 110:
-			Animation.KnockFront[direction][0].SetTopLeft(xPos, yPos);
-			Animation.KnockFront[direction][0].ShowBitmap();
-			break;
-		case 111:
-			Animation.KnockFront[direction][1].SetTopLeft(xPos, yPos);
-			Animation.KnockFront[direction][1].ShowBitmap();
-			break;
-		case 112:
-			Animation.KnockFront[direction][2].SetTopLeft(xPos, yPos);
-			Animation.KnockFront[direction][2].ShowBitmap();
-			break;
-		case 113:
-			Animation.KnockFront[direction][3].SetTopLeft(xPos, yPos);
-			Animation.KnockFront[direction][3].ShowBitmap();
-			break;
-		case 114:
-			Animation.KnockFront[direction][4].SetTopLeft(xPos, yPos);
-			Animation.KnockFront[direction][4].ShowBitmap();
-			break;
-		case 115:
-			Animation.KnockFront[direction][5].SetTopLeft(xPos, yPos);
-			Animation.KnockFront[direction][5].ShowBitmap();
-			break;
-		case 116:
-			Animation.KnockFront[direction][6].SetTopLeft(xPos, yPos);
-			Animation.KnockFront[direction][6].ShowBitmap();
-			break;
-		case 120:
-			Animation.KnockBack[direction][0].SetTopLeft(xPos, yPos);
-			Animation.KnockBack[direction][0].ShowBitmap();
-			break;
-		case 121:
-			Animation.KnockBack[direction][1].SetTopLeft(xPos, yPos);
-			Animation.KnockBack[direction][1].ShowBitmap();
-			break;
-		case 122:
-			Animation.KnockBack[direction][2].SetTopLeft(xPos, yPos);
-			Animation.KnockBack[direction][2].ShowBitmap();
-			break;
-		case 123:
-			Animation.KnockBack[direction][3].SetTopLeft(xPos, yPos);
-			Animation.KnockBack[direction][3].ShowBitmap();
-			break;
-		case 124:
-			Animation.KnockBack[direction][4].SetTopLeft(xPos, yPos);
-			Animation.KnockBack[direction][4].ShowBitmap();
-			break;
-		case 125:
-			Animation.KnockBack[direction][5].SetTopLeft(xPos, yPos);
-			Animation.KnockBack[direction][5].ShowBitmap();
-			break;
-		case 126:
-			Animation.KnockBack[direction][6].SetTopLeft(xPos, yPos);
-			Animation.KnockBack[direction][6].ShowBitmap();
-			break;
-		default:
-			break;
-		}
-	}
 
 	Character::~Character() {
 
@@ -795,6 +510,7 @@ namespace game_framework {
 
 	void Freeze::SetCharacter() {
 		Animation.LoadFreeze();
+		InitSpecialAttack();
 		name = "Freeze";
 	}
 
@@ -1172,10 +888,16 @@ namespace game_framework {
 			}
 			break;
 		case 7:
-			if (KnockCount <= 10) {
+			if (KnockCount == 0) {
+				//init velocity
+				InitialVelocity = 2;
+				YVelocity = InitialVelocity;
+				KnockSpeed=1;
+			}
+			if (KnockCount <= 3) {
 				AnimationState = 110;
 			}
-			else if (KnockCount <= 20) {
+			else if (KnockCount <= 6) {
 				AnimationState = 111;
 			}
 			else if (KnockCount <= 30) {
@@ -1228,6 +950,395 @@ namespace game_framework {
 					DamageAccumulator = 0;
 				}
 			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	void Freeze::InitSpecialAttack() {
+		//Freeze Ball Attack
+		FrozenBallAnimation[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_0.bmp", RGB(0, 0, 0));
+		FrozenBallAnimation[0][1].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_1.bmp", RGB(0, 0, 0));
+		FrozenBallAnimation[0][2].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_2.bmp", RGB(0, 0, 0));
+		FrozenBallAnimation[0][3].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_3.bmp", RGB(0, 0, 0));
+		FrozenBallAnimation[0][4].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_4.bmp", RGB(0, 0, 0));
+		FrozenBallAnimation[0][5].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_5.bmp", RGB(0, 0, 0));
+		FrozenBallAnimation[1][0].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_9.bmp", RGB(0, 0, 0));
+		FrozenBallAnimation[1][1].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_8.bmp", RGB(0, 0, 0));
+		FrozenBallAnimation[1][2].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_7.bmp", RGB(0, 0, 0));
+		FrozenBallAnimation[1][3].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_6.bmp", RGB(0, 0, 0));
+		FrozenBallAnimation[1][4].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_5.bmp", RGB(0, 0, 0));
+		FrozenBallAnimation[1][5].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_4.bmp", RGB(0, 0, 0));
+	}
+
+	void Freeze::OnMove() {
+		AnimationCount++;
+		if (!isAttacking) {
+			AttackLong = 0;
+		}
+		else {
+			AttackLong++;
+		}
+		//Heal
+		if (AnimationCount % 150 == 0) {
+			if (HealthPoint <= InnerHealPoint) {
+				HealthPoint += 30;
+				if (HealthPoint >= 1800) {
+					HealthPoint = 1800;
+				}
+			}
+		}
+		if (AnimationCount % 30 == 0) {
+			if (Mana <= InnerMana) {
+				Mana += 10;
+				if (Mana >= 1800) {
+					Mana = 1800;
+				}
+			}
+		}
+		//Reset Damage
+		if (AttackLong >= 50) {
+			AttackAccumulator = 0;
+		}
+		if (DamageAccumulator >= 400) {
+			DamageAccumulator = 0;
+		}
+
+		//TRACE("d %d\n", direction);
+		//TRACE("E d %d\n", hitDirection);
+		//some basic movement
+
+		/*
+		if (isGettingHit) {
+		}
+		*/
+		SetMoving();
+		if (isJumpping) {
+			JumpCount++;
+		}
+		if (isDefense) {
+			ShowDefense();
+		}
+		if (isAttacking) {
+			ShowAttack();
+		}
+		if (isRunning && isDefense) {
+			ShowRoll();
+		}
+		if (isGettingHit) {
+			ShowKnock();
+			TRACE("KnockCount %d\n", KnockCount);
+			int sspeed = 1;
+			/*
+			if (KnockCount == 10) {
+				sspeed = 10;
+			}
+			else if (KnockCount == 110) {
+				sspeed = 50;
+			}
+			*/
+			if (direction == 0) {
+				if (hitDirection == 0) {
+					this->SetXY(xPos - sspeed, yPos);
+				}
+				else if (hitDirection == 1) {
+					this->SetXY(xPos + sspeed, yPos);
+				}
+			}
+			else if (direction == 1) {
+				if (hitDirection == 0) {
+					this->SetXY(xPos + sspeed, yPos);
+				}
+				else if (hitDirection == 1) {
+					this->SetXY(xPos - sspeed, yPos);
+				}
+			}
+			//if (KnockCount ==  || KnockCount == 110) {
+			//}
+		}
+		if (SpecialAttackState != 0) {
+			CallSpecial();
+		}
+
+		//calculate input time diff
+		KeyBoardInputTime++;
+	}
+	void Freeze::OnShow() {
+		switch (AnimationState)
+		{
+		case 0:
+			Animation.Normal[direction].OnMove();
+			Animation.Normal[direction].SetTopLeft(xPos, yPos);
+			Animation.Normal[direction].OnShow();
+			break;
+		case 1:
+			Animation.Walk[direction].OnMove();
+			Animation.Walk[direction].SetTopLeft(xPos, yPos);
+			Animation.Walk[direction].OnShow();
+			break;
+		case 2:
+			Animation.Run[direction].OnMove();
+			Animation.Run[direction].SetTopLeft(xPos, yPos);
+			Animation.Run[direction].OnShow();
+			break;
+		case 3:
+			Animation.RunStop[direction].SetTopLeft(xPos, yPos);
+			Animation.RunStop[direction].ShowBitmap();
+			break;
+		case 4:
+			Animation.Jump[direction][0].SetTopLeft(xPos, yPos);
+			Animation.Jump[direction][0].ShowBitmap();
+			break;
+		case 5:
+			//land
+			Animation.Jump[direction][1].SetTopLeft(xPos, yPos);
+			Animation.Jump[direction][1].ShowBitmap();
+			break;
+		case 6:
+			if (isRunning) {
+				Animation.Jump[direction][3].SetTopLeft(xPos, yPos);
+				Animation.Jump[direction][3].ShowBitmap();
+				break;
+			}
+			else {
+				Animation.Jump[direction][2].SetTopLeft(xPos, yPos);
+				Animation.Jump[direction][2].ShowBitmap();
+				break;
+			}
+		case 7:
+			Animation.Defense[direction][0].SetTopLeft(xPos, yPos);
+			Animation.Defense[direction][0].ShowBitmap();
+			break;
+		case 8:
+			Animation.Defense[direction][1].SetTopLeft(xPos, yPos);
+			Animation.Defense[direction][1].ShowBitmap();
+			break;
+		case 9:
+			Animation.Roll[direction][0].SetTopLeft(xPos, yPos);
+			Animation.Roll[direction][0].ShowBitmap();
+			break;
+		case 10:
+			Animation.Roll[direction][1].SetTopLeft(xPos, yPos);
+			Animation.Roll[direction][1].ShowBitmap();
+			break;
+			//Attack
+		case 11:
+			Animation.NormalAttack1[direction][0].SetTopLeft(xPos, yPos);
+			Animation.NormalAttack1[direction][0].ShowBitmap();
+			break;
+		case 12:
+			Animation.NormalAttack1[direction][1].SetTopLeft(xPos, yPos);
+			Animation.NormalAttack1[direction][1].ShowBitmap();
+			break;
+		case 13:
+			Animation.NormalAttack2[direction][0].SetTopLeft(xPos, yPos);
+			Animation.NormalAttack2[direction][0].ShowBitmap();
+			break;
+		case 14:
+			Animation.NormalAttack2[direction][1].SetTopLeft(xPos, yPos);
+			Animation.NormalAttack2[direction][1].ShowBitmap();
+			break;
+		case 15:
+			Animation.NormalAttack3[direction][0].SetTopLeft(xPos, yPos);
+			Animation.NormalAttack3[direction][0].ShowBitmap();
+			break;
+		case 16:
+			Animation.NormalAttack3[direction][1].SetTopLeft(xPos, yPos);
+			Animation.NormalAttack3[direction][1].ShowBitmap();
+			break;
+		case 17:
+			Animation.NormalAttack3[direction][2].SetTopLeft(xPos, yPos);
+			Animation.NormalAttack3[direction][2].ShowBitmap();
+			break;
+		case 18:
+			Animation.HeavyAttack[direction][0].SetTopLeft(xPos, yPos);
+			Animation.HeavyAttack[direction][0].ShowBitmap();
+			break;
+		case 19:
+			Animation.HeavyAttack[direction][1].SetTopLeft(xPos, yPos);
+			Animation.HeavyAttack[direction][1].ShowBitmap();
+			break;
+		case 20:
+			Animation.HeavyAttack[direction][2].SetTopLeft(xPos, yPos);
+			Animation.HeavyAttack[direction][2].ShowBitmap();
+			break;
+		case 21:
+			Animation.HeavyAttack[direction][3].SetTopLeft(xPos, yPos);
+			Animation.HeavyAttack[direction][3].ShowBitmap();
+			break;
+		case 22:
+			Animation.HeavyAttack[direction][4].SetTopLeft(xPos, yPos);
+			Animation.HeavyAttack[direction][4].ShowBitmap();
+			break;
+		case 23:
+			Animation.JumpAttack[direction][0].SetTopLeft(xPos, yPos);
+			Animation.JumpAttack[direction][0].ShowBitmap();
+			break;
+		case 24:
+			Animation.JumpAttack[direction][1].SetTopLeft(xPos, yPos);
+			Animation.JumpAttack[direction][1].ShowBitmap();
+			break;
+		case 25:
+			Animation.JumpAttack[direction][2].SetTopLeft(xPos, yPos);
+			Animation.JumpAttack[direction][2].ShowBitmap();
+			break;
+		case 26:
+			Animation.JumpHeavyAttack[direction][0].SetTopLeft(xPos, yPos);
+			Animation.JumpHeavyAttack[direction][0].ShowBitmap();
+			break;
+		case 27:
+			Animation.JumpHeavyAttack[direction][1].SetTopLeft(xPos, yPos);
+			Animation.JumpHeavyAttack[direction][1].ShowBitmap();
+			break;
+		case 28:
+			Animation.JumpHeavyAttack[direction][2].SetTopLeft(xPos, yPos);
+			Animation.JumpHeavyAttack[direction][2].ShowBitmap();
+			break;
+			//Since Knock is complicated, so begin at 100
+		case 100:
+			Animation.Knock[direction][0].SetTopLeft(xPos, yPos);
+			Animation.Knock[direction][0].ShowBitmap();
+			break;
+		case 101:
+			Animation.Knock[direction][1].SetTopLeft(xPos, yPos);
+			Animation.Knock[direction][1].ShowBitmap();
+			break;
+		case 102:
+			Animation.Knock[direction][2].SetTopLeft(xPos, yPos);
+			Animation.Knock[direction][2].ShowBitmap();
+			break;
+		case 103:
+			Animation.Knock2[direction][0].SetTopLeft(xPos, yPos);
+			Animation.Knock2[direction][0].ShowBitmap();
+			break;
+		case 104:
+			Animation.Knock2[direction][1].SetTopLeft(xPos, yPos);
+			Animation.Knock2[direction][1].ShowBitmap();
+			break;
+		case 105:
+			Animation.Knock2[direction][2].SetTopLeft(xPos, yPos);
+			Animation.Knock2[direction][2].ShowBitmap();
+			break;
+		case 110:
+			Animation.KnockFront[direction][0].SetTopLeft(xPos, yPos);
+			Animation.KnockFront[direction][0].ShowBitmap();
+			break;
+		case 111:
+			Animation.KnockFront[direction][1].SetTopLeft(xPos, yPos);
+			Animation.KnockFront[direction][1].ShowBitmap();
+			break;
+		case 112:
+			Animation.KnockFront[direction][2].SetTopLeft(xPos, yPos);
+			Animation.KnockFront[direction][2].ShowBitmap();
+			break;
+		case 113:
+			Animation.KnockFront[direction][3].SetTopLeft(xPos, yPos);
+			Animation.KnockFront[direction][3].ShowBitmap();
+			break;
+		case 114:
+			Animation.KnockFront[direction][4].SetTopLeft(xPos, yPos);
+			Animation.KnockFront[direction][4].ShowBitmap();
+			break;
+		case 115:
+			Animation.KnockFront[direction][5].SetTopLeft(xPos, yPos);
+			Animation.KnockFront[direction][5].ShowBitmap();
+			break;
+		case 116:
+			Animation.KnockFront[direction][6].SetTopLeft(xPos, yPos);
+			Animation.KnockFront[direction][6].ShowBitmap();
+			break;
+		case 120:
+			Animation.KnockBack[direction][0].SetTopLeft(xPos, yPos);
+			Animation.KnockBack[direction][0].ShowBitmap();
+			break;
+		case 121:
+			Animation.KnockBack[direction][1].SetTopLeft(xPos, yPos);
+			Animation.KnockBack[direction][1].ShowBitmap();
+			break;
+		case 122:
+			Animation.KnockBack[direction][2].SetTopLeft(xPos, yPos);
+			Animation.KnockBack[direction][2].ShowBitmap();
+			break;
+		case 123:
+			Animation.KnockBack[direction][3].SetTopLeft(xPos, yPos);
+			Animation.KnockBack[direction][3].ShowBitmap();
+			break;
+		case 124:
+			Animation.KnockBack[direction][4].SetTopLeft(xPos, yPos);
+			Animation.KnockBack[direction][4].ShowBitmap();
+			break;
+		case 125:
+			Animation.KnockBack[direction][5].SetTopLeft(xPos, yPos);
+			Animation.KnockBack[direction][5].ShowBitmap();
+			break;
+		case 126:
+			Animation.KnockBack[direction][6].SetTopLeft(xPos, yPos);
+			Animation.KnockBack[direction][6].ShowBitmap();
+			break;
+		case 200:
+			FrozenBallAnimation[direction][0].SetTopLeft(xPos, yPos);
+			FrozenBallAnimation[direction][0].ShowBitmap();
+			break;
+		case 201:
+			FrozenBallAnimation[direction][1].SetTopLeft(xPos, yPos);
+			FrozenBallAnimation[direction][1].ShowBitmap();
+			break;
+		case 202:
+			FrozenBallAnimation[direction][2].SetTopLeft(xPos, yPos);
+			FrozenBallAnimation[direction][2].ShowBitmap();
+			break;
+		case 203:
+			FrozenBallAnimation[direction][3].SetTopLeft(xPos, yPos);
+			FrozenBallAnimation[direction][3].ShowBitmap();
+			break;
+		case 204:
+			FrozenBallAnimation[direction][4].SetTopLeft(xPos, yPos);
+			FrozenBallAnimation[direction][4].ShowBitmap();
+			break;
+		case 205:
+			FrozenBallAnimation[direction][5].SetTopLeft(xPos, yPos);
+			FrozenBallAnimation[direction][5].ShowBitmap();
+			break;
+		default:
+			break;
+		}
+	}
+
+	void Freeze::FrozenBall() {
+		SpCount++;
+		if (SpCount <= 5) {
+			AnimationState = 200;
+		}
+		else if (SpCount <= 10) {
+			AnimationState = 201;
+		}
+		else if (SpCount <= 15) {
+			AnimationState = 202;
+		}
+		else if (SpCount <= 20) {
+			AnimationState = 203;
+		}
+		else if (SpCount <= 25) {
+			AnimationState = 204;
+		}
+		else if (SpCount <= 30) {
+			AnimationState = 205;
+			if (SpCount >= 30) {
+				SpCount = 0;
+				SpecialAttackState = 0;
+			}
+		}
+	}
+
+	void Freeze::CallSpecial() {
+		switch (SpecialAttackState)
+		{
+		case 0:
+			break;
+		case 1:
+			//TRACE("FrozenBall\n");
+			return FrozenBall();
 			break;
 		default:
 			break;

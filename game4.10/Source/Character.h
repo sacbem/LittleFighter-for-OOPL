@@ -18,8 +18,8 @@ namespace game_framework {
 		int	 GetHealth();
 		void Initialize();
 		virtual void SetCharacter() = 0;
-		void OnShow();
-		void OnMove();
+		virtual void OnShow()=0;
+		virtual void OnMove() = 0;
 		void SetMovingDown(bool flag);
 		void SetMovingLeft(bool flag);
 		void SetMovingRight(bool flag);
@@ -66,6 +66,7 @@ namespace game_framework {
 
 		int LeftCount = 0;
 		int RightCount = 0;
+		int KeyBoardInputTime;
 	protected:
         CMovingBitmap photoSticker;
         void DistaceAccumulator();
@@ -108,6 +109,10 @@ namespace game_framework {
 		int LastKnockState = 0;
 		int KnockCount = 0;
 		int DamageAccumulator = 0;
+		int KnockSpeed;
+
+		int SpecialAttackState = 0;
+		virtual void CallSpecial() = 0;
 
 		virtual bool isAttackFrame() = 0;
 		virtual bool AttackReach() = 0;
@@ -142,7 +147,6 @@ namespace game_framework {
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) = 0;
 
 		//keyInput
-		int KeyBoardInputTime;
 		int LastInputTime;
 		int Diff;
 		UINT LastInput;									//�W�@�ӿ�J
@@ -151,11 +155,8 @@ namespace game_framework {
 	class Freeze:public Character {
 	public:
 		//change to freeze
-		CMovingBitmap NormalAttack[2][4]; //0_10 ~ 13
-		CMovingBitmap NormalAttack2[2][3]; //0_50 ~ 52
-		CMovingBitmap HeavyAttack[2][4]; //0_17 0_18 0_19 0_29
-		CMovingBitmap JumpAttack[2][3]; //0_14 0_15 0_16
-		CMovingBitmap AttackLand[2][2]; //0_39  0_49
+		virtual void OnShow() override;
+		virtual void OnMove() override;
 
 		virtual void SetAttack(bool flag) override;
 		virtual void ShowAttack() override;
@@ -170,7 +171,14 @@ namespace game_framework {
 		//Movement
 		virtual void ShowDefense() override;
 		virtual void ShowRoll() override;
+		//Special Attack;
+		virtual void CallSpecial() override;
+
+		int SpCount=0;
+		void InitSpecialAttack();
+		void FrozenBall();
 	protected:
+		CMovingBitmap FrozenBallAnimation[2][6];
 		virtual bool AttackReach() override;
 
 	private:
