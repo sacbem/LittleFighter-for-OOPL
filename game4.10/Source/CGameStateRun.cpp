@@ -15,17 +15,18 @@ using namespace std;
 #define Forest 100
 namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
+		CharacterList.reserve(2);
 		//EnemyTest = new Character();
 		HealthPlayer1 = new HealthBar();
-		//HealthPlayer2 = new HealthBar();
+		HealthPlayer2 = new HealthBar();
         maps = new Map(Forest);
 		charactersPosition.resize(1); // resize 為腳色數量 : 1
 
 
 	}
 
-	void CGameStateRun::OnBeginState(){
-		//EnemyTest->SetXY(500, 200);
+	void CGameStateRun::OnBeginState()
+	{
 		//_CrtDumpMemoryLeaks();
 		for (int i = 0; i < 2; i++) {
 			charactersPosition[0].push_back(200);
@@ -37,14 +38,21 @@ namespace game_framework {
 		CleanCounter++;
 		if (CleanCounter >= 10) {
 			CleanCounter = 0;
-			/*
 			if (EnemyTest->GetHealth() <= 0) {
 				EnemyTest->SetAlive(false);
 			}
-			*/
 		}
 
 		PlayerTest->OnMove();
+		EnemyTest->OnMove();
+		if (PlayerTest->HitEnemy(EnemyTest) && PlayerTest->isAttacking) {
+			if (EnemyTest->HealthPoint > 0) {
+				//int hitDirection = PlayerTest->GetDir();
+				EnemyTest->SetKnock(true, PlayerTest->GetDir(), PlayerTest->AttackState);
+				EnemyTest->isGettingDamage(PlayerTest->AttackPoint);
+			}
+		}
+		maps->ResetCharactAccumulator(PlayerTest->GetDistance(), PlayerTest->GetDistance());
 		//EnemyTest->OnMove();
 		PlayerTest->DistanceAccumulatorReset();
 		maps->ScenesCamera(PlayerTest->isRunning, PlayerTest->GetDir(), PlayerTest->GetDistance());
@@ -58,10 +66,10 @@ namespace game_framework {
 
         maps->Load(Forest);
 		HealthPlayer1->init();
-		//HealthPlayer2->init();
+		HealthPlayer2->init();
+
 		HealthPlayer1->OnLoad(0, 0);
-		//HealthPlayer2->OnLoad(400, 0);
-		//_CrtDumpMemoryLeaks();
+		HealthPlayer2->OnLoad(400, 0);
 
 	}
 
@@ -82,6 +90,8 @@ namespace game_framework {
 			ifs.open("CharacterSelected.txt");
 			ifs.read(buffer, sizeof(buffer));
 			ifs.close();
+			CharacterList.push_back(new Freeze());
+
 			//if (selectCharacterID==0) {
 			//	PlayerTest = new Freeze();
 			//}
@@ -89,17 +99,26 @@ namespace game_framework {
 			PlayerTest->SetXY(200, 200);
 			PlayerTest->SetCharacter();
 
+			EnemyTest = new Freeze();
+			EnemyTest->SetXY(400,200);
+			EnemyTest->SetCharacter();
+			
 			//EnemyTest->SetCharacter(buffer[1] - '0');
 			PlayerTest->getCharacter = true;
+			EnemyTest->getCharacter = true;
+			
 			GetCharacter = true;
-			//EnemyTest->getCharacter = true;
 			//load HealthBar small character
 			HealthPlayer1->loadSmallImg(1);
-			//HealthPlayer2->loadSmallImg(buffer[1] - '0');
+			HealthPlayer2->loadSmallImg(1);
 		}
 		
         maps->PrintMap();
 		PlayerTest->OnShow();
+		EnemyTest->OnShow();
+		HealthPlayer1->OnShow(PlayerTest->HealthPoint, PlayerTest->InnerHealPoint, PlayerTest->Mana, PlayerTest->InnerMana);
+		HealthPlayer2->OnShow(EnemyTest->HealthPoint, EnemyTest->InnerHealPoint, EnemyTest->Mana, EnemyTest->InnerMana);
+		//_CrtDumpMemoryLeaks();
 		maps->DynamicScence(PlayerTest->GetDir(), PlayerTest->GetDistance());
 		
 		CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
@@ -114,9 +133,12 @@ namespace game_framework {
 		pDC->TextOut(120, 220, str);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();
-		HealthPlayer1->OnShow(PlayerTest->HealthPoint);
 	}
     CGameStateRun::~CGameStateRun(){
-		delete maps, HealthPlayer1;//, HealthPlayer2;
+		delete maps, HealthPlayer1, HealthPlayer2, PlayerTest, EnemyTest;
+
+		for (auto& i : CharacterList) {
+			delete i;
+		}
     }
 }
