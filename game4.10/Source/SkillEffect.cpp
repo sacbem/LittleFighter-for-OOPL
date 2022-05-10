@@ -6,9 +6,10 @@
 #include "gamelib.h"
 #include "SkillEffect.h"
 namespace game_framework {
-    SkillEffect::SkillEffect(int skillsID) {
+    SkillEffect::SkillEffect(int skillsID, int createdTimes) {
         effectObj.reserve(5);
         skillID = skillsID;
+        createdTime = createdTimes;
         CreatEffectObj();
 
     }
@@ -69,7 +70,7 @@ namespace game_framework {
             break;
         }
     }
-    boolean  SkillEffect::SkillsProcess(vector<vector<int>> theOthersPosition) {
+    boolean  SkillEffect::SkillsProcess(vector<vector<int>> theOthersPosition,int duration) {
         switch (skillID) {
             //////////////// Freeze
         case static_cast<int>(skillsIdTable::frozenWave):
@@ -98,16 +99,23 @@ namespace game_framework {
         }
         SkillsFeedbackStatus(theOthersPosition);
 
-        if (GarbageCollectorTimer()) {
+        if (GarbageCollectorTimer(duration)) {
             return true;
         }
         else {
             return false;
         }
     }
-    boolean SkillEffect:: GarbageCollectorTimer() {
-        return true;
-
+    boolean SkillEffect:: GarbageCollectorTimer(int duration) {
+        const int skill_duration_1 = 5;
+        switch (duration){
+        case skill_duration_1:
+            return true;
+            break;
+        default:
+            return false;
+            break;
+        }
     }
     void  SkillEffect::SkillsFeedbackStatus(vector<vector<int>> theOthersPosition) {
 

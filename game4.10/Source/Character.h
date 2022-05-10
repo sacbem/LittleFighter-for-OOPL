@@ -1,3 +1,5 @@
+#pragma once
+#include "SkillEffect.h"
 #include "CharacterAnimation.h"
 namespace game_framework {
 	class Character
@@ -7,8 +9,8 @@ namespace game_framework {
 		Character(Character const & other);
 		~Character();
 		//int HitEnemy(Character* enemy);
-		virtual int HitEnemy(Character* enemy)=0;
-		bool isHitting;
+	
+	
 		bool GetAlive();
 		int  GetX1();					// Chracter
 		int  GetY1();					// Chracter
@@ -16,7 +18,12 @@ namespace game_framework {
 		int  GetY2();					// Chracter
 		int	 GetDir();
 		int	 GetHealth();
+		void isGettingDamage(int Damage);
+		int GetDistance();
+		int GetMovingTime(boolean isLeft);
+		int GetSkillSignal();
 		void Initialize();
+
 		virtual void SetCharacter() = 0;
 		void OnShow();
 		void OnMove();
@@ -27,20 +34,20 @@ namespace game_framework {
 		void SetRunning(bool flag);
 		void SetJumpping(bool flag);
 		void SetDefense(bool flag);
-		virtual void SetAttack(bool flag) = 0;
-		virtual void SetKnock(bool flag, int Dir, int AttState)=0;
-		void InputKeyDown(UINT nChar);
-		void InputKeyUp(UINT nChar);
-		boolean IsStatic();
-		boolean  DistanceAccumulatorReset();
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
-		void isGettingDamage(int Damage);
-		//void SetStatic();
-		//int GetState() ; //static :1 walking :2 running : 3
-        int GetDistance();
-		int GetMovingTime(boolean isLeft);
 		void SetMapBorder(int mapID);
+		virtual void SetAttack(bool flag) = 0;
+		virtual void SetKnock(bool flag, int Dir, int AttState)=0;
+		virtual void SetSkill() =0;
+		void InputKeyDown(UINT nChar);
+		void InputKeyUp(UINT nChar);
+
+		boolean IsStatic();
+		boolean  DistanceAccumulatorReset();
+		virtual int HitEnemy(Character* enemy) = 0;
+
+		
 		//basic informtion
 		bool getCharacter=false;
 		int characterNumber;
@@ -52,6 +59,7 @@ namespace game_framework {
 		int DefencePoint;
 		bool isAlive;
 		bool isWalking;
+		bool isHitting;
 		bool isRunning;
 		bool StopRun;
 
@@ -64,17 +72,18 @@ namespace game_framework {
 		virtual void ShowKnock() = 0;
 		int AttackState = 0;
 
-		int LeftCount = 0;
-		int RightCount = 0;
+		int leftTime = 0;
+		int rightTime = 0;
+		vector<int>skillsEffect_InFieldNumber;
 	protected:
-        CMovingBitmap photoSticker;
-        void DistaceAccumulator();
+		CMovingBitmap photoSticker;
+		void DistaceAccumulator();
 		int DelayCounter;
 		int Delay;
 		int xPos, yPos;
 		int xMapBorderMax, yMapBorderMax;
 		int xMapBorderMin, yMapBorderMin;
-        int xAccumulator, yAccumulator;
+		int xAccumulator, yAccumulator;
 		//judge
 		//direction
 		int direction;				// 0=Left 1=Right
@@ -84,8 +93,8 @@ namespace game_framework {
 		bool isMovingLeft;
 		bool isMovingRight;
 		bool isMovingUp;
-        int walkedDistance;
-
+		int walkedDistance;
+		
 		bool UnMovable;
 		//for jump
 		bool isJumpping;
@@ -127,16 +136,18 @@ namespace game_framework {
 		//Roll
 		int RollCount = 0;
 		//basic function
-		void SetMoving();
-
+		
+		
 		time_t L_start, L_finish;
 		time_t R_start, R_finish;
+		void SetMoving();
 	private:
 		//CMovingBitmap shadow;
 		//CMovingBitmap nameImg;
 		
 		//basic information
 		int speed=2;
+		int skillSignal;
 		//hit box
 		//int HitRectangle(int tx1, int ty1, int tx2, int ty2);
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) = 0;
@@ -151,6 +162,7 @@ namespace game_framework {
 	class Freeze:public Character {
 	public:
 		//change to freeze
+		Freeze();
 		CMovingBitmap NormalAttack[2][4]; //0_10 ~ 13
 		CMovingBitmap NormalAttack2[2][3]; //0_50 ~ 52
 		CMovingBitmap HeavyAttack[2][4]; //0_17 0_18 0_19 0_29
@@ -160,9 +172,14 @@ namespace game_framework {
 		virtual void SetAttack(bool flag) override;
 		virtual void ShowAttack() override;
 		virtual void SetCharacter() override;
+		virtual void SetSkill() override;
 		virtual int HitEnemy(Character* enemy) override;
 		virtual bool isAttackFrame() override;
 
+		~Freeze();
+		
+
+		
 		//Knock
 		virtual void ShowKnock() override;
 		virtual void SetKnock(bool flag, int Dir, int AttState) override;
@@ -176,6 +193,7 @@ namespace game_framework {
 	private:
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
 		vector <SkillEffect> frozenWaves, frozenPunchs, frozenSwords, frozenStorms;
+		vector <int>  frozenWaves_Duration;
 	};
 	
 	

@@ -122,7 +122,7 @@ namespace game_framework {
 // 這個class提供時間、錯誤等控制
 // 一般的遊戲並不需直接操作這個物件，因此可以不管這個class的使用方法
 /////////////////////////////////////////////////////////////////////////////
-static int selectCharacterID;
+static int selectCharacterID[2];
 class CSpecialEffect {
 public:
 	static void  SetCurrentTime();					// 儲存目前的時間至ctime
@@ -169,16 +169,16 @@ private:
 	static void  ReleaseSurface();
 	static void  RestoreSurface();
 	static void  SetColorKey(unsigned SurfaceID, COLORREF color);
-    static HDC					hdc;
+	static HDC					hdc;
 	static CDC					cdc;
 	static CView				*pCView;
-    static LPDIRECTDRAW2		lpDD;
+	static LPDIRECTDRAW2		lpDD;
 	static LPDIRECTDRAWCLIPPER	lpClipperPrimary;   
 	static LPDIRECTDRAWCLIPPER	lpClipperBack;   
 	static LPDIRECTDRAWSURFACE	lpDDSPrimary;
 	static LPDIRECTDRAWSURFACE	lpDDSBack;
 	static vector<LPDIRECTDRAWSURFACE>	lpDDS;
-    static HRESULT				ddrval;
+	static HRESULT				ddrval;
 	static vector<int>			BitmapID;
 	static vector<string>		BitmapName;
 	static vector<CRect>		BitmapRect;
