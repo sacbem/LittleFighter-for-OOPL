@@ -20,12 +20,17 @@ namespace game_framework {
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
         maps = new Map(Forest);
-		//_CrtDumpMemoryLeaks();
+		charactersPosition.resize(1); // resize 為腳色數量 : 1
+
+
 	}
 
 	void CGameStateRun::OnBeginState()
 	{
 		//_CrtDumpMemoryLeaks();
+		for (int i = 0; i < 2; i++) {
+			charactersPosition[0].push_back(200);
+		}
 	}
    
 	void CGameStateRun::OnMove()						// 移動遊戲元素
@@ -107,7 +112,7 @@ namespace game_framework {
 			HealthPlayer1->loadSmallImg(1);
 			HealthPlayer2->loadSmallImg(1);
 		}
-
+		
         maps->PrintMap();
 		PlayerTest->OnShow();
 		EnemyTest->OnShow();
@@ -124,7 +129,7 @@ namespace game_framework {
 		pDC->SetTextColor(RGB(255, 255, 0));
 
 		CString str;
-		str.Format("%d", PlayerTest->GetDistance());
+		str.Format("%d", PlayerTest->GetMovingTime(PlayerTest->GetDir()));
 		pDC->TextOut(120, 220, str);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();

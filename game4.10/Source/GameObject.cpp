@@ -6,22 +6,25 @@
 #include "gamelib.h"
 #include "GameObject.h"
 namespace game_framework {
-    GameObject::GameObject(const string type,int ind) {
+    GameObject::GameObject(const string type) {
         Initialize(type);
-        index = ind;
     }
     void  GameObject::Initialize(const string type) {
         if (type == "Scenes") {
             IsScenes = true;
-            IsWeapon = IsItem = false;
+            IsWeapon = IsItem = IsEffect = false;
         }
         else if (type == "Weapon") {
             IsWeapon = true;
-            IsScenes = IsItem = false;
+            IsScenes = IsItem = IsEffect = false;
         }
         else if (type == "Item") {
             IsItem = true;
-            IsScenes = IsWeapon = false;
+            IsScenes = IsWeapon = IsEffect = false;
+        }
+        else if (type == "Effect") {
+            IsEffect = true;
+            IsScenes = IsWeapon = IsItem = false;
         }
     }
     void GameObject::Load(int bitmap) {
@@ -33,8 +36,6 @@ namespace game_framework {
     void GameObject::SetTopLeft(int x, int y) { 
         xPos = x>=1600 ? 1600 :x; 
         xPos = x <= -800 ? -800 : x;
-       /* yPos = x >= 600 ? 600 : y;
-        xPos = x; */
         yPos = y;
         img.SetTopLeft(xPos, yPos);
     }

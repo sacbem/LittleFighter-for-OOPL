@@ -7,6 +7,7 @@
 #include "Character.h"
 #include "time.h"
 #include <cmath>
+#include <time.h>
 namespace game_framework {
 
 	Character::Character() {
@@ -93,15 +94,11 @@ namespace game_framework {
 	int Character::GetDistance() {
 		return walkedDistance;
 	}
-	//void Character::SetAccumulator(int x, int y, boolean resetSignal) {
-	//	if (resetSignal) {
-	//		walkedDistance = 0;
-	//		xAccumulator = x;
-	//		yAccumulator = y;
-	//	}
-	//}
+	int Character::GetMovingTime(boolean isLeft){
+		return isLeft ? LeftCount : RightCount;
+	}
 	boolean Character::DistanceAccumulatorReset() {
-		if (this->AnimationState) {
+		if (this->AnimationState  || walkedDistance < 3) {
 			return false;
 		}
 		else {

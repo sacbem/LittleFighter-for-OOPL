@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "HealthBar.h"
+#include "SkillEffect.h"
 #include "Map.h"
 #include <ctime>
 namespace game_framework {
@@ -12,6 +13,7 @@ namespace game_framework {
 		void OnKeyDown(UINT, UINT, UINT);
 		void OnKeyUp(UINT, UINT, UINT);
         //void MapSlide();
+		vector<vector<int>> charactersPosition;
 	protected:
 		void OnMove();									// ���ʹC������
 		void OnShow();									// ��ܳo�Ӫ��A���C���e��

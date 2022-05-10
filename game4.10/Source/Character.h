@@ -1,4 +1,5 @@
 #include "CharacterAnimation.h"
+#include "SkillEffect.h"
 namespace game_framework {
 	class Character
 	{
@@ -39,7 +40,7 @@ namespace game_framework {
 		//void SetStatic();
 		//int GetState() ; //static :1 walking :2 running : 3
         int GetDistance();
-        //void SetAccumulator(int, int,boolean resetSignal);
+		int GetMovingTime(boolean isLeft);
 		void SetMapBorder(int mapID);
 		//basic informtion
 		bool getCharacter=false;
@@ -183,6 +184,7 @@ namespace game_framework {
 
 	private:
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
+		vector <SkillEffect> frozenWaves, frozenPunchs, frozenSwords, frozenStorms;
 	};
 	
 	

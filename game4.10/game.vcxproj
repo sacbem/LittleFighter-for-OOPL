@@ -268,6 +268,7 @@
     </ClCompile>
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\SelCharacterConfig.cpp" />
+    <ClCompile Include="Source\SkillEffect.cpp" />
     <ClCompile Include="Source\StdAfx.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -302,6 +303,7 @@
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Resource.h" />
     <ClInclude Include="Source\SelCharacterConfig.h" />
+    <ClInclude Include="Source\SkillEffect.h" />
     <ClInclude Include="Source\StdAfx.h" />
     <ClInclude Include="Source\gamelib.h" />
   </ItemGroup>

@@ -43,19 +43,19 @@ namespace game_framework {
         case Forest:
 
             for (int floorNum = 0; floorNum < 3; floorNum++) {
-                floors.push_back(new GameObject("Scenes", floorNum));
+                floors.push_back(new GameObject("Scenes"));
             }
             for (int weedNum = 0; weedNum < 3; weedNum++) {
-                floorObjs.push_back(new GameObject("Scenes", weedNum));
+                floorObjs.push_back(new GameObject("Scenes"));
             }
             for (int treeNum = 0; treeNum < 8; treeNum++) {
-                backgroundFrontObjs.push_back(new GameObject("Scenes", treeNum));
+                backgroundFrontObjs.push_back(new GameObject("Scenes"));
             }
             for (int mountainNum = 0; mountainNum < 1; mountainNum++) {
-                backgroundBackObjs.push_back(new GameObject("Scenes", mountainNum));
+                backgroundBackObjs.push_back(new GameObject("Scenes"));
             }
             for (int skyNum = 0; skyNum < 3; skyNum++) {
-                backgroundSkyObjs.push_back(new GameObject("Scenes", skyNum));
+                backgroundSkyObjs.push_back(new GameObject("Scenes"));
             }
             break;
         default:
@@ -128,22 +128,6 @@ namespace game_framework {
         }
 
     }
-    //void Map:: DynamicScenceManager(boolean isLeft, int distance) {
-    //    for (auto &iter : mapBordary) {
-    //        if (!iter) {
-    //            if (gameScencePos.first == -800) {  ///左底場景判斷
-    //                if (!isLeft && distance!=0) {  /// 左底往右走
-    //                    iter = true;
-    //                }
-    //            }
-    //            else if (gameScencePos.first == 800) {
-    //                if (isLeft && distance != 0) {  /// 右底往左走
-    //                    iter = true;
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
     void Map::StopDynamic(boolean isLeft, int distance) {
         if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0) {/// 左/右底場景判斷
             mapBordary[0] = false;
@@ -192,30 +176,29 @@ namespace game_framework {
         StopDynamic(IsLeft, walkedDistance);
         int direction = IsLeft ? 1 : -1; // 往右 : 1 往左 : -1 
         if (mapBordary[0]) {
-            if (walkedDistance > forestSky_dx) {
+            if (walkedDistance > forestSky_dx ) {
                 for (auto& i : backgroundSkyObjs) {
                     i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
                 }
             }
         }
         if (mapBordary[1]) {
-            if (walkedDistance > forestTree_dx) {
+            if (walkedDistance > forestTree_dx  ) {
                 for (auto& i : backgroundFrontObjs) {
                     i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
                 }
             }
         }
         if (mapBordary[2]) {
-            if (walkedDistance > forestTree_dx) {
+            if (walkedDistance > forestTree_dx ) {
                 for (auto& i : floorObjs) {
                     i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
                 }
             }
         }
         if (mapBordary[3]) {
-            if (walkedDistance > forestMountain_dx2) {
+            if (walkedDistance > forestMountain_dx2 ) {
                 backgroundBackObjs[0]->SetTopLeftSpical(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
-                TRACE("%d 000000000000000000000000000000000000000000\n", direction);
             }
          }      
     }
@@ -258,18 +241,7 @@ namespace game_framework {
         for (auto i : floorObjs) {
             i->OnShow();
         }
-        CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
-        CFont f, * fp;
-        f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-        fp = pDC->SelectObject(&f);					// 選用 font f
-        pDC->SetBkColor(RGB(0, 0, 0));
-        pDC->SetTextColor(RGB(255, 255, 0));
 
-        CString str;
-        str.Format("%d", backgroundBackObjs[0]->GetPositionXY("X"));
-        pDC->TextOut(120, 290, str);
-        pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-        CDDraw::ReleaseBackCDC();
 
     }
     Map::~Map() {

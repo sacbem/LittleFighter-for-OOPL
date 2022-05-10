@@ -8,7 +8,6 @@ namespace game_framework{
         Map(int mapID);
         int GetScenesPos(const string type);
         void ScenesCamera(boolean IsRunning, boolean IsLeft, int walkedDistance);
-        //int GetScenesPos(Map& map, const string type);
         void Load(int mapID);
         void GenerateLand(int mapID);
         void PrintMap();
@@ -18,16 +17,14 @@ namespace game_framework{
       
     private:
         void InitializeAllObjs(int mapID);
-      /*  void DynamicScenceManager(boolean isLeft,int distance);*/
         void StopDynamic(boolean isLeft, int distance);
         void InitializeMap(int mapID);
         int rubberBandAccumulator(boolean IsRunning, boolean InBorder);
-        //boolean CharacterDetector(Character character);
         int rubberMode; // rubberMode:  0 => Mode => 1 => Mode : Walking, 2 => Mode : Runing
         pair <int, int> gameScencePos; // first -> ScenceMinPosition; second -> ScenceMaxPosition 
         vector<boolean>mapBordary;//1:sky 2:tree 3:land 4: mountain
         vector<vector<int>> map;  // 2400*600 80*60 per blank;  30 * 10
-        
+      
         vector<boolean> characterInBorder;
         vector<GameObject*> floors, floorObjs, backgroundFrontObjs, backgroundBackObjs, backgroundSkyObjs;
         /// <summary>
