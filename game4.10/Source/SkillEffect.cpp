@@ -38,7 +38,7 @@ namespace game_framework {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
 			for (auto& i : effectObj) {
-				i->SetTopLeft( x + 50 , y + 70);
+				
 			}
 			break;
 		case static_cast<int>(skillsIdTable::frozenPunch):
@@ -138,7 +138,11 @@ namespace game_framework {
 		}
 
 	}
-
+	void SkillEffect::OnShow() {
+		for (auto i : effectObj) {
+			i->OnShow();
+		}
+	}
 	SkillEffect::~SkillEffect() {
 		for (auto& i : effectObj) {
 			delete i;

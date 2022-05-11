@@ -7,6 +7,7 @@ namespace game_framework {
 		boolean SkillsProcess(vector<vector<int>> theOthersPosition, int duration);
 		void SkillsFeedbackStatus(vector<vector<int>>  theOthersPosition);
 		boolean GarbageCollectorTimer(int duration);
+		void OnShow();
 		//void GarbageCollector();
 		~SkillEffect();
 		int createdTime;
