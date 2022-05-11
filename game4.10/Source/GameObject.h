@@ -18,6 +18,7 @@ namespace game_framework {
 		int GetPositionXY(const string type);
 		int GetPositionXY(int id_x, int id_y,const string type);
 		void OnShow();
+		void OnShow(int id_x, int id_y);
 		~GameObject();
 	private:
 		int xPos, yPos;
