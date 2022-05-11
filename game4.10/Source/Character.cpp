@@ -579,6 +579,9 @@ namespace game_framework {
 		Animation.LoadFreeze();
 		InitSpecialAttack();
 		name = "Freeze";
+
+		frozenWaves.push_back(new SkillEffect(0, 100));
+		
 	}
 
 	void Freeze::ShowDefense() {
@@ -1118,6 +1121,8 @@ namespace game_framework {
 	}
 
 	void Freeze::OnMove() {
+		frozenWaves[0]->SetEffectObj(200, 200);
+
 		TRACE("UnMove %d\n", UnMovable);
 		AnimationCount++;
 		if (AnimationCount == 0) {
@@ -1131,6 +1136,7 @@ namespace game_framework {
 		}
 		//Heal
 		if (AnimationCount % 150 == 0) {
+			SpAnCount++;
 			if (HealthPoint <= InnerHealPoint) {
 				HealthPoint += 30;
 				if (HealthPoint >= 1800) {
@@ -1197,7 +1203,7 @@ namespace game_framework {
 			//if (KnockCount ==  || KnockCount == 110) {
 			//}
 		}
-		if (SkillSignal != 0) {
+		if (SkillSignal != -1) {
 			CallSpecial();
 		}
 
@@ -1205,6 +1211,8 @@ namespace game_framework {
 		KeyBoardInputTime++;
 	}
 	void Freeze::OnShow() {
+		frozenWaves[0]->OnShow(direction, 0);
+
 		switch (AnimationState)
 		{
 		case 0:
@@ -1658,21 +1666,36 @@ namespace game_framework {
 	}
 
 	void Freeze::CallSpecial() {
+		/*
+		if (SkillSignal == 1) {
+			CallfrozenPunchs();
+		}
+		else if (SkillSignal == 2) {
+			CallfrozenStorms();
+		}
+		else if (SkillSignal == 3) {
+			CallfrozenStorms();
+		}
+		*/
 		switch (SkillSignal)
 		{
 		case -1:
 			break;
+		case 0:
+			CallfrozenWaves();
+			//for (auto& i : frozenWaves) {
+				//i->SetEffectObj(200, 200);
+				//i->OnShow(0, 0);
+			//}
+			break;
 		case 1:
-			return CallfrozenPunchs();
+			CallfrozenPunchs();
 			break;
 		case 2:
-			return CallfrozenStorms();
+			CallfrozenStorms();
 			break;
 		case 3:
-			return CallfrozenWaves();
-			break;
-		case 4:
-			return CallfrozenSwords();
+			CallfrozenSwords();
 			break;
 		default:
 			break;

@@ -88,6 +88,9 @@ namespace game_framework {
     void GameObject::OnShow() {
         img.ShowBitmap();
     }
+    void GameObject::OnShow(int id_x, int id_y) {
+        imgs[id_x][id_y]->ShowBitmap();
+    }
     GameObject::~GameObject() {
         if (anotherDestructorEnable) {
             for (auto& i : imgs) {
