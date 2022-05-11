@@ -137,8 +137,6 @@ namespace game_framework {
 		const char KEY_TEST_SKILL1 = 0x5A; // keyboard Z
 		const char KEY_J = 0x4A;
 
-
-
 		Diff = KeyBoardInputTime - LastInputTime;
 		LastInputTime = KeyBoardInputTime;
 		if (!UnMovable) {
@@ -159,7 +157,7 @@ namespace game_framework {
 				//Sp
 				if (nChar == KEY_J) {
 					TRACE("Sp \n");
-					SpecialAttackState = 1;
+					skillSignal = 0;
 				}
 			}
 			//detect double click
@@ -197,9 +195,9 @@ namespace game_framework {
 		if (nChar == KEY_ENTER) {
 			SetAttack(true);
 		}
-		else if (nChar == KEY_TEST_SKILL1) {
+		/*else if (nChar == KEY_TEST_SKILL1) {
 			skillSignal = 0;
-		}
+		}*/
 	}
 
 	void Character::InputKeyUp(UINT nChar) {
@@ -494,11 +492,11 @@ namespace game_framework {
 	}
 
 	Freeze::Freeze() {
-		frozenWaves_Duration.reserve(1);
 		for (int i = 0; i < 5; i++) {
 			skillsEffect_InFieldNumber.push_back(0);
 		}
 	}
+	
 	int Freeze::HitEnemy(Character* enemy) {
 		if (isAttackFrame()) {
 			return HitRectangle(enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);
@@ -757,8 +755,7 @@ namespace game_framework {
 	}
 
 	bool Freeze::isAttackFrame() {
-		switch (AnimationState)
-		{
+		switch (AnimationState){
 		case 12:
 			return true;
 			break;
@@ -843,8 +840,7 @@ namespace game_framework {
 		//TRACE("Damage %d\n", DamageAccumulator);
 		//TRACE("Attack %d\n", AttackAccumulator);
 		KnockCount++;
-		switch (KnockState)
-		{
+		switch (KnockState){
 		case 1:
 			if (KnockCount <= 10) {
 				AnimationState = 100;
@@ -973,16 +969,24 @@ namespace game_framework {
 			break;
 		}
 	}
-	void Freeze::SetSkill() {
-			const int skill_duration = 5;
-			auto beginPos = skillsEffect_InFieldNumber.begin();
-			auto frozenWavesBegin = frozenWaves_Duration.begin();
-			if (this->GetSkillSignal() == 1) {
-				skillsEffect_InFieldNumber[0]++;
-				
-				
+	
+	void Freeze::SetSkill(int createdTimes) {
+			auto frozenWaves_Begin = frozenWaves.begin();
+			if (this->GetSkillSignal() == 0) {
+				frozenWaves.insert(frozenWaves_Begin,new SkillEffect(0, createdTimes));
+				skillsEffect_InFieldNumber[0] = frozenWaves.size();
+			}
+	}
+	
+	void Freeze::EffectObjectAliveManager(int mainTime) {
+		const int frozenWaves_AliveTime = 5;
+		for (auto& i : frozenWaves) {
+			if (mainTime - i->createdTime == frozenWaves_AliveTime) {
+				delete i;
+				frozenWaves.pop_back();
 			}
 		}
+	}
 	void Freeze::InitSpecialAttack() {
 		//Freeze Ball Attack
 		FrozenBallAnimation[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_0.bmp", RGB(0, 0, 0));
@@ -1084,7 +1088,7 @@ namespace game_framework {
 			//if (KnockCount ==  || KnockCount == 110) {
 			//}
 		}
-		if (SpecialAttackState != 0) {
+		if (skillSignal != 0) {
 			CallSpecial();
 		}
 
@@ -1353,18 +1357,16 @@ namespace game_framework {
 			AnimationState = 205;
 			if (SpCount >= 30) {
 				SpCount = 0;
-				SpecialAttackState = 0;
+				skillSignal = 0;
 			}
 		}
 	}
 
 	void Freeze::CallSpecial() {
-		switch (SpecialAttackState)
-		{
+		switch (skillSignal){
 		case 0:
 			break;
 		case 1:
-			//TRACE("FrozenBall\n");
 			return FrozenBall();
 			break;
 		default:

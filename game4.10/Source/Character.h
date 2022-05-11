@@ -1,10 +1,9 @@
 #pragma once
 #include "SkillEffect.h"
 #include "CharacterAnimation.h"
-#include "SkillEffect.h"
+
 namespace game_framework {
-	class Character
-	{
+	class Character{
 	public:
 		Character();
 		Character(Character const & other);
@@ -40,7 +39,7 @@ namespace game_framework {
 		void SetMapBorder(int mapID);
 		virtual void SetAttack(bool flag) = 0;
 		virtual void SetKnock(bool flag, int Dir, int AttState)=0;
-		virtual void SetSkill() =0;
+		virtual void SetSkill(int createdTimes) =0;
 		void InputKeyDown(UINT nChar);
 		void InputKeyUp(UINT nChar);
 
@@ -77,6 +76,7 @@ namespace game_framework {
 		int rightTime = 0;
 		vector<int>skillsEffect_InFieldNumber;
 		int KeyBoardInputTime;
+		friend class SkillEffect;
 	protected:
 		CMovingBitmap photoSticker;
 		void DistaceAccumulator();
@@ -120,6 +120,7 @@ namespace game_framework {
 		int KnockCount = 0;
 		int DamageAccumulator = 0;
 		int KnockSpeed;
+		int skillSignal;
 
 		int SpecialAttackState = 0;
 		virtual void CallSpecial() = 0;
@@ -153,7 +154,7 @@ namespace game_framework {
 		
 		//basic information
 		int speed=2;
-		int skillSignal;
+		
 		//hit box
 		//int HitRectangle(int tx1, int ty1, int tx2, int ty2);
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) = 0;
@@ -174,14 +175,12 @@ namespace game_framework {
 		virtual void SetAttack(bool flag) override;
 		virtual void ShowAttack() override;
 		virtual void SetCharacter() override;
-		virtual void SetSkill() override;
+		virtual void SetSkill(int createdTimes) override;
 		virtual int HitEnemy(Character* enemy) override;
 		virtual bool isAttackFrame() override;
-
+		void EffectObjectAliveManager(int mainTime);
 		~Freeze();
-		
 
-		
 		//Knock
 		virtual void ShowKnock() override;
 		virtual void SetKnock(bool flag, int Dir, int AttState) override;
@@ -201,7 +200,7 @@ namespace game_framework {
 
 	private:
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
-		vector <SkillEffect> frozenWaves, frozenPunchs, frozenSwords, frozenStorms;
+		vector <SkillEffect*> frozenWaves, frozenPunchs, frozenSwords, frozenStorms;
 		vector <int>  frozenWaves_Duration;
 	};
 	

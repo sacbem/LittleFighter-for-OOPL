@@ -85,6 +85,7 @@ namespace game_framework {
 		
 		//get character
 		if (GetCharacter == false ){ // && EnemyTest->getCharacter == false) {
+			GenerationTime = clock();
 			ifstream ifs;
 			char buffer[2];
 			ifs.open("CharacterSelected.txt");
@@ -112,7 +113,9 @@ namespace game_framework {
 			HealthPlayer1->loadSmallImg(1);
 			HealthPlayer2->loadSmallImg(1);
 		}
-		
+		CurrentTime = clock();
+		TimePassed = CurrentTime - GenerationTime / 1000;
+
 		maps->PrintMap();
 		PlayerTest->OnShow();
 		EnemyTest->OnShow();

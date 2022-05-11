@@ -117,12 +117,12 @@ using namespace std;
 		}
 
 namespace game_framework {
-
+	static int selectCharacterID[2];
 /////////////////////////////////////////////////////////////////////////////
 // 這個class提供時間、錯誤等控制
 // 一般的遊戲並不需直接操作這個物件，因此可以不管這個class的使用方法
 /////////////////////////////////////////////////////////////////////////////
-static int selectCharacterID[2];
+
 class CSpecialEffect {
 public:
 	static void  SetCurrentTime();					// 儲存目前的時間至ctime

@@ -115,7 +115,6 @@ namespace game_framework {
               if (SELECT_ENTER) { 
                   switch (nChar) {
                   case KEY_W:
-                     
                           characterID[characterIsSeclected]++;
                           if (characterID[characterIsSeclected] > 2) {
                               characterID[characterIsSeclected] = 0;
@@ -132,6 +131,11 @@ namespace game_framework {
                   case KEY_ENTER:
                           if (SELECTOR_ENABLE) {
                               characterIsSeclected++;
+                              if (characterIsSeclected == 1) {
+                                  photoSticker_1P->Load(picStickers[photoSticker_seclecter->seclectedID], picIDs[photoSticker_seclecter->seclectedID], picNames[photoSticker_seclecter->seclectedID]);
+                                  photoSticker_seclecter->SetXY(336, 195);
+                              }
+                              photoSticker_seclecter->seclectedID = 0;
                           }
                       break;
                   }
@@ -183,15 +187,16 @@ namespace game_framework {
             /*selectCharacterID = 0;*/
             switch (characterIsSeclected) {
             case 1:
+                idGet = photoSticker_seclecter->GetCharacterID();
                 if (loadMap < characterIsSeclected) {
-                    photoSticker_1P->Load(picStickers[idGet], picIDs[idGet],picNames[idGet]);
-                    photoSticker_seclecter->SetXY(336, 195);
                     loadMap++;
                     /*selectCharacterID = idGet;*/
                 }
                 photoSticker_1P->OnShow();
+                idGet = 0;
                 break;
             case 2:
+                idGet = photoSticker_seclecter->GetCharacterID();
                 if (loadMap < characterIsSeclected) {
                     photoSticker_2P->Load(picStickers[idGet], picIDs[idGet], picNames[idGet]);
                     loadMap++;

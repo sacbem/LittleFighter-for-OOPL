@@ -5,13 +5,13 @@ namespace  game_framework {
         SelectCharacterMenu();
         virtual void OnShow();
         void Load(int);
-       
         void Initialize();
         ~SelectCharacterMenu();
+        int seclectedID, posID;  // 需修改
     protected:
         vector<vector<int>> posistion_XY;					// 圖形左上角座標  
         CMovingBitmap pic;
-        int seclectedID, posID;
+        
        
     };
 
