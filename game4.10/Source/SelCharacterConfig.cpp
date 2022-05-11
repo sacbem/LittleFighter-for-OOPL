@@ -23,6 +23,9 @@ namespace game_framework {
         pic.SetTopLeft(posistion_XY[0][0], posistion_XY[0][1]);
         pic.ShowBitmap();
     }
+    void SelectCharacterMenu::SetSeclectedID(int id) {
+        seclectedID = id;
+    }
     SelectCharacterMenu::~SelectCharacterMenu() {
         
     }

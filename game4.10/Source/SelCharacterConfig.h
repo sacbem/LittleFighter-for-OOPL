@@ -6,12 +6,13 @@ namespace  game_framework {
         virtual void OnShow();
         void Load(int);
         void Initialize();
-        int seclectedID, posID;
+      
+        void SetSeclectedID(int id);
         ~SelectCharacterMenu();
     protected:
         vector<vector<int>> posistion_XY;					// �ϧΥ��W���y��  
         CMovingBitmap pic;
-       
+        int seclectedID, posID;
     };
 
     class Seclecter :public SelectCharacterMenu {
