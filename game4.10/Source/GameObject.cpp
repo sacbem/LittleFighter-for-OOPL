@@ -8,6 +8,13 @@
 namespace game_framework {
     GameObject::GameObject(const string type) {
         Initialize(type);
+        anotherDestructorEnable = false;
+    }
+    GameObject::GameObject(int num,const string type) {
+        imgs.resize(num);
+        Pos_imgs.resize(num);
+        Initialize(type);
+        anotherDestructorEnable = true;
     }
     void  GameObject::Initialize(const string type) {
         if (type == "Scenes") {
@@ -27,11 +34,21 @@ namespace game_framework {
             IsScenes = IsWeapon = IsItem = false;
         }
     }
+    
     void  GameObject::Load(char* path, COLORREF color) {
         img.LoadBitmap(path, color);
     }
     void  GameObject::Load(int bitmap, COLORREF color) {
         img.LoadBitmap(bitmap, color);
+    }
+    void  GameObject::Load(int imgID,char* path, COLORREF color) {
+        imgs[imgID].push_back(new CMovingBitmap());
+        Pos_imgs[imgID].push_back(pair<int, int>(0, 0));
+        imgs[imgID][imgs[imgID].size()-1]->LoadBitmap(path, color);
+    }
+    void  GameObject::Load(int imgID,int bitmap, COLORREF color) {
+        imgs[imgID].push_back(new CMovingBitmap());
+        imgs[imgID][imgs[imgID].size() - 1]->LoadBitmap(bitmap, color);
     }
     void GameObject::SetTopLeft(int x, int y) { 
         xPos = x>=1600 ? 1600 :x; 
@@ -44,6 +61,14 @@ namespace game_framework {
         xPos = x <= -1600 ? -1600 : x;
         yPos = y;
         img.SetTopLeft(xPos, yPos);
+    }
+    void GameObject::SetTopLeft(int id_x, int id_y,int x, int y) {
+        Pos_imgs[id_x][id_y].first = x;
+        Pos_imgs[id_x][id_y].second = y;
+        imgs[id_x][id_y]->SetTopLeft(xPos, yPos);
+    }
+    int GameObject::GetPositionXY(int id_x, int id_y, const string type) {
+        return type == "X" ? Pos_imgs[id_x][id_y] .first: Pos_imgs[id_x][id_y].second;
     }
     string GameObject::GetClassification() {
         if (IsWeapon) {
@@ -63,6 +88,12 @@ namespace game_framework {
         img.ShowBitmap();
     }
     GameObject::~GameObject() {
-
+        if (anotherDestructorEnable) {
+            for (auto& i : imgs) {
+                for (auto x : i) {
+                    delete x;
+                }
+            }
+        }
     }
 }
