@@ -53,6 +53,22 @@ namespace game_framework {
 
 		KnockState = 0;
 		LastKnockState = 0;
+		if (direction == 0) {
+			if (hitDirection == 0) {
+				KnockSpeed = -1;
+			}
+			else if (hitDirection == 1) {
+				KnockSpeed = 1;
+			}
+		}
+		else if (direction == 1) {
+			if (hitDirection == 0) {
+				KnockSpeed = 1;
+			}
+			else if (hitDirection == 1) {
+				KnockSpeed = -1;
+			}
+		}
 
 		//time
 		KeyBoardInputTime = 0;
@@ -948,19 +964,19 @@ namespace game_framework {
 			}
 			if (KnockCount <= 3) {
 				AnimationState = 110;
-				SetXY(xPos + KnockSpeed * 3, yPos);
+				SetXY(xPos + KnockSpeed*3, yPos);
 			}
 			else if (KnockCount <= 6) {
 				AnimationState = 111;
-				SetXY(xPos + KnockSpeed * 3, yPos);
+				SetXY(xPos + KnockSpeed*3, yPos);
 			}
 			else if (KnockCount <= 30) {
 				AnimationState = 112;
-				SetXY(xPos + KnockSpeed * 3, yPos);
+				SetXY(xPos + KnockSpeed*3, yPos);
 			}
 			else if (KnockCount <= 40) {
 				AnimationState = 113;
-				SetXY(xPos + KnockSpeed * 3, yPos);
+				SetXY(xPos + KnockSpeed*3, yPos);
 			}
 			else if (KnockCount <= 100) {
 				AnimationState = 114;
