@@ -8,7 +8,7 @@ namespace  game_framework {
         void Initialize();
         int seclectedID, posID;
         ~SelectCharacterMenu();
-        int seclectedID, posID;  // �ݭק�
+        //int seclectedID, posID;  // �ݭק�
     protected:
         vector<vector<int>> posistion_XY;					// �ϧΥ��W���y��  
         CMovingBitmap pic;
