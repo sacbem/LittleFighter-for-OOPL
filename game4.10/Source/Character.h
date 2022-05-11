@@ -97,7 +97,7 @@ namespace game_framework {
 		bool isMovingUp;
 		int walkedDistance;
 		
-		bool UnMovable;
+		bool UnMovable=false;
 		//for jump
 		bool isJumpping;
 		bool isRising;
@@ -122,7 +122,8 @@ namespace game_framework {
 		int KnockSpeed;
 		int skillSignal;
 
-		int SpecialAttackState = 0;
+		//int SpecialAttackState = 0;
+		int SkillSignal;
 		virtual void CallSpecial() = 0;
 
 		virtual bool isAttackFrame() = 0;
@@ -180,7 +181,6 @@ namespace game_framework {
 		virtual bool isAttackFrame() override;
 		void EffectObjectAliveManager(int mainTime);
 		~Freeze();
-
 		//Knock
 		virtual void ShowKnock() override;
 		virtual void SetKnock(bool flag, int Dir, int AttState) override;
@@ -193,9 +193,15 @@ namespace game_framework {
 
 		int SpCount=0;
 		void InitSpecialAttack();
-		void FrozenBall();
+		void CallfrozenWaves();
+		void CallfrozenPunchs();
+		void CallfrozenStorms();
+		void CallfrozenSwords();
 	protected:
-		CMovingBitmap FrozenBallAnimation[2][6];
+		CMovingBitmap frozenWavesAnimation[2][6];
+		CMovingBitmap frozenPunchsAnimation[2][8];
+		CMovingBitmap frozenStormsAnimation[2][9];
+		CMovingBitmap frozenSwordsAnimation[2][5];
 		virtual bool AttackReach() override;
 
 	private:

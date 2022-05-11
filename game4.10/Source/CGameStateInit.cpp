@@ -132,10 +132,10 @@ namespace game_framework {
                           if (SELECTOR_ENABLE) {
                               characterIsSeclected++;
                               if (characterIsSeclected == 1) {
-                                  photoSticker_1P->Load(picStickers[photoSticker_seclecter->seclectedID], picIDs[photoSticker_seclecter->seclectedID], picNames[photoSticker_seclecter->seclectedID]);
-                                  photoSticker_seclecter->SetXY(336, 195);
+                                    photoSticker_1P->Load(picStickers[photoSticker_seclecter->seclectedID], picIDs[photoSticker_seclecter->seclectedID], picNames[photoSticker_seclecter->seclectedID]);
+                                    photoSticker_seclecter->SetXY(336, 195);
+                                    photoSticker_seclecter->seclectedID = 0;
                               }
-                              photoSticker_seclecter->seclectedID = 0;
                           }
                       break;
                   }
@@ -184,11 +184,12 @@ namespace game_framework {
     void CGameStateInit::SetPhotoStickers() {
         if (SELECTOR_ENABLE) {
             int idGet = photoSticker_seclecter->GetCharacterID();
-            /*selectCharacterID = 0;*/
             switch (characterIsSeclected) {
             case 1:
                 idGet = photoSticker_seclecter->GetCharacterID();
                 if (loadMap < characterIsSeclected) {
+                    //photoSticker_1P->Load(picStickers[idGet], picIDs[idGet],picNames[idGet]);
+                    //photoSticker_seclecter->SetXY(336, 195);
                     loadMap++;
                     /*selectCharacterID = idGet;*/
                 }
@@ -203,8 +204,10 @@ namespace game_framework {
                 }
                 photoSticker_2P->OnShow();
                 SELECTOR_ENABLE = false;
+                idGet = 0;
                 break;
             }
+            TRACE("ID %d\n", idGet);
             photoSticker_seclecter->OnShow();
         }
         else {
@@ -219,7 +222,7 @@ namespace game_framework {
           logo.ShowBitmap();
 
           //test
-          GotoGameState(GAME_STATE_RUN);
+          //GotoGameState(GAME_STATE_RUN);
           if (!SELECT_ENTER) {
               startBtn->OnShow();
               settingBtn->OnShow();
@@ -256,11 +259,9 @@ namespace game_framework {
               if (!SELECTOR_ENABLE) {  //結束選角
                   SetCountdownAni();
 				  if (countDown.IsFinalBitmap()){
-					  string text(string(std::to_string(characterID[0]) + std::to_string(characterID[1])));
-					  string filename3("CharacterSelected.txt");
-					  FILE *o_file = fopen(filename3.c_str(), "w+");
-					  fwrite(text.c_str(), 1, text.size(), o_file);
-					  fclose(o_file);
+                      this->game->SelectCharacterID[0] = characterID[0];
+                      this->game->SelectCharacterID[1] = characterID[1];
+
 					  GotoGameState(GAME_STATE_RUN);
 				  }
               }

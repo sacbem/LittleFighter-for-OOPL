@@ -15,13 +15,15 @@ using namespace std;
 #define Forest 100
 namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
+		TRACE("Begin Player 1 %d\n", g->SelectCharacterID[0]);
+		TRACE("Begin Player 2 %d\n", g->SelectCharacterID[1]);
 		CharacterList.reserve(2);
 		//EnemyTest = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
 		maps = new Map(Forest);
 		charactersPosition.resize(1); // resize 為腳色數量 : 1
-
+		//GenerationTime = clock();
 
 	}
 
@@ -31,6 +33,7 @@ namespace game_framework {
 		for (int i = 0; i < 2; i++) {
 			charactersPosition[0].push_back(200);
 		}
+		TimePassed = 0;
 	}
    
 	void CGameStateRun::OnMove()						// 移動遊戲元素
@@ -82,20 +85,10 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnShow(){
-		
+		TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);
+		TRACE("Begin Player 2 %d\n", this->game->SelectCharacterID[1]);
 		//get character
 		if (GetCharacter == false ){ // && EnemyTest->getCharacter == false) {
-			GenerationTime = clock();
-			ifstream ifs;
-			char buffer[2];
-			ifs.open("CharacterSelected.txt");
-			ifs.read(buffer, sizeof(buffer));
-			ifs.close();
-			CharacterList.push_back(new Freeze());
-
-			//if (selectCharacterID==0) {
-			//	PlayerTest = new Freeze();
-			//}
 			PlayerTest = new Freeze();
 			PlayerTest->SetXY(200, 200);
 			PlayerTest->SetCharacter();
@@ -110,12 +103,15 @@ namespace game_framework {
 			
 			GetCharacter = true;
 			//load HealthBar small character
-			HealthPlayer1->loadSmallImg(1);
-			HealthPlayer2->loadSmallImg(1);
+			HealthPlayer1->loadSmallImg(this->game->SelectCharacterID[0]);
+			HealthPlayer2->loadSmallImg(this->game->SelectCharacterID[1]);
+
+			GenerationTime = clock();
 		}
 		CurrentTime = clock();
-		TimePassed = CurrentTime - GenerationTime / 1000;
-
+		TimePassed = CurrentTime - GenerationTime/1000;
+		//TRACE("TimePassed %d\n", TimePassed);
+		
 		maps->PrintMap();
 		PlayerTest->OnShow();
 		EnemyTest->OnShow();
