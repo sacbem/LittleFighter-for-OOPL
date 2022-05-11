@@ -177,33 +177,33 @@ namespace game_framework {
 				}
 			}
 			else if (!isRunning) {
-				//Sp
-				if (nChar == KEY_K) {
+				if (nChar == KEY_H) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
-						SkillSignal = 1;
-					}
-				}
-				else if (nChar == KEY_L) {
-					//TRACE("Sp \n");
-					if (Mana >= 250) {
-						Mana -= 10;
-						SkillSignal = 2;
+						SkillSignal = 0;
+						
 					}
 				}
 				else if (nChar == KEY_J) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
-						SkillSignal = 3;
+						SkillSignal = 1;
 					}
 				}
-				else if (nChar == KEY_H) {
+				else if (nChar == KEY_K) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
-						SkillSignal = 4;
+						SkillSignal = 2;
+					}
+				}
+				else if (nChar == KEY_L) {
+					//TRACE("Sp \n");
+					if (Mana >= 250) {
+						Mana -= 10;
+						SkillSignal = 3;
 					}
 				}
 			}
@@ -580,7 +580,7 @@ namespace game_framework {
 		InitSpecialAttack();
 		name = "Freeze";
 
-		frozenWaves.push_back(new SkillEffect(0, 100));
+		
 		
 	}
 
@@ -1121,7 +1121,7 @@ namespace game_framework {
 	}
 
 	void Freeze::OnMove() {
-		frozenWaves[0]->SetEffectObj(200, 200);
+	/*	frozenWaves[0]->SetEffectObj(200, 200);*/
 
 		TRACE("UnMove %d\n", UnMovable);
 		AnimationCount++;
@@ -1203,16 +1203,17 @@ namespace game_framework {
 			//if (KnockCount ==  || KnockCount == 110) {
 			//}
 		}
-		if (SkillSignal != -1) {
-			CallSpecial();
-		}
+	
 
 		//calculate input time diff
 		KeyBoardInputTime++;
 	}
 	void Freeze::OnShow() {
-		frozenWaves[0]->OnShow(direction, 0);
 
+		if (SkillSignal != -1) {
+			CallSpecial();
+			frozenWaves[0]->OnShow();
+		}
 		switch (AnimationState)
 		{
 		case 0:
@@ -1545,6 +1546,8 @@ namespace game_framework {
 
 	void Freeze::CallfrozenWaves() {
 		SpCount++;
+		frozenWaves[0]->SetEffectObj(200, 200);
+		frozenWaves[0]->OnShow(0, 0);
 		if (SpCount <= 4) {
 			AnimationState = 200;
 		}
@@ -1666,7 +1669,12 @@ namespace game_framework {
 	}
 
 	void Freeze::CallSpecial() {
-		/*
+		
+		if (SkillSignal == 0) {
+			frozenWaves.push_back(new SkillEffect(0, 100));
+			TRACE("asdasdadadadadadadadadadasbdfhdgfdg\n");
+			CallfrozenWaves();
+		}
 		if (SkillSignal == 1) {
 			CallfrozenPunchs();
 		}
@@ -1676,17 +1684,14 @@ namespace game_framework {
 		else if (SkillSignal == 3) {
 			CallfrozenStorms();
 		}
-		*/
-		switch (SkillSignal)
-		{
+		
+		
+		/*switch (SkillSignal){
 		case -1:
 			break;
 		case 0:
 			CallfrozenWaves();
-			//for (auto& i : frozenWaves) {
-				//i->SetEffectObj(200, 200);
-				//i->OnShow(0, 0);
-			//}
+			
 			break;
 		case 1:
 			CallfrozenPunchs();
@@ -1699,7 +1704,7 @@ namespace game_framework {
 			break;
 		default:
 			break;
-		}
+		}*/
 	}
 }
 

@@ -38,6 +38,7 @@ namespace game_framework {
 			effectObj[0]->Load(1, ".\\res\\Freeze\\Freeze_ball_reverse\\Freeze_ball_reverse_6.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(1, ".\\res\\Freeze\\Freeze_ball_reverse\\Freeze_ball_reverse_5.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(1, ".\\res\\Freeze\\Freeze_ball_reverse\\Freeze_ball_reverse_4.bmp", RGB(0, 0, 0));
+
 			
 			break;
 		case static_cast<int>(skillsIdTable::frozenPunch):
@@ -112,9 +113,18 @@ namespace game_framework {
 	}
 
 	void SkillEffect::OnShow(int id_x, int id_y) {
-		for (auto i : effectObj) {
-			i->OnShow(id_x, id_y);
-		}
+		effectObj[0]->SetTopLeft(0, 0, 200, 200);
+		effectObj[0]->OnShow(0, 0);
+		//for (auto i : effectObj) {
+		//	i->SetTopLeft(id_x, id_y,200,200);
+		//	i->OnShow(id_x, id_y);
+		//}
+		//for (auto& i : effectObj[0]->imgs) {
+		//	for (auto k : i) {
+		//		k->SetTopLeft(0, 0);
+		//		k->ShowBitmap();
+		//	}
+		//}
 	}
 
 	void  SkillEffect::SetEffectObj(int x, int y) { //���U�զX��� �Q�I�s�@��
@@ -224,9 +234,14 @@ namespace game_framework {
 
 	}
 	void SkillEffect::OnShow() {
-		for (auto i : effectObj) {
-			i->OnShow();
+		for (auto& x : effectObj) {
+			for (auto& i : x->imgs) {
+				for (auto j : i) {
+					j->ShowBitmap();
+				}
+			}
 		}
+
 	}
 	SkillEffect::~SkillEffect() {
 		for (auto& i : effectObj) {
