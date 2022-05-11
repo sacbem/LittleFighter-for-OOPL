@@ -48,6 +48,7 @@ namespace game_framework {
     }
     void  GameObject::Load(int imgID,int bitmap, COLORREF color) {
         imgs[imgID].push_back(new CMovingBitmap());
+        Pos_imgs[imgID].push_back(pair<int, int>(0, 0));
         imgs[imgID][imgs[imgID].size() - 1]->LoadBitmap(bitmap, color);
     }
     void GameObject::SetTopLeft(int x, int y) { 
