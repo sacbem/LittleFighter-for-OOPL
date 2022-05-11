@@ -6,8 +6,7 @@ namespace game_framework {
 	public:
 		GameObject(const string type);
 		void Initialize(const string type);
-		void Load(int bitmap);
-		void Load(int bitmap, int RGB); //¥h­I¥Î
+		void Load(int bitmap ,COLORREF = CLR_INVALID); 
 		void Load(char*, COLORREF = CLR_INVALID);
 		void SetTopLeft(int x, int y);
 		void SetTopLeftSpical(int x, int y);

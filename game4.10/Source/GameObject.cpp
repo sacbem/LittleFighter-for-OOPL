@@ -30,11 +30,8 @@ namespace game_framework {
     void  GameObject::Load(char* path, COLORREF color) {
         img.LoadBitmap(path, color);
     }
-    void GameObject::Load(int bitmap) {
-        img.LoadBitmap(bitmap);
-    }
-    void  GameObject::Load(int bitmap, int RGB) {
-        img.LoadBitmap(bitmap, RGB);
+    void  GameObject::Load(int bitmap, COLORREF color) {
+        img.LoadBitmap(bitmap, color);
     }
     void GameObject::SetTopLeft(int x, int y) { 
         xPos = x>=1600 ? 1600 :x; 
