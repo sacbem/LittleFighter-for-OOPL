@@ -27,6 +27,9 @@ namespace game_framework {
             IsScenes = IsWeapon = IsItem = false;
         }
     }
+    void  GameObject::Load(char* path, COLORREF color) {
+        img.LoadBitmap(path, color);
+    }
     void GameObject::Load(int bitmap) {
         img.LoadBitmap(bitmap);
     }
