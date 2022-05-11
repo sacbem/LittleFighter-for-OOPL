@@ -21,7 +21,7 @@ namespace game_framework {
 		//EnemyTest = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
-        maps = new Map(Forest);
+		maps = new Map(Forest);
 		charactersPosition.resize(1); // resize 為腳色數量 : 1
 		//GenerationTime = clock();
 
@@ -67,7 +67,7 @@ namespace game_framework {
 		ShowInitProgress(50);
 		Sleep(300);
 
-        maps->Load(Forest);
+		maps->Load(Forest);
 		HealthPlayer1->init();
 		HealthPlayer2->init();
 
@@ -112,7 +112,7 @@ namespace game_framework {
 		TimePassed = CurrentTime - GenerationTime/1000;
 		//TRACE("TimePassed %d\n", TimePassed);
 		
-        maps->PrintMap();
+		maps->PrintMap();
 		PlayerTest->OnShow();
 		EnemyTest->OnShow();
 		HealthPlayer1->OnShow(PlayerTest->HealthPoint, PlayerTest->InnerHealPoint, PlayerTest->Mana, PlayerTest->InnerMana);
@@ -133,11 +133,11 @@ namespace game_framework {
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();
 	}
-    CGameStateRun::~CGameStateRun(){
+	CGameStateRun::~CGameStateRun(){
 		delete maps, HealthPlayer1, HealthPlayer2, PlayerTest, EnemyTest;
 
 		for (auto& i : CharacterList) {
 			delete i;
 		}
-    }
+	}
 }

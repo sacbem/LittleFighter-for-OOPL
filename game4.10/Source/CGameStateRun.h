@@ -8,22 +8,22 @@ namespace game_framework {
 	public:
 		CGameStateRun(CGame* g);
 		~CGameStateRun();
-		void OnBeginState();							// �]�w�C�������һݪ��ܼ�
-		void OnInit();  								// �C������Ȥιϧγ]�w
+		void OnBeginState();							
+		void OnInit();  								
 		void OnKeyDown(UINT, UINT, UINT);
 		void OnKeyUp(UINT, UINT, UINT);
-        //void MapSlide();
+		//void MapSlide();
 		vector<vector<int>> charactersPosition;
 	protected:
-		void OnMove();									// ���ʹC������
-		void OnShow();									// ��ܳo�Ӫ��A���C���e��
+		void OnMove();									
+		void OnShow();									
 	private:
 		bool GetCharacter = false;
 		vector<Character*> CharacterList;
 		//Player & other
 		Character *PlayerTest;
 		Character *EnemyTest;
-        Map* maps;
+		Map* maps;
 		HealthBar* HealthPlayer1;
 		HealthBar* HealthPlayer2;
 		int CleanCounter=0;

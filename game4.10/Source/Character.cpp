@@ -10,10 +10,55 @@
 #include <time.h>
 namespace game_framework {
 
+	
 	Character::Character() {
 		Initialize();
 	}
+	void Character::Initialize() {
+		DelayCounter = 50;
+		Delay = 30;
 
+		xPos = 200;
+		yPos = 200;
+		skillSignal = -1;
+		xAccumulator = yAccumulator = 200;
+		//moving statement
+		isRunning = isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+		UnMovable = StopRun = false;
+
+		isDefense = false;
+		isGettingHit = false;
+		isAttacking = false;
+
+		//init jump
+		isJumpping = island = false;
+
+		direction = 1;
+		getCharacter = false;
+
+		HealthPoint = 1800;
+		InnerHealPoint = 1800;
+		Mana = 900;
+		InnerMana = 1800;
+
+		AttackPoint = 10;
+		DefencePoint = 5;
+		walkedDistance = 0;
+		SetMapBorder(0);
+
+		//re
+		AnimationState = 0;
+		speed = 2;
+		AttackCount = 0;
+
+		KnockState = 0;
+		LastKnockState = 0;
+
+		//time
+		KeyBoardInputTime = 0;
+		LastInputTime = 0;
+	}
+	
 	Character::Character(Character const& other) : name(other.name) {
 		Initialize();
 	}
@@ -25,6 +70,7 @@ namespace game_framework {
 	int Character::GetX1() {
 		return xPos;
 	}
+	
 	boolean Character::IsStatic() {
 		return this->AnimationState ? false : true;
 	}
@@ -48,55 +94,24 @@ namespace game_framework {
 	int Character::GetDir() {
 		return direction;
 	}
-	void Character::Initialize() {
-		DelayCounter = 50;
-		Delay = 30;
-
-		xPos = 200;
-		yPos = 200;
-		xAccumulator = yAccumulator = 200;
-		//moving statement
-		isRunning = isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
-		UnMovable = StopRun = false;
-
-		isDefense = false;
-
-		//init jump
-		isJumpping = island = false;
-
-		direction = 1;
-		getCharacter = false;
-
-		HealthPoint = 1800;
-		InnerHealPoint = 1800;
-		Mana = 900;
-		InnerMana = 1800;
-
-		AttackPoint = 10;
-		DefencePoint = 5;
-		walkedDistance = 0;
-		SetMapBorder(0);
-
-		//re
-		AnimationState = 0;
-		speed = 2;
-		AttackCount = 0;
-
-		//time
-		KeyBoardInputTime = 0;
-		LastInputTime = 0;
+	
+	int Character::GetSkillSignal() {
+		return skillSignal;
 	}
 
 	void Character::DistaceAccumulator() {
 		walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
 		
 	}
+	
 	int Character::GetDistance() {
 		return walkedDistance;
 	}
+	
 	int Character::GetMovingTime(boolean isLeft){
 		return isLeft ? leftTime : rightTime;
 	}
+	
 	boolean Character::DistanceAccumulatorReset() {
 		if (this->AnimationState  || walkedDistance < 3) {
 			return false;
@@ -116,7 +131,6 @@ namespace game_framework {
 	}
 
 	void Character::InputKeyDown(UINT nChar) {
-
 		const char KEY_LEFT = 0x41; // keyboard���b�Y 0x25
 		const char KEY_UP = 0x57; // keyboard�W�b�Y 0x26
 		const char KEY_RIGHT = 0x44; // keyboard�k�b�Y 0x27
@@ -124,10 +138,12 @@ namespace game_framework {
 		const char KEY_SPACE = 0x20; // keyboard SPACE
 		const char KEY_CTRL = 0x11; //keyboard ctrl
 		const char KEY_ENTER = 0x0D; // keyboard ENTER
+		const char KEY_TEST_SKILL1 = 0x5A; // keyboard Z
 		const char KEY_H = 0x48;
 		const char KEY_J = 0x4A;
 		const char KEY_K = 0x4B;
 		const char KEY_L = 0x4C;
+
 
 
 		Diff = KeyBoardInputTime - LastInputTime;
@@ -149,28 +165,28 @@ namespace game_framework {
 			else if (!isRunning) {
 				//Sp
 				if (nChar == KEY_K) {
-					TRACE("Sp \n");
+					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
 						SkillSignal = 1;
 					}
 				}
 				else if (nChar == KEY_L) {
-					TRACE("Sp \n");
+					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
 						SkillSignal = 2;
 					}
 				}
 				else if (nChar == KEY_J) {
-					TRACE("Sp \n");
+					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
 						SkillSignal = 3;
 					}
 				}
 				else if (nChar == KEY_H) {
-					TRACE("Sp \n");
+					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
 						SkillSignal = 4;
@@ -212,6 +228,11 @@ namespace game_framework {
 		if (nChar == KEY_ENTER) {
 			SetAttack(true);
 		}
+		/*
+		if (nChar == KEY_TEST_SKILL1) {
+			skillSignal = 0;
+		}
+		*/
 	}
 
 	void Character::InputKeyUp(UINT nChar) {
@@ -337,6 +358,7 @@ namespace game_framework {
 			speed = 2;
 		}
 		if (isMovingLeft) {
+			TRACE("LEFT\n");
 			if ((!isDefense && !isAttacking) || isRunning) {
 				this->SetXY(xPos - speed, yPos);
 				DistaceAccumulator();
@@ -345,9 +367,9 @@ namespace game_framework {
 			}
 			L_finish = clock();
 			leftTime = (L_finish - L_start) / 1000;
-			TRACE("leftTime %d\n", leftTime);
 		}
 		if (isMovingRight) {
+			TRACE("RIGHT\n");
 			if ((!isDefense && !isAttacking) || isRunning) {
 				this->SetXY(xPos + speed, yPos);
 				DistaceAccumulator();
@@ -506,6 +528,12 @@ namespace game_framework {
 
 	}
 
+	Freeze::Freeze() {
+		frozenWaves_Duration.reserve(1);
+		for (int i = 0; i < 5; i++) {
+			skillsEffect_InFieldNumber.push_back(0);
+		}
+	}
 	int Freeze::HitEnemy(Character* enemy) {
 		if (isAttackFrame()) {
 			return HitRectangle(enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);
@@ -992,7 +1020,16 @@ namespace game_framework {
 			break;
 		}
 	}
-
+	void Freeze::SetSkill() {
+			const int skill_duration = 5;
+			auto beginPos = skillsEffect_InFieldNumber.begin();
+			auto frozenWavesBegin = frozenWaves_Duration.begin();
+			if (this->GetSkillSignal() == 1) {
+				skillsEffect_InFieldNumber[0]++;
+				
+				
+			}
+		}
 	void Freeze::InitSpecialAttack() {
 		//Freeze Ball Attack
 		frozenWavesAnimation[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_0.bmp", RGB(0, 0, 0));
@@ -1061,7 +1098,11 @@ namespace game_framework {
 	}
 
 	void Freeze::OnMove() {
+		TRACE("UnMove %d\n", UnMovable);
 		AnimationCount++;
+		if (AnimationCount == 0) {
+			UnMovable = false;
+		}
 		if (!isAttacking) {
 			AttackLong = 0;
 		}
