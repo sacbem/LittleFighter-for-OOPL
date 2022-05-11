@@ -67,7 +67,7 @@ namespace game_framework {
 		direction = 1;
 		getCharacter = false;
 
-		HealthPoint = 1000;
+		HealthPoint = 1800;
 		InnerHealPoint = 1800;
 		Mana = 900;
 		InnerMana = 1800;
@@ -95,7 +95,7 @@ namespace game_framework {
 		return walkedDistance;
 	}
 	int Character::GetMovingTime(boolean isLeft){
-		return isLeft ? LeftCount : RightCount;
+		return isLeft ? leftTime : rightTime;
 	}
 	boolean Character::DistanceAccumulatorReset() {
 		if (this->AnimationState  || walkedDistance < 3) {
@@ -124,7 +124,10 @@ namespace game_framework {
 		const char KEY_SPACE = 0x20; // keyboard SPACE
 		const char KEY_CTRL = 0x11; //keyboard ctrl
 		const char KEY_ENTER = 0x0D; // keyboard ENTER
+		const char KEY_H = 0x48;
 		const char KEY_J = 0x4A;
+		const char KEY_K = 0x4B;
+		const char KEY_L = 0x4C;
 
 
 		Diff = KeyBoardInputTime - LastInputTime;
@@ -145,9 +148,33 @@ namespace game_framework {
 			}
 			else if (!isRunning) {
 				//Sp
-				if (nChar == KEY_J) {
+				if (nChar == KEY_K) {
 					TRACE("Sp \n");
-					SpecialAttackState = 1;
+					if (Mana >= 250) {
+						Mana -= 10;
+						SkillSignal = 1;
+					}
+				}
+				else if (nChar == KEY_L) {
+					TRACE("Sp \n");
+					if (Mana >= 250) {
+						Mana -= 10;
+						SkillSignal = 2;
+					}
+				}
+				else if (nChar == KEY_J) {
+					TRACE("Sp \n");
+					if (Mana >= 250) {
+						Mana -= 10;
+						SkillSignal = 3;
+					}
+				}
+				else if (nChar == KEY_H) {
+					TRACE("Sp \n");
+					if (Mana >= 250) {
+						Mana -= 10;
+						SkillSignal = 4;
+					}
 				}
 			}
 			//detect double click
@@ -243,7 +270,7 @@ namespace game_framework {
 	void Character::SetMovingLeft(bool flag) {
 		if (!isRunning) {
 			if (flag == true) {
-				LeftCount = 0;
+				leftTime = 0;
 				isMovingLeft = flag;
 				isMovingRight = false;
 			}
@@ -257,7 +284,7 @@ namespace game_framework {
 		if (!isRunning) {
 			if (flag == true) {
 				isMovingRight = flag;
-				RightCount = 0;
+				rightTime = 0;
 				isMovingLeft = false;
 			}
 			else {
@@ -317,7 +344,8 @@ namespace game_framework {
 				direction = 1;
 			}
 			L_finish = clock();
-			LeftCount = (L_finish - L_start) / 1000;
+			leftTime = (L_finish - L_start) / 1000;
+			TRACE("leftTime %d\n", leftTime);
 		}
 		if (isMovingRight) {
 			if ((!isDefense && !isAttacking) || isRunning) {
@@ -327,11 +355,11 @@ namespace game_framework {
 				direction = 0;
 			}
 			R_finish = clock();
-			RightCount = (R_finish - R_start) / 1000;
+			rightTime = (R_finish - R_start) / 1000;
 		}
 
-		//TRACE("RightCount %d\n", RightCount);
-		//TRACE("LeftCount %d\n", LeftCount);
+		//TRACE("rightTime %d\n", rightTime);
+		//TRACE("leftTime %d\n", leftTime);
 		if (isMovingUp) {
 			if (!isDefense && !isAttacking) {
 				if (!isJumpping) {
@@ -889,19 +917,22 @@ namespace game_framework {
 				//init velocity
 				InitialVelocity = 2;
 				YVelocity = InitialVelocity;
-				KnockSpeed=1;
 			}
 			if (KnockCount <= 3) {
 				AnimationState = 110;
+				SetXY(xPos + KnockSpeed * 3, yPos);
 			}
 			else if (KnockCount <= 6) {
 				AnimationState = 111;
+				SetXY(xPos + KnockSpeed * 3, yPos);
 			}
 			else if (KnockCount <= 30) {
 				AnimationState = 112;
+				SetXY(xPos + KnockSpeed * 3, yPos);
 			}
 			else if (KnockCount <= 40) {
 				AnimationState = 113;
+				SetXY(xPos + KnockSpeed * 3, yPos);
 			}
 			else if (KnockCount <= 100) {
 				AnimationState = 114;
@@ -920,16 +951,25 @@ namespace game_framework {
 			}
 			break;
 		case 8:
-			if (KnockCount <= 10) {
+			if (KnockCount == 0) {
+				//init velocity
+				InitialVelocity = 2;
+				YVelocity = InitialVelocity;
+			}
+			else if (KnockCount <= 10) {
 				AnimationState = 120;
+				SetXY(xPos + KnockSpeed*3, yPos);
 			}
 			else if (KnockCount <= 20) {
 				AnimationState = 121;
+				SetXY(xPos + KnockSpeed*3, yPos);
 			}
 			else if (KnockCount <= 30) {
 				AnimationState = 122;
+				SetXY(xPos + KnockSpeed*3, yPos);
 			}
 			else if (KnockCount <= 40) {
+				SetXY(xPos + KnockSpeed * 3, yPos);
 				AnimationState = 123;
 			}
 			else if (KnockCount <= 100) {
@@ -955,18 +995,69 @@ namespace game_framework {
 
 	void Freeze::InitSpecialAttack() {
 		//Freeze Ball Attack
-		FrozenBallAnimation[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_0.bmp", RGB(0, 0, 0));
-		FrozenBallAnimation[0][1].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_1.bmp", RGB(0, 0, 0));
-		FrozenBallAnimation[0][2].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_2.bmp", RGB(0, 0, 0));
-		FrozenBallAnimation[0][3].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_3.bmp", RGB(0, 0, 0));
-		FrozenBallAnimation[0][4].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_4.bmp", RGB(0, 0, 0));
-		FrozenBallAnimation[0][5].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_5.bmp", RGB(0, 0, 0));
-		FrozenBallAnimation[1][0].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_9.bmp", RGB(0, 0, 0));
-		FrozenBallAnimation[1][1].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_8.bmp", RGB(0, 0, 0));
-		FrozenBallAnimation[1][2].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_7.bmp", RGB(0, 0, 0));
-		FrozenBallAnimation[1][3].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_6.bmp", RGB(0, 0, 0));
-		FrozenBallAnimation[1][4].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_5.bmp", RGB(0, 0, 0));
-		FrozenBallAnimation[1][5].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_4.bmp", RGB(0, 0, 0));
+		frozenWavesAnimation[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_0.bmp", RGB(0, 0, 0));
+		frozenWavesAnimation[0][1].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_1.bmp", RGB(0, 0, 0));
+		frozenWavesAnimation[0][2].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_2.bmp", RGB(0, 0, 0));
+		frozenWavesAnimation[0][3].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_3.bmp", RGB(0, 0, 0));
+		frozenWavesAnimation[0][4].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_4.bmp", RGB(0, 0, 0));
+		frozenWavesAnimation[0][5].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_5.bmp", RGB(0, 0, 0));
+		frozenWavesAnimation[1][0].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_9.bmp", RGB(0, 0, 0));
+		frozenWavesAnimation[1][1].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_8.bmp", RGB(0, 0, 0));
+		frozenWavesAnimation[1][2].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_7.bmp", RGB(0, 0, 0));
+		frozenWavesAnimation[1][3].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_6.bmp", RGB(0, 0, 0));
+		frozenWavesAnimation[1][4].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_5.bmp", RGB(0, 0, 0));
+		frozenWavesAnimation[1][5].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_4.bmp", RGB(0, 0, 0));
+
+		//FrozenPunch
+		frozenPunchsAnimation[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_8.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[0][1].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_9.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[0][2].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_17.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[0][3].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_18.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[0][4].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_19.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[0][5].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_45.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[0][6].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_46.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[0][7].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_49.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[1][0].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_1.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[1][1].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_0.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[1][2].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_12.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[1][3].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_11.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[1][4].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_10.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[1][5].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_44.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[1][6].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_43.bmp", RGB(0, 0, 0));
+		frozenPunchsAnimation[1][7].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_40.bmp", RGB(0, 0, 0));
+
+		//FrozenStorms
+		frozenStormsAnimation[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_10.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[0][1].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_11.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[0][2].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_12.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[0][3].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_13.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[0][4].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_14.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[0][5].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_15.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[0][6].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_16.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[0][7].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_17.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[0][8].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_18.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[1][0].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_19.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[1][1].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_18.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[1][2].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_17.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[1][3].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_16.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[1][4].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_15.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[1][5].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_14.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[1][6].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_13.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[1][7].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_12.bmp", RGB(0, 0, 0));
+		frozenStormsAnimation[1][8].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_11.bmp", RGB(0, 0, 0));
+
+		//Frozen Swords
+		frozenSwordsAnimation[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_20.bmp", RGB(0, 0, 0));
+		frozenSwordsAnimation[0][1].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_21.bmp", RGB(0, 0, 0));
+		frozenSwordsAnimation[0][2].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_22.bmp", RGB(0, 0, 0));
+		frozenSwordsAnimation[0][3].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_23.bmp", RGB(0, 0, 0));
+		frozenSwordsAnimation[0][4].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_24.bmp", RGB(0, 0, 0));
+		frozenSwordsAnimation[1][0].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_29.bmp", RGB(0, 0, 0));
+		frozenSwordsAnimation[1][1].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_28.bmp", RGB(0, 0, 0));
+		frozenSwordsAnimation[1][2].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_27.bmp", RGB(0, 0, 0));
+		frozenSwordsAnimation[1][3].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_26.bmp", RGB(0, 0, 0));
+		frozenSwordsAnimation[1][4].LoadBitmap(".\\res\\Freeze\\Freeze_2_reverse\\freeze_2_reverse_25.bmp", RGB(0, 0, 0));
+
 	}
 
 	void Freeze::OnMove() {
@@ -1026,35 +1117,26 @@ namespace game_framework {
 		if (isGettingHit) {
 			ShowKnock();
 			TRACE("KnockCount %d\n", KnockCount);
-			int sspeed = 1;
-			/*
-			if (KnockCount == 10) {
-				sspeed = 10;
-			}
-			else if (KnockCount == 110) {
-				sspeed = 50;
-			}
-			*/
 			if (direction == 0) {
 				if (hitDirection == 0) {
-					this->SetXY(xPos - sspeed, yPos);
+					KnockSpeed = -1;
 				}
 				else if (hitDirection == 1) {
-					this->SetXY(xPos + sspeed, yPos);
+					KnockSpeed = 1;
 				}
 			}
 			else if (direction == 1) {
 				if (hitDirection == 0) {
-					this->SetXY(xPos + sspeed, yPos);
+					KnockSpeed = 1;
 				}
 				else if (hitDirection == 1) {
-					this->SetXY(xPos - sspeed, yPos);
+					KnockSpeed = -1;
 				}
 			}
 			//if (KnockCount ==  || KnockCount == 110) {
 			//}
 		}
-		if (SpecialAttackState != 0) {
+		if (SkillSignal != 0) {
 			CallSpecial();
 		}
 
@@ -1274,68 +1356,262 @@ namespace game_framework {
 			Animation.KnockBack[direction][6].ShowBitmap();
 			break;
 		case 200:
-			FrozenBallAnimation[direction][0].SetTopLeft(xPos, yPos);
-			FrozenBallAnimation[direction][0].ShowBitmap();
+			frozenWavesAnimation[direction][0].SetTopLeft(xPos, yPos);
+			frozenWavesAnimation[direction][0].ShowBitmap();
 			break;
 		case 201:
-			FrozenBallAnimation[direction][1].SetTopLeft(xPos, yPos);
-			FrozenBallAnimation[direction][1].ShowBitmap();
+			frozenWavesAnimation[direction][1].SetTopLeft(xPos, yPos);
+			frozenWavesAnimation[direction][1].ShowBitmap();
 			break;
 		case 202:
-			FrozenBallAnimation[direction][2].SetTopLeft(xPos, yPos);
-			FrozenBallAnimation[direction][2].ShowBitmap();
+			frozenWavesAnimation[direction][2].SetTopLeft(xPos, yPos);
+			frozenWavesAnimation[direction][2].ShowBitmap();
 			break;
 		case 203:
-			FrozenBallAnimation[direction][3].SetTopLeft(xPos, yPos);
-			FrozenBallAnimation[direction][3].ShowBitmap();
+			frozenWavesAnimation[direction][3].SetTopLeft(xPos, yPos);
+			frozenWavesAnimation[direction][3].ShowBitmap();
 			break;
 		case 204:
-			FrozenBallAnimation[direction][4].SetTopLeft(xPos, yPos);
-			FrozenBallAnimation[direction][4].ShowBitmap();
+			frozenWavesAnimation[direction][4].SetTopLeft(xPos, yPos);
+			frozenWavesAnimation[direction][4].ShowBitmap();
 			break;
 		case 205:
-			FrozenBallAnimation[direction][5].SetTopLeft(xPos, yPos);
-			FrozenBallAnimation[direction][5].ShowBitmap();
+			frozenWavesAnimation[direction][5].SetTopLeft(xPos, yPos);
+			frozenWavesAnimation[direction][5].ShowBitmap();
+			break;
+		//Frozen Punch
+		case 210:
+			frozenPunchsAnimation[direction][0].SetTopLeft(xPos, yPos);
+			frozenPunchsAnimation[direction][0].ShowBitmap();
+			break;
+		case 211:
+			frozenPunchsAnimation[direction][1].SetTopLeft(xPos, yPos);
+			frozenPunchsAnimation[direction][1].ShowBitmap();
+			break;
+		case 212:
+			frozenPunchsAnimation[direction][2].SetTopLeft(xPos, yPos);
+			frozenPunchsAnimation[direction][2].ShowBitmap();
+			break;
+		case 213:
+			frozenPunchsAnimation[direction][3].SetTopLeft(xPos, yPos);
+			frozenPunchsAnimation[direction][3].ShowBitmap();
+			break;
+		case 214:
+			frozenPunchsAnimation[direction][4].SetTopLeft(xPos, yPos);
+			frozenPunchsAnimation[direction][4].ShowBitmap();
+			break;
+		case 215:
+			frozenPunchsAnimation[direction][5].SetTopLeft(xPos, yPos);
+			frozenPunchsAnimation[direction][5].ShowBitmap();
+			break;
+		case 216:
+			frozenPunchsAnimation[direction][6].SetTopLeft(xPos, yPos);
+			frozenPunchsAnimation[direction][6].ShowBitmap();
+			break;
+		case 217:
+			frozenPunchsAnimation[direction][7].SetTopLeft(xPos, yPos);
+			frozenPunchsAnimation[direction][7].ShowBitmap();
+			break;
+		//frozenStorms
+		case 220:
+			frozenStormsAnimation[direction][0].SetTopLeft(xPos, yPos);
+			frozenStormsAnimation[direction][0].ShowBitmap();
+			break;
+		case 221:
+			frozenStormsAnimation[direction][1].SetTopLeft(xPos, yPos);
+			frozenStormsAnimation[direction][1].ShowBitmap();
+			break;
+		case 222:
+			frozenStormsAnimation[direction][2].SetTopLeft(xPos, yPos);
+			frozenStormsAnimation[direction][2].ShowBitmap();
+			break;
+		case 223:
+			frozenStormsAnimation[direction][3].SetTopLeft(xPos, yPos);
+			frozenStormsAnimation[direction][3].ShowBitmap();
+			break;
+		case 224:
+			frozenStormsAnimation[direction][4].SetTopLeft(xPos, yPos);
+			frozenStormsAnimation[direction][4].ShowBitmap();
+			break;
+		case 225:
+			frozenStormsAnimation[direction][5].SetTopLeft(xPos, yPos);
+			frozenStormsAnimation[direction][5].ShowBitmap();
+			break;
+		case 226:
+			frozenStormsAnimation[direction][6].SetTopLeft(xPos, yPos);
+			frozenStormsAnimation[direction][6].ShowBitmap();
+			break;
+		case 227:
+			frozenStormsAnimation[direction][7].SetTopLeft(xPos, yPos);
+			frozenStormsAnimation[direction][7].ShowBitmap();
+			break;
+		case 228:
+			frozenStormsAnimation[direction][8].SetTopLeft(xPos, yPos);
+			frozenStormsAnimation[direction][8].ShowBitmap();
+			break;
+		case 230:
+			frozenSwordsAnimation[direction][0].SetTopLeft(xPos, yPos);
+			frozenSwordsAnimation[direction][0].ShowBitmap();
+			break;
+		case 231:
+			frozenSwordsAnimation[direction][1].SetTopLeft(xPos, yPos);
+			frozenSwordsAnimation[direction][1].ShowBitmap();
+			break;
+		case 232:
+			frozenSwordsAnimation[direction][2].SetTopLeft(xPos, yPos);
+			frozenSwordsAnimation[direction][2].ShowBitmap();
+			break;
+		case 233:
+			frozenSwordsAnimation[direction][3].SetTopLeft(xPos, yPos);
+			frozenSwordsAnimation[direction][3].ShowBitmap();
+			break;
+		case 234:
+			frozenSwordsAnimation[direction][4].SetTopLeft(xPos, yPos);
+			frozenSwordsAnimation[direction][4].ShowBitmap();
 			break;
 		default:
 			break;
 		}
 	}
 
-	void Freeze::FrozenBall() {
+	void Freeze::CallfrozenWaves() {
 		SpCount++;
-		if (SpCount <= 5) {
+		if (SpCount <= 4) {
 			AnimationState = 200;
 		}
-		else if (SpCount <= 10) {
+		else if (SpCount <= 8) {
 			AnimationState = 201;
 		}
-		else if (SpCount <= 15) {
+		else if (SpCount <= 12) {
 			AnimationState = 202;
 		}
-		else if (SpCount <= 20) {
+		else if (SpCount <= 16) {
 			AnimationState = 203;
 		}
-		else if (SpCount <= 25) {
+		else if (SpCount <= 20) {
 			AnimationState = 204;
 		}
-		else if (SpCount <= 30) {
+		else if (SpCount <= 24) {
 			AnimationState = 205;
-			if (SpCount >= 30) {
+			if (SpCount >= 24) {
 				SpCount = 0;
-				SpecialAttackState = 0;
+				SkillSignal = -1;
+			}
+		}
+	}
+
+	void Freeze::CallfrozenPunchs() {
+		SpCount++;
+		if (SpCount <= 4) {
+			AnimationState = 210;
+		}
+		else if (SpCount <= 8) {
+			AnimationState = 211;
+		}
+		else if (SpCount <= 12) {
+			AnimationState = 212;
+		}
+		else if (SpCount <= 16) {
+			AnimationState = 213;
+		}
+		else if (SpCount <= 20) {
+			AnimationState = 214;
+		}
+		else if (SpCount <= 24) {
+			AnimationState = 215;
+		}
+		else if (SpCount <= 35) {
+			AnimationState = 216;
+		}
+		else if (SpCount <= 40) {
+			AnimationState = 217;
+			if (SpCount >= 40) {
+				SpCount = 0;
+				SkillSignal = -1;
+			}
+		}
+	}
+
+	void Freeze::CallfrozenStorms() {
+		SpCount++;
+		if (SpCount <= 4) {
+			AnimationState = 220;
+		}
+		else if (SpCount <= 8) {
+			AnimationState = 221;
+		}
+		else if (SpCount <= 12) {
+			AnimationState = 222;
+		}
+		else if (SpCount <= 16) {
+			AnimationState = 223;
+		}
+		else if (SpCount <= 20) {
+			AnimationState = 224;
+		}
+		else if (SpCount <= 24) {
+			AnimationState = 225;
+		}
+		else if (SpCount <= 28) {
+			AnimationState = 226;
+		}
+		else if (SpCount <= 32) {
+			AnimationState = 227;
+		}
+		else if (SpCount <= 36) {
+			AnimationState = 228;
+			if (SpCount >= 36) {
+				SpCount = 0;
+				SkillSignal = -1;
+			}
+		}
+	}
+
+	void Freeze::CallfrozenSwords() {
+		SpCount++;
+		if (SpCount <= 4) {
+			AnimationState = 230;
+		}
+		else if (SpCount <= 8) {
+			AnimationState = 231;
+		}
+		else if (SpCount <= 12) {
+			AnimationState = 232;
+		}
+		else if (SpCount <= 16) {
+			AnimationState = 233;
+		}
+		else if (SpCount <= 20) {
+			AnimationState = 234;
+		}
+		else if (SpCount <= 24) {
+			AnimationState = 235;
+			if (SpCount >= 24) {
+				SpCount = 0;
+				SkillSignal = -1;
+
+				//need fix this one
+				//SetXY(xPos + 20, yPos);
 			}
 		}
 	}
 
 	void Freeze::CallSpecial() {
-		switch (SpecialAttackState)
+		switch (SkillSignal)
 		{
-		case 0:
+		case -1:
 			break;
 		case 1:
-			//TRACE("FrozenBall\n");
-			return FrozenBall();
+			return CallfrozenPunchs();
+			break;
+		case 2:
+			return CallfrozenStorms();
+			break;
+		case 3:
+			return CallfrozenWaves();
+			break;
+		case 4:
+			return CallfrozenSwords();
 			break;
 		default:
 			break;

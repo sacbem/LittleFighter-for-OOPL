@@ -7,11 +7,11 @@ namespace  game_framework {
         void Load(int);
        
         void Initialize();
+        int seclectedID, posID;
         ~SelectCharacterMenu();
     protected:
         vector<vector<int>> posistion_XY;					// 圖形左上角座標  
         CMovingBitmap pic;
-        int seclectedID, posID;
        
     };
 

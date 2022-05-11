@@ -122,7 +122,7 @@ namespace game_framework {
 // 這個class提供時間、錯誤等控制
 // 一般的遊戲並不需直接操作這個物件，因此可以不管這個class的使用方法
 /////////////////////////////////////////////////////////////////////////////
-static int selectCharacterID;
+//static int selectCharacterID[2];
 class CSpecialEffect {
 public:
 	static void  SetCurrentTime();					// 儲存目前的時間至ctime
@@ -337,6 +337,8 @@ public:
 	void OnSuspend();								// 處理「待命」的動作
 	void SetGameState(int);
 	static CGame *Instance();
+	//static int SelectCharacterID[2];
+	static int SelectCharacterID[2];
 private:
 	bool			running;			// 遊戲是否正在進行中(未被Pause)
 	bool            suspended;			// 遊戲是否被suspended

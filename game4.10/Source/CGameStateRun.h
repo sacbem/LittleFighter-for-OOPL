@@ -27,5 +27,10 @@ namespace game_framework {
 		HealthBar* HealthPlayer1;
 		HealthBar* HealthPlayer2;
 		int CleanCounter=0;
+
+		//Generate Time
+		time_t GenerationTime;
+		time_t CurrentTime;
+		int TimePassed;
 	};
 }

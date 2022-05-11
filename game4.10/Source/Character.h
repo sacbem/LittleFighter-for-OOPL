@@ -65,8 +65,8 @@ namespace game_framework {
 		virtual void ShowKnock() = 0;
 		int AttackState = 0;
 
-		int LeftCount = 0;
-		int RightCount = 0;
+		int leftTime = 0;
+		int rightTime = 0;
 		int KeyBoardInputTime;
 	protected:
         CMovingBitmap photoSticker;
@@ -112,7 +112,8 @@ namespace game_framework {
 		int DamageAccumulator = 0;
 		int KnockSpeed;
 
-		int SpecialAttackState = 0;
+		//int SpecialAttackState = 0;
+		int SkillSignal;
 		virtual void CallSpecial() = 0;
 
 		virtual bool isAttackFrame() = 0;
@@ -177,9 +178,15 @@ namespace game_framework {
 
 		int SpCount=0;
 		void InitSpecialAttack();
-		void FrozenBall();
+		void CallfrozenWaves();
+		void CallfrozenPunchs();
+		void CallfrozenStorms();
+		void CallfrozenSwords();
 	protected:
-		CMovingBitmap FrozenBallAnimation[2][6];
+		CMovingBitmap frozenWavesAnimation[2][6];
+		CMovingBitmap frozenPunchsAnimation[2][8];
+		CMovingBitmap frozenStormsAnimation[2][9];
+		CMovingBitmap frozenSwordsAnimation[2][5];
 		virtual bool AttackReach() override;
 
 	private:
