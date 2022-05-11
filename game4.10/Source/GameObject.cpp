@@ -10,6 +10,7 @@ namespace game_framework {
         Initialize(type);
         anotherDestructorEnable = false;
     }
+    
     GameObject::GameObject(int num,const string type) {
         imgs.resize(num);
         Pos_imgs.resize(num);
@@ -38,39 +39,43 @@ namespace game_framework {
     void  GameObject::Load(char* path, COLORREF color) {
         img.LoadBitmap(path, color);
     }
+    
     void  GameObject::Load(int bitmap, COLORREF color) {
         img.LoadBitmap(bitmap, color);
     }
+    
     void  GameObject::Load(int imgID,char* path, COLORREF color) {
         imgs[imgID].push_back(new CMovingBitmap());
         Pos_imgs[imgID].push_back(pair<int, int>(0, 0));
         imgs[imgID][imgs[imgID].size()-1]->LoadBitmap(path, color);
     }
+   
     void  GameObject::Load(int imgID,int bitmap, COLORREF color) {
         imgs[imgID].push_back(new CMovingBitmap());
         Pos_imgs[imgID].push_back(pair<int, int>(0, 0));
         imgs[imgID][imgs[imgID].size() - 1]->LoadBitmap(bitmap, color);
     }
+
     void GameObject::SetTopLeft(int x, int y) { 
         xPos = x>=1600 ? 1600 :x; 
         xPos = x <= -800 ? -800 : x;
         yPos = y;
         img.SetTopLeft(xPos, yPos);
     }
+    
     void GameObject::SetTopLeftSpical(int x, int y) {
         xPos = x >= 1600 ? 1600 : x;
         xPos = x <= -1600 ? -1600 : x;
         yPos = y;
         img.SetTopLeft(xPos, yPos);
     }
+    
     void GameObject::SetTopLeft(int id_x, int id_y,int x, int y) {
         Pos_imgs[id_x][id_y].first = x;
         Pos_imgs[id_x][id_y].second = y;
         imgs[id_x][id_y]->SetTopLeft(xPos, yPos);
     }
-    int GameObject::GetPositionXY(int id_x, int id_y, const string type) {
-        return type == "X" ? Pos_imgs[id_x][id_y] .first: Pos_imgs[id_x][id_y].second;
-    }
+   
     string GameObject::GetClassification() {
         if (IsWeapon) {
             return "Weapon";
@@ -81,9 +86,15 @@ namespace game_framework {
         if (IsScenes) {
             return "Scenes";
         }
+        if (IsEffect) {
+            return "Effect";
+        }
     }
     int GameObject::GetPositionXY(const string type) {
         return type == "X" ? xPos : yPos;
+    }
+    int GameObject::GetPositionXY(int id_x, int id_y, const string type) {
+        return type == "X" ? Pos_imgs[id_x][id_y].first : Pos_imgs[id_x][id_y].second;
     }
     void GameObject::OnShow() {
         img.ShowBitmap();
