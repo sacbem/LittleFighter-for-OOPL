@@ -183,7 +183,7 @@ namespace game_framework {
 			}
 		}
 		if (mapBordary[1]) {
-			if (walkedDistance > forestTree_dx  ) {
+			if (walkedDistance > forestMountain_dx2) {
 				for (auto& i : backgroundFrontObjs) {
 					i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
 				}
@@ -203,8 +203,38 @@ namespace game_framework {
 		 }      
 	}
 
-	void Map::ScenesCamera(boolean IsRunning, boolean IsLeft, int walkedDistance) {
+	void Map::ScenesCamera(boolean mapMove, boolean IsRunning, boolean IsLeft, int walkedDistance) {
 		int direction = IsLeft  ?  1 : -1; // 往右 : 1 往左 : -1 
+		if (mapMove) {
+			StopDynamic(IsLeft, walkedDistance);
+			int direction = IsLeft ? 1 : -1; // 往右 : 1 往左 : -1 
+			if (mapBordary[0]) {
+				if (walkedDistance > forestSky_dx) {
+					for (auto& i : backgroundSkyObjs) {
+						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+					}
+				}
+			}
+			if (mapBordary[1]) {
+				if (walkedDistance > forestMountain_dx2) {
+					for (auto& i : backgroundFrontObjs) {
+						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+					}
+				}
+			}
+			if (mapBordary[2]) {
+				if (walkedDistance > forestTree_dx) {
+					for (auto& i : floorObjs) {
+						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+					}
+				}
+			}
+			if (mapBordary[3]) {
+				if (walkedDistance > forestMountain_dx2) {
+					backgroundBackObjs[0]->SetTopLeftSpical(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
+				}
+			}
+		}
 		//if (IsLeft) {
 		//    if (IsRunning) {    //往左跑
 		//        gameScenesPos_X++;

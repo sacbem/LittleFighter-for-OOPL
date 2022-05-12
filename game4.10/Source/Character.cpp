@@ -376,7 +376,7 @@ namespace game_framework {
 				speed = 7;
 			}
 			else {
-				speed = 4;
+				speed = 5;
 			}
 		}
 		else {

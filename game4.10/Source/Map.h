@@ -7,7 +7,7 @@ namespace game_framework{
 	public:
 		Map(int mapID);
 		int GetScenesPos(const string type);
-		void ScenesCamera(boolean IsRunning, boolean IsLeft, int walkedDistance);
+		void ScenesCamera(boolean mapMove, boolean IsRunning, boolean IsLeft, int walkedDistance);
 		void Load(int mapID);
 		void GenerateLand(int mapID);
 		void PrintMap();
