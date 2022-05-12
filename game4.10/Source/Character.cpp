@@ -29,6 +29,9 @@ namespace game_framework {
 		isDefense = false;
 		isGettingHit = false;
 		isAttacking = false;
+		hitDirection = 0;
+		KnockSpeed = 0;
+
 
 		//init jump
 		isJumpping = island = false;
@@ -45,6 +48,8 @@ namespace game_framework {
 		DefencePoint = 5;
 		walkedDistance = 0;
 		SetMapBorder(0);
+
+		SkillSignal = -1;
 
 		//re
 		AnimationState = 0;
@@ -146,7 +151,7 @@ namespace game_framework {
 		DamageAccumulator += Damage;
 	}
 
-	void Character::InputKeyDown(UINT nChar) {
+	void Character::InputKeyDown(UINT nChar, int Time) {
 		const char KEY_LEFT = 0x41; // keyboard���b�Y 0x25
 		const char KEY_UP = 0x57; // keyboard�W�b�Y 0x26
 		const char KEY_RIGHT = 0x44; // keyboard�k�b�Y 0x27
@@ -178,34 +183,35 @@ namespace game_framework {
 			}
 			else if (!isRunning) {
 				//Sp
-				if (nChar == KEY_K) {
+				if (nChar == KEY_H) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
-						SkillSignal = 1;
-					}
-				}
-				else if (nChar == KEY_L) {
-					//TRACE("Sp \n");
-					if (Mana >= 250) {
-						Mana -= 10;
-						SkillSignal = 2;
+						SkillSignal = 0;
 					}
 				}
 				else if (nChar == KEY_J) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
-						SkillSignal = 3;
+						SkillSignal = 1;
 					}
 				}
-				else if (nChar == KEY_H) {
+				else if (nChar == KEY_K) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
-						SkillSignal = 4;
+						SkillSignal = 2;
 					}
 				}
+				else if (nChar == KEY_L) {
+					//TRACE("Sp \n");
+					if (Mana >= 250) {
+						Mana -= 10;
+						SkillSignal = 3;
+					}
+				}
+				//SetSkill(Time);
 			}
 			//detect double click
 			if (Diff <= 20) {
@@ -372,7 +378,7 @@ namespace game_framework {
 			speed = 2;
 		}
 		if (isMovingLeft) {
-			TRACE("LEFT\n");
+			//TRACE("LEFT\n");
 			if ((!isDefense && !isAttacking) || isRunning) {
 				this->SetXY(xPos - speed, yPos);
 				DistaceAccumulator();
@@ -383,7 +389,7 @@ namespace game_framework {
 			leftTime = (L_finish - L_start) / 1000;
 		}
 		if (isMovingRight) {
-			TRACE("RIGHT\n");
+			//TRACE("RIGHT\n");
 			if ((!isDefense && !isAttacking) || isRunning) {
 				this->SetXY(xPos + speed, yPos);
 				DistaceAccumulator();
@@ -579,9 +585,9 @@ namespace game_framework {
 		Animation.LoadFreeze();
 		InitSpecialAttack();
 		name = "Freeze";
-
-		frozenWaves.push_back(new SkillEffect(0, 100));
 		
+		// Test
+		//frozenWaves.push_back(new SkillEffect(0, 100));
 	}
 
 	void Freeze::ShowDefense() {
@@ -1039,7 +1045,7 @@ namespace game_framework {
 	void Freeze::SetSkill(int createdTimes) {
 			auto frozenWaves_Begin = frozenWaves.begin();
 			if (this->GetSkillSignal() == 0) {
-				frozenWaves.insert(frozenWaves_Begin,new SkillEffect(0, createdTimes));
+				frozenWaves.insert(frozenWaves_Begin,new SkillEffect(0, createdTimes, direction, xPos+50, yPos));
 				skillsEffect_InFieldNumber[0] = frozenWaves.size();
 			}
 	}
@@ -1121,9 +1127,6 @@ namespace game_framework {
 	}
 
 	void Freeze::OnMove() {
-		frozenWaves[0]->SetEffectObj(200, 200);
-
-		TRACE("UnMove %d\n", UnMovable);
 		AnimationCount++;
 		if (AnimationCount == 0) {
 			UnMovable = false;
@@ -1136,7 +1139,6 @@ namespace game_framework {
 		}
 		//Heal
 		if (AnimationCount % 150 == 0) {
-			SpAnCount++;
 			if (HealthPoint <= InnerHealPoint) {
 				HealthPoint += 30;
 				if (HealthPoint >= 1800) {
@@ -1183,7 +1185,6 @@ namespace game_framework {
 		}
 		if (isGettingHit) {
 			ShowKnock();
-			TRACE("KnockCount %d\n", KnockCount);
 			if (direction == 0) {
 				if (hitDirection == 0) {
 					KnockSpeed = -1;
@@ -1211,7 +1212,8 @@ namespace game_framework {
 		KeyBoardInputTime++;
 	}
 	void Freeze::OnShow() {
-		frozenWaves[0]->OnShow(direction, 0);
+
+		//frozenWaves[0]->OnShow(direction, 0);
 
 		switch (AnimationState)
 		{
@@ -1541,9 +1543,14 @@ namespace game_framework {
 		default:
 			break;
 		}
+		//Special Attack Animation
+		ShowSpecialAttack();
 	}
 
 	void Freeze::CallfrozenWaves() {
+		//frozenWaves[0]->SetEffectObj(direction, SpCount%10, xPos+50);
+		
+		//TRACE("SpCount %d\n", SpCount);
 		SpCount++;
 		if (SpCount <= 4) {
 			AnimationState = 200;
@@ -1556,6 +1563,11 @@ namespace game_framework {
 		}
 		else if (SpCount <= 16) {
 			AnimationState = 203;
+			if (SpCount == 16) {
+				//Create Frozen Waves
+				frozenWaves.push_back(new SkillEffect(0,KeyBoardInputTime,direction, xPos, yPos));
+				TRACE("Length %d\n", frozenWaves.size());
+			}
 		}
 		else if (SpCount <= 20) {
 			AnimationState = 204;
@@ -1564,6 +1576,7 @@ namespace game_framework {
 			AnimationState = 205;
 			if (SpCount >= 24) {
 				SpCount = 0;
+				//Clear State
 				SkillSignal = -1;
 			}
 		}
@@ -1666,27 +1679,12 @@ namespace game_framework {
 	}
 
 	void Freeze::CallSpecial() {
-		/*
-		if (SkillSignal == 1) {
-			CallfrozenPunchs();
-		}
-		else if (SkillSignal == 2) {
-			CallfrozenStorms();
-		}
-		else if (SkillSignal == 3) {
-			CallfrozenStorms();
-		}
-		*/
 		switch (SkillSignal)
 		{
 		case -1:
 			break;
 		case 0:
 			CallfrozenWaves();
-			//for (auto& i : frozenWaves) {
-				//i->SetEffectObj(200, 200);
-				//i->OnShow(0, 0);
-			//}
 			break;
 		case 1:
 			CallfrozenPunchs();
@@ -1699,6 +1697,12 @@ namespace game_framework {
 			break;
 		default:
 			break;
+		}
+	}
+
+	void Freeze::ShowSpecialAttack() {
+		for (auto& i : frozenWaves) {
+			i->OnShow(direction, SpCount % 10);
 		}
 	}
 }

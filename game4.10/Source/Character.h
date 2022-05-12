@@ -39,7 +39,7 @@ namespace game_framework {
 		virtual void SetAttack(bool flag) = 0;
 		virtual void SetKnock(bool flag, int Dir, int AttState)=0;
 		virtual void SetSkill(int createdTimes) =0;
-		void InputKeyDown(UINT nChar);
+		void InputKeyDown(UINT nChar, int Time);
 		void InputKeyUp(UINT nChar);
 
 		boolean IsStatic();
@@ -190,8 +190,10 @@ namespace game_framework {
 		virtual void CallSpecial() override;
 
 		int SpCount=0;
-		int SpAnCount = 0;
+		//int SpAnCount = 0;
 		void InitSpecialAttack();
+		void ShowSpecialAttack();
+
 		void CallfrozenWaves();
 		void CallfrozenPunchs();
 		void CallfrozenStorms();

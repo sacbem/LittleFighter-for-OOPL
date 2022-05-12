@@ -15,8 +15,8 @@ using namespace std;
 #define Forest 100
 namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
-		TRACE("Begin Player 1 %d\n", g->SelectCharacterID[0]);
-		TRACE("Begin Player 2 %d\n", g->SelectCharacterID[1]);
+		//TRACE("Begin Player 1 %d\n", g->SelectCharacterID[0]);
+		//TRACE("Begin Player 2 %d\n", g->SelectCharacterID[1]);
 		CharacterList.reserve(2);
 		//EnemyTest = new Character();
 		HealthPlayer1 = new HealthBar();
@@ -24,7 +24,6 @@ namespace game_framework {
 		maps = new Map(Forest);
 		charactersPosition.resize(1); // resize 為腳色數量 : 1
 		//GenerationTime = clock();
-
 	}
 
 	void CGameStateRun::OnBeginState()
@@ -77,7 +76,7 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags){
-		PlayerTest->InputKeyDown(nChar);
+		PlayerTest->InputKeyDown(nChar, CurrentTime);
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
@@ -85,8 +84,9 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnShow(){
-		TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);
-		TRACE("Begin Player 2 %d\n", this->game->SelectCharacterID[1]);
+
+		//TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);
+		//TRACE("Begin Player 2 %d\n", this->game->SelectCharacterID[1]);
 		//get character
 		if (GetCharacter == false ){ // && EnemyTest->getCharacter == false) {
 			PlayerTest = new Freeze();
@@ -132,6 +132,8 @@ namespace game_framework {
 		pDC->TextOut(200, 180, str);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();
+		
+		//imgs[0][0]->ShowBitmap();
 	}
 	CGameStateRun::~CGameStateRun(){
 		delete maps, HealthPlayer1, HealthPlayer2, PlayerTest, EnemyTest;

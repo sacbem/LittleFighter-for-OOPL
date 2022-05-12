@@ -6,16 +6,21 @@
 #include "gamelib.h"
 #include "SkillEffect.h"
 namespace game_framework {
-	SkillEffect::SkillEffect(int skillsID, int createdTimes) {
+	SkillEffect::SkillEffect(int skillsID, int createdTimes,int dire ,int x, int y) {
 		effectObj.reserve(5);
 		skillID = skillsID;
 		createdTime = createdTimes;
+		xPos = x;
+		yPos = y;
+		direction = dire;
+		AnimationState = 0;
+		AnimationCount = 0;
 		CreatEffectObj();
 	}
 	void  SkillEffect::CreatEffectObj() {
 		switch (skillID) {
 		case static_cast<int>(skillsIdTable::frozenWave):
-			effectObj.push_back(new GameObject(2,"Effect"));
+			effectObj.push_back(new GameObject(2, "Effect"));
 			//effectObj[0]->Load(".\\res\\Freeze\\Freeze_ball\\Freeze_ball_0.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(0, ".\\res\\Freeze\\Freeze_ball\\Freeze_ball_0.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(0, ".\\res\\Freeze\\Freeze_ball\\Freeze_ball_1.bmp", RGB(0, 0, 0));
@@ -38,10 +43,10 @@ namespace game_framework {
 			effectObj[0]->Load(1, ".\\res\\Freeze\\Freeze_ball_reverse\\Freeze_ball_reverse_6.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(1, ".\\res\\Freeze\\Freeze_ball_reverse\\Freeze_ball_reverse_5.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(1, ".\\res\\Freeze\\Freeze_ball_reverse\\Freeze_ball_reverse_4.bmp", RGB(0, 0, 0));
-			
+
 			break;
 		case static_cast<int>(skillsIdTable::frozenPunch):
-			effectObj.push_back(new GameObject(8,"Effect"));
+			effectObj.push_back(new GameObject(8, "Effect"));
 			//0 1 ice_1
 			effectObj[1]->Load(0, ".\\res\\Freeze\\Freeze_col\\Freeze_col_0.bmp", RGB(0, 0, 0));
 			effectObj[1]->Load(0, ".\\res\\Freeze\\Freeze_col\\Freeze_col_1.bmp", RGB(0, 0, 0));
@@ -99,31 +104,40 @@ namespace game_framework {
 			effectObj[1]->Load(7, ".\\res\\Freeze\\Freeze_col_reverse\\Freeze_col_reverse_23.bmp", RGB(0, 0, 0));
 			effectObj[1]->Load(7, ".\\res\\Freeze\\Freeze_col_reverse\\Freeze_col_reverse_22.bmp", RGB(0, 0, 0));
 			break;
-		//case static_cast<int>(skillsIdTable::frozenSword):
-		//	effectObj.push_back(new GameObject("Effect"));
-		//	break;
-		//case static_cast<int>(skillsIdTable::frozenStorm):
-		//	effectObj.push_back(new GameObject("Effect"));
+			//case static_cast<int>(skillsIdTable::frozenSword):
+			//	effectObj.push_back(new GameObject("Effect"));
+			//	break;
+			//case static_cast<int>(skillsIdTable::frozenStorm):
+			//	effectObj.push_back(new GameObject("Effect"));
 
-		//	break;
+			//	break;
 		default:
 			break;
 		}
 	}
 
 	void SkillEffect::OnShow(int id_x, int id_y) {
-		for (auto i : effectObj) {
-			i->OnShow(id_x, id_y);
-		}
-	}
-
-	void  SkillEffect::SetEffectObj(int x, int y) { //按下組合鍵後 被呼叫一次
-		switch(skillID) {
+		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
-			for (auto& i : effectObj) {
-				i->SetTopLeft(0, 0, x, y);
+			//effectObj[0]->OnShow(id_x, id_y);
+			//TRACE("skill show %d %d\n", id_x, id_y);
+			effectObj[0]->SetTopLeft(direction, AnimationCount % 6, xPos, yPos);
+			effectObj[0]->OnShow(direction, AnimationCount%6);
+			TRACE("Count %d\n", AnimationCount);
+			AnimationCount++;
+			if (direction == 0) {
+				xPos += 5;
 			}
+			else if (direction == 1) {
+				xPos -= 5;
+			}
+
+			/*
+			for (auto& i : effectObj) {
+				i->OnShow(direction, AnimaiotnState);
+			}
+			*/
 			break;
 		case static_cast<int>(skillsIdTable::frozenPunch):
 			//for (auto& i : effectObj) {
@@ -140,12 +154,53 @@ namespace game_framework {
 
 			//}
 			break;
-		////////////////
+			////////////////
+		default:
+			break;
+		}
+			CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
+			CFont f, * fp;
+			f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+			fp = pDC->SelectObject(&f);					// 選用 font f
+			pDC->SetBkColor(RGB(0, 0, 0));
+			pDC->SetTextColor(RGB(255, 255, 0));
+			CString str;
+			str.Format("%d", AnimationCount);
+			pDC->TextOut(xPos+50, yPos, str);
+			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+			CDDraw::ReleaseBackCDC();
+	}
+
+	void  SkillEffect::SetEffectObj(int dir, int x, int y) { //按下組合鍵後 被呼叫一次
+		switch (skillID) {
+			//////////////// Freeze
+		case static_cast<int>(skillsIdTable::frozenWave):
+			TRACE("skill setEffect %d %d\n", x, y);
+			//for (auto& i : effectObj) {
+				//i->SetTopLeft(direction, AnimationState, x, y);
+			//}
+			break;
+		case static_cast<int>(skillsIdTable::frozenPunch):
+			//for (auto& i : effectObj) {
+
+			//}
+			break;
+		case static_cast<int>(skillsIdTable::frozenSword):
+			//for (auto& i : effectObj) {
+
+			//}
+			break;
+		case static_cast<int>(skillsIdTable::frozenStorm):
+			//for (auto& i : effectObj) {
+
+			//}
+			break;
+			////////////////
 		default:
 			break;
 		}
 	}
-	boolean  SkillEffect::SkillsProcess(vector<vector<int>> theOthersPosition,int duration) {
+	boolean  SkillEffect::SkillsProcess(vector<vector<int>> theOthersPosition, int duration) {
 		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
@@ -182,9 +237,9 @@ namespace game_framework {
 			return false;
 		}
 	}
-	boolean SkillEffect:: GarbageCollectorTimer(int duration) {
+	boolean SkillEffect::GarbageCollectorTimer(int duration) {
 		const int skill_duration_1 = 5;
-		switch (duration){
+		switch (duration) {
 		case skill_duration_1:
 			return true;
 			break;
@@ -196,7 +251,7 @@ namespace game_framework {
 	void  SkillEffect::SkillsFeedbackStatus(vector<vector<int>> theOthersPosition) {
 
 		switch (skillID) {
-		 //////////////// Freeze
+			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
 			for (auto& i : effectObj) {
 				for (int h = 0; h < theOthersPosition.size(); h++) {
@@ -209,15 +264,15 @@ namespace game_framework {
 			}
 			break;
 		case static_cast<int>(skillsIdTable::frozenPunch):
-			
+
 			break;
 		case static_cast<int>(skillsIdTable::frozenSword):
-			
+
 			break;
 		case static_cast<int>(skillsIdTable::frozenStorm):
-		   
+
 			break;
-			
+
 		default:
 			break;
 		}

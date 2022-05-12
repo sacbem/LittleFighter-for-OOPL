@@ -208,7 +208,7 @@ namespace game_framework {
 				idGet = 0;
 				break;
 			}
-			TRACE("ID %d\n", idGet);
+			//TRACE("ID %d\n", idGet);
 			photoSticker_seclecter->OnShow();
 		}
 		else {
