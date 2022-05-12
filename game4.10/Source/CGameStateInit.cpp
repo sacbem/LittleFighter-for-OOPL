@@ -223,7 +223,7 @@ namespace game_framework {
 		  logo.ShowBitmap();
 
 		  //test
-		  GotoGameState(GAME_STATE_RUN);
+		  //GotoGameState(GAME_STATE_RUN);
 		  if (!SELECT_ENTER) {
 			  startBtn->OnShow();
 			  settingBtn->OnShow();

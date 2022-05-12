@@ -10,6 +10,7 @@ namespace game_framework {
 		~Character();
 		//int HitEnemy(Character* enemy);
 	
+	
 		bool GetAlive();
 		int  GetX1();					// Chracter
 		int  GetY1();					// Chracter
@@ -46,6 +47,7 @@ namespace game_framework {
 		boolean  DistanceAccumulatorReset();
 		virtual int HitEnemy(Character* enemy) = 0;
 
+		
 		//basic informtion
 		bool getCharacter=false;
 		int characterNumber;
@@ -190,7 +192,6 @@ namespace game_framework {
 		virtual void CallSpecial() override;
 
 		int SpCount=0;
-		int SpAnCount = 0;
 		void InitSpecialAttack();
 		void CallfrozenWaves();
 		void CallfrozenPunchs();

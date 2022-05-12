@@ -20,15 +20,13 @@ namespace game_framework {
 		void OnShow();
 		void OnShow(int id_x, int id_y);
 		~GameObject();
-		vector<vector<CMovingBitmap*>> imgs;
-		
 	private:
 		int xPos, yPos;
 		int index;
 		boolean anotherDestructorEnable;
 		boolean IsWeapon, IsItem, IsScenes,IsEffect;
 		CMovingBitmap img;
-		
+		vector<vector<CMovingBitmap*>> imgs;
 		vector<vector<pair<int, int>>> Pos_imgs;
 	};
 }

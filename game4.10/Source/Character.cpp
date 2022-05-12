@@ -177,33 +177,33 @@ namespace game_framework {
 				}
 			}
 			else if (!isRunning) {
-				if (nChar == KEY_H) {
-					//TRACE("Sp \n");
-					if (Mana >= 250) {
-						Mana -= 10;
-						SkillSignal = 0;
-						
-					}
-				}
-				else if (nChar == KEY_J) {
+				//Sp
+				if (nChar == KEY_K) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
 						SkillSignal = 1;
 					}
 				}
-				else if (nChar == KEY_K) {
+				else if (nChar == KEY_L) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
 						SkillSignal = 2;
 					}
 				}
-				else if (nChar == KEY_L) {
+				else if (nChar == KEY_J) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
 						SkillSignal = 3;
+					}
+				}
+				else if (nChar == KEY_H) {
+					//TRACE("Sp \n");
+					if (Mana >= 250) {
+						Mana -= 10;
+						SkillSignal = 4;
 					}
 				}
 			}
@@ -579,9 +579,6 @@ namespace game_framework {
 		Animation.LoadFreeze();
 		InitSpecialAttack();
 		name = "Freeze";
-
-		
-		
 	}
 
 	void Freeze::ShowDefense() {
@@ -1121,8 +1118,6 @@ namespace game_framework {
 	}
 
 	void Freeze::OnMove() {
-	/*	frozenWaves[0]->SetEffectObj(200, 200);*/
-
 		TRACE("UnMove %d\n", UnMovable);
 		AnimationCount++;
 		if (AnimationCount == 0) {
@@ -1136,7 +1131,6 @@ namespace game_framework {
 		}
 		//Heal
 		if (AnimationCount % 150 == 0) {
-			SpAnCount++;
 			if (HealthPoint <= InnerHealPoint) {
 				HealthPoint += 30;
 				if (HealthPoint >= 1800) {
@@ -1203,17 +1197,14 @@ namespace game_framework {
 			//if (KnockCount ==  || KnockCount == 110) {
 			//}
 		}
-	
+		if (SkillSignal != 0) {
+			CallSpecial();
+		}
 
 		//calculate input time diff
 		KeyBoardInputTime++;
 	}
 	void Freeze::OnShow() {
-
-		if (SkillSignal != -1) {
-			CallSpecial();
-			frozenWaves[0]->OnShow();
-		}
 		switch (AnimationState)
 		{
 		case 0:
@@ -1546,8 +1537,6 @@ namespace game_framework {
 
 	void Freeze::CallfrozenWaves() {
 		SpCount++;
-		frozenWaves[0]->SetEffectObj(200, 200);
-		frozenWaves[0]->OnShow(0, 0);
 		if (SpCount <= 4) {
 			AnimationState = 200;
 		}
@@ -1669,42 +1658,25 @@ namespace game_framework {
 	}
 
 	void Freeze::CallSpecial() {
-		
-		if (SkillSignal == 0) {
-			frozenWaves.push_back(new SkillEffect(0, 100));
-			TRACE("asdasdadadadadadadadadadasbdfhdgfdg\n");
-			CallfrozenWaves();
-		}
-		if (SkillSignal == 1) {
-			CallfrozenPunchs();
-		}
-		else if (SkillSignal == 2) {
-			CallfrozenStorms();
-		}
-		else if (SkillSignal == 3) {
-			CallfrozenStorms();
-		}
-		
-		
-		/*switch (SkillSignal){
+		switch (SkillSignal)
+		{
 		case -1:
 			break;
-		case 0:
-			CallfrozenWaves();
-			
-			break;
 		case 1:
-			CallfrozenPunchs();
+			return CallfrozenPunchs();
 			break;
 		case 2:
-			CallfrozenStorms();
+			return CallfrozenStorms();
 			break;
 		case 3:
-			CallfrozenSwords();
+			return CallfrozenWaves();
+			break;
+		case 4:
+			return CallfrozenSwords();
 			break;
 		default:
 			break;
-		}*/
+		}
 	}
 }
 

@@ -3,8 +3,6 @@
 namespace game_framework {
 	class SkillEffect {
 	public:
-		void OnShow(int id_x,int id_y);
-		void SetEffectObj(int x, int y);//x :腳色的 X ; y :腳色的Y       
 		SkillEffect(int skillID,int createdTimes);
 		boolean SkillsProcess(vector<vector<int>> theOthersPosition, int duration);
 		void SkillsFeedbackStatus(vector<vector<int>>  theOthersPosition);
@@ -17,8 +15,9 @@ namespace game_framework {
 		vector<GameObject*> effectObj;
 		vector<string> feedbackStatus;
 	private:
-		int skillID;
 		void CreatEffectObj();
+		void SetEffectObj(int x, int y);//x :腳色的 X ; y :腳色的Y       
+		int skillID;
 		
 		enum class skillsIdTable {
 			frozenWave, frozenPunch, frozenSword, frozenStorm

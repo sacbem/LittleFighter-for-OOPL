@@ -120,7 +120,18 @@ namespace game_framework {
 		//_CrtDumpMemoryLeaks();
 		maps->DynamicScence(PlayerTest->GetDir(), PlayerTest->GetDistance());
 		
+		CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
+		CFont f, * fp;
+		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+		fp = pDC->SelectObject(&f);					// 選用 font f
+		pDC->SetBkColor(RGB(0, 0, 0));
+		pDC->SetTextColor(RGB(255, 255, 0));
 
+		CString str;
+		str.Format("%d", PlayerTest->GetMovingTime(PlayerTest->GetDir()));
+		pDC->TextOut(120, 220, str);
+		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+		CDDraw::ReleaseBackCDC();
 	}
 	CGameStateRun::~CGameStateRun(){
 		delete maps, HealthPlayer1, HealthPlayer2, PlayerTest, EnemyTest;
