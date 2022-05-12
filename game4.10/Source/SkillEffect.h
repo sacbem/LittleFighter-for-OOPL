@@ -4,8 +4,8 @@ namespace game_framework {
 	class SkillEffect {
 	public:
 		SkillEffect(int skillID,int createdTimes);
-		boolean SkillsProcess(vector<vector<int>> theOthersPosition, int duration);
-		void SkillsFeedbackStatus(vector<vector<int>>  theOthersPosition);
+		boolean SkillsProcess(vector<pair<int,int>> theOthersPosition, int duration);
+		void SkillsFeedbackStatus(vector<pair<int, int>>  theOthersPosition);
 		boolean GarbageCollectorTimer(int duration);
 		void OnShow();
 		//void GarbageCollector();

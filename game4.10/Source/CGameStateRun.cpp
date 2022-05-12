@@ -17,12 +17,13 @@ namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
 		TRACE("Begin Player 1 %d\n", g->SelectCharacterID[0]);
 		TRACE("Begin Player 2 %d\n", g->SelectCharacterID[1]);
-		CharacterList.reserve(2);
+		characterList.reserve(2);
+		theOthersPosition.reserve(2);
 		//EnemyTest = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
 		maps = new Map(Forest);
-		charactersPosition.resize(1); // resize 為腳色數量 : 1
+	
 		//GenerationTime = clock();
 
 	}
@@ -31,13 +32,13 @@ namespace game_framework {
 	{
 		//_CrtDumpMemoryLeaks();
 		for (int i = 0; i < 2; i++) {
-			charactersPosition[0].push_back(200);
+			theOthersPosition.push_back(pair<int,int>(0,0));
 		}
 		TimePassed = 0;
 	}
    
-	void CGameStateRun::OnMove()						// 移動遊戲元素
-	{
+	void CGameStateRun::OnMove()	{					// 移動遊戲元素
+	
 		CleanCounter++;
 		if (CleanCounter >= 10) {
 			CleanCounter = 0;
@@ -83,7 +84,12 @@ namespace game_framework {
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
 		PlayerTest->InputKeyUp(nChar);
 	}
-
+	void CGameStateRun::SetAllCharacterPosition() {
+		for (int i = 0; i < characterList.size(); i++) {
+			theOthersPosition[i].first = characterList[i]->GetX1();
+			theOthersPosition[i].second = characterList[i]->GetY1();
+		}
+	}
 	void CGameStateRun::OnShow(){
 		TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);
 		TRACE("Begin Player 2 %d\n", this->game->SelectCharacterID[1]);
@@ -136,7 +142,7 @@ namespace game_framework {
 	CGameStateRun::~CGameStateRun(){
 		delete maps, HealthPlayer1, HealthPlayer2, PlayerTest, EnemyTest;
 
-		for (auto& i : CharacterList) {
+		for (auto& i : characterList) {
 			delete i;
 		}
 	}

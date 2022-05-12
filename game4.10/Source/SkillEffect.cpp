@@ -61,7 +61,7 @@ namespace game_framework {
 			break;
 		}
 	}
-	boolean  SkillEffect::SkillsProcess(vector<vector<int>> theOthersPosition,int duration) {
+	boolean  SkillEffect::SkillsProcess(vector<pair<int, int>>theOthersPosition,int duration) {
 		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
@@ -108,15 +108,15 @@ namespace game_framework {
 			break;
 		}
 	}
-	void  SkillEffect::SkillsFeedbackStatus(vector<vector<int>> theOthersPosition) {
+	void  SkillEffect::SkillsFeedbackStatus(vector<pair<int, int>> theOthersPosition) {
 
 		switch (skillID) {
 		 //////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
 			for (auto& i : effectObj) {
 				for (int h = 0; h < theOthersPosition.size(); h++) {
-					if (i->GetPositionXY("X") == theOthersPosition[h][0]) {
-						if (i->GetPositionXY("Y") == theOthersPosition[h][1]) {
+					if (i->GetPositionXY("X") == theOthersPosition[h].first) {
+						if (i->GetPositionXY("Y") == theOthersPosition[h].second) {
 							feedbackStatus[h] = "Freezed";
 						}
 					}
