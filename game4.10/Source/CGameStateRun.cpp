@@ -88,8 +88,8 @@ namespace game_framework {
 		}
 	}
 	void CGameStateRun::OnShow(){
-		TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);
-		TRACE("Begin Player 2 %d\n", this->game->SelectCharacterID[1]);
+		//TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);
+		//TRACE("Begin Player 2 %d\n", this->game->SelectCharacterID[1]);
 		//get character
 		if (GetCharacter == false ){ // && EnemyTest->getCharacter == false) {
 			PlayerTest = new Freeze();
@@ -122,7 +122,7 @@ namespace game_framework {
 		HealthPlayer2->OnShow(EnemyTest->HealthPoint, EnemyTest->InnerHealPoint, EnemyTest->Mana, EnemyTest->InnerMana);
 		//_CrtDumpMemoryLeaks();
 		maps->DynamicScence(PlayerTest->GetDir(), PlayerTest->GetDistance());
-		TRACE("------------ %d\n", PlayerTest->GetDistance());
+		//TRACE("------------ %d\n", PlayerTest->GetDistance());
 		CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
 		CFont f, * fp;
 		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字

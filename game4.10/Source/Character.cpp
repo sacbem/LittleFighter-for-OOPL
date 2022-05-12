@@ -48,8 +48,6 @@ namespace game_framework {
 		walkedDistance = 0;
 		SetMapBorder(0);
 
-		SkillSignal = -1;
-
 		//re
 		AnimationState = 0;
 		speed = 2;
@@ -185,32 +183,40 @@ namespace game_framework {
 				if (nChar == KEY_H) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
-						Mana -= 250;
-						SkillSignal = 0;
+						Mana -= 0;
+						skillSignal = 0;
 					}
 				}
 				else if (nChar == KEY_J) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
-						Mana -= 250;
-						SkillSignal = 1;
+						Mana -= 0;
+						skillSignal = 1;
 					}
 				}
 				else if (nChar == KEY_K) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
-						Mana -= 250;
-						SkillSignal = 2;
+						Mana -= 0;
+						skillSignal = 2;
 					}
 				}
 				else if (nChar == KEY_L) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
-						Mana -= 250;
-						SkillSignal = 3;
+						Mana -= 0;
+						skillSignal = 3;
 					}
 				}
-				//SetSkill(Time);
+				TRACE("Call Set Skill\n");
+				SetSkill(0);
+				/*
+				if (SpCount == 16) {
+					//Create Frozen Waves
+					//SetSkill(0);
+					frozenWaves.push_back(new SkillEffect(0, KeyBoardInputTime, direction, xPos, yPos));
+				}
+				*/
 			}
 			//detect double click
 			if (Diff <= 20) {
@@ -549,6 +555,7 @@ namespace game_framework {
 		for (int i = 0; i < 5; i++) {
 			skillsEffect_InFieldNumber.push_back(0);
 		}
+		frozenWaves.reserve(1);
 	}
 	
 	int Freeze::HitEnemy(Character* enemy) {
@@ -1035,14 +1042,34 @@ namespace game_framework {
 			break;
 		}
 	}
+		//TRACE("Begin %d\n", frozenWaves.begin());
+		//if (SpCount == 16) {
+			//frozenWaves.push_back(new SkillEffect(0, 0, direction, xPos, yPos));
+		//}
 	
 	void Freeze::SetSkill(int createdTimes) {
-			auto frozenWaves_Begin = frozenWaves.begin();
-			if (this->GetSkillSignal() == 0) {
-				frozenWaves.insert(frozenWaves_Begin,new SkillEffect(0, createdTimes, direction, xPos+50, yPos));
-				skillsEffect_InFieldNumber[0] = frozenWaves.size();
-			}
+		auto frozenWaves_Begin = frozenWaves.begin();
+		TRACE("Signal %d\n", this->GetSkillSignal());
+		if (this->GetSkillSignal()==0) {
+			frozenWaves.insert(frozenWaves_Begin, new SkillEffect(0, createdTimes, direction, xPos, yPos));
+			skillsEffect_InFieldNumber[0] = frozenWaves.size();
+		}
+		TRACE("Length %d\n", frozenWaves.size());
 	}
+
+	/*
+	void Freeze::SetSkill(int createdTime) {
+		if (this->GetSkillSignal() == 0) {
+			if (frozenWaves.size() != 0) {
+				std::reverse(frozenWaves.begin(), frozenWaves.end());
+			}
+			frozenWaves.push_back(new SkillEffect(0, createdTime, direction, xPos, yPos));
+			std::reverse(frozenWaves.begin(), frozenWaves.end());
+			skillsEffect_InFieldNumber[0] = frozenWaves.size();
+		}
+		TRACE("Length %d\n", frozenWaves.size());
+	}
+	*/
 	
 	void Freeze::EffectObjectAliveManager(int mainTime) {
 		const int frozenWaves_AliveTime = 5;
@@ -1200,7 +1227,7 @@ namespace game_framework {
 			//if (KnockCount ==  || KnockCount == 110) {
 			//}
 		}
-		if (SkillSignal != -1) {
+		if (skillSignal != -1) {
 			CallSpecial();
 		}
 
@@ -1559,11 +1586,6 @@ namespace game_framework {
 		}
 		else if (SpCount <= 16) {
 			AnimationState = 203;
-			if (SpCount == 16) {
-				//Create Frozen Waves
-				frozenWaves.push_back(new SkillEffect(0,KeyBoardInputTime,direction, xPos, yPos));
-				TRACE("Length %d\n", frozenWaves.size());
-			}
 		}
 		else if (SpCount <= 20) {
 			AnimationState = 204;
@@ -1573,7 +1595,7 @@ namespace game_framework {
 			if (SpCount >= 24) {
 				SpCount = 0;
 				//Clear State
-				SkillSignal = -1;
+				skillSignal = -1;
 			}
 		}
 	}
@@ -1605,7 +1627,7 @@ namespace game_framework {
 			AnimationState = 217;
 			if (SpCount >= 40) {
 				SpCount = 0;
-				SkillSignal = -1;
+				skillSignal = -1;
 			}
 		}
 	}
@@ -1640,7 +1662,7 @@ namespace game_framework {
 			AnimationState = 228;
 			if (SpCount >= 36) {
 				SpCount = 0;
-				SkillSignal = -1;
+				skillSignal = -1;
 			}
 		}
 	}
@@ -1666,7 +1688,7 @@ namespace game_framework {
 			AnimationState = 235;
 			if (SpCount >= 24) {
 				SpCount = 0;
-				SkillSignal = -1;
+				skillSignal = -1;
 
 				//need fix this one
 				//SetXY(xPos + 20, yPos);
@@ -1675,7 +1697,7 @@ namespace game_framework {
 	}
 
 	void Freeze::CallSpecial() {
-		switch (SkillSignal)
+		switch (skillSignal)
 		{
 		case -1:
 			break;

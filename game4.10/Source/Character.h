@@ -123,7 +123,6 @@ namespace game_framework {
 		int skillSignal;
 
 		//int SpecialAttackState = 0;
-		int SkillSignal;
 		virtual void CallSpecial() = 0;
 
 		virtual bool isAttackFrame() = 0;

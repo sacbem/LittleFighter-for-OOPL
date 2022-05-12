@@ -125,7 +125,7 @@ namespace game_framework {
 			//TRACE("skill show %d %d\n", id_x, id_y);
 			effectObj[0]->SetTopLeft(direction, AnimationCount % 6, xPos, yPos);
 			effectObj[0]->OnShow(direction, AnimationCount%6);
-			TRACE("Count %d\n", AnimationCount);
+			//TRACE("Count %d\n", AnimationCount);
 			AnimationCount++;
 			if (direction == 0) {
 				xPos += 5;
@@ -176,7 +176,7 @@ namespace game_framework {
 		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
-			TRACE("skill setEffect %d %d\n", x, y);
+			//TRACE("skill setEffect %d %d\n", x, y);
 			//for (auto& i : effectObj) {
 				//i->SetTopLeft(direction, AnimationState, x, y);
 			//}
