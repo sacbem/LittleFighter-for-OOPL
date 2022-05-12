@@ -131,7 +131,7 @@ namespace game_framework {
 		pDC->SetTextColor(RGB(255, 255, 0));
 
 		CString str;
-		str.Format("%d", PlayerTest->GetMovingTime(PlayerTest->GetDistance()));
+		str.Format("%d, %d", PlayerTest->GetMovingTime(PlayerTest->GetDistance()), PlayerTest->Mana);
 		pDC->TextOut(200, 220, str);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();

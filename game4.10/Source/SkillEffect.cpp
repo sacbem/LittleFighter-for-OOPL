@@ -278,11 +278,6 @@ namespace game_framework {
 		}
 
 	}
-	void SkillEffect::OnShow() {
-		for (auto i : effectObj) {
-			i->OnShow();
-		}
-	}
 	SkillEffect::~SkillEffect() {
 		for (auto& i : effectObj) {
 			delete i;

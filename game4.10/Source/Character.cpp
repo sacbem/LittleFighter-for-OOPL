@@ -185,28 +185,28 @@ namespace game_framework {
 				if (nChar == KEY_H) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
-						Mana -= 10;
+						Mana -= 250;
 						SkillSignal = 0;
 					}
 				}
 				else if (nChar == KEY_J) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
-						Mana -= 10;
+						Mana -= 250;
 						SkillSignal = 1;
 					}
 				}
 				else if (nChar == KEY_K) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
-						Mana -= 10;
+						Mana -= 250;
 						SkillSignal = 2;
 					}
 				}
 				else if (nChar == KEY_L) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
-						Mana -= 10;
+						Mana -= 250;
 						SkillSignal = 3;
 					}
 				}
@@ -1200,7 +1200,7 @@ namespace game_framework {
 			//if (KnockCount ==  || KnockCount == 110) {
 			//}
 		}
-		if (SkillSignal != 0) {
+		if (SkillSignal != -1) {
 			CallSpecial();
 		}
 
@@ -1680,7 +1680,7 @@ namespace game_framework {
 		case -1:
 			break;
 		case 0:
-			CallfrozenWaves();
+			return CallfrozenWaves();
 			break;
 		case 1:
 			return CallfrozenPunchs();
@@ -1689,9 +1689,6 @@ namespace game_framework {
 			return CallfrozenStorms();
 			break;
 		case 3:
-			return CallfrozenWaves();
-			break;
-		case 4:
 			return CallfrozenSwords();
 			break;
 		default:
