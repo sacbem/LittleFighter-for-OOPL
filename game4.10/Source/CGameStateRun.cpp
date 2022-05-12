@@ -15,8 +15,6 @@ using namespace std;
 #define Forest 100
 namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
-		TRACE("Begin Player 1 %d\n", g->SelectCharacterID[0]);
-		TRACE("Begin Player 2 %d\n", g->SelectCharacterID[1]);
 		characterList.reserve(2);
 		theOthersPosition.reserve(2);
 		//EnemyTest = new Character();
@@ -91,8 +89,6 @@ namespace game_framework {
 		}
 	}
 	void CGameStateRun::OnShow(){
-		TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);
-		TRACE("Begin Player 2 %d\n", this->game->SelectCharacterID[1]);
 		//get character
 		if (GetCharacter == false ){ // && EnemyTest->getCharacter == false) {
 			PlayerTest = new Freeze();
@@ -125,7 +121,7 @@ namespace game_framework {
 		HealthPlayer2->OnShow(EnemyTest->HealthPoint, EnemyTest->InnerHealPoint, EnemyTest->Mana, EnemyTest->InnerMana);
 		//_CrtDumpMemoryLeaks();
 		maps->DynamicScence(PlayerTest->GetDir(), PlayerTest->GetDistance());
-		
+		TRACE("------------ %d\n", PlayerTest->GetDistance());
 		CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
 		CFont f, * fp;
 		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
@@ -134,8 +130,8 @@ namespace game_framework {
 		pDC->SetTextColor(RGB(255, 255, 0));
 
 		CString str;
-		str.Format("%d", PlayerTest->GetMovingTime(PlayerTest->GetDir()));
-		pDC->TextOut(120, 220, str);
+		str.Format("%d", PlayerTest->GetMovingTime(PlayerTest->GetDistance()));
+		pDC->TextOut(200, 220, str);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();
 	}

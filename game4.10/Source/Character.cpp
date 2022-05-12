@@ -129,7 +129,7 @@ namespace game_framework {
 	}
 	
 	boolean Character::DistanceAccumulatorReset() {
-		if (this->AnimationState  || walkedDistance < 3) {
+		if ( walkedDistance < 3 && AnimationState != 0 ) {
 			return false;
 		}
 		else {
@@ -372,7 +372,7 @@ namespace game_framework {
 			speed = 2;
 		}
 		if (isMovingLeft) {
-			TRACE("LEFT\n");
+			/*TRACE("LEFT\n");*/
 			if ((!isDefense && !isAttacking) || isRunning) {
 				this->SetXY(xPos - speed, yPos);
 				DistaceAccumulator();
@@ -383,7 +383,7 @@ namespace game_framework {
 			leftTime = (L_finish - L_start) / 1000;
 		}
 		if (isMovingRight) {
-			TRACE("RIGHT\n");
+			/*TRACE("RIGHT\n");*/
 			if ((!isDefense && !isAttacking) || isRunning) {
 				this->SetXY(xPos + speed, yPos);
 				DistaceAccumulator();
@@ -1118,7 +1118,7 @@ namespace game_framework {
 	}
 
 	void Freeze::OnMove() {
-		TRACE("UnMove %d\n", UnMovable);
+		/*TRACE("UnMove %d\n", UnMovable);*/
 		AnimationCount++;
 		if (AnimationCount == 0) {
 			UnMovable = false;
