@@ -15,14 +15,13 @@ using namespace std;
 #define Forest 100
 namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
-		//TRACE("Begin Player 1 %d\n", g->SelectCharacterID[0]);
-		//TRACE("Begin Player 2 %d\n", g->SelectCharacterID[1]);
-		CharacterList.reserve(2);
+		characterList.reserve(2);
+		theOthersPosition.reserve(2);
 		//EnemyTest = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
 		maps = new Map(Forest);
-		charactersPosition.resize(1); // resize 為腳色數量 : 1
+	
 		//GenerationTime = clock();
 	}
 
@@ -30,13 +29,13 @@ namespace game_framework {
 	{
 		//_CrtDumpMemoryLeaks();
 		for (int i = 0; i < 2; i++) {
-			charactersPosition[0].push_back(200);
+			theOthersPosition.push_back(pair<int,int>(0,0));
 		}
 		TimePassed = 0;
 	}
    
-	void CGameStateRun::OnMove()						// 移動遊戲元素
-	{
+	void CGameStateRun::OnMove()	{					// 移動遊戲元素
+	
 		CleanCounter++;
 		if (CleanCounter >= 10) {
 			CleanCounter = 0;
@@ -82,11 +81,15 @@ namespace game_framework {
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
 		PlayerTest->InputKeyUp(nChar);
 	}
-
+	void CGameStateRun::SetAllCharacterPosition() {
+		for (int i = 0; i < characterList.size(); i++) {
+			theOthersPosition[i].first = characterList[i]->GetX1();
+			theOthersPosition[i].second = characterList[i]->GetY1();
+		}
+	}
 	void CGameStateRun::OnShow(){
-
-		//TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);
-		//TRACE("Begin Player 2 %d\n", this->game->SelectCharacterID[1]);
+		TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);
+		TRACE("Begin Player 2 %d\n", this->game->SelectCharacterID[1]);
 		//get character
 		if (GetCharacter == false ){ // && EnemyTest->getCharacter == false) {
 			PlayerTest = new Freeze();
@@ -119,7 +122,7 @@ namespace game_framework {
 		HealthPlayer2->OnShow(EnemyTest->HealthPoint, EnemyTest->InnerHealPoint, EnemyTest->Mana, EnemyTest->InnerMana);
 		//_CrtDumpMemoryLeaks();
 		maps->DynamicScence(PlayerTest->GetDir(), PlayerTest->GetDistance());
-		
+		TRACE("------------ %d\n", PlayerTest->GetDistance());
 		CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
 		CFont f, * fp;
 		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
@@ -128,8 +131,8 @@ namespace game_framework {
 		pDC->SetTextColor(RGB(255, 255, 0));
 
 		CString str;
-		str.Format("%d", PlayerTest->GetMovingTime(PlayerTest->GetDir()));
-		pDC->TextOut(200, 180, str);
+		str.Format("%d", PlayerTest->GetMovingTime(PlayerTest->GetDistance()));
+		pDC->TextOut(200, 220, str);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();
 		
@@ -138,7 +141,7 @@ namespace game_framework {
 	CGameStateRun::~CGameStateRun(){
 		delete maps, HealthPlayer1, HealthPlayer2, PlayerTest, EnemyTest;
 
-		for (auto& i : CharacterList) {
+		for (auto& i : characterList) {
 			delete i;
 		}
 	}

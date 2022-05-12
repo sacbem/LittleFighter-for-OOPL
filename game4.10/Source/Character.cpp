@@ -10,7 +10,6 @@
 #include <time.h>
 namespace game_framework {
 
-	
 	Character::Character() {
 		Initialize();
 	}
@@ -134,7 +133,7 @@ namespace game_framework {
 	}
 	
 	boolean Character::DistanceAccumulatorReset() {
-		if (this->AnimationState  || walkedDistance < 3) {
+		if ( walkedDistance < 3 && AnimationState != 0 ) {
 			return false;
 		}
 		else {
@@ -378,7 +377,7 @@ namespace game_framework {
 			speed = 2;
 		}
 		if (isMovingLeft) {
-			//TRACE("LEFT\n");
+			
 			if ((!isDefense && !isAttacking) || isRunning) {
 				this->SetXY(xPos - speed, yPos);
 				DistaceAccumulator();
@@ -389,7 +388,7 @@ namespace game_framework {
 			leftTime = (L_finish - L_start) / 1000;
 		}
 		if (isMovingRight) {
-			//TRACE("RIGHT\n");
+			
 			if ((!isDefense && !isAttacking) || isRunning) {
 				this->SetXY(xPos + speed, yPos);
 				DistaceAccumulator();
@@ -400,8 +399,6 @@ namespace game_framework {
 			rightTime = (R_finish - R_start) / 1000;
 		}
 
-		//TRACE("rightTime %d\n", rightTime);
-		//TRACE("leftTime %d\n", leftTime);
 		if (isMovingUp) {
 			if (!isDefense && !isAttacking) {
 				if (!isJumpping) {
@@ -500,7 +497,7 @@ namespace game_framework {
 				}
 			}
 			if (island) {
-				if (JumpCount >= JumpCountTemp * 2 + 6) {
+				if (JumpCount >= JumpCountTemp * 2 + 6) { 
 					isJumpping = false;
 					island = false;
 					UnMovable = false;
@@ -585,9 +582,6 @@ namespace game_framework {
 		Animation.LoadFreeze();
 		InitSpecialAttack();
 		name = "Freeze";
-		
-		// Test
-		//frozenWaves.push_back(new SkillEffect(0, 100));
 	}
 
 	void Freeze::ShowDefense() {
@@ -1059,6 +1053,7 @@ namespace game_framework {
 			}
 		}
 	}
+	
 	void Freeze::InitSpecialAttack() {
 		//Freeze Ball Attack
 		frozenWavesAnimation[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_0.bmp", RGB(0, 0, 0));
@@ -1127,6 +1122,7 @@ namespace game_framework {
 	}
 
 	void Freeze::OnMove() {
+		/*TRACE("UnMove %d\n", UnMovable);*/
 		AnimationCount++;
 		if (AnimationCount == 0) {
 			UnMovable = false;
@@ -1204,7 +1200,7 @@ namespace game_framework {
 			//if (KnockCount ==  || KnockCount == 110) {
 			//}
 		}
-		if (SkillSignal != -1) {
+		if (SkillSignal != 0) {
 			CallSpecial();
 		}
 
@@ -1687,13 +1683,16 @@ namespace game_framework {
 			CallfrozenWaves();
 			break;
 		case 1:
-			CallfrozenPunchs();
+			return CallfrozenPunchs();
 			break;
 		case 2:
-			CallfrozenStorms();
+			return CallfrozenStorms();
 			break;
 		case 3:
-			CallfrozenSwords();
+			return CallfrozenWaves();
+			break;
+		case 4:
+			return CallfrozenSwords();
 			break;
 		default:
 			break;

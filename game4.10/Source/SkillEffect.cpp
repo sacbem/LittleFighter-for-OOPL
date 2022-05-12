@@ -16,6 +16,7 @@ namespace game_framework {
 		AnimationState = 0;
 		AnimationCount = 0;
 		CreatEffectObj();
+
 	}
 	void  SkillEffect::CreatEffectObj() {
 		switch (skillID) {
@@ -200,13 +201,12 @@ namespace game_framework {
 			break;
 		}
 	}
-	boolean  SkillEffect::SkillsProcess(vector<vector<int>> theOthersPosition, int duration) {
+	boolean  SkillEffect::SkillsProcess(vector<pair<int, int>>theOthersPosition,int duration) {
 		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
 			for (auto& i : effectObj) {
-				//i->SetTopLeft(i->GetPositionXY("X") + 1, i->GetPositionXY("Y"));
-				//i->OnShow();
+				i->SetTopLeft(i->GetPositionXY("X") + 1, i->GetPositionXY("Y"));
 			}
 			break;
 		case static_cast<int>(skillsIdTable::frozenPunch):
@@ -248,15 +248,15 @@ namespace game_framework {
 			break;
 		}
 	}
-	void  SkillEffect::SkillsFeedbackStatus(vector<vector<int>> theOthersPosition) {
+	void  SkillEffect::SkillsFeedbackStatus(vector<pair<int, int>> theOthersPosition) {
 
 		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
 			for (auto& i : effectObj) {
 				for (int h = 0; h < theOthersPosition.size(); h++) {
-					if (i->GetPositionXY("X") == theOthersPosition[h][0]) {
-						if (i->GetPositionXY("Y") == theOthersPosition[h][1]) {
+					if (i->GetPositionXY("X") == theOthersPosition[h].first) {
+						if (i->GetPositionXY("Y") == theOthersPosition[h].second) {
 							feedbackStatus[h] = "Freezed";
 						}
 					}
@@ -278,7 +278,11 @@ namespace game_framework {
 		}
 
 	}
-
+	void SkillEffect::OnShow() {
+		for (auto i : effectObj) {
+			i->OnShow();
+		}
+	}
 	SkillEffect::~SkillEffect() {
 		for (auto& i : effectObj) {
 			delete i;

@@ -54,7 +54,7 @@ namespace game_framework {
 	}
 	void CGameStateInit::OnBeginState(){
 		keyCount = cursorClickLift = 0;;     
-		loadMap = characterIsSeclected = enterCounter = 0;
+		loadedImg = characterIsSeclected = enterCounter = 0;
 		//countDown.SetDelayCount(50);
 		MOUSE_ENABLE = SELECT_ENTER = SELECTOR_ENABLE = false;
 		for (int i = 0; i < 3;i++) {
@@ -70,7 +70,7 @@ namespace game_framework {
 		cursorXY[0] = point.x;
 		cursorXY[1] = point.y;
 		MOUSE_ENABLE = true;
-	   /* TRACE("posX: %d posY: %d\n", point.x, point.y);*/
+	   
 		if (cursorXY[0] >= 545 * (0.81) + 20 && cursorXY[0] <= 745 * (0.81) + 20) {
 			if (cursorXY[1] >= 260 * (0.94) && cursorXY[1] <= 280 * (0.94)) {
 			keyCount = 0;                   //回歸正常計數
@@ -188,31 +188,24 @@ namespace game_framework {
 			switch (characterIsSeclected) {
 			case 1:
 				idGet = photoSticker_seclecter->GetCharacterID();
-				if (loadMap < characterIsSeclected) {
-					//photoSticker_1P->Load(picStickers[idGet], picIDs[idGet],picNames[idGet]);
-					//photoSticker_seclecter->SetXY(336, 195);
-					loadMap++;
-					/*selectCharacterID = idGet;*/
+				if (loadedImg < characterIsSeclected) {
+					loadedImg++;
 				}
 				photoSticker_1P->OnShow();
-				idGet = 0;
 				break;
 			case 2:
 				idGet = photoSticker_seclecter->GetCharacterID();
-				if (loadMap < characterIsSeclected) {
+				if (loadedImg < characterIsSeclected) {
 					photoSticker_2P->Load(picStickers[idGet], picIDs[idGet], picNames[idGet]);
-					loadMap++;
+					loadedImg++;
 				}
 				photoSticker_2P->OnShow();
 				SELECTOR_ENABLE = false;
-				idGet = 0;
 				break;
 			}
-			//TRACE("ID %d\n", idGet);
 			photoSticker_seclecter->OnShow();
 		}
 		else {
-
 			photoSticker_1P->OnShow();
 			photoSticker_2P->OnShow();
 		}
@@ -223,7 +216,7 @@ namespace game_framework {
 		  logo.ShowBitmap();
 
 		  //test
-		  GotoGameState(GAME_STATE_RUN);
+		  //GotoGameState(GAME_STATE_RUN);
 		  if (!SELECT_ENTER) {
 			  startBtn->OnShow();
 			  settingBtn->OnShow();

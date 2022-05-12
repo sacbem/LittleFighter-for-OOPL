@@ -1,6 +1,6 @@
+#include "SkillEffect.h"
 #include "Character.h"
 #include "HealthBar.h"
-#include "SkillEffect.h"
 #include "Map.h"
 #include <ctime>
 namespace game_framework {
@@ -12,14 +12,16 @@ namespace game_framework {
 		void OnInit();  								
 		void OnKeyDown(UINT, UINT, UINT);
 		void OnKeyUp(UINT, UINT, UINT);
+		void SetAllCharacterPosition();
 		//void MapSlide();
-		vector<vector<int>> charactersPosition;
+		
 	protected:
 		void OnMove();									
 		void OnShow();									
 	private:
 		bool GetCharacter = false;
-		vector<Character*> CharacterList;
+		vector<pair<int,int>> theOthersPosition;
+		vector<Character*> characterList;
 		//Player & other
 		Character *PlayerTest;
 		Character *EnemyTest;
