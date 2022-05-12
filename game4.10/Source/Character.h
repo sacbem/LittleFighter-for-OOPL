@@ -74,7 +74,7 @@ namespace game_framework {
 
 		int leftTime = 0;
 		int rightTime = 0;
-		vector<int>skillsEffect_InFieldNumber;
+		vector<int>skillsEffect_InFieldNumber; // 統計各技能物件存活數量 index 對應 skill ID
 		int KeyBoardInputTime;
 		friend class SkillEffect;
 	protected:

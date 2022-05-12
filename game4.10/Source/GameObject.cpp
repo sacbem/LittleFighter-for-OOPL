@@ -89,6 +89,7 @@ namespace game_framework {
         if (IsEffect) {
             return "Effect";
         }
+        return "Type did not be set.";
     }
     int GameObject::GetPositionXY(const string type) {
         return type == "X" ? xPos : yPos;

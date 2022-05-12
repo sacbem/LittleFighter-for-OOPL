@@ -7,42 +7,42 @@ namespace game_framework {
 		CGameStateInit(CGame* g);
 		void OnInit();  								// 遊戲的初值及圖形設定
 		void OnBeginState();							// 設定每次重玩所需的變數
-        void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
+		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
 		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
-        void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作
-        void ScreenClear();
-        void SetAnimation();
-        void SetCountdownAni();
-        void SetPhotoStickers();
-        ~CGameStateInit();
+		void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作
+		void ScreenClear();
+		void SetAnimation();
+		void SetCountdownAni();
+		void SetPhotoStickers();
+		~CGameStateInit();
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-        /*
-        //shared_ptr<SettingBtn> settingBtn;
-        //shared_ptr<SelectCharacterMenu> selectCharacterMenu;
-        //shared_ptr<Seclecter> photoSticker_seclecter;
-        //shared_ptr<PhotoSticker>photoSticker_1P, photoSticker_2P;
-        //shared_ptr<StartBtn> startBtn;
-        */
+		/*
+		//shared_ptr<SettingBtn> settingBtn;
+		//shared_ptr<SelectCharacterMenu> selectCharacterMenu;
+		//shared_ptr<Seclecter> photoSticker_seclecter;
+		//shared_ptr<PhotoSticker>photoSticker_1P, photoSticker_2P;
+		//shared_ptr<StartBtn> startBtn;
+		*/
 		CMovingBitmap logo,black;	// csie的logo
-        CAnimation attackScreen,countDown; //需改名 還沒選角的動畫 
-        StartBtn * startBtn;
-        SettingBtn * settingBtn;
-        SelectCharacterMenu* selectCharacterMenu;
-        PhotoSticker *photoSticker_1P, *photoSticker_2P;
-        Seclecter* photoSticker_seclecter;
-        vector<int> bitmap;
-        vector<int> picStickers{ PHOTOSTICKER_FIRZEN,PHOTOSTICKER_FREEZE,PHOTOSTICKER_HENRY }, picIDs{ BITMAP_NUMBER_0,BITMAP_NUMBER_1,BITMAP_NUMBER_2 }, picNames{NAME_FIRZEN,NAME_FREEZE,NAME_HENRY};
-        int keyCount;
-        int cursorXY[2];
-        int cursorClickLift;
-        int characterID[2];
-        int characterIsSeclected ;
-        int loadMap;
-        int enterCounter;
-        boolean MOUSE_ENABLE,SELECT_ENTER,SELECTOR_ENABLE;
+		CAnimation attackScreen,countDown; //需改名 還沒選角的動畫 
+		StartBtn * startBtn;
+		SettingBtn * settingBtn;
+		SelectCharacterMenu* selectCharacterMenu;
+		PhotoSticker *photoSticker_1P, *photoSticker_2P;
+		Seclecter* photoSticker_seclecter;
+		vector<int> bitmap;
+		vector<int> picStickers{ PHOTOSTICKER_FIRZEN,PHOTOSTICKER_FREEZE,PHOTOSTICKER_HENRY }, picIDs{ BITMAP_NUMBER_0,BITMAP_NUMBER_1,BITMAP_NUMBER_2 }, picNames{NAME_FIRZEN,NAME_FREEZE,NAME_HENRY};
+		int keyCount;
+		int cursorXY[2];
+		int cursorClickLift;
+		int characterID[2];
+		int characterIsSeclected ;
+		int loadedImg;
+		int enterCounter;
+		boolean MOUSE_ENABLE,SELECT_ENTER,SELECTOR_ENABLE;
  
-        
+		
 	};
 }
