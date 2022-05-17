@@ -286,6 +286,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MapConfiguration.h" />
     <ClInclude Include="Source\audio.h" />
     <ClInclude Include="Source\CEraser.h" />
     <ClInclude Include="Source\CGameStateInit.h" />

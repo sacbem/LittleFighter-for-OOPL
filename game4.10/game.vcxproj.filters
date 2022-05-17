@@ -16,11 +16,10 @@
     <ClCompile Include="Source\InitalPageMenu.cpp" />
     <ClCompile Include="Source\MainFrm.cpp" />
     <ClCompile Include="Source\Map.cpp" />
-    <ClCompile Include="Source\MapGenerator.cpp" />
     <ClCompile Include="Source\SelCharacterConfig.cpp" />
     <ClCompile Include="Source\StdAfx.cpp" />
     <ClCompile Include="Source\gamelib.cpp" />
-    <ClCompile Include="Source\Skills.cpp" />
+    <ClCompile Include="Source\SkillEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
@@ -38,12 +37,12 @@
     <ClInclude Include="Source\InitalPageMenu.h" />
     <ClInclude Include="Source\MainFrm.h" />
     <ClInclude Include="Source\Map.h" />
-    <ClInclude Include="Source\MapGenerator.h" />
     <ClInclude Include="Source\Resource.h" />
     <ClInclude Include="Source\SelCharacterConfig.h" />
     <ClInclude Include="Source\StdAfx.h" />
     <ClInclude Include="Source\gamelib.h" />
-    <ClInclude Include="Source\Skills.h" />
+    <ClInclude Include="Source\SkillEffect.h" />
+    <ClInclude Include="MapConfiguration.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\game.rc" />

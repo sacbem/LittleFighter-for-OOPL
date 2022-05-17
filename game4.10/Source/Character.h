@@ -25,7 +25,7 @@ namespace game_framework {
 		void Initialize();
 
 		virtual void SetCharacter() = 0;
-		virtual void OnShow()=0;
+		virtual void OnShow(vector<pair<int, int>>theOthersPosition , int mainTime)=0;
 		virtual void OnMove() = 0;
 		void SetMovingDown(bool flag);
 		void SetMovingLeft(bool flag);
@@ -169,7 +169,7 @@ namespace game_framework {
 	public:
 		//change to freeze
 		Freeze();
-		virtual void OnShow() override;
+		virtual void OnShow(vector<pair<int, int>>theOthersPosition ,int mainTime) override;
 		virtual void OnMove() override;
 
 		virtual void SetAttack(bool flag) override;

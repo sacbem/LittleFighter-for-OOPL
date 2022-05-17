@@ -6,17 +6,7 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "Map.h"
-
-#define Forest 100
-#define MapWidth 3200* 0.75
-#define BoundaryMin 
-constexpr auto forestSky_dx = MapWidth / 800 * 0.75;
-constexpr auto forestMountain_dx1 = MapWidth / 1100 * 0.75;
-constexpr auto forestMountain_dx2 = MapWidth / 1400 * 0.75;
-constexpr auto forestTree_dx = 1.5 * MapWidth / 2900 * 0.75;
-constexpr auto forestLand_dx1 = MapWidth / 2950 * 0.75;
-constexpr auto forestLand_dx2 = MapWidth / 3070 * 0.75;
-constexpr auto forestLand_dx3 = MapWidth / 3200 * 0.75;
+using namespace mapConfiguration;
 namespace game_framework {
 	Map::Map(int mapID) {
 		for (int i = 0; i < 4; i++) {
@@ -27,6 +17,9 @@ namespace game_framework {
 		}
 		map.reserve(30);
 		InitializeAllObjs(mapID);
+		mapId = mapID;
+
+		cameraEnable = mapId == Forest ? true : false;
 	}
 	void Map::InitializeAllObjs(int mapID) {
 		////初始遊戲鏡頭位置
@@ -58,6 +51,17 @@ namespace game_framework {
 				backgroundSkyObjs.push_back(new GameObject("Scenes"));
 			}
 			break;
+		case HKC:
+			for (int backgroundFronNum = 0; backgroundFronNum < 2; backgroundFronNum++) {
+				backgroundBackObjs.push_back(new GameObject("Scenes"));
+			}
+			for (int floorNum = 0; floorNum < 1; floorNum++) {
+				floors.push_back(new GameObject("Scenes"));
+			}
+			for (int skyNum = 0; skyNum < 1; skyNum++) {
+				backgroundSkyObjs.push_back(new GameObject("Scenes"));
+			}
+			break;
 		default:
 			break;
 		}
@@ -82,6 +86,13 @@ namespace game_framework {
 			}
 			backgroundBackObjs[0]->Load(BITMAP_BACKSCENE_FOREST, RGB(0, 0, 0));
 		   
+			break;
+		case HKC:
+			floors[0]->Load(".\\res\\hkc\\gray.bmp");
+			backgroundBackObjs[0]->Load(".\\res\\hkc\\hkc_back1.bmp");
+			backgroundBackObjs[1]->Load(".\\res\\hkc\\hkc_back2.bmp");
+			backgroundSkyObjs[0]->Load(".\\res\\hkc\\hkc_sky.bmp");
+
 			break;
 		default:
 			break;
@@ -125,45 +136,55 @@ namespace game_framework {
 				////mountains
 				backgroundBackObjs[0]->SetTopLeft(-800, 90);
 				break;
+			case HKC:
+				floors[0]->SetTopLeft(0,336);
+				backgroundBackObjs[0]->SetTopLeft(3,250);
+				backgroundBackObjs[1]->SetTopLeft(3,250);
+				backgroundSkyObjs[0]->SetTopLeft(3,100);
+				break;
 		}
 
 	}
 	void Map::StopDynamic(boolean isLeft, int distance) {
-		if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0) {/// 左/右底場景判斷
-			mapBordary[0] = false;
-			if (distance != 0) {
-				if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// 左底場景 往右走
-					mapBordary[0] = true;
+		if (cameraEnable) {
+			if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0) {/// 左/右底場景判斷
+				mapBordary[0] = false;
+				if (distance != 0) {
+					if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// 左底場景 往右走
+						mapBordary[0] = true;
+					}
+					else if (backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0 && isLeft) {/// 右底場景 往左走
+						mapBordary[0] = true;
+					}
 				}
-				else if (backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0 && isLeft) {/// 右底場景 往左走
-					mapBordary[0] = true;
+			}
+			if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 || backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547) {/// 左/右底場景判斷
+				mapBordary[1] = false;
+				if (distance != 0) {
+					if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// 左底場景 往右走
+						mapBordary[1] = true;
+					}
+					else if (backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547 && isLeft) {/// 右底場景 往左走
+						mapBordary[1] = true;
+					}
+				}
+				//if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size()-1]->GetPositionXY("X") == -800) {
+				//    mapBordary[2] = false;
+				//}
+				if (backgroundBackObjs[0]->GetPositionXY("X") == 0 || backgroundBackObjs[backgroundBackObjs.size() - 1]->GetPositionXY("X") == -1600) {
+					mapBordary[3] = false;
+					if (backgroundBackObjs[0]->GetPositionXY("X") == 0 && !isLeft) {
+						mapBordary[3] = true;
+					}
+					else if (backgroundBackObjs[backgroundBackObjs.size() - 1]->GetPositionXY("X") == -1600 && isLeft) {
+						mapBordary[3] = true;
+					}
 				}
 			}
 		}
-		if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 || backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547) {/// 左/右底場景判斷
-			mapBordary[1] = false;
-			if (distance != 0) {
-				if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// 左底場景 往右走
-					mapBordary[1] = true;
-				}
-				else if (backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547 && isLeft) {/// 右底場景 往左走
-					mapBordary[1] = true;
-				}
-			}
-			//if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size()-1]->GetPositionXY("X") == -800) {
-			//    mapBordary[2] = false;
-			//}
-			if (backgroundBackObjs[0]->GetPositionXY("X") == 0 || backgroundBackObjs[backgroundBackObjs.size() - 1]->GetPositionXY("X") == -1600) {
-				mapBordary[3] = false;
-				if (backgroundBackObjs[0]->GetPositionXY("X") == 0  && !isLeft) {
-					mapBordary[3] = true;
-				}
-				else if (backgroundBackObjs[backgroundBackObjs.size() - 1]->GetPositionXY("X") == -1600 && isLeft) {
-					mapBordary[3] = true;
-				}
-			}
-		}
+		
 	}
+	
 	boolean Map::ResetCharactAccumulator(int distance1, int distance2) {
 		if (distance1 > forestSky_dx || distance2 > forestSky_dx) {
 			return true;
@@ -172,40 +193,50 @@ namespace game_framework {
 			return false;
 		}
 	}
+	
 	void Map::DynamicScence(boolean IsLeft,int walkedDistance) {
 		StopDynamic(IsLeft, walkedDistance);
 		int direction = IsLeft ? 1 : -1; // 往右 : 1 往左 : -1 
-		if (mapBordary[0]) {
-			if (walkedDistance > forestSky_dx ) {
-				for (auto& i : backgroundSkyObjs) {
-					i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+		if (cameraEnable) {
+			if (mapBordary[0]) {
+				if (walkedDistance > forestSky_dx) {
+					for (auto& i : backgroundSkyObjs) {
+						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+					}
+				}
+			}
+			if (mapBordary[1]) {
+				if (walkedDistance > forestMountain_dx2) {
+					for (auto& i : backgroundFrontObjs) {
+						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+					}
+				}
+			}
+			if (mapBordary[2]) {
+				if (walkedDistance > forestTree_dx) {
+					for (auto& i : floorObjs) {
+						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+					}
+				}
+			}
+			if (mapBordary[3]) {
+				if (walkedDistance > forestMountain_dx2) {
+					backgroundBackObjs[0]->SetTopLeftSpical(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
 				}
 			}
 		}
-		if (mapBordary[1]) {
-			if (walkedDistance > forestMountain_dx2) {
-				for (auto& i : backgroundFrontObjs) {
-					i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
-				}
-			}
+		switch (mapId){
+		case HKC:
+
+		default:
+			break;
 		}
-		if (mapBordary[2]) {
-			if (walkedDistance > forestTree_dx ) {
-				for (auto& i : floorObjs) {
-					i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
-				}
-			}
-		}
-		if (mapBordary[3]) {
-			if (walkedDistance > forestMountain_dx2 ) {
-				backgroundBackObjs[0]->SetTopLeftSpical(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
-			}
-		 }      
 	}
 
 	void Map::ScenesCamera(boolean mapMove, boolean IsRunning, boolean IsLeft, int walkedDistance) {
 		int direction = IsLeft  ?  1 : -1; // 往右 : 1 往左 : -1 
-		if (mapMove) {
+		
+		if (mapMove && cameraEnable) {
 			StopDynamic(IsLeft, walkedDistance);
 			int direction = IsLeft ? 1 : -1; // 往右 : 1 往左 : -1 
 			if (mapBordary[0]) {
@@ -235,61 +266,72 @@ namespace game_framework {
 				}
 			}
 		}
-		//if (IsLeft) {
-		//    if (IsRunning) {    //往左跑
-		//        gameScenesPos_X++;
-		//    }
-		//    else if (!IsRunning && walkedDistance > 20) { //往左走
-		//        gameScenesPos_X++;
-		//    }
-		//}
-		//else if (!IsLeft) {
-		//    if (IsRunning) {  //往右跑
-		//        gameScenesPos_X--;
-		//    }
-		//    else if (!IsRunning && walkedDistance > 20) { //往右走
-		//        gameScenesPos_X--;
-		//    }
-		//}
-
 	}
 
-	void Map::PrintMap() {
-		for (auto & i : backgroundSkyObjs) {
-			i->OnShow();
-		}
-		for (auto& i : backgroundBackObjs) {
-			i->OnShow();
-		}
-		for (auto i : floors) {
-			i->OnShow();
-		}
-		for (auto& i : backgroundFrontObjs) {
-			i->OnShow();
-		}
+	void Map::PrintMap(boolean showStates) {
 
-		for (auto i : floorObjs) {
-			i->OnShow();
+		if (backgroundSkyObjs.size()) {
+			for (auto& i : backgroundSkyObjs) {
+				i->OnShow();
+			}
 		}
-
-
+		if (backgroundBackObjs.size()) {
+			if (mapId == HKC && showStates) {
+				backgroundBackObjs[0]->OnShow();
+			}
+			else if (mapId != HKC) {
+				for (auto& i : backgroundBackObjs) {
+					i->OnShow();
+				}
+			}
+			else {
+				backgroundBackObjs[1]->OnShow();
+			}
+			
+		}
+		if (floors.size()) {
+			for (auto i : floors) {
+				i->OnShow();
+			}
+		}
+		if (backgroundFrontObjs.size()) {
+			for (auto& i : backgroundFrontObjs) {
+				i->OnShow();
+			}
+		}
+		if (floorObjs.size()) {
+			for (auto i : floorObjs) {
+				i->OnShow();
+			}
+		}
 	}
 	Map::~Map() {
-		for (auto& i : floors) {
-			delete i;
+		if (floorObjs.size()) {
+			for (auto& i : floors) {
+				delete i;
+			}
 		}
-		for (auto& i : floorObjs) {
-			delete i;
+		if (floorObjs.size()) {
+			for (auto& i : floorObjs) {
+				delete i;
+			}
 		}
-		for (auto& i : backgroundFrontObjs) {
-			delete i;
+		if (backgroundFrontObjs.size()) {
+			for (auto& i : backgroundFrontObjs) {
+				delete i;
+			}
 		}
-		for (auto& i : backgroundSkyObjs) {
-			delete i;
+		if (backgroundSkyObjs.size()) {
+			for (auto& i : backgroundSkyObjs) {
+				delete i;
+			}
 		}
-		for (auto& i : backgroundBackObjs) {
-			delete i;
+		if (backgroundBackObjs.size()) {
+			for (auto& i : backgroundBackObjs) {
+				delete i;
+			}
 		}
+	
 		//floors.clear();
 	}
    

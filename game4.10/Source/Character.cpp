@@ -148,7 +148,7 @@ namespace game_framework {
 		DamageAccumulator += Damage;
 	}
 
-	void Character::InputKeyDown(UINT nChar, int Time) {
+	void Character::InputKeyDown(UINT nChar, int createdTime) {
 		const char KEY_LEFT = 0x41; // keyboard���b�Y 0x25
 		const char KEY_UP = 0x57; // keyboard�W�b�Y 0x26
 		const char KEY_RIGHT = 0x44; // keyboard�k�b�Y 0x27
@@ -208,8 +208,8 @@ namespace game_framework {
 						skillSignal = 3;
 					}
 				}
-				TRACE("Call Set Skill\n");
-				SetSkill(0);
+				
+				SetSkill(createdTime);
 				/*
 				if (SpCount == 16) {
 					//Create Frozen Waves
@@ -1049,34 +1049,20 @@ namespace game_framework {
 	
 	void Freeze::SetSkill(int createdTimes) {
 		auto frozenWaves_Begin = frozenWaves.begin();
-		TRACE("Signal %d\n", this->GetSkillSignal());
 		if (this->GetSkillSignal()==0) {
 			frozenWaves.insert(frozenWaves_Begin, new SkillEffect(0, createdTimes, direction, xPos, yPos));
 			skillsEffect_InFieldNumber[0] = frozenWaves.size();
 		}
-		TRACE("Length %d\n", frozenWaves.size());
 	}
-
-	/*
-	void Freeze::SetSkill(int createdTime) {
-		if (this->GetSkillSignal() == 0) {
-			if (frozenWaves.size() != 0) {
-				std::reverse(frozenWaves.begin(), frozenWaves.end());
-			}
-			frozenWaves.push_back(new SkillEffect(0, createdTime, direction, xPos, yPos));
-			std::reverse(frozenWaves.begin(), frozenWaves.end());
-			skillsEffect_InFieldNumber[0] = frozenWaves.size();
-		}
-		TRACE("Length %d\n", frozenWaves.size());
-	}
-	*/
 	
 	void Freeze::EffectObjectAliveManager(int mainTime) {
 		const int frozenWaves_AliveTime = 5;
-		for (auto& i : frozenWaves) {
-			if (mainTime - i->createdTime == frozenWaves_AliveTime) {
-				delete i;
-				frozenWaves.pop_back();
+		if (frozenWaves.size() > 0) {
+			for (auto& i : frozenWaves) {
+				if (mainTime - i->createdTime == frozenWaves_AliveTime) {
+					delete i;
+					frozenWaves.pop_back();
+				}
 			}
 		}
 	}
@@ -1234,7 +1220,8 @@ namespace game_framework {
 		//calculate input time diff
 		KeyBoardInputTime++;
 	}
-	void Freeze::OnShow() {
+	
+	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition,int mainTime) {
 
 		//frozenWaves[0]->OnShow(direction, 0);
 
@@ -1719,9 +1706,9 @@ namespace game_framework {
 	}
 
 	void Freeze::ShowSpecialAttack() {
-		for (auto& i : frozenWaves) {
+		/*for (auto& i : frozenWaves) {
 			i->OnShow(direction, SpCount % 10);
-		}
+		}*/
 	}
 }
 
