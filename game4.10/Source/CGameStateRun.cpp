@@ -43,7 +43,6 @@ namespace game_framework {
 				EnemyTest->SetAlive(false);
 			}
 		}
-
 		PlayerTest->OnMove();
 		EnemyTest->OnMove();
 		if (PlayerTest->HitEnemy(EnemyTest) && PlayerTest->isAttacking) {
@@ -56,7 +55,7 @@ namespace game_framework {
 		maps->ResetCharactAccumulator(PlayerTest->GetDistance(), PlayerTest->GetDistance());
 		//EnemyTest->OnMove();
 		PlayerTest->DistanceAccumulatorReset();
-		maps->ScenesCamera(PlayerTest->isRunning, PlayerTest->GetDir(), PlayerTest->GetDistance());
+		maps->ScenesCamera(PlayerTest->DistanceAccumulatorReset(),PlayerTest->isRunning,PlayerTest->GetDir(), PlayerTest->GetDistance());
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -100,10 +99,6 @@ namespace game_framework {
 			EnemyTest->SetXY(400,200);
 			EnemyTest->SetCharacter();
 			
-			//EnemyTest->SetCharacter(buffer[1] - '0');
-			PlayerTest->getCharacter = true;
-			EnemyTest->getCharacter = true;
-			
 			GetCharacter = true;
 			//load HealthBar small character
 			HealthPlayer1->loadSmallImg(this->game->SelectCharacterID[0]);
@@ -112,12 +107,12 @@ namespace game_framework {
 			GenerationTime = clock();
 		}
 		CurrentTime = clock();
-		TimePassed = CurrentTime - GenerationTime/1000;
+		TimePassed = (CurrentTime - GenerationTime) / 1000;
 		//TRACE("TimePassed %d\n", TimePassed);
 		
 		maps->PrintMap();
-		PlayerTest->OnShow();
-		EnemyTest->OnShow();
+		PlayerTest->OnShow(CurrentTime);
+		EnemyTest->OnShow(CurrentTime);
 		HealthPlayer1->OnShow(PlayerTest->HealthPoint, PlayerTest->InnerHealPoint, PlayerTest->Mana, PlayerTest->InnerMana);
 		HealthPlayer2->OnShow(EnemyTest->HealthPoint, EnemyTest->InnerHealPoint, EnemyTest->Mana, EnemyTest->InnerMana);
 		//_CrtDumpMemoryLeaks();
@@ -131,7 +126,7 @@ namespace game_framework {
 		pDC->SetTextColor(RGB(255, 255, 0));
 
 		CString str;
-		str.Format("%d, %d", PlayerTest->GetMovingTime(PlayerTest->GetDistance()), PlayerTest->Mana);
+		str.Format("%d", PlayerTest->GetMovingTime(PlayerTest->GetDistance()));
 		pDC->TextOut(200, 220, str);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();

@@ -9,8 +9,7 @@ namespace game_framework {
 		Character(Character const & other);
 		~Character();
 		//int HitEnemy(Character* enemy);
-	
-	
+
 		bool GetAlive();
 		int  GetX1();					// Chracter
 		int  GetY1();					// Chracter
@@ -25,7 +24,7 @@ namespace game_framework {
 		void Initialize();
 
 		virtual void SetCharacter() = 0;
-		virtual void OnShow()=0;
+		virtual void OnShow(int currentTime)=0;
 		virtual void OnMove() = 0;
 		void SetMovingDown(bool flag);
 		void SetMovingLeft(bool flag);
@@ -47,9 +46,7 @@ namespace game_framework {
 		boolean  DistanceAccumulatorReset();
 		virtual int HitEnemy(Character* enemy) = 0;
 
-		
 		//basic informtion
-		bool getCharacter=false;
 		int characterNumber;
 		int HealthPoint;
 		int InnerHealPoint;
@@ -74,6 +71,7 @@ namespace game_framework {
 
 		int leftTime = 0;
 		int rightTime = 0;
+		int currentTime=0;
 		vector<int>skillsEffect_InFieldNumber; // 統計各技能物件存活數量 index 對應 skill ID
 		int KeyBoardInputTime;
 		friend class SkillEffect;
@@ -169,7 +167,7 @@ namespace game_framework {
 	public:
 		//change to freeze
 		Freeze();
-		virtual void OnShow() override;
+		virtual void OnShow(int currentTime) override;
 		virtual void OnMove() override;
 
 		virtual void SetAttack(bool flag) override;

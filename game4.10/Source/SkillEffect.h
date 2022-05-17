@@ -10,13 +10,14 @@ namespace game_framework {
         //void GarbageCollector();
         ~SkillEffect();
         int createdTime;
-        void OnShow(int id_x, int id_y);
+        void OnShow();
         void SetEffectObj(int direction, int x, int y);//x :腳色的 X ; y :腳色的Y
-    protected:
         int xPos, yPos;
+    protected:
         int direction;
         int AnimationState;
-        int AnimationCount;
+        int AnimationCount[3];
+        int timeCount;
         vector<string> feedbackStatus;
         vector<GameObject*> effectObj;
     private:

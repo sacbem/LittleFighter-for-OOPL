@@ -7,9 +7,9 @@
 #include "Character.h"
 #include "time.h"
 #include <cmath>
+#include <algorithm>
 #include <time.h>
 namespace game_framework {
-
 	Character::Character() {
 		Initialize();
 	}
@@ -36,7 +36,6 @@ namespace game_framework {
 		isJumpping = island = false;
 
 		direction = 1;
-		getCharacter = false;
 
 		HealthPoint = 1800;
 		InnerHealPoint = 1800;
@@ -148,7 +147,7 @@ namespace game_framework {
 		DamageAccumulator += Damage;
 	}
 
-	void Character::InputKeyDown(UINT nChar, int Time) {
+	void Character::InputKeyDown(UINT nChar, int createdTime) {
 		const char KEY_LEFT = 0x41; // keyboard���b�Y 0x25
 		const char KEY_UP = 0x57; // keyboard�W�b�Y 0x26
 		const char KEY_RIGHT = 0x44; // keyboard�k�b�Y 0x27
@@ -178,38 +177,42 @@ namespace game_framework {
 					}
 				}
 			}
-			else if (!isRunning) {
+			else if (!isRunning && !isWalking) {
 				//Sp
 				if (nChar == KEY_H) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
-						Mana -= 0;
+						Mana -= 10;
 						skillSignal = 0;
+						UnMovable = true;
 					}
 				}
 				else if (nChar == KEY_J) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
-						Mana -= 0;
+						Mana -= 10;
 						skillSignal = 1;
+						UnMovable = true;
 					}
 				}
 				else if (nChar == KEY_K) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
-						Mana -= 0;
+						Mana -= 10;
 						skillSignal = 2;
+						UnMovable = true;
 					}
 				}
 				else if (nChar == KEY_L) {
 					//TRACE("Sp \n");
 					if (Mana >= 250) {
-						Mana -= 0;
+						Mana -= 10;
 						skillSignal = 3;
+						UnMovable = true;
 					}
 				}
-				TRACE("Call Set Skill\n");
-				SetSkill(0);
+				//TRACE("Call Set Skill\n");
+				SetSkill(createdTime);
 				/*
 				if (SpCount == 16) {
 					//Create Frozen Waves
@@ -268,7 +271,6 @@ namespace game_framework {
 		const char KEY_SPACE = 0x20; // keyboard SPACE
 		const char KEY_ENTER = 0x0D; // keyboard ENTER
 		const char KEY_J = 0x4A;
-
 		if (nChar == KEY_LEFT) {
 			if (isRunning == false) {
 				SetMovingRight(false);
@@ -303,7 +305,6 @@ namespace game_framework {
 		}
 		LastInput = nChar;
 	}
-
 
 	void Character::SetMovingDown(bool flag) {
 		isMovingDown = flag;
@@ -556,6 +557,9 @@ namespace game_framework {
 			skillsEffect_InFieldNumber.push_back(0);
 		}
 		frozenWaves.reserve(1);
+		frozenPunchs.reserve(1);
+		frozenSwords.reserve(1);
+		frozenStorms.reserve(1);
 	}
 	
 	int Freeze::HitEnemy(Character* enemy) {
@@ -1042,41 +1046,52 @@ namespace game_framework {
 			break;
 		}
 	}
-		//TRACE("Begin %d\n", frozenWaves.begin());
-		//if (SpCount == 16) {
-			//frozenWaves.push_back(new SkillEffect(0, 0, direction, xPos, yPos));
-		//}
 	
 	void Freeze::SetSkill(int createdTimes) {
 		auto frozenWaves_Begin = frozenWaves.begin();
-		TRACE("Signal %d\n", this->GetSkillSignal());
+		auto frozenPunchs_Begin = frozenPunchs.begin();
+		auto frozenStorms_Begin = frozenStorms.begin();
+		//TRACE("Signal %d\n", this->GetSkillSignal());
 		if (this->GetSkillSignal()==0) {
 			frozenWaves.insert(frozenWaves_Begin, new SkillEffect(0, createdTimes, direction, xPos, yPos));
 			skillsEffect_InFieldNumber[0] = frozenWaves.size();
 		}
-		TRACE("Length %d\n", frozenWaves.size());
-	}
-
-	/*
-	void Freeze::SetSkill(int createdTime) {
-		if (this->GetSkillSignal() == 0) {
-			if (frozenWaves.size() != 0) {
-				std::reverse(frozenWaves.begin(), frozenWaves.end());
-			}
-			frozenWaves.push_back(new SkillEffect(0, createdTime, direction, xPos, yPos));
-			std::reverse(frozenWaves.begin(), frozenWaves.end());
-			skillsEffect_InFieldNumber[0] = frozenWaves.size();
+		else if (this->GetSkillSignal() == 1) {
+			frozenPunchs.insert(frozenPunchs_Begin, new SkillEffect(1, createdTimes, direction, xPos, yPos));
+			skillsEffect_InFieldNumber[1] = frozenPunchs.size();
 		}
-		TRACE("Length %d\n", frozenWaves.size());
+		else if (this->GetSkillSignal() == 3) {
+			frozenStorms.insert(frozenStorms_Begin, new SkillEffect(3, createdTimes, direction, xPos, yPos));
+			skillsEffect_InFieldNumber[3] = frozenStorms.size();
+		}
 	}
-	*/
 	
 	void Freeze::EffectObjectAliveManager(int mainTime) {
-		const int frozenWaves_AliveTime = 5;
+		const int frozenWaves_AliveTime = 10000;
+		const int frozenPunchs_AliveTime = 10000;
+		const int frozenStorms_AliveTime = 4500;
 		for (auto& i : frozenWaves) {
-			if (mainTime - i->createdTime == frozenWaves_AliveTime) {
+			if (mainTime - i->createdTime >= frozenWaves_AliveTime) {
 				delete i;
 				frozenWaves.pop_back();
+			}
+		}
+		for (auto& i : frozenPunchs) {
+			TRACE("Time m %d\n", mainTime);
+			TRACE("Time c %d\n", i->createdTime);
+			TRACE("Time %d\n", mainTime - i->createdTime);
+			if (mainTime - i->createdTime >= frozenPunchs_AliveTime) {
+				delete i;
+				frozenPunchs.pop_back();
+			}
+		}
+		for (auto& i : frozenStorms) {
+			TRACE("Time m %d\n", mainTime);
+			TRACE("Time c %d\n", i->createdTime);
+			TRACE("Time %d\n", mainTime - i->createdTime);
+			if (mainTime - i->createdTime >= frozenStorms_AliveTime) {
+				delete i;
+				frozenStorms.pop_back();
 			}
 		}
 	}
@@ -1234,7 +1249,7 @@ namespace game_framework {
 		//calculate input time diff
 		KeyBoardInputTime++;
 	}
-	void Freeze::OnShow() {
+	void Freeze::OnShow(int currentTime) {
 
 		//frozenWaves[0]->OnShow(direction, 0);
 
@@ -1244,6 +1259,10 @@ namespace game_framework {
 			Animation.Normal[direction].OnMove();
 			Animation.Normal[direction].SetTopLeft(xPos, yPos);
 			Animation.Normal[direction].OnShow();
+			
+			//Fool-proof mechanism
+			skillSignal = -1;
+			UnMovable = false;
 			break;
 		case 1:
 			Animation.Walk[direction].OnMove();
@@ -1567,6 +1586,7 @@ namespace game_framework {
 			break;
 		}
 		//Special Attack Animation
+		EffectObjectAliveManager(currentTime);
 		ShowSpecialAttack();
 	}
 
@@ -1708,19 +1728,49 @@ namespace game_framework {
 			return CallfrozenPunchs();
 			break;
 		case 2:
-			return CallfrozenStorms();
+			return CallfrozenSwords();
 			break;
 		case 3:
-			return CallfrozenSwords();
+			return CallfrozenStorms();
 			break;
 		default:
 			break;
 		}
 	}
 
+	bool mycompare(SkillEffect* s1, SkillEffect* s2) {
+		return s1->yPos < s2->yPos;
+	}
+
 	void Freeze::ShowSpecialAttack() {
-		for (auto& i : frozenWaves) {
-			i->OnShow(direction, SpCount % 10);
+		vector<SkillEffect*>  frozenWavesSorted, frozenPunchsSorted, frozenSwordsSorted, frozenStormsSorted;
+		frozenWavesSorted = frozenWaves;
+		frozenPunchsSorted = frozenPunchs;
+		frozenStormsSorted = frozenStorms;
+
+		std::sort(frozenWavesSorted.begin(), frozenWavesSorted.end(), mycompare);
+		std::sort(frozenPunchsSorted.begin(), frozenPunchsSorted.end(), mycompare);
+		std::sort(frozenStormsSorted.begin(), frozenStormsSorted.end(), mycompare);
+		/*
+		for (int i = frozenWavesSorted.size()-1; i >= 0; i--) {
+			frozenWavesSorted[i]->OnShow();
+		}
+		for (int i = frozenPunchsSorted.size()-1; i >= 0; i--) {
+			TRACE("Y %d\n", frozenPunchs[i]->yPos);
+			frozenPunchsSorted[i]->OnShow();
+		}
+		for (int i = frozenStormsSorted.size()-1; i >= 0; i--) {
+			frozenStormsSorted[i]->OnShow();
+		}
+		*/
+		for (auto& i : frozenWavesSorted) {
+			i->OnShow();
+		}
+		for (auto& i : frozenPunchsSorted) {
+			i->OnShow();
+		}
+		for (auto& i : frozenStormsSorted) {
+			i->OnShow();
 		}
 	}
 }

@@ -71,6 +71,9 @@ namespace game_framework {
     }
     
     void GameObject::SetTopLeft(int id_x, int id_y,int x, int y) {
+        //xPos = x >= 500 ? 500 : x;
+        //xPos = x <= 0 ? 0 : x;
+
         Pos_imgs[id_x][id_y].first = x;
         Pos_imgs[id_x][id_y].second = y;
         imgs[id_x][id_y]->SetTopLeft(x, y);
