@@ -211,7 +211,7 @@ namespace game_framework {
 						UnMovable = true;
 					}
 				}
-				//TRACE("Call Set Skill\n");
+				
 				SetSkill(createdTime);
 				/*
 				if (SpCount == 16) {
@@ -1249,7 +1249,8 @@ namespace game_framework {
 		//calculate input time diff
 		KeyBoardInputTime++;
 	}
-	void Freeze::OnShow(int currentTime) {
+	
+	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition,int mainTime) {
 
 		//frozenWaves[0]->OnShow(direction, 0);
 
@@ -1586,7 +1587,7 @@ namespace game_framework {
 			break;
 		}
 		//Special Attack Animation
-		EffectObjectAliveManager(currentTime);
+		EffectObjectAliveManager(mainTime);
 		ShowSpecialAttack();
 	}
 

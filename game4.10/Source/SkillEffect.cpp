@@ -148,27 +148,17 @@ namespace game_framework {
 		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
-			//effectObj[0]->OnShow(id_x, id_y);
-			//TRACE("skill show %d %d\n", id_x, id_y);
-			if (timeCount >= 16) {
-				effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 6, xPos, yPos);
-				effectObj[0]->OnShow(direction, AnimationCount[0] % 6);
-				//TRACE("Count %d\n", AnimationCount);
-				AnimationCount[0]++;
-				if (direction == 0) {
-					xPos += 5;
-				}
-				else if (direction == 1) {
-					xPos -= 5;
-				}
-			}
-			timeCount++;
 
-			/*
-			for (auto& i : effectObj) {
-				i->OnShow(direction, AnimaiotnState);
+			effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 6, xPos, yPos);
+			effectObj[0]->OnShow(direction, AnimationCount[0] % 6);
+			AnimationCount[0]++;
+			//SkillsProcess(theOthersPosition, mainTime - createdTime);
+			if (direction == 0) {
+				xPos += 5;
 			}
-			*/
+			else if (direction == 1) {
+				xPos -= 5;
+			}
 			break;
 		case static_cast<int>(skillsIdTable::frozenPunch):
 			if (timeCount >= 20) {
@@ -262,19 +252,6 @@ namespace game_framework {
 		default:
 			break;
 		}
-		/*
-			CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
-			CFont f, * fp;
-			f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-			fp = pDC->SelectObject(&f);					// 選用 font f
-			pDC->SetBkColor(RGB(0, 0, 0));
-			pDC->SetTextColor(RGB(255, 255, 0));
-			CString str;
-			str.Format("%d", AnimationCount);
-			pDC->TextOut(xPos+50, yPos, str);
-			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-			CDDraw::ReleaseBackCDC();
-		*/
 	}
 
 	void  SkillEffect::SetEffectObj(int dir, int x, int y) { //按下組合鍵後 被呼叫一次
@@ -306,40 +283,34 @@ namespace game_framework {
 			break;
 		}
 	}
-	boolean  SkillEffect::SkillsProcess(vector<pair<int, int>>theOthersPosition,int duration) {
+	
+	int  SkillEffect::SkillsProcess(vector<pair<int, int>>theOthersPosition,int duration) {
 		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
 			for (auto& i : effectObj) {
-				i->SetTopLeft(i->GetPositionXY("X") + 1, i->GetPositionXY("Y"));
+				for (int h = 0; h < theOthersPosition.size(); h++) {
+					if (i->GetPositionXY("X") == theOthersPosition[h].first) {
+						if (i->GetPositionXY("Y") == theOthersPosition[h].second) {
+							return -700;
+						}
+					}
+				}
 			}
 			break;
 		case static_cast<int>(skillsIdTable::frozenPunch):
-			//for (auto& i : effectObj) {
 
-			//}
 			break;
 		case static_cast<int>(skillsIdTable::frozenSword):
-			//for (auto& i : effectObj) {
 
-			//}
 			break;
 		case static_cast<int>(skillsIdTable::frozenStorm):
-			//for (auto& i : effectObj) {
 
-			//}
 			break;
-			////////////////
+
 		default:
+			return 0;
 			break;
-		}
-		SkillsFeedbackStatus(theOthersPosition);
-
-		if (GarbageCollectorTimer(duration)) {
-			return true;
-		}
-		else {
-			return false;
 		}
 	}
 	boolean SkillEffect::GarbageCollectorTimer(int duration) {

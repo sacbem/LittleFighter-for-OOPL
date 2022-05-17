@@ -12,7 +12,8 @@ using namespace std;
 #define  _CRTDBG_MAP_ALLOC
 #include  < stdlib.h >
 #include  < crtdbg.h >
-#define Forest 100
+#define Forest 0
+#define HKC 1
 namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
 		characterList.reserve(2);
@@ -20,8 +21,8 @@ namespace game_framework {
 		//EnemyTest = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
-		maps = new Map(Forest);
-	
+		maps = new Map(HKC);
+		
 		//GenerationTime = clock();
 	}
 
@@ -45,6 +46,7 @@ namespace game_framework {
 		}
 		PlayerTest->OnMove();
 		EnemyTest->OnMove();
+		SetAllCharacterPosition();
 		if (PlayerTest->HitEnemy(EnemyTest) && PlayerTest->isAttacking) {
 			if (EnemyTest->HealthPoint > 0) {
 				//int hitDirection = PlayerTest->GetDir();
@@ -64,7 +66,7 @@ namespace game_framework {
 		ShowInitProgress(50);
 		Sleep(300);
 
-		maps->Load(Forest);
+		maps->Load(HKC);
 		HealthPlayer1->init();
 		HealthPlayer2->init();
 
@@ -80,13 +82,16 @@ namespace game_framework {
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
 		PlayerTest->InputKeyUp(nChar);
 	}
+	
 	void CGameStateRun::SetAllCharacterPosition() {
 		for (int i = 0; i < characterList.size(); i++) {
 			theOthersPosition[i].first = characterList[i]->GetX1();
 			theOthersPosition[i].second = characterList[i]->GetY1();
 		}
 	}
+	
 	void CGameStateRun::OnShow(){
+		boolean showStatus;
 		//TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);
 		//TRACE("Begin Player 2 %d\n", this->game->SelectCharacterID[1]);
 		//get character
@@ -99,6 +104,9 @@ namespace game_framework {
 			EnemyTest->SetXY(400,200);
 			EnemyTest->SetCharacter();
 			
+			//EnemyTest->SetCharacter(buffer[1] - '0');
+			SetAllCharacterPosition();
+
 			GetCharacter = true;
 			//load HealthBar small character
 			HealthPlayer1->loadSmallImg(this->game->SelectCharacterID[0]);
@@ -107,29 +115,15 @@ namespace game_framework {
 			GenerationTime = clock();
 		}
 		CurrentTime = clock();
-		TimePassed = (CurrentTime - GenerationTime) / 1000;
+		TimePassed = (CurrentTime - GenerationTime)/1000;
 		//TRACE("TimePassed %d\n", TimePassed);
-		
-		maps->PrintMap();
-		PlayerTest->OnShow(CurrentTime);
-		EnemyTest->OnShow(CurrentTime);
+		showStatus = TimePassed % 2 == 0 ? true : false;
+		maps->PrintMap(showStatus);
+		PlayerTest->OnShow(theOthersPosition, CurrentTime);
+		EnemyTest->OnShow(theOthersPosition, CurrentTime);
 		HealthPlayer1->OnShow(PlayerTest->HealthPoint, PlayerTest->InnerHealPoint, PlayerTest->Mana, PlayerTest->InnerMana);
 		HealthPlayer2->OnShow(EnemyTest->HealthPoint, EnemyTest->InnerHealPoint, EnemyTest->Mana, EnemyTest->InnerMana);
-		//_CrtDumpMemoryLeaks();
-		maps->DynamicScence(PlayerTest->GetDir(), PlayerTest->GetDistance());
-		//TRACE("------------ %d\n", PlayerTest->GetDistance());
-		CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
-		CFont f, * fp;
-		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-		fp = pDC->SelectObject(&f);					// 選用 font f
-		pDC->SetBkColor(RGB(0, 0, 0));
-		pDC->SetTextColor(RGB(255, 255, 0));
-
-		CString str;
-		str.Format("%d", PlayerTest->GetMovingTime(PlayerTest->GetDistance()));
-		pDC->TextOut(200, 220, str);
-		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		CDDraw::ReleaseBackCDC();
+	
 		
 		//imgs[0][0]->ShowBitmap();
 	}
