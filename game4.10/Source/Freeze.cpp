@@ -1232,4 +1232,40 @@ namespace game_framework {
 			i->OnShow();
 		}
 	}
+	void Freeze::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
+		pair<int, int> itr(0, 0);  // first ²Ä´X°¦¸}¦â second ¶Ë®`
+
+		for (auto& i : frozenWaves) {
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if (i->xPos == theOthersPosition[h].first) {
+					if (i->yPos == theOthersPosition[h].second) {
+						itr.first = h; itr.second = -300;
+						hittedTable.push_back(itr);
+					}
+				}
+			}
+		}
+
+		for (auto& i : frozenPunchs) {
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if (i->xPos > theOthersPosition[h].first && i->xPos < theOthersPosition[h].first + 209) {
+					if (i->yPos == theOthersPosition[h].second + 79) {
+						itr.first = h; itr.second = -500;
+						hittedTable.push_back(itr);
+					}
+				}
+			}
+		}
+
+		for (auto& i : frozenStorms) {
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if ((i->xPos + 40) - 80 > theOthersPosition[h].first && (i->xPos + 40) + 80 < theOthersPosition[h].first) {
+					if ((i->yPos + 90) + 79 == theOthersPosition[h].second) {
+						itr.first = h; itr.second = -900;
+						hittedTable.push_back(itr);
+					}
+				}
+			}
+		}
+	}
 }

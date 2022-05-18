@@ -253,8 +253,8 @@ namespace game_framework {
 			  if (!SELECTOR_ENABLE) {  //結束選角
 				  SetCountdownAni();
 				  if (countDown.IsFinalBitmap()){
-					  this->game->SelectCharacterID[0] = characterID[0];
-					  this->game->SelectCharacterID[1] = characterID[1];
+					  this->game->selectCharacterID[0] = characterID[0];
+					  this->game->selectCharacterID[1] = characterID[1];
 
 					  GotoGameState(GAME_STATE_RUN);
 				  }

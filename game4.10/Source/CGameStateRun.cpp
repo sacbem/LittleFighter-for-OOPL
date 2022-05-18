@@ -14,6 +14,7 @@ using namespace std;
 #include  < crtdbg.h >
 #define Forest 0
 #define HKC 1
+using namespace skillTable;
 namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
 		characterList.reserve(2);
@@ -89,14 +90,40 @@ namespace game_framework {
 			theOthersPosition[i].second = characterList[i]->GetY1();
 		}
 	}
-	
+	void  CGameStateRun::CalculateDamage(vector<pair<int, int>> theOthersPosition) {
+		int player1Damage =0, player2Damage = 0;
+		for (int i = 0; i < 2; i++) {
+			if (this->game->selectCharacterID[i] == 0) {
+				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition);
+			}
+			else if (this->game->selectCharacterID[i] == 1) {
+				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition);
+			}
+			else if (this->game->selectCharacterID[i] == 2) {
+				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition);
+			}
+		}
+		for (auto& u : characterList) {
+			for (auto i : u->hittedTable) { /// issue :可能不會改 !!!
+				if (i.first == 1) {
+					player1Damage += i.second;
+				}
+				else if (i.first == 2) {
+					player2Damage += i.second;
+				}
+			}
+		}
+		
+		characterList[0]->isGettingDamage(player1Damage);
+		characterList[1]->isGettingDamage(player2Damage);
+	}
+
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
-		//TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);
-		//TRACE("Begin Player 2 %d\n", this->game->SelectCharacterID[1]);
+		
 		//get character
 		if (GetCharacter == false ){ // && characterList[1]->getCharacter == false) {
-			switch (this->game->SelectCharacterID[0])
+			switch (this->game->selectCharacterID[0])
 			{
 			case 0:
 				characterList.push_back(new Woody());
@@ -114,7 +141,7 @@ namespace game_framework {
 			characterList[0]->SetXY(200, 200);
 			characterList[0]->SetCharacter();
 
-			switch (this->game->SelectCharacterID[1])
+			switch (this->game->selectCharacterID[1])
 			{
 			case 0:
 				characterList.push_back(new Woody());
@@ -137,8 +164,8 @@ namespace game_framework {
 
 			GetCharacter = true;
 			//load HealthBar small character
-			HealthPlayer1->loadSmallImg(this->game->SelectCharacterID[0]);
-			HealthPlayer2->loadSmallImg(this->game->SelectCharacterID[1]);
+			HealthPlayer1->loadSmallImg(this->game->selectCharacterID[0]);
+			HealthPlayer2->loadSmallImg(this->game->selectCharacterID[1]);
 
 			GenerationTime = clock();
 		}
@@ -155,6 +182,7 @@ namespace game_framework {
 		
 		//imgs[0][0]->ShowBitmap();
 	}
+
 	CGameStateRun::~CGameStateRun(){
 		delete maps, HealthPlayer1, HealthPlayer2;
 

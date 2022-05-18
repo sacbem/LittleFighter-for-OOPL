@@ -560,7 +560,6 @@ namespace game_framework {
 	Character::~Character() {
 
 	}
-	
 }
 
 

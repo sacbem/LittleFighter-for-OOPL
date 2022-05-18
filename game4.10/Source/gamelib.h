@@ -117,7 +117,7 @@ using namespace std;
 		}
 
 namespace game_framework {
-	static int selectCharacterID[2];
+	/*static int selectCharacterID[2];*/
 /////////////////////////////////////////////////////////////////////////////
 // �o��class���Ѯɶ��B���~������
 // �@�몺�C���ä��ݪ����ާ@�o�Ӫ���A�]���i�H���޳o��class���ϥΤ�k
@@ -338,7 +338,7 @@ public:
 	void SetGameState(int);
 	static CGame *Instance();
 	//static int SelectCharacterID[2];
-	static int SelectCharacterID[2];
+	static int selectCharacterID[2];
 private:
 	bool			running;			// �C���O�_���b�i�椤(���QPause)
 	bool            suspended;			// �C���O�_�Qsuspended
