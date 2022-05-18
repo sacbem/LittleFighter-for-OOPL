@@ -208,5 +208,98 @@ namespace game_framework {
 		vector <int>  frozenWaves_Duration;
 	};
 	
+	class Henry :public Character {
+	public:
+		//change to freeze
+		Henry();
+		virtual void OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) override;
+		virtual void OnMove() override;
+
+		virtual void SetAttack(bool flag) override;
+		virtual void ShowAttack() override;
+		virtual void SetCharacter() override;
+		virtual void SetSkill(int createdTimes) override;
+		virtual int HitEnemy(Character* enemy) override;
+		virtual bool isAttackFrame() override;
+		void EffectObjectAliveManager(int mainTime);
+		~Henry();
+		//Knock
+		virtual void ShowKnock() override;
+		virtual void SetKnock(bool flag, int Dir, int AttState) override;
+
+		//Movement
+		virtual void ShowDefense() override;
+		virtual void ShowRoll() override;
+		//Special Attack;
+		virtual void CallSpecial() override;
+
+		int SpCount = 0;
+		void InitSpecialAttack();
+		void ShowSpecialAttack();
+
+		void CallairWave();
+		void CallpierceArrow();
+		void CallarrowRain();
+		void CalldemonicSong();
+	protected:
+		CMovingBitmap airWaveAnimation[2][6];
+		CMovingBitmap pierceArrowAnimation[2][4];
+		CMovingBitmap arrowRainAnimation[2][8];
+		CMovingBitmap demonicSongAnimation[2][4];
+		virtual bool AttackReach() override;
+
+	private:
+		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
+		vector <SkillEffect*> arrow, airwave, pierceArrow, arrowRain, demonicSong;
+		vector <int>  frozenWaves_Duration;
+	};
 	
+	class Woody :public Character {
+	public:
+		//change to freeze
+		Woody();
+		virtual void OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) override;
+		virtual void OnMove() override;
+
+		virtual void SetAttack(bool flag) override;
+		virtual void ShowAttack() override;
+		virtual void SetCharacter() override;
+		virtual void SetSkill(int createdTimes) override;
+		virtual int HitEnemy(Character* enemy) override;
+		virtual bool isAttackFrame() override;
+		void EffectObjectAliveManager(int mainTime);
+		~Woody();
+		//Knock
+		virtual void ShowKnock() override;
+		virtual void SetKnock(bool flag, int Dir, int AttState) override;
+
+		//Movement
+		virtual void ShowDefense() override;
+		virtual void ShowRoll() override;
+		//Special Attack;
+		virtual void CallSpecial() override;
+
+		int SpCount = 0;
+		void InitSpecialAttack();
+		void ShowSpecialAttack();
+
+		void CallEnergyBlast();
+		void CallFootKnife();
+		void CallDemonFoot();
+		void CallTank();
+		void CallTeleportation();
+
+	protected:
+		CMovingBitmap energyBlastAnimation[2][12];
+		CMovingBitmap footKnifeAnimation[2][7];
+		CMovingBitmap demonFootAnimation[2][11];
+		CMovingBitmap tankAnimation[2][7];
+		CMovingBitmap teleportationAnimation[2][9];
+		virtual bool AttackReach() override;
+
+	private:
+		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
+		vector <SkillEffect*> energyBlast;
+		vector <int>  frozenWaves_Duration;
+	};
 }

@@ -23,8 +23,8 @@ namespace game_framework {
 		vector<pair<int,int>> theOthersPosition;
 		vector<Character*> characterList;
 		//Player & other
-		Character *PlayerTest;
-		Character *EnemyTest;
+		//Character *PlayerTest;
+		//Character *EnemyTest;
 		Map* maps;
 		HealthBar* HealthPlayer1;
 		HealthBar* HealthPlayer2;

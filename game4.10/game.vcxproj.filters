@@ -20,6 +20,9 @@
     <ClCompile Include="Source\StdAfx.cpp" />
     <ClCompile Include="Source\gamelib.cpp" />
     <ClCompile Include="Source\SkillEffect.cpp" />
+    <ClCompile Include="Source\Freeze.cpp" />
+    <ClCompile Include="Source\Henry.cpp" />
+    <ClCompile Include="Source\Woody.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
@@ -494,6 +497,8 @@
     <Image Include="RES\quit1.bmp" />
     <Image Include="RES\quit2.bmp" />
     <Image Include="RES\red.bmp" />
+    <Image Include="RES\Henry\henry_f.bmp" />
+    <Image Include="RES\Woody\woody_f.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp" />

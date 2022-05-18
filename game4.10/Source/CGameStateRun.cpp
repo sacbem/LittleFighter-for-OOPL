@@ -18,7 +18,7 @@ namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
 		characterList.reserve(2);
 		theOthersPosition.reserve(2);
-		//EnemyTest = new Character();
+		//characterList[1] = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
 		maps = new Map(HKC);
@@ -40,24 +40,24 @@ namespace game_framework {
 		CleanCounter++;
 		if (CleanCounter >= 10) {
 			CleanCounter = 0;
-			if (EnemyTest->GetHealth() <= 0) {
-				EnemyTest->SetAlive(false);
+			if (characterList[1]->GetHealth() <= 0) {
+				characterList[1]->SetAlive(false);
 			}
 		}
-		PlayerTest->OnMove();
-		EnemyTest->OnMove();
+		characterList[0]->OnMove();
+		characterList[1]->OnMove();
 		SetAllCharacterPosition();
-		if (PlayerTest->HitEnemy(EnemyTest) && PlayerTest->isAttacking) {
-			if (EnemyTest->HealthPoint > 0) {
-				//int hitDirection = PlayerTest->GetDir();
-				EnemyTest->SetKnock(true, PlayerTest->GetDir(), PlayerTest->AttackState);
-				EnemyTest->isGettingDamage(PlayerTest->AttackPoint);
+		if (characterList[0]->HitEnemy(characterList[1]) && characterList[0]->isAttacking) {
+			if (characterList[1]->HealthPoint > 0) {
+				//int hitDirection = characterList[0]->GetDir();
+				characterList[1]->SetKnock(true, characterList[0]->GetDir(), characterList[0]->AttackState);
+				characterList[1]->isGettingDamage(characterList[0]->AttackPoint);
 			}
 		}
-		maps->ResetCharactAccumulator(PlayerTest->GetDistance(), PlayerTest->GetDistance());
-		//EnemyTest->OnMove();
-		PlayerTest->DistanceAccumulatorReset();
-		maps->ScenesCamera(PlayerTest->DistanceAccumulatorReset(),PlayerTest->isRunning,PlayerTest->GetDir(), PlayerTest->GetDistance());
+		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
+		//characterList[1]->OnMove();
+		characterList[0]->DistanceAccumulatorReset();
+		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(),characterList[0]->isRunning,characterList[0]->GetDir(), characterList[0]->GetDistance());
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -76,11 +76,11 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags){
-		PlayerTest->InputKeyDown(nChar, CurrentTime);
+		characterList[0]->InputKeyDown(nChar, CurrentTime);
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
-		PlayerTest->InputKeyUp(nChar);
+		characterList[0]->InputKeyUp(nChar);
 	}
 	
 	void CGameStateRun::SetAllCharacterPosition() {
@@ -95,16 +95,44 @@ namespace game_framework {
 		//TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);
 		//TRACE("Begin Player 2 %d\n", this->game->SelectCharacterID[1]);
 		//get character
-		if (GetCharacter == false ){ // && EnemyTest->getCharacter == false) {
-			PlayerTest = new Freeze();
-			PlayerTest->SetXY(200, 200);
-			PlayerTest->SetCharacter();
+		if (GetCharacter == false ){ // && characterList[1]->getCharacter == false) {
+			switch (this->game->SelectCharacterID[0])
+			{
+			case 0:
+				characterList.push_back(new Woody());
+				break;
+			case 1:
+				characterList.push_back(new Freeze());
+				break;
+			case 2:
+				characterList.push_back(new Henry());
+				break;
+			default:
+				characterList.push_back(new Freeze());
+				break;
+			}
+			characterList[0]->SetXY(200, 200);
+			characterList[0]->SetCharacter();
 
-			EnemyTest = new Freeze();
-			EnemyTest->SetXY(400,200);
-			EnemyTest->SetCharacter();
+			switch (this->game->SelectCharacterID[1])
+			{
+			case 0:
+				characterList.push_back(new Woody());
+				break;
+			case 1:
+				characterList.push_back(new Freeze());
+				break;
+			case 2:
+				characterList.push_back(new Henry());
+				break;
+			default:
+				characterList.push_back(new Freeze());
+				break;
+			}
+			characterList[1]->SetXY(400, 200);
+			characterList[1]->SetCharacter();
 			
-			//EnemyTest->SetCharacter(buffer[1] - '0');
+			//characterList[1]->SetCharacter(buffer[1] - '0');
 			SetAllCharacterPosition();
 
 			GetCharacter = true;
@@ -119,16 +147,16 @@ namespace game_framework {
 		//TRACE("TimePassed %d\n", TimePassed);
 		showStatus = TimePassed % 2 == 0 ? true : false;
 		maps->PrintMap(showStatus);
-		PlayerTest->OnShow(theOthersPosition, CurrentTime);
-		EnemyTest->OnShow(theOthersPosition, CurrentTime);
-		HealthPlayer1->OnShow(PlayerTest->HealthPoint, PlayerTest->InnerHealPoint, PlayerTest->Mana, PlayerTest->InnerMana);
-		HealthPlayer2->OnShow(EnemyTest->HealthPoint, EnemyTest->InnerHealPoint, EnemyTest->Mana, EnemyTest->InnerMana);
+		characterList[0]->OnShow(theOthersPosition, CurrentTime);
+		characterList[1]->OnShow(theOthersPosition, CurrentTime);
+		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
+		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 	
 		
 		//imgs[0][0]->ShowBitmap();
 	}
 	CGameStateRun::~CGameStateRun(){
-		delete maps, HealthPlayer1, HealthPlayer2, PlayerTest, EnemyTest;
+		delete maps, HealthPlayer1, HealthPlayer2;
 
 		for (auto& i : characterList) {
 			delete i;
