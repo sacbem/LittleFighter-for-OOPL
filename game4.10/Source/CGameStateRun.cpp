@@ -89,7 +89,35 @@ namespace game_framework {
 			theOthersPosition[i].second = characterList[i]->GetY1();
 		}
 	}
-	
+	//void CGameStateRun::DetectSkillDamage() {
+	//	switch (skillID) {
+	//		//////////////// Freeze
+	//	case static_cast<int>(skillsIdTable::frozenWave):
+	//		for (auto& i : effectObj) {
+	//			for (int h = 0; h < theOthersPosition.size(); h++) {
+	//				if (i->GetPositionXY("X") == theOthersPosition[h].first) {
+	//					if (i->GetPositionXY("Y") == theOthersPosition[h].second) {
+	//						return -300;
+	//					}
+	//				}
+	//			}
+	//		}
+	//		break;
+	//	case static_cast<int>(skillsIdTable::frozenPunch):
+
+	//		break;
+	//	case static_cast<int>(skillsIdTable::frozenSword):
+
+	//		break;
+	//	case static_cast<int>(skillsIdTable::frozenStorm):
+
+	//		break;
+
+	//	default:
+	//		return 0;
+	//		break;
+	//	}
+	//}
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//TRACE("Begin Player 1 %d\n", this->game->SelectCharacterID[0]);

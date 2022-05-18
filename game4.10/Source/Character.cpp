@@ -692,12 +692,7 @@ namespace game_framework {
 	}
 
 	void Freeze::ShowAttack() {
-		//TRACE("Attacl %d\n", AttackAccumulator);
-		//TRACE("Count %d\n", AttackCount);
-		//TRACE("Attack %d\n", AttackState);
-		//TRACE("Last Attack %d\n", LastAttackState);
-		//TRACE("Animation %d\n", AnimationState);
-		//TRACE("Hit %d\n", isHitting);
+
 		AttackCount++;
 		switch (AttackState)
 		{
@@ -1077,18 +1072,12 @@ namespace game_framework {
 			}
 		}
 		for (auto& i : frozenPunchs) {
-			TRACE("Time m %d\n", mainTime);
-			TRACE("Time c %d\n", i->createdTime);
-			TRACE("Time %d\n", mainTime - i->createdTime);
 			if (mainTime - i->createdTime >= frozenPunchs_AliveTime) {
 				delete i;
 				frozenPunchs.pop_back();
 			}
 		}
 		for (auto& i : frozenStorms) {
-			TRACE("Time m %d\n", mainTime);
-			TRACE("Time c %d\n", i->createdTime);
-			TRACE("Time %d\n", mainTime - i->createdTime);
 			if (mainTime - i->createdTime >= frozenStorms_AliveTime) {
 				delete i;
 				frozenStorms.pop_back();

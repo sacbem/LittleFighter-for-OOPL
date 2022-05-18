@@ -209,14 +209,9 @@ namespace game_framework {
 			}
 
 			timeCount++;
-			//for (auto& i : effectObj) {
-
-			//}
 			break;
 		case static_cast<int>(skillsIdTable::frozenSword):
-			//for (auto& i : effectObj) {
 
-			//}
 			break;
 		case static_cast<int>(skillsIdTable::frozenStorm):
 			if (timeCount >= 16 && timeCount<200) {
@@ -244,9 +239,6 @@ namespace game_framework {
 				AnimationCount[0]++;
 			}
 			timeCount++;
-			//for (auto& i : effectObj) {
-
-			//}
 			break;
 			////////////////
 		default:
@@ -254,76 +246,8 @@ namespace game_framework {
 		}
 	}
 
-	void  SkillEffect::SetEffectObj(int dir, int x, int y) { //按下組合鍵後 被呼叫一次
-		switch (skillID) {
-			//////////////// Freeze
-		case static_cast<int>(skillsIdTable::frozenWave):
-			//TRACE("skill setEffect %d %d\n", x, y);
-			//for (auto& i : effectObj) {
-				//i->SetTopLeft(direction, AnimationState, x, y);
-			//}
-			break;
-		case static_cast<int>(skillsIdTable::frozenPunch):
-			//for (auto& i : effectObj) {
-
-			//}
-			break;
-		case static_cast<int>(skillsIdTable::frozenSword):
-			//for (auto& i : effectObj) {
-
-			//}
-			break;
-		case static_cast<int>(skillsIdTable::frozenStorm):
-			//for (auto& i : effectObj) {
-
-			//}
-			break;
-			////////////////
-		default:
-			break;
-		}
-	}
 	
-	int  SkillEffect::SkillsProcess(vector<pair<int, int>>theOthersPosition,int duration) {
-		switch (skillID) {
-			//////////////// Freeze
-		case static_cast<int>(skillsIdTable::frozenWave):
-			for (auto& i : effectObj) {
-				for (int h = 0; h < theOthersPosition.size(); h++) {
-					if (i->GetPositionXY("X") == theOthersPosition[h].first) {
-						if (i->GetPositionXY("Y") == theOthersPosition[h].second) {
-							return -700;
-						}
-					}
-				}
-			}
-			break;
-		case static_cast<int>(skillsIdTable::frozenPunch):
 
-			break;
-		case static_cast<int>(skillsIdTable::frozenSword):
-
-			break;
-		case static_cast<int>(skillsIdTable::frozenStorm):
-
-			break;
-
-		default:
-			return 0;
-			break;
-		}
-	}
-	boolean SkillEffect::GarbageCollectorTimer(int duration) {
-		const int skill_duration_1 = 5;
-		switch (duration) {
-		case skill_duration_1:
-			return true;
-			break;
-		default:
-			return false;
-			break;
-		}
-	}
 	void  SkillEffect::SkillsFeedbackStatus(vector<pair<int, int>> theOthersPosition) {
 
 		switch (skillID) {

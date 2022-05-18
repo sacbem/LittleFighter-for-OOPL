@@ -176,6 +176,7 @@ namespace game_framework {
 		virtual int HitEnemy(Character* enemy) override;
 		virtual bool isAttackFrame() override;
 		void EffectObjectAliveManager(int mainTime);
+		
 		~Freeze();
 		//Knock
 		virtual void ShowKnock() override;
