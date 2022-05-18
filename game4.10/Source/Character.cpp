@@ -1707,8 +1707,7 @@ namespace game_framework {
 	}
 
 	void Freeze::CallSpecial() {
-		switch (skillSignal)
-		{
+		switch (skillSignal){
 		case -1:
 			break;
 		case 0:
@@ -1741,18 +1740,7 @@ namespace game_framework {
 		std::sort(frozenWavesSorted.begin(), frozenWavesSorted.end(), mycompare);
 		std::sort(frozenPunchsSorted.begin(), frozenPunchsSorted.end(), mycompare);
 		std::sort(frozenStormsSorted.begin(), frozenStormsSorted.end(), mycompare);
-		/*
-		for (int i = frozenWavesSorted.size()-1; i >= 0; i--) {
-			frozenWavesSorted[i]->OnShow();
-		}
-		for (int i = frozenPunchsSorted.size()-1; i >= 0; i--) {
-			TRACE("Y %d\n", frozenPunchs[i]->yPos);
-			frozenPunchsSorted[i]->OnShow();
-		}
-		for (int i = frozenStormsSorted.size()-1; i >= 0; i--) {
-			frozenStormsSorted[i]->OnShow();
-		}
-		*/
+
 		for (auto& i : frozenWavesSorted) {
 			i->OnShow();
 		}
@@ -1761,6 +1749,42 @@ namespace game_framework {
 		}
 		for (auto& i : frozenStormsSorted) {
 			i->OnShow();
+		}
+	}
+	void Freeze::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
+		pair<int, int> itr(0, 0);  // first 第幾隻腳色 second 傷害
+
+		for (auto& i : frozenWaves) {
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if (i->xPos == theOthersPosition[h].first) {
+					if (i->yPos == theOthersPosition[h].second) {
+						itr.first = h; itr.second = -300;
+						hittedTable.push_back(itr);
+					}
+				}
+			}
+		}
+
+		for (auto& i : frozenPunchs) {
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if (i->xPos > theOthersPosition[h].first  && i->xPos < theOthersPosition[h].first +209) {
+					if (i->yPos == theOthersPosition[h].second + 79 ) {
+						itr.first = h; itr.second = -500;
+						hittedTable.push_back(itr);
+					}
+				}
+			}
+		}
+
+		for (auto& i : frozenStorms) {
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if ( (i->xPos + 40) - 80 > theOthersPosition[h].first && ( i->xPos + 40 ) + 80 < theOthersPosition[h].first ) {
+					if ((i->yPos + 90)+ 79 == theOthersPosition[h].second ) {
+						itr.first = h; itr.second = -900;
+						hittedTable.push_back(itr);
+					}
+				}
+			}
 		}
 	}
 }

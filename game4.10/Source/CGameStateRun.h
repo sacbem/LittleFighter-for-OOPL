@@ -13,16 +13,17 @@ namespace game_framework {
 		void OnKeyDown(UINT, UINT, UINT);
 		void OnKeyUp(UINT, UINT, UINT);
 		void SetAllCharacterPosition();
-		//void MapSlide();
-		
+		void CalculateDamage(vector<pair<int, int>> theOthersPosition);
+		friend class Freeze;
 	protected:
 		void OnMove();									
 		void OnShow();									
 	private:
-		void DetectSkillDamage();
+		void DetectSkillDamage(vector<pair<int, int>> theOthersPosition);
 		bool GetCharacter = false;
 		vector<pair<int,int>> theOthersPosition;
 		vector<Character*> characterList;
+		vector<Freeze*> testFreeze;
 		//Player & other
 		Character *PlayerTest;
 		Character *EnemyTest;

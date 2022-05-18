@@ -72,6 +72,7 @@ namespace game_framework {
 		int leftTime = 0;
 		int rightTime = 0;
 		vector<int>skillsEffect_InFieldNumber; // 統計各技能物件存活數量 index 對應 skill ID
+		vector<pair<int, int>> hittedTable;
 		int KeyBoardInputTime;
 		friend class SkillEffect;
 	protected:
@@ -191,11 +192,12 @@ namespace game_framework {
 		int SpCount=0;
 		void InitSpecialAttack();
 		void ShowSpecialAttack();
-
+		void DetectSkillDamage(vector<pair<int, int>> theOthersPosition);
 		void CallfrozenWaves();
 		void CallfrozenPunchs();
 		void CallfrozenStorms();
 		void CallfrozenSwords();
+		friend class CGameStateRun;
 	protected:
 		CMovingBitmap frozenWavesAnimation[2][6];
 		CMovingBitmap frozenPunchsAnimation[2][8];
@@ -206,6 +208,7 @@ namespace game_framework {
 	private:
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
 		vector <SkillEffect*> frozenWaves, frozenPunchs, frozenSwords, frozenStorms;
+
 		vector <int>  frozenWaves_Duration;
 	};
 	
