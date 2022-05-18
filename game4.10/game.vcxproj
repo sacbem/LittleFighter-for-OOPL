@@ -564,6 +564,7 @@
     <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_7.bmp" />
     <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_8.bmp" />
     <Image Include="RES\Henry\Henry_0_reverse\henry_0_reverse_9.bmp" />
+    <Image Include="RES\Henry\henry_f.bmp" />
     <Image Include="RES\Henry\henry_s.bmp" />
     <Image Include="RES\henry_f.bmp" />
     <Image Include="RES\inital_btn_setting.bmp" />
@@ -762,6 +763,7 @@
     <Image Include="RES\quit1.bmp" />
     <Image Include="RES\quit2.bmp" />
     <Image Include="RES\red.bmp" />
+    <Image Include="RES\Woody\woody_f.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

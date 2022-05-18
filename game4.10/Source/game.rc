@@ -860,6 +860,10 @@ IDB_BITMAP43            BITMAP                  "..\\res\\freeze\\freeze_0_rever
 
 BITMAP_BACKSCENE_FOREST BITMAP                  "..\\RES\\lf\\backscene_forest.bmp"
 
+IDB_BITMAP44            BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Henry\\henry_f.bmp"
+
+PHOTOSTICKER_WOODY      BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Woody\\woody_f.bmp"
+
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////
 

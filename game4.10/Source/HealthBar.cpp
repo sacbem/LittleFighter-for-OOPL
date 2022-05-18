@@ -123,5 +123,4 @@ namespace game_framework {
 			break;
 		}
 	}
-
 }

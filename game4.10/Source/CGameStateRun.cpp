@@ -44,7 +44,6 @@ namespace game_framework {
 				EnemyTest->SetAlive(false);
 			}
 		}
-
 		PlayerTest->OnMove();
 		EnemyTest->OnMove();
 		SetAllCharacterPosition();
@@ -57,8 +56,8 @@ namespace game_framework {
 		}
 		maps->ResetCharactAccumulator(PlayerTest->GetDistance(), PlayerTest->GetDistance());
 		//EnemyTest->OnMove();
-		
-		maps->ScenesCamera(PlayerTest->DistanceAccumulatorReset(),PlayerTest->isRunning, PlayerTest->GetDir(), PlayerTest->GetDistance());
+		PlayerTest->DistanceAccumulatorReset();
+		maps->ScenesCamera(PlayerTest->DistanceAccumulatorReset(),PlayerTest->isRunning,PlayerTest->GetDir(), PlayerTest->GetDistance());
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -120,8 +119,8 @@ namespace game_framework {
 		//TRACE("TimePassed %d\n", TimePassed);
 		showStatus = TimePassed % 2 == 0 ? true : false;
 		maps->PrintMap(showStatus);
-		PlayerTest->OnShow(theOthersPosition, TimePassed);
-		EnemyTest->OnShow(theOthersPosition, TimePassed);
+		PlayerTest->OnShow(theOthersPosition, CurrentTime);
+		EnemyTest->OnShow(theOthersPosition, CurrentTime);
 		HealthPlayer1->OnShow(PlayerTest->HealthPoint, PlayerTest->InnerHealPoint, PlayerTest->Mana, PlayerTest->InnerMana);
 		HealthPlayer2->OnShow(EnemyTest->HealthPoint, EnemyTest->InnerHealPoint, EnemyTest->Mana, EnemyTest->InnerMana);
 	
