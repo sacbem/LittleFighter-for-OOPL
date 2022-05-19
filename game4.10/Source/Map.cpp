@@ -23,11 +23,11 @@ namespace game_framework {
 	
 	}
 	void Map::InitializeAllObjs(int mapID) {
-		////ªì©l¹CÀ¸ÃèÀY¦ì¸m
+		////ï¿½ï¿½lï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½m
 		rubberMode = 0;
 		gameScencePos.first = 0;
 		gameScencePos.second = 794;
-		//// ªì©l¤Æ¦a¹Ï¤º®e
+		//// ï¿½ï¿½lï¿½Æ¦aï¿½Ï¤ï¿½ï¿½e
 		for (auto& i : map) {
 			for (int o = 0; o < 10; o++) {
 				i.push_back(0);
@@ -70,15 +70,25 @@ namespace game_framework {
 			for (int backgroundFrontNum = 0; backgroundFrontNum < 2; backgroundFrontNum++) {
 				backgroundFrontObjs.push_back(new GameObject("Scenes"));
 			}
+<<<<<<< HEAD
 			
 			floors.push_back(new GameObject("Scenes"));
 			break;
+=======
+			for (int floorNum = 0; floorNum < 3; floorNum++) {
+				floors.push_back(new GameObject("Scenes"));
+			}
+>>>>>>> c14b32c703f4f06f098c8947ae0fad791536afcc
 		default:
 			break;
 			}
 		}
 	
+<<<<<<< HEAD
 	void Map::Load() {
+=======
+	void Map::Load(int mapID) {
+>>>>>>> c14b32c703f4f06f098c8947ae0fad791536afcc
 		int cnt = 0;
 		switch (mapId) {
 		case Forest:
@@ -110,9 +120,15 @@ namespace game_framework {
 			backgroundBackObjs[0]->Load(".\\res\\bc\\bc1.bmp");
 			backgroundBackObjs[1]->Load(".\\res\\bc\\bc2.bmp");
 			backgroundBackObjs[2]->Load(".\\res\\bc\\bc3.bmp");
+<<<<<<< HEAD
 			backgroundFrontObjs[0]->Load(".\\res\\bc\\bc4.bmp",RGB(0,0,0));
 			backgroundFrontObjs[1]->Load(".\\res\\bc\\bc4.bmp", RGB(0, 0, 0));
 			floors[0]->Load(".\\res\\bc\\bg5_x3.bmp", RGB(0, 0, 0));
+=======
+			backgroundFrontObjs[0]->Load(".\\res\\bc\\bc4.bmp");
+			backgroundFrontObjs[1]->Load(".\\res\\bc\\bc4.bmp");
+			floors[0]->Load(".\\res\\bc\\bg5_x3.bmp");
+>>>>>>> c14b32c703f4f06f098c8947ae0fad791536afcc
 
 			break;
 		default:
@@ -129,18 +145,28 @@ namespace game_framework {
 			break;	
 		case HKC:
 			floors[0]->SetTopLeft(0, 336);
+<<<<<<< HEAD
 			break;
 		case BC:
 			floors[0]->SetTopLeft(0, 296);
+=======
+>>>>>>> c14b32c703f4f06f098c8947ae0fad791536afcc
 			break;
+		case BC:
+			floors[0]->SetTopLeft(0, 296);
 		default:
 			break;
 		}
 	}
 	void Map::InitializeMap() {
 		int cnt = 0;
+<<<<<<< HEAD
 		GenerateLand();
 		switch (mapId) {
+=======
+		GenerateLand(mapID);
+		switch (mapID) {
+>>>>>>> c14b32c703f4f06f098c8947ae0fad791536afcc
 			case Forest:
 				for (auto& tree : backgroundFrontObjs) {
 					tree->SetTopLeft(-800 + 250 * cnt, 165);
@@ -165,6 +191,7 @@ namespace game_framework {
 				break;
 
 			case BC:
+<<<<<<< HEAD
 				for (int i = 0; i < backgroundBackObjs.size(); i++) {
 					backgroundBackObjs[i]->SetTopLeft(460 * i, 129);
 				}
@@ -175,32 +202,41 @@ namespace game_framework {
 			break;
 			default:
 			break;
+=======
+				for (int i = 0; i < 3; i++) {
+					backgroundBackObjs[0]->SetTopLeft(460 * i, 129);
+				}
+				for (int i = 0; i < 2; i++) {
+					backgroundFrontObjs[i]->SetTopLeft(800 * i, 261);
+				}
+				break;
+>>>>>>> c14b32c703f4f06f098c8947ae0fad791536afcc
 		}
 
 	}
 	void Map::StopDynamic(boolean isLeft, int distance) {
 		if (cameraEnable) {
 			if (!backgroundSkyObjs.empty()) {
-				if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0) {/// ¥ª/¥k©³³õ´º§PÂ_
+				if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0) {/// ï¿½ï¿½/ï¿½kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½_
 					mapBordary[0] = false;
 					if (distance != 0) {
-						if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// ¥ª©³³õ´º ©¹¥k¨«
+						if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½kï¿½ï¿½
 							mapBordary[0] = true;
 						}
-						else if (backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0 && isLeft) {/// ¥k©³³õ´º ©¹¥ª¨«
+						else if (backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0 && isLeft) {/// ï¿½kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 							mapBordary[0] = true;
 						}
 					}
 				}
 			}
 			if (!backgroundFrontObjs.empty()) {
-				if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 || backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547) {/// ¥ª/¥k©³³õ´º§PÂ_
+				if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 || backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547) {/// ï¿½ï¿½/ï¿½kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½_
 					mapBordary[1] = false;
 					if (distance != 0) {
-						if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// ¥ª©³³õ´º ©¹¥k¨«
+						if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½kï¿½ï¿½
 							mapBordary[1] = true;
 						}
-						else if (backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547 && isLeft) {/// ¥k©³³õ´º ©¹¥ª¨«
+						else if (backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547 && isLeft) {/// ï¿½kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 							mapBordary[1] = true;
 						}
 					}
@@ -233,7 +269,7 @@ namespace game_framework {
 	
 	//void Map::DynamicScence(boolean IsLeft,int walkedDistance) {
 	//	StopDynamic(IsLeft, walkedDistance);
-	//	int direction = IsLeft ? 1 : -1; // ©¹¥k : 1 ©¹¥ª : -1 
+	//	int direction = IsLeft ? 1 : -1; // ï¿½ï¿½ï¿½k : 1 ï¿½ï¿½ï¿½ï¿½ : -1 
 	//	if (cameraEnable) {
 	//		if (mapBordary[0]) {
 	//			if (walkedDistance > forestSky_dx) {
@@ -304,7 +340,7 @@ namespace game_framework {
 	//}
 
 	void Map::ScenesCamera(boolean mapMove, boolean IsRunning, boolean IsLeft, int walkedDistance) {
-		int direction = IsLeft  ?  1 : -1; // ©¹¥k : 1 ©¹¥ª : -1 
+		int direction = IsLeft  ?  1 : -1; // ï¿½ï¿½ï¿½k : 1 ï¿½ï¿½ï¿½ï¿½ : -1 
 		
 		//if (mapMove && cameraEnable) {
 			StopDynamic(IsLeft, walkedDistance);
@@ -435,7 +471,7 @@ namespace game_framework {
    
 }
 	/// <summary> friend int GetScenesPos(Map &map,const string type);
-	/// GameObject :    ³õ´º¤W©Ò¦³ª«¥óªºÃþ§O(ªZ¾¹¡B¥¬´º¡B¹D¨ã)
+	/// GameObject :    ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Ò¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½O(ï¿½Zï¿½ï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½Bï¿½Dï¿½ï¿½)
 	/// </summary>
 	/// <param name="type"></param>
 
