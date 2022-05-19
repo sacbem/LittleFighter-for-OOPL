@@ -70,25 +70,15 @@ namespace game_framework {
 			for (int backgroundFrontNum = 0; backgroundFrontNum < 2; backgroundFrontNum++) {
 				backgroundFrontObjs.push_back(new GameObject("Scenes"));
 			}
-<<<<<<< HEAD
 			
 			floors.push_back(new GameObject("Scenes"));
 			break;
-=======
-			for (int floorNum = 0; floorNum < 3; floorNum++) {
-				floors.push_back(new GameObject("Scenes"));
-			}
->>>>>>> c14b32c703f4f06f098c8947ae0fad791536afcc
 		default:
 			break;
 			}
 		}
 	
-<<<<<<< HEAD
 	void Map::Load() {
-=======
-	void Map::Load(int mapID) {
->>>>>>> c14b32c703f4f06f098c8947ae0fad791536afcc
 		int cnt = 0;
 		switch (mapId) {
 		case Forest:
@@ -120,15 +110,9 @@ namespace game_framework {
 			backgroundBackObjs[0]->Load(".\\res\\bc\\bc1.bmp");
 			backgroundBackObjs[1]->Load(".\\res\\bc\\bc2.bmp");
 			backgroundBackObjs[2]->Load(".\\res\\bc\\bc3.bmp");
-<<<<<<< HEAD
 			backgroundFrontObjs[0]->Load(".\\res\\bc\\bc4.bmp",RGB(0,0,0));
 			backgroundFrontObjs[1]->Load(".\\res\\bc\\bc4.bmp", RGB(0, 0, 0));
 			floors[0]->Load(".\\res\\bc\\bg5_x3.bmp", RGB(0, 0, 0));
-=======
-			backgroundFrontObjs[0]->Load(".\\res\\bc\\bc4.bmp");
-			backgroundFrontObjs[1]->Load(".\\res\\bc\\bc4.bmp");
-			floors[0]->Load(".\\res\\bc\\bg5_x3.bmp");
->>>>>>> c14b32c703f4f06f098c8947ae0fad791536afcc
 
 			break;
 		default:
@@ -145,28 +129,18 @@ namespace game_framework {
 			break;	
 		case HKC:
 			floors[0]->SetTopLeft(0, 336);
-<<<<<<< HEAD
 			break;
 		case BC:
 			floors[0]->SetTopLeft(0, 296);
-=======
->>>>>>> c14b32c703f4f06f098c8947ae0fad791536afcc
 			break;
-		case BC:
-			floors[0]->SetTopLeft(0, 296);
 		default:
 			break;
 		}
 	}
 	void Map::InitializeMap() {
 		int cnt = 0;
-<<<<<<< HEAD
 		GenerateLand();
 		switch (mapId) {
-=======
-		GenerateLand(mapID);
-		switch (mapID) {
->>>>>>> c14b32c703f4f06f098c8947ae0fad791536afcc
 			case Forest:
 				for (auto& tree : backgroundFrontObjs) {
 					tree->SetTopLeft(-800 + 250 * cnt, 165);
@@ -191,7 +165,6 @@ namespace game_framework {
 				break;
 
 			case BC:
-<<<<<<< HEAD
 				for (int i = 0; i < backgroundBackObjs.size(); i++) {
 					backgroundBackObjs[i]->SetTopLeft(460 * i, 129);
 				}
@@ -202,15 +175,6 @@ namespace game_framework {
 			break;
 			default:
 			break;
-=======
-				for (int i = 0; i < 3; i++) {
-					backgroundBackObjs[0]->SetTopLeft(460 * i, 129);
-				}
-				for (int i = 0; i < 2; i++) {
-					backgroundFrontObjs[i]->SetTopLeft(800 * i, 261);
-				}
-				break;
->>>>>>> c14b32c703f4f06f098c8947ae0fad791536afcc
 		}
 
 	}
