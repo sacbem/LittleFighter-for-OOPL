@@ -594,7 +594,7 @@ namespace game_framework {
 			}
 
 			if (KnockCount >= 3 && KnockCount <= 40) {
-				xPos -= KnockSpeed * 3;
+				xPos += KnockSpeed * 3;
 			}
 			//yPos Movement
 			if (KnockCount >= 3) {

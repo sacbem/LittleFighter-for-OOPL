@@ -299,11 +299,11 @@ namespace game_framework {
 	}
 
 	void Map::ScenesCamera(boolean mapMove, boolean IsRunning, boolean IsLeft, int walkedDistance) {
+		TRACE("Distance %d\n", walkedDistance);
 		int direction = IsLeft  ?  1 : -1; // 往右 : 1 往左 : -1 
 		
-		if (mapMove && cameraEnable) {
+		//if (mapMove && cameraEnable) {
 			StopDynamic(IsLeft, walkedDistance);
-			int direction = IsLeft ? 1 : -1; // 往右 : 1 往左 : -1 
 			if (mapBordary[0]) {
 				if (mapId == Forest) {
 					if (walkedDistance > forestSky_dx) {
@@ -358,7 +358,7 @@ namespace game_framework {
 					}
 				}
 			}
-		}
+		//}
 	}
 
 	void Map::PrintMap(boolean showStates) {

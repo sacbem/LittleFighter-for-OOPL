@@ -709,7 +709,9 @@ namespace game_framework {
 	}
 
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
-
+		//TRACE("isLeft %d\n", isMovingLeft);
+		//TRACE("isRightt %d\n",isMovingRight);
+		//TRACE("Distance %d\n", GetDistance());
 		//frozenWaves[0]->OnShow(direction, 0);
 
 		switch (AnimationState)

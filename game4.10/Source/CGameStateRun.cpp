@@ -23,7 +23,7 @@ namespace game_framework {
 		//characterList[1] = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
-		maps = new Map(HKC);
+		maps = new Map(Forest);
 		
 		//GenerationTime = clock();
 	}
@@ -68,7 +68,7 @@ namespace game_framework {
 		ShowInitProgress(50);
 		Sleep(300);
 
-		maps->Load(HKC);
+		maps->Load(Forest);
 		HealthPlayer1->init();
 		HealthPlayer2->init();
 
