@@ -46,17 +46,24 @@ namespace game_framework{
 namespace mapConfiguration {
 	#define Forest 0
 	#define HKC 1
+	#define BC 2
 
-	#define MapWidth_abonormal 794
-	#define MapWidth_normal 3200 * 0.75
+	
+	#define MapWidth_Forest 3200 * 0.75
+	#define MapWidth_HKC 794
+	#define MapWidth_BC 1500
 
-	constexpr int forestSky_dx = MapWidth_normal / 800 * 0.75;
-	constexpr int forestMountain_dx1 = MapWidth_normal / 1100 * 0.75;
-	constexpr int forestMountain_dx2 = MapWidth_normal / 1400 * 0.75;
-	constexpr int forestTree_dx = 1.5 * MapWidth_normal / 2900 * 0.75;
-	constexpr int forestLand_dx1 = MapWidth_normal / 2950 * 0.75;
-	constexpr int forestLand_dx2 = MapWidth_normal / 3070 * 0.75;
-	constexpr int forestLand_dx3 = MapWidth_normal / 3200 * 0.75;
+	constexpr int forestSky_dx = MapWidth_Forest / 800 * 0.75;
+	constexpr int forestMountain_dx1 = MapWidth_Forest / 1100 * 0.75;
+	constexpr int forestMountain_dx2 = MapWidth_Forest / 1400 * 0.75;
+	constexpr int forestTree_dx = 1.5 * MapWidth_Forest / 2900 * 0.75;
+	constexpr int forestLand_dx1 = MapWidth_Forest / 2950 * 0.75;
+	constexpr int forestLand_dx2 = MapWidth_Forest / 3070 * 0.75;
+	constexpr int forestLand_dx3 = MapWidth_Forest / 3200 * 0.75;
 
 
+	constexpr int bcBackScence_dx = MapWidth_BC / 1379;
+	constexpr int bcFrontScence_dx = MapWidth_BC / 1500;
+	constexpr int bcLand_dx = MapWidth_BC /1500;
+	
 }

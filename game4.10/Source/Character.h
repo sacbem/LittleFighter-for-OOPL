@@ -45,6 +45,7 @@ namespace game_framework {
 		boolean IsStatic();
 		boolean  DistanceAccumulatorReset();
 		virtual int HitEnemy(Character* enemy) = 0;
+		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition) = 0;
 
 		//basic informtion
 		int characterNumber;
@@ -74,6 +75,7 @@ namespace game_framework {
 		vector<int>skillsEffect_InFieldNumber; // 統計各技能物件存活數量 index 對應 skill ID
 		vector<pair<int, int>> hittedTable;
 		int KeyBoardInputTime;
+		int CurrentTime;
 		friend class SkillEffect;
 	protected:
 		CMovingBitmap photoSticker;
@@ -192,7 +194,7 @@ namespace game_framework {
 		int SpCount=0;
 		void InitSpecialAttack();
 		void ShowSpecialAttack();
-		void DetectSkillDamage(vector<pair<int, int>> theOthersPosition);
+		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition) override;
 		void CallfrozenWaves();
 		void CallfrozenPunchs();
 		void CallfrozenStorms();
@@ -241,6 +243,7 @@ namespace game_framework {
 		void InitSpecialAttack();
 		void ShowSpecialAttack();
 
+		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition) override;
 		void CallairWave();
 		void CallpierceArrow();
 		void CallarrowRain();
@@ -287,6 +290,7 @@ namespace game_framework {
 		void InitSpecialAttack();
 		void ShowSpecialAttack();
 
+		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition) override;
 		void CallEnergyBlast();
 		void CallFootKnife();
 		void CallDemonFoot();

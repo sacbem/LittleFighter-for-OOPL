@@ -35,25 +35,26 @@ namespace game_framework {
 		time_t GenerationTime;
 		time_t CurrentTime;
 		int TimePassed;
+		int MapAniCount=0;
 
 	};
 }
 namespace skillTable {
-	// Freeze
-	constexpr int frozenWave = 0x00;
-	constexpr int frozenPunch = 0x01;
-	constexpr int frozenSword = 0x02;
-	constexpr int frozenStorm = 0x03;
-	// Henry 
-	constexpr int airWave = 0x10;
-	constexpr int pierceArrow = 0x11;
-	constexpr int arrowRain = 0x12;
-	constexpr int demonicSong = 0x13;
 	// Woody 
-	constexpr int energyBlast = 0x20;
-	constexpr int footKnife = 0x21;
-	constexpr int demonFoot = 0x22;
-	constexpr int tank = 0x23;
-	constexpr int teleportation = 0x24;
+	constexpr int energyBlast = 0x00;
+	constexpr int footKnife = 0x01;
+	constexpr int demonFoot = 0x02;
+	constexpr int tank = 0x03;
+	constexpr int teleportation = 0x04;
+	// Freeze
+	constexpr int frozenWave = 0x10;
+	constexpr int frozenPunch = 0x11;
+	constexpr int frozenSword = 0x12;
+	constexpr int frozenStorm = 0x13;
+	// Henry 
+	constexpr int airWave = 0x20;
+	constexpr int pierceArrow = 0x21;
+	constexpr int arrowRain = 0x22;
+	constexpr int demonicSong = 0x23;
 
 }

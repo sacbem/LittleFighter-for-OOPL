@@ -450,6 +450,8 @@
 #define PHOTOSTICKER_WOODY              567
 #define IDC_README                      568
 #define IDB_BITMAP14                    569
+#define IDB_BITMAP46                    569
+#define NAME_WOODY                      569
 #define IDB_BITMAP15                    570
 #define IDB_BITMAP16                    571
 #define IDB_BITMAP17                    572
@@ -475,7 +477,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        568
+#define _APS_NEXT_RESOURCE_VALUE        570
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

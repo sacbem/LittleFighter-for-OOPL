@@ -47,6 +47,9 @@ namespace game_framework {
 		}
 	}
 
+	void Henry::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
+	}
+
 	void Henry::SetCharacter() {
 		Animation.LoadHenry();
 		InitSpecialAttack();
@@ -111,10 +114,20 @@ namespace game_framework {
 					if (!isHitting) {
 						LastAttackState = AttackState;
 						AttackState = 1;
+						auto arrow_Begin = arrow.begin();
+						if (this->AttackState == 1) {
+							arrow.insert(arrow_Begin, new SkillEffect(4, CurrentTime, direction, xPos, yPos + 20));
+							skillsEffect_InFieldNumber[0] = arrow.size();
+						}
 					}
 					else {
 						LastAttackState = AttackState;
 						AttackState = 1;
+						auto arrow_Begin = arrow.begin();
+						if (this->AttackState == 1) {
+							arrow.insert(arrow_Begin, new SkillEffect(4, CurrentTime, direction, xPos, yPos + 20));
+							skillsEffect_InFieldNumber[0] = arrow.size();
+						}
 					}
 				}
 			}
@@ -123,13 +136,14 @@ namespace game_framework {
 			isAttacking = false;
 			AttackCount = 0;
 			LastAttackState = AttackState;
+			AttackState = 0;
 		}
 	}
 
 	void Henry::ShowAttack() {
 		//TRACE("Attacl %d\n", AttackAccumulator);
 		//TRACE("Count %d\n", AttackCount);
-		//TRACE("Attack %d\n", AttackState);
+		TRACE("Attack %d\n", AttackState);
 		//TRACE("Last Attack %d\n", LastAttackState);
 		//TRACE("Animation %d\n", AnimationState);
 		//TRACE("Hit %d\n", isHitting);
@@ -489,56 +503,33 @@ namespace game_framework {
 	}
 
 	void Henry::SetSkill(int createdTimes) {
-		/*
-		auto frozenWaves_Begin = frozenWaves.begin();
-		auto frozenPunchs_Begin = frozenPunchs.begin();
-		auto frozenStorms_Begin = frozenStorms.begin();
+		
+		auto pierceArrow_Begin = pierceArrow.begin();
 		//TRACE("Signal %d\n", this->GetSkillSignal());
-		if (this->GetSkillSignal() == 0) {
-			frozenWaves.insert(frozenWaves_Begin, new SkillEffect(0, createdTimes, direction, xPos, yPos));
-			skillsEffect_InFieldNumber[0] = frozenWaves.size();
+		if (this->GetSkillSignal() == 1) {
+			pierceArrow.insert(pierceArrow_Begin, new SkillEffect(5, createdTimes, direction, xPos, yPos+20));
+			skillsEffect_InFieldNumber[1] = pierceArrow.size();
 		}
-		else if (this->GetSkillSignal() == 1) {
-			frozenPunchs.insert(frozenPunchs_Begin, new SkillEffect(1, createdTimes, direction, xPos, yPos));
-			skillsEffect_InFieldNumber[1] = frozenPunchs.size();
-		}
-		else if (this->GetSkillSignal() == 3) {
-			frozenStorms.insert(frozenStorms_Begin, new SkillEffect(3, createdTimes, direction, xPos, yPos));
-			skillsEffect_InFieldNumber[3] = frozenStorms.size();
-		}
-		*/
 	}
 
 	void Henry::EffectObjectAliveManager(int mainTime) {
-		/*
-		const int frozenWaves_AliveTime = 10000;
-		const int frozenPunchs_AliveTime = 10000;
-		const int frozenStorms_AliveTime = 4500;
-		for (auto& i : frozenWaves) {
-			if (mainTime - i->createdTime >= frozenWaves_AliveTime) {
+		const int arrow_AliveTime = 10000;
+		const int pierceArrow_AliveTime = 10000;
+		for (auto& i : arrow) {
+			if (mainTime - i->createdTime >= arrow_AliveTime) {
 				delete i;
-				frozenWaves.pop_back();
+				arrow.pop_back();
 			}
 		}
-		for (auto& i : frozenPunchs) {
+		for (auto& i : pierceArrow) {
 			TRACE("Time m %d\n", mainTime);
 			TRACE("Time c %d\n", i->createdTime);
 			TRACE("Time %d\n", mainTime - i->createdTime);
-			if (mainTime - i->createdTime >= frozenPunchs_AliveTime) {
+			if (mainTime - i->createdTime >= pierceArrow_AliveTime) {
 				delete i;
-				frozenPunchs.pop_back();
+				pierceArrow.pop_back();
 			}
 		}
-		for (auto& i : frozenStorms) {
-			TRACE("Time m %d\n", mainTime);
-			TRACE("Time c %d\n", i->createdTime);
-			TRACE("Time %d\n", mainTime - i->createdTime);
-			if (mainTime - i->createdTime >= frozenStorms_AliveTime) {
-				delete i;
-				frozenStorms.pop_back();
-			}
-		}
-		*/
 	}
 
 	void Henry::InitSpecialAttack() {
@@ -683,6 +674,7 @@ namespace game_framework {
 	}
 
 	void Henry::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
+		CurrentTime = mainTime;
 		switch (AnimationState)
 		{
 		case 0:
@@ -1159,36 +1151,11 @@ namespace game_framework {
 	}
 
 	void Henry::ShowSpecialAttack() {
-		/*
-		vector<SkillEffect*>  frozenWavesSorted, frozenPunchsSorted, frozenSwordsSorted, frozenStormsSorted;
-		frozenWavesSorted = frozenWaves;
-		frozenPunchsSorted = frozenPunchs;
-		frozenStormsSorted = frozenStorms;
-
-		std::sort(frozenWavesSorted.begin(), frozenWavesSorted.end(), mycompare);
-		std::sort(frozenPunchsSorted.begin(), frozenPunchsSorted.end(), mycompare);
-		std::sort(frozenStormsSorted.begin(), frozenStormsSorted.end(), mycompare);
-		/*
-		for (int i = frozenWavesSorted.size()-1; i >= 0; i--) {
-			frozenWavesSorted[i]->OnShow();
-		}
-		for (int i = frozenPunchsSorted.size()-1; i >= 0; i--) {
-			TRACE("Y %d\n", frozenPunchs[i]->yPos);
-			frozenPunchsSorted[i]->OnShow();
-		}
-		for (int i = frozenStormsSorted.size()-1; i >= 0; i--) {
-			frozenStormsSorted[i]->OnShow();
-		}
-
-		for (auto& i : frozenWavesSorted) {
+		for (auto& i : arrow) {
 			i->OnShow();
 		}
-		for (auto& i : frozenPunchsSorted) {
+		for (auto& i : pierceArrow) {
 			i->OnShow();
 		}
-		for (auto& i : frozenStormsSorted) {
-			i->OnShow();
-		}
-		*/
 	}
 }
