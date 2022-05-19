@@ -9,6 +9,7 @@ namespace game_framework {
 		Character(Character const & other);
 		~Character();
 		//int HitEnemy(Character* enemy);
+		int serialNumber;
 
 		bool GetAlive();
 		int  GetX1();					// Chracter
@@ -168,7 +169,7 @@ namespace game_framework {
 	class Freeze:public Character {
 	public:
 		//change to freeze
-		Freeze();
+		Freeze(int num);
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition ,int mainTime) override;
 		virtual void OnMove() override;
 
@@ -217,7 +218,7 @@ namespace game_framework {
 	class Henry :public Character {
 	public:
 		//change to freeze
-		Henry();
+		Henry(int num);
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) override;
 		virtual void OnMove() override;
 
@@ -264,7 +265,7 @@ namespace game_framework {
 	class Woody :public Character {
 	public:
 		//change to freeze
-		Woody();
+		Woody(int num);
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) override;
 		virtual void OnMove() override;
 

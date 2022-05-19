@@ -37,6 +37,8 @@ namespace game_framework {
 		int TimePassed;
 		int MapAniCount=0;
 
+		int registSerialNumber;
+
 	};
 }
 namespace skillTable {

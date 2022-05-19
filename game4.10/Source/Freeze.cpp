@@ -10,7 +10,8 @@
 #include <algorithm>
 #include <time.h>
 namespace game_framework {
-	Freeze::Freeze() {
+	Freeze::Freeze(int num) {
+		serialNumber = num;
 		for (int i = 0; i < 5; i++) {
 			skillsEffect_InFieldNumber.push_back(0);
 		}
@@ -535,18 +536,18 @@ namespace game_framework {
 			}
 		}
 		for (auto& i : frozenPunchs) {
-			TRACE("Time m %d\n", mainTime);
-			TRACE("Time c %d\n", i->createdTime);
-			TRACE("Time %d\n", mainTime - i->createdTime);
+			//TRACE("Time m %d\n", mainTime);
+			//TRACE("Time c %d\n", i->createdTime);
+			//TRACE("Time %d\n", mainTime - i->createdTime);
 			if (mainTime - i->createdTime >= frozenPunchs_AliveTime) {
 				delete i;
 				frozenPunchs.pop_back();
 			}
 		}
 		for (auto& i : frozenStorms) {
-			TRACE("Time m %d\n", mainTime);
-			TRACE("Time c %d\n", i->createdTime);
-			TRACE("Time %d\n", mainTime - i->createdTime);
+			//TRACE("Time m %d\n", mainTime);
+			//TRACE("Time c %d\n", i->createdTime);
+			//TRACE("Time %d\n", mainTime - i->createdTime);
 			if (mainTime - i->createdTime >= frozenStorms_AliveTime) {
 				delete i;
 				frozenStorms.pop_back();
@@ -1236,13 +1237,20 @@ namespace game_framework {
 	}
 	void Freeze::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
 		pair<int, int> itr(0, 0);  // first ²Ä´X°¦¸}¦â second ¶Ë®`
+		//tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2
+		
+		//first+80 >=xPos && fist<=xPos+80
+		//second+80 >=yPos && second<=yPos+80
 
 		for (auto& i : frozenWaves) {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
-				if (i->xPos == theOthersPosition[h].first) {
-					if (i->yPos == theOthersPosition[h].second) {
-						itr.first = h; itr.second = -300;
-						hittedTable.push_back(itr);
+				if (h != this->serialNumber) {
+					if (i->xPos <= theOthersPosition[h].first+80 && i->xPos+80 >= theOthersPosition[h].first) {
+						if (i->yPos <= theOthersPosition[h].second+80 && i->yPos+80 >= theOthersPosition[h].second) {
+							TRACE("itr %d\n", itr.first);
+							itr.first = h; itr.second = 300;
+							hittedTable.push_back(itr);
+						}
 					}
 				}
 			}

@@ -70,11 +70,7 @@ namespace game_framework {
 			for (int backgroundFrontNum = 0; backgroundFrontNum < 2; backgroundFrontNum++) {
 				backgroundFrontObjs.push_back(new GameObject("Scenes"));
 			}
-			/*
-			for (int floorNum = 0; floorNum < 3; floorNum++) {
-				floors.push_back(new GameObject("Scenes"));
-			}
-			*/
+			
 			floors.push_back(new GameObject("Scenes"));
 			break;
 		default:
@@ -136,6 +132,7 @@ namespace game_framework {
 			break;
 		case BC:
 			floors[0]->SetTopLeft(0, 296);
+			break;
 		default:
 			break;
 		}
