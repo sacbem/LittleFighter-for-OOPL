@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// ¤¤¤å (ÁcÅé¡A¥xÆW) resources
+// ï¿½ï¿½ï¿½ï¿½ (ï¿½cï¿½ï¿½Aï¿½xï¿½W) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
@@ -864,14 +864,14 @@ IDB_BITMAP44            BITMAP                  "..\\res\\Henry\\henry_f.bmp"
 
 PHOTOSTICKER_WOODY      BITMAP                  "..\\res\\Woody\\woody_f.bmp"
 
-NAME_WOODY              BITMAP                  "C:\\Users\\User\\Desktop\\OOP_code\\game4.10\\RES\\Woody.bmp"
+NAME_WOODY              BITMAP                  "..\\res\\Woody.bmp"
 
-#endif    // ¤¤¤å (ÁcÅé¡A¥xÆW) resources
+#endif    // ï¿½ï¿½ï¿½ï¿½ (ï¿½cï¿½ï¿½Aï¿½xï¿½W) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// ­^¤å (¬ü°ê) resources
+// ï¿½^ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
@@ -1157,7 +1157,7 @@ BEGIN
     ID_BUTTON_UNITTEST      "Perform Unit Test"
 END
 
-#endif    // ­^¤å (¬ü°ê) resources
+#endif    // ï¿½^ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

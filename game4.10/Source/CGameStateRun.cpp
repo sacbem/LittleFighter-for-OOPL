@@ -23,7 +23,7 @@ namespace game_framework {
 		//characterList[1] = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
-		maps = new Map(Forest);
+		maps = new Map(BC);
 		
 		//GenerationTime = clock();
 	}
@@ -59,6 +59,7 @@ namespace game_framework {
 		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
 		//characterList[1]->OnMove();
 		characterList[0]->DistanceAccumulatorReset();
+	
 		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(),characterList[0]->isRunning,characterList[0]->GetDir(), characterList[0]->GetDistance());
 	}
 
@@ -68,7 +69,7 @@ namespace game_framework {
 		ShowInitProgress(50);
 		Sleep(300);
 
-		maps->Load(Forest);
+		maps->Load();
 		HealthPlayer1->init();
 		HealthPlayer2->init();
 

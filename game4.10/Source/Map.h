@@ -9,8 +9,8 @@ namespace game_framework{
 		Map(int mapID);
 		int GetScenesPos(const string type);
 		void ScenesCamera(boolean mapMove, boolean IsRunning, boolean IsLeft, int walkedDistance);
-		void Load(int mapID);
-		void GenerateLand(int mapID);
+		void Load();
+		void GenerateLand();
 		void PrintMap(boolean showStates);
 		void DynamicScence(boolean IsLeft,int walkedDistance);
 		boolean ResetCharactAccumulator(int distance1,int distance2);
@@ -19,7 +19,7 @@ namespace game_framework{
 	private:
 		void InitializeAllObjs(int mapID);
 		void StopDynamic(boolean isLeft, int distance);
-		void InitializeMap(int mapID);
+		void InitializeMap();
 		int rubberBandAccumulator(boolean IsRunning, boolean InBorder);
 		int rubberMode; // rubberMode:  0 => Mode => 1 => Mode : Walking, 2 => Mode : Runing
 		int mapId;
