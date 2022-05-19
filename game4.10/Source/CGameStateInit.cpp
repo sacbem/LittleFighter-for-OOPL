@@ -217,6 +217,7 @@ namespace game_framework {
 
 		  //test
 		  GotoGameState(GAME_STATE_RUN);
+
 		  if (!SELECT_ENTER) {
 			  startBtn->OnShow();
 			  settingBtn->OnShow();

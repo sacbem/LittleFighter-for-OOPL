@@ -26,6 +26,9 @@ namespace game_framework {
 		}
 	}
 
+	void Woody::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
+	}
+
 	int Woody::HitRectangle(int tx1, int ty1, int tx2, int ty2) {
 		int x1 = xPos;
 		int y1 = yPos;
@@ -327,6 +330,15 @@ namespace game_framework {
 		case 82:
 			return true;
 			break;
+		case 233:
+			return true;
+			break;
+		case 234:
+			return true;
+			break;
+		case 235:
+			return true;
+			break;
 		case 242:
 			return true;
 			break;
@@ -394,8 +406,6 @@ namespace game_framework {
 					else if (direction == 1 && Dir == 0) {
 						KnockState = 7;
 					}
-					JumpYposTemp = yPos + 1;
-					isRising = true;
 				}
 			}
 		}
@@ -473,26 +483,25 @@ namespace game_framework {
 			}
 			break;
 		case 7:
-			if (KnockCount == 0) {
+			if (KnockCount == 1) {
 				//init velocity
-				InitialVelocity = 2;
+				InitialVelocity = 10;
 				YVelocity = InitialVelocity;
+				JumpYposTemp = yPos + 1;
+				isRising = true;
 			}
 			if (KnockCount <= 3) {
 				AnimationState = 110;
-				SetXY(xPos + KnockSpeed * 3, yPos);
+				//SetXY(xPos + KnockSpeed * 3, yPos);
 			}
 			else if (KnockCount <= 6) {
 				AnimationState = 111;
-				SetXY(xPos + KnockSpeed * 3, yPos);
 			}
 			else if (KnockCount <= 30) {
 				AnimationState = 112;
-				SetXY(xPos + KnockSpeed * 3, yPos);
 			}
 			else if (KnockCount <= 40) {
 				AnimationState = 113;
-				SetXY(xPos + KnockSpeed * 3, yPos);
 			}
 			else if (KnockCount <= 100) {
 				AnimationState = 114;
@@ -509,27 +518,63 @@ namespace game_framework {
 					DamageAccumulator = 0;
 				}
 			}
+			if (KnockCount >= 3 && KnockCount <= 40) {
+				xPos += KnockSpeed * 3;
+			}
+			//yPos Movement
+			if (KnockCount >= 3) {
+				if (isRising) {
+					//TRACE("ISRising\n");
+					if (YVelocity > 0) {
+						//SetXY(xPos, yPos - YVelocity*10);
+						yPos -= YVelocity;
+						YVelocity--;
+					}
+					else {
+						isRising = false;
+						YVelocity = 1;
+						JumpCountTemp = JumpCount + 1;
+					}
+				}
+				else if (!isRising) {
+					if (yPos < JumpYposTemp - 1) {
+						//SetXY(xPos, yPos + YVelocity);
+						yPos += YVelocity;
+						YVelocity++;
+					}
+					else {
+						//SetXY(xPos, JumpYposTemp - 1);
+						yPos = JumpYposTemp - 1;
+						YVelocity = InitialVelocity;
+						island = true;
+					}
+				}
+			}
+			if (island) {
+				if (JumpCount >= JumpCountTemp * 2 + 6) {
+					island = false;
+					UnMovable = false;
+				}
+			}
 			break;
 		case 8:
-			if (KnockCount == 0) {
+			if (KnockCount == 1) {
 				//init velocity
-				InitialVelocity = 2;
+				InitialVelocity = 10;
 				YVelocity = InitialVelocity;
+				JumpYposTemp = yPos + 1;
+				isRising = true;
 			}
 			else if (KnockCount <= 10) {
 				AnimationState = 120;
-				SetXY(xPos + KnockSpeed * 3, yPos);
 			}
 			else if (KnockCount <= 20) {
 				AnimationState = 121;
-				SetXY(xPos + KnockSpeed * 3, yPos);
 			}
 			else if (KnockCount <= 30) {
 				AnimationState = 122;
-				SetXY(xPos + KnockSpeed * 3, yPos);
 			}
 			else if (KnockCount <= 40) {
-				SetXY(xPos + KnockSpeed * 3, yPos);
 				AnimationState = 123;
 			}
 			else if (KnockCount <= 100) {
@@ -547,6 +592,45 @@ namespace game_framework {
 					DamageAccumulator = 0;
 				}
 			}
+
+			if (KnockCount >= 3 && KnockCount <= 40) {
+				xPos -= KnockSpeed * 3;
+			}
+			//yPos Movement
+			if (KnockCount >= 3) {
+				if (isRising) {
+					//TRACE("ISRising\n");
+					if (YVelocity > 0) {
+						//SetXY(xPos, yPos - YVelocity*10);
+						yPos -= YVelocity;
+						YVelocity--;
+					}
+					else {
+						isRising = false;
+						YVelocity = 1;
+						JumpCountTemp = JumpCount + 1;
+					}
+				}
+				else if (!isRising) {
+					if (yPos < JumpYposTemp - 1) {
+						//SetXY(xPos, yPos + YVelocity);
+						yPos += YVelocity;
+						YVelocity++;
+					}
+					else {
+						//SetXY(xPos, JumpYposTemp - 1);
+						yPos = JumpYposTemp - 1;
+						YVelocity = InitialVelocity;
+						island = true;
+					}
+				}
+			}
+			if (island) {
+				if (JumpCount >= JumpCountTemp * 2 + 6) {
+					island = false;
+					UnMovable = false;
+				}
+			}
 			break;
 		default:
 			break;
@@ -554,56 +638,22 @@ namespace game_framework {
 	}
 
 	void Woody::SetSkill(int createdTimes) {
-		/*
-		auto frozenWaves_Begin = frozenWaves.begin();
-		auto frozenPunchs_Begin = frozenPunchs.begin();
-		auto frozenStorms_Begin = frozenStorms.begin();
+		auto energyBlast_Begin = energyBlast.begin();
 		//TRACE("Signal %d\n", this->GetSkillSignal());
 		if (this->GetSkillSignal() == 0) {
-			frozenWaves.insert(frozenWaves_Begin, new SkillEffect(0, createdTimes, direction, xPos, yPos));
-			skillsEffect_InFieldNumber[0] = frozenWaves.size();
+			energyBlast.insert(energyBlast_Begin, new SkillEffect(6, createdTimes, direction, xPos, yPos));
+			skillsEffect_InFieldNumber[0] = energyBlast.size();
 		}
-		else if (this->GetSkillSignal() == 1) {
-			frozenPunchs.insert(frozenPunchs_Begin, new SkillEffect(1, createdTimes, direction, xPos, yPos));
-			skillsEffect_InFieldNumber[1] = frozenPunchs.size();
-		}
-		else if (this->GetSkillSignal() == 3) {
-			frozenStorms.insert(frozenStorms_Begin, new SkillEffect(3, createdTimes, direction, xPos, yPos));
-			skillsEffect_InFieldNumber[3] = frozenStorms.size();
-		}
-		*/
 	}
 
 	void Woody::EffectObjectAliveManager(int mainTime) {
-		/*
-		const int frozenWaves_AliveTime = 10000;
-		const int frozenPunchs_AliveTime = 10000;
-		const int frozenStorms_AliveTime = 4500;
-		for (auto& i : frozenWaves) {
-			if (mainTime - i->createdTime >= frozenWaves_AliveTime) {
+		const int energyBlast_AliveTime = 10000;
+		for (auto& i : energyBlast) {
+			if (mainTime - i->createdTime >= energyBlast_AliveTime) {
 				delete i;
-				frozenWaves.pop_back();
+				energyBlast.pop_back();
 			}
 		}
-		for (auto& i : frozenPunchs) {
-			TRACE("Time m %d\n", mainTime);
-			TRACE("Time c %d\n", i->createdTime);
-			TRACE("Time %d\n", mainTime - i->createdTime);
-			if (mainTime - i->createdTime >= frozenPunchs_AliveTime) {
-				delete i;
-				frozenPunchs.pop_back();
-			}
-		}
-		for (auto& i : frozenStorms) {
-			TRACE("Time m %d\n", mainTime);
-			TRACE("Time c %d\n", i->createdTime);
-			TRACE("Time %d\n", mainTime - i->createdTime);
-			if (mainTime - i->createdTime >= frozenStorms_AliveTime) {
-				delete i;
-				frozenStorms.pop_back();
-			}
-		}
-		*/
 	}
 
 	void Woody::InitSpecialAttack() {
@@ -798,6 +848,7 @@ namespace game_framework {
 
 	void Woody::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
 		//TRACE("isAttacking %d\n", isAttacking);
+		TRACE("YPOS %d\n", yPos);
 		switch (AnimationState)
 		{
 		case 0:
@@ -1347,6 +1398,14 @@ namespace game_framework {
 	}
 
 	void Woody::CallTank() {
+		SetAttack(true);
+		//TRACE("SpCount %d\n", SpCount);
+		if (SpCount == 0) {
+			InitialVelocity = 10;
+			YVelocity = InitialVelocity;
+			JumpYposTemp = yPos + 1;
+			isRising = true;
+		}
 		SpCount++;
 		if (SpCount <= 4) {
 			AnimationState = 230;
@@ -1357,19 +1416,57 @@ namespace game_framework {
 		else if (SpCount <= 12) {
 			AnimationState = 232;
 		}
-		else if (SpCount <= 16) {
+		else if (SpCount <= 60) {
 			AnimationState = 233;
 		}
-		else if (SpCount <= 20) {
+		else if (SpCount <= 70) {
 			AnimationState = 234;
 		}
-		else if (SpCount <= 24) {
+		else if (SpCount <= 80) {
 			AnimationState = 235;
-			if (SpCount >= 24) {
+			if (SpCount >= 80) {
 				SpCount = 0;
 				skillSignal = -1;
 			}
 		}
+
+		//yPos Movement
+		if (SpCount >= 12) {
+			if (isRising) {
+				if (YVelocity > 0) {
+					TRACE("RISING\n");
+					TRACE("Velocity %d\n", YVelocity);
+					//SetXY(xPos, yPos - YVelocity*10);
+					yPos -= YVelocity;
+					YVelocity--;
+				}
+				else {
+					isRising = false;
+					YVelocity = 1;
+					JumpCountTemp = JumpCount + 1;
+				}
+			}
+			else if (SpCount>=65) {
+				if (yPos < JumpYposTemp - 1) {
+					//SetXY(xPos, yPos + YVelocity);
+					yPos += YVelocity;
+					YVelocity++;
+				}
+				else {
+					//SetXY(xPos, JumpYposTemp - 1);
+					yPos = JumpYposTemp - 1;
+					YVelocity = InitialVelocity;
+					island = true;
+				}
+			}
+		}
+		if (island) {
+			if (JumpCount >= JumpCountTemp * 2 + 6) {
+				island = false;
+				UnMovable = false;
+			}
+		}
+
 		if (direction == 0) {
 			this->SetXY(xPos + 5, yPos);
 		}
@@ -1447,35 +1544,9 @@ namespace game_framework {
 	}
 
 	void Woody::ShowSpecialAttack() {
-		/*
-		vector<SkillEffect*>  frozenWavesSorted, frozenPunchsSorted, frozenSwordsSorted, frozenStormsSorted;
-		frozenWavesSorted = frozenWaves;
-		frozenPunchsSorted = frozenPunchs;
-		frozenStormsSorted = frozenStorms;
-
-		std::sort(frozenWavesSorted.begin(), frozenWavesSorted.end(), mycompare);
-		std::sort(frozenPunchsSorted.begin(), frozenPunchsSorted.end(), mycompare);
-		std::sort(frozenStormsSorted.begin(), frozenStormsSorted.end(), mycompare);
-		/*
-		for (int i = frozenWavesSorted.size()-1; i >= 0; i--) {
-			frozenWavesSorted[i]->OnShow();
-		}
-		for (int i = frozenPunchsSorted.size()-1; i >= 0; i--) {
-			TRACE("Y %d\n", frozenPunchs[i]->yPos);
-			frozenPunchsSorted[i]->OnShow();
-		}
-		for (int i = frozenStormsSorted.size()-1; i >= 0; i--) {
-			frozenStormsSorted[i]->OnShow();
-		}
-		for (auto& i : frozenWavesSorted) {
+		for (auto& i : energyBlast) {
 			i->OnShow();
 		}
-		for (auto& i : frozenPunchsSorted) {
-			i->OnShow();
-		}
-		for (auto& i : frozenStormsSorted) {
-			i->OnShow();
-		}
-		*/
+		
 	}
 }

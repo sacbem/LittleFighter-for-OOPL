@@ -864,6 +864,8 @@ IDB_BITMAP44            BITMAP                  "..\\res\\Henry\\henry_f.bmp"
 
 PHOTOSTICKER_WOODY      BITMAP                  "..\\res\\Woody\\woody_f.bmp"
 
+NAME_WOODY              BITMAP                  "..\\res\\Woody.bmp"
+
 #endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////
 

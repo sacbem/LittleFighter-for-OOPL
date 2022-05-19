@@ -14,6 +14,7 @@ using namespace std;
 #include  < crtdbg.h >
 #define Forest 0
 #define HKC 1
+#define BC 2
 using namespace skillTable;
 namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
@@ -22,7 +23,7 @@ namespace game_framework {
 		//characterList[1] = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
-		maps = new Map(HKC);
+		maps = new Map(BC);
 		
 		//GenerationTime = clock();
 	}
@@ -58,6 +59,7 @@ namespace game_framework {
 		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
 		//characterList[1]->OnMove();
 		characterList[0]->DistanceAccumulatorReset();
+	
 		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(),characterList[0]->isRunning,characterList[0]->GetDir(), characterList[0]->GetDistance());
 	}
 
@@ -67,7 +69,7 @@ namespace game_framework {
 		ShowInitProgress(50);
 		Sleep(300);
 
-		maps->Load(HKC);
+		maps->Load();
 		HealthPlayer1->init();
 		HealthPlayer2->init();
 
@@ -130,6 +132,7 @@ namespace game_framework {
 				break;
 			case 1:
 				characterList.push_back(new Freeze());
+				testFreeze.push_back(new Freeze());
 				break;
 			case 2:
 				characterList.push_back(new Henry());
@@ -138,7 +141,7 @@ namespace game_framework {
 				characterList.push_back(new Freeze());
 				break;
 			}
-			characterList[0]->SetXY(200, 200);
+			characterList[0]->SetXY(200, 600);
 			characterList[0]->SetCharacter();
 
 			switch (this->game->selectCharacterID[1])
@@ -156,7 +159,7 @@ namespace game_framework {
 				characterList.push_back(new Freeze());
 				break;
 			}
-			characterList[1]->SetXY(400, 200);
+			characterList[1]->SetXY(400, 600);
 			characterList[1]->SetCharacter();
 			
 			//characterList[1]->SetCharacter(buffer[1] - '0');
@@ -170,9 +173,19 @@ namespace game_framework {
 			GenerationTime = clock();
 		}
 		CurrentTime = clock();
-		TimePassed = (CurrentTime - GenerationTime)/1000;
-		//TRACE("TimePassed %d\n", TimePassed);
-		showStatus = TimePassed % 2 == 0 ? true : false;
+		TimePassed = (CurrentTime - GenerationTime);
+		MapAniCount++;
+		if (MapAniCount < 50) {
+			showStatus = true;
+		}
+		else if (MapAniCount <= 100) {
+			showStatus = false;
+			if (MapAniCount >= 100) {
+				MapAniCount = 0;
+			}
+		}
+		//TRACE("MapAniCount %d\n", MapAniCount);
+		//showStatus = MapAniCount % 2 == 0 ? true : false;
 		maps->PrintMap(showStatus);
 		characterList[0]->OnShow(theOthersPosition, CurrentTime);
 		characterList[1]->OnShow(theOthersPosition, CurrentTime);

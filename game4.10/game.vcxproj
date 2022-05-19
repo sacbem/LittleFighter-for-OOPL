@@ -766,6 +766,7 @@
     <Image Include="RES\quit1.bmp" />
     <Image Include="RES\quit2.bmp" />
     <Image Include="RES\red.bmp" />
+    <Image Include="RES\Woody.bmp" />
     <Image Include="RES\Woody\woody_f.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

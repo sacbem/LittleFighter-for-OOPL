@@ -130,7 +130,7 @@ namespace game_framework {
 	}
 	
 	boolean Character::DistanceAccumulatorReset() {
-		if ( walkedDistance < 3 && AnimationState != 0 ) {
+		if ( walkedDistance < 4 && AnimationState != 0 ) {
 			return false;
 		}
 		else {

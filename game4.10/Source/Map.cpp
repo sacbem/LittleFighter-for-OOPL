@@ -19,12 +19,13 @@ namespace game_framework {
 		InitializeAllObjs(mapID);
 		mapId = mapID;
 
-		cameraEnable = mapId == Forest ? true : false;
+		cameraEnable = mapId == HKC ? false : true;
+	
 	}
 	void Map::InitializeAllObjs(int mapID) {
 		////初始遊戲鏡頭位置
 		rubberMode = 0;
-		gameScencePos.first = 0; 
+		gameScencePos.first = 0;
 		gameScencePos.second = 794;
 		//// 初始化地圖內容
 		for (auto& i : map) {
@@ -52,7 +53,7 @@ namespace game_framework {
 			}
 			break;
 		case HKC:
-			for (int backgroundFronNum = 0; backgroundFronNum < 2; backgroundFronNum++) {
+			for (int backgroundBackNum = 0; backgroundBackNum < 2; backgroundBackNum++) {
 				backgroundBackObjs.push_back(new GameObject("Scenes"));
 			}
 			for (int floorNum = 0; floorNum < 1; floorNum++) {
@@ -62,13 +63,24 @@ namespace game_framework {
 				backgroundSkyObjs.push_back(new GameObject("Scenes"));
 			}
 			break;
+		case BC:
+			for (int backgroundBackNum = 0; backgroundBackNum < 3; backgroundBackNum++) {
+				backgroundBackObjs.push_back(new GameObject("Scenes"));
+			}
+			for (int backgroundFrontNum = 0; backgroundFrontNum < 2; backgroundFrontNum++) {
+				backgroundFrontObjs.push_back(new GameObject("Scenes"));
+			}
+			
+			floors.push_back(new GameObject("Scenes"));
+			break;
 		default:
 			break;
+			}
 		}
-	}
-	void Map::Load(int mapID) {
+	
+	void Map::Load() {
 		int cnt = 0;
-		switch (mapID) {
+		switch (mapId) {
 		case Forest:
 			for (int i = 0; i < floorObjs.size() - 1;i++) {
 				floorObjs[i]->Load(BITMAP_FOREST_L1 + i);
@@ -94,83 +106,108 @@ namespace game_framework {
 			backgroundSkyObjs[0]->Load(".\\res\\hkc\\hkc_sky.bmp");
 
 			break;
+		case BC:
+			backgroundBackObjs[0]->Load(".\\res\\bc\\bc1.bmp");
+			backgroundBackObjs[1]->Load(".\\res\\bc\\bc2.bmp");
+			backgroundBackObjs[2]->Load(".\\res\\bc\\bc3.bmp");
+			backgroundFrontObjs[0]->Load(".\\res\\bc\\bc4.bmp",RGB(0,0,0));
+			backgroundFrontObjs[1]->Load(".\\res\\bc\\bc4.bmp", RGB(0, 0, 0));
+			floors[0]->Load(".\\res\\bc\\bg5_x3.bmp", RGB(0, 0, 0));
+
+			break;
 		default:
 			break;
 		}
-		InitializeMap(mapID);
+		InitializeMap();
 	}
-	void Map::GenerateLand(int mapID) {
-		switch (mapID){
+	void Map::GenerateLand() {
+		switch (mapId){
 		case Forest:
 			floorObjs[0]->SetTopLeft(0, 356);
 			floorObjs[1]->SetTopLeft(300, 385);
 			floorObjs[2]->SetTopLeft(600, 420);
+			break;	
+		case HKC:
+			floors[0]->SetTopLeft(0, 336);
+			break;
+		case BC:
+			floors[0]->SetTopLeft(0, 296);
 			break;
 		default:
 			break;
 		}
 	}
-	void Map::InitializeMap(int mapID) {
+	void Map::InitializeMap() {
 		int cnt = 0;
-		switch (mapID) {
+		GenerateLand();
+		switch (mapId) {
 			case Forest:
-				// weeds
-				GenerateLand(mapID);
-				//trees
 				for (auto& tree : backgroundFrontObjs) {
 					tree->SetTopLeft(-800 + 250 * cnt, 165);
 					cnt++;
 				}
 				cnt = 0;
-				//floors
 				for (auto& floor : floors) {
 					floor->SetTopLeft(-1600 + 800 * cnt, 280);
 					cnt++;
 				}
 				cnt = 0;
-				//sky
 				for (auto& sky : backgroundSkyObjs) {
 					sky->SetTopLeft(-800 + 800 * cnt, 80);
 					cnt++;
 				}
-				////mountains
 				backgroundBackObjs[0]->SetTopLeft(-800, 90);
 				break;
 			case HKC:
-				floors[0]->SetTopLeft(0,336);
 				backgroundBackObjs[0]->SetTopLeft(3,250);
 				backgroundBackObjs[1]->SetTopLeft(3,250);
 				backgroundSkyObjs[0]->SetTopLeft(3,100);
 				break;
+
+			case BC:
+				for (int i = 0; i < backgroundBackObjs.size(); i++) {
+					backgroundBackObjs[i]->SetTopLeft(460 * i, 129);
+				}
+				for (int i = 0; i < backgroundFrontObjs.size(); i++) {
+					backgroundFrontObjs[i]->SetTopLeft(800 * i, 261);
+				}
+
+			break;
+			default:
+			break;
 		}
 
 	}
 	void Map::StopDynamic(boolean isLeft, int distance) {
 		if (cameraEnable) {
-			if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0) {/// 左/右底場景判斷
-				mapBordary[0] = false;
-				if (distance != 0) {
-					if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// 左底場景 往右走
-						mapBordary[0] = true;
-					}
-					else if (backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0 && isLeft) {/// 右底場景 往左走
-						mapBordary[0] = true;
+			if (!backgroundSkyObjs.empty()) {
+				if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0) {/// 左/右底場景判斷
+					mapBordary[0] = false;
+					if (distance != 0) {
+						if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// 左底場景 往右走
+							mapBordary[0] = true;
+						}
+						else if (backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0 && isLeft) {/// 右底場景 往左走
+							mapBordary[0] = true;
+						}
 					}
 				}
 			}
-			if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 || backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547) {/// 左/右底場景判斷
-				mapBordary[1] = false;
-				if (distance != 0) {
-					if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// 左底場景 往右走
-						mapBordary[1] = true;
-					}
-					else if (backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547 && isLeft) {/// 右底場景 往左走
-						mapBordary[1] = true;
+			if (!backgroundFrontObjs.empty()) {
+				if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 || backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547) {/// 左/右底場景判斷
+					mapBordary[1] = false;
+					if (distance != 0) {
+						if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// 左底場景 往右走
+							mapBordary[1] = true;
+						}
+						else if (backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547 && isLeft) {/// 右底場景 往左走
+							mapBordary[1] = true;
+						}
 					}
 				}
-				//if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size()-1]->GetPositionXY("X") == -800) {
-				//    mapBordary[2] = false;
-				//}
+			}
+			
+			if (!backgroundBackObjs.empty()) {
 				if (backgroundBackObjs[0]->GetPositionXY("X") == 0 || backgroundBackObjs[backgroundBackObjs.size() - 1]->GetPositionXY("X") == -1600) {
 					mapBordary[3] = false;
 					if (backgroundBackObjs[0]->GetPositionXY("X") == 0 && !isLeft) {
@@ -182,8 +219,8 @@ namespace game_framework {
 				}
 			}
 		}
-		
 	}
+		
 	
 	boolean Map::ResetCharactAccumulator(int distance1, int distance2) {
 		if (distance1 > forestSky_dx || distance2 > forestSky_dx) {
@@ -194,88 +231,148 @@ namespace game_framework {
 		}
 	}
 	
-	void Map::DynamicScence(boolean IsLeft,int walkedDistance) {
-		StopDynamic(IsLeft, walkedDistance);
-		int direction = IsLeft ? 1 : -1; // 往右 : 1 往左 : -1 
-		if (cameraEnable) {
-			if (mapBordary[0]) {
-				if (walkedDistance > forestSky_dx) {
-					for (auto& i : backgroundSkyObjs) {
-						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
-					}
-				}
-			}
-			if (mapBordary[1]) {
-				if (walkedDistance > forestMountain_dx2) {
-					for (auto& i : backgroundFrontObjs) {
-						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
-					}
-				}
-			}
-			if (mapBordary[2]) {
-				if (walkedDistance > forestTree_dx) {
-					for (auto& i : floorObjs) {
-						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
-					}
-				}
-			}
-			if (mapBordary[3]) {
-				if (walkedDistance > forestMountain_dx2) {
-					backgroundBackObjs[0]->SetTopLeftSpical(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
-				}
-			}
-		}
-		switch (mapId){
-		case HKC:
-
-		default:
-			break;
-		}
-	}
+	//void Map::DynamicScence(boolean IsLeft,int walkedDistance) {
+	//	StopDynamic(IsLeft, walkedDistance);
+	//	int direction = IsLeft ? 1 : -1; // 往右 : 1 往左 : -1 
+	//	if (cameraEnable) {
+	//		if (mapBordary[0]) {
+	//			if (walkedDistance > forestSky_dx) {
+	//				for (auto& i : backgroundSkyObjs) {
+	//					i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+	//				}
+	//			}
+	//		}
+	//		if (mapBordary[1]) {
+	//			switch (mapId) {
+	//			case Forest:
+	//				if (walkedDistance > forestTree_dx) {
+	//					for (auto& i : backgroundFrontObjs) {
+	//						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+	//					}
+	//				}
+	//				break;
+	//			case BC:
+	//				if (walkedDistance > bcBackScence_dx) {
+	//					for (auto& i : backgroundFrontObjs) {
+	//						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+	//					}
+	//				}
+	//				break;
+	//			default:
+	//				break;
+	//			}
+	//		}
+	//		if (mapBordary[2]) {
+	//			switch (mapId){
+	//			case Forest:
+	//				if (walkedDistance > forestTree_dx) {
+	//					for (auto& i : floorObjs) {
+	//						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+	//					}
+	//				}
+	//				break;
+	//			case BC:
+	//				if (walkedDistance > bcLand_dx) {
+	//					if (walkedDistance > bcLand_dx) {
+	//						floorObjs[0]->SetTopLeft(floorObjs[0]->GetPositionXY("X") + 1 * direction, floorObjs[0]->GetPositionXY("Y"));
+	//					}
+	//				}
+	//				break;
+	//			default:
+	//				break;
+	//			}
+	//		}
+	//		if (mapBordary[3]) {
+	//			switch (mapId){
+	//			case Forest:
+	//				if (walkedDistance > forestMountain_dx2) {
+	//						backgroundBackObjs[0]->SetTopLeftSpical(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
+	//				}
+	//			break;
+	//			case  BC:
+	//				if (walkedDistance > forestMountain_dx2) {
+	//					for (int i = 0; i < 3; i++) {
+	//						backgroundBackObjs[0]->SetTopLeftSpical(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
+	//					}
+	//				}
+	//				break;
+	//			default:
+	//				break;
+	//			}
+	//		}
+	//	}
+	//}
 
 	void Map::ScenesCamera(boolean mapMove, boolean IsRunning, boolean IsLeft, int walkedDistance) {
 		int direction = IsLeft  ?  1 : -1; // 往右 : 1 往左 : -1 
 		
-		if (mapMove && cameraEnable) {
+		//if (mapMove && cameraEnable) {
 			StopDynamic(IsLeft, walkedDistance);
-			int direction = IsLeft ? 1 : -1; // 往右 : 1 往左 : -1 
 			if (mapBordary[0]) {
-				if (walkedDistance > forestSky_dx) {
-					for (auto& i : backgroundSkyObjs) {
-						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+				if (mapId == Forest) {
+					if (walkedDistance > forestSky_dx) {
+						for (auto& i : backgroundSkyObjs) {
+							i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+						}
 					}
 				}
+				
 			}
 			if (mapBordary[1]) {
-				if (walkedDistance > forestMountain_dx2) {
-					for (auto& i : backgroundFrontObjs) {
-						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+				if (mapId == Forest) {
+					if (walkedDistance > forestMountain_dx2) {
+						for (auto& i : backgroundFrontObjs) {
+							i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+						}
+					}
+				}
+				else if (mapId == BC) {
+					if (walkedDistance > bcBackScence_dx) {
+						for (auto& i : backgroundFrontObjs) {
+							i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+						}
 					}
 				}
 			}
 			if (mapBordary[2]) {
-				if (walkedDistance > forestTree_dx) {
-					for (auto& i : floorObjs) {
-						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+				if (mapId == Forest) {
+					if (walkedDistance > forestTree_dx) {
+						for (auto& i : floorObjs) {
+							i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
+						}
+					}
+				}
+				else if (mapId == BC) {
+					if (walkedDistance > bcLand_dx) {
+						floors[0]->SetTopLeft(floors[0]->GetPositionXY("X") + 1 * direction, floors[0]->GetPositionXY("Y"));
 					}
 				}
 			}
 			if (mapBordary[3]) {
-				if (walkedDistance > forestMountain_dx2) {
-					backgroundBackObjs[0]->SetTopLeftSpical(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
+				if (mapId == Forest) {
+					if (walkedDistance > forestMountain_dx2) {
+						backgroundBackObjs[0]->SetTopLeftSpical(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
+					}
+				}
+				else if (mapId == BC) {
+					if (walkedDistance > forestMountain_dx2) {
+						for (int i = 0; i < 3; i++) {
+							backgroundBackObjs[i]->SetTopLeftSpical(backgroundBackObjs[i]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[i]->GetPositionXY("Y"));
+						}
+					}
 				}
 			}
-		}
+		//}
 	}
 
 	void Map::PrintMap(boolean showStates) {
 
-		if (backgroundSkyObjs.size()) {
+		if (!backgroundSkyObjs.empty()) {
 			for (auto& i : backgroundSkyObjs) {
 				i->OnShow();
 			}
 		}
-		if (backgroundBackObjs.size()) {
+		if (!backgroundBackObjs.empty()) {
 			if (mapId == HKC && showStates) {
 				backgroundBackObjs[0]->OnShow();
 			}
@@ -289,44 +386,45 @@ namespace game_framework {
 			}
 			
 		}
-		if (floors.size()) {
+		if (!floors.empty()) {
 			for (auto i : floors) {
 				i->OnShow();
 			}
 		}
-		if (backgroundFrontObjs.size()) {
+		if (!backgroundFrontObjs.empty()) {
 			for (auto& i : backgroundFrontObjs) {
 				i->OnShow();
 			}
 		}
-		if (floorObjs.size()) {
+		if (!floorObjs.empty()) {
 			for (auto i : floorObjs) {
 				i->OnShow();
 			}
 		}
+		//TRACE("backgroundSkyObjs %d backgroundBackObjs %d floors %d backgroundFrontObjs %d floorObjs %d\n", backgroundSkyObjs.empty(), backgroundBackObjs.empty(), floors.empty(), backgroundFrontObjs.empty(), floorObjs.empty());
 	}
 	Map::~Map() {
-		if (floorObjs.size()) {
+		if (!floorObjs.empty()) {
 			for (auto& i : floors) {
 				delete i;
 			}
 		}
-		if (floorObjs.size()) {
+		if (!floorObjs.empty()) {
 			for (auto& i : floorObjs) {
 				delete i;
 			}
 		}
-		if (backgroundFrontObjs.size()) {
+		if (!backgroundFrontObjs.empty()) {
 			for (auto& i : backgroundFrontObjs) {
 				delete i;
 			}
 		}
-		if (backgroundSkyObjs.size()) {
+		if (!backgroundSkyObjs.empty()) {
 			for (auto& i : backgroundSkyObjs) {
 				delete i;
 			}
 		}
-		if (backgroundBackObjs.size()) {
+		if (!backgroundBackObjs.empty()) {
 			for (auto& i : backgroundBackObjs) {
 				delete i;
 			}

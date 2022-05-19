@@ -110,7 +110,7 @@ namespace game_framework {
 		switch (id)
 		{
 		case 0:
-			imgCharacter.LoadBitmap(FIRZEN_S, RGB(224, 68, 60));
+			imgCharacter.LoadBitmap(".\\res\\Woody\\woody_s.bmp", RGB(224, 68, 60));
 			break;
 		case 1:
 			imgCharacter.LoadBitmap(FREEZE_S, RGB(224, 68, 60));

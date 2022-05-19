@@ -139,6 +139,107 @@ namespace game_framework {
 			effectObj[0]->Load(1, ".\\res\\Freeze\\Freeze_ww_reverse\\freeze_ww_reverse_6.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(1, ".\\res\\Freeze\\Freeze_ww_reverse\\freeze_ww_reverse_5.bmp", RGB(0, 0, 0));
 			break;
+		case static_cast<int>(skillsIdTable::normalArrow):
+			effectObj.push_back(new GameObject(2, "Effect"));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_0.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_1.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_1.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_1.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_1.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_2.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_3.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_4.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_5.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_6.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_10.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_11.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_12.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_13.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_14.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_15.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_16.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_17.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_18.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_19.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_9.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_8.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_8.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_8.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_8.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_7.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_6.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_5.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_4.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_3.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_19.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_18.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_17.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_16.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_15.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_14.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_13.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_12.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_11.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_10.bmp", RGB(0, 0, 0));
+			break;
+		case static_cast<int>(skillsIdTable::pierceArrow):
+			effectObj.push_back(new GameObject(2, "Effect"));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow2\\Henry_arrow2_0.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow2\\Henry_arrow2_1.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow2\\Henry_arrow2_2.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow2\\Henry_arrow2_3.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow2\\Henry_arrow2_4.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow2\\Henry_arrow2_5.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow2\\Henry_arrow2_6.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow2\\Henry_arrow2_7.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow2\\Henry_arrow2_8.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow2\\Henry_arrow2_9.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow2_reverse\\Henry_arrow2_reverse_5.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow2_reverse\\Henry_arrow2_reverse_4.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow2_reverse\\Henry_arrow2_reverse_3.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow2_reverse\\Henry_arrow2_reverse_2.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow2_reverse\\Henry_arrow2_reverse_1.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow2_reverse\\Henry_arrow2_reverse_0.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow2_reverse\\Henry_arrow2_reverse_11.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow2_reverse\\Henry_arrow2_reverse_10.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow2_reverse\\Henry_arrow2_reverse_9.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow2_reverse\\Henry_arrow2_reverse_8.bmp", RGB(0, 0, 0));
+		case static_cast<int>(skillsIdTable::EnergyBlast):
+			effectObj.push_back(new GameObject(2, "Effect"));
+			effectObj.push_back(new GameObject(2, "Effect"));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_0.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_1.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_2.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_3.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_4.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_5.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_6.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_7.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_3.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_2.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_1.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_0.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_7.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_6.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_5.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_4.bmp", RGB(0, 0, 0));
+			//second blast
+			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_8.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_9.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_10.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_11.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_4.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_5.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_6.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_7.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_11.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_10.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_9.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_8.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_7.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_6.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_5.bmp", RGB(0, 0, 0));
+			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_4.bmp", RGB(0, 0, 0));
 		default:
 			break;
 		}
@@ -148,7 +249,6 @@ namespace game_framework {
 		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
-
 			effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 6, xPos, yPos);
 			effectObj[0]->OnShow(direction, AnimationCount[0] % 6);
 			AnimationCount[0]++;
@@ -241,12 +341,58 @@ namespace game_framework {
 			timeCount++;
 			break;
 			////////////////
+		case static_cast<int>(skillsIdTable::normalArrow):
+			if (timeCount >= 20) {
+				effectObj[0]->SetTopLeft(direction, 1, xPos, yPos);
+				effectObj[0]->OnShow(direction, 1);
+				AnimationCount[0]++;
+				//SkillsProcess(theOthersPosition, mainTime - createdTime);
+				if (direction == 0) {
+					xPos += 5;
+				}
+				else if (direction == 1) {
+					xPos -= 5;
+				}
+			}
+			timeCount++;
+			break;
+		case static_cast<int>(skillsIdTable::pierceArrow):
+			if (timeCount >= 20) {
+				effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 6, xPos, yPos);
+				effectObj[0]->OnShow(direction, AnimationCount[0] % 6);
+				AnimationCount[0]++;
+				//SkillsProcess(theOthersPosition, mainTime - createdTime);
+				if (direction == 0) {
+					xPos += 8;
+				}
+				else if (direction == 1) {
+					xPos -= 8;
+				}
+			}
+			timeCount++;
+			break;
+		case static_cast<int>(skillsIdTable::EnergyBlast):
+			effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 4, xPos, yPos);
+			effectObj[0]->OnShow(direction, AnimationCount[0] % 4);
+			if (timeCount >= 20) {
+				effectObj[1]->SetTopLeft(direction, AnimationCount[1] % 4, xPos - 50, yPos);
+				effectObj[1]->OnShow(direction, AnimationCount[1] % 4);
+				AnimationCount[1]++;
+			}
+			AnimationCount[0]++;
+			//SkillsProcess(theOthersPosition, mainTime - createdTime);
+			if (direction == 0) {
+				xPos += 5;
+			}
+			else if (direction == 1) {
+				xPos -= 5;
+			}
+			timeCount++;
+			break;
 		default:
 			break;
 		}
 	}
-
-	
 
 	void  SkillEffect::SkillsFeedbackStatus(vector<pair<int, int>> theOthersPosition) {
 

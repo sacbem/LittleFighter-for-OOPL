@@ -22,7 +22,7 @@ namespace game_framework {
         void CreatEffectObj();
 
         enum class skillsIdTable {
-            frozenWave, frozenPunch, frozenSword, frozenStorm
+            frozenWave, frozenPunch, frozenSword, frozenStorm, normalArrow, pierceArrow, EnergyBlast
         };
     };
 
