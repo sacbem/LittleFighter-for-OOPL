@@ -23,11 +23,11 @@ namespace game_framework {
 	
 	}
 	void Map::InitializeAllObjs(int mapID) {
-		////��l�C�����Y��m
+		
 		rubberMode = 0;
 		gameScencePos.first = 0;
 		gameScencePos.second = 794;
-		//// ��l�Ʀa�Ϥ��e
+		
 		for (auto& i : map) {
 			for (int o = 0; o < 10; o++) {
 				i.push_back(0);
@@ -131,7 +131,7 @@ namespace game_framework {
 			floors[0]->SetTopLeft(0, 336);
 			break;
 		case BC:
-			floors[0]->SetTopLeft(0, 296);
+			floors[0]->SetTopLeft(-600, 296);
 			break;
 		default:
 			break;
@@ -179,28 +179,30 @@ namespace game_framework {
 
 	}
 	void Map::StopDynamic(boolean isLeft, int distance) {
+
+
 		if (cameraEnable) {
 			if (!backgroundSkyObjs.empty()) {
-				if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0) {/// ��/�k�������P�_
+				if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 || backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0) {
 					mapBordary[0] = false;
 					if (distance != 0) {
-						if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// �������� ���k��
+						if (backgroundSkyObjs[0]->GetPositionXY("X") == 0 && !isLeft) {
 							mapBordary[0] = true;
 						}
-						else if (backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0 && isLeft) {/// �k������ ������
+						else if (backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0 && isLeft) {
 							mapBordary[0] = true;
 						}
 					}
 				}
 			}
 			if (!backgroundFrontObjs.empty()) {
-				if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 || backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547) {/// ��/�k�������P�_
+				if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 || backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547) {
 					mapBordary[1] = false;
 					if (distance != 0) {
-						if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 && !isLeft) {/// �������� ���k��
+						if (backgroundFrontObjs[0]->GetPositionXY("X") == 0 && !isLeft) {
 							mapBordary[1] = true;
 						}
-						else if (backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547 && isLeft) {/// �k������ ������
+						else if (backgroundFrontObjs[backgroundFrontObjs.size() - 1]->GetPositionXY("X") == 547 && isLeft) {
 							mapBordary[1] = true;
 						}
 					}
@@ -304,7 +306,7 @@ namespace game_framework {
 	//}
 
 	void Map::ScenesCamera(boolean mapMove, boolean IsRunning, boolean IsLeft, int walkedDistance) {
-		int direction = IsLeft  ?  1 : -1; // ���k : 1 ���� : -1 
+		int direction = IsLeft  ?  1 : -1; 
 		
 		//if (mapMove && cameraEnable) {
 			StopDynamic(IsLeft, walkedDistance);
