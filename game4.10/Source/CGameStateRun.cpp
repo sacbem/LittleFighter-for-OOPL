@@ -38,7 +38,6 @@ namespace game_framework {
 	}
    
 	void CGameStateRun::OnMove()	{					// 移動遊戲元素
-	
 		CleanCounter++;
 		if (CleanCounter >= 10) {
 			CleanCounter = 0;
@@ -61,6 +60,12 @@ namespace game_framework {
 		characterList[0]->DistanceAccumulatorReset();
 	
 		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(),characterList[0]->isRunning,characterList[0]->GetDir(), characterList[0]->GetDistance());
+
+		CalculateDamage(theOthersPosition);
+
+		for (auto i : characterList[0]->hittedTable) {
+			TRACE("hitter table %d %d\n", i.first, i.second);
+		}
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -106,64 +111,70 @@ namespace game_framework {
 			}
 		}
 		for (auto& u : characterList) {
-			for (auto i : u->hittedTable) { /// issue :可能不會改 !!!
+			for (auto &i : u->hittedTable) { /// issue :可能不會改 !!!
 				if (i.first == 1) {
-					player1Damage += i.second;
+					//player1Damage += i.second;
+					TRACE("dama %d\n", i.second);
+					characterList[1]->isGettingDamage(i.second);
 				}
 				else if (i.first == 2) {
-					player2Damage += i.second;
+					//player2Damage += i.second;
+					characterList[1]->isGettingDamage(i.second);
 				}
 			}
 		}
-		
-		characterList[0]->isGettingDamage(player1Damage);
-		characterList[1]->isGettingDamage(player2Damage);
+		//characterList[1]->isGettingDamage(player2Damage);
 	}
 
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
-		
 		//get character
 		if (GetCharacter == false ){ // && characterList[1]->getCharacter == false) {
 			switch (this->game->selectCharacterID[0])
 			{
 			case 0:
-				characterList.push_back(new Woody());
+				characterList.push_back(new Woody(0));
+				registSerialNumber=0;
 				break;
 			case 1:
-				characterList.push_back(new Freeze());
-				testFreeze.push_back(new Freeze());
+				characterList.push_back(new Freeze(0));
+				registSerialNumber = 1;
 				break;
 			case 2:
-				characterList.push_back(new Henry());
+				characterList.push_back(new Henry(0));
+				registSerialNumber = 2;
 				break;
 			default:
-				characterList.push_back(new Freeze());
+				characterList.push_back(new Freeze(0));
+				registSerialNumber = 1;
+
 				break;
 			}
-			characterList[0]->SetXY(200, 600);
+			characterList[0]->SetXY(200, 500);
 			characterList[0]->SetCharacter();
 
 			switch (this->game->selectCharacterID[1])
 			{
 			case 0:
-				characterList.push_back(new Woody());
+				characterList.push_back(new Woody(registSerialNumber == 0 ? 0 : 2));
 				break;
 			case 1:
-				characterList.push_back(new Freeze());
+				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2));
 				break;
 			case 2:
-				characterList.push_back(new Henry());
+				characterList.push_back(new Henry(registSerialNumber == 0 ? 0 : 2));
 				break;
 			default:
-				characterList.push_back(new Freeze());
+				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2));
 				break;
 			}
-			characterList[1]->SetXY(400, 600);
+			characterList[1]->SetXY(400, 500);
 			characterList[1]->SetCharacter();
 			
 			//characterList[1]->SetCharacter(buffer[1] - '0');
 			SetAllCharacterPosition();
+			TRACE("Pos f %d\n", theOthersPosition[1].first);
+			TRACE("Pos s %d\n", theOthersPosition[1].second);
 
 			GetCharacter = true;
 			//load HealthBar small character

@@ -10,7 +10,8 @@
 #include <algorithm>
 #include <time.h>
 namespace game_framework {
-	Woody::Woody() {
+	Woody::Woody(int num) {
+		serialNumber = num;
 		for (int i = 0; i < 5; i++) {
 			skillsEffect_InFieldNumber.push_back(0);
 		}
@@ -594,7 +595,7 @@ namespace game_framework {
 			}
 
 			if (KnockCount >= 3 && KnockCount <= 40) {
-				xPos -= KnockSpeed * 3;
+				xPos += KnockSpeed * 3;
 			}
 			//yPos Movement
 			if (KnockCount >= 3) {
@@ -848,7 +849,7 @@ namespace game_framework {
 
 	void Woody::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
 		//TRACE("isAttacking %d\n", isAttacking);
-		TRACE("YPOS %d\n", yPos);
+		//TRACE("YPOS %d\n", yPos);
 		switch (AnimationState)
 		{
 		case 0:

@@ -375,7 +375,14 @@ namespace game_framework {
 			effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 4, xPos, yPos);
 			effectObj[0]->OnShow(direction, AnimationCount[0] % 4);
 			if (timeCount >= 20) {
-				effectObj[1]->SetTopLeft(direction, AnimationCount[1] % 4, xPos - 50, yPos);
+				int dd;
+				if (direction == 0) {
+					dd = -50;
+				}
+				else if (direction == 1) {
+					dd = +50;
+				}
+				effectObj[1]->SetTopLeft(direction, AnimationCount[1] % 4, xPos + dd, yPos);
 				effectObj[1]->OnShow(direction, AnimationCount[1] % 4);
 				AnimationCount[1]++;
 			}
