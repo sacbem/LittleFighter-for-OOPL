@@ -63,9 +63,16 @@ namespace game_framework {
         img.SetTopLeft(xPos, yPos);
     }
     
-    void GameObject::SetTopLeftSpical(int x, int y) {
-        xPos = x >= 1600 ? 1600 : x;
-        xPos = x <= -1600 ? -1600 : x;
+    void GameObject::SetTopLeftSpical(int x, int y,int mapID) {
+        if (mapID == 0) {
+            xPos = x >= 1600 ? 1600 : x;
+            xPos = x <= -1600 ? -1600 : x;
+        }
+        else if (mapID == 2) {
+            xPos = x >= 2000 ? 2000 : x;
+            xPos = x <= -2500 ? -2500 : x;
+        }
+       
         yPos = y;
         img.SetTopLeft(xPos, yPos);
     }

@@ -42,7 +42,7 @@ namespace game_framework {
 		virtual void SetSkill(int createdTimes) =0;
 		void InputKeyDown(UINT nChar, int Time);
 		void InputKeyUp(UINT nChar);
-
+		boolean IsInBorder(int mapID);
 		boolean IsStatic();
 		boolean  DistanceAccumulatorReset();
 		virtual int HitEnemy(Character* enemy) = 0;

@@ -91,7 +91,9 @@ namespace game_framework {
 	boolean Character::IsStatic() {
 		return this->AnimationState ? false : true;
 	}
-
+	boolean Character::IsInBorder(int mapID) {
+		return xPos == 0 || xPos == 794 ? true : false;
+	}
 	int Character::GetX2() {
 		return xPos + Animation.Normal[0].Width();
 	}
@@ -130,7 +132,7 @@ namespace game_framework {
 	}
 	
 	boolean Character::DistanceAccumulatorReset() {
-		if ( walkedDistance < 4 && AnimationState != 0 ) {
+		if ( walkedDistance < 5 && AnimationState != 0 ) {
 			return false;
 		}
 		else {
@@ -533,11 +535,15 @@ namespace game_framework {
 
 	void Character::SetMapBorder(int mapID) {
 		xMapBorderMin = -50;
-		xMapBorderMax = 750;
+		xMapBorderMax = 810;
 		switch (mapID) {
 		case 0:
 			yMapBorderMin = 300;
 			yMapBorderMax = 500;
+		case 2:
+			yMapBorderMin = 300;
+			yMapBorderMax = 600;
+			break;
 		default:
 			break;
 		}
