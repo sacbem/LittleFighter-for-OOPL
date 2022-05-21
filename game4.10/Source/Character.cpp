@@ -328,7 +328,9 @@ namespace game_framework {
 	void Character::SetMovingUp(bool flag) {
 		isMovingUp = flag;
 	}
-
+	void Character::SetAbonormalStatus(int characterID, boolean val) {
+		statusTable.push_back(pair<int, boolean>(characterID, val));
+	}
 	void Character::SetMovingLeft(bool flag) {
 		if (!isRunning) {
 			if (flag == true) {
@@ -538,7 +540,9 @@ namespace game_framework {
 			}
 		}
 	}
-
+	void Character::ClearAbonormalStatus() {
+		vector<pair<int, boolean>>().swap(statusTable);
+	}
 	void Character::SetMapBorder(int mapID) {
 		xMapBorderMin = -50;
 		xMapBorderMax = 810;

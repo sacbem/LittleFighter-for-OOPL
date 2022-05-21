@@ -1201,18 +1201,6 @@ namespace game_framework {
 		std::sort(frozenWavesSorted.begin(), frozenWavesSorted.end(), mycompare);
 		std::sort(frozenPunchsSorted.begin(), frozenPunchsSorted.end(), mycompare);
 		std::sort(frozenStormsSorted.begin(), frozenStormsSorted.end(), mycompare);
-		/*
-		for (int i = frozenWavesSorted.size()-1; i >= 0; i--) {
-			frozenWavesSorted[i]->OnShow();
-		}
-		for (int i = frozenPunchsSorted.size()-1; i >= 0; i--) {
-			TRACE("Y %d\n", frozenPunchs[i]->yPos);
-			frozenPunchsSorted[i]->OnShow();
-		}
-		for (int i = frozenStormsSorted.size()-1; i >= 0; i--) {
-			frozenStormsSorted[i]->OnShow();
-		}
-		*/
 		for (auto& i : frozenWavesSorted) {
 			i->OnShow();
 		}
@@ -1226,12 +1214,6 @@ namespace game_framework {
 	void Freeze::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
 		pair<int, int> itr(0, 0);  // first : characterID second :damage
 		int attackDirection = this->GetDir() ? -1 : 1;
-		//tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2
-		//enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);
-		
-		//first+80 >=xPos && fist<=xPos+80
-		//second+80 >=yPos && second<=yPos+80
-
 		for (auto& i : frozenWaves) {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
 				if (h != this->serialNumber) {
@@ -1243,6 +1225,7 @@ namespace game_framework {
 								hittedTable.push_back(itr);
 								i->isHit = true;
 								this->SetCalculateDamageRequest (true);
+								this->SetAbonormalStatus(h, true);
 							}
 						}
 					}

@@ -99,29 +99,31 @@ namespace game_framework {
 		}
 	}
 	void  CGameStateRun::CalculateDamage(vector<pair<int, int>> theOthersPosition) {
-		int player1Damage =0, player2Damage = 0;
+
 		for (int i = 0; i < 2; i++) {
 			if (this->game->selectCharacterID[i] == 0) {
-				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition);
+				static_cast<Woody*>(characterList[i])->DetectSkillDamage(theOthersPosition);
 			}
 			else if (this->game->selectCharacterID[i] == 1) {
 				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition);
 			}
 			else if (this->game->selectCharacterID[i] == 2) {
-				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition);
+				static_cast<Henry*>(characterList[i])->DetectSkillDamage(theOthersPosition);
 			}
 		}
 
-		if (characterList[0]->GetCalculateDamageRequest()) {
+		if (characterList[0]->GetCalculateDamageRequest() || characterList[1]->GetCalculateDamageRequest()) {
 			for (auto& u : characterList) {
 				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
-					if (i.first == 1) {
-						characterList[1]->isGettingDamage(i.second);
+					if (i.first == 0) {
+						characterList[0]->isGettingDamage(i.second);
 					}
-					else if (i.first == 2) {
+					else if (i.first == 1) {
 						characterList[1]->isGettingDamage(i.second);
 					}
 				}
+				characterList[0]->ClearAbonormalStatus();
+				characterList[1]->ClearAbonormalStatus();
 			}
 
 			pair<int, int>().swap(characterList[0]->hittedTable[0]);
@@ -213,7 +215,6 @@ namespace game_framework {
 			characterList[1]->SetXY(400, 500);
 			characterList[1]->SetCharacter();
 			
-			//characterList[1]->SetCharacter(buffer[1] - '0');
 			SetAllCharacterPosition();
 
 
@@ -236,26 +237,20 @@ namespace game_framework {
 				MapAniCount = 0;
 			}
 		}
-		//TRACE("MapAniCount %d\n", MapAniCount);
-		//showStatus = MapAniCount % 2 == 0 ? true : false;
+	
 		maps->PrintMap(showStatus);
-
 		SortedShow();
 
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 	
-		
-		//imgs[0][0]->ShowBitmap();
+
 		boxTest->ShowAnimation();
 	}
 
 	CGameStateRun::~CGameStateRun(){
-		delete maps, HealthPlayer1, HealthPlayer2;
-		//delete boxTest;
-
-		for (auto& i : characterList) {
-			delete i;
-		}
+		delete maps, HealthPlayer1, HealthPlayer2,boxTest;
+		vector<Character*>().swap(characterList);
+		vector<FieldObject*>().swap(drop);
 	}
 }

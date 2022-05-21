@@ -462,38 +462,17 @@ namespace game_framework {
 		}
 	}
 	Map::~Map() {
-		if (!floorObjs.empty()) {
-			for (auto& i : floors) {
-				delete i;
-			}
-		}
-		if (!floorObjs.empty()) {
-			for (auto& i : floorObjs) {
-				delete i;
-			}
-		}
-		if (!backgroundFrontObjs.empty()) {
-			for (auto& i : backgroundFrontObjs) {
-				delete i;
-			}
-		}
-		if (!backgroundSkyObjs.empty()) {
-			for (auto& i : backgroundSkyObjs) {
-				delete i;
-			}
-		}
-		if (!backgroundBackObjs.empty()) {
-			for (auto& i : backgroundBackObjs) {
-				delete i;
-			}
-		}
-	
-		//floors.clear();
+		vector<GameObject*>().swap(floors);
+		vector<GameObject*>().swap(floorObjs);
+		vector<GameObject*>().swap(backgroundFrontObjs);
+		vector<GameObject*>().swap(backgroundSkyObjs);
+		vector<GameObject*>().swap(backgroundBackObjs);
+
 	}
    
 }
 	/// <summary> friend int GetScenesPos(Map &map,const string type);
-	/// GameObject :    �����W�Ҧ��������O(�Z���B�����B�D��)
+	/// GameObject :   
 	/// </summary>
 	/// <param name="type"></param>
 

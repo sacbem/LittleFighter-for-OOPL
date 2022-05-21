@@ -39,6 +39,8 @@ namespace game_framework {
 		void SetXY(int X, int Y);
 		void SetMapBorder(int mapID);
 		void SetCalculateDamageRequest(boolean val);
+		void SetAbonormalStatus(int characterID,boolean val);
+		void ClearAbonormalStatus();
 		virtual void SetAttack(bool flag) = 0;
 		virtual void SetKnock(bool flag, int Dir, int AttState)=0;
 		virtual void SetSkill(int createdTimes) =0;
@@ -78,7 +80,9 @@ namespace game_framework {
 		int rightTime = 0;
 		vector<int>skillsEffect_InFieldNumber; // 統計各技能物件存活數量 index 對應 skill ID
 		vector<pair<int, int>> hittedTable;
+		vector<pair<int, boolean>> statusTable;
 		vector<vector<int>> hittedLog;
+
 		int KeyBoardInputTime;
 		int CurrentTime;
 		friend class SkillEffect;

@@ -110,6 +110,6 @@ namespace game_framework {
 	}
 
 	FieldObject::~FieldObject() {
-
+		delete Obj;
 	}
 }

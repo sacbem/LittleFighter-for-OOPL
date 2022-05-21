@@ -425,38 +425,7 @@ namespace game_framework {
 		}
 	}
 
-	void  SkillEffect::SkillsFeedbackStatus(vector<pair<int, int>> theOthersPosition) {
-
-		switch (skillID) {
-			//////////////// Freeze
-		case static_cast<int>(skillsIdTable::frozenWave):
-			for (auto& i : effectObj) {
-				for (int h = 0; h < theOthersPosition.size(); h++) {
-					if (i->GetPositionXY("X") == theOthersPosition[h].first) {
-						if (i->GetPositionXY("Y") == theOthersPosition[h].second) {
-							feedbackStatus[h] = "Freezed";
-						}
-					}
-				}
-			}
-			break;
-		case static_cast<int>(skillsIdTable::frozenPunch):
-
-			break;
-		case static_cast<int>(skillsIdTable::frozenSword):
-
-			break;
-		case static_cast<int>(skillsIdTable::frozenStorm):
-
-			break;
-
-		default:
-			break;
-		}
-	}
 	SkillEffect::~SkillEffect() {
-		for (auto& i : effectObj) {
-			delete i;
-		}
+		vector<GameObject*>().swap(effectObj);
 	}
 }

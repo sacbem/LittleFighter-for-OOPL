@@ -18,28 +18,6 @@ namespace game_framework {
 		imgInnerMana.reserve(180);
 	}
 
-	HealthBar::~HealthBar() {
-		for (int i = 0; i < 180; i++) {
-			delete imgHealth[i];
-		}
-		imgHealth.clear();
-
-		for (int i = 0; i < 180; i++) {
-			delete imgInnerHealth[i];
-		}
-		imgInnerHealth.clear();
-
-		for (int i = 0; i < 180; i++) {
-			delete imgMana[i];
-		}
-		imgMana.clear();
-
-		for (int i = 0; i < 180; i++) {
-			delete imgInnerMana[i];
-		}
-		imgInnerMana.clear();
-	}
-
 	void HealthBar::init() {
 		for (int i = 0; i < 180; i++) {
 			imgHealth.push_back(new CMovingBitmap());
@@ -122,5 +100,11 @@ namespace game_framework {
 			imgCharacter.LoadBitmap(PLAYER0_S, RGB(224, 68, 60));
 			break;
 		}
+	}
+	HealthBar::~HealthBar() {
+		vector<CMovingBitmap*>().swap(imgHealth);
+		vector<CMovingBitmap*>().swap(imgInnerHealth);
+		vector<CMovingBitmap*>().swap(imgMana);
+		vector<CMovingBitmap*>().swap(imgInnerMana);
 	}
 }

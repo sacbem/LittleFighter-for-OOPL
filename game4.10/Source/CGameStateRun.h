@@ -25,7 +25,7 @@ namespace game_framework {
 		bool GetCharacter = false;
 		vector<pair<int,int>> theOthersPosition;
 		vector<Character*> characterList;
-		vector<FieldObject*> drop;
+		vector<FieldObject*> drop; /// ©ñ¸m±¼¸¨ª«
 
 		//Player & other
 		//Character *PlayerTest;
