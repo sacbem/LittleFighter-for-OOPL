@@ -117,7 +117,9 @@ namespace game_framework {
 	int Character::GetSkillSignal() {
 		return skillSignal;
 	}
-
+	boolean Character::GetCalculateDamageRequest() {
+		return calculateDamage_Request;
+	}
 	void Character::DistaceAccumulator() {
 		walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
 		
@@ -142,7 +144,9 @@ namespace game_framework {
 			return true;
 		}
 	}
-
+	void Character::SetCalculateDamageRequest(boolean val) {
+		calculateDamage_Request = val;
+	}
 	void Character::isGettingDamage(int Damage) {
 		HealthPoint -= Damage;
 		InnerHealPoint -= Damage / 2;
@@ -402,8 +406,9 @@ namespace game_framework {
 				isWalking = true;
 				direction = 1;
 			}
-			L_finish = clock();
-			leftTime = (L_finish - L_start) / 1000;
+			//L_finish = clock();
+			//leftTime = (L_finish - L_start) / 1000;
+			leftTime++;
 		}
 		if (isMovingRight) {
 			
@@ -413,8 +418,9 @@ namespace game_framework {
 				isWalking = true;
 				direction = 0;
 			}
-			R_finish = clock();
-			rightTime = (R_finish - R_start) / 1000;
+			//R_finish = clock();
+			//rightTime = (R_finish - R_start) / 1000;
+			rightTime++;
 		}
 
 		if (isMovingUp) {
@@ -561,7 +567,6 @@ namespace game_framework {
 			yPos = yPos < yMapBorderMin ? yMapBorderMin : yPos;
 		}
 	}
-
 
 	Character::~Character() {
 

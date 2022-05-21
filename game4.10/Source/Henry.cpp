@@ -15,10 +15,13 @@ namespace game_framework {
 		for (int i = 0; i < 5; i++) {
 			skillsEffect_InFieldNumber.push_back(0);
 		}
-		//frozenWaves.reserve(1);
-		//frozenPunchs.reserve(1);
-		//frozenSwords.reserve(1);
-		//frozenStorms.reserve(1);
+		arrow.reserve(1);
+		airwave.reserve(1);
+		pierceArrow.reserve(1);
+		arrowRain.reserve(1);
+		demonicSong.reserve(1);
+		hittedLog.resize(4);
+		SetCalculateDamageRequest(false);
 	}
 
 	int Henry::HitEnemy(Character* enemy) {
@@ -49,6 +52,114 @@ namespace game_framework {
 	}
 
 	void Henry::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
+		pair<int, int> itr(0, 0);  // first 第幾隻腳色 second 傷害
+		int attackDirection = this->GetDir() ? -1 : 1;
+		//tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2
+		//enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);
+
+		//first+80 >=xPos && fist<=xPos+80
+		//second+80 >=yPos && second<=yPos+80
+
+		for (auto& i : arrow) {
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if (h != this->serialNumber) {
+					if (i->xPos <= theOthersPosition[h].first + 50 && i->xPos + 48 >= theOthersPosition[h].first + 30) {
+						if (i->yPos + 20 <= theOthersPosition[h].second + 60 && i->yPos + 28 >= theOthersPosition[h].second + 20) {
+							if (!i->isHit) {
+								itr.first = h; itr.second = 250;
+								hittedLog[0].push_back(h);
+								hittedTable.push_back(itr);
+								i->isHit = true;
+								this->SetCalculateDamageRequest(true);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		for (auto& i : airwave) {
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if (h != this->serialNumber) {
+					if (!this->direction) {
+						if (i->xPos - 239 <= theOthersPosition[h].first + 50 && i->xPos - 60 >= theOthersPosition[h].first + 30) {
+							if (i->yPos - 30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
+								if (!i->isHit) {
+									itr.first = h; itr.second = 500;
+									hittedTable.push_back(itr);
+									i->isHit = true;
+									this->SetCalculateDamageRequest(true);
+								}
+							}
+						}
+					}
+					else {
+						if (i->xPos + 40 * attackDirection <= theOthersPosition[h].first + 50 && i->xPos + 229 * attackDirection >= theOthersPosition[h].first + 30) {
+							if (i->yPos - 30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
+								if (!i->isHit) {
+									itr.first = h; itr.second = 500;
+									hittedTable.push_back(itr);
+									i->isHit = true;
+									this->SetCalculateDamageRequest(true);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (auto& i : pierceArrow) {  /// issue 不會穿透 需 hittedLog 正常  
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if (h != this->serialNumber) {
+					if(i->xPos <= theOthersPosition[h].first + 50 && i->xPos + 48 >= theOthersPosition[h].first + 30) {
+						if (i->yPos + 20 <= theOthersPosition[h].second + 60 && i->yPos + 28 >= theOthersPosition[h].second + 20) {
+							if (!i->isHit) {
+								itr.first = h; itr.second = 900;
+								hittedTable.push_back(itr);
+								i->isHit = true;
+								this->SetCalculateDamageRequest(true);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		for (auto& i : arrowRain) {
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if (h != this->serialNumber) {
+					if (i->xPos + 4 <= theOthersPosition[h].first + 50 && i->xPos + 78 >= theOthersPosition[h].first + 30) {
+						if (i->yPos + 23 <= theOthersPosition[h].second + 60 && i->yPos + 57 >= theOthersPosition[h].second + 20) {
+							if (!i->isHit) {
+								itr.first = h; itr.second = 500;
+								hittedLog[0].push_back(h);
+								hittedTable.push_back(itr);
+								i->isHit = true;
+								this->SetCalculateDamageRequest(true);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		for (auto& i : demonicSong) {
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if (h != this->serialNumber) {
+					if (i->xPos + 4 <= theOthersPosition[h].first + 50 && i->xPos + 78 >= theOthersPosition[h].first + 30) {
+						if (i->yPos + 23 <= theOthersPosition[h].second + 60 && i->yPos + 57 >= theOthersPosition[h].second + 20) {
+							if (!i->isHit) {
+								itr.first = h; itr.second = 500;
+								hittedLog[0].push_back(h);
+								hittedTable.push_back(itr);
+								i->isHit = true;
+								this->SetCalculateDamageRequest(true);
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	void Henry::SetCharacter() {

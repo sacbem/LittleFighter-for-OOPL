@@ -26,6 +26,7 @@ namespace game_framework {
 		maps = new Map(BC);
 		
 		//GenerationTime = clock();
+
 	}
 
 	void CGameStateRun::OnBeginState()
@@ -38,6 +39,8 @@ namespace game_framework {
 	}
    
 	void CGameStateRun::OnMove()	{					// 移動遊戲元素
+		//boxTest->OnMove();
+
 		CleanCounter++;
 		if (CleanCounter >= 10) {
 			CleanCounter = 0;
@@ -63,9 +66,6 @@ namespace game_framework {
 
 		CalculateDamage(theOthersPosition);
 
-		for (auto i : characterList[0]->hittedTable) {
-			TRACE("hitter table %d %d\n", i.first, i.second);
-		}
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -110,31 +110,37 @@ namespace game_framework {
 				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition);
 			}
 		}
-		for (auto& u : characterList) {
-			for (auto &i : u->hittedTable) { /// issue :可能不會改 !!!
-				if (i.first == 1) {
-					//player1Damage += i.second;
-					TRACE("dama %d\n", i.second);
-					characterList[1]->isGettingDamage(i.second);
-				}
-				else if (i.first == 2) {
-					//player2Damage += i.second;
-					characterList[1]->isGettingDamage(i.second);
+
+		if (characterList[0]->GetCalculateDamageRequest()) {
+			for (auto& u : characterList) {
+				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
+					if (i.first == 1) {
+						characterList[1]->isGettingDamage(i.second);
+					}
+					else if (i.first == 2) {
+						characterList[1]->isGettingDamage(i.second);
+					}
 				}
 			}
+
+			pair<int, int>().swap(characterList[0]->hittedTable[0]);
+			characterList[0]->SetCalculateDamageRequest(false);
 		}
+		
 		//characterList[1]->isGettingDamage(player2Damage);
+		
+		boxTest->OnMove();
 	}
 
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//get character
 		if (GetCharacter == false ){ // && characterList[1]->getCharacter == false) {
-			switch (this->game->selectCharacterID[0])
-			{
+			boxTest = new FieldObject(0);
+			switch (this->game->selectCharacterID[0]){
 			case 0:
 				characterList.push_back(new Woody(0));
-				registSerialNumber=0;
+				registSerialNumber = 0;
 				break;
 			case 1:
 				characterList.push_back(new Freeze(0));
@@ -153,8 +159,7 @@ namespace game_framework {
 			characterList[0]->SetXY(200, 500);
 			characterList[0]->SetCharacter();
 
-			switch (this->game->selectCharacterID[1])
-			{
+			switch (this->game->selectCharacterID[1]) {
 			case 0:
 				characterList.push_back(new Woody(registSerialNumber == 0 ? 0 : 2));
 				break;
@@ -173,8 +178,7 @@ namespace game_framework {
 			
 			//characterList[1]->SetCharacter(buffer[1] - '0');
 			SetAllCharacterPosition();
-			TRACE("Pos f %d\n", theOthersPosition[1].first);
-			TRACE("Pos s %d\n", theOthersPosition[1].second);
+
 
 			GetCharacter = true;
 			//load HealthBar small character
@@ -205,10 +209,12 @@ namespace game_framework {
 	
 		
 		//imgs[0][0]->ShowBitmap();
+		boxTest->ShowAnimation();
 	}
 
 	CGameStateRun::~CGameStateRun(){
 		delete maps, HealthPlayer1, HealthPlayer2;
+		//delete boxTest;
 
 		for (auto& i : characterList) {
 			delete i;

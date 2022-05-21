@@ -23,6 +23,7 @@
     <ClCompile Include="Source\Freeze.cpp" />
     <ClCompile Include="Source\Henry.cpp" />
     <ClCompile Include="Source\Woody.cpp" />
+    <ClCompile Include="Source\FieldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
@@ -46,6 +47,8 @@
     <ClInclude Include="Source\gamelib.h" />
     <ClInclude Include="Source\SkillEffect.h" />
     <ClInclude Include="MapConfiguration.h" />
+    <ClInclude Include="Source\FieldObject.h" />
+    <ClInclude Include="ShowedObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\game.rc" />

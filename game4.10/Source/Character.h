@@ -22,6 +22,7 @@ namespace game_framework {
 		int GetDistance();
 		int GetMovingTime(boolean isLeft);
 		int GetSkillSignal();
+		boolean GetCalculateDamageRequest();
 		void Initialize();
 
 		virtual void SetCharacter() = 0;
@@ -37,6 +38,7 @@ namespace game_framework {
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
 		void SetMapBorder(int mapID);
+		void SetCalculateDamageRequest(boolean val);
 		virtual void SetAttack(bool flag) = 0;
 		virtual void SetKnock(bool flag, int Dir, int AttState)=0;
 		virtual void SetSkill(int createdTimes) =0;
@@ -45,6 +47,7 @@ namespace game_framework {
 		boolean IsInBorder(int mapID);
 		boolean IsStatic();
 		boolean  DistanceAccumulatorReset();
+		
 		virtual int HitEnemy(Character* enemy) = 0;
 		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition) = 0;
 
@@ -75,6 +78,7 @@ namespace game_framework {
 		int rightTime = 0;
 		vector<int>skillsEffect_InFieldNumber; // 統計各技能物件存活數量 index 對應 skill ID
 		vector<pair<int, int>> hittedTable;
+		vector<vector<int>> hittedLog;
 		int KeyBoardInputTime;
 		int CurrentTime;
 		friend class SkillEffect;
@@ -155,7 +159,7 @@ namespace game_framework {
 		
 		//basic information
 		int speed=2;
-		
+		boolean calculateDamage_Request;
 		//hit box
 		//int HitRectangle(int tx1, int ty1, int tx2, int ty2);
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) = 0;

@@ -15,7 +15,9 @@ namespace game_framework {
 		for (int i = 0; i < 5; i++) {
 			skillsEffect_InFieldNumber.push_back(0);
 		}
-		//energyBlast.reserve(1);
+		energyBlast.reserve(1);
+		hittedLog.resize(1);
+		SetCalculateDamageRequest(false);
 	}
 
 	int Woody::HitEnemy(Character* enemy) {
@@ -28,6 +30,25 @@ namespace game_framework {
 	}
 
 	void Woody::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
+		pair<int, int> itr(0, 0);  // first ²Ä´X°¦¸}¦â second ¶Ë®`
+		int attackDirection = this->GetDir() ? -1 : 1;
+		for (auto& i : energyBlast) {
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if (h != this->serialNumber) {
+					if (i->xPos + 4 <= theOthersPosition[h].first + 50 && i->xPos + 78 >= theOthersPosition[h].first + 30) {
+						if (i->yPos + 23 <= theOthersPosition[h].second + 60 && i->yPos + 57 >= theOthersPosition[h].second + 20) {
+							if (!i->isHit) {
+								itr.first = h; itr.second = 250;
+								hittedLog[0].push_back(h);
+								hittedTable.push_back(itr);
+								i->isHit = true;
+								this->SetCalculateDamageRequest(true);
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	int Woody::HitRectangle(int tx1, int ty1, int tx2, int ty2) {
@@ -154,15 +175,9 @@ namespace game_framework {
 	}
 
 	void Woody::ShowAttack() {
-		//TRACE("Attacl %d\n", AttackAccumulator);
-		//TRACE("Count %d\n", AttackCount);
-		//TRACE("Attack %d\n", AttackState);
-		//TRACE("Last Attack %d\n", LastAttackState);
-		//TRACE("Animation %d\n", AnimationState);
-		//TRACE("Hit %d\n", isHitting);
+
 		AttackCount++;
-		switch (AttackState)
-		{
+		switch (AttackState){
 		case 1:
 			if (AttackCount <= 10) {
 				AnimationState = 30;

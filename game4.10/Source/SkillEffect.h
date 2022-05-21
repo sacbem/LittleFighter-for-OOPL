@@ -9,7 +9,9 @@ namespace game_framework {
         ~SkillEffect();
         int createdTime;
         void OnShow();
+        void ShowFinal();
         int xPos, yPos;
+        bool isHit;
     protected:
         int direction;
         int AnimationState;

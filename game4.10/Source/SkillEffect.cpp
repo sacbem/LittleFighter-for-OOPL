@@ -18,6 +18,7 @@ namespace game_framework {
 		AnimationCount[1] = 0;
 		AnimationCount[2] = 0;
 		timeCount = 0;
+		isHit = false;
 		CreatEffectObj();
 
 	}
@@ -249,15 +250,39 @@ namespace game_framework {
 		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
-			effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 6, xPos, yPos);
-			effectObj[0]->OnShow(direction, AnimationCount[0] % 6);
-			AnimationCount[0]++;
-			//SkillsProcess(theOthersPosition, mainTime - createdTime);
-			if (direction == 0) {
-				xPos += 5;
+			if (!isHit) {
+				effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 6, xPos, yPos);
+				effectObj[0]->OnShow(direction, AnimationCount[0] % 6);
+				AnimationCount[0]++;
+				//SkillsProcess(theOthersPosition, mainTime - createdTime);
+				if (direction == 0) {
+					xPos += 5;
+				}
+				else if (direction == 1) {
+					xPos -= 5;
+				}
 			}
-			else if (direction == 1) {
-				xPos -= 5;
+			else if (isHit) {
+				if (AnimationCount[1] <= 4) {
+					effectObj[0]->SetTopLeft(direction, 6, xPos, yPos);
+					effectObj[0]->OnShow(direction, 6);
+				}
+				else if(AnimationCount[1] <= 8) {
+					effectObj[0]->SetTopLeft(direction, 7, xPos, yPos);
+					effectObj[0]->OnShow(direction, 7);
+				}
+				else if (AnimationCount[1] <= 12) {
+					effectObj[0]->SetTopLeft(direction, 8, xPos, yPos);
+					effectObj[0]->OnShow(direction, 8);
+				}
+				else if (AnimationCount[1] <= 16) {
+					effectObj[0]->SetTopLeft(direction, 9, xPos, yPos);
+					effectObj[0]->OnShow(direction, 9);
+				}
+				else if (AnimationCount[1] > 16) {
+					break;
+				}
+				AnimationCount[1]++;
 			}
 			break;
 		case static_cast<int>(skillsIdTable::frozenPunch):
