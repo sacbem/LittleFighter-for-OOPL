@@ -205,6 +205,7 @@ namespace game_framework {
 		void CallfrozenStorms();
 		void CallfrozenSwords();
 		friend class CGameStateRun;
+
 	protected:
 		CMovingBitmap frozenWavesAnimation[2][6];
 		CMovingBitmap frozenPunchsAnimation[2][8];
@@ -215,8 +216,6 @@ namespace game_framework {
 	private:
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
 		vector <SkillEffect*> frozenWaves, frozenPunchs, frozenSwords, frozenStorms;
-
-		vector <int>  frozenWaves_Duration;
 	};
 	
 	class Henry :public Character {

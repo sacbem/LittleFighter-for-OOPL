@@ -8,6 +8,7 @@
 #include "CGameStateRun.h"
 #include <fstream>
 #include <string>
+#include <algorithm>
 using namespace std;
 #define  _CRTDBG_MAP_ALLOC
 #include  < stdlib.h >
@@ -24,7 +25,7 @@ namespace game_framework {
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
 		maps = new Map(BC);
-		
+		drop.resize(0);
 		//GenerationTime = clock();
 
 	}
@@ -131,7 +132,43 @@ namespace game_framework {
 		
 		boxTest->OnMove();
 	}
+	boolean CompareC(Character* obj1, Character* obj2) {
+		return obj1->GetY1() < obj1->GetY1();
+	}
+	boolean CompareF(FieldObject* obj1, FieldObject* obj2) {
+		return obj1->GetY() < obj1->GetY();
+	}
+	void CGameStateRun::SortedShow() {
+		vector<FieldObject *> dropCopy;
+		vector<Character*> characterListCopy;
+		pair <int, int> showSequence(0,0);
+		boolean dropEmpty = drop.empty() , characterEmpty = characterList.empty();
+		int totalSize = drop.size() + characterList.size();
 
+		if (! dropEmpty ) {
+			dropCopy.assign(drop.begin(), drop.end());
+			std::sort(dropCopy.begin(), dropCopy.end(), CompareF);
+		}
+		if (!characterEmpty) {
+			characterListCopy.assign(characterList.begin(), characterList.end());
+			std::sort(characterListCopy.begin(), characterListCopy.end(),CompareC);
+		}
+
+		for (int i = 0; i < totalSize ; i++) {
+			if (dropEmpty) {
+				characterList[showSequence.second]->OnShow(theOthersPosition, CurrentTime);
+				showSequence.second += 1;
+			}
+			else if (dropCopy[showSequence.first]->GetY() > characterListCopy[showSequence.second]->GetY1()) {
+				characterList[showSequence.second]->OnShow(theOthersPosition, CurrentTime);
+				showSequence.second += 1;
+			}
+			else {
+				dropCopy[showSequence.first]->ShowAnimation();
+				showSequence.first += 1;
+			}
+		}
+	}
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//get character
@@ -202,8 +239,9 @@ namespace game_framework {
 		//TRACE("MapAniCount %d\n", MapAniCount);
 		//showStatus = MapAniCount % 2 == 0 ? true : false;
 		maps->PrintMap(showStatus);
-		characterList[0]->OnShow(theOthersPosition, CurrentTime);
-		characterList[1]->OnShow(theOthersPosition, CurrentTime);
+
+		SortedShow();
+
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 	

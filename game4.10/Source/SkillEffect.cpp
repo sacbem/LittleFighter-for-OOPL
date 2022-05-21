@@ -412,7 +412,6 @@ namespace game_framework {
 				AnimationCount[1]++;
 			}
 			AnimationCount[0]++;
-			//SkillsProcess(theOthersPosition, mainTime - createdTime);
 			if (direction == 0) {
 				xPos += 5;
 			}
@@ -454,7 +453,6 @@ namespace game_framework {
 		default:
 			break;
 		}
-
 	}
 	SkillEffect::~SkillEffect() {
 		for (auto& i : effectObj) {

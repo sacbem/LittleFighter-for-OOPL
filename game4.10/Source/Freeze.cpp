@@ -1224,7 +1224,7 @@ namespace game_framework {
 		}
 	}
 	void Freeze::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
-		pair<int, int> itr(0, 0);  // first �ĴX���}�� second �ˮ`
+		pair<int, int> itr(0, 0);  // first : characterID second :damage
 		int attackDirection = this->GetDir() ? -1 : 1;
 		//tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2
 		//enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);

@@ -15,6 +15,7 @@ namespace game_framework {
 		void OnMove();
 		void ShowAnimation();
 		void ShowRoll();
+		int GetY();
 		int Hp;
 		~FieldObject();
 	protected:

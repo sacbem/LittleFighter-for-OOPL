@@ -76,7 +76,9 @@ namespace game_framework {
 			}
 		}
 	}
-
+	int FieldObject::GetY() {
+		return yPos;
+	}
 	void FieldObject::ShowRoll() {
 		if (AnimationCount <= 4) {
 			AnimationState = 1;
