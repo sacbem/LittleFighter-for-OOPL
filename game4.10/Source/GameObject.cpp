@@ -45,7 +45,9 @@ namespace game_framework {
     }
     
     void  GameObject::Load(int imgID,char* path, COLORREF color) {
+        //TRACE("imgID %d\n", imgID);
         imgs[imgID].push_back(new CMovingBitmap());
+        //TRACE("size %d\n", imgs[imgID].size());
         Pos_imgs[imgID].push_back(pair<int, int>(0, 0));
         imgs[imgID][imgs[imgID].size()-1]->LoadBitmap(path, color);
     }

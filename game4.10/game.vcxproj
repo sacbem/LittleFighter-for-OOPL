@@ -243,6 +243,7 @@
     <ClCompile Include="Source\CGameStateRun.cpp" />
     <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\CharacterAnimation.cpp" />
+    <ClCompile Include="Source\FieldObject.cpp" />
     <ClCompile Include="Source\Freeze.cpp" />
     <ClCompile Include="Source\game.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -297,6 +298,7 @@
     <ClInclude Include="Source\CGameStateRun.h" />
     <ClInclude Include="Source\Character.h" />
     <ClInclude Include="Source\CharacterAnimation.h" />
+    <ClInclude Include="Source\FieldObject.h" />
     <ClInclude Include="Source\game.h" />
     <ClInclude Include="Source\gameDoc.h" />
     <ClInclude Include="Source\GameObject.h" />

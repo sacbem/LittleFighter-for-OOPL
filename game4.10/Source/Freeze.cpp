@@ -1238,6 +1238,7 @@ namespace game_framework {
 	void Freeze::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
 		pair<int, int> itr(0, 0);  // first ²Ä´X°¦¸}¦â second ¶Ë®`
 		//tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2
+		//enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);
 		
 		//first+80 >=xPos && fist<=xPos+80
 		//second+80 >=yPos && second<=yPos+80
@@ -1245,11 +1246,12 @@ namespace game_framework {
 		for (auto& i : frozenWaves) {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
 				if (h != this->serialNumber) {
-					if (i->xPos <= theOthersPosition[h].first+80 && i->xPos+80 >= theOthersPosition[h].first) {
-						if (i->yPos <= theOthersPosition[h].second+80 && i->yPos+80 >= theOthersPosition[h].second) {
-							TRACE("itr %d\n", itr.first);
-							itr.first = h; itr.second = 300;
+					if (i->xPos+4 <= theOthersPosition[h].first+50 && i->xPos+78 >= theOthersPosition[h].first+20) {
+						if (i->yPos+23 <= theOthersPosition[h].second+60 && i->yPos+57 >= theOthersPosition[h].second+20) {
+							TRACE("Pos %d %d\n", theOthersPosition[h].first, theOthersPosition[h].second);
+							itr.first = h; itr.second = 1;
 							hittedTable.push_back(itr);
+							i->isHit = true;
 						}
 					}
 				}

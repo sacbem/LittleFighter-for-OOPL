@@ -400,8 +400,9 @@ namespace game_framework {
 				isWalking = true;
 				direction = 1;
 			}
-			L_finish = clock();
-			leftTime = (L_finish - L_start) / 1000;
+			//L_finish = clock();
+			//leftTime = (L_finish - L_start) / 1000;
+			leftTime++;
 		}
 		if (isMovingRight) {
 			
@@ -411,8 +412,9 @@ namespace game_framework {
 				isWalking = true;
 				direction = 0;
 			}
-			R_finish = clock();
-			rightTime = (R_finish - R_start) / 1000;
+			//R_finish = clock();
+			//rightTime = (R_finish - R_start) / 1000;
+			rightTime++;
 		}
 
 		if (isMovingUp) {
@@ -555,7 +557,6 @@ namespace game_framework {
 			yPos = yPos < yMapBorderMin ? yMapBorderMin : yPos;
 		}
 	}
-
 
 	Character::~Character() {
 

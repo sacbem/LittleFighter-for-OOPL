@@ -26,6 +26,7 @@ namespace game_framework {
 		maps = new Map(BC);
 		
 		//GenerationTime = clock();
+
 	}
 
 	void CGameStateRun::OnBeginState()
@@ -38,6 +39,8 @@ namespace game_framework {
 	}
    
 	void CGameStateRun::OnMove()	{					// 移動遊戲元素
+		//boxTest->OnMove();
+
 		CleanCounter++;
 		if (CleanCounter >= 10) {
 			CleanCounter = 0;
@@ -124,12 +127,15 @@ namespace game_framework {
 			}
 		}
 		//characterList[1]->isGettingDamage(player2Damage);
+		boxTest->OnMove();
 	}
 
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//get character
 		if (GetCharacter == false ){ // && characterList[1]->getCharacter == false) {
+			boxTest = new FieldObject(0);
+
 			switch (this->game->selectCharacterID[0])
 			{
 			case 0:
@@ -205,10 +211,12 @@ namespace game_framework {
 	
 		
 		//imgs[0][0]->ShowBitmap();
+		boxTest->ShowAnimation();
 	}
 
 	CGameStateRun::~CGameStateRun(){
 		delete maps, HealthPlayer1, HealthPlayer2;
+		//delete boxTest;
 
 		for (auto& i : characterList) {
 			delete i;

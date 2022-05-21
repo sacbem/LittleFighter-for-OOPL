@@ -3,6 +3,7 @@
 #include "HealthBar.h"
 #include "Map.h"
 #include <ctime>
+#include "FieldObject.h"
 namespace game_framework {
 	class CGameStateRun : public CGameState {
 	public:
@@ -27,6 +28,7 @@ namespace game_framework {
 		//Player & other
 		//Character *PlayerTest;
 		//Character *EnemyTest;
+		FieldObject* boxTest;
 		Map* maps;
 		HealthBar* HealthPlayer1;
 		HealthBar* HealthPlayer2;

@@ -1,5 +1,4 @@
 #pragma once
-
 namespace game_framework {
 	class GameObject {
 		//friend  void  SetPosition_Scenes(Map &map,int x, int y);;
@@ -29,4 +28,5 @@ namespace game_framework {
 		vector<vector<CMovingBitmap*>> imgs;
 		vector<vector<pair<int, int>>> Pos_imgs;
 	};
+
 }
