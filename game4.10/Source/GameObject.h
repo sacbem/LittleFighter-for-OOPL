@@ -12,7 +12,7 @@ namespace game_framework {
 		void Load(int imgID,char*, COLORREF = CLR_INVALID);
 		void SetTopLeft(int x, int y);
 		void SetTopLeft(int id_x, int id_y,int x, int y);
-		void SetTopLeftSpical(int x, int y);
+		void SetTopLeftSpical(int x, int y,int mapID);
 		string GetClassification();
 		int GetPositionXY(const string type);
 		int GetPositionXY(int id_x, int id_y,const string type);

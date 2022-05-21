@@ -37,8 +37,7 @@ namespace game_framework {
 		time_t GenerationTime;
 		time_t CurrentTime;
 		int TimePassed;
-		int MapAniCount=0;
-
+		int MapAniCount = 0;
 		int registSerialNumber;
 
 	};

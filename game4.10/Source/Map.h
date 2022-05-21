@@ -56,7 +56,7 @@ namespace mapConfiguration {
 	constexpr int forestSky_dx = MapWidth_Forest / 800 * 0.75;
 	constexpr int forestMountain_dx1 = MapWidth_Forest / 1100 * 0.75;
 	constexpr int forestMountain_dx2 = MapWidth_Forest / 1400 * 0.75;
-	constexpr int forestTree_dx = 1.5 * MapWidth_Forest / 2900 * 0.75;
+	constexpr int forestTree_dx = 8 * MapWidth_Forest / 2900 * 0.75;
 	constexpr int forestLand_dx1 = MapWidth_Forest / 2950 * 0.75;
 	constexpr int forestLand_dx2 = MapWidth_Forest / 3070 * 0.75;
 	constexpr int forestLand_dx3 = MapWidth_Forest / 3200 * 0.75;
