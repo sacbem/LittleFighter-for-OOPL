@@ -15,7 +15,8 @@ namespace game_framework {
 		for (int i = 0; i < 5; i++) {
 			skillsEffect_InFieldNumber.push_back(0);
 		}
-		//energyBlast.reserve(1);
+		energyBlast.reserve(1);
+		energyBlast2.reserve(1);
 	}
 
 	int Woody::HitEnemy(Character* enemy) {
@@ -640,10 +641,14 @@ namespace game_framework {
 
 	void Woody::SetSkill(int createdTimes) {
 		auto energyBlast_Begin = energyBlast.begin();
+		auto energyBlast2_Begin = energyBlast2.begin();
 		//TRACE("Signal %d\n", this->GetSkillSignal());
 		if (this->GetSkillSignal() == 0) {
 			energyBlast.insert(energyBlast_Begin, new SkillEffect(6, createdTimes, direction, xPos, yPos));
 			skillsEffect_InFieldNumber[0] = energyBlast.size();
+
+			energyBlast2.insert(energyBlast2_Begin, new SkillEffect(12, createdTimes, direction, xPos, yPos));
+			skillsEffect_InFieldNumber[0] = energyBlast2.size();
 		}
 	}
 
@@ -1548,6 +1553,8 @@ namespace game_framework {
 		for (auto& i : energyBlast) {
 			i->OnShow();
 		}
-		
+		for (auto& i : energyBlast2) {
+			i->OnShow();
+		}
 	}
 }

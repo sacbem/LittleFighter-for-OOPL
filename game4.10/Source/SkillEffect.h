@@ -11,6 +11,7 @@ namespace game_framework {
         void OnShow();
         void ShowFinal();
         int xPos, yPos;
+        int yTemp;
         bool isHit;
     protected:
         int direction;
@@ -24,7 +25,7 @@ namespace game_framework {
         void CreatEffectObj();
 
         enum class skillsIdTable {
-            frozenWave, frozenPunch, frozenSword, frozenStorm, normalArrow, pierceArrow, EnergyBlast
+            frozenWave, frozenPunch, frozenSword, frozenStorm, normalArrow, pierceArrow, EnergyBlast, airWave, demonicSong, downArrow, upArrow, downArrow2, EnergyBlast2
         };
     };
 

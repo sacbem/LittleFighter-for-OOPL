@@ -173,6 +173,10 @@ namespace game_framework {
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition ,int mainTime) override;
 		virtual void OnMove() override;
 
+		//for frozenPunch
+		void ShowFrozenPunch();
+		vector <SkillEffect*> frozenPunchs;
+
 		virtual void SetAttack(bool flag) override;
 		virtual void ShowAttack() override;
 		virtual void SetCharacter() override;
@@ -210,7 +214,7 @@ namespace game_framework {
 
 	private:
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
-		vector <SkillEffect*> frozenWaves, frozenPunchs, frozenSwords, frozenStorms;
+		vector <SkillEffect*> frozenWaves, frozenSwords, frozenStorms;
 
 		vector <int>  frozenWaves_Duration;
 	};
@@ -258,7 +262,7 @@ namespace game_framework {
 
 	private:
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
-		vector <SkillEffect*> arrow, airwave, pierceArrow, arrowRain, demonicSong;
+		vector <SkillEffect*> arrow, airwave, pierceArrow, arrowRain, demonicSong, downArrow, upArrow, downArrow2;
 		vector <int>  frozenWaves_Duration;
 	};
 	
@@ -308,7 +312,7 @@ namespace game_framework {
 
 	private:
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
-		vector <SkillEffect*> energyBlast;
+		vector <SkillEffect*> energyBlast, energyBlast2;
 		vector <int>  frozenWaves_Duration;
 	};
 }

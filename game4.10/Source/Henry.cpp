@@ -15,6 +15,13 @@ namespace game_framework {
 		for (int i = 0; i < 5; i++) {
 			skillsEffect_InFieldNumber.push_back(0);
 		}
+		arrow.reserve(1);
+		downArrow.reserve(1);
+		downArrow2.reserve(1);
+		upArrow.reserve(1);
+		airwave.reserve(1);
+		pierceArrow.reserve(1);
+		demonicSong.reserve(1);
 		//frozenWaves.reserve(1);
 		//frozenPunchs.reserve(1);
 		//frozenSwords.reserve(1);
@@ -110,6 +117,12 @@ namespace game_framework {
 				else if (isJumpping) {
 					LastAttackState = AttackState;
 					AttackState = 5;
+					auto downArrow_Begin = downArrow.begin();
+					if (this->AttackState == 5) {
+						TRACE("DOWN ARROW\n");
+						downArrow.insert(downArrow_Begin, new SkillEffect(9, CurrentTime, direction, xPos-10, yPos-10));
+						skillsEffect_InFieldNumber[0] = downArrow.size();
+					}
 				}
 				else {
 					if (!isHitting) {
@@ -504,31 +517,87 @@ namespace game_framework {
 	}
 
 	void Henry::SetSkill(int createdTimes) {
-		
+		auto downArrow_Begin = downArrow.begin();
+		auto downArrow2_Begin = downArrow2.begin();
+		auto arrow_Begin = arrow.begin();
+		auto upArrow_Begin = upArrow.begin();
+
 		auto pierceArrow_Begin = pierceArrow.begin();
+		auto airwave_Begin = airwave.begin();
+		auto demonicSong_Begin = demonicSong.begin();
 		//TRACE("Signal %d\n", this->GetSkillSignal());
 		if (this->GetSkillSignal() == 1) {
 			pierceArrow.insert(pierceArrow_Begin, new SkillEffect(5, createdTimes, direction, xPos, yPos+20));
 			skillsEffect_InFieldNumber[1] = pierceArrow.size();
 		}
+		else if (this->GetSkillSignal() == 0) {
+			airwave.insert(airwave_Begin, new SkillEffect(7, createdTimes, direction, xPos, yPos + 20));
+			skillsEffect_InFieldNumber[1] = airwave.size();
+		}
+		else if (this->GetSkillSignal() == 2) {
+			//call three type of Arrow
+			upArrow.insert(upArrow_Begin, new SkillEffect(10, createdTimes, direction, xPos-10, yPos + 20));
+			skillsEffect_InFieldNumber[1] = upArrow.size();
+
+			arrow.insert(arrow_Begin, new SkillEffect(4, createdTimes, direction, xPos-10, yPos + 20));
+			skillsEffect_InFieldNumber[1] = arrow.size();
+
+			downArrow2.insert(downArrow2_Begin, new SkillEffect(11, createdTimes, direction, xPos - 10, yPos + 20));
+			skillsEffect_InFieldNumber[0] = downArrow2.size();
+		}
+		else if (this->GetSkillSignal() == 3) {
+			demonicSong.insert(demonicSong_Begin, new SkillEffect(8, createdTimes, direction, xPos, yPos));
+			skillsEffect_InFieldNumber[1] = demonicSong.size();
+		}
 	}
 
 	void Henry::EffectObjectAliveManager(int mainTime) {
 		const int arrow_AliveTime = 10000;
+		const int downArrow_AliveTime = 10000;
 		const int pierceArrow_AliveTime = 10000;
+		const int airwave_AliveTime = 10000;
+		const int demonicSong_AliveTime = 6000;
 		for (auto& i : arrow) {
 			if (mainTime - i->createdTime >= arrow_AliveTime) {
 				delete i;
 				arrow.pop_back();
 			}
 		}
+		for (auto& i : downArrow) {
+			if (mainTime - i->createdTime >= arrow_AliveTime) {
+				delete i;
+				downArrow.pop_back();
+			}
+		}
+		for (auto& i : downArrow2) {
+			if (mainTime - i->createdTime >= arrow_AliveTime) {
+				delete i;
+				downArrow2.pop_back();
+			}
+		}
+		for (auto& i : upArrow) {
+			if (mainTime - i->createdTime >= arrow_AliveTime) {
+				delete i;
+				upArrow.pop_back();
+			}
+		}
 		for (auto& i : pierceArrow) {
-			TRACE("Time m %d\n", mainTime);
-			TRACE("Time c %d\n", i->createdTime);
-			TRACE("Time %d\n", mainTime - i->createdTime);
 			if (mainTime - i->createdTime >= pierceArrow_AliveTime) {
 				delete i;
 				pierceArrow.pop_back();
+			}
+		}
+		for (auto& i : airwave) {
+			if (mainTime - i->createdTime >= airwave_AliveTime) {
+				delete i;
+				airwave.pop_back();
+			}
+		}
+		for (auto& i : demonicSong) {
+			TRACE("Time m %d\n", mainTime);
+			if (mainTime - i->createdTime >= demonicSong_AliveTime) {
+				delete i;
+				demonicSong.pop_back();
 			}
 		}
 	}
@@ -1079,30 +1148,30 @@ namespace game_framework {
 
 	void Henry::CallarrowRain() {
 		SpCount++;
-		if (SpCount <= 10) {
+		if (SpCount <= 5) {
 			AnimationState = 220;
 		}
-		else if (SpCount <= 20) {
+		else if (SpCount <= 10) {
 			AnimationState = 221;
 		}
-		else if (SpCount <= 30) {
+		else if (SpCount <= 15) {
 			AnimationState = 222;
 		}
-		else if (SpCount <= 40) {
+		else if (SpCount <= 20) {
 			AnimationState = 223;
 		}
-		else if (SpCount <= 50) {
+		else if (SpCount <= 25) {
 			AnimationState = 224;
 		}
-		else if (SpCount <= 60) {
+		else if (SpCount <= 30) {
 			AnimationState = 225;
 		}
-		else if (SpCount <= 70) {
+		else if (SpCount <= 35) {
 			AnimationState = 226;
 		}
-		else if (SpCount <= 80) {
+		else if (SpCount <= 40) {
 			AnimationState = 227;
-			if (SpCount >= 80) {
+			if (SpCount >= 40) {
 				SpCount = 0;
 				skillSignal = -1;
 			}
@@ -1155,7 +1224,22 @@ namespace game_framework {
 		for (auto& i : arrow) {
 			i->OnShow();
 		}
+		for (auto& i : downArrow) {
+			i->OnShow();
+		}
+		for (auto& i : downArrow2) {
+			i->OnShow();
+		}
+		for (auto& i : upArrow) {
+			i->OnShow();
+		}
 		for (auto& i : pierceArrow) {
+			i->OnShow();
+		}
+		for (auto& i : airwave) {
+			i->OnShow();
+		}
+		for (auto& i : demonicSong) {
 			i->OnShow();
 		}
 	}

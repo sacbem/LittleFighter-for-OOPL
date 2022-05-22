@@ -709,6 +709,19 @@ namespace game_framework {
 		KeyBoardInputTime++;
 	}
 
+	bool mycompare(SkillEffect* s1, SkillEffect* s2) {
+		return s1->yPos < s2->yPos;
+	}
+
+	void Freeze::ShowFrozenPunch() {
+		vector<SkillEffect*>  frozenPunchsSorted;
+		frozenPunchsSorted = frozenPunchs;
+		std::sort(frozenPunchsSorted.begin(), frozenPunchsSorted.end(), mycompare);
+		for (auto& i : frozenPunchsSorted) {
+			i->OnShow();
+		}
+	}
+
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
 		//TRACE("isLeft %d\n", isMovingLeft);
 		//TRACE("isRightt %d\n",isMovingRight);
@@ -1050,6 +1063,7 @@ namespace game_framework {
 		//Special Attack Animation
 		EffectObjectAliveManager(mainTime);
 		ShowSpecialAttack();
+		ShowFrozenPunch();
 	}
 
 	void Freeze::CallfrozenWaves() {
@@ -1200,38 +1214,11 @@ namespace game_framework {
 		}
 	}
 
-	bool mycompare(SkillEffect* s1, SkillEffect* s2) {
-		return s1->yPos < s2->yPos;
-	}
-
 	void Freeze::ShowSpecialAttack() {
-		vector<SkillEffect*>  frozenWavesSorted, frozenPunchsSorted, frozenSwordsSorted, frozenStormsSorted;
-		frozenWavesSorted = frozenWaves;
-		frozenPunchsSorted = frozenPunchs;
-		frozenStormsSorted = frozenStorms;
-
-		std::sort(frozenWavesSorted.begin(), frozenWavesSorted.end(), mycompare);
-		std::sort(frozenPunchsSorted.begin(), frozenPunchsSorted.end(), mycompare);
-		std::sort(frozenStormsSorted.begin(), frozenStormsSorted.end(), mycompare);
-		/*
-		for (int i = frozenWavesSorted.size()-1; i >= 0; i--) {
-			frozenWavesSorted[i]->OnShow();
-		}
-		for (int i = frozenPunchsSorted.size()-1; i >= 0; i--) {
-			TRACE("Y %d\n", frozenPunchs[i]->yPos);
-			frozenPunchsSorted[i]->OnShow();
-		}
-		for (int i = frozenStormsSorted.size()-1; i >= 0; i--) {
-			frozenStormsSorted[i]->OnShow();
-		}
-		*/
-		for (auto& i : frozenWavesSorted) {
+		for (auto& i : frozenWaves) {
 			i->OnShow();
 		}
-		for (auto& i : frozenPunchsSorted) {
-			i->OnShow();
-		}
-		for (auto& i : frozenStormsSorted) {
+		for (auto& i : frozenStorms) {
 			i->OnShow();
 		}
 	}
@@ -1239,19 +1226,20 @@ namespace game_framework {
 		pair<int, int> itr(0, 0);  // first ²Ä´X°¦¸}¦â second ¶Ë®`
 		//tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2
 		//enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);
-		
+
 		//first+80 >=xPos && fist<=xPos+80
 		//second+80 >=yPos && second<=yPos+80
 
 		for (auto& i : frozenWaves) {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
 				if (h != this->serialNumber) {
-					if (i->xPos+4 <= theOthersPosition[h].first+50 && i->xPos+78 >= theOthersPosition[h].first+20) {
-						if (i->yPos+23 <= theOthersPosition[h].second+60 && i->yPos+57 >= theOthersPosition[h].second+20) {
-							TRACE("Pos %d %d\n", theOthersPosition[h].first, theOthersPosition[h].second);
-							itr.first = h; itr.second = 1;
-							hittedTable.push_back(itr);
-							i->isHit = true;
+					if (i->xPos + 4 <= theOthersPosition[h].first + 50 && i->xPos + 78 >= theOthersPosition[h].first + 30) {
+						if (i->yPos + 23 <= theOthersPosition[h].second + 60 && i->yPos + 57 >= theOthersPosition[h].second + 20) {
+								TRACE("Pos %d %d\n", theOthersPosition[h].first, theOthersPosition[h].second);
+								itr.first = h; itr.second = 1;
+								hittedTable.push_back(itr);
+								i->isHit = true;
+								//TRACE("pp %d %d\n", i->xPos, i->yPos);
 						}
 					}
 				}
@@ -1260,8 +1248,8 @@ namespace game_framework {
 
 		for (auto& i : frozenPunchs) {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
-				if (i->xPos > theOthersPosition[h].first && i->xPos < theOthersPosition[h].first + 209) {
-					if (i->yPos == theOthersPosition[h].second + 79) {
+				if (i->xPos + 40 <= theOthersPosition[h].first + 50 && i->xPos + 229 >= theOthersPosition[h].first + 30) {
+					if (i->yPos-30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
 						itr.first = h; itr.second = -500;
 						hittedTable.push_back(itr);
 					}
@@ -1271,10 +1259,17 @@ namespace game_framework {
 
 		for (auto& i : frozenStorms) {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
-				if ((i->xPos + 40) - 80 > theOthersPosition[h].first && (i->xPos + 40) + 80 < theOthersPosition[h].first) {
-					if ((i->yPos + 90) + 79 == theOthersPosition[h].second) {
-						itr.first = h; itr.second = -900;
-						hittedTable.push_back(itr);
+				if (h != this->serialNumber) {
+					if (i->xPos - 35 <= theOthersPosition[h].first + 50 && i->xPos + 124 >= theOthersPosition[h].first + 30) {
+						if (i->yPos - 70 <= theOthersPosition[h].second + 60 && i->yPos + 89 >= theOthersPosition[h].second + 20) {
+							if (!i->isHit) {
+								//TRACE("Pos %d %d\n", theOthersPosition[h].first, theOthersPosition[h].second);
+								itr.first = h; itr.second = 1;
+								hittedTable.push_back(itr);
+								//i->isHit = true;
+								//TRACE("pp %d %d\n", i->xPos, i->yPos);
+							}
+						}
 					}
 				}
 			}

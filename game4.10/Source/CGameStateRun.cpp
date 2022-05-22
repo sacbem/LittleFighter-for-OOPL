@@ -67,7 +67,7 @@ namespace game_framework {
 		CalculateDamage(theOthersPosition);
 
 		for (auto i : characterList[0]->hittedTable) {
-			TRACE("hitter table %d %d\n", i.first, i.second);
+			//TRACE("hitter table %d %d\n", i.first, i.second);
 		}
 	}
 
@@ -113,16 +113,17 @@ namespace game_framework {
 				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition);
 			}
 		}
+
 		for (auto& u : characterList) {
 			for (auto &i : u->hittedTable) { /// issue :可能不會改 !!!
 				if (i.first == 1) {
 					//player1Damage += i.second;
-					TRACE("dama %d\n", i.second);
+					//TRACE("dama %d\n", i.second);
 					characterList[1]->isGettingDamage(i.second);
 				}
 				else if (i.first == 2) {
 					//player2Damage += i.second;
-					characterList[1]->isGettingDamage(i.second);
+					characterList[0]->isGettingDamage(i.second);
 				}
 			}
 		}

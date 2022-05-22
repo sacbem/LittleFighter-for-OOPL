@@ -49,7 +49,6 @@ namespace game_framework {
 		xPos = spawnX;
 		yPos = -80;
 		
-		
 		Obj->SetTopLeft(direction, 0, spawnX, -80);
 
 		//set velocity
@@ -74,6 +73,9 @@ namespace game_framework {
 				Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
 				YVelocity = InitialVelocity;
 			}
+		}
+		else if (state==2 || state==3) {
+			ShowRoll();
 		}
 	}
 
@@ -104,6 +106,15 @@ namespace game_framework {
 		else if (direction == 1) {
 			xPos -= 1;
 			Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
+		}
+	}
+
+	void FieldObject::Throw(bool flag) {
+		if (true) {
+			state = 3;
+		}
+		else {
+			state = 0;
 		}
 	}
 
