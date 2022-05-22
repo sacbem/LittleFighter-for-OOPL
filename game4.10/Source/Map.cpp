@@ -16,13 +16,11 @@ namespace game_framework {
 			characterInBorder.push_back(false);
 		}
 		map.reserve(30);
-		InitializeAllObjs(mapID);
 		mapId = mapID;
-
+		InitializeAllObjs();
 		cameraEnable = mapId == HKC ? false : true;
-	
 	}
-	void Map::InitializeAllObjs(int mapID) {
+	void Map::InitializeAllObjs() {
 		
 		rubberMode = 0;
 		gameScencePos.first = 0;
@@ -33,7 +31,7 @@ namespace game_framework {
 				i.push_back(0);
 			}
 		}
-		switch (mapID) {
+		switch (mapId) {
 		case Forest:
 
 			for (int floorNum = 0; floorNum < 3; floorNum++) {
@@ -185,6 +183,9 @@ namespace game_framework {
 		}
 
 	}
+	int Map::GetMapID() {
+		return mapId;
+	}
 	void Map::StopDynamic(boolean isLeft, int distance) {
 
 		if (cameraEnable) {
@@ -289,78 +290,6 @@ namespace game_framework {
 		}
 	}
 	
-	//void Map::DynamicScence(boolean IsLeft,int walkedDistance) {
-	//	StopDynamic(IsLeft, walkedDistance);
-	//	int direction = IsLeft ? 1 : -1; // ���k : 1 ���� : -1 
-	//	if (cameraEnable) {
-	//		if (mapBordary[0]) {
-	//			if (walkedDistance > forestSky_dx) {
-	//				for (auto& i : backgroundSkyObjs) {
-	//					i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
-	//				}
-	//			}
-	//		}
-	//		if (mapBordary[1]) {
-	//			switch (mapId) {
-	//			case Forest:
-	//				if (walkedDistance > forestTree_dx) {
-	//					for (auto& i : backgroundFrontObjs) {
-	//						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
-	//					}
-	//				}
-	//				break;
-	//			case BC:
-	//				if (walkedDistance > bcBackScence_dx) {
-	//					for (auto& i : backgroundFrontObjs) {
-	//						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
-	//					}
-	//				}
-	//				break;
-	//			default:
-	//				break;
-	//			}
-	//		}
-	//		if (mapBordary[2]) {
-	//			switch (mapId){
-	//			case Forest:
-	//				if (walkedDistance > forestTree_dx) {
-	//					for (auto& i : floorObjs) {
-	//						i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
-	//					}
-	//				}
-	//				break;
-	//			case BC:
-	//				if (walkedDistance > bcLand_dx) {
-	//					if (walkedDistance > bcLand_dx) {
-	//						floorObjs[0]->SetTopLeft(floorObjs[0]->GetPositionXY("X") + 1 * direction, floorObjs[0]->GetPositionXY("Y"));
-	//					}
-	//				}
-	//				break;
-	//			default:
-	//				break;
-	//			}
-	//		}
-	//		if (mapBordary[3]) {
-	//			switch (mapId){
-	//			case Forest:
-	//				if (walkedDistance > forestMountain_dx2) {
-	//						backgroundBackObjs[0]->SetTopLeftSpical(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
-	//				}
-	//			break;
-	//			case  BC:
-	//				if (walkedDistance > forestMountain_dx2) {
-	//					for (int i = 0; i < 3; i++) {
-	//						backgroundBackObjs[0]->SetTopLeftSpical(backgroundBackObjs[0]->GetPositionXY("X") + 1 * direction, backgroundBackObjs[0]->GetPositionXY("Y"));
-	//					}
-	//				}
-	//				break;
-	//			default:
-	//				break;
-	//			}
-	//		}
-	//	}
-	//}
-
 	void Map::ScenesCamera(boolean mapMove, boolean IsRunning, boolean IsLeft, int walkedDistance) {
 		int direction = IsLeft  ?  1 : -1; 
 		

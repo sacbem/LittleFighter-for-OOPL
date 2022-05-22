@@ -34,6 +34,8 @@ namespace game_framework {
 
 		startBtn->Load();
 		settingBtn->Load();
+		CAudio::Instance()->Load(0, "bgm\\main.wav");	// 載入編號0的聲音ding.wav
+	
 		countDown.AddBitmap(BITMAP_COUNTDOWN_BACK, RGB(0, 0, 0));
 		for (int i = 4; i >=0 ; i--) {
 			countDown.AddBitmap( BITMAP_COUNTDOWN_5- i , RGB(0, 0, 0));
@@ -45,7 +47,7 @@ namespace game_framework {
 		logo.LoadBitmap(IDB_BITMAP3);
 		selectCharacterMenu->Load(BITMAP_SELECTMENU);
 		photoSticker_seclecter->Load(picStickers,picIDs,picNames);
-
+		CAudio::Instance()->Play(0, true);
 		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		/*
 		 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
@@ -60,6 +62,7 @@ namespace game_framework {
 		for (int i = 0; i < 3;i++) {
 			characterID[i] = 0;
 		}
+		
 	}
 	void CGameStateInit::ScreenClear() {
 		black.SetTopLeft(0, 0);   //清除畫面用
@@ -214,7 +217,7 @@ namespace game_framework {
 	void CGameStateInit::OnShow() {
 		  logo.SetTopLeft(0, 0);
 		  logo.ShowBitmap();
-
+		  
 		  //test
 		  //GotoGameState(GAME_STATE_RUN);
 
@@ -256,7 +259,7 @@ namespace game_framework {
 				  if (countDown.IsFinalBitmap()){
 					  this->game->selectCharacterID[0] = characterID[0];
 					  this->game->selectCharacterID[1] = characterID[1];
-
+					  CAudio::Instance()->Stop(0);
 					  GotoGameState(GAME_STATE_RUN);
 				  }
 			  }

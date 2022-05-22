@@ -1211,6 +1211,7 @@ namespace game_framework {
 			i->OnShow();
 		}
 	}
+	
 	void Freeze::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
 		pair<int, int> itr(0, 0);  // first : characterID second :damage
 		int attackDirection = this->GetDir() ? -1 : 1;

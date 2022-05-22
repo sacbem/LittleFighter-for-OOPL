@@ -81,6 +81,22 @@ namespace game_framework {
 
 		HealthPlayer1->OnLoad(0, 0);
 		HealthPlayer2->OnLoad(400, 0);
+		switch (maps->GetMapID()){
+		case Forest:
+			CAudio::Instance()->Load(Forest, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
+			CAudio::Instance()->Play(Forest, true);
+			break;
+		case HKC:
+			CAudio::Instance()->Load(HKC, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
+			CAudio::Instance()->Play(HKC, true);
+			break;
+		case BC:
+			CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
+			CAudio::Instance()->Play(BC, true);
+			break;
+		default:
+			break;
+		}
 
 	}
 
