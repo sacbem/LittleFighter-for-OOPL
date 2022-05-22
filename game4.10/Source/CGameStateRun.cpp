@@ -171,21 +171,32 @@ namespace game_framework {
 			characterListCopy.assign(characterList.begin(), characterList.end());
 			std::sort(characterListCopy.begin(), characterListCopy.end(),CompareC);
 		}
-
-		for (int i = 0; i < totalSize ; i++) {
-			if (dropEmpty) {
+		if (dropEmpty) {
+			for (int i = 0; i < totalSize; i++) {
 				characterList[showSequence.second]->OnShow(theOthersPosition, CurrentTime);
 				showSequence.second += 1;
 			}
-			else if (dropCopy[showSequence.first]->GetY() > characterListCopy[showSequence.second]->GetY1()) {
-				characterList[showSequence.second]->OnShow(theOthersPosition, CurrentTime);
-				showSequence.second += 1;
+		}
+		for (int i = 0; i < totalSize; i++) {
+			if (dropCopy[showSequence.first]->GetY() > characterListCopy[showSequence.second]->GetY1()) {
+				characterListCopy[showSequence.second]->OnShow(theOthersPosition, CurrentTime);
+				for (auto k : dropCopy) {
+					k->ShowAnimation();
+				}
+				if (showSequence.second < characterList.size() - 1) {
+					showSequence.second += 1;
+				}
 			}
 			else {
 				dropCopy[showSequence.first]->ShowAnimation();
-				showSequence.first += 1;
+				for (auto k : characterListCopy) {
+					k->OnShow(theOthersPosition, CurrentTime);
+				}
+				if (showSequence.first < drop.size() - 1) {
+					showSequence.first += 1;
+				}
 			}
-		}
+		}	
 	}
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
