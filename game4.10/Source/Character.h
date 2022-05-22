@@ -53,6 +53,8 @@ namespace game_framework {
 		virtual int HitEnemy(Character* enemy) = 0;
 		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition) = 0;
 
+		vector <SkillEffect*> frozenPunchs;
+
 		//basic informtion
 		int characterNumber;
 		int HealthPoint;
@@ -183,7 +185,6 @@ namespace game_framework {
 
 		//for frozenPunch
 		void ShowFrozenPunch();
-		vector <SkillEffect*> frozenPunchs;
 
 		virtual void SetAttack(bool flag) override;
 		virtual void ShowAttack() override;
