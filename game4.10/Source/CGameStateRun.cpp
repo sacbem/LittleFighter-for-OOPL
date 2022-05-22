@@ -93,8 +93,8 @@ namespace game_framework {
 			CAudio::Instance()->Play(HKC, true);
 			break;
 		case BC:
-			CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
-			CAudio::Instance()->Play(BC, true);
+			//CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
+			//CAudio::Instance()->Play(BC, true);
 			break;
 		default:
 			break;
@@ -159,10 +159,10 @@ namespace game_framework {
 		}
 	}
 	boolean CompareC(Character* obj1, Character* obj2) {
-		return obj1->GetY1() < obj1->GetY1();
+		return obj1->GetY1() < obj2->GetY1();
 	}
 	boolean CompareF(FieldObject* obj1, FieldObject* obj2) {
-		return obj1->GetY() < obj1->GetY();
+		return obj1->GetY() < obj2->GetY();
 	}
 	boolean CompareFP(SkillEffect* s1, SkillEffect* s2) {
 		return s1->yPos < s2->yPos;
@@ -172,50 +172,81 @@ namespace game_framework {
 		vector<FieldObject *> dropCopy;
 		vector<Character*> characterListCopy;
 		vector<SkillEffect*> frozenPunchListCopy;
-		pair <int, int> showSequence(0,0);
-		boolean dropEmpty = drop.empty() , characterEmpty = characterList.empty() , frozemPunchEmpty = frozenPunchList.empty();
-		int totalSize = drop.size() + characterList.size();
+		vector<int> showSequence(3,0), sequenceValue_Y(3,0) ,characterYPos(2,0);
+		boolean dropEmpty = drop.empty(), characterEmpty = characterList.empty(), frozemPunchEmpty = frozenPunchList.empty();
+		int totalSize = drop.size() + characterList.size() + frozenPunchList.size();
+
+
 
 		if (! dropEmpty ) {
 			dropCopy.assign(drop.begin(), drop.end());
 			std::sort(dropCopy.begin(), dropCopy.end(), CompareF);
+			sequenceValue_Y[0] = dropCopy[0]->GetY();
+		}
+		else {
+			showSequence[0] = -1;
+			sequenceValue_Y[0] = 10000;
 		}
 		if (!characterEmpty) {
 			characterListCopy.assign(characterList.begin(), characterList.end());
 			std::sort(characterListCopy.begin(), characterListCopy.end(),CompareC);
+			sequenceValue_Y[1] = characterYPos[0];
+		}
+		else {
+			showSequence[1] = -1;
+			sequenceValue_Y[1] = 10000;
 		}
 		if (!frozemPunchEmpty) {
+			frozenPunchListCopy.assign(frozenPunchList.begin(), frozenPunchList.end());
 			std::sort(frozenPunchList.begin(), frozenPunchList.end(), CompareFP);
+			sequenceValue_Y[2] = frozenPunchListCopy[0]->yPos;
+		}
+		else {
+			showSequence[2] = -1;
+			sequenceValue_Y[2] = 10000;
 		}
 
-		if (dropEmpty) {
-			for (int i = 0; i < totalSize; i++) {
-				characterList[showSequence.second]->OnShow(theOthersPosition, CurrentTime);
-				showSequence.second += 1;
-			}
-		}
+
 		for (int i = 0; i < totalSize; i++) {
-			if (dropCopy[showSequence.first]->GetY() > characterListCopy[showSequence.second]->GetY1()) {
-				characterListCopy[showSequence.second]->OnShow(theOthersPosition, CurrentTime);
-				for (auto k : dropCopy) {
-					k->ShowAnimation();
+			auto showingIndex = std::min_element(sequenceValue_Y.begin(), sequenceValue_Y.end()) - sequenceValue_Y.begin();
+			switch (showingIndex) {
+			case 0:
+				dropCopy[showSequence[0]]->ShowAnimation();
+				if (showSequence[0] < drop.size() - 1) {
+					showSequence[0] += 1;
+					sequenceValue_Y[0] = dropCopy[showSequence[0]]->GetY();
 				}
-				if (showSequence.second < characterList.size() - 1) {
-					showSequence.second += 1;
+				else {
+					sequenceValue_Y[0] = 1000;
+				}
+				break;
+			case 1:
+				characterListCopy[showSequence[1]]->OnShow(theOthersPosition, CurrentTime);
+				if (showSequence[1] < characterList.size() - 1) {
+					showSequence[1] += 1;
+					sequenceValue_Y[1] = characterListCopy[showSequence[1]]->GetY1();
+				}
+				else {
+					sequenceValue_Y[1] = 1000;
+				}
+				break;
+			case 2:
+				frozenPunchListCopy[showSequence[2]]->OnShow();
+				if (showSequence[2] < frozenPunchListCopy.size() - 1) {
+					showSequence[2]++;
+					sequenceValue_Y[2] = frozenPunchListCopy[showSequence[2]]->yPos;
+				}
+				else {
+					sequenceValue_Y[2] = 1000;
+				}
+				break;
+			default:
+					break;
 				}
 			}
-			else {
-				dropCopy[showSequence.first]->ShowAnimation();
-				for (auto k : characterListCopy) {
-					k->OnShow(theOthersPosition, CurrentTime);
-				}
-				if (showSequence.first < drop.size() - 1) {
-					showSequence.first += 1;
-				}
-			}
-		}
+		}		
 
-	}
+	//}
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//get character
@@ -260,7 +291,7 @@ namespace game_framework {
 				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2));
 				break;
 			}
-			characterList[1]->SetXY(400, 200);
+			characterList[1]->SetXY(400, 400);
 			characterList[1]->SetCharacter();
 			
 			SetAllCharacterPosition();
