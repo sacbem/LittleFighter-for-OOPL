@@ -12,6 +12,7 @@ namespace game_framework {
 		createdTime = createdTimes;
 		xPos = x;
 		yPos = y;
+		yTemp = y + 120;
 		direction = dire;
 		AnimationState = 0;
 		AnimationCount[0] = 0;
@@ -22,6 +23,11 @@ namespace game_framework {
 		CreatEffectObj();
 
 	}
+
+	int SkillEffect::GetDir() {
+		return direction;
+	}
+
 	void  SkillEffect::CreatEffectObj() {
 		switch (skillID) {
 		case static_cast<int>(skillsIdTable::frozenWave):
@@ -183,6 +189,39 @@ namespace game_framework {
 			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_11.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_10.bmp", RGB(0, 0, 0));
 			break;
+		case static_cast<int>(skillsIdTable::downArrow):
+			effectObj.push_back(new GameObject(2, "Effect"));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_5.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_4.bmp", RGB(0, 0, 0));
+			break;
+		case static_cast<int>(skillsIdTable::downArrow2):
+			yTemp = yPos + 50;
+			effectObj.push_back(new GameObject(2, "Effect"));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_1.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_8.bmp", RGB(0, 0, 0));
+			break;
+		case static_cast<int>(skillsIdTable::upArrow):
+			yTemp = yPos - 50;
+			effectObj.push_back(new GameObject(2, "Effect"));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow1\\Henry_arrow1_1.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow1_reverse\\Henry_arrow1_reverse_8.bmp", RGB(0, 0, 0));
+			break;
+		case static_cast<int>(skillsIdTable::airWave):
+			effectObj.push_back(new GameObject(2, "Effect"));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_wind\\henry_wind_4.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_wind\\henry_wind_5.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_wind\\henry_wind_6.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_wind\\henry_wind_7.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_wind\\Henry_wind_0.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_wind_reverse\\henry_wind_reverse_7.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_wind_reverse\\henry_wind_reverse_6.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_wind_reverse\\henry_wind_reverse_5.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_wind_reverse\\henry_wind_reverse_4.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_wind\\Henry_wind_0.bmp");
+		case static_cast<int>(skillsIdTable::demonicSong):
+			effectObj.push_back(new GameObject(2, "Effect"));
+			effectObj[0]->Load(0, ".\\res\\Henry\\demonicSong.bmp",RGB(0,0,0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\demonicSong.bmp", RGB(0, 0, 0));
 		case static_cast<int>(skillsIdTable::pierceArrow):
 			effectObj.push_back(new GameObject(2, "Effect"));
 			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow2\\Henry_arrow2_0.bmp", RGB(0, 0, 0));
@@ -207,7 +246,6 @@ namespace game_framework {
 			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_arrow2_reverse\\Henry_arrow2_reverse_8.bmp", RGB(0, 0, 0));
 		case static_cast<int>(skillsIdTable::EnergyBlast):
 			effectObj.push_back(new GameObject(2, "Effect"));
-			effectObj.push_back(new GameObject(2, "Effect"));
 			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_0.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_1.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_2.bmp", RGB(0, 0, 0));
@@ -224,29 +262,31 @@ namespace game_framework {
 			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_6.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_5.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_4.bmp", RGB(0, 0, 0));
-			//second blast
-			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_8.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_9.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_10.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_11.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_4.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_5.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_6.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_7.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_11.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_10.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_9.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_8.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_7.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_6.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_5.bmp", RGB(0, 0, 0));
-			effectObj[1]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_4.bmp", RGB(0, 0, 0));
+		case static_cast<int>(skillsIdTable::EnergyBlast2):
+			effectObj.push_back(new GameObject(2, "Effect"));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_8.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_9.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_10.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_11.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_4.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_5.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_6.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(0, ".\\res\\Woody\\Woody_ball\\Woody_ball_7.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_11.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_10.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_9.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_8.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_7.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_6.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_5.bmp", RGB(0, 0, 0));
+			effectObj[0]->Load(1, ".\\res\\Woody\\Woody_ball_reverse\\Woody_ball_reverse_4.bmp", RGB(0, 0, 0));
 		default:
 			break;
 		}
 	}
 
 	void SkillEffect::OnShow() {
+		//TRACE("pp %d %d\n", xPos, yPos);
 		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
@@ -267,7 +307,7 @@ namespace game_framework {
 					effectObj[0]->SetTopLeft(direction, 6, xPos, yPos);
 					effectObj[0]->OnShow(direction, 6);
 				}
-				else if(AnimationCount[1] <= 8) {
+				else if (AnimationCount[1] <= 8) {
 					effectObj[0]->SetTopLeft(direction, 7, xPos, yPos);
 					effectObj[0]->OnShow(direction, 7);
 				}
@@ -280,6 +320,8 @@ namespace game_framework {
 					effectObj[0]->OnShow(direction, 9);
 				}
 				else if (AnimationCount[1] > 16) {
+					xPos = 999;
+					yPos = 999;
 					break;
 				}
 				AnimationCount[1]++;
@@ -290,7 +332,7 @@ namespace game_framework {
 				if (direction == 0) {
 					effectObj[2]->SetTopLeft(direction, AnimationCount[0], xPos + 40, yPos - 30);
 					effectObj[2]->OnShow(direction, AnimationCount[0]);
-					
+
 				}
 				else if (direction == 1) {
 					effectObj[2]->SetTopLeft(direction, AnimationCount[0], xPos - 60, yPos - 30);
@@ -332,16 +374,15 @@ namespace game_framework {
 					}
 				}
 			}
-
 			timeCount++;
 			break;
 		case static_cast<int>(skillsIdTable::frozenSword):
 
 			break;
 		case static_cast<int>(skillsIdTable::frozenStorm):
-			if (timeCount >= 16 && timeCount<200) {
+			if (timeCount >= 16 && timeCount < 200) {
 				if (timeCount < 180) {
-					effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 8, xPos-40, yPos-70);
+					effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 8, xPos - 40, yPos - 70);
 					effectObj[0]->OnShow(direction, AnimationCount[0] % 8);
 				}
 				else if (timeCount < 190) {
@@ -366,18 +407,138 @@ namespace game_framework {
 			timeCount++;
 			break;
 			////////////////
-		case static_cast<int>(skillsIdTable::normalArrow):
-			if (timeCount >= 20) {
-				effectObj[0]->SetTopLeft(direction, 1, xPos, yPos);
-				effectObj[0]->OnShow(direction, 1);
-				AnimationCount[0]++;
-				//SkillsProcess(theOthersPosition, mainTime - createdTime);
+		case static_cast<int>(skillsIdTable::airWave):
+			if (timeCount >= 40 && timeCount < 56) {
+				if (timeCount < 44) {
+					effectObj[0]->SetTopLeft(direction, 0, xPos, yPos);
+					effectObj[0]->OnShow(direction, 0);
+				}
+				else if (timeCount < 48) {
+					effectObj[0]->SetTopLeft(direction, 1, xPos, yPos);
+					effectObj[0]->OnShow(direction, 1);
+				}
+				else if (timeCount < 52) {
+					effectObj[0]->SetTopLeft(direction, 2, xPos, yPos);
+					effectObj[0]->OnShow(direction, 2);
+				}
+				else if (timeCount < 56) {
+					effectObj[0]->SetTopLeft(direction, 3, xPos, yPos);
+					effectObj[0]->OnShow(direction, 3);
+				}
+			}
+
+			if (timeCount > 40) {
+				effectObj[0]->SetTopLeft(direction, 4, xPos, yPos);
+				effectObj[0]->OnShow(direction, 4);
 				if (direction == 0) {
-					xPos += 5;
+					xPos += 10;
 				}
 				else if (direction == 1) {
-					xPos -= 5;
+					xPos -= 10;
 				}
+			}
+			timeCount++;
+			break;
+		case static_cast<int>(skillsIdTable::demonicSong):
+			effectObj[0]->SetTopLeft(direction, 0, xPos - 40, yPos - 60);
+			effectObj[0]->OnShow(direction, 0);
+			timeCount++;
+			break;
+		case static_cast<int>(skillsIdTable::normalArrow):
+			if (!isHit) {
+				if (timeCount >= 20) {
+					effectObj[0]->SetTopLeft(direction, 1, xPos, yPos);
+					effectObj[0]->OnShow(direction, 1);
+					AnimationCount[0]++;
+					//SkillsProcess(theOthersPosition, mainTime - createdTime);
+					if (direction == 0) {
+						xPos += 5;
+					}
+					else if (direction == 1) {
+						xPos -= 5;
+					}
+				}
+			}
+			else if (isHit) {
+				xPos = 999;
+				yPos = 999;
+			}
+			timeCount++;
+			break;
+		case static_cast<int>(skillsIdTable::downArrow):
+			if (!isHit) {
+				if (timeCount >= 20) {
+					effectObj[0]->SetTopLeft(direction, 0, xPos, yPos);
+					effectObj[0]->OnShow(direction, 0);
+					AnimationCount[0]++;
+					//SkillsProcess(theOthersPosition, mainTime - createdTime);
+					if (direction == 0) {
+						xPos += 5;
+						yPos += 5;
+					}
+					else if (direction == 1) {
+						xPos -= 5;
+						yPos += 5;
+					}
+
+					if (yPos >= yTemp) {
+						isHit = true;
+					}
+				}
+			}
+			else if (isHit) {
+				xPos = 999;
+				yPos = 999;
+			}
+			timeCount++;
+			break;
+		case static_cast<int>(skillsIdTable::downArrow2):
+			if (!isHit) {
+				if (timeCount >= 20) {
+					effectObj[0]->SetTopLeft(direction, 0, xPos, yPos);
+					effectObj[0]->OnShow(direction, 0);
+					AnimationCount[0]++;
+					//SkillsProcess(theOthersPosition, mainTime - createdTime);
+					if (direction == 0) {
+						xPos += 5;
+					}
+					else if (direction == 1) {
+						xPos -= 5;
+					}
+
+					if (yPos <= yTemp) {
+						yPos += 5;
+					}
+				}
+			}
+			else if (isHit) {
+				xPos = 999;
+				yPos = 999;
+			}
+			timeCount++;
+			break;
+		case static_cast<int>(skillsIdTable::upArrow):
+			if (!isHit) {
+				if (timeCount >= 20) {
+					effectObj[0]->SetTopLeft(direction, 0, xPos, yPos);
+					effectObj[0]->OnShow(direction, 0);
+					AnimationCount[0]++;
+					//SkillsProcess(theOthersPosition, mainTime - createdTime);
+					if (direction == 0) {
+						xPos += 5;
+					}
+					else if (direction == 1) {
+						xPos -= 5;
+					}
+
+					if (yPos >= yTemp) {
+						yPos -= 5;
+					}
+				}
+			}
+			else if (isHit) {
+				xPos = 999;
+				yPos = 999;
 			}
 			timeCount++;
 			break;
@@ -397,26 +558,84 @@ namespace game_framework {
 			timeCount++;
 			break;
 		case static_cast<int>(skillsIdTable::EnergyBlast):
-			effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 4, xPos, yPos);
-			effectObj[0]->OnShow(direction, AnimationCount[0] % 4);
-			if (timeCount >= 20) {
-				int dd;
-				if (direction == 0) {
-					dd = -50;
+			if (!isHit) {
+				if (timeCount >= 20) {
+					effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 4, xPos, yPos);
+					effectObj[0]->OnShow(direction, AnimationCount[0] % 4);
+					AnimationCount[0]++;
+					if (direction == 0) {
+						xPos += 5;
+					}
+					else if (direction == 1) {
+						xPos -= 5;
+					}
 				}
-				else if (direction == 1) {
-					dd = +50;
+				//SkillsProcess(theOthersPosition, mainTime - createdTime);
+			}
+			else if (isHit) {
+				if (AnimationCount[1] <= 4) {
+					effectObj[0]->SetTopLeft(direction, 4, xPos, yPos);
+					effectObj[0]->OnShow(direction, 4);
 				}
-				effectObj[1]->SetTopLeft(direction, AnimationCount[1] % 4, xPos + dd, yPos);
-				effectObj[1]->OnShow(direction, AnimationCount[1] % 4);
+				else if (AnimationCount[1] <= 8) {
+					effectObj[0]->SetTopLeft(direction, 5, xPos, yPos);
+					effectObj[0]->OnShow(direction, 5);
+				}
+				else if (AnimationCount[1] <= 12) {
+					effectObj[0]->SetTopLeft(direction, 6, xPos, yPos);
+					effectObj[0]->OnShow(direction, 6);
+				}
+				else if (AnimationCount[1] <= 16) {
+					effectObj[0]->SetTopLeft(direction, 7, xPos, yPos);
+					effectObj[0]->OnShow(direction, 7);
+				}
+				else if (AnimationCount[1] > 16) {
+					xPos = 999;
+					yPos = 999;
+					break;
+				}
 				AnimationCount[1]++;
 			}
-			AnimationCount[0]++;
-			if (direction == 0) {
-				xPos += 5;
+			timeCount++;
+			break;
+		case static_cast<int>(skillsIdTable::EnergyBlast2):
+			if (!isHit) {
+				if (timeCount >= 30) {
+					effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 4, xPos, yPos);
+					effectObj[0]->OnShow(direction, AnimationCount[0] % 4);
+					AnimationCount[0]++;
+					if (direction == 0) {
+						xPos += 5;
+					}
+					else if (direction == 1) {
+						xPos -= 5;
+					}
+				}
+				//SkillsProcess(theOthersPosition, mainTime - createdTime);
 			}
-			else if (direction == 1) {
-				xPos -= 5;
+			else if (isHit) {
+				if (AnimationCount[1] <= 4) {
+					effectObj[0]->SetTopLeft(direction, 4, xPos, yPos);
+					effectObj[0]->OnShow(direction, 4);
+				}
+				else if (AnimationCount[1] <= 8) {
+					effectObj[0]->SetTopLeft(direction, 5, xPos, yPos);
+					effectObj[0]->OnShow(direction, 5);
+				}
+				else if (AnimationCount[1] <= 12) {
+					effectObj[0]->SetTopLeft(direction, 6, xPos, yPos);
+					effectObj[0]->OnShow(direction, 6);
+				}
+				else if (AnimationCount[1] <= 16) {
+					effectObj[0]->SetTopLeft(direction, 7, xPos, yPos);
+					effectObj[0]->OnShow(direction, 7);
+				}
+				else if (AnimationCount[1] > 16) {
+					xPos = 999;
+					yPos = 999;
+					break;
+				}
+				AnimationCount[1]++;
 			}
 			timeCount++;
 			break;

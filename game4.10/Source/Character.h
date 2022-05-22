@@ -53,6 +53,8 @@ namespace game_framework {
 		virtual int HitEnemy(Character* enemy) = 0;
 		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition) = 0;
 
+		vector <SkillEffect*> frozenPunchs;
+
 		//basic informtion
 		int characterNumber;
 		int HealthPoint;
@@ -181,6 +183,9 @@ namespace game_framework {
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition ,int mainTime) override;
 		virtual void OnMove() override;
 
+		//for frozenPunch
+		void ShowFrozenPunch();
+
 		virtual void SetAttack(bool flag) override;
 		virtual void ShowAttack() override;
 		virtual void SetCharacter() override;
@@ -219,7 +224,7 @@ namespace game_framework {
 
 	private:
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
-		vector <SkillEffect*> frozenWaves, frozenPunchs, frozenSwords, frozenStorms;
+		vector <SkillEffect*> frozenWaves, frozenSwords, frozenStorms;
 	};
 	
 	class Henry :public Character {
@@ -265,7 +270,7 @@ namespace game_framework {
 
 	private:
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
-		vector <SkillEffect*> arrow, airwave, pierceArrow, arrowRain, demonicSong;
+		vector <SkillEffect*> arrow, airwave, pierceArrow, arrowRain, demonicSong, downArrow, upArrow, downArrow2;
 		vector <int>  frozenWaves_Duration;
 	};
 	
@@ -315,7 +320,7 @@ namespace game_framework {
 
 	private:
 		virtual int HitRectangle(int tx1, int ty1, int tx2, int ty2) override;
-		vector <SkillEffect*> energyBlast;
+		vector <SkillEffect*> energyBlast, energyBlast2;
 		vector <int>  frozenWaves_Duration;
 	};
 }

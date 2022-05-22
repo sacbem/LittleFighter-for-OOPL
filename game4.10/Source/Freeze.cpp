@@ -702,6 +702,19 @@ namespace game_framework {
 		KeyBoardInputTime++;
 	}
 
+	bool mycompare(SkillEffect* s1, SkillEffect* s2) {
+		return s1->yPos < s2->yPos;
+	}
+
+	void Freeze::ShowFrozenPunch() {
+		vector<SkillEffect*>  frozenPunchsSorted;
+		frozenPunchsSorted = frozenPunchs;
+		std::sort(frozenPunchsSorted.begin(), frozenPunchsSorted.end(), mycompare);
+		for (auto& i : frozenPunchsSorted) {
+			i->OnShow();
+		}
+	}
+
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
 		switch (AnimationState)
 		{
@@ -1038,6 +1051,7 @@ namespace game_framework {
 		//Special Attack Animation
 		EffectObjectAliveManager(mainTime);
 		ShowSpecialAttack();
+		ShowFrozenPunch();
 	}
 
 	void Freeze::CallfrozenWaves() {
@@ -1188,26 +1202,11 @@ namespace game_framework {
 		}
 	}
 
-	bool mycompare(SkillEffect* s1, SkillEffect* s2) {
-		return s1->yPos < s2->yPos;
-	}
-
 	void Freeze::ShowSpecialAttack() {
-		vector<SkillEffect*>  frozenWavesSorted, frozenPunchsSorted, frozenSwordsSorted, frozenStormsSorted;
-		frozenWavesSorted = frozenWaves;
-		frozenPunchsSorted = frozenPunchs;
-		frozenStormsSorted = frozenStorms;
-
-		std::sort(frozenWavesSorted.begin(), frozenWavesSorted.end(), mycompare);
-		std::sort(frozenPunchsSorted.begin(), frozenPunchsSorted.end(), mycompare);
-		std::sort(frozenStormsSorted.begin(), frozenStormsSorted.end(), mycompare);
-		for (auto& i : frozenWavesSorted) {
+		for (auto& i : frozenWaves) {
 			i->OnShow();
 		}
-		for (auto& i : frozenPunchsSorted) {
-			i->OnShow();
-		}
-		for (auto& i : frozenStormsSorted) {
+		for (auto& i : frozenStorms) {
 			i->OnShow();
 		}
 	}

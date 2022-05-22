@@ -26,11 +26,12 @@ namespace game_framework {
 		vector<pair<int,int>> theOthersPosition;
 		vector<Character*> characterList;
 		vector<FieldObject*> drop; /// 放置掉落物
+		vector<SkillEffect*> frozenPunchList; /// 放置掉落物
 
 		//Player & other
 		//Character *PlayerTest;
 		//Character *EnemyTest;
-		FieldObject* boxTest;
+		//FieldObject* boxTest;
 		Map* maps;
 		HealthBar* HealthPlayer1;
 		HealthBar* HealthPlayer2;

@@ -9,11 +9,12 @@ namespace game_framework {
 		// 0	box
 		// 1	stone
 		void Init();
-		void Throw(bool flag);
+		void Throw(bool flag, int dir);
 		void SetKnock();
 		void PickedUp(Character &player);
 		void OnMove();
 		void ShowAnimation();
+		void ShowStatic();
 		void ShowRoll();
 		int GetY();
 		int Hp;

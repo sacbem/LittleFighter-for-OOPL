@@ -57,6 +57,8 @@ namespace game_framework {
 				//int hitDirection = characterList[0]->GetDir();
 				characterList[1]->SetKnock(true, characterList[0]->GetDir(), characterList[0]->AttackState);
 				characterList[1]->isGettingDamage(characterList[0]->AttackPoint);
+
+				//boxTest->Throw(true, characterList[0]->GetDir());
 			}
 		}
 		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
@@ -102,6 +104,9 @@ namespace game_framework {
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags){
 		characterList[0]->InputKeyDown(nChar, CurrentTime);
+
+		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
+
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
@@ -148,7 +153,10 @@ namespace game_framework {
 		
 		//characterList[1]->isGettingDamage(player2Damage);
 		
-		boxTest->OnMove();
+		//boxTest->OnMove();
+		for (auto& i : drop) {
+			i->OnMove();
+		}
 	}
 	boolean CompareC(Character* obj1, Character* obj2) {
 		return obj1->GetY1() < obj1->GetY1();
@@ -156,11 +164,16 @@ namespace game_framework {
 	boolean CompareF(FieldObject* obj1, FieldObject* obj2) {
 		return obj1->GetY() < obj1->GetY();
 	}
+	boolean CompareFP(SkillEffect* s1, SkillEffect* s2) {
+		return s1->yPos < s2->yPos;
+	}
+
 	void CGameStateRun::SortedShow() {
 		vector<FieldObject *> dropCopy;
 		vector<Character*> characterListCopy;
+		vector<SkillEffect*> frozenPunchListCopy;
 		pair <int, int> showSequence(0,0);
-		boolean dropEmpty = drop.empty() , characterEmpty = characterList.empty();
+		boolean dropEmpty = drop.empty() , characterEmpty = characterList.empty() , frozemPunchEmpty = frozenPunchList.empty();
 		int totalSize = drop.size() + characterList.size();
 
 		if (! dropEmpty ) {
@@ -171,6 +184,10 @@ namespace game_framework {
 			characterListCopy.assign(characterList.begin(), characterList.end());
 			std::sort(characterListCopy.begin(), characterListCopy.end(),CompareC);
 		}
+		if (!frozemPunchEmpty) {
+			std::sort(frozenPunchList.begin(), frozenPunchList.end(), CompareFP);
+		}
+
 		if (dropEmpty) {
 			for (int i = 0; i < totalSize; i++) {
 				characterList[showSequence.second]->OnShow(theOthersPosition, CurrentTime);
@@ -196,13 +213,17 @@ namespace game_framework {
 					showSequence.first += 1;
 				}
 			}
-		}	
+		}
+
 	}
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//get character
 		if (GetCharacter == false ){ // && characterList[1]->getCharacter == false) {
-			boxTest = new FieldObject(0);
+			//boxTest = new FieldObject(0);
+			drop.push_back(new FieldObject(0));
+			//drop.push_back(new FieldObject(0));
+			//drop.push_back(new FieldObject(0));
 			switch (this->game->selectCharacterID[0]){
 			case 0:
 				characterList.push_back(new Woody(0));
@@ -222,7 +243,7 @@ namespace game_framework {
 
 				break;
 			}
-			characterList[0]->SetXY(200, 500);
+			characterList[0]->SetXY(200, 200);
 			characterList[0]->SetCharacter();
 
 			switch (this->game->selectCharacterID[1]) {
@@ -239,7 +260,7 @@ namespace game_framework {
 				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2));
 				break;
 			}
-			characterList[1]->SetXY(400, 500);
+			characterList[1]->SetXY(400, 200);
 			characterList[1]->SetCharacter();
 			
 			SetAllCharacterPosition();
@@ -272,11 +293,11 @@ namespace game_framework {
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 	
 
-		boxTest->ShowAnimation();
+		//boxTest->ShowAnimation();
 	}
 
 	CGameStateRun::~CGameStateRun(){
-		delete maps, HealthPlayer1, HealthPlayer2,boxTest;
+		delete maps, HealthPlayer1, HealthPlayer2;
 		vector<Character*>().swap(characterList);
 		vector<FieldObject*>().swap(drop);
 	}

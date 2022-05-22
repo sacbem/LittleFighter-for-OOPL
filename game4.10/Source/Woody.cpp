@@ -18,6 +18,8 @@ namespace game_framework {
 		energyBlast.reserve(1);
 		hittedLog.resize(1);
 		SetCalculateDamageRequest(false);
+		energyBlast.reserve(1);
+		energyBlast2.reserve(1);
 	}
 
 	int Woody::HitEnemy(Character* enemy) {
@@ -33,6 +35,24 @@ namespace game_framework {
 		pair<int, int> itr(0, 0);  // first ²Ä´X°¦¸}¦â second ¶Ë®`
 		int attackDirection = this->GetDir() ? -1 : 1;
 		for (auto& i : energyBlast) {
+			for (int h = 0; h < theOthersPosition.size(); h++) {
+				if (h != this->serialNumber) {
+					if (i->xPos + 4 <= theOthersPosition[h].first + 50 && i->xPos + 78 >= theOthersPosition[h].first + 30) {
+						if (i->yPos + 23 <= theOthersPosition[h].second + 60 && i->yPos + 57 >= theOthersPosition[h].second + 20) {
+							if (!i->isHit) {
+								itr.first = h; itr.second = 250;
+								hittedLog[0].push_back(h);
+								hittedTable.push_back(itr);
+								i->isHit = true;
+								this->SetCalculateDamageRequest(true);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		for (auto& i : energyBlast2) {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
 				if (h != this->serialNumber) {
 					if (i->xPos + 4 <= theOthersPosition[h].first + 50 && i->xPos + 78 >= theOthersPosition[h].first + 30) {
@@ -655,10 +675,14 @@ namespace game_framework {
 
 	void Woody::SetSkill(int createdTimes) {
 		auto energyBlast_Begin = energyBlast.begin();
+		auto energyBlast2_Begin = energyBlast2.begin();
 		//TRACE("Signal %d\n", this->GetSkillSignal());
 		if (this->GetSkillSignal() == 0) {
 			energyBlast.insert(energyBlast_Begin, new SkillEffect(6, createdTimes, direction, xPos, yPos));
 			skillsEffect_InFieldNumber[0] = energyBlast.size();
+
+			energyBlast2.insert(energyBlast2_Begin, new SkillEffect(12, createdTimes, direction, xPos, yPos));
+			skillsEffect_InFieldNumber[0] = energyBlast2.size();
 		}
 	}
 
@@ -1563,6 +1587,8 @@ namespace game_framework {
 		for (auto& i : energyBlast) {
 			i->OnShow();
 		}
-		
+		for (auto& i : energyBlast2) {
+			i->OnShow();
+		}
 	}
 }
