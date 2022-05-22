@@ -4,12 +4,10 @@ namespace game_framework {
     class SkillEffect {
     public:
         SkillEffect(int skillID, int createdTimes, int direction, int xPos, int yPos);
-        void SkillsFeedbackStatus(vector<pair<int, int>>  theOthersPosition);
-        //void GarbageCollector();
         ~SkillEffect();
         int createdTime;
         void OnShow();
-        void ShowFinal();
+        int GetDir();
         int xPos, yPos;
         int yTemp;
         bool isHit;

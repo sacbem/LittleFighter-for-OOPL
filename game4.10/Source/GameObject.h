@@ -1,5 +1,12 @@
 #pragma once
 namespace game_framework {
+	class ShowedObject {
+	public:
+		ShowedObject();
+		virtual void GetY1() = 0;
+		virtual void Show() = 0;
+		~ShowedObject();
+	};
 	class GameObject {
 		//friend  void  SetPosition_Scenes(Map &map,int x, int y);;
 	public:

@@ -19,6 +19,8 @@ namespace game_framework {
 		frozenPunchs.reserve(1);
 		frozenSwords.reserve(1);
 		frozenStorms.reserve(1);
+		hittedLog.resize(4);
+		SetCalculateDamageRequest(false);
 	}
 
 	int Freeze::HitEnemy(Character* enemy) {
@@ -151,12 +153,6 @@ namespace game_framework {
 	}
 
 	void Freeze::ShowAttack() {
-		//TRACE("Attacl %d\n", AttackAccumulator);
-		//TRACE("Count %d\n", AttackCount);
-		//TRACE("Attack %d\n", AttackState);
-		//TRACE("Last Attack %d\n", LastAttackState);
-		//TRACE("Animation %d\n", AnimationState);
-		//TRACE("Hit %d\n", isHitting);
 		AttackCount++;
 		switch (AttackState)
 		{
@@ -360,9 +356,6 @@ namespace game_framework {
 	}
 
 	void Freeze::ShowKnock() {
-		//TRACE("Hit %d\n", isGettingHit);
-		//TRACE("Damage %d\n", DamageAccumulator);
-		//TRACE("Attack %d\n", AttackAccumulator);
 		KnockCount++;
 		switch (KnockState) {
 		case 1:
@@ -723,11 +716,6 @@ namespace game_framework {
 	}
 
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
-		//TRACE("isLeft %d\n", isMovingLeft);
-		//TRACE("isRightt %d\n",isMovingRight);
-		//TRACE("Distance %d\n", GetDistance());
-		//frozenWaves[0]->OnShow(direction, 0);
-
 		switch (AnimationState)
 		{
 		case 0:
@@ -1222,24 +1210,23 @@ namespace game_framework {
 			i->OnShow();
 		}
 	}
+	
 	void Freeze::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
-		pair<int, int> itr(0, 0);  // first ²Ä´X°¦¸}¦â second ¶Ë®`
-		//tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2
-		//enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);
-
-		//first+80 >=xPos && fist<=xPos+80
-		//second+80 >=yPos && second<=yPos+80
-
+		pair<int, int> itr(0, 0);  // first : characterID second :damage
+		int attackDirection = this->GetDir() ? -1 : 1;
 		for (auto& i : frozenWaves) {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
 				if (h != this->serialNumber) {
-					if (i->xPos + 4 <= theOthersPosition[h].first + 50 && i->xPos + 78 >= theOthersPosition[h].first + 30) {
-						if (i->yPos + 23 <= theOthersPosition[h].second + 60 && i->yPos + 57 >= theOthersPosition[h].second + 20) {
-								TRACE("Pos %d %d\n", theOthersPosition[h].first, theOthersPosition[h].second);
-								itr.first = h; itr.second = 1;
+					if (i->xPos+4 <= theOthersPosition[h].first+50 && i->xPos+78 >= theOthersPosition[h].first + 30) {
+						if (i->yPos+23 <= theOthersPosition[h].second+60 && i->yPos+57 >= theOthersPosition[h].second+20) {
+							if (! i->isHit) {
+								itr.first = h; itr.second = 500;
+								hittedLog[0].push_back(h);
 								hittedTable.push_back(itr);
 								i->isHit = true;
-								//TRACE("pp %d %d\n", i->xPos, i->yPos);
+								this->SetCalculateDamageRequest (true);
+								this->SetAbonormalStatus(h, true);
+							}
 						}
 					}
 				}
@@ -1248,10 +1235,30 @@ namespace game_framework {
 
 		for (auto& i : frozenPunchs) {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
-				if (i->xPos + 40 <= theOthersPosition[h].first + 50 && i->xPos + 229 >= theOthersPosition[h].first + 30) {
-					if (i->yPos-30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
-						itr.first = h; itr.second = -500;
-						hittedTable.push_back(itr);
+				if (h != this->serialNumber) {
+					if (this->direction == 1) {
+						if (i->xPos - 239 <= theOthersPosition[h].first + 50 && i->xPos - 60 >= theOthersPosition[h].first + 30) {
+							if (i->yPos - 30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
+								if (!i->isHit) {
+									itr.first = h; itr.second = 500;
+									hittedTable.push_back(itr);
+									i->isHit = true;
+									this->SetCalculateDamageRequest(true);
+								}
+							}
+						}
+					}
+					else {
+						if (i->xPos + 40 * attackDirection <= theOthersPosition[h].first + 50 && i->xPos + 229 * attackDirection >= theOthersPosition[h].first + 30) {
+							if (i->yPos - 30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
+								if (!i->isHit) {
+									itr.first = h; itr.second = 500;
+									hittedTable.push_back(itr);
+									i->isHit = true;
+									this->SetCalculateDamageRequest(true);
+								}
+							}
+						}
 					}
 				}
 			}
@@ -1263,11 +1270,10 @@ namespace game_framework {
 					if (i->xPos - 35 <= theOthersPosition[h].first + 50 && i->xPos + 124 >= theOthersPosition[h].first + 30) {
 						if (i->yPos - 70 <= theOthersPosition[h].second + 60 && i->yPos + 89 >= theOthersPosition[h].second + 20) {
 							if (!i->isHit) {
-								//TRACE("Pos %d %d\n", theOthersPosition[h].first, theOthersPosition[h].second);
-								itr.first = h; itr.second = 1;
+								itr.first = h; itr.second = 900;
 								hittedTable.push_back(itr);
-								//i->isHit = true;
-								//TRACE("pp %d %d\n", i->xPos, i->yPos);
+								i->isHit = true;
+								this->SetCalculateDamageRequest(true);
 							}
 						}
 					}

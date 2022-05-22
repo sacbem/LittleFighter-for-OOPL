@@ -18,13 +18,6 @@ namespace game_framework {
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		/*
-		//shared_ptr<SettingBtn> settingBtn;
-		//shared_ptr<SelectCharacterMenu> selectCharacterMenu;
-		//shared_ptr<Seclecter> photoSticker_seclecter;
-		//shared_ptr<PhotoSticker>photoSticker_1P, photoSticker_2P;
-		//shared_ptr<StartBtn> startBtn;
-		*/
 		CMovingBitmap logo,black;	// csie的logo
 		CAnimation attackScreen,countDown; //需改名 還沒選角的動畫 
 		StartBtn * startBtn;

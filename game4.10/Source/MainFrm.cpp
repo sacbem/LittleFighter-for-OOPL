@@ -140,7 +140,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 
 	cs.cx = 640; cs.cy = 480;
 	cs.style = WS_BORDER | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
-    cs.x = (::GetSystemMetrics(SM_CXSCREEN) - cs.cx) / 2; 
+	cs.x = (::GetSystemMetrics(SM_CXSCREEN) - cs.cx) / 2; 
 	cs.y = (::GetSystemMetrics(SM_CYSCREEN) - cs.cy) / 2; 
 	//  Set priority level
 	AfxGetApp()->SetThreadPriority(THREAD_PRIORITY_HIGHEST);

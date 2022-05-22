@@ -23,6 +23,11 @@ namespace game_framework {
 		CreatEffectObj();
 
 	}
+
+	int SkillEffect::GetDir() {
+		return direction;
+	}
+
 	void  SkillEffect::CreatEffectObj() {
 		switch (skillID) {
 		case static_cast<int>(skillsIdTable::frozenWave):
@@ -207,7 +212,7 @@ namespace game_framework {
 			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_wind\\henry_wind_5.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_wind\\henry_wind_6.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_wind\\henry_wind_7.bmp", RGB(0, 0, 0));
-			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_wind\\Henry_wind_0.bmp");
+			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_wind\\Henry_wind_0.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_wind_reverse\\henry_wind_reverse_7.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_wind_reverse\\henry_wind_reverse_6.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_wind_reverse\\henry_wind_reverse_5.bmp", RGB(0, 0, 0));
@@ -215,8 +220,8 @@ namespace game_framework {
 			effectObj[0]->Load(1, ".\\res\\Henry\\Henry_wind\\Henry_wind_0.bmp");
 		case static_cast<int>(skillsIdTable::demonicSong):
 			effectObj.push_back(new GameObject(2, "Effect"));
-			effectObj[0]->Load(0, ".\\res\\Henry\\demonicSong.bmp");
-			effectObj[0]->Load(1, ".\\res\\Henry\\demonicSong.bmp");
+			effectObj[0]->Load(0, ".\\res\\Henry\\demonicSong.bmp",RGB(0,0,0));
+			effectObj[0]->Load(1, ".\\res\\Henry\\demonicSong.bmp", RGB(0, 0, 0));
 		case static_cast<int>(skillsIdTable::pierceArrow):
 			effectObj.push_back(new GameObject(2, "Effect"));
 			effectObj[0]->Load(0, ".\\res\\Henry\\Henry_arrow2\\Henry_arrow2_0.bmp", RGB(0, 0, 0));
@@ -570,19 +575,19 @@ namespace game_framework {
 			else if (isHit) {
 				if (AnimationCount[1] <= 4) {
 					effectObj[0]->SetTopLeft(direction, 4, xPos, yPos);
-					effectObj[0]->OnShow(direction, 6);
+					effectObj[0]->OnShow(direction, 4);
 				}
 				else if (AnimationCount[1] <= 8) {
 					effectObj[0]->SetTopLeft(direction, 5, xPos, yPos);
-					effectObj[0]->OnShow(direction, 7);
+					effectObj[0]->OnShow(direction, 5);
 				}
 				else if (AnimationCount[1] <= 12) {
 					effectObj[0]->SetTopLeft(direction, 6, xPos, yPos);
-					effectObj[0]->OnShow(direction, 8);
+					effectObj[0]->OnShow(direction, 6);
 				}
 				else if (AnimationCount[1] <= 16) {
 					effectObj[0]->SetTopLeft(direction, 7, xPos, yPos);
-					effectObj[0]->OnShow(direction, 9);
+					effectObj[0]->OnShow(direction, 7);
 				}
 				else if (AnimationCount[1] > 16) {
 					xPos = 999;
@@ -611,19 +616,19 @@ namespace game_framework {
 			else if (isHit) {
 				if (AnimationCount[1] <= 4) {
 					effectObj[0]->SetTopLeft(direction, 4, xPos, yPos);
-					effectObj[0]->OnShow(direction, 6);
+					effectObj[0]->OnShow(direction, 4);
 				}
 				else if (AnimationCount[1] <= 8) {
 					effectObj[0]->SetTopLeft(direction, 5, xPos, yPos);
-					effectObj[0]->OnShow(direction, 7);
+					effectObj[0]->OnShow(direction, 5);
 				}
 				else if (AnimationCount[1] <= 12) {
 					effectObj[0]->SetTopLeft(direction, 6, xPos, yPos);
-					effectObj[0]->OnShow(direction, 8);
+					effectObj[0]->OnShow(direction, 6);
 				}
 				else if (AnimationCount[1] <= 16) {
 					effectObj[0]->SetTopLeft(direction, 7, xPos, yPos);
-					effectObj[0]->OnShow(direction, 9);
+					effectObj[0]->OnShow(direction, 7);
 				}
 				else if (AnimationCount[1] > 16) {
 					xPos = 999;
@@ -639,39 +644,7 @@ namespace game_framework {
 		}
 	}
 
-	void  SkillEffect::SkillsFeedbackStatus(vector<pair<int, int>> theOthersPosition) {
-
-		switch (skillID) {
-			//////////////// Freeze
-		case static_cast<int>(skillsIdTable::frozenWave):
-			for (auto& i : effectObj) {
-				for (int h = 0; h < theOthersPosition.size(); h++) {
-					if (i->GetPositionXY("X") == theOthersPosition[h].first) {
-						if (i->GetPositionXY("Y") == theOthersPosition[h].second) {
-							feedbackStatus[h] = "Freezed";
-						}
-					}
-				}
-			}
-			break;
-		case static_cast<int>(skillsIdTable::frozenPunch):
-
-			break;
-		case static_cast<int>(skillsIdTable::frozenSword):
-
-			break;
-		case static_cast<int>(skillsIdTable::frozenStorm):
-
-			break;
-
-		default:
-			break;
-		}
-
-	}
 	SkillEffect::~SkillEffect() {
-		for (auto& i : effectObj) {
-			delete i;
-		}
+		vector<GameObject*>().swap(effectObj);
 	}
 }

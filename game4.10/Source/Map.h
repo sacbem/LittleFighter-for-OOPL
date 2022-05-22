@@ -13,11 +13,12 @@ namespace game_framework{
 		void GenerateLand();
 		void PrintMap(boolean showStates);
 		void DynamicScence(boolean IsLeft,int walkedDistance);
+		int GetMapID();
 		boolean ResetCharactAccumulator(int distance1,int distance2);
 		~Map();
 		
 	private:
-		void InitializeAllObjs(int mapID);
+		void InitializeAllObjs();
 		void StopDynamic(boolean isLeft, int distance);
 		void InitializeMap();
 		int rubberBandAccumulator(boolean IsRunning, boolean InBorder);

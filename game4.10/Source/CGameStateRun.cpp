@@ -8,6 +8,7 @@
 #include "CGameStateRun.h"
 #include <fstream>
 #include <string>
+#include <algorithm>
 using namespace std;
 #define  _CRTDBG_MAP_ALLOC
 #include  < stdlib.h >
@@ -24,7 +25,7 @@ namespace game_framework {
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
 		maps = new Map(BC);
-		
+		drop.resize(0);
 		//GenerationTime = clock();
 
 	}
@@ -56,6 +57,8 @@ namespace game_framework {
 				//int hitDirection = characterList[0]->GetDir();
 				characterList[1]->SetKnock(true, characterList[0]->GetDir(), characterList[0]->AttackState);
 				characterList[1]->isGettingDamage(characterList[0]->AttackPoint);
+
+				//boxTest->Throw(true, characterList[0]->GetDir());
 			}
 		}
 		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
@@ -66,9 +69,6 @@ namespace game_framework {
 
 		CalculateDamage(theOthersPosition);
 
-		for (auto i : characterList[0]->hittedTable) {
-			//TRACE("hitter table %d %d\n", i.first, i.second);
-		}
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -83,6 +83,22 @@ namespace game_framework {
 
 		HealthPlayer1->OnLoad(0, 0);
 		HealthPlayer2->OnLoad(400, 0);
+		switch (maps->GetMapID()){
+		case Forest:
+			CAudio::Instance()->Load(Forest, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
+			CAudio::Instance()->Play(Forest, true);
+			break;
+		case HKC:
+			CAudio::Instance()->Load(HKC, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
+			CAudio::Instance()->Play(HKC, true);
+			break;
+		case BC:
+			CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
+			CAudio::Instance()->Play(BC, true);
+			break;
+		default:
+			break;
+		}
 
 	}
 
@@ -101,47 +117,87 @@ namespace game_framework {
 		}
 	}
 	void  CGameStateRun::CalculateDamage(vector<pair<int, int>> theOthersPosition) {
-		int player1Damage =0, player2Damage = 0;
+
 		for (int i = 0; i < 2; i++) {
 			if (this->game->selectCharacterID[i] == 0) {
-				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition);
+				static_cast<Woody*>(characterList[i])->DetectSkillDamage(theOthersPosition);
 			}
 			else if (this->game->selectCharacterID[i] == 1) {
 				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition);
 			}
 			else if (this->game->selectCharacterID[i] == 2) {
-				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition);
+				static_cast<Henry*>(characterList[i])->DetectSkillDamage(theOthersPosition);
 			}
 		}
 
-		for (auto& u : characterList) {
-			for (auto &i : u->hittedTable) { /// issue :可能不會改 !!!
-				if (i.first == 1) {
-					//player1Damage += i.second;
-					//TRACE("dama %d\n", i.second);
-					characterList[1]->isGettingDamage(i.second);
+		if (characterList[0]->GetCalculateDamageRequest() || characterList[1]->GetCalculateDamageRequest()) {
+			for (auto& u : characterList) {
+				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
+					if (i.first == 0) {
+						characterList[0]->isGettingDamage(i.second);
+					}
+					else if (i.first == 1) {
+						characterList[1]->isGettingDamage(i.second);
+					}
 				}
-				else if (i.first == 2) {
-					//player2Damage += i.second;
-					characterList[0]->isGettingDamage(i.second);
-				}
+				characterList[0]->ClearAbonormalStatus();
+				characterList[1]->ClearAbonormalStatus();
 			}
+
+			pair<int, int>().swap(characterList[0]->hittedTable[0]);
+			characterList[0]->SetCalculateDamageRequest(false);
 		}
+		
 		//characterList[1]->isGettingDamage(player2Damage);
+		
 		boxTest->OnMove();
 	}
+	boolean CompareC(Character* obj1, Character* obj2) {
+		return obj1->GetY1() < obj1->GetY1();
+	}
+	boolean CompareF(FieldObject* obj1, FieldObject* obj2) {
+		return obj1->GetY() < obj1->GetY();
+	}
+	void CGameStateRun::SortedShow() {
+		vector<FieldObject *> dropCopy;
+		vector<Character*> characterListCopy;
+		pair <int, int> showSequence(0,0);
+		boolean dropEmpty = drop.empty() , characterEmpty = characterList.empty();
+		int totalSize = drop.size() + characterList.size();
 
+		if (! dropEmpty ) {
+			dropCopy.assign(drop.begin(), drop.end());
+			std::sort(dropCopy.begin(), dropCopy.end(), CompareF);
+		}
+		if (!characterEmpty) {
+			characterListCopy.assign(characterList.begin(), characterList.end());
+			std::sort(characterListCopy.begin(), characterListCopy.end(),CompareC);
+		}
+
+		for (int i = 0; i < totalSize ; i++) {
+			if (dropEmpty) {
+				characterList[showSequence.second]->OnShow(theOthersPosition, CurrentTime);
+				showSequence.second += 1;
+			}
+			else if (dropCopy[showSequence.first]->GetY() > characterListCopy[showSequence.second]->GetY1()) {
+				characterList[showSequence.second]->OnShow(theOthersPosition, CurrentTime);
+				showSequence.second += 1;
+			}
+			else {
+				dropCopy[showSequence.first]->ShowAnimation();
+				showSequence.first += 1;
+			}
+		}
+	}
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//get character
 		if (GetCharacter == false ){ // && characterList[1]->getCharacter == false) {
 			boxTest = new FieldObject(0);
-
-			switch (this->game->selectCharacterID[0])
-			{
+			switch (this->game->selectCharacterID[0]){
 			case 0:
 				characterList.push_back(new Woody(0));
-				registSerialNumber=0;
+				registSerialNumber = 0;
 				break;
 			case 1:
 				characterList.push_back(new Freeze(0));
@@ -160,8 +216,7 @@ namespace game_framework {
 			characterList[0]->SetXY(200, 500);
 			characterList[0]->SetCharacter();
 
-			switch (this->game->selectCharacterID[1])
-			{
+			switch (this->game->selectCharacterID[1]) {
 			case 0:
 				characterList.push_back(new Woody(registSerialNumber == 0 ? 0 : 2));
 				break;
@@ -178,10 +233,8 @@ namespace game_framework {
 			characterList[1]->SetXY(400, 500);
 			characterList[1]->SetCharacter();
 			
-			//characterList[1]->SetCharacter(buffer[1] - '0');
 			SetAllCharacterPosition();
-			TRACE("Pos f %d\n", theOthersPosition[1].first);
-			TRACE("Pos s %d\n", theOthersPosition[1].second);
+
 
 			GetCharacter = true;
 			//load HealthBar small character
@@ -202,25 +255,20 @@ namespace game_framework {
 				MapAniCount = 0;
 			}
 		}
-		//TRACE("MapAniCount %d\n", MapAniCount);
-		//showStatus = MapAniCount % 2 == 0 ? true : false;
+	
 		maps->PrintMap(showStatus);
-		characterList[0]->OnShow(theOthersPosition, CurrentTime);
-		characterList[1]->OnShow(theOthersPosition, CurrentTime);
+		SortedShow();
+
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 	
-		
-		//imgs[0][0]->ShowBitmap();
+
 		boxTest->ShowAnimation();
 	}
 
 	CGameStateRun::~CGameStateRun(){
-		delete maps, HealthPlayer1, HealthPlayer2;
-		//delete boxTest;
-
-		for (auto& i : characterList) {
-			delete i;
-		}
+		delete maps, HealthPlayer1, HealthPlayer2,boxTest;
+		vector<Character*>().swap(characterList);
+		vector<FieldObject*>().swap(drop);
 	}
 }

@@ -12,6 +12,8 @@ namespace game_framework {
 		id = num;
 		direction = 0;
 		AnimationState = 5;
+		AnimationCount = 0;
+		state = 0;
 		Init();
 	}
 
@@ -57,6 +59,9 @@ namespace game_framework {
 	}
 
 	void FieldObject::ShowAnimation() {
+		TRACE("ss %d\n", state);
+		TRACE("AC %d\n", AnimationCount);
+
 		Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
 		Obj->OnShow(direction, AnimationState);
 	}
@@ -73,52 +78,69 @@ namespace game_framework {
 				Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
 				YVelocity = InitialVelocity;
 			}
+
+			if (state == 0) {
+				ShowStatic();
+			}
+			else  if (state == 2 || state == 3) {
+				ShowRoll();
+			}
 		}
-		else if (state==2 || state==3) {
-			ShowRoll();
-		}
+	}
+	int FieldObject::GetY() {
+		return yPos;
+	}
+
+	void FieldObject::ShowStatic() {
+		Obj->SetTopLeft(direction, 0, xPos, yPos);
+		Obj->OnShow(direction, 0);
 	}
 
 	void FieldObject::ShowRoll() {
-		if (AnimationCount <= 4) {
-			AnimationState = 1;
-		}
-		else if (AnimationCount <= 8) {
-			AnimationState = 2;
-		}
-		else if (AnimationCount <= 12) {
-			AnimationState = 3;
-		}
-		else if (AnimationCount <= 16) {
-			AnimationState = 4;
-		}
-		else if (AnimationCount <= 20) {
-			AnimationState = 5;
-			if (AnimationCount == 20) {
-				state = 0;
+		if (state == 2 || state == 3) {
+			AnimationCount++;
+			if (AnimationCount <= 4) {
+				AnimationState = 1;
 			}
-		}
-		AnimationCount++;
-		if (direction == 0) {
-			xPos += 1;
-			Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
-		}
-		else if (direction == 1) {
-			xPos -= 1;
-			Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
+			else if (AnimationCount <= 8) {
+				AnimationState = 2;
+			}
+			else if (AnimationCount <= 12) {
+				AnimationState = 3;
+			}
+			else if (AnimationCount <= 16) {
+				AnimationState = 4;
+			}
+			else if (AnimationCount <= 20) {
+				AnimationState = 5;
+				if (AnimationCount >= 20) {
+					AnimationCount = 0;
+					state = 0;
+				}
+			}
+			if (direction == 0) {
+				xPos += 3;
+				Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
+			}
+			else if (direction == 1) {
+				xPos -= 3;
+				Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
+			}
 		}
 	}
 
-	void FieldObject::Throw(bool flag) {
-		if (true) {
+	void FieldObject::Throw(bool flag, int dir) {
+		if (flag == true) {
 			state = 3;
+			direction = dir;
 		}
-		else {
+		else if(flag==false) {
 			state = 0;
+			AnimationCount = 0;
 		}
 	}
 
 	FieldObject::~FieldObject() {
-
+		delete Obj;
 	}
 }

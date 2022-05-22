@@ -117,7 +117,9 @@ namespace game_framework {
 	int Character::GetSkillSignal() {
 		return skillSignal;
 	}
-
+	boolean Character::GetCalculateDamageRequest() {
+		return calculateDamage_Request;
+	}
 	void Character::DistaceAccumulator() {
 		walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
 		
@@ -142,7 +144,9 @@ namespace game_framework {
 			return true;
 		}
 	}
-
+	void Character::SetCalculateDamageRequest(boolean val) {
+		calculateDamage_Request = val;
+	}
 	void Character::isGettingDamage(int Damage) {
 		HealthPoint -= Damage;
 		InnerHealPoint -= Damage / 2;
@@ -324,7 +328,9 @@ namespace game_framework {
 	void Character::SetMovingUp(bool flag) {
 		isMovingUp = flag;
 	}
-
+	void Character::SetAbonormalStatus(int characterID, boolean val) {
+		statusTable.push_back(pair<int, boolean>(characterID, val));
+	}
 	void Character::SetMovingLeft(bool flag) {
 		if (!isRunning) {
 			if (flag == true) {
@@ -534,7 +540,9 @@ namespace game_framework {
 			}
 		}
 	}
-
+	void Character::ClearAbonormalStatus() {
+		vector<pair<int, boolean>>().swap(statusTable);
+	}
 	void Character::SetMapBorder(int mapID) {
 		xMapBorderMin = -50;
 		xMapBorderMax = 810;

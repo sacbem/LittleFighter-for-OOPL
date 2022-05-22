@@ -18,13 +18,15 @@ namespace game_framework {
 		friend class Freeze;
 	protected:
 		void OnMove();									
-		void OnShow();									
+		void OnShow();		
+		void SortedShow();
 	private:
 		void DetectSkillDamage(vector<pair<int, int>> theOthersPosition);
 		bool GetCharacter = false;
 		vector<pair<int,int>> theOthersPosition;
 		vector<Character*> characterList;
-		vector<Freeze*> testFreeze;
+		vector<FieldObject*> drop; /// ©ñ¸m±¼¸¨ª«
+
 		//Player & other
 		//Character *PlayerTest;
 		//Character *EnemyTest;
