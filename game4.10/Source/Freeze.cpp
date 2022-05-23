@@ -10,8 +10,9 @@
 #include <algorithm>
 #include <time.h>
 namespace game_framework {
-	Freeze::Freeze(int num) {
+	Freeze::Freeze(int num, int mapID) {
 		serialNumber = num;
+		SetMapBorder(mapID);
 		for (int i = 0; i < 5; i++) {
 			skillsEffect_InFieldNumber.push_back(0);
 		}
@@ -724,7 +725,6 @@ namespace game_framework {
 	}
 
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
-		TRACE("y %d\n", yPos);
 		switch (AnimationState)
 		{
 		case 0:

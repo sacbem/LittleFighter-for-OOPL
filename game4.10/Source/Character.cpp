@@ -564,9 +564,13 @@ namespace game_framework {
 		case 0:
 			yMapBorderMin = 300;
 			yMapBorderMax = 500;
+		case 1 : 
+			yMapBorderMin = 255;
+			yMapBorderMax = 530;
+			break;
 		case 2:
-			yMapBorderMin = 300;
-			yMapBorderMax = 600;
+			yMapBorderMin = 240;
+			yMapBorderMax = 450;
 			break;
 		default:
 			break;
@@ -584,6 +588,7 @@ namespace game_framework {
 			yPos = Y > yMapBorderMax ? yMapBorderMax : Y;
 			yPos = yPos < yMapBorderMin ? yMapBorderMin : yPos;
 		}
+		TRACE("Y %d\n", yPos);
 	}
 
 	Character::~Character() {

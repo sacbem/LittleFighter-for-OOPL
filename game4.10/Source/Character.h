@@ -184,7 +184,7 @@ namespace game_framework {
 	class Freeze:public Character {
 	public:
 		//change to freeze
-		Freeze(int num);
+		Freeze(int num,int mapID);
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition ,int mainTime) override;
 		virtual void OnMove() override;
 
@@ -235,7 +235,7 @@ namespace game_framework {
 	class Henry :public Character {
 	public:
 		//change to freeze
-		Henry(int num);
+		Henry(int num, int mapID);
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) override;
 		virtual void OnMove() override;
 
@@ -282,7 +282,7 @@ namespace game_framework {
 	class Woody :public Character {
 	public:
 		//change to freeze
-		Woody(int num);
+		Woody(int num, int mapID);
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) override;
 		virtual void OnMove() override;
 

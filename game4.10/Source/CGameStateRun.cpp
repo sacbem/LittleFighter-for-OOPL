@@ -18,13 +18,13 @@ using namespace std;
 #define BC 2
 using namespace skillTable;
 namespace game_framework {
-	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
+	CGameStateRun::CGameStateRun(CGame* g) : CGameState(g) {
 		characterList.reserve(2);
 		theOthersPosition.reserve(2);
 		//characterList[1] = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
-		maps = new Map(BC);
+		maps = new Map(HKC);
 		drop.resize(0);
 		//GenerationTime = clock();
 
@@ -34,12 +34,12 @@ namespace game_framework {
 	{
 		//_CrtDumpMemoryLeaks();
 		for (int i = 0; i < 2; i++) {
-			theOthersPosition.push_back(pair<int,int>(0,0));
+			theOthersPosition.push_back(pair<int, int>(0, 0));
 		}
 		TimePassed = 0;
 	}
-   
-	void CGameStateRun::OnMove()	{					// 移動遊戲元素
+
+	void CGameStateRun::OnMove() {					// 移動遊戲元素
 		//boxTest->OnMove();
 
 		CleanCounter++;
@@ -63,8 +63,8 @@ namespace game_framework {
 		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
 		//characterList[1]->OnMove();
 		characterList[0]->DistanceAccumulatorReset();
-	
-		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(),characterList[0]->isRunning,characterList[0]->GetDir(), characterList[0]->GetDistance());
+
+		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(), characterList[0]->isRunning, characterList[0]->GetDir(), characterList[0]->GetDistance());
 
 		CalculateDamage(theOthersPosition);
 
@@ -86,14 +86,14 @@ namespace game_framework {
 
 		HealthPlayer1->OnLoad(0, 0);
 		HealthPlayer2->OnLoad(400, 0);
-		switch (maps->GetMapID()){
+		switch (maps->GetMapID()) {
 		case Forest:
 			CAudio::Instance()->Load(Forest, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
 			CAudio::Instance()->Play(Forest, true);
 			break;
 		case HKC:
-			CAudio::Instance()->Load(HKC, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
-			CAudio::Instance()->Play(HKC, true);
+			//CAudio::Instance()->Load(HKC, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
+			//CAudio::Instance()->Play(HKC, true);
 			break;
 		case BC:
 			//CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
@@ -105,17 +105,17 @@ namespace game_framework {
 
 	}
 
-	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags){
+	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		characterList[0]->InputKeyDown(nChar, CurrentTime);
 
 		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
 
 	}
 
-	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
+	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		characterList[0]->InputKeyUp(nChar);
 	}
-	
+
 	void CGameStateRun::SetAllCharacterPosition() {
 		for (int i = 0; i < characterList.size(); i++) {
 			theOthersPosition[i].first = characterList[i]->GetX1();
@@ -153,9 +153,9 @@ namespace game_framework {
 			pair<int, int>().swap(characterList[0]->hittedTable[0]);
 			characterList[0]->SetCalculateDamageRequest(false);
 		}
-		
+
 		//characterList[1]->isGettingDamage(player2Damage);
-		
+
 		//boxTest->OnMove();
 		//for (auto& i : drop) {
 		//	i->OnMove();
@@ -177,13 +177,11 @@ namespace game_framework {
 		vector<FieldObject*> dropCopy;
 		vector<Character*> characterListCopy;
 		vector<SkillEffect*> frozenPunchListCopy;
-		vector<int> showSequence(3,0), sequenceValue_Y(3,0);
+		vector<int> showSequence(3, 0), sequenceValue_Y(3, 0);
 		boolean dropEmpty = drop.empty(), characterEmpty = characterList.empty(), frozemPunchEmpty = frozenPunchList.empty();
 		int totalSize = drop.size() + characterList.size() + frozenPunchList.size();
 
-
-
-		if (! dropEmpty ) {
+		if (!dropEmpty) {
 			dropCopy.assign(drop.begin(), drop.end());
 			std::sort(dropCopy.begin(), dropCopy.end(), CompareF);
 			sequenceValue_Y[0] = dropCopy[0]->GetY();
@@ -194,7 +192,7 @@ namespace game_framework {
 		}
 		if (!characterEmpty) {
 			characterListCopy.assign(characterList.begin(), characterList.end());
-			std::sort(characterListCopy.begin(), characterListCopy.end(),CompareC);
+			std::sort(characterListCopy.begin(), characterListCopy.end(), CompareC);
 			sequenceValue_Y[1] = characterListCopy[0]->GetY1();
 		}
 		else {
@@ -211,116 +209,46 @@ namespace game_framework {
 			sequenceValue_Y[2] = 10000;
 		}
 
-		if (! characterListCopy[0]->GetMovingUp_Down() ) {
-			for (int i = 0; i < totalSize; i++) {
-				auto showingIndex = std::min_element(sequenceValue_Y.begin(), sequenceValue_Y.end()) - sequenceValue_Y.begin();
-				switch (showingIndex) {
-				case 0:
-					dropCopy[showSequence[0]]->ShowAnimation();
-					if (showSequence[0] < drop.size() - 1) {
-						showSequence[0] += 1;
-						sequenceValue_Y[0] = dropCopy[showSequence[0]]->GetY();
-					}
-					else {
-						sequenceValue_Y[0] = 1000;
-					}
-					break;
-				case 1:
-					characterListCopy[showSequence[1]]->OnShow(theOthersPosition, CurrentTime);
-					if (showSequence[1] < characterList.size() - 1) {
-						showSequence[1] += 1;
-						sequenceValue_Y[1] = characterListCopy[showSequence[1]]->GetY1();
-					}
-					else {
-						sequenceValue_Y[1] = 1000;
-					}
-					break;
-				case 2:
-
-					frozenPunchListCopy[showSequence[2]]->OnShow();
-					if (showSequence[2] < frozenPunchListCopy.size() - 1) {
-						showSequence[2]++;
-						sequenceValue_Y[2] = frozenPunchListCopy[showSequence[2]]->yPos;
-					}
-					else {
-						sequenceValue_Y[2] = 1000;
-					}
-					break;
-				
-				default:
-					break;
+		for (int i = 0; i < totalSize; i++) {
+			auto showingIndex = std::min_element(sequenceValue_Y.begin(), sequenceValue_Y.end()) - sequenceValue_Y.begin();
+			switch (showingIndex) {
+			case 0:
+				dropCopy[showSequence[0]]->ShowAnimation();
+				if (showSequence[0] < drop.size() - 1) {
+					showSequence[0] += 1;
+					sequenceValue_Y[0] = dropCopy[showSequence[0]]->GetY();
 				}
+				else {
+					sequenceValue_Y[0] = 1000;
+				}
+				break;
+			case 1:
+				characterListCopy[showSequence[1]]->OnShow(theOthersPosition, CurrentTime);
+				if (showSequence[1] < characterList.size() - 1) {
+					showSequence[1] += 1;
+					sequenceValue_Y[1] = characterListCopy[showSequence[1]]->GetY1();
+				}
+				else {
+					sequenceValue_Y[1] = 1000;
+				}
+				break;
+			case 2:
+				frozenPunchListCopy[showSequence[2]]->OnShow();
+				if (showSequence[2] < frozenPunchListCopy.size() - 1) {
+					showSequence[2]++;
+					sequenceValue_Y[2] = frozenPunchListCopy[showSequence[2]]->yPos;
+				}
+				else {
+					sequenceValue_Y[2] = 1000;
+				}
+				break;
+			default:
+				break;
 			}
+
 		}
-		else {
-			for (auto& i : showSequence) {
-				i = 0;
-			}
-			if (!dropEmpty) {
-				std::sort(dropCopy.begin(), dropCopy.end(), CompareF);
-				sequenceValue_Y[0] = dropCopy[0]->GetY();
-			}
-			else {
-				showSequence[0] = -1;
-				sequenceValue_Y[0] = 10000;
-			}
-			if (!characterEmpty) {
-				std::sort(characterListCopy.begin(), characterListCopy.end(), CompareC);
-				sequenceValue_Y[1] = characterListCopy[0]->GetY1();
-			}
-			else {
-				showSequence[1] = -1;
-				sequenceValue_Y[1] = 10000;
-			}
-			if (!frozemPunchEmpty) {
-				std::sort(frozenPunchList.begin(), frozenPunchList.end(), CompareFP);
-				sequenceValue_Y[2] = frozenPunchListCopy[0]->yPos;
-			}
-			else {
-				showSequence[2] = -1;
-				sequenceValue_Y[2] = 10000;
-			}
-			for (int i = 0; i < totalSize; i++) {
-				auto showingIndex = std::min_element(sequenceValue_Y.begin(), sequenceValue_Y.end()) - sequenceValue_Y.begin();
-				switch (showingIndex) {
-				case 0:
-					dropCopy[showSequence[0]]->ShowAnimation();
-					if (showSequence[0] < drop.size() - 1) {
-						showSequence[0] += 1;
-						sequenceValue_Y[0] = dropCopy[showSequence[0]]->GetY();
-					}
-					else {
-						sequenceValue_Y[0] = 1000;
-					}
-					break;
-				case 1:
-					characterListCopy[showSequence[1]]->OnShow(theOthersPosition, CurrentTime);
-					if (showSequence[1] < characterList.size() - 1) {
-						showSequence[1] += 1;
-						sequenceValue_Y[1] = characterListCopy[showSequence[1]]->GetY1();
-					}
-					else {
-						sequenceValue_Y[1] = 1000;
-					}
-					break;
-					case 2:
-						frozenPunchListCopy[showSequence[2]]->OnShow();
-						if (showSequence[2] < frozenPunchListCopy.size() - 1) {
-							showSequence[2]++;
-							sequenceValue_Y[2] = frozenPunchListCopy[showSequence[2]]->yPos;
-						}
-						else {
-							sequenceValue_Y[2] = 1000;
-						}
-						break;
-
-					default:
-						break;
-					}
-				}
-			}
-	}		
-
+	}
+	
 	//}
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
@@ -332,19 +260,19 @@ namespace game_framework {
 			drop.push_back(new FieldObject(0));
 			switch (this->game->selectCharacterID[0]){
 			case 0:
-				characterList.push_back(new Woody(0));
+				characterList.push_back(new Woody(0 ,maps->GetMapID()));
 				registSerialNumber = 0;
 				break;
 			case 1:
-				characterList.push_back(new Freeze(0));
+				characterList.push_back(new Freeze(0, maps->GetMapID()));
 				registSerialNumber = 1;
 				break;
 			case 2:
-				characterList.push_back(new Henry(0));
+				characterList.push_back(new Henry(0, maps->GetMapID()));
 				registSerialNumber = 2;
 				break;
 			default:
-				characterList.push_back(new Freeze(0));
+				characterList.push_back(new Freeze(0, maps->GetMapID()));
 				registSerialNumber = 1;
 
 				break;
@@ -354,19 +282,19 @@ namespace game_framework {
 
 			switch (this->game->selectCharacterID[1]) {
 			case 0:
-				characterList.push_back(new Woody(registSerialNumber == 0 ? 0 : 2));
+				characterList.push_back(new Woody(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
 				break;
 			case 1:
-				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2));
+				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
 				break;
 			case 2:
-				characterList.push_back(new Henry(registSerialNumber == 0 ? 0 : 2));
+				characterList.push_back(new Henry(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
 				break;
 			default:
-				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2));
+				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
 				break;
 			}
-			characterList[1]->SetXY(400, 400);
+			characterList[1]->SetXY(400, 401);
 			characterList[1]->SetCharacter();
 			
 			SetAllCharacterPosition();
