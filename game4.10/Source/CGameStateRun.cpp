@@ -172,7 +172,7 @@ namespace game_framework {
 		vector<FieldObject *> dropCopy;
 		vector<Character*> characterListCopy;
 		vector<SkillEffect*> frozenPunchListCopy;
-		vector<int> showSequence(3,0), sequenceValue_Y(3,0) ,characterYPos(2,0);
+		vector<int> showSequence(3,0), sequenceValue_Y(3,0);
 		boolean dropEmpty = drop.empty(), characterEmpty = characterList.empty(), frozemPunchEmpty = frozenPunchList.empty();
 		int totalSize = drop.size() + characterList.size() + frozenPunchList.size();
 
@@ -190,7 +190,7 @@ namespace game_framework {
 		if (!characterEmpty) {
 			characterListCopy.assign(characterList.begin(), characterList.end());
 			std::sort(characterListCopy.begin(), characterListCopy.end(),CompareC);
-			sequenceValue_Y[1] = characterYPos[0];
+			sequenceValue_Y[1] = characterListCopy[0]->GetY1();
 		}
 		else {
 			showSequence[1] = -1;
@@ -206,45 +206,115 @@ namespace game_framework {
 			sequenceValue_Y[2] = 10000;
 		}
 
+		if (! characterListCopy[0]->GetMovingUp_Down() ) {
+			for (int i = 0; i < totalSize; i++) {
+				auto showingIndex = std::min_element(sequenceValue_Y.begin(), sequenceValue_Y.end()) - sequenceValue_Y.begin();
+				switch (showingIndex) {
+				case 0:
+					dropCopy[showSequence[0]]->ShowAnimation();
+					if (showSequence[0] < drop.size() - 1) {
+						showSequence[0] += 1;
+						sequenceValue_Y[0] = dropCopy[showSequence[0]]->GetY();
+					}
+					else {
+						sequenceValue_Y[0] = 1000;
+					}
+					break;
+				case 1:
+					characterListCopy[showSequence[1]]->OnShow(theOthersPosition, CurrentTime);
+					if (showSequence[1] < characterList.size() - 1) {
+						showSequence[1] += 1;
+						sequenceValue_Y[1] = characterListCopy[showSequence[1]]->GetY1();
+					}
+					else {
+						sequenceValue_Y[1] = 1000;
+					}
+					break;
+				case 2:
 
-		for (int i = 0; i < totalSize; i++) {
-			auto showingIndex = std::min_element(sequenceValue_Y.begin(), sequenceValue_Y.end()) - sequenceValue_Y.begin();
-			switch (showingIndex) {
-			case 0:
-				dropCopy[showSequence[0]]->ShowAnimation();
-				if (showSequence[0] < drop.size() - 1) {
-					showSequence[0] += 1;
-					sequenceValue_Y[0] = dropCopy[showSequence[0]]->GetY();
-				}
-				else {
-					sequenceValue_Y[0] = 1000;
-				}
-				break;
-			case 1:
-				characterListCopy[showSequence[1]]->OnShow(theOthersPosition, CurrentTime);
-				if (showSequence[1] < characterList.size() - 1) {
-					showSequence[1] += 1;
-					sequenceValue_Y[1] = characterListCopy[showSequence[1]]->GetY1();
-				}
-				else {
-					sequenceValue_Y[1] = 1000;
-				}
-				break;
-			case 2:
-				frozenPunchListCopy[showSequence[2]]->OnShow();
-				if (showSequence[2] < frozenPunchListCopy.size() - 1) {
-					showSequence[2]++;
-					sequenceValue_Y[2] = frozenPunchListCopy[showSequence[2]]->yPos;
-				}
-				else {
-					sequenceValue_Y[2] = 1000;
-				}
-				break;
-			default:
+					frozenPunchListCopy[showSequence[2]]->OnShow();
+					if (showSequence[2] < frozenPunchListCopy.size() - 1) {
+						showSequence[2]++;
+						sequenceValue_Y[2] = frozenPunchListCopy[showSequence[2]]->yPos;
+					}
+					else {
+						sequenceValue_Y[2] = 1000;
+					}
+					break;
+				
+				default:
 					break;
 				}
 			}
-		}		
+		}
+		else {
+			for (auto& i : showSequence) {
+				i = 0;
+			}
+			if (!dropEmpty) {
+				std::sort(dropCopy.begin(), dropCopy.end(), CompareF);
+				sequenceValue_Y[0] = dropCopy[0]->GetY();
+			}
+			else {
+				showSequence[0] = -1;
+				sequenceValue_Y[0] = 10000;
+			}
+			if (!characterEmpty) {
+				std::sort(characterListCopy.begin(), characterListCopy.end(), CompareC);
+				sequenceValue_Y[1] = characterListCopy[0]->GetY1();
+			}
+			else {
+				showSequence[1] = -1;
+				sequenceValue_Y[1] = 10000;
+			}
+			if (!frozemPunchEmpty) {
+				std::sort(frozenPunchList.begin(), frozenPunchList.end(), CompareFP);
+				sequenceValue_Y[2] = frozenPunchListCopy[0]->yPos;
+			}
+			else {
+				showSequence[2] = -1;
+				sequenceValue_Y[2] = 10000;
+			}
+			for (int i = 0; i < totalSize; i++) {
+				auto showingIndex = std::min_element(sequenceValue_Y.begin(), sequenceValue_Y.end()) - sequenceValue_Y.begin();
+				switch (showingIndex) {
+				case 0:
+					dropCopy[showSequence[0]]->ShowAnimation();
+					if (showSequence[0] < drop.size() - 1) {
+						showSequence[0] += 1;
+						sequenceValue_Y[0] = dropCopy[showSequence[0]]->GetY();
+					}
+					else {
+						sequenceValue_Y[0] = 1000;
+					}
+					break;
+				case 1:
+					characterListCopy[showSequence[1]]->OnShow(theOthersPosition, CurrentTime);
+					if (showSequence[1] < characterList.size() - 1) {
+						showSequence[1] += 1;
+						sequenceValue_Y[1] = characterListCopy[showSequence[1]]->GetY1();
+					}
+					else {
+						sequenceValue_Y[1] = 1000;
+					}
+					break;
+					case 2:
+						frozenPunchListCopy[showSequence[2]]->OnShow();
+						if (showSequence[2] < frozenPunchListCopy.size() - 1) {
+							showSequence[2]++;
+							sequenceValue_Y[2] = frozenPunchListCopy[showSequence[2]]->yPos;
+						}
+						else {
+							sequenceValue_Y[2] = 1000;
+						}
+						break;
+
+					default:
+						break;
+					}
+				}
+			}
+	}		
 
 	//}
 	void CGameStateRun::OnShow(){

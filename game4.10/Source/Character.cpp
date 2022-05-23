@@ -113,7 +113,15 @@ namespace game_framework {
 	int Character::GetDir() {
 		return direction;
 	}
-	
+	int Character::GetMovingUp_Down() {
+		if (isMovingDown) {
+			return 1;
+		}
+		if (isMovingUp) {
+			return 2;
+		}
+		return 0;
+	}
 	int Character::GetSkillSignal() {
 		return skillSignal;
 	}

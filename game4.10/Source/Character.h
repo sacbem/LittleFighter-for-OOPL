@@ -22,6 +22,7 @@ namespace game_framework {
 		int GetDistance();
 		int GetMovingTime(boolean isLeft);
 		int GetSkillSignal();
+		int GetMovingUp_Down();
 		boolean GetCalculateDamageRequest();
 		void Initialize();
 
