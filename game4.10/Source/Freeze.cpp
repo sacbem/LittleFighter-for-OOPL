@@ -724,7 +724,7 @@ namespace game_framework {
 	}
 
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
-		TRACE("y %d\n", yPos);
+		//TRACE("y %d\n", yPos);
 		switch (AnimationState)
 		{
 		case 0:

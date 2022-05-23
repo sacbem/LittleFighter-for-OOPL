@@ -40,7 +40,7 @@ namespace game_framework {
 	}
    
 	void CGameStateRun::OnMove()	{					// 移動遊戲元素
-		//boxTest->OnMove();
+		drop[0]->OnMove();
 
 		CleanCounter++;
 		if (CleanCounter >= 10) {
@@ -69,7 +69,16 @@ namespace game_framework {
 		CalculateDamage(theOthersPosition);
 
 		//boxTest->Throw(true, characterList[0]->GetDir());
-		if (drop[0]->HitPlayer(characterList[0]->GetX1(), characterList[0]->GetX2(), characterList[0]->GetY1(), characterList[0]->GetY2(), characterList[0]->isAttacking)) {
+		if (drop[0]->HitPlayer(0, characterList[0]->GetX1(), characterList[0]->GetY1(), characterList[0]->GetX2(), characterList[0]->GetY2(), characterList[0]->isAttacking)) {
+			TRACE("In Range\n");
+			if (characterList[0]->isDropItem == false && characterList[0]->isCarryItem == false && characterList[0]->GetSkillSignal()==-1) {
+				if (drop[0]->GetState() == 0) {
+					characterList[0]->SetPickup(true,0);
+					drop[0]->SetState(1);
+				}
+			}
+		}
+		if (drop[0]->GetState() == 1) {
 			characterList[0]->Pickup(drop[0]);
 		}
 	}
@@ -110,6 +119,15 @@ namespace game_framework {
 
 		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
 
+		if (characterList[0]->isDropItem == true) {
+			drop[0]->liftUp(false, characterList[0]->GetX1(), characterList[0]->GetY1(), characterList[0]->GetDir());
+			//TRACE("drop state %d\n", drop[0]->GetState());
+			//TRACE("char isDrop %d\n", characterList[0]->isDropItem);
+			//TRACE("char isCarry %d\n", characterList[0]->isCarryItem);
+			characterList[0]->isCarryItem = false;
+			characterList[0]->isDropItem = false;
+			characterList[0]->itemId = -1;
+		}
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
@@ -157,10 +175,7 @@ namespace game_framework {
 		//characterList[1]->isGettingDamage(player2Damage);
 		
 		//boxTest->OnMove();
-		//for (auto& i : drop) {
-		//	i->OnMove();
-		//}
-		drop[0]->OnMove();
+		//drop[0]->OnMove();
 		//characterList[0]->Pickup(drop[0]);
 	}
 	boolean CompareC(Character* obj1, Character* obj2) {
@@ -177,13 +192,11 @@ namespace game_framework {
 		vector<FieldObject*> dropCopy;
 		vector<Character*> characterListCopy;
 		vector<SkillEffect*> frozenPunchListCopy;
-		vector<int> showSequence(3,0), sequenceValue_Y(3,0) ,characterYPos(2,0);
+		vector<int> showSequence(3, 0), sequenceValue_Y(3, 0);
 		boolean dropEmpty = drop.empty(), characterEmpty = characterList.empty(), frozemPunchEmpty = frozenPunchList.empty();
 		int totalSize = drop.size() + characterList.size() + frozenPunchList.size();
 
-
-
-		if (! dropEmpty ) {
+		if (!dropEmpty) {
 			dropCopy.assign(drop.begin(), drop.end());
 			std::sort(dropCopy.begin(), dropCopy.end(), CompareF);
 			sequenceValue_Y[0] = dropCopy[0]->GetY();
@@ -194,8 +207,8 @@ namespace game_framework {
 		}
 		if (!characterEmpty) {
 			characterListCopy.assign(characterList.begin(), characterList.end());
-			std::sort(characterListCopy.begin(), characterListCopy.end(),CompareC);
-			sequenceValue_Y[1] = characterYPos[0];
+			std::sort(characterListCopy.begin(), characterListCopy.end(), CompareC);
+			sequenceValue_Y[1] = characterListCopy[0]->GetY1();
 		}
 		else {
 			showSequence[1] = -1;
@@ -210,7 +223,6 @@ namespace game_framework {
 			showSequence[2] = -1;
 			sequenceValue_Y[2] = 10000;
 		}
-
 
 		for (int i = 0; i < totalSize; i++) {
 			auto showingIndex = std::min_element(sequenceValue_Y.begin(), sequenceValue_Y.end()) - sequenceValue_Y.begin();
@@ -246,10 +258,11 @@ namespace game_framework {
 				}
 				break;
 			default:
-					break;
-				}
+				break;
 			}
-		}		
+
+		}
+	}
 
 	//}
 	void CGameStateRun::OnShow(){
@@ -258,8 +271,8 @@ namespace game_framework {
 		if (GetCharacter == false ){ // && characterList[1]->getCharacter == false) {
 			//boxTest = new FieldObject(0);
 			drop.push_back(new FieldObject(0));
-			drop.push_back(new FieldObject(0));
-			drop.push_back(new FieldObject(0));
+			//drop.push_back(new FieldObject(0));
+			//drop.push_back(new FieldObject(0));
 			switch (this->game->selectCharacterID[0]){
 			case 0:
 				characterList.push_back(new Woody(0));
@@ -328,8 +341,10 @@ namespace game_framework {
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 	
-
+		//drop[0]->ShowAnimation();
 		//boxTest->ShowAnimation();
+		TRACE("isCarry %d\n", characterList[0]->isCarryItem);
+		TRACE("isDrop %d\n", characterList[0]->isDropItem);
 	}
 
 	CGameStateRun::~CGameStateRun(){

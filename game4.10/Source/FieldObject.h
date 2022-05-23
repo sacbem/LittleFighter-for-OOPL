@@ -10,11 +10,12 @@ namespace game_framework {
 		void Init();
 		void Throw(bool flag, int dir);
 		void SetKnock();
+		void SetState(int s);
 		//Hit Character
-		int HitPlayer(int tx1, int ty1, int tx2, int ty2, bool isAttacking);
-		int HitRectangle(int tx1, int ty1, int tx2, int ty2);
+		int HitPlayer(int ownerId, int tx1, int ty1, int tx2, int ty2, bool isAttacking);
+		int HitRectangle(int ownerId, int tx1, int ty1, int tx2, int ty2);
 
-		void liftUp(bool flag, int x, int y);
+		void liftUp(bool flag, int x, int y, int dir);
 		void PickedUp(bool flag, int x, int y);
 		int GetState();
 		void OnMove();
@@ -25,6 +26,7 @@ namespace game_framework {
 		int Hp;
 		~FieldObject();
 	protected:
+		int OwnerId;
 		int id;
 		GameObject* Obj;
 		int spawnX, spawnY;

@@ -144,6 +144,8 @@ namespace game_framework {
 	}
 
 	void Woody::SetAttack(bool flag) {
+		//TRACE("Att State %d\n", AttackState);
+		//TRACE("isHit %d\n", isHitting);
 		if (flag == true) {
 			if (!isAttacking) {
 				isAttacking = true;
@@ -1482,6 +1484,11 @@ namespace game_framework {
 			if (SpCount >= 80) {
 				SpCount = 0;
 				skillSignal = -1;
+
+				//init jump
+				isJumpping = island = false;
+				InitialVelocity = 10;
+				YVelocity = InitialVelocity;
 			}
 		}
 

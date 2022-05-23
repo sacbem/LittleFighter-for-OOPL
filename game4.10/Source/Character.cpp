@@ -29,9 +29,13 @@ namespace game_framework {
 		isDefense = false;
 		isGettingHit = false;
 		isAttacking = false;
+		isHitting = false;
 		hitDirection = 0;
 		KnockSpeed = 0;
 
+		itemId = -1;
+		isCarryItem = false;
+		isDropItem = false;
 
 		//init jump
 		isJumpping = island = false;
@@ -81,9 +85,27 @@ namespace game_framework {
 		Initialize();
 	}
 
+	void Character::SetPickup(bool flag, int Id) {
+		if (flag == true) {
+			if (isCarryItem == false && isDropItem == false) {
+				if (itemId == -1) {
+					//TRACE("Call PickUP\n");
+					isCarryItem = true;
+					isDropItem = false;
+					itemId = Id;
+				}
+			}
+		}
+		else if (flag == false) {
+			//TRACE("Call NOT PickUP\n");
+			isCarryItem = false;
+			isDropItem = true;
+			itemId = -1;
+		}
+	}
+
 	void Character::Pickup(FieldObject *other) {
-		other->liftUp(true,xPos,yPos);
-		isCarryItem = true;
+		other->liftUp(true,xPos,yPos,direction);
 	}
 
 	bool Character::GetAlive() {
@@ -234,13 +256,6 @@ namespace game_framework {
 				}
 				
 				SetSkill(createdTime);
-				/*
-				if (SpCount == 16) {
-					//Create Frozen Waves
-					//SetSkill(0);
-					frozenWaves.push_back(new SkillEffect(0, KeyBoardInputTime, direction, xPos, yPos));
-				}
-				*/
 			}
 			//detect double click
 			if (Diff <= 20) {
@@ -276,6 +291,9 @@ namespace game_framework {
 		}
 		if (nChar == KEY_ENTER) {
 			SetAttack(true);
+			if (isCarryItem == true) {
+				SetPickup(false, itemId);
+			}
 		}
 		/*
 		if (nChar == KEY_TEST_SKILL1) {

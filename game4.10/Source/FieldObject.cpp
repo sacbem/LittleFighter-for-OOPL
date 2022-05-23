@@ -9,7 +9,9 @@
 
 namespace game_framework {
 	FieldObject::FieldObject(int num) {
+		OwnerId = -1;
 		id = num;
+		Hp = 20;
 		direction = 0;
 		AnimationState = 5;
 		AnimationCount = 0;
@@ -45,9 +47,10 @@ namespace game_framework {
 		
 		srand(time(NULL));
 		//spawn random x
-		spawnX = rand() % (600 - 100 + 1) + 100;
+		//spawnX = rand() % (600 - 100 + 1) + 100;
 		//spawnY = rand() % (400 - 200 + 1) + 200;
-		spawnY = 500;
+		spawnX = 350;
+		spawnY = 350;
 		xPos = spawnX;
 		yPos = -80;
 		
@@ -58,12 +61,13 @@ namespace game_framework {
 		YVelocity = InitialVelocity;
 	}
 
-	int FieldObject::HitPlayer(int tx1, int ty1, int tx2, int ty2, bool isAttacking) {
+	int FieldObject::HitPlayer(int ownerid, int tx1, int ty1, int tx2, int ty2, bool isAttacking) {
 		int yRange1 = ty1 - 20;
 		int yRange2 = ty1 + 20;
 		if (yRange1 <= ty1 && ty1 <= yRange2) {
 			if (isAttacking) {
-				return HitRectangle(tx1 + 30, ty1 + 20, tx2 - 30, ty2 - 20);
+				Hp -= 1;
+				return HitRectangle(ownerid, tx1 + 30, ty1 + 20, tx2 - 30, ty2 - 20);
 			}
 		}
 		else {
@@ -71,39 +75,50 @@ namespace game_framework {
 		}
 	}
 
-	int FieldObject::HitRectangle(int tx1, int ty1, int tx2, int ty2) {
+	int FieldObject::HitRectangle(int ownerid, int tx1, int ty1, int tx2, int ty2) {
 		int x1 = xPos;
 		int y1 = yPos;
 		int x2 = x1 + 58;
 		int y2 = y1 + 58;
 
 		if (tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2) {
-			state = 1;
-			return 1;
+			TRACE("Hit Box 2\n");
+			if (state == 0) {
+				TRACE("Hit Box & state=0\n");
+				//state = 1;
+				OwnerId = ownerid;
+				return 1;
+			}
 		}
 		else {
 			return 0;
 		}
 	}
 
+	void FieldObject::SetState(int s) {
+		state = s;
+	};
+
 	int FieldObject::GetState() {
 		return state;
 	}
 
-	void FieldObject::liftUp(bool flag, int x, int y) {
+	void FieldObject::liftUp(bool flag, int x, int y, int dir) {
 		if (flag == true) {
 			xPos = x+10;
 			yPos = y-40;
+			direction = dir;
 			state = 1;
 		}
 		else if (flag == false) {
-			spawnY = y + 80;
+			spawnY = y + 22;
 			state = 3;
+			OwnerId = -1;
 		}
 	};
 
 	void FieldObject::ShowAnimation() {
-		//TRACE("ss %d\n", state);
+		TRACE("ss %d\n", state);
 		//TRACE("AC %d\n", AnimationCount);
 
 		Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
@@ -123,11 +138,11 @@ namespace game_framework {
 				YVelocity = InitialVelocity;
 			}
 
-			if (state == 0) {
-				ShowStatic();
-			}
-			else  if (state == 2 || state == 3) {
+			if (state == 2 || state == 3) {
 				ShowRoll();
+			}
+			else if (state == 0) {
+				ShowStatic();
 			}
 		}
 	}
@@ -159,15 +174,16 @@ namespace game_framework {
 				AnimationState = 5;
 				if (AnimationCount >= 20) {
 					AnimationCount = 0;
+					Hp -= 5;
 					state = 0;
 				}
 			}
 			if (direction == 0) {
-				xPos += 3;
+				xPos += 10;
 				Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
 			}
 			else if (direction == 1) {
-				xPos -= 3;
+				xPos -= 10;
 				Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
 			}
 		}
