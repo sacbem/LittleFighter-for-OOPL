@@ -46,8 +46,8 @@ namespace game_framework {
 		srand(time(NULL));
 		//spawn random x
 		spawnX = rand() % (600 - 100 + 1) + 100;
-		spawnY = rand() % (400 - 200 + 1) + 200;
-		//spawnY = 350;
+		//spawnY = rand() % (400 - 200 + 1) + 200;
+		spawnY = 500;
 		xPos = spawnX;
 		yPos = -80;
 		

@@ -96,8 +96,8 @@ namespace game_framework {
 			CAudio::Instance()->Play(HKC, true);
 			break;
 		case BC:
-			CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
-			CAudio::Instance()->Play(BC, true);
+			//CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
+			//CAudio::Instance()->Play(BC, true);
 			break;
 		default:
 			break;
@@ -164,10 +164,10 @@ namespace game_framework {
 		//characterList[0]->Pickup(drop[0]);
 	}
 	boolean CompareC(Character* obj1, Character* obj2) {
-		return obj1->GetY1() < obj1->GetY1();
+		return obj1->GetY1() < obj2->GetY1();
 	}
 	boolean CompareF(FieldObject* obj1, FieldObject* obj2) {
-		return obj1->GetY() < obj1->GetY();
+		return obj1->GetY() < obj2->GetY();
 	}
 	boolean CompareFP(SkillEffect* s1, SkillEffect* s2) {
 		return s1->yPos < s2->yPos;
@@ -177,11 +177,13 @@ namespace game_framework {
 		vector<FieldObject*> dropCopy;
 		vector<Character*> characterListCopy;
 		vector<SkillEffect*> frozenPunchListCopy;
-		vector<int> showSequence(3, 0), sequenceValue_Y(3, 0), characterYPos(2, 0);
+		vector<int> showSequence(3,0), sequenceValue_Y(3,0) ,characterYPos(2,0);
 		boolean dropEmpty = drop.empty(), characterEmpty = characterList.empty(), frozemPunchEmpty = frozenPunchList.empty();
 		int totalSize = drop.size() + characterList.size() + frozenPunchList.size();
 
-		if (!dropEmpty) {
+
+
+		if (! dropEmpty ) {
 			dropCopy.assign(drop.begin(), drop.end());
 			std::sort(dropCopy.begin(), dropCopy.end(), CompareF);
 			sequenceValue_Y[0] = dropCopy[0]->GetY();
@@ -192,7 +194,7 @@ namespace game_framework {
 		}
 		if (!characterEmpty) {
 			characterListCopy.assign(characterList.begin(), characterList.end());
-			std::sort(characterListCopy.begin(), characterListCopy.end(), CompareC);
+			std::sort(characterListCopy.begin(), characterListCopy.end(),CompareC);
 			sequenceValue_Y[1] = characterYPos[0];
 		}
 		else {
@@ -244,11 +246,12 @@ namespace game_framework {
 				}
 				break;
 			default:
-				break;
+					break;
+				}
 			}
-		}
-	}
+		}		
 
+	//}
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//get character

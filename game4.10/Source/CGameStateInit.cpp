@@ -259,7 +259,7 @@ namespace game_framework {
 				  if (countDown.IsFinalBitmap()){
 					  this->game->selectCharacterID[0] = characterID[0];
 					  this->game->selectCharacterID[1] = characterID[1];
-					  //CAudio::Instance()->Stop(0);
+					 // CAudio::Instance()->Stop(0);
 					  GotoGameState(GAME_STATE_RUN);
 				  }
 			  }
