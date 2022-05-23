@@ -167,20 +167,26 @@ namespace game_framework {
 		DamageAccumulator += Damage;
 	}
 
-	void Character::InputKeyDown(UINT nChar, int createdTime) {
-		const char KEY_LEFT = 0x41; // keyboard���b�Y 0x25
-		const char KEY_UP = 0x57; // keyboard�W�b�Y 0x26
-		const char KEY_RIGHT = 0x44; // keyboard�k�b�Y 0x27
-		const char KEY_DOWN = 0x53; // keyboard�U�b�Y 0x28
-		const char KEY_SPACE = 0x20; // keyboard SPACE
-		const char KEY_CTRL = 0x11; //keyboard ctrl
-		const char KEY_ENTER = 0x0D; // keyboard ENTER
-		const char KEY_TEST_SKILL1 = 0x5A; // keyboard Z
+	void Character::InputKeyDown(UINT nChar, int createdTime, int playerID) {
+		const char KEY_LEFT = playerID ? 0x25 : 0x41; // keyboard���b�Y 0x25
+		const char KEY_UP = playerID ? 0x26: 0x57; // keyboard�W�b�Y 0x26
+		const char KEY_RIGHT = playerID ? 0x27 : 0x44; // keyboard�k�b�Y 0x27
+		const char KEY_DOWN = playerID ? 0x28 : 0x53; // keyboard�U�b�Y 0x28
+		const char KEY_SPACE = playerID ? 0x30 : 0x20; // keyboard SPACE
+		const char KEY_CTRL = playerID ? 0x31 : 0x11; //keyboard ctrl
+		const char KEY_ENTER = playerID ? 0x32 : 0x0D; // keyboard ENTER
+		
 		const char KEY_H = 0x48;
 		const char KEY_J = 0x4A;
 		const char KEY_K = 0x4B;
 		const char KEY_L = 0x4C;
 		const char KEY_U = 0x55;
+
+		const char KEY_Z = 0x5A;
+		const char KEY_X = 0x58;
+		const char KEY_C = 0x43;
+		const char KEY_V = 0x56;
+		const char KEY_B = 0x42;
 
 		Diff = KeyBoardInputTime - LastInputTime;
 		LastInputTime = KeyBoardInputTime;
@@ -242,13 +248,6 @@ namespace game_framework {
 				}
 				
 				SetSkill(createdTime);
-				/*
-				if (SpCount == 16) {
-					//Create Frozen Waves
-					//SetSkill(0);
-					frozenWaves.push_back(new SkillEffect(0, KeyBoardInputTime, direction, xPos, yPos));
-				}
-				*/
 			}
 			//detect double click
 			if (Diff <= 20) {
@@ -292,14 +291,16 @@ namespace game_framework {
 		*/
 	}
 
-	void Character::InputKeyUp(UINT nChar) {
-		const char KEY_LEFT = 0x41; // keyboard���b�Y 0x25
-		const char KEY_UP = 0x57; // keyboard�W�b�Y 0x26
-		const char KEY_RIGHT = 0x44; // keyboard�k�b�Y 0x27
-		const char KEY_DOWN = 0x53; // keyboard�U�b�Y 0x28
-		const char KEY_SPACE = 0x20; // keyboard SPACE
-		const char KEY_ENTER = 0x0D; // keyboard ENTER
-		const char KEY_J = 0x4A;
+	void Character::InputKeyUp(UINT nChar, int playerID) {
+		const char KEY_LEFT = playerID ? 0x25 : 0x41; // keyboard���b�Y 0x25
+		const char KEY_UP = playerID ? 0x26 : 0x57; // keyboard�W�b�Y 0x26
+		const char KEY_RIGHT = playerID ? 0x27 : 0x44; // keyboard�k�b�Y 0x27
+		const char KEY_DOWN = playerID ? 0x28 : 0x53; // keyboard�U�b�Y 0x28
+
+		const char KEY_SPACE = playerID ? 0x30 : 0x20; // keyboard SPACE
+		const char KEY_ENTER = playerID ? 0x32 : 0x0D; // keyboard ENTER
+		
+
 		if (nChar == KEY_LEFT) {
 			if (isRunning == false) {
 				SetMovingRight(false);
