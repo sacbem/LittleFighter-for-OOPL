@@ -131,12 +131,12 @@ namespace game_framework {
 			floorObjs[2]->SetTopLeft(600, 420);
 			break;	
 		case HKC:
-			floors[0]->SetTopLeft(0, 336);
+			floors[0]->SetTopLeft(0, 336);//363+336
 			break;
 		case BC:
 			floors[0]->SetTopLeft(-2500, 296);
 			floors[1]->SetTopLeft(-600, 296);
-			floors[2]->SetTopLeft(1150, 296);
+			floors[2]->SetTopLeft(1150, 296);//296+231
 			break;
 		default:
 			break;

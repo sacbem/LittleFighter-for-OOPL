@@ -18,13 +18,13 @@ using namespace std;
 #define BC 2
 using namespace skillTable;
 namespace game_framework {
-	CGameStateRun::CGameStateRun(CGame* g): CGameState(g){
+	CGameStateRun::CGameStateRun(CGame* g) : CGameState(g) {
 		characterList.reserve(2);
 		theOthersPosition.reserve(2);
 		//characterList[1] = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
-		maps = new Map(BC);
+		maps = new Map(HKC);
 		drop.resize(0);
 		//GenerationTime = clock();
 
@@ -34,7 +34,7 @@ namespace game_framework {
 	{
 		//_CrtDumpMemoryLeaks();
 		for (int i = 0; i < 2; i++) {
-			theOthersPosition.push_back(pair<int,int>(0,0));
+			theOthersPosition.push_back(pair<int, int>(0, 0));
 		}
 		TimePassed = 0;
 	}
@@ -63,8 +63,8 @@ namespace game_framework {
 		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
 		//characterList[1]->OnMove();
 		characterList[0]->DistanceAccumulatorReset();
-	
-		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(),characterList[0]->isRunning,characterList[0]->GetDir(), characterList[0]->GetDistance());
+
+		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(), characterList[0]->isRunning, characterList[0]->GetDir(), characterList[0]->GetDistance());
 
 		CalculateDamage(theOthersPosition);
 
@@ -95,14 +95,14 @@ namespace game_framework {
 
 		HealthPlayer1->OnLoad(0, 0);
 		HealthPlayer2->OnLoad(400, 0);
-		switch (maps->GetMapID()){
+		switch (maps->GetMapID()) {
 		case Forest:
 			CAudio::Instance()->Load(Forest, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
 			CAudio::Instance()->Play(Forest, true);
 			break;
 		case HKC:
-			CAudio::Instance()->Load(HKC, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
-			CAudio::Instance()->Play(HKC, true);
+			//CAudio::Instance()->Load(HKC, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
+			//CAudio::Instance()->Play(HKC, true);
 			break;
 		case BC:
 			//CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
@@ -114,8 +114,8 @@ namespace game_framework {
 
 	}
 
-	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags){
-		characterList[0]->InputKeyDown(nChar, CurrentTime);
+	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
+		characterList[0]->InputKeyDown(nChar, CurrentTime,0);
 
 		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
 
@@ -130,10 +130,10 @@ namespace game_framework {
 		}
 	}
 
-	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags){
-		characterList[0]->InputKeyUp(nChar);
+	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
+		characterList[0]->InputKeyUp(nChar,0);
 	}
-	
+
 	void CGameStateRun::SetAllCharacterPosition() {
 		for (int i = 0; i < characterList.size(); i++) {
 			theOthersPosition[i].first = characterList[i]->GetX1();
@@ -171,9 +171,9 @@ namespace game_framework {
 			pair<int, int>().swap(characterList[0]->hittedTable[0]);
 			characterList[0]->SetCalculateDamageRequest(false);
 		}
-		
+
 		//characterList[1]->isGettingDamage(player2Damage);
-		
+
 		//boxTest->OnMove();
 		//drop[0]->OnMove();
 		//characterList[0]->Pickup(drop[0]);
@@ -263,7 +263,7 @@ namespace game_framework {
 
 		}
 	}
-
+	
 	//}
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
@@ -275,19 +275,19 @@ namespace game_framework {
 			//drop.push_back(new FieldObject(0));
 			switch (this->game->selectCharacterID[0]){
 			case 0:
-				characterList.push_back(new Woody(0));
+				characterList.push_back(new Woody(0 ,maps->GetMapID()));
 				registSerialNumber = 0;
 				break;
 			case 1:
-				characterList.push_back(new Freeze(0));
+				characterList.push_back(new Freeze(0, maps->GetMapID()));
 				registSerialNumber = 1;
 				break;
 			case 2:
-				characterList.push_back(new Henry(0));
+				characterList.push_back(new Henry(0, maps->GetMapID()));
 				registSerialNumber = 2;
 				break;
 			default:
-				characterList.push_back(new Freeze(0));
+				characterList.push_back(new Freeze(0, maps->GetMapID()));
 				registSerialNumber = 1;
 
 				break;
@@ -297,19 +297,19 @@ namespace game_framework {
 
 			switch (this->game->selectCharacterID[1]) {
 			case 0:
-				characterList.push_back(new Woody(registSerialNumber == 0 ? 0 : 2));
+				characterList.push_back(new Woody(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
 				break;
 			case 1:
-				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2));
+				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
 				break;
 			case 2:
-				characterList.push_back(new Henry(registSerialNumber == 0 ? 0 : 2));
+				characterList.push_back(new Henry(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
 				break;
 			default:
-				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2));
+				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
 				break;
 			}
-			characterList[1]->SetXY(400, 400);
+			characterList[1]->SetXY(400, 401);
 			characterList[1]->SetCharacter();
 			
 			SetAllCharacterPosition();

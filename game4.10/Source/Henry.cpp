@@ -10,8 +10,9 @@
 #include <algorithm>
 #include <time.h>
 namespace game_framework {
-	Henry::Henry(int num) {
+	Henry::Henry(int num,int mapID) {
 		serialNumber = num;
+		SetMapBorder(mapID);
 		for (int i = 0; i < 5; i++) {
 			skillsEffect_InFieldNumber.push_back(0);
 		}

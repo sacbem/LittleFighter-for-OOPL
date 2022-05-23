@@ -23,6 +23,7 @@ namespace game_framework {
 		int GetDistance();
 		int GetMovingTime(boolean isLeft);
 		int GetSkillSignal();
+		int GetMovingUp_Down();
 		boolean GetCalculateDamageRequest();
 		void Initialize();
 
@@ -50,8 +51,8 @@ namespace game_framework {
 		virtual void SetAttack(bool flag) = 0;
 		virtual void SetKnock(bool flag, int Dir, int AttState)=0;
 		virtual void SetSkill(int createdTimes) =0;
-		void InputKeyDown(UINT nChar, int Time);
-		void InputKeyUp(UINT nChar);
+		void InputKeyDown(UINT nChar, int createdTime, int playerID);
+		void InputKeyUp(UINT nChar, int playerID);
 		boolean IsInBorder(int mapID);
 		boolean IsStatic();
 		boolean  DistanceAccumulatorReset();
@@ -187,7 +188,7 @@ namespace game_framework {
 	class Freeze:public Character {
 	public:
 		//change to freeze
-		Freeze(int num);
+		Freeze(int num,int mapID);
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition ,int mainTime) override;
 		virtual void OnMove() override;
 
@@ -238,7 +239,7 @@ namespace game_framework {
 	class Henry :public Character {
 	public:
 		//change to freeze
-		Henry(int num);
+		Henry(int num, int mapID);
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) override;
 		virtual void OnMove() override;
 
@@ -285,7 +286,7 @@ namespace game_framework {
 	class Woody :public Character {
 	public:
 		//change to freeze
-		Woody(int num);
+		Woody(int num, int mapID);
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) override;
 		virtual void OnMove() override;
 
