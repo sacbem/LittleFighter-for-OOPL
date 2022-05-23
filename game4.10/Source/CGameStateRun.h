@@ -1,9 +1,9 @@
 #include "SkillEffect.h"
 #include "Character.h"
 #include "HealthBar.h"
+#include "FieldObject.h"
 #include "Map.h"
 #include <ctime>
-#include "FieldObject.h"
 namespace game_framework {
 	class CGameStateRun : public CGameState {
 	public:

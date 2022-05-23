@@ -5,6 +5,7 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "Character.h"
+#include "FieldObject.h"
 #include "time.h"
 #include <cmath>
 #include <algorithm>
@@ -78,6 +79,11 @@ namespace game_framework {
 	
 	Character::Character(Character const& other) : name(other.name) {
 		Initialize();
+	}
+
+	void Character::Pickup(FieldObject *other) {
+		other->liftUp(true,xPos,yPos);
+		isCarryItem = true;
 	}
 
 	bool Character::GetAlive() {

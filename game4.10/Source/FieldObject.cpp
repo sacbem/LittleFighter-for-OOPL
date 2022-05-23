@@ -58,7 +58,53 @@ namespace game_framework {
 		YVelocity = InitialVelocity;
 	}
 
+	int FieldObject::HitPlayer(int tx1, int ty1, int tx2, int ty2, bool isAttacking) {
+		int yRange1 = ty1 - 20;
+		int yRange2 = ty1 + 20;
+		if (yRange1 <= ty1 && ty1 <= yRange2) {
+			if (isAttacking) {
+				return HitRectangle(tx1 + 30, ty1 + 20, tx2 - 30, ty2 - 20);
+			}
+		}
+		else {
+			return 0;
+		}
+	}
+
+	int FieldObject::HitRectangle(int tx1, int ty1, int tx2, int ty2) {
+		int x1 = xPos;
+		int y1 = yPos;
+		int x2 = x1 + 58;
+		int y2 = y1 + 58;
+
+		if (tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2) {
+			state = 1;
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+
+	int FieldObject::GetState() {
+		return state;
+	}
+
+	void FieldObject::liftUp(bool flag, int x, int y) {
+		if (flag == true) {
+			xPos = x+10;
+			yPos = y-40;
+			state = 1;
+		}
+		else if (flag == false) {
+			spawnY = y + 80;
+			state = 3;
+		}
+	};
+
 	void FieldObject::ShowAnimation() {
+		//TRACE("ss %d\n", state);
+		//TRACE("AC %d\n", AnimationCount);
 
 		Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
 		Obj->OnShow(direction, AnimationState);

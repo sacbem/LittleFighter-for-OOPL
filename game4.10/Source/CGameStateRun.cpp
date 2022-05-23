@@ -58,7 +58,6 @@ namespace game_framework {
 				characterList[1]->SetKnock(true, characterList[0]->GetDir(), characterList[0]->AttackState);
 				characterList[1]->isGettingDamage(characterList[0]->AttackPoint);
 
-				//boxTest->Throw(true, characterList[0]->GetDir());
 			}
 		}
 		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
@@ -69,6 +68,10 @@ namespace game_framework {
 
 		CalculateDamage(theOthersPosition);
 
+		//boxTest->Throw(true, characterList[0]->GetDir());
+		if (drop[0]->HitPlayer(characterList[0]->GetX1(), characterList[0]->GetX2(), characterList[0]->GetY1(), characterList[0]->GetY2(), characterList[0]->isAttacking)) {
+			characterList[0]->Pickup(drop[0]);
+		}
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -154,9 +157,11 @@ namespace game_framework {
 		//characterList[1]->isGettingDamage(player2Damage);
 		
 		//boxTest->OnMove();
-		for (auto& i : drop) {
-			i->OnMove();
-		}
+		//for (auto& i : drop) {
+		//	i->OnMove();
+		//}
+		drop[0]->OnMove();
+		//characterList[0]->Pickup(drop[0]);
 	}
 	boolean CompareC(Character* obj1, Character* obj2) {
 		return obj1->GetY1() < obj2->GetY1();
@@ -169,7 +174,7 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::SortedShow() {
-		vector<FieldObject *> dropCopy;
+		vector<FieldObject*> dropCopy;
 		vector<Character*> characterListCopy;
 		vector<SkillEffect*> frozenPunchListCopy;
 		vector<int> showSequence(3,0), sequenceValue_Y(3,0);
@@ -323,8 +328,8 @@ namespace game_framework {
 		if (GetCharacter == false ){ // && characterList[1]->getCharacter == false) {
 			//boxTest = new FieldObject(0);
 			drop.push_back(new FieldObject(0));
-			//drop.push_back(new FieldObject(0));
-			//drop.push_back(new FieldObject(0));
+			drop.push_back(new FieldObject(0));
+			drop.push_back(new FieldObject(0));
 			switch (this->game->selectCharacterID[0]){
 			case 0:
 				characterList.push_back(new Woody(0));
@@ -344,7 +349,7 @@ namespace game_framework {
 
 				break;
 			}
-			characterList[0]->SetXY(200, 200);
+			characterList[0]->SetXY(200, 400);
 			characterList[0]->SetCharacter();
 
 			switch (this->game->selectCharacterID[1]) {

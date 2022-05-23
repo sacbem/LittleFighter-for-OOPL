@@ -32,7 +32,14 @@ namespace game_framework {
 
 	int Henry::HitEnemy(Character* enemy) {
 		if (isAttackFrame()) {
-			return HitRectangle(enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);
+			int yRange1 = yPos - 20;
+			int yRange2 = yPos + 20;
+			if (yRange1 <= enemy->GetY1() && enemy->GetY1() <= yRange2) {
+				return HitRectangle(enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);
+			}
+			else {
+				return 0;
+			}
 		}
 		else {
 			return 0;
@@ -71,12 +78,16 @@ namespace game_framework {
 				if (h != this->serialNumber) {
 					if (i->xPos <= theOthersPosition[h].first + 50 && i->xPos + 48 >= theOthersPosition[h].first + 30) {
 						if (i->yPos + 20 <= theOthersPosition[h].second + 60 && i->yPos + 28 >= theOthersPosition[h].second + 20) {
-							if (!i->isHit) {
-								itr.first = h; itr.second = 250;
-								hittedLog[0].push_back(h);
-								hittedTable.push_back(itr);
-								i->isHit = true;
-								this->SetCalculateDamageRequest(true);
+							int yRange1 = i->yPos - 20;
+							int yRange2 = i->yPos + 20;
+							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
+								if (!i->isHit) {
+									itr.first = h; itr.second = 250;
+									hittedLog[0].push_back(h);
+									hittedTable.push_back(itr);
+									i->isHit = true;
+									this->SetCalculateDamageRequest(true);
+								}
 							}
 						}
 					}
@@ -89,12 +100,16 @@ namespace game_framework {
 				if (h != this->serialNumber) {
 					if (i->xPos <= theOthersPosition[h].first + 50 && i->xPos + 48 >= theOthersPosition[h].first + 30) {
 						if (i->yPos + 20 <= theOthersPosition[h].second + 60 && i->yPos + 28 >= theOthersPosition[h].second + 20) {
-							if (!i->isHit) {
-								itr.first = h; itr.second = 250;
-								hittedLog[0].push_back(h);
-								hittedTable.push_back(itr);
-								i->isHit = true;
-								this->SetCalculateDamageRequest(true);
+							int yRange1 = i->yPos - 20;
+							int yRange2 = i->yPos + 20;
+							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
+								if (!i->isHit) {
+									itr.first = h; itr.second = 250;
+									hittedLog[0].push_back(h);
+									hittedTable.push_back(itr);
+									i->isHit = true;
+									this->SetCalculateDamageRequest(true);
+								}
 							}
 						}
 					}
@@ -107,12 +122,16 @@ namespace game_framework {
 				if (h != this->serialNumber) {
 					if (i->xPos <= theOthersPosition[h].first + 50 && i->xPos + 48 >= theOthersPosition[h].first + 30) {
 						if (i->yPos + 20 <= theOthersPosition[h].second + 60 && i->yPos + 28 >= theOthersPosition[h].second + 20) {
-							if (!i->isHit) {
-								itr.first = h; itr.second = 250;
-								hittedLog[0].push_back(h);
-								hittedTable.push_back(itr);
-								i->isHit = true;
-								this->SetCalculateDamageRequest(true);
+							int yRange1 = i->yPos - 20;
+							int yRange2 = i->yPos + 20;
+							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
+								if (!i->isHit) {
+									itr.first = h; itr.second = 250;
+									hittedLog[0].push_back(h);
+									hittedTable.push_back(itr);
+									i->isHit = true;
+									this->SetCalculateDamageRequest(true);
+								}
 							}
 						}
 					}
@@ -125,12 +144,16 @@ namespace game_framework {
 				if (h != this->serialNumber) {
 					if (i->xPos <= theOthersPosition[h].first + 50 && i->xPos + 48 >= theOthersPosition[h].first + 30) {
 						if (i->yPos + 20 <= theOthersPosition[h].second + 60 && i->yPos + 28 >= theOthersPosition[h].second + 20) {
-							if (!i->isHit) {
-								itr.first = h; itr.second = 250;
-								hittedLog[0].push_back(h);
-								hittedTable.push_back(itr);
-								i->isHit = true;
-								this->SetCalculateDamageRequest(true);
+							int yRange1 = i->yPos - 20;
+							int yRange2 = i->yPos + 20;
+							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
+								if (!i->isHit) {
+									itr.first = h; itr.second = 250;
+									hittedLog[0].push_back(h);
+									hittedTable.push_back(itr);
+									i->isHit = true;
+									this->SetCalculateDamageRequest(true);
+								}
 							}
 						}
 					}
@@ -144,11 +167,15 @@ namespace game_framework {
 					if (!this->direction) {
 						if (i->xPos - 239 <= theOthersPosition[h].first + 50 && i->xPos - 60 >= theOthersPosition[h].first + 30) {
 							if (i->yPos - 30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
-								if (!i->isHit) {
-									itr.first = h; itr.second = 500;
-									hittedTable.push_back(itr);
-									i->isHit = true;
-									this->SetCalculateDamageRequest(true);
+								int yRange1 = i->yPos - 20;
+								int yRange2 = i->yPos + 20;
+								if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
+									if (!i->isHit) {
+										itr.first = h; itr.second = 500;
+										hittedTable.push_back(itr);
+										i->isHit = true;
+										this->SetCalculateDamageRequest(true);
+									}
 								}
 							}
 						}
@@ -156,11 +183,15 @@ namespace game_framework {
 					else {
 						if (i->xPos + 40 * attackDirection <= theOthersPosition[h].first + 50 && i->xPos + 229 * attackDirection >= theOthersPosition[h].first + 30) {
 							if (i->yPos - 30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
-								if (!i->isHit) {
-									itr.first = h; itr.second = 500;
-									hittedTable.push_back(itr);
-									i->isHit = true;
-									this->SetCalculateDamageRequest(true);
+								int yRange1 = i->yPos - 20;
+								int yRange2 = i->yPos + 20;
+								if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
+									if (!i->isHit) {
+										itr.first = h; itr.second = 500;
+										hittedTable.push_back(itr);
+										i->isHit = true;
+										this->SetCalculateDamageRequest(true);
+									}
 								}
 							}
 						}
@@ -173,11 +204,15 @@ namespace game_framework {
 				if (h != this->serialNumber) {
 					if(i->xPos <= theOthersPosition[h].first + 50 && i->xPos + 48 >= theOthersPosition[h].first + 30) {
 						if (i->yPos + 20 <= theOthersPosition[h].second + 60 && i->yPos + 28 >= theOthersPosition[h].second + 20) {
-							if (!i->isHit) {
-								itr.first = h; itr.second = 900;
-								hittedTable.push_back(itr);
-								i->isHit = true;
-								this->SetCalculateDamageRequest(true);
+							int yRange1 = i->yPos - 20;
+							int yRange2 = i->yPos + 20;
+							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
+								if (!i->isHit) {
+									itr.first = h; itr.second = 900;
+									hittedTable.push_back(itr);
+									i->isHit = true;
+									this->SetCalculateDamageRequest(true);
+								}
 							}
 						}
 					}
@@ -190,12 +225,16 @@ namespace game_framework {
 				if (h != this->serialNumber) {
 					if (i->xPos + 4 <= theOthersPosition[h].first + 50 && i->xPos + 78 >= theOthersPosition[h].first + 30) {
 						if (i->yPos + 23 <= theOthersPosition[h].second + 60 && i->yPos + 57 >= theOthersPosition[h].second + 20) {
-							if (!i->isHit) {
-								itr.first = h; itr.second = 500;
-								hittedLog[0].push_back(h);
-								hittedTable.push_back(itr);
-								i->isHit = true;
-								this->SetCalculateDamageRequest(true);
+							int yRange1 = i->yPos - 20;
+							int yRange2 = i->yPos + 20;
+							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
+								if (!i->isHit) {
+									itr.first = h; itr.second = 500;
+									hittedLog[0].push_back(h);
+									hittedTable.push_back(itr);
+									i->isHit = true;
+									this->SetCalculateDamageRequest(true);
+								}
 							}
 						}
 					}
