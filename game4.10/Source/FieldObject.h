@@ -1,5 +1,4 @@
 #pragma once
-#include "Character.h"
 #include "GameObject.h"
 
 namespace game_framework {
@@ -11,7 +10,13 @@ namespace game_framework {
 		void Init();
 		void Throw(bool flag, int dir);
 		void SetKnock();
-		void PickedUp(Character &player);
+		//Hit Character
+		int HitPlayer(int tx1, int ty1, int tx2, int ty2, bool isAttacking);
+		int HitRectangle(int tx1, int ty1, int tx2, int ty2);
+
+		void liftUp(bool flag, int x, int y);
+		void PickedUp(bool flag, int x, int y);
+		int GetState();
 		void OnMove();
 		void ShowAnimation();
 		void ShowStatic();

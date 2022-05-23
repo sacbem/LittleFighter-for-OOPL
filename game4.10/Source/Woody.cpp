@@ -24,7 +24,14 @@ namespace game_framework {
 
 	int Woody::HitEnemy(Character* enemy) {
 		if (isAttackFrame()) {
-			return HitRectangle(enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);
+			int yRange1 = yPos - 20;
+			int yRange2 = yPos + 20;
+			if (yRange1 <= enemy->GetY1() && enemy->GetY1() <= yRange2) {
+				return HitRectangle(enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);
+			}
+			else {
+				return 0;
+			}
 		}
 		else {
 			return 0;
@@ -39,12 +46,16 @@ namespace game_framework {
 				if (h != this->serialNumber) {
 					if (i->xPos + 4 <= theOthersPosition[h].first + 50 && i->xPos + 78 >= theOthersPosition[h].first + 30) {
 						if (i->yPos + 23 <= theOthersPosition[h].second + 60 && i->yPos + 57 >= theOthersPosition[h].second + 20) {
-							if (!i->isHit) {
-								itr.first = h; itr.second = 250;
-								hittedLog[0].push_back(h);
-								hittedTable.push_back(itr);
-								i->isHit = true;
-								this->SetCalculateDamageRequest(true);
+							int yRange1 = i->yPos - 20;
+							int yRange2 = i->yPos + 20;
+							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
+								if (!i->isHit) {
+									itr.first = h; itr.second = 250;
+									hittedLog[0].push_back(h);
+									hittedTable.push_back(itr);
+									i->isHit = true;
+									this->SetCalculateDamageRequest(true);
+								}
 							}
 						}
 					}
@@ -57,12 +68,16 @@ namespace game_framework {
 				if (h != this->serialNumber) {
 					if (i->xPos + 4 <= theOthersPosition[h].first + 50 && i->xPos + 78 >= theOthersPosition[h].first + 30) {
 						if (i->yPos + 23 <= theOthersPosition[h].second + 60 && i->yPos + 57 >= theOthersPosition[h].second + 20) {
-							if (!i->isHit) {
-								itr.first = h; itr.second = 250;
-								hittedLog[0].push_back(h);
-								hittedTable.push_back(itr);
-								i->isHit = true;
-								this->SetCalculateDamageRequest(true);
+							int yRange1 = i->yPos - 20;
+							int yRange2 = i->yPos + 20;
+							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
+								if (!i->isHit) {
+									itr.first = h; itr.second = 250;
+									hittedLog[0].push_back(h);
+									hittedTable.push_back(itr);
+									i->isHit = true;
+									this->SetCalculateDamageRequest(true);
+								}
 							}
 						}
 					}
@@ -257,27 +272,27 @@ namespace game_framework {
 			}
 			break;
 		case 3:
-			if (AttackCount <= 10) {
+			if (AttackCount <= 5) {
 				AnimationState = 50;
 			}
-			else if (AttackCount <= 20) {
+			else if (AttackCount <= 10) {
 				AnimationState = 51;
 			}
-			else if (AttackCount <= 30) {
+			else if (AttackCount <= 15) {
 				AnimationState = 52;
 			}
-			else if (AttackCount <= 40) {
+			else if (AttackCount <= 20) {
 				AnimationState = 53;
 			}
-			else if (AttackCount <= 50) {
+			else if (AttackCount <= 25) {
 				AnimationState = 54;
 			}
-			else if (AttackCount <= 60) {
+			else if (AttackCount <= 30) {
 				AnimationState = 55;
 			}
-			else if (AttackCount <= 70) {
+			else if (AttackCount <= 35) {
 				AnimationState = 56;
-				if (AttackCount >= 70) {
+				if (AttackCount >= 35) {
 					SetAttack(false);
 				}
 			}

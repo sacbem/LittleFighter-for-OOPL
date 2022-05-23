@@ -507,7 +507,7 @@ namespace game_framework {
 					}
 
 					if (yPos <= yTemp) {
-						yPos += 5;
+						yPos += 1;
 					}
 				}
 			}
@@ -532,7 +532,7 @@ namespace game_framework {
 					}
 
 					if (yPos >= yTemp) {
-						yPos -= 5;
+						yPos -= 1;
 					}
 				}
 			}

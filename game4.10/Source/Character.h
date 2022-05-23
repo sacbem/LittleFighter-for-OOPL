@@ -1,6 +1,7 @@
 #pragma once
 #include "SkillEffect.h"
 #include "CharacterAnimation.h"
+#include "FieldObject.h"
 
 namespace game_framework {
 	class Character{
@@ -24,6 +25,8 @@ namespace game_framework {
 		int GetSkillSignal();
 		boolean GetCalculateDamageRequest();
 		void Initialize();
+
+		void Pickup(FieldObject *other);
 
 		virtual void SetCharacter() = 0;
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition , int mainTime)=0;
@@ -68,6 +71,7 @@ namespace game_framework {
 		bool isHitting;
 		bool isRunning;
 		bool StopRun;
+		bool isCarryItem;
 
 		bool isAttacking;
 		bool isGettingHit;

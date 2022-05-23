@@ -47,7 +47,7 @@ namespace game_framework {
 		logo.LoadBitmap(IDB_BITMAP3);
 		selectCharacterMenu->Load(BITMAP_SELECTMENU);
 		photoSticker_seclecter->Load(picStickers,picIDs,picNames);
-		CAudio::Instance()->Play(0, true);
+		//CAudio::Instance()->Play(0, true);
 		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		/*
 		 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
@@ -259,7 +259,7 @@ namespace game_framework {
 				  if (countDown.IsFinalBitmap()){
 					  this->game->selectCharacterID[0] = characterID[0];
 					  this->game->selectCharacterID[1] = characterID[1];
-					  CAudio::Instance()->Stop(0);
+					  //CAudio::Instance()->Stop(0);
 					  GotoGameState(GAME_STATE_RUN);
 				  }
 			  }
