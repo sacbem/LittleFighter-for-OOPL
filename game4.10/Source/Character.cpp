@@ -131,9 +131,11 @@ namespace game_framework {
 	int Character::GetSkillSignal() {
 		return skillSignal;
 	}
+	
 	boolean Character::GetCalculateDamageRequest() {
 		return calculateDamage_Request;
 	}
+	
 	void Character::DistaceAccumulator() {
 		walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
 		

@@ -106,14 +106,15 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
-		characterList[0]->InputKeyDown(nChar, CurrentTime);
-
+		characterList[0]->InputKeyDown(nChar, CurrentTime,0);
+		characterList[1]->InputKeyDown(nChar, CurrentTime,1);
 		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
 
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
-		characterList[0]->InputKeyUp(nChar);
+		characterList[0]->InputKeyUp(nChar,0);
+		characterList[1]->InputKeyUp(nChar,1);
 	}
 
 	void CGameStateRun::SetAllCharacterPosition() {
@@ -151,7 +152,9 @@ namespace game_framework {
 			}
 
 			pair<int, int>().swap(characterList[0]->hittedTable[0]);
+			pair<int, int>().swap(characterList[1]->hittedTable[0]);
 			characterList[0]->SetCalculateDamageRequest(false);
+			characterList[1]->SetCalculateDamageRequest(false);
 		}
 
 		//characterList[1]->isGettingDamage(player2Damage);

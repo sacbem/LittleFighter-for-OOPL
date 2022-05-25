@@ -1260,6 +1260,7 @@ namespace game_framework {
 										hittedTable.push_back(itr);
 										i->isHit = true;
 										this->SetCalculateDamageRequest(true);
+										this->SetAbonormalStatus(h, true);
 									}
 								}
 							}
@@ -1276,6 +1277,7 @@ namespace game_framework {
 										hittedTable.push_back(itr);
 										i->isHit = true;
 										this->SetCalculateDamageRequest(true);
+										this->SetAbonormalStatus(h, true);
 									}
 								}
 							}
@@ -1298,6 +1300,7 @@ namespace game_framework {
 									hittedTable.push_back(itr);
 									i->isHit = true;
 									this->SetCalculateDamageRequest(true);
+									this->SetAbonormalStatus(h, true);
 								}
 							}
 						}
