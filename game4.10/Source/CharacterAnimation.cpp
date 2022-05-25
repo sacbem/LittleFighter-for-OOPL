@@ -169,6 +169,46 @@ namespace game_framework {
 		KnockBack[1][4].LoadBitmap(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_45.bmp", RGB(0, 0, 0));
 		KnockBack[1][5].LoadBitmap(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_44.bmp", RGB(0, 0, 0));
 		KnockBack[1][6].LoadBitmap(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_33.bmp", RGB(0, 0, 0));
+
+		itemNormal[0].LoadBitmap(".\\res\\Woody\\Woody_0\\woody_0_27.bmp", RGB(0, 0, 0));
+		itemNormal[1].LoadBitmap(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_23.bmp", RGB(0, 0, 0));
+
+		itemWalk[0].AddBitmap(".\\res\\Woody\\Woody_0\\woody_0_23.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Woody\\Woody_0\\woody_0_24.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Woody\\Woody_0\\woody_0_25.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Woody\\Woody_0\\woody_0_26.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Woody\\Woody_0\\woody_0_25.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Woody\\Woody_0\\woody_0_24.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_26.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_25.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_24.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_23.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_24.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_25.bmp", RGB(0, 0, 0));
+
+		itemRun[0].AddBitmap(".\\res\\Woody\\Woody_1\\woody_1_55.bmp", RGB(0, 0, 0));
+		itemRun[0].AddBitmap(".\\res\\Woody\\Woody_1\\woody_1_56.bmp", RGB(0, 0, 0));
+		itemRun[0].AddBitmap(".\\res\\Woody\\Woody_1\\woody_1_57.bmp", RGB(0, 0, 0));
+		itemRun[0].AddBitmap(".\\res\\Woody\\Woody_1\\woody_1_56.bmp", RGB(0, 0, 0));
+		itemRun[1].AddBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_54.bmp", RGB(0, 0, 0));
+		itemRun[1].AddBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_53.bmp", RGB(0, 0, 0));
+		itemRun[1].AddBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_52.bmp", RGB(0, 0, 0));
+		itemRun[1].AddBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_53.bmp", RGB(0, 0, 0));
+
+		itemThrow[0][0].LoadBitmapA(".\\res\\Woody\\Woody_0\\woody_0_27.bmp", RGB(0, 0, 0));
+		itemThrow[0][1].LoadBitmapA(".\\res\\Woody\\Woody_0\\woody_0_28.bmp", RGB(0, 0, 0));
+		itemThrow[1][0].LoadBitmapA(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_22.bmp", RGB(0, 0, 0));
+		itemThrow[1][1].LoadBitmapA(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_21.bmp", RGB(0, 0, 0));
+
+		itemRunThrow[0][0].LoadBitmapA(".\\res\\Woody\\Woody_1\\woody_1_58.bmp", RGB(0, 0, 0));
+		itemRunThrow[0][1].LoadBitmapA(".\\res\\Woody\\Woody_1\\woody_1_26.bmp", RGB(0, 0, 0));
+		itemRunThrow[1][0].LoadBitmapA(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_51.bmp", RGB(0, 0, 0));
+		itemRunThrow[1][1].LoadBitmapA(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_23.bmp", RGB(0, 0, 0));
+
+		Frozen[0][0].LoadBitmapA(".\\res\\Woody\\Woody_0\\woody_0_8.bmp", RGB(0, 0, 0));
+		Frozen[0][1].LoadBitmapA(".\\res\\Woody\\Woody_0\\woody_0_9.bmp", RGB(0, 0, 0));
+		Frozen[1][0].LoadBitmapA(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_1.bmp", RGB(0, 0, 0));
+		Frozen[1][1].LoadBitmapA(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_0.bmp", RGB(0, 0, 0));
 	}
 	
 	void CharacterAnimation::LoadFreeze() {
@@ -319,6 +359,46 @@ namespace game_framework {
 		KnockBack[1][4].LoadBitmap(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_45.bmp", RGB(0, 0, 0));
 		KnockBack[1][5].LoadBitmap(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_44.bmp", RGB(0, 0, 0));
 		KnockBack[1][6].LoadBitmap(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_33.bmp", RGB(0, 0, 0));
+
+		itemNormal[0].LoadBitmap(".\\res\\Freeze\\Freeze_0\\freeze_0_23.bmp", RGB(0, 0, 0));
+		itemNormal[1].LoadBitmap(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_26.bmp", RGB(0, 0, 0));
+
+		itemWalk[0].AddBitmap(".\\res\\Freeze\\Freeze_0\\freeze_0_23.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Freeze\\Freeze_0\\freeze_0_24.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Freeze\\Freeze_0\\freeze_0_25.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Freeze\\Freeze_0\\freeze_0_26.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Freeze\\Freeze_0\\freeze_0_25.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Freeze\\Freeze_0\\freeze_0_24.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_26.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_25.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_24.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_23.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_24.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_25.bmp", RGB(0, 0, 0));
+
+		itemRun[0].AddBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_55.bmp", RGB(0, 0, 0));
+		itemRun[0].AddBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_56.bmp", RGB(0, 0, 0));
+		itemRun[0].AddBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_57.bmp", RGB(0, 0, 0));
+		itemRun[0].AddBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_56.bmp", RGB(0, 0, 0));
+		itemRun[1].AddBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_54.bmp", RGB(0, 0, 0));
+		itemRun[1].AddBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_53.bmp", RGB(0, 0, 0));
+		itemRun[1].AddBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_52.bmp", RGB(0, 0, 0));
+		itemRun[1].AddBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_53.bmp", RGB(0, 0, 0));
+
+		itemThrow[0][0].LoadBitmapA(".\\res\\Freeze\\Freeze_0\\freeze_0_27.bmp", RGB(0, 0, 0));
+		itemThrow[0][1].LoadBitmapA(".\\res\\Freeze\\Freeze_0\\freeze_0_28.bmp", RGB(0, 0, 0));
+		itemThrow[1][0].LoadBitmapA(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_22.bmp", RGB(0, 0, 0));
+		itemThrow[1][1].LoadBitmapA(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_21.bmp", RGB(0, 0, 0));
+
+		itemRunThrow[0][0].LoadBitmapA(".\\res\\Freeze\\Freeze_1\\freeze_1_58.bmp", RGB(0, 0, 0));
+		itemRunThrow[0][1].LoadBitmapA(".\\res\\Freeze\\Freeze_1\\freeze_1_26.bmp", RGB(0, 0, 0));
+		itemRunThrow[1][0].LoadBitmapA(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_51.bmp", RGB(0, 0, 0));
+		itemRunThrow[1][1].LoadBitmapA(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_23.bmp", RGB(0, 0, 0));
+
+		Frozen[0][0].LoadBitmapA(".\\res\\Freeze\\Freeze_0\\freeze_0_8.bmp", RGB(0, 0, 0));
+		Frozen[0][1].LoadBitmapA(".\\res\\Freeze\\Freeze_0\\freeze_0_9.bmp", RGB(0, 0, 0));
+		Frozen[1][0].LoadBitmapA(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_1.bmp", RGB(0, 0, 0));
+		Frozen[1][1].LoadBitmapA(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_0.bmp", RGB(0, 0, 0));
 	}
 
 	void CharacterAnimation::LoadHenry() {
@@ -487,6 +567,46 @@ namespace game_framework {
 		KnockBack[1][4].LoadBitmap(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_45.bmp", RGB(0, 0, 0));
 		KnockBack[1][5].LoadBitmap(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_44.bmp", RGB(0, 0, 0));
 		KnockBack[1][6].LoadBitmap(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_33.bmp", RGB(0, 0, 0));
+
+		itemNormal[0].LoadBitmap(".\\res\\Henry\\Henry_0\\henry_0_23.bmp", RGB(0, 0, 0));
+		itemNormal[1].LoadBitmap(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_26.bmp", RGB(0, 0, 0));
+
+		itemWalk[0].AddBitmap(".\\res\\Henry\\Henry_0\\henry_0_23.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Henry\\Henry_0\\henry_0_24.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Henry\\Henry_0\\henry_0_25.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Henry\\Henry_0\\henry_0_26.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Henry\\Henry_0\\henry_0_25.bmp", RGB(0, 0, 0));
+		itemWalk[0].AddBitmap(".\\res\\Henry\\Henry_0\\henry_0_24.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_26.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_25.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_24.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_23.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_24.bmp", RGB(0, 0, 0));
+		itemWalk[1].AddBitmap(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_25.bmp", RGB(0, 0, 0));
+
+		itemRun[0].AddBitmap(".\\res\\Henry\\Henry_1\\henry_1_55.bmp", RGB(0, 0, 0));
+		itemRun[0].AddBitmap(".\\res\\Henry\\Henry_1\\henry_1_56.bmp", RGB(0, 0, 0));
+		itemRun[0].AddBitmap(".\\res\\Henry\\Henry_1\\henry_1_57.bmp", RGB(0, 0, 0));
+		itemRun[0].AddBitmap(".\\res\\Henry\\Henry_1\\henry_1_56.bmp", RGB(0, 0, 0));
+		itemRun[1].AddBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_54.bmp", RGB(0, 0, 0));
+		itemRun[1].AddBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_53.bmp", RGB(0, 0, 0));
+		itemRun[1].AddBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_52.bmp", RGB(0, 0, 0));
+		itemRun[1].AddBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_53.bmp", RGB(0, 0, 0));
+
+		itemThrow[0][0].LoadBitmapA(".\\res\\Henry\\Henry_0\\henry_0_27.bmp", RGB(0, 0, 0));
+		itemThrow[0][1].LoadBitmapA(".\\res\\Henry\\Henry_0\\henry_0_28.bmp", RGB(0, 0, 0));
+		itemThrow[1][0].LoadBitmapA(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_22.bmp", RGB(0, 0, 0));
+		itemThrow[1][1].LoadBitmapA(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_21.bmp", RGB(0, 0, 0));
+
+		itemRunThrow[0][0].LoadBitmapA(".\\res\\Henry\\Henry_1\\henry_1_58.bmp", RGB(0, 0, 0));
+		itemRunThrow[0][1].LoadBitmapA(".\\res\\Henry\\Henry_1\\henry_1_26.bmp", RGB(0, 0, 0));
+		itemRunThrow[1][0].LoadBitmapA(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_51.bmp", RGB(0, 0, 0));
+		itemRunThrow[1][1].LoadBitmapA(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_23.bmp", RGB(0, 0, 0));
+
+		Frozen[0][0].LoadBitmapA(".\\res\\Henry\\Henry_0\\henry_0_8.bmp", RGB(0, 0, 0));
+		Frozen[0][1].LoadBitmapA(".\\res\\Henry\\Henry_0\\henry_0_9.bmp", RGB(0, 0, 0));
+		Frozen[1][0].LoadBitmapA(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_1.bmp", RGB(0, 0, 0));
+		Frozen[1][1].LoadBitmapA(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_0.bmp", RGB(0, 0, 0));
 	}
 	CharacterAnimation::~CharacterAnimation() {
 

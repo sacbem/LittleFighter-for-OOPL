@@ -123,8 +123,8 @@ namespace game_framework {
 				if (h != this->serialNumber) {
 					if (i->xPos <= theOthersPosition[h].first + 50 && i->xPos + 48 >= theOthersPosition[h].first + 30) {
 						if (i->yPos + 20 <= theOthersPosition[h].second + 60 && i->yPos + 28 >= theOthersPosition[h].second + 20) {
-							int yRange1 = i->yPos - 20;
-							int yRange2 = i->yPos + 20;
+							int yRange1 = i->yPos + 20 - 20;
+							int yRange2 = i->yPos + 20 + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
 									itr.first = h; itr.second = 250;
@@ -316,7 +316,13 @@ namespace game_framework {
 				}
 				else if (isRunning) {
 					LastAttackState = AttackState;
-					AttackState = 4;
+					if (isCarryItem) {
+						LastAttackState = AttackState;
+						AttackState = 8;
+					}
+					else {
+						AttackState = 4;
+					}
 				}
 				else if (isJumpping) {
 					LastAttackState = AttackState;
@@ -327,6 +333,10 @@ namespace game_framework {
 						downArrow.insert(downArrow_Begin, new SkillEffect(9, CurrentTime, direction, xPos-10, yPos-10));
 						skillsEffect_InFieldNumber[0] = downArrow.size();
 					}
+				}
+				else if (isCarryItem) {
+					LastAttackState = AttackState;
+					AttackState = 7;
 				}
 				else {
 					if (!isHitting) {
@@ -495,6 +505,34 @@ namespace game_framework {
 				AnimationState = 82;
 				if (AttackCount == 30) {
 					SetAttack(false);
+				}
+			}
+			break;
+		case 7:
+			//Throw
+			if (AttackCount <= 10) {
+				AnimationState = 1020;
+			}
+			else if (AttackCount <= 20) {
+				AnimationState = 1021;
+				if (AttackCount == 20) {
+					SetAttack(false);
+				}
+			}
+			break;
+		case 8:
+			//Run Throw
+			if (AttackCount <= 10) {
+				AnimationState = 1030;
+			}
+			else if (AttackCount <= 20) {
+				AnimationState = 1031;
+				if (AttackCount == 20) {
+					SetAttack(false);
+					UnMovable = false;
+					isRunning = false;
+					isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+					AttackAccumulator = 0;
 				}
 			}
 			break;
@@ -1285,6 +1323,46 @@ namespace game_framework {
 		case 233:
 			demonicSongAnimation[direction][3].SetTopLeft(xPos, yPos);
 			demonicSongAnimation[direction][3].ShowBitmap();
+			break;
+			//Frozen state
+		case 300:
+			Animation.Frozen[direction][0].SetTopLeft(xPos, yPos);
+			Animation.Frozen[direction][0].ShowBitmap();
+			break;
+		case 301:
+			Animation.Frozen[direction][1].SetTopLeft(xPos, yPos);
+			Animation.Frozen[direction][1].ShowBitmap();
+			break;
+			//Carrying item
+		case 1000:
+			Animation.itemNormal[direction].SetTopLeft(xPos, yPos);
+			Animation.itemNormal[direction].ShowBitmap();
+			break;
+		case 1001:
+			Animation.itemWalk[direction].OnMove();
+			Animation.itemWalk[direction].SetTopLeft(xPos, yPos);
+			Animation.itemWalk[direction].OnShow();
+			break;
+		case 1010:
+			Animation.itemRun[direction].OnMove();
+			Animation.itemRun[direction].SetTopLeft(xPos, yPos);
+			Animation.itemRun[direction].OnShow();
+			break;
+		case 1020:
+			Animation.itemThrow[direction][0].SetTopLeft(xPos, yPos);
+			Animation.itemThrow[direction][0].ShowBitmap();
+			break;
+		case 1021:
+			Animation.itemThrow[direction][1].SetTopLeft(xPos, yPos);
+			Animation.itemThrow[direction][1].ShowBitmap();
+			break;
+		case 1030:
+			Animation.itemRunThrow[direction][0].SetTopLeft(xPos, yPos);
+			Animation.itemRunThrow[direction][0].ShowBitmap();
+			break;
+		case 1031:
+			Animation.itemRunThrow[direction][1].SetTopLeft(xPos, yPos);
+			Animation.itemRunThrow[direction][1].ShowBitmap();
 			break;
 		default:
 			break;

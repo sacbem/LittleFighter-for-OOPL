@@ -27,7 +27,10 @@ namespace game_framework {
 		boolean GetCalculateDamageRequest();
 		void Initialize();
 
-		void Pickup(FieldObject *other);
+		int itemId;
+		void SetPickup(bool flag, int itemId);
+		void Pickup(FieldObject* other);
+		void DropItem(FieldObject *other);
 
 		virtual void SetCharacter() = 0;
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition , int mainTime)=0;
@@ -73,6 +76,7 @@ namespace game_framework {
 		bool isRunning;
 		bool StopRun;
 		bool isCarryItem;
+		bool isDropItem;
 
 		bool isAttacking;
 		bool isGettingHit;

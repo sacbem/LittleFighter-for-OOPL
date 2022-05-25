@@ -24,6 +24,13 @@ namespace game_framework {
 		CMovingBitmap Knock2[2][3];
 		CMovingBitmap KnockFront[2][7];
 		CMovingBitmap KnockBack[2][7];
+		//Carry item
+		CMovingBitmap itemNormal[2];
+		CAnimation itemWalk[2];
+		CAnimation itemRun[2];
+		CMovingBitmap itemThrow[2][2];
+		CMovingBitmap itemRunThrow[2][2];
+		CMovingBitmap Frozen[2][2];
 
 		void LoadFreeze();
 		void LoadWoody();
