@@ -264,13 +264,12 @@ namespace game_framework {
 		}
 	}
 	
-	//}
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//get character
 		if (GetCharacter == false ){ // && characterList[1]->getCharacter == false) {
 			//boxTest = new FieldObject(0);
-			drop.push_back(new FieldObject(0));
+			drop.push_back(new FieldObject(0, maps->GetMapID()));
 			//drop.push_back(new FieldObject(0));
 			//drop.push_back(new FieldObject(0));
 			switch (this->game->selectCharacterID[0]){
@@ -343,8 +342,8 @@ namespace game_framework {
 	
 		//drop[0]->ShowAnimation();
 		//boxTest->ShowAnimation();
-		TRACE("isCarry %d\n", characterList[0]->isCarryItem);
-		TRACE("isDrop %d\n", characterList[0]->isDropItem);
+		//TRACE("isCarry %d\n", characterList[0]->isCarryItem);
+		//TRACE("isDrop %d\n", characterList[0]->isDropItem);
 	}
 
 	CGameStateRun::~CGameStateRun(){

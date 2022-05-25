@@ -412,23 +412,28 @@ namespace game_framework {
 	}
 
 	void Character::SetJumpping(bool flag) {
-		if (!isJumpping) {
-			isJumpping = flag;
-			JumpYposTemp = yPos + 1;
-			isRising = true;
-			AnimationState = 4;
+		if (!isCarryItem) {
+			if (!isJumpping) {
+				isJumpping = flag;
+				JumpYposTemp = yPos + 1;
+				isRising = true;
+				AnimationState = 4;
+			}
 		}
 	}
 
 	void Character::SetDefense(bool flag) {
-		isDefense = flag;
-		if (flag == true) {
-			//reset
-			DefenseCount = 0;
+		if (!isCarryItem) {
+			isDefense = flag;
+			if (flag == true) {
+				//reset
+				DefenseCount = 0;
+			}
 		}
 	}
 
 	void Character::SetMoving() {
+		TRACE("AniState %d\n", AnimationState);
 		if (isRunning) {
 			if (isJumpping) {
 				speed = 7;
@@ -485,28 +490,58 @@ namespace game_framework {
 		if (!isMovingUp && !isMovingDown && !isMovingLeft && !isMovingRight) {
 			isWalking = false;
 			//Walk[direction].Reset();
-			AnimationState = 0;
+			if (isCarryItem) {
+				AnimationState = 1000;
+			}
+			else if (!isCarryItem) {
+				AnimationState = 0;
+			}
 		}
 
 		if (isWalking) {
 			if (isMovingLeft && isMovingRight) {
-				AnimationState = 0;
+				if (isCarryItem) {
+					AnimationState = 1000;
+				}
+				else if (!isCarryItem) {
+					AnimationState = 0;
+				}
 			}
 			else {
-				AnimationState = 1;
+				if (isCarryItem) {
+					AnimationState = 1001;
+				}
+				else if (!isCarryItem) {
+					AnimationState = 1;
+				}
 			}
 		}
 		else {
-			AnimationState = 0;
+			if (isCarryItem) {
+				AnimationState = 1000;
+			}
+			else if (!isCarryItem) {
+				AnimationState = 0;
+			}
 		}
 
 		if (isRunning) {
-			AnimationState = 2;
+			if (isCarryItem) {
+				AnimationState = 1010;
+			}
+			else if (!isCarryItem) {
+				AnimationState = 2;
+			}
 		}
 		else if (StopRun) {
 			if (RunCount <= 10) {
 				RunCount++;
-				AnimationState = 3;
+				if (isCarryItem) {
+					AnimationState = 1000;
+				}
+				else if (!isCarryItem) {
+					AnimationState = 3;
+				}
 			}
 			else {
 				StopRun = false;

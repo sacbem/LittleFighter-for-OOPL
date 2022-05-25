@@ -8,7 +8,7 @@
 #include "FieldObject.h"
 
 namespace game_framework {
-	FieldObject::FieldObject(int num) {
+	FieldObject::FieldObject(int num, int mapID) {
 		OwnerId = -1;
 		id = num;
 		Hp = 20;
@@ -17,6 +17,26 @@ namespace game_framework {
 		AnimationCount = 0;
 		state = 0;
 		Init();
+	}
+
+	void FieldObject::SetMapBorder(int mapID) {
+		xMapBorderMin = -50;
+		xMapBorderMax = 810;
+		switch (mapID) {
+		case 0:
+			yMapBorderMin = 300;
+			yMapBorderMax = 500;
+		case 1:
+			yMapBorderMin = 255;
+			yMapBorderMax = 530;
+			break;
+		case 2:
+			yMapBorderMin = 240;
+			yMapBorderMax = 450;
+			break;
+		default:
+			break;
+		}
 	}
 
 	void FieldObject::Init() {
@@ -97,6 +117,13 @@ namespace game_framework {
 
 	void FieldObject::SetState(int s) {
 		state = s;
+	}
+
+	void FieldObject::SetXY(int x, int y) {
+		xPos = x > xMapBorderMax ? xMapBorderMax : x;
+		xPos = xPos < xMapBorderMin ? xMapBorderMin : xPos;
+		yPos = y > yMapBorderMax ? yMapBorderMax : y;
+		yPos = yPos < yMapBorderMin ? yMapBorderMin : yPos;
 	};
 
 	int FieldObject::GetState() {
@@ -118,7 +145,7 @@ namespace game_framework {
 	};
 
 	void FieldObject::ShowAnimation() {
-		TRACE("ss %d\n", state);
+		//TRACE("ss %d\n", state);
 		//TRACE("AC %d\n", AnimationCount);
 
 		Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
