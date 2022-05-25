@@ -435,7 +435,7 @@ namespace game_framework {
 	}
 
 	void Character::SetMoving() {
-		TRACE("AniState %d\n", AnimationState);
+		//TRACE("AniState %d\n", AnimationState);
 		if (isRunning) {
 			if (isJumpping) {
 				speed = 7;
@@ -651,7 +651,7 @@ namespace game_framework {
 			yPos = Y > yMapBorderMax ? yMapBorderMax : Y;
 			yPos = yPos < yMapBorderMin ? yMapBorderMin : yPos;
 		}
-		TRACE("Y %d\n", yPos);
+		//TRACE("Y %d\n", yPos);
 	}
 
 	Character::~Character() {

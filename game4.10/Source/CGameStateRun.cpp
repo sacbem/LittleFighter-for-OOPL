@@ -24,8 +24,8 @@ namespace game_framework {
 		//characterList[1] = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
-		maps = new Map(HKC);
-		drop.resize(0);
+		maps = new Map(BC);
+		
 		//GenerationTime = clock();
 
 	}
@@ -40,8 +40,8 @@ namespace game_framework {
 	}
    
 	void CGameStateRun::OnMove()	{					// 移動遊戲元素
-		drop[0]->OnMove();
-
+		//maps->drops[0]->OnMove();
+		maps->drops[0]->OnMove();
 		CleanCounter++;
 		if (CleanCounter >= 10) {
 			CleanCounter = 0;
@@ -69,17 +69,16 @@ namespace game_framework {
 		CalculateDamage(theOthersPosition);
 
 		//boxTest->Throw(true, characterList[0]->GetDir());
-		if (drop[0]->HitPlayer(0, characterList[0]->GetX1(), characterList[0]->GetY1(), characterList[0]->GetX2(), characterList[0]->GetY2(), characterList[0]->isAttacking)) {
-			TRACE("In Range\n");
+		if (maps->drops[0]->HitPlayer(0, characterList[0]->GetX1(), characterList[0]->GetY1(), characterList[0]->GetX2(), characterList[0]->GetY2(), characterList[0]->isAttacking)) {
 			if (characterList[0]->isDropItem == false && characterList[0]->isCarryItem == false && characterList[0]->GetSkillSignal()==-1) {
-				if (drop[0]->GetState() == 0) {
+				if (maps->drops[0]->GetState() == 0) {
 					characterList[0]->SetPickup(true,0);
-					drop[0]->SetState(1);
+					maps->drops[0]->SetState(1);
 				}
 			}
 		}
-		if (drop[0]->GetState() == 1) {
-			characterList[0]->Pickup(drop[0]);
+		if (maps->drops[0]->GetState() == 1) {
+			characterList[0]->Pickup((maps->drops[0]));
 		}
 	}
 
@@ -116,11 +115,11 @@ namespace game_framework {
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		characterList[0]->InputKeyDown(nChar, CurrentTime,0);
-		characterList[1]->InputKeyDown(nChar, CurrentTime,1);
+		//characterList[1]->InputKeyDown(nChar, CurrentTime,1);
 		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
 
 		if (characterList[0]->isDropItem == true) {
-			drop[0]->liftUp(false, characterList[0]->GetX1(), characterList[0]->GetY1(), characterList[0]->GetDir());
+			maps->drops[0]->liftUp(false, characterList[0]->GetX1(), characterList[0]->GetY1(), characterList[0]->GetDir());
 			//TRACE("drop state %d\n", drop[0]->GetState());
 			//TRACE("char isDrop %d\n", characterList[0]->isDropItem);
 			//TRACE("char isCarry %d\n", characterList[0]->isCarryItem);
@@ -132,7 +131,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		characterList[0]->InputKeyUp(nChar,0);
-		characterList[1]->InputKeyUp(nChar,1);
+		//characterList[1]->InputKeyUp(nChar,1);
 	}
 
 	void CGameStateRun::SetAllCharacterPosition() {
@@ -168,18 +167,35 @@ namespace game_framework {
 				characterList[0]->ClearAbonormalStatus();
 				characterList[1]->ClearAbonormalStatus();
 			}
-
-			pair<int, int>().swap(characterList[0]->hittedTable[0]);
-			pair<int, int>().swap(characterList[1]->hittedTable[0]);
+			if (!characterList[0]->hittedTable.empty()) {
+				pair<int, int>().swap(characterList[0]->hittedTable[0]);
+			}
+			if (!characterList[1]->hittedTable.empty()) {
+				pair<int, int>().swap(characterList[1]->hittedTable[0]);
+			}
 			characterList[0]->SetCalculateDamageRequest(false);
 			characterList[1]->SetCalculateDamageRequest(false);
 		}
-
-		//characterList[1]->isGettingDamage(player2Damage);
-
-		//boxTest->OnMove();
-		//drop[0]->OnMove();
-		//characterList[0]->Pickup(drop[0]);
+	}
+	
+	void CGameStateRun::SetAbonormalStatus() {
+		for (auto i : characterList) {
+			for (auto x : i->statusTable) {
+				statusTableAll.push_back(x.first);
+			}
+		}
+		if (count(statusTableAll.begin(), statusTableAll.end(), 1) != 0) {
+			tables[1] = 1;
+		}
+		else {
+			tables[1] = -1;
+		}
+		if (count(statusTableAll.begin(), statusTableAll.end(), 0) != 0) {
+			tables[0] = 1;
+		}
+		else {
+			tables[0] = -1;
+		}
 	}
 	boolean CompareC(Character* obj1, Character* obj2) {
 		return obj1->GetY1() < obj2->GetY1();
@@ -196,11 +212,11 @@ namespace game_framework {
 		vector<Character*> characterListCopy;
 		vector<SkillEffect*> frozenPunchListCopy;
 		vector<int> showSequence(3, 0), sequenceValue_Y(3, 0);
-		boolean dropEmpty = drop.empty(), characterEmpty = characterList.empty(), frozemPunchEmpty = frozenPunchList.empty();
-		int totalSize = drop.size() + characterList.size() + frozenPunchList.size();
+		boolean dropEmpty = maps->drops.empty(), characterEmpty = characterList.empty(), frozemPunchEmpty = frozenPunchList.empty();
+		int totalSize = maps->drops.size() + characterList.size() + frozenPunchList.size();
 
 		if (!dropEmpty) {
-			dropCopy.assign(drop.begin(), drop.end());
+			dropCopy.assign(maps->drops.begin(), maps->drops.end());
 			std::sort(dropCopy.begin(), dropCopy.end(), CompareF);
 			sequenceValue_Y[0] = dropCopy[0]->GetY();
 		}
@@ -232,9 +248,11 @@ namespace game_framework {
 			switch (showingIndex) {
 			case 0:
 				dropCopy[showSequence[0]]->ShowAnimation();
-				if (showSequence[0] < drop.size() - 1) {
+				TRACE("xPos %d yPos %d \n" , dropCopy[showSequence[0]]->GetX(), dropCopy[showSequence[0]]->GetY());
+				if (showSequence[0] < maps->drops.size()-1) {
 					showSequence[0] += 1;
 					sequenceValue_Y[0] = dropCopy[showSequence[0]]->GetY();
+					
 				}
 				else {
 					sequenceValue_Y[0] = 1000;
@@ -272,7 +290,7 @@ namespace game_framework {
 		//get character
 		if (GetCharacter == false ){ // && characterList[1]->getCharacter == false) {
 			//boxTest = new FieldObject(0);
-			drop.push_back(new FieldObject(0, maps->GetMapID()));
+			maps->drops.push_back(new FieldObject(0, maps->GetMapID()));
 			//drop.push_back(new FieldObject(0));
 			//drop.push_back(new FieldObject(0));
 			switch (this->game->selectCharacterID[0]){
@@ -352,6 +370,6 @@ namespace game_framework {
 	CGameStateRun::~CGameStateRun(){
 		delete maps, HealthPlayer1, HealthPlayer2;
 		vector<Character*>().swap(characterList);
-		vector<FieldObject*>().swap(drop);
+	
 	}
 }

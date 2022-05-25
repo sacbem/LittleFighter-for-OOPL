@@ -15,6 +15,8 @@ namespace game_framework {
 		void OnKeyUp(UINT, UINT, UINT);
 		void SetAllCharacterPosition();
 		void CalculateDamage(vector<pair<int, int>> theOthersPosition);
+		void SetAbonormalStatus();
+	
 		friend class Freeze;
 	protected:
 		void OnMove();									
@@ -25,9 +27,8 @@ namespace game_framework {
 		bool GetCharacter = false;
 		vector<pair<int,int>> theOthersPosition;
 		vector<Character*> characterList;
-		vector<FieldObject*> drop; /// 放置掉落物
 		vector<SkillEffect*> frozenPunchList; /// 放置掉落物
-
+		vector<int>statusTableAll;
 		//Player & other
 		//Character *PlayerTest;
 		//Character *EnemyTest;
@@ -42,6 +43,7 @@ namespace game_framework {
 		int TimePassed;
 		int MapAniCount = 0;
 		int registSerialNumber;
+		int tables[2] = { -1,-1 };
 
 	};
 }
