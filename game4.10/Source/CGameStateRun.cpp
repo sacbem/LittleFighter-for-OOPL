@@ -296,19 +296,15 @@ namespace game_framework {
 			switch (this->game->selectCharacterID[0]){
 			case 0:
 				characterList.push_back(new Woody(0 ,maps->GetMapID()));
-				registSerialNumber = 0;
 				break;
 			case 1:
 				characterList.push_back(new Freeze(0, maps->GetMapID()));
-				registSerialNumber = 1;
 				break;
 			case 2:
 				characterList.push_back(new Henry(0, maps->GetMapID()));
-				registSerialNumber = 2;
 				break;
 			default:
 				characterList.push_back(new Freeze(0, maps->GetMapID()));
-				registSerialNumber = 1;
 
 				break;
 			}
@@ -317,16 +313,16 @@ namespace game_framework {
 
 			switch (this->game->selectCharacterID[1]) {
 			case 0:
-				characterList.push_back(new Woody(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
+				characterList.push_back(new Woody(1, maps->GetMapID()));
 				break;
 			case 1:
-				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
+				characterList.push_back(new Freeze(1, maps->GetMapID()));
 				break;
 			case 2:
-				characterList.push_back(new Henry(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
+				characterList.push_back(new Henry(1, maps->GetMapID()));
 				break;
 			default:
-				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
+				characterList.push_back(new Freeze(1, maps->GetMapID()));
 				break;
 			}
 			characterList[1]->SetXY(400, 401);
