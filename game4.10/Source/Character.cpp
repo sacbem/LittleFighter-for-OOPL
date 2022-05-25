@@ -56,6 +56,7 @@ namespace game_framework {
 		AnimationState = 0;
 		speed = 2;
 		AttackCount = 0;
+		specialState = 0;
 
 		KnockState = 0;
 		LastKnockState = 0;
@@ -432,6 +433,25 @@ namespace game_framework {
 		}
 	}
 
+	void Character::ShowFrozen() {
+		FrozenCount++;
+		UnMovable = true;
+		isDefense = false;
+		isRunning = false;
+		isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+		if (FrozenCount <= 20) {
+			AnimationState = 300;
+		}
+		else if (FrozenCount <= 400) {
+			AnimationState = 301;
+			if (FrozenCount >= 400) {
+				FrozenCount = 0;
+				UnMovable = true;
+				specialState = 0;
+			}
+		}
+	}
+
 	void Character::SetMoving() {
 		TRACE("AniState %d\n", AnimationState);
 		if (isRunning) {
@@ -446,7 +466,6 @@ namespace game_framework {
 			speed = 2;
 		}
 		if (isMovingLeft) {
-			
 			if ((!isDefense && !isAttacking) || isRunning) {
 				this->SetXY(xPos - speed, yPos);
 				DistaceAccumulator();
@@ -490,22 +509,12 @@ namespace game_framework {
 		if (!isMovingUp && !isMovingDown && !isMovingLeft && !isMovingRight) {
 			isWalking = false;
 			//Walk[direction].Reset();
-			if (isCarryItem) {
-				AnimationState = 1000;
-			}
-			else if (!isCarryItem) {
-				AnimationState = 0;
-			}
+			AnimationState = 0;
 		}
 
 		if (isWalking) {
 			if (isMovingLeft && isMovingRight) {
-				if (isCarryItem) {
-					AnimationState = 1000;
-				}
-				else if (!isCarryItem) {
-					AnimationState = 0;
-				}
+				AnimationState = 0;
 			}
 			else {
 				if (isCarryItem) {
@@ -517,12 +526,7 @@ namespace game_framework {
 			}
 		}
 		else {
-			if (isCarryItem) {
-				AnimationState = 1000;
-			}
-			else if (!isCarryItem) {
-				AnimationState = 0;
-			}
+			AnimationState = 0;
 		}
 
 		if (isRunning) {
@@ -649,7 +653,7 @@ namespace game_framework {
 			yPos = Y > yMapBorderMax ? yMapBorderMax : Y;
 			yPos = yPos < yMapBorderMin ? yMapBorderMin : yPos;
 		}
-		TRACE("Y %d\n", yPos);
+		//TRACE("Y %d\n", yPos);
 	}
 
 	Character::~Character() {

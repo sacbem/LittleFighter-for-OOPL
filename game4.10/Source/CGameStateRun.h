@@ -9,13 +9,16 @@ namespace game_framework {
 	public:
 		CGameStateRun(CGame* g);
 		~CGameStateRun();
-		void OnBeginState();							
-		void OnInit();  								
+		void OnBeginState();
+		void OnInit();
 		void OnKeyDown(UINT, UINT, UINT);
 		void OnKeyUp(UINT, UINT, UINT);
 		void SetAllCharacterPosition();
+		void SetAbonormalStatus();
 		void CalculateDamage(vector<pair<int, int>> theOthersPosition);
 		friend class Freeze;
+
+		int tables[2] = {-1, -1};
 	protected:
 		void OnMove();									
 		void OnShow();		
@@ -27,6 +30,7 @@ namespace game_framework {
 		vector<Character*> characterList;
 		vector<FieldObject*> drop; /// 放置掉落物
 		vector<SkillEffect*> frozenPunchList; /// 放置掉落物
+		vector<int> statusTableAll;
 
 		//Player & other
 		//Character *PlayerTest;

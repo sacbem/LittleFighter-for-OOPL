@@ -24,7 +24,7 @@ namespace game_framework {
 		//characterList[1] = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
-		maps = new Map(HKC);
+		maps = new Map(BC);
 		drop.resize(0);
 		//GenerationTime = clock();
 
@@ -49,8 +49,17 @@ namespace game_framework {
 				characterList[1]->SetAlive(false);
 			}
 		}
+
+		SetAbonormalStatus();
+		//TRACE("OnMove %d\n",statusTableAll.empty());
 		characterList[0]->OnMove();
 		characterList[1]->OnMove();
+		//Reset
+		int x = 0;
+		for (auto i : characterList) {
+			tables[x++] = i->specialState;
+		}
+
 		SetAllCharacterPosition();
 		if (characterList[0]->HitEnemy(characterList[1]) && characterList[0]->isAttacking) {
 			if (characterList[1]->HealthPoint > 0) {
@@ -114,6 +123,13 @@ namespace game_framework {
 
 	}
 
+	void CGameStateRun::SetAbonormalStatus() {
+		int x = 0;
+		for (auto i : characterList) {
+			i->specialState = tables[x++];
+		}
+	}
+
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		characterList[0]->InputKeyDown(nChar, CurrentTime,0);
 
@@ -144,16 +160,16 @@ namespace game_framework {
 
 		for (int i = 0; i < 2; i++) {
 			if (this->game->selectCharacterID[i] == 0) {
-				static_cast<Woody*>(characterList[i])->DetectSkillDamage(theOthersPosition);
+				static_cast<Woody*>(characterList[i])->DetectSkillDamage(theOthersPosition, tables);
 			}
 			else if (this->game->selectCharacterID[i] == 1) {
-				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition);
+				static_cast<Freeze*>(characterList[i])->DetectSkillDamage(theOthersPosition, tables);
 			}
 			else if (this->game->selectCharacterID[i] == 2) {
-				static_cast<Henry*>(characterList[i])->DetectSkillDamage(theOthersPosition);
+				static_cast<Henry*>(characterList[i])->DetectSkillDamage(theOthersPosition, tables);
 			}
 		}
-
+		//statusTable = characterList[0]->statusTable;
 		if (characterList[0]->GetCalculateDamageRequest() || characterList[1]->GetCalculateDamageRequest()) {
 			for (auto& u : characterList) {
 				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
@@ -164,14 +180,24 @@ namespace game_framework {
 						characterList[1]->isGettingDamage(i.second);
 					}
 				}
-				characterList[0]->ClearAbonormalStatus();
-				characterList[1]->ClearAbonormalStatus();
+				//characterList[0]->ClearAbonormalStatus();
+				//characterList[1]->ClearAbonormalStatus();
+				//for (auto i : statusTableAll) {
+					//TRACE("All %d\n", i.first);
+				//}
+
 			}
 
 			pair<int, int>().swap(characterList[0]->hittedTable[0]);
 			characterList[0]->SetCalculateDamageRequest(false);
-		}
 
+
+			//Reset
+			characterList[0]->ClearAbonormalStatus();
+			characterList[1]->ClearAbonormalStatus();
+			//vector<pair<int, boolean>>().swap(statusTableAll);
+		}
+		
 		//characterList[1]->isGettingDamage(player2Damage);
 
 		//boxTest->OnMove();
@@ -296,16 +322,16 @@ namespace game_framework {
 
 			switch (this->game->selectCharacterID[1]) {
 			case 0:
-				characterList.push_back(new Woody(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
+				characterList.push_back(new Woody(registSerialNumber == 0 ? 1 : 2, maps->GetMapID()));
 				break;
 			case 1:
-				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
+				characterList.push_back(new Freeze(registSerialNumber == 0 ? 1 : 2, maps->GetMapID()));
 				break;
 			case 2:
-				characterList.push_back(new Henry(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
+				characterList.push_back(new Henry(registSerialNumber == 0 ? 1 : 2, maps->GetMapID()));
 				break;
 			default:
-				characterList.push_back(new Freeze(registSerialNumber == 0 ? 0 : 2, maps->GetMapID()));
+				characterList.push_back(new Freeze(registSerialNumber == 0 ? 1 : 2, maps->GetMapID()));
 				break;
 			}
 			characterList[1]->SetXY(400, 401);
@@ -335,6 +361,12 @@ namespace game_framework {
 		}
 	
 		maps->PrintMap(showStatus);
+
+		//Share statusTable
+		//for (auto i : characterList) {
+			//i->statusTable = statusTable;
+		//}
+
 		SortedShow();
 
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);

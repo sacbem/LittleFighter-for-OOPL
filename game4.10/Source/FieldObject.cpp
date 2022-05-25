@@ -17,6 +17,7 @@ namespace game_framework {
 		AnimationCount = 0;
 		state = 0;
 		Init();
+		SetMapBorder(mapID);
 	}
 
 	void FieldObject::SetMapBorder(int mapID) {
@@ -147,7 +148,6 @@ namespace game_framework {
 	void FieldObject::ShowAnimation() {
 		//TRACE("ss %d\n", state);
 		//TRACE("AC %d\n", AnimationCount);
-
 		Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
 		Obj->OnShow(direction, AnimationState);
 	}
