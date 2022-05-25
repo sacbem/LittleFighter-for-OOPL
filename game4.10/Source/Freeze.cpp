@@ -708,6 +708,14 @@ namespace game_framework {
 		}
 		*/
 		SetMoving();
+		//TRACE("statusTable is Empty %d\n", statusTable.empty());
+
+			//Frozen
+		if (specialState == 1) {
+			TRACE("Freeze\n");
+			ShowFrozen();
+		}
+		//TRACE("Woody froze %d\n", statusTable[serialNumber]);
 		if (isJumpping) {
 			JumpCount++;
 		}
@@ -766,15 +774,21 @@ namespace game_framework {
 		switch (AnimationState)
 		{
 		case 0:
-			Animation.Normal[direction].OnMove();
-			Animation.Normal[direction].SetTopLeft(xPos, yPos);
-			Animation.Normal[direction].OnShow();
+			if (isCarryItem) {
+				Animation.itemNormal[direction].SetTopLeft(xPos, yPos);
+				Animation.itemNormal[direction].ShowBitmap();
+			}
+			else if (!isCarryItem) {
+				Animation.Normal[direction].OnMove();
+				Animation.Normal[direction].SetTopLeft(xPos, yPos);
+				Animation.Normal[direction].OnShow();
+			}
 
 			//Fool-proof mechanism
 			skillSignal = -1;
 			UnMovable = false;
-			isCarryItem = false;
-			isDropItem = false;
+			//isCarryItem = false;
+			//isDropItem = false;
 			break;
 		case 1:
 			Animation.Walk[direction].OnMove();
@@ -1300,7 +1314,7 @@ namespace game_framework {
 		}
 	}
 	
-	void Freeze::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
+	void Freeze::DetectSkillDamage(vector<pair<int, int>> theOthersPosition, int *n) {
 		pair<int, int> itr(0, 0);  // first : characterID second :damage
 		int attackDirection = this->GetDir() ? -1 : 1;
 		for (auto& i : frozenWaves) {
@@ -1317,7 +1331,8 @@ namespace game_framework {
 									hittedTable.push_back(itr);
 									i->isHit = true;
 									this->SetCalculateDamageRequest(true);
-									this->SetAbonormalStatus(h, true);
+									//this->SetAbonormalStatus(h, true);
+									n[h] = 1;
 								}
 							}
 						}
@@ -1340,7 +1355,7 @@ namespace game_framework {
 										hittedTable.push_back(itr);
 										i->isHit = true;
 										this->SetCalculateDamageRequest(true);
-										this->SetAbonormalStatus(h, true);
+										n[h] = 1;
 									}
 								}
 							}
@@ -1357,7 +1372,7 @@ namespace game_framework {
 										hittedTable.push_back(itr);
 										i->isHit = true;
 										this->SetCalculateDamageRequest(true);
-										this->SetAbonormalStatus(h, true);
+										n[h] = 1;
 									}
 								}
 							}
@@ -1380,7 +1395,7 @@ namespace game_framework {
 									hittedTable.push_back(itr);
 									i->isHit = true;
 									this->SetCalculateDamageRequest(true);
-									this->SetAbonormalStatus(h, true);
+									n[h] = 1;
 								}
 							}
 						}

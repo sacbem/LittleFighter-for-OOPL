@@ -205,10 +205,10 @@ namespace game_framework {
 		itemRunThrow[1][0].LoadBitmapA(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_51.bmp", RGB(0, 0, 0));
 		itemRunThrow[1][1].LoadBitmapA(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_23.bmp", RGB(0, 0, 0));
 
-		Frozen[0][0].LoadBitmapA(".\\res\\Woody\\Woody_0\\woody_0_8.bmp", RGB(0, 0, 0));
-		Frozen[0][1].LoadBitmapA(".\\res\\Woody\\Woody_0\\woody_0_9.bmp", RGB(0, 0, 0));
-		Frozen[1][0].LoadBitmapA(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_1.bmp", RGB(0, 0, 0));
-		Frozen[1][1].LoadBitmapA(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_0.bmp", RGB(0, 0, 0));
+		Frozen[0][0].LoadBitmapA(".\\res\\Woody\\Woody_1\\woody_1_8.bmp", RGB(0, 0, 0));
+		Frozen[0][1].LoadBitmapA(".\\res\\Woody\\Woody_1\\woody_1_9.bmp", RGB(0, 0, 0));
+		Frozen[1][0].LoadBitmapA(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_1.bmp", RGB(0, 0, 0));
+		Frozen[1][1].LoadBitmapA(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_0.bmp", RGB(0, 0, 0));
 	}
 	
 	void CharacterAnimation::LoadFreeze() {
@@ -603,10 +603,10 @@ namespace game_framework {
 		itemRunThrow[1][0].LoadBitmapA(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_51.bmp", RGB(0, 0, 0));
 		itemRunThrow[1][1].LoadBitmapA(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_23.bmp", RGB(0, 0, 0));
 
-		Frozen[0][0].LoadBitmapA(".\\res\\Henry\\Henry_0\\henry_0_8.bmp", RGB(0, 0, 0));
-		Frozen[0][1].LoadBitmapA(".\\res\\Henry\\Henry_0\\henry_0_9.bmp", RGB(0, 0, 0));
-		Frozen[1][0].LoadBitmapA(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_1.bmp", RGB(0, 0, 0));
-		Frozen[1][1].LoadBitmapA(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_0.bmp", RGB(0, 0, 0));
+		Frozen[0][0].LoadBitmapA(".\\res\\Henry\\Henry_1\\henry_1_8.bmp", RGB(0, 0, 0));
+		Frozen[0][1].LoadBitmapA(".\\res\\Henry\\Henry_1\\henry_1_9.bmp", RGB(0, 0, 0));
+		Frozen[1][0].LoadBitmapA(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_1.bmp", RGB(0, 0, 0));
+		Frozen[1][1].LoadBitmapA(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_0.bmp", RGB(0, 0, 0));
 	}
 	CharacterAnimation::~CharacterAnimation() {
 

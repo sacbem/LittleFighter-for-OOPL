@@ -39,7 +39,7 @@ namespace game_framework {
 		}
 	}
 
-	void Woody::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
+	void Woody::DetectSkillDamage(vector<pair<int, int>> theOthersPosition, int *n) {
 		pair<int, int> itr(0, 0);  // first ²Ä´X°¦¸}¦â second ¶Ë®`
 		int attackDirection = this->GetDir() ? -1 : 1;
 		for (auto& i : energyBlast) {
@@ -901,6 +901,11 @@ namespace game_framework {
 		}
 		*/
 		SetMoving();
+		//TRACE("statusTable is Empty %d\n", statusTableAll.empty());
+		if (specialState == 1) {
+			TRACE("Freeze\n");
+			ShowFrozen();
+		}
 		if (isJumpping) {
 			JumpCount++;
 		}
@@ -948,14 +953,21 @@ namespace game_framework {
 		switch (AnimationState)
 		{
 		case 0:
-			Animation.Normal[direction].OnMove();
-			Animation.Normal[direction].SetTopLeft(xPos, yPos);
-			Animation.Normal[direction].OnShow();
+			if (isCarryItem) {
+				Animation.itemNormal[direction].SetTopLeft(xPos, yPos);
+				Animation.itemNormal[direction].ShowBitmap();
+			}
+			else if (!isCarryItem) {
+				Animation.Normal[direction].OnMove();
+				Animation.Normal[direction].SetTopLeft(xPos, yPos);
+				Animation.Normal[direction].OnShow();
+			}
 
 			//Fool-proof mechanism
 			skillSignal = -1;
 			UnMovable = false;
-			isCarryItem = false;
+			//isCarryItem = false;
+			//isDropItem = false;
 			break;
 		case 1:
 			Animation.Walk[direction].OnMove();
@@ -1438,8 +1450,8 @@ namespace game_framework {
 	void Woody::CallEnergyBlast() {
 		//frozenWaves[0]->SetEffectObj(direction, SpCount%10, xPos+50);
 
-		//TRACE("SpCount %d\n", SpCount);
 		SpCount++;
+		TRACE("SpCount %d\n", SpCount);
 		if (SpCount <= 4) {
 			AnimationState = 190;
 		}

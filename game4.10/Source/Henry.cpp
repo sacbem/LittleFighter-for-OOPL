@@ -65,7 +65,7 @@ namespace game_framework {
 		}
 	}
 
-	void Henry::DetectSkillDamage(vector<pair<int, int>> theOthersPosition) {
+	void Henry::DetectSkillDamage(vector<pair<int, int>> theOthersPosition, int* n) {
 		pair<int, int> itr(0, 0);  // first ²Ä´X°¦¸}¦â second ¶Ë®`
 		int attackDirection = this->GetDir() ? -1 : 1;
 		//tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2
@@ -944,6 +944,9 @@ namespace game_framework {
 		}
 		*/
 		SetMoving();
+		if (specialState == 1) {
+			ShowFrozen();
+		}
 		if (isJumpping) {
 			JumpCount++;
 		}
@@ -990,13 +993,21 @@ namespace game_framework {
 		switch (AnimationState)
 		{
 		case 0:
-			Animation.Normal[direction].OnMove();
-			Animation.Normal[direction].SetTopLeft(xPos, yPos);
-			Animation.Normal[direction].OnShow();
+			if (isCarryItem) {
+				Animation.itemNormal[direction].SetTopLeft(xPos, yPos);
+				Animation.itemNormal[direction].ShowBitmap();
+			}
+			else if (!isCarryItem) {
+				Animation.Normal[direction].OnMove();
+				Animation.Normal[direction].SetTopLeft(xPos, yPos);
+				Animation.Normal[direction].OnShow();
+			}
 
 			//Fool-proof mechanism
 			skillSignal = -1;
 			UnMovable = false;
+			//isCarryItem = false;
+			//isDropItem = false;
 			break;
 		case 1:
 			Animation.Walk[direction].OnMove();

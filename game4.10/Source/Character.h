@@ -58,7 +58,7 @@ namespace game_framework {
 		boolean  DistanceAccumulatorReset();
 		
 		virtual int HitEnemy(Character* enemy) = 0;
-		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition) = 0;
+		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition, int *n) = 0;
 
 		vector <SkillEffect*> frozenPunchs;
 
@@ -85,7 +85,11 @@ namespace game_framework {
 		virtual void ShowRoll () = 0;
 		virtual void ShowAttack() = 0;
 		virtual void ShowKnock() = 0;
+		void ShowFrozen();
+		int FrozenCount = 0;
+
 		int AttackState = 0;
+		int specialState = 0;
 
 		int leftTime = 0;
 		int rightTime = 0;
@@ -217,7 +221,7 @@ namespace game_framework {
 		int SpCount=0;
 		void InitSpecialAttack();
 		void ShowSpecialAttack();
-		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition) override;
+		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition, int *n) override;
 		void CallfrozenWaves();
 		void CallfrozenPunchs();
 		void CallfrozenStorms();
@@ -265,7 +269,7 @@ namespace game_framework {
 		void InitSpecialAttack();
 		void ShowSpecialAttack();
 
-		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition) override;
+		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition, int *n) override;
 		void CallairWave();
 		void CallpierceArrow();
 		void CallarrowRain();
@@ -312,7 +316,7 @@ namespace game_framework {
 		void InitSpecialAttack();
 		void ShowSpecialAttack();
 
-		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition) override;
+		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition, int *n) override;
 		void CallEnergyBlast();
 		void CallFootKnife();
 		void CallDemonFoot();

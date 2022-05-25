@@ -9,15 +9,17 @@ namespace game_framework {
 	public:
 		CGameStateRun(CGame* g);
 		~CGameStateRun();
-		void OnBeginState();							
-		void OnInit();  								
+		void OnBeginState();
+		void OnInit();
 		void OnKeyDown(UINT, UINT, UINT);
 		void OnKeyUp(UINT, UINT, UINT);
 		void SetAllCharacterPosition();
-		void CalculateDamage(vector<pair<int, int>> theOthersPosition);
 		void SetAbonormalStatus();
+		void CalculateDamage(vector<pair<int, int>> theOthersPosition);
 	
 		friend class Freeze;
+
+		int tables[2] = {-1, -1};
 	protected:
 		void OnMove();									
 		void OnShow();		
@@ -43,7 +45,6 @@ namespace game_framework {
 		int TimePassed;
 		int MapAniCount = 0;
 		int registSerialNumber;
-		int tables[2] = { -1,-1 };
 
 	};
 }
