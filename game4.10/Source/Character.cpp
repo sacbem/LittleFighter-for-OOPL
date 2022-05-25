@@ -154,9 +154,11 @@ namespace game_framework {
 	int Character::GetSkillSignal() {
 		return skillSignal;
 	}
+	
 	boolean Character::GetCalculateDamageRequest() {
 		return calculateDamage_Request;
 	}
+	
 	void Character::DistaceAccumulator() {
 		walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
 		
@@ -187,6 +189,12 @@ namespace game_framework {
 	void Character::isGettingDamage(int Damage) {
 		HealthPoint -= Damage;
 		InnerHealPoint -= Damage / 2;
+		if (HealthPoint <= 0) {
+			HealthPoint = 0;
+		}
+		if (InnerHealPoint <= 0) {
+			InnerHealPoint = 0;
+		}
 		DamageAccumulator += Damage;
 	}
 
@@ -453,7 +461,7 @@ namespace game_framework {
 	}
 
 	void Character::SetMoving() {
-		TRACE("AniState %d\n", AnimationState);
+		//TRACE("AniState %d\n", AnimationState);
 		if (isRunning) {
 			if (isJumpping) {
 				speed = 7;

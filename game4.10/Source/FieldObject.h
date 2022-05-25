@@ -24,6 +24,7 @@ namespace game_framework {
 		void ShowAnimation();
 		void ShowStatic();
 		void ShowRoll();
+		int GetX();
 		int GetY();
 		int Hp;
 		~FieldObject();

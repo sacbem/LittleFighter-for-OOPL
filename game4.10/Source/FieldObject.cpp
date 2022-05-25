@@ -16,6 +16,7 @@ namespace game_framework {
 		AnimationState = 5;
 		AnimationCount = 0;
 		state = 0;
+		SetMapBorder(mapID);
 		Init();
 		SetMapBorder(mapID);
 	}
@@ -103,9 +104,7 @@ namespace game_framework {
 		int y2 = y1 + 58;
 
 		if (tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2) {
-			TRACE("Hit Box 2\n");
 			if (state == 0) {
-				TRACE("Hit Box & state=0\n");
 				//state = 1;
 				OwnerId = ownerid;
 				return 1;
@@ -125,6 +124,7 @@ namespace game_framework {
 		xPos = xPos < xMapBorderMin ? xMapBorderMin : xPos;
 		yPos = y > yMapBorderMax ? yMapBorderMax : y;
 		yPos = yPos < yMapBorderMin ? yMapBorderMin : yPos;
+		Obj->SetTopLeft(xPos, yPos);
 	};
 
 	int FieldObject::GetState() {
@@ -172,6 +172,9 @@ namespace game_framework {
 				ShowStatic();
 			}
 		}
+	}
+	int FieldObject::GetX() {
+		return xPos;
 	}
 	int FieldObject::GetY() {
 		return yPos;

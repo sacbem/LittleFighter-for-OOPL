@@ -965,6 +965,7 @@ namespace game_framework {
 
 			//Fool-proof mechanism
 			skillSignal = -1;
+			UnMovable = false;
 			//isCarryItem = false;
 			//isDropItem = false;
 			break;
@@ -1449,8 +1450,8 @@ namespace game_framework {
 	void Woody::CallEnergyBlast() {
 		//frozenWaves[0]->SetEffectObj(direction, SpCount%10, xPos+50);
 
-		//TRACE("SpCount %d\n", SpCount);
 		SpCount++;
+		TRACE("SpCount %d\n", SpCount);
 		if (SpCount <= 4) {
 			AnimationState = 190;
 		}

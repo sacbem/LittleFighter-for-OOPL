@@ -16,6 +16,7 @@ namespace game_framework {
 		void SetAllCharacterPosition();
 		void SetAbonormalStatus();
 		void CalculateDamage(vector<pair<int, int>> theOthersPosition);
+	
 		friend class Freeze;
 
 		int tables[2] = {-1, -1};
@@ -28,10 +29,8 @@ namespace game_framework {
 		bool GetCharacter = false;
 		vector<pair<int,int>> theOthersPosition;
 		vector<Character*> characterList;
-		vector<FieldObject*> drop; /// 放置掉落物
 		vector<SkillEffect*> frozenPunchList; /// 放置掉落物
-		vector<int> statusTableAll;
-
+		vector<int>statusTableAll;
 		//Player & other
 		//Character *PlayerTest;
 		//Character *EnemyTest;

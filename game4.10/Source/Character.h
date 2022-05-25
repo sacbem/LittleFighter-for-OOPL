@@ -51,7 +51,7 @@ namespace game_framework {
 		virtual void SetAttack(bool flag) = 0;
 		virtual void SetKnock(bool flag, int Dir, int AttState)=0;
 		virtual void SetSkill(int createdTimes) =0;
-		void InputKeyDown(UINT nChar, int createdTime, int playerID);
+		void InputKeyDown(UINT nChar, int Time , int playerID);
 		void InputKeyUp(UINT nChar, int playerID);
 		boolean IsInBorder(int mapID);
 		boolean IsStatic();
@@ -95,7 +95,7 @@ namespace game_framework {
 		int rightTime = 0;
 		vector<int>skillsEffect_InFieldNumber; // 統計各技能物件存活數量 index 對應 skill ID
 		vector<pair<int, int>> hittedTable;
-		vector<pair<int, boolean>> statusTable;
+		vector<pair<int,boolean>> statusTable;
 		vector<vector<int>> hittedLog;
 
 		int KeyBoardInputTime;

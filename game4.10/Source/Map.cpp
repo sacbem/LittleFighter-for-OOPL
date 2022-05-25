@@ -326,12 +326,18 @@ namespace game_framework {
 						for (auto& i : floorObjs) {
 							i->SetTopLeft(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"));
 						}
+						for (auto x : drops) {
+							x->SetXY(x->GetX() + 1 * direction, x->GetY());
+						}
 					}
 				}
 				else if (mapId == BC) {
 					if (walkedDistance > bcLand_dx) {
 						for (auto& i : floors) {
 							i->SetTopLeftSpical(i->GetPositionXY("X") + 1 * direction, i->GetPositionXY("Y"), mapId);
+						}
+						for (auto x : drops) {
+							x->SetXY(x->GetX() + 1 * direction, x->GetY());
 						}
 					}
 				}
@@ -372,7 +378,6 @@ namespace game_framework {
 			else {
 				backgroundBackObjs[1]->OnShow();
 			}
-			
 		}
 		if (!floors.empty()) {
 			for (auto i : floors) {
@@ -396,7 +401,7 @@ namespace game_framework {
 		vector<GameObject*>().swap(backgroundFrontObjs);
 		vector<GameObject*>().swap(backgroundSkyObjs);
 		vector<GameObject*>().swap(backgroundBackObjs);
-
+		vector<FieldObject*>().swap(drops);
 	}
    
 }
