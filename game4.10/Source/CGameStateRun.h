@@ -16,7 +16,8 @@ namespace game_framework {
 		void SetAllCharacterPosition();
 		void SetAbonormalStatus();
 		void CalculateDamage(vector<pair<int, int>> theOthersPosition);
-	
+		void CharacterMapPosOffset();
+		void SetCharacterSlide();
 		friend class Freeze;
 
 		int tables[2] = {-1, -1};
@@ -31,10 +32,7 @@ namespace game_framework {
 		vector<Character*> characterList;
 		vector<SkillEffect*> frozenPunchList; /// ©ñ¸m±¼¸¨ª«
 		vector<int>statusTableAll;
-		//Player & other
-		//Character *PlayerTest;
-		//Character *EnemyTest;
-		//FieldObject* boxTest;
+		vector<int> characterSlidePriority; //walk 1000 1 run 1010 2  
 		Map* maps;
 		HealthBar* HealthPlayer1;
 		HealthBar* HealthPlayer2;

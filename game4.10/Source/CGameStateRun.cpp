@@ -25,9 +25,10 @@ namespace game_framework {
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
 		maps = new Map(BC);
-		
-		//GenerationTime = clock();
+		characterSlidePriority.reserve(2);
 
+		characterSlidePriority.push_back(-1);
+		characterSlidePriority.push_back(-1);
 	}
 
 	void CGameStateRun::OnBeginState()
@@ -51,9 +52,9 @@ namespace game_framework {
 		}
 
 		SetAbonormalStatus();
-		//TRACE("OnMove %d\n",statusTableAll.empty());
 		characterList[0]->OnMove();
 		characterList[1]->OnMove();
+		SetCharacterSlide();
 		//Reset
 		int x = 0;
 		for (auto i : characterList) {
@@ -70,14 +71,17 @@ namespace game_framework {
 			}
 		}
 		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
-		//characterList[1]->OnMove();
+
 		characterList[0]->DistanceAccumulatorReset();
 
 		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(), characterList[0]->isRunning, characterList[0]->GetDir(), characterList[0]->GetDistance());
-
+		
+		if (maps->characterOffsetFlag) {
+			CharacterMapPosOffset();
+		}
+		
 		CalculateDamage(theOthersPosition);
 
-		//boxTest->Throw(true, characterList[0]->GetDir());
 		if (maps->drops[0]->HitPlayer(0, characterList[0]->GetX1(), characterList[0]->GetY1(), characterList[0]->GetX2(), characterList[0]->GetY2(), characterList[0]->isAttacking)) {
 			if (characterList[0]->isDropItem == false && characterList[0]->isCarryItem == false && characterList[0]->GetSkillSignal()==-1) {
 				if (maps->drops[0]->GetState() == 0) {
@@ -130,15 +134,12 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
-		//characterList[0]->InputKeyDown(nChar, CurrentTime,0);
+		characterList[0]->InputKeyDown(nChar, CurrentTime,0);
 		characterList[1]->InputKeyDown(nChar, CurrentTime,1);
 		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
 
 		if (characterList[0]->isDropItem == true) {
 			maps->drops[0]->liftUp(false, characterList[0]->GetX1(), characterList[0]->GetY1(), characterList[0]->GetDir());
-			//TRACE("drop state %d\n", drop[0]->GetState());
-			//TRACE("char isDrop %d\n", characterList[0]->isDropItem);
-			//TRACE("char isCarry %d\n", characterList[0]->isCarryItem);
 			characterList[0]->isCarryItem = false;
 			characterList[0]->isDropItem = false;
 			characterList[0]->itemId = -1;
@@ -146,14 +147,54 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
-		//characterList[0]->InputKeyUp(nChar,0);
-		characterList[1]->InputKeyUp(nChar,1);
+		characterList[0]->InputKeyUp(nChar,0);
+		//characterList[1]->InputKeyUp(nChar,1);
+	}
+	void CGameStateRun::SetCharacterSlide() {
+		
+		constexpr int walk[2] = { 1,1001};
+		constexpr int run [2] = { 2,1010 };
+		constexpr int resetNum = -1;
+		int cnt = 0;
+		for (auto i : characterList) {
+			if (i->GetAnimationState() == walk[0] || i->GetAnimationState() == walk[1] || i->GetAnimationState() == run[0] || i->GetAnimationState() == run[1]) {
+				if (characterSlidePriority[cnt] == resetNum) {
+					characterSlidePriority[cnt] = TimePassed;
+				}
+			}
+			else {
+				characterSlidePriority[cnt] = resetNum;
+			}
+			cnt++;
+		}
 	}
 
 	void CGameStateRun::SetAllCharacterPosition() {
 		for (int i = 0; i < characterList.size(); i++) {
 			theOthersPosition[i].first = characterList[i]->GetX1();
 			theOthersPosition[i].second = characterList[i]->GetY1();
+		}
+	}
+	void CGameStateRun::CharacterMapPosOffset() {
+		constexpr int resetNum (-1) ;
+		constexpr int characterMoving_dx (2);
+		int index(-1);
+		if ((characterSlidePriority[0] != -1 || characterSlidePriority[1] != -1 ) && characterSlidePriority[0] != characterSlidePriority[1]) {
+			int direction; 
+			if (characterSlidePriority[0] > characterSlidePriority[1]) {
+				direction = characterList[0]->GetDir() ? 1 : -1;
+				index = 0;
+				TRACE("TimePassed %d %d\n", characterSlidePriority[0], characterSlidePriority[1]);
+			}
+			else {
+				index = 1;
+				direction = characterList[1]->GetDir() ? 1 : -1;
+			}
+			for (auto i : characterList) {
+				if (characterList[index]->GetDistance() > characterMoving_dx) {
+					i->SetXY(i->GetX1() + 1 * direction , i->GetY1());
+				}
+			}
 		}
 	}
 	void  CGameStateRun::CalculateDamage(vector<pair<int, int>> theOthersPosition) {
@@ -180,12 +221,6 @@ namespace game_framework {
 						characterList[1]->isGettingDamage(i.second);
 					}
 				}
-				//characterList[0]->ClearAbonormalStatus();
-				//characterList[1]->ClearAbonormalStatus();
-				//for (auto i : statusTableAll) {
-					//TRACE("All %d\n", i.first);
-				//}
-
 			}
 			if (!characterList[0]->hittedTable.empty()) {
 				pair<int, int>().swap(characterList[0]->hittedTable[0]);
@@ -196,12 +231,6 @@ namespace game_framework {
 			characterList[0]->SetCalculateDamageRequest(false);
 			characterList[1]->SetCalculateDamageRequest(false);
 		}
-		
-		//characterList[1]->isGettingDamage(player2Damage);
-
-		//boxTest->OnMove();
-		//drop[0]->OnMove();
-		//characterList[0]->Pickup(drop[0]);
 	}
 	boolean CompareC(Character* obj1, Character* obj2) {
 		return obj1->GetY1() < obj2->GetY1();
@@ -254,7 +283,6 @@ namespace game_framework {
 			switch (showingIndex) {
 			case 0:
 				dropCopy[showSequence[0]]->ShowAnimation();
-				TRACE("xPos %d yPos %d \n" , dropCopy[showSequence[0]]->GetX(), dropCopy[showSequence[0]]->GetY());
 				if (showSequence[0] < maps->drops.size()-1) {
 					showSequence[0] += 1;
 					sequenceValue_Y[0] = dropCopy[showSequence[0]]->GetY();
@@ -338,7 +366,6 @@ namespace game_framework {
 
 
 			GetCharacter = true;
-			//load HealthBar small character
 			HealthPlayer1->loadSmallImg(this->game->selectCharacterID[0]);
 			HealthPlayer2->loadSmallImg(this->game->selectCharacterID[1]);
 
@@ -357,22 +384,14 @@ namespace game_framework {
 			}
 		}
 	
+
+
 		maps->PrintMap(showStatus);
-
-		//Share statusTable
-		//for (auto i : characterList) {
-			//i->statusTable = statusTable;
-		//}
-
 		SortedShow();
 
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 	
-		//drop[0]->ShowAnimation();
-		//boxTest->ShowAnimation();
-		//TRACE("isCarry %d\n", characterList[0]->isCarryItem);
-		//TRACE("isDrop %d\n", characterList[0]->isDropItem);
 	}
 
 	CGameStateRun::~CGameStateRun(){
