@@ -18,6 +18,7 @@ namespace game_framework {
 		void CalculateDamage(vector<pair<int, int>> theOthersPosition);
 		void CharacterMapPosOffset();
 		void SetCharacterSlide();
+		void ResetGame();
 		friend class Freeze;
 
 		int tables[2] = {-1, -1};
