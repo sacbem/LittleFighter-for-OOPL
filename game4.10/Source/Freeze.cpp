@@ -1346,7 +1346,7 @@ namespace game_framework {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
 				if (h != this->serialNumber) {
 					if (this->direction == 1) {
-						if (i->xPos - 149 <= theOthersPosition[h].first + 50 && i->xPos - 60 >= theOthersPosition[h].first + 30) {
+						if (i->xPos - 149 <= theOthersPosition[h].first + 50 && i->xPos >= theOthersPosition[h].first + 30) {
 							if (i->yPos - 30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
 								yRange1 = i->yPos - 20;
 								yRange2 = i->yPos + 20;
