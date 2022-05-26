@@ -412,14 +412,12 @@ namespace game_framework {
 						if (cnt == 0) { 
 							delete HealthPlayer1; 
 							HealthPlayer1 = new HealthBar();
-							HealthPlayer1->init();
 							HealthPlayer1->loadSmallImg(1);
 							HealthPlayer1->OnLoad(400, 0);
 						}
 						else {
 							delete HealthPlayer2;
 							HealthPlayer2 = new HealthBar();
-							HealthPlayer2->init();
 							HealthPlayer2->loadSmallImg(2);
 							HealthPlayer2->OnLoad(400, 0);
 						}
@@ -498,7 +496,7 @@ namespace game_framework {
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 	
-		/// 切換關卡轉場
+		/// 切換關卡轉場與清場
 		ResetGame();
 	}
 
