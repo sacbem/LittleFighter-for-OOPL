@@ -33,6 +33,7 @@ namespace game_framework {
 		CMovingBitmap Frozen[2][2];
 
 		CMovingBitmap Grab[2];
+		CMovingBitmap Dead[2][2];
 
 		void LoadFreeze();
 		void LoadWoody();

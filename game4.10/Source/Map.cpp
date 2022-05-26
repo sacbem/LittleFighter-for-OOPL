@@ -34,7 +34,6 @@ namespace game_framework {
 		}
 		switch (mapId) {
 		case Forest:
-
 			for (int floorNum = 0; floorNum < 3; floorNum++) {
 				floors.push_back(new GameObject("Scenes"));
 			}

@@ -9,7 +9,6 @@ namespace game_framework {
 		Character();
 		Character(Character const & other);
 		~Character();
-		//int HitEnemy(Character* enemy);
 		int serialNumber;
 
 		bool GetAlive();
@@ -91,6 +90,7 @@ namespace game_framework {
 		virtual void ShowAttack() = 0;
 		virtual void ShowKnock() = 0;
 		void ShowFrozen();
+		void ShowDead();
 		int FrozenCount = 0;
 
 		int AttackState = 0;
@@ -151,7 +151,6 @@ namespace game_framework {
 		int KnockSpeed;
 		int skillSignal;
 
-		//int SpecialAttackState = 0;
 		virtual void CallSpecial() = 0;
 
 		virtual bool isAttackFrame() = 0;

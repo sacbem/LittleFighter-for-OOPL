@@ -286,7 +286,6 @@ namespace game_framework {
 	}
 
 	void SkillEffect::OnShow() {
-		//TRACE("pp %d %d\n", xPos, yPos);
 		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):
@@ -294,7 +293,6 @@ namespace game_framework {
 				effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 6, xPos, yPos);
 				effectObj[0]->OnShow(direction, AnimationCount[0] % 6);
 				AnimationCount[0]++;
-				//SkillsProcess(theOthersPosition, mainTime - createdTime);
 				if (direction == 0) {
 					xPos += 5;
 				}
@@ -450,7 +448,6 @@ namespace game_framework {
 					effectObj[0]->SetTopLeft(direction, 1, xPos, yPos);
 					effectObj[0]->OnShow(direction, 1);
 					AnimationCount[0]++;
-					//SkillsProcess(theOthersPosition, mainTime - createdTime);
 					if (direction == 0) {
 						xPos += 5;
 					}
@@ -471,7 +468,6 @@ namespace game_framework {
 					effectObj[0]->SetTopLeft(direction, 0, xPos, yPos);
 					effectObj[0]->OnShow(direction, 0);
 					AnimationCount[0]++;
-					//SkillsProcess(theOthersPosition, mainTime - createdTime);
 					if (direction == 0) {
 						xPos += 5;
 						yPos += 5;
@@ -498,7 +494,6 @@ namespace game_framework {
 					effectObj[0]->SetTopLeft(direction, 0, xPos, yPos);
 					effectObj[0]->OnShow(direction, 0);
 					AnimationCount[0]++;
-					//SkillsProcess(theOthersPosition, mainTime - createdTime);
 					if (direction == 0) {
 						xPos += 5;
 					}
@@ -523,7 +518,6 @@ namespace game_framework {
 					effectObj[0]->SetTopLeft(direction, 0, xPos, yPos);
 					effectObj[0]->OnShow(direction, 0);
 					AnimationCount[0]++;
-					//SkillsProcess(theOthersPosition, mainTime - createdTime);
 					if (direction == 0) {
 						xPos += 5;
 					}
@@ -547,7 +541,6 @@ namespace game_framework {
 				effectObj[0]->SetTopLeft(direction, AnimationCount[0] % 6, xPos, yPos);
 				effectObj[0]->OnShow(direction, AnimationCount[0] % 6);
 				AnimationCount[0]++;
-				//SkillsProcess(theOthersPosition, mainTime - createdTime);
 				if (direction == 0) {
 					xPos += 8;
 				}
@@ -570,7 +563,6 @@ namespace game_framework {
 						xPos -= 5;
 					}
 				}
-				//SkillsProcess(theOthersPosition, mainTime - createdTime);
 			}
 			else if (isHit) {
 				if (AnimationCount[1] <= 4) {
@@ -611,7 +603,6 @@ namespace game_framework {
 						xPos -= 5;
 					}
 				}
-				//SkillsProcess(theOthersPosition, mainTime - createdTime);
 			}
 			else if (isHit) {
 				if (AnimationCount[1] <= 4) {

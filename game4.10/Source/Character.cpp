@@ -247,101 +247,97 @@ namespace game_framework {
 
 		Diff = KeyBoardInputTime - LastInputTime;
 		LastInputTime = KeyBoardInputTime;
-		if (!UnMovable) {
-			//here has a problem
-			if (isRunning) {
-				if (direction == 0) {
-					if (nChar == KEY_LEFT) {
-						SetRunning(false);
+		if (isAlive) {
+			if (!UnMovable) {
+				if (isRunning) {
+					if (direction == 0) {
+						if (nChar == KEY_LEFT) {
+							SetRunning(false);
+						}
+					}
+					else if (direction == 1) {
+						if (nChar == KEY_RIGHT) {
+							SetRunning(false);
+						}
 					}
 				}
-				else if (direction == 1) {
-					if (nChar == KEY_RIGHT) {
-						SetRunning(false);
+				else if (!isRunning && !isWalking) {
+					//Sp
+					if (nChar == KEY_H) {
+						if (Mana >= 250) {
+							Mana -= 10;
+							skillSignal = 0;
+							UnMovable = true;
+						}
 					}
-				}
-			}
-			else if (!isRunning && !isWalking) {
-				//Sp
-				if (nChar == KEY_H) {
-					//TRACE("Sp \n");
-					if (Mana >= 250) {
-						Mana -= 10;
-						skillSignal = 0;
-						UnMovable = true;
+					else if (nChar == KEY_J) {
+						if (Mana >= 250) {
+							Mana -= 10;
+							skillSignal = 1;
+							UnMovable = true;
+						}
 					}
-				}
-				else if (nChar == KEY_J) {
-					//TRACE("Sp \n");
-					if (Mana >= 250) {
-						Mana -= 10;
-						skillSignal = 1;
-						UnMovable = true;
+					else if (nChar == KEY_K) {
+						if (Mana >= 250) {
+							Mana -= 10;
+							skillSignal = 2;
+							UnMovable = true;
+						}
 					}
-				}
-				else if (nChar == KEY_K) {
-					//TRACE("Sp \n");
-					if (Mana >= 250) {
-						Mana -= 10;
-						skillSignal = 2;
-						UnMovable = true;
+					else if (nChar == KEY_L) {
+						if (Mana >= 250) {
+							Mana -= 10;
+							skillSignal = 3;
+							UnMovable = true;
+						}
 					}
-				}
-				else if (nChar == KEY_L) {
-					//TRACE("Sp \n");
-					if (Mana >= 250) {
-						Mana -= 10;
-						skillSignal = 3;
-						UnMovable = true;
+					else if (nChar == KEY_U) {
+						if (Mana >= 250) {
+							Mana -= 10;
+							skillSignal = 4;
+							UnMovable = true;
+						}
 					}
-				}
-				else if (nChar == KEY_U) {
-					//TRACE("Sp \n");
-					if (Mana >= 250) {
-						Mana -= 10;
-						skillSignal = 4;
-						UnMovable = true;
-					}
-				}
 				
-				SetSkill(createdTime);
-			}
-			//detect double click
-			if (Diff <= 20) {
-				if (nChar == KEY_LEFT && LastInput == KEY_LEFT) {
+					SetSkill(createdTime);
+				}
+				//detect double click
+				if (Diff <= 20) {
+					if (nChar == KEY_LEFT && LastInput == KEY_LEFT) {
+						SetMovingLeft(true);
+						SetRunning(true);
+					}
+					else if (nChar == KEY_RIGHT && LastInput == KEY_RIGHT) {
+						SetMovingRight(true);
+						SetRunning(true);
+					}
+				}
+				if (nChar == KEY_LEFT) {
 					SetMovingLeft(true);
-					SetRunning(true);
+					L_start = clock();
 				}
-				else if (nChar == KEY_RIGHT && LastInput == KEY_RIGHT) {
+				if (nChar == KEY_RIGHT) {
 					SetMovingRight(true);
-					SetRunning(true);
+					R_start = clock();
+				}
+				if (nChar == KEY_UP) {
+					SetMovingUp(true);
+				}
+				if (nChar == KEY_DOWN) {
+					SetMovingDown(true);
+				}
+				if (nChar == KEY_SPACE) {
+					SetJumpping(true);
+				}
+				if (nChar == KEY_CTRL) {
+					SetDefense(true);
 				}
 			}
-			if (nChar == KEY_LEFT) {
-				SetMovingLeft(true);
-				L_start = clock();
-			}
-			if (nChar == KEY_RIGHT) {
-				SetMovingRight(true);
-				R_start = clock();
-			}
-			if (nChar == KEY_UP) {
-				SetMovingUp(true);
-			}
-			if (nChar == KEY_DOWN) {
-				SetMovingDown(true);
-			}
-			if (nChar == KEY_SPACE) {
-				SetJumpping(true);
-			}
-			if (nChar == KEY_CTRL) {
-				SetDefense(true);
-			}
-		}
-		if (nChar == KEY_ENTER) {
-			SetAttack(true);
-			if (isCarryItem == true) {
-				SetPickup(false, itemId);
+			if (nChar == KEY_ENTER) {
+				SetAttack(true);
+				if (isCarryItem == true) {
+					SetPickup(false, itemId);
+				}
 			}
 		}
 	}
@@ -355,40 +351,41 @@ namespace game_framework {
 		const char KEY_SPACE = playerID ? 0x30 : 0x20; // keyboard SPACE
 		const char KEY_ENTER = playerID ? 0x32 : 0x0D; // keyboard ENTER
 		
-
-		if (nChar == KEY_LEFT) {
-			if (isRunning == false) {
-				SetMovingRight(false);
+		if (isAlive) {
+			if (nChar == KEY_LEFT) {
+				if (isRunning == false) {
+					SetMovingRight(false);
+				}
 			}
-		}
-		if (nChar == KEY_RIGHT) {
-			if (isRunning == false) {
+			if (nChar == KEY_RIGHT) {
+				if (isRunning == false) {
+					SetMovingLeft(false);
+				}
+			}
+
+			if (nChar == KEY_LEFT) {
 				SetMovingLeft(false);
 			}
-		}
-
-		if (nChar == KEY_LEFT) {
-			SetMovingLeft(false);
-		}
-		if (nChar == KEY_RIGHT) {
-			SetMovingRight(false);
-		}
-		if (nChar == KEY_UP) {
-			SetMovingUp(false);
-		}
-		if (nChar == KEY_DOWN) {
-			SetMovingDown(false);
-		}
-		if (nChar == KEY_SPACE) {
-			SetJumpping(false);
-		}
-
-		if (AttackCount >= 30) {
-			if (nChar == KEY_ENTER) {
-				SetAttack(false);
+			if (nChar == KEY_RIGHT) {
+				SetMovingRight(false);
 			}
+			if (nChar == KEY_UP) {
+				SetMovingUp(false);
+			}
+			if (nChar == KEY_DOWN) {
+				SetMovingDown(false);
+			}
+			if (nChar == KEY_SPACE) {
+				SetJumpping(false);
+			}
+
+			if (AttackCount >= 30) {
+				if (nChar == KEY_ENTER) {
+					SetAttack(false);
+				}
+			}
+			LastInput = nChar;
 		}
-		LastInput = nChar;
 	}
 
 	void Character::SetMovingDown(bool flag) {
@@ -481,8 +478,19 @@ namespace game_framework {
 		}
 	}
 
+	void Character::ShowDead() {
+		if (LastKnockState == 7) {
+			AnimationState = 2000;
+		}
+		else if (LastKnockState == 8) {
+			AnimationState = 2001;
+		}
+		else {
+			AnimationState = 2000;
+		}
+	}
+
 	void Character::SetMoving() {
-		//TRACE("AniState %d\n", AnimationState);
 		if (isRunning) {
 			if (isJumpping) {
 				speed = 7;
@@ -501,8 +509,6 @@ namespace game_framework {
 				isWalking = true;
 				direction = 1;
 			}
-			//L_finish = clock();
-			//leftTime = (L_finish - L_start) / 1000;
 			leftTime++;
 		}
 		if (isMovingRight) {
@@ -513,8 +519,6 @@ namespace game_framework {
 				isWalking = true;
 				direction = 0;
 			}
-			//R_finish = clock();
-			//rightTime = (R_finish - R_start) / 1000;
 			rightTime++;
 		}
 
@@ -537,7 +541,6 @@ namespace game_framework {
 
 		if (!isMovingUp && !isMovingDown && !isMovingLeft && !isMovingRight) {
 			isWalking = false;
-			//Walk[direction].Reset();
 			AnimationState = 0;
 		}
 
@@ -682,7 +685,6 @@ namespace game_framework {
 			yPos = Y > yMapBorderMax ? yMapBorderMax : Y;
 			yPos = yPos < yMapBorderMin ? yMapBorderMin : yPos;
 		}
-		//TRACE("Y %d\n", yPos);
 	}
 
 	Character::~Character() {
