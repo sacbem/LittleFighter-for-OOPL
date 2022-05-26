@@ -48,11 +48,9 @@ namespace game_framework {
 			map[mapNowID]->drops[0]->OnMove();
 		}
 	
-		CleanCounter++;
-		if (CleanCounter >= 10) {
-			CleanCounter = 0;
-			if (characterList[1]->GetHealth() <= 0) {
-				characterList[1]->SetAlive(false);
+		for (auto i : characterList) {
+			if (i->GetHealth() <= 0) {
+				i->SetAlive(false);
 			}
 		}
 
@@ -458,6 +456,5 @@ namespace game_framework {
 		delete HealthPlayer1, HealthPlayer2;
 		vector<Character*>().swap(characterList);
 		vector<Map*>().swap(map);
-	
 	}
 }

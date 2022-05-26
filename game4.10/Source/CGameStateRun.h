@@ -36,7 +36,6 @@ namespace game_framework {
 		vector <Map*> map;
 		HealthBar* HealthPlayer1;
 		HealthBar* HealthPlayer2;
-		int CleanCounter=0;
 		//Generate Time
 		time_t GenerationTime;
 		time_t CurrentTime;
