@@ -310,7 +310,11 @@ namespace game_framework {
 		if (flag == true) {
 			if (!isAttacking) {
 				isAttacking = true;
-				if (isRunning && isJumpping) {
+				if (isNearItem) {
+					LastAttackState = AttackState;
+					AttackState = 9;
+				}
+				else if (isRunning && isJumpping) {
 					LastAttackState = AttackState;
 					AttackState = 6;
 				}
@@ -533,6 +537,15 @@ namespace game_framework {
 					isRunning = false;
 					isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 					AttackAccumulator = 0;
+				}
+			}
+			break;
+		case 9:
+			//Grab
+			if (AttackCount <= 10) {
+				AnimationState = 400;
+				if (AttackCount == 10) {
+					SetAttack(false);
 				}
 			}
 			break;
@@ -1006,6 +1019,7 @@ namespace game_framework {
 			//Fool-proof mechanism
 			skillSignal = -1;
 			UnMovable = false;
+			AttackState = 0;
 			//isCarryItem = false;
 			//isDropItem = false;
 			break;
@@ -1334,6 +1348,10 @@ namespace game_framework {
 		case 233:
 			demonicSongAnimation[direction][3].SetTopLeft(xPos, yPos);
 			demonicSongAnimation[direction][3].ShowBitmap();
+			break;
+		case 400:
+			Animation.Grab[direction].SetTopLeft(xPos, yPos);
+			Animation.Grab[direction].ShowBitmap();
 			break;
 			//Frozen state
 		case 300:

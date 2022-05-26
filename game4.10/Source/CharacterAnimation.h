@@ -32,6 +32,8 @@ namespace game_framework {
 		CMovingBitmap itemRunThrow[2][2];
 		CMovingBitmap Frozen[2][2];
 
+		CMovingBitmap Grab[2];
+
 		void LoadFreeze();
 		void LoadWoody();
 		void LoadHenry();

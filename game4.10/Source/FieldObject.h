@@ -15,7 +15,7 @@ namespace game_framework {
 		void SetXY(int x, int y);
 		void SetMapBorder(int mapID);
 		//Hit Character
-		int HitPlayer(int ownerId, int tx1, int ty1, int tx2, int ty2, bool isAttacking);
+		int HitPlayer(int ownerId, int tx1, int ty1, int tx2, int ty2,bool isAttacking);
 		int HitRectangle(int ownerId, int tx1, int ty1, int tx2, int ty2);
 
 		void liftUp(bool flag, int x, int y, int dir);

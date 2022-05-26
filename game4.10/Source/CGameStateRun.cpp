@@ -94,17 +94,27 @@ namespace game_framework {
 		
 		CalculateDamage(theOthersPosition);
 
-		//boxTest->Throw(true, characterList[0]->GetDir());
+		//Character NeraItem
+		for (auto j : characterList) {
+			for (auto i : maps->drops) {
+				j->NearItem(i->GetX(),i->GetY(), i->GetX()+58, i->GetY()+58);
+				if (j->isNearItem == true) {
+					break;
+				}
+			}
+		}
 		int num = 0;
 		int num2 = 0;
 		for (auto i : maps->drops) {
 			for (auto j : characterList) {
-				if (i->HitPlayer(num2, j->GetX1(), j->GetY1(), j->GetX2(), j->GetY2(), j->isAttacking)) {
-					if (j->isDropItem == false && j->isCarryItem == false && j->GetSkillSignal() == -1) {
-						if (i->GetState() == 0) {
-							j->SetPickup(true, num);
-							i->SetState(1);
-							i->SetOwner(num2);
+				if (!j->isRunning) {
+					if (i->HitPlayer(num2, j->GetX1(), j->GetY1(), j->GetX2(), j->GetY2(),j->isAttacking)) {
+						if (j->isDropItem == false && j->isCarryItem == false && j->GetSkillSignal() == -1) {
+							if (i->GetState() == 0) {
+								j->SetPickup(true, num);
+								i->SetState(1);
+								i->SetOwner(num2);
+							}
 						}
 					}
 				}
@@ -117,7 +127,6 @@ namespace game_framework {
 			}
 			num++;
 		}
-		
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定

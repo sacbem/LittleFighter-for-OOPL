@@ -76,8 +76,12 @@ namespace game_framework {
 		bool isHitting;
 		bool isRunning;
 		bool StopRun;
+
 		bool isCarryItem;
 		bool isDropItem;
+		bool isNearItem;
+
+		void NearItem(int tx1, int ty1, int tx2, int ty2);
 
 		bool isAttacking;
 		bool isGettingHit;

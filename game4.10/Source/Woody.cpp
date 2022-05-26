@@ -153,6 +153,10 @@ namespace game_framework {
 				if (skillSignal == 1) {
 					AttackState = 3;
 				}
+				else if (isNearItem) {
+					LastAttackState = AttackState;
+					AttackState = 9;
+				}
 				else if (isRunning && isJumpping) {
 					LastAttackState = AttackState;
 					AttackState = 6;
@@ -219,6 +223,7 @@ namespace game_framework {
 			isAttacking = false;
 			AttackCount = 0;
 			LastAttackState = AttackState;
+			AttackState = 0;
 		}
 	}
 
@@ -391,6 +396,15 @@ namespace game_framework {
 					isRunning = false;
 					isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 					AttackAccumulator = 0;
+				}
+			}
+			break;
+		case 9:
+			//Grab
+			if (AttackCount <= 10) {
+				AnimationState = 400;
+				if (AttackCount == 10) {
+					SetAttack(false);
 				}
 			}
 			break;
@@ -967,6 +981,7 @@ namespace game_framework {
 			//Fool-proof mechanism
 			skillSignal = -1;
 			UnMovable = false;
+			AttackState = 0;
 			//isCarryItem = false;
 			//isDropItem = false;
 			break;
@@ -1399,6 +1414,10 @@ namespace game_framework {
 		case 268:
 			teleportationAnimation[direction][8].SetTopLeft(xPos, yPos);
 			teleportationAnimation[direction][8].ShowBitmap();
+			break;
+		case 400:
+			Animation.Grab[direction].SetTopLeft(xPos, yPos);
+			Animation.Grab[direction].ShowBitmap();
 			break;
 			//Frozen state
 		case 300:

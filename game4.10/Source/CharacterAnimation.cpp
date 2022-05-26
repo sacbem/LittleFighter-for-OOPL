@@ -209,6 +209,9 @@ namespace game_framework {
 		Frozen[0][1].LoadBitmapA(".\\res\\Woody\\Woody_1\\woody_1_9.bmp", RGB(0, 0, 0));
 		Frozen[1][0].LoadBitmapA(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_1.bmp", RGB(0, 0, 0));
 		Frozen[1][1].LoadBitmapA(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_0.bmp", RGB(0, 0, 0));
+
+		Grab[0].LoadBitmapA(".\\res\\Woody\\Woody_1\\woody_1_44.bmp", RGB(0, 0, 0));
+		Grab[1].LoadBitmapA(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_45.bmp", RGB(0, 0, 0));
 	}
 	
 	void CharacterAnimation::LoadFreeze() {
@@ -399,6 +402,9 @@ namespace game_framework {
 		Frozen[0][1].LoadBitmapA(".\\res\\Freeze\\Freeze_0\\freeze_0_9.bmp", RGB(0, 0, 0));
 		Frozen[1][0].LoadBitmapA(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_1.bmp", RGB(0, 0, 0));
 		Frozen[1][1].LoadBitmapA(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_0.bmp", RGB(0, 0, 0));
+
+		Grab[0].LoadBitmapA(".\\res\\Freeze\\Freeze_0\\freeze_0_12.bmp", RGB(0, 0, 0));
+		Grab[1].LoadBitmapA(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_17.bmp", RGB(0, 0, 0));
 	}
 
 	void CharacterAnimation::LoadHenry() {
@@ -607,6 +613,9 @@ namespace game_framework {
 		Frozen[0][1].LoadBitmapA(".\\res\\Henry\\Henry_1\\henry_1_9.bmp", RGB(0, 0, 0));
 		Frozen[1][0].LoadBitmapA(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_1.bmp", RGB(0, 0, 0));
 		Frozen[1][1].LoadBitmapA(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_0.bmp", RGB(0, 0, 0));
+
+		Grab[0].LoadBitmapA(".\\res\\Henry\\Henry_0\\henry_0_51.bmp", RGB(0, 0, 0));
+		Grab[1].LoadBitmapA(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_58.bmp", RGB(0, 0, 0));
 	}
 	CharacterAnimation::~CharacterAnimation() {
 

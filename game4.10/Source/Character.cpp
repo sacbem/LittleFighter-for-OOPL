@@ -36,6 +36,7 @@ namespace game_framework {
 		itemId = -1;
 		isCarryItem = false;
 		isDropItem = false;
+		isNearItem = false;
 
 		//init jump
 		isJumpping = island = false;
@@ -84,6 +85,27 @@ namespace game_framework {
 	
 	Character::Character(Character const& other) : name(other.name) {
 		Initialize();
+	}
+
+	void Character::NearItem(int tx1, int ty1, int tx2, int ty2) {
+		int yRange1 = ty1 - 20;
+		int yRange2 = ty1 + 20;
+		if (yRange1 <= ty1 && ty1 <= yRange2) {
+			int x1 = xPos;
+			int y1 = yPos;
+			int x2 = x1 + 80;
+			int y2 = y1 + 80;
+
+			if (tx2-30 >= x1 && ty2-20 >= y1 && tx1+30 <= x2 && ty1+20 <= y2) {
+				isNearItem = true;
+			}
+			else {
+				isNearItem = false;
+			}
+		}
+		else {
+			isNearItem = false;
+		}
 	}
 
 	void Character::SetPickup(bool flag, int Id) {
