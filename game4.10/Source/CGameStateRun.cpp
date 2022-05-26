@@ -33,7 +33,6 @@ namespace game_framework {
 
 	void CGameStateRun::OnBeginState()
 	{
-		//_CrtDumpMemoryLeaks();
 		for (int i = 0; i < 2; i++) {
 			theOthersPosition.push_back(pair<int, int>(0, 0));
 		}
@@ -153,8 +152,7 @@ namespace game_framework {
 		characterList[1]->InputKeyUp(nChar,1);
 	}
 	void CGameStateRun::SetCharacterSlide() {
-		
-		constexpr int walk[2] = { 1,1001};
+		constexpr int walk [2] = { 1,1001 };
 		constexpr int run [2] = { 2,1010 };
 		constexpr int resetNum = -1;
 		int cnt = 0;
@@ -186,7 +184,6 @@ namespace game_framework {
 			if (characterSlidePriority[0] > characterSlidePriority[1]) {
 				direction = characterList[0]->GetDir() ? 1 : -1;
 				index = 0;
-				TRACE("TimePassed %d %d\n", characterSlidePriority[0], characterSlidePriority[1]);
 			}
 			else {
 				index = 1;
