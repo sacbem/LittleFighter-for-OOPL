@@ -24,7 +24,9 @@ namespace game_framework {
 		//characterList[1] = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
+
 		maps = new Map(BC);
+
 		characterSlidePriority.reserve(2);
 
 		characterSlidePriority.push_back(-1);
@@ -69,17 +71,18 @@ namespace game_framework {
 
 			}
 		}
-		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[1]->GetDistance());
 
+		/// 動態地圖相關
+		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[1]->GetDistance());
 		characterList[0]->DistanceAccumulatorReset();
 		characterList[1]->DistanceAccumulatorReset();
-
 		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(), characterList[0]->isRunning, characterList[0]->GetDir(), characterList[0]->GetDistance());
 		maps->ScenesCamera(characterList[1]->DistanceAccumulatorReset(), characterList[1]->isRunning, characterList[1]->GetDir(), characterList[1]->GetDistance());
-		
 		if (maps->characterOffsetFlag) {
 			CharacterMapPosOffset();
 		}
+		///
+
 		
 		CalculateDamage(theOthersPosition);
 
@@ -209,7 +212,7 @@ namespace game_framework {
 				static_cast<Henry*>(characterList[i])->DetectSkillDamage(theOthersPosition, tables);
 			}
 		}
-		//statusTable = characterList[0]->statusTable;
+
 		if (characterList[0]->GetCalculateDamageRequest() || characterList[1]->GetCalculateDamageRequest()) {
 			for (auto& u : characterList) {
 				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
@@ -363,7 +366,6 @@ namespace game_framework {
 			
 			SetAllCharacterPosition();
 
-
 			GetCharacter = true;
 			HealthPlayer1->loadSmallImg(this->game->selectCharacterID[0]);
 			HealthPlayer2->loadSmallImg(this->game->selectCharacterID[1]);
@@ -382,9 +384,6 @@ namespace game_framework {
 				MapAniCount = 0;
 			}
 		}
-	
-
-
 		maps->PrintMap(showStatus);
 		SortedShow();
 
