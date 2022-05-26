@@ -359,7 +359,6 @@ namespace game_framework {
 			isAttacking = false;
 			AttackCount = 0;
 			LastAttackState = AttackState;
-			AttackState = 0;
 		}
 	}
 
@@ -831,7 +830,6 @@ namespace game_framework {
 			}
 		}
 		for (auto& i : demonicSong) {
-			TRACE("Time m %d\n", mainTime);
 			if (mainTime - i->createdTime >= demonicSong_AliveTime) {
 				delete i;
 				demonicSong.pop_back();
@@ -906,19 +904,21 @@ namespace game_framework {
 			AttackLong++;
 		}
 		//Heal
-		if (AnimationCount % 150 == 0) {
-			if (HealthPoint <= InnerHealPoint && InnerHealPoint > 0) {
-				HealthPoint += 30;
-				if (HealthPoint >= 1800) {
-					HealthPoint = 1800;
+		if (isAlive) {
+			if (AnimationCount % 150 == 0) {
+				if (HealthPoint <= InnerHealPoint && InnerHealPoint > 0) {
+					HealthPoint += 30;
+					if (HealthPoint >= 1800) {
+						HealthPoint = 1800;
+					}
 				}
 			}
-		}
-		if (AnimationCount % 30 == 0) {
-			if (Mana <= InnerMana) {
-				Mana += 10;
-				if (Mana >= 1800) {
-					Mana = 1800;
+			if (AnimationCount % 30 == 0) {
+				if (Mana <= InnerMana) {
+					Mana += 10;
+					if (Mana >= 1800) {
+						Mana = 1800;
+					}
 				}
 			}
 		}
@@ -994,8 +994,6 @@ namespace game_framework {
 			//Fool-proof mechanism
 			skillSignal = -1;
 			UnMovable = false;
-			AttackState = 0;
-
 			break;
 		case 1:
 			Animation.Walk[direction].OnMove();
@@ -1366,6 +1364,14 @@ namespace game_framework {
 		case 1031:
 			Animation.itemRunThrow[direction][1].SetTopLeft(xPos, yPos);
 			Animation.itemRunThrow[direction][1].ShowBitmap();
+			break;
+		case 2000:
+			Animation.Dead[direction][0].SetTopLeft(xPos, yPos);
+			Animation.Dead[direction][0].ShowBitmap();
+			break;
+		case 2001:
+			Animation.Dead[direction][1].SetTopLeft(xPos, yPos);
+			Animation.Dead[direction][1].ShowBitmap();
 			break;
 		default:
 			break;

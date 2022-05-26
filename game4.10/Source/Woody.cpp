@@ -218,7 +218,6 @@ namespace game_framework {
 			isAttacking = false;
 			AttackCount = 0;
 			LastAttackState = AttackState;
-			AttackState = 0;
 		}
 	}
 
@@ -854,80 +853,88 @@ namespace game_framework {
 
 	void Woody::OnMove() {
 		AnimationCount++;
-		if (AnimationCount == 0) {
-			UnMovable = false;
-		}
-		if (!isAttacking) {
-			AttackLong = 0;
-		}
-		else {
-			AttackLong++;
-		}
-		//Heal
-		if (AnimationCount % 150 == 0) {
-			if (HealthPoint <= InnerHealPoint && InnerHealPoint >0) {
-				HealthPoint += 30;
-				if (HealthPoint >= 1800) {
-					HealthPoint = 1800;
-				}
-			}
-		}
-		if (AnimationCount % 30 == 0) {
-			if (Mana <= InnerMana) {
-				Mana += 10;
-				if (Mana >= 1800) {
-					Mana = 1800;
-				}
-			}
-		}
-		//Reset Damage
-		if (AttackLong >= 50) {
-			AttackAccumulator = 0;
-		}
-		if (DamageAccumulator >= 400) {
-			DamageAccumulator = 0;
-		}
+		if (isAlive) {
 
-		SetMoving();
-
-		if (specialState == 1) {
-			TRACE("Freeze\n");
-			ShowFrozen();
-		}
-		if (isJumpping) {
-			JumpCount++;
-		}
-		if (isDefense) {
-			ShowDefense();
-		}
-		if (isAttacking) {
-			ShowAttack();
-		}
-		if (isRunning && isDefense) {
-			ShowRoll();
-		}
-		if (isGettingHit) {
-			ShowKnock();
-			if (direction == 0) {
-				if (hitDirection == 0) {
-					KnockSpeed = 1;
+			if (AnimationCount == 0) {
+				UnMovable = false;
+			}
+			if (!isAttacking) {
+				AttackLong = 0;
+			}
+			else {
+				AttackLong++;
+			}
+			if (isAlive) {
+				if (AnimationCount % 150 == 0) {
+					if (HealthPoint <= InnerHealPoint && InnerHealPoint > 0) {
+						HealthPoint += 30;
+						if (HealthPoint >= 1800) {
+							HealthPoint = 1800;
+						}
+					}
 				}
-				else if (hitDirection == 1) {
-					KnockSpeed = -1;
+				if (AnimationCount % 30 == 0) {
+					if (Mana <= InnerMana) {
+						Mana += 10;
+						if (Mana >= 1800) {
+							Mana = 1800;
+						}
+					}
 				}
 			}
-			else if (direction == 1) {
-				if (hitDirection == 0) {
-					KnockSpeed = 1;
-				}
-				else if (hitDirection == 1) {
-					KnockSpeed = -1;
-				}
+			//Reset Damage
+			if (AttackLong >= 50) {
+				AttackAccumulator = 0;
+			}
+			if (DamageAccumulator >= 400) {
+				DamageAccumulator = 0;
 			}
 
+			//some basic movement
+			SetMoving();
+			if (specialState == 1) {
+				TRACE("Freeze\n");
+				ShowFrozen();
+			}
+			if (isJumpping) {
+				JumpCount++;
+			}
+			if (isDefense) {
+				ShowDefense();
+			}
+			if (isAttacking) {
+				ShowAttack();
+			}
+			if (isRunning && isDefense) {
+				ShowRoll();
+			}
+			if (isGettingHit) {
+				ShowKnock();
+				if (direction == 0) {
+					if (hitDirection == 0) {
+						KnockSpeed = 1;
+					}
+					else if (hitDirection == 1) {
+						KnockSpeed = -1;
+					}
+				}
+				else if (direction == 1) {
+					if (hitDirection == 0) {
+						KnockSpeed = 1;
+					}
+					else if (hitDirection == 1) {
+						KnockSpeed = -1;
+					}
+				}
+				//if (KnockCount ==  || KnockCount == 110) {
+				//}
+			}
+			if (skillSignal != -1) {
+				CallSpecial();
+			}
 		}
-		if (skillSignal != -1) {
-			CallSpecial();
+		else if (!isAlive) {
+			ShowDead();
 		}
 
 		//calculate input time diff
@@ -952,8 +959,6 @@ namespace game_framework {
 			//Fool-proof mechanism
 			skillSignal = -1;
 			UnMovable = false;
-			AttackState = 0;
-
 			break;
 		case 1:
 			Animation.Walk[direction].OnMove();
@@ -1428,6 +1433,14 @@ namespace game_framework {
 		case 1031:
 			Animation.itemRunThrow[direction][1].SetTopLeft(xPos, yPos);
 			Animation.itemRunThrow[direction][1].ShowBitmap();
+			break;
+		case 2000:
+			Animation.Dead[direction][0].SetTopLeft(xPos, yPos);
+			Animation.Dead[direction][0].ShowBitmap();
+			break;
+		case 2001:
+			Animation.Dead[direction][1].SetTopLeft(xPos, yPos);
+			Animation.Dead[direction][1].ShowBitmap();
 			break;
 		default:
 			break;
