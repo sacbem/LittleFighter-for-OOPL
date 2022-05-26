@@ -119,6 +119,10 @@ namespace game_framework {
 		state = s;
 	}
 
+	void FieldObject::SetOwner(int id) {
+		OwnerId = id;
+	}
+
 	void FieldObject::SetXY(int x, int y) {
 		xPos = x > xMapBorderMax ? xMapBorderMax : x;
 		xPos = xPos < xMapBorderMin ? xMapBorderMin : xPos;
@@ -129,6 +133,10 @@ namespace game_framework {
 
 	int FieldObject::GetState() {
 		return state;
+	}
+
+	int FieldObject::GetOwner() {
+		return OwnerId;
 	}
 
 	void FieldObject::liftUp(bool flag, int x, int y, int dir) {

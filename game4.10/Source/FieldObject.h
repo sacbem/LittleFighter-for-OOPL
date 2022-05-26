@@ -11,6 +11,7 @@ namespace game_framework {
 		void Throw(bool flag, int dir);
 		void SetKnock();
 		void SetState(int s);
+		void SetOwner(int id);
 		void SetXY(int x, int y);
 		void SetMapBorder(int mapID);
 		//Hit Character
@@ -20,6 +21,7 @@ namespace game_framework {
 		void liftUp(bool flag, int x, int y, int dir);
 		void PickedUp(bool flag, int x, int y);
 		int GetState();
+		int GetOwner();
 		void OnMove();
 		void ShowAnimation();
 		void ShowStatic();

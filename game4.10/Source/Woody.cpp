@@ -307,6 +307,7 @@ namespace game_framework {
 				AnimationState = 56;
 				if (AttackCount >= 35) {
 					SetAttack(false);
+					skillSignal = -1;
 				}
 			}
 			break;
@@ -487,10 +488,10 @@ namespace game_framework {
 				else if (AttState == 3 || AttState == 4 || AttState == 6) {
 					LastKnockState = KnockState;
 					if (direction == 0 && Dir == 0) {
-						KnockState = 7;
+						KnockState = 8;
 					}
 					else if (direction == 1 && Dir == 1) {
-						KnockState = 8;
+						KnockState = 7;
 					}
 					else if (direction == 0 && Dir == 1) {
 						KnockState = 8;
@@ -869,7 +870,7 @@ namespace game_framework {
 		}
 		//Heal
 		if (AnimationCount % 150 == 0) {
-			if (HealthPoint <= InnerHealPoint) {
+			if (HealthPoint <= InnerHealPoint && InnerHealPoint >0) {
 				HealthPoint += 30;
 				if (HealthPoint >= 1800) {
 					HealthPoint = 1800;
@@ -922,10 +923,10 @@ namespace game_framework {
 			ShowKnock();
 			if (direction == 0) {
 				if (hitDirection == 0) {
-					KnockSpeed = -1;
+					KnockSpeed = 1;
 				}
 				else if (hitDirection == 1) {
-					KnockSpeed = 1;
+					KnockSpeed = -1;
 				}
 			}
 			else if (direction == 1) {

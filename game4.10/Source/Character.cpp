@@ -101,7 +101,7 @@ namespace game_framework {
 			//TRACE("Call NOT PickUP\n");
 			isCarryItem = false;
 			isDropItem = true;
-			itemId = -1;
+			//itemId = -1;
 		}
 	}
 
