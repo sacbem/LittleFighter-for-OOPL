@@ -33,7 +33,6 @@ namespace game_framework {
 		vector<SkillEffect*> frozenPunchList; /// ©ñ¸m±¼¸¨ª«
 		vector<int>statusTableAll;
 		vector<int> characterSlidePriority; //walk 1000 1 run 1010 2  
-		Map* maps;
 		vector <Map*> map;
 		HealthBar* HealthPlayer1;
 		HealthBar* HealthPlayer2;

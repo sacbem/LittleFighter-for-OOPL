@@ -53,7 +53,6 @@ namespace game_framework {
 		}
 		else {
 			isHitting = false;
-			//AttackAccumulator = 0;
 			return 0;
 		}
 	}
@@ -704,19 +703,13 @@ namespace game_framework {
 		}
 		//some basic movement
 
-		/*
-		if (isGettingHit) {
-		}
-		*/
 		SetMoving();
-		//TRACE("statusTable is Empty %d\n", statusTable.empty());
-
-			//Frozen
+	
+		//Frozen
 		if (specialState == 1) {
 			TRACE("Freeze\n");
 			ShowFrozen();
 		}
-		//TRACE("Woody froze %d\n", statusTable[serialNumber]);
 		if (isJumpping) {
 			JumpCount++;
 		}
@@ -747,8 +740,6 @@ namespace game_framework {
 					KnockSpeed = -1;
 				}
 			}
-			//if (KnockCount ==  || KnockCount == 110) {
-			//}
 		}
 		if (skillSignal != -1) {
 			CallSpecial();
@@ -772,9 +763,6 @@ namespace game_framework {
 	}
 
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
-		//TRACE("direction %d\n",direction);
-		TRACE("Att %d\n",AttackState);
-
 		switch (AnimationState)
 		{
 		case 0:
@@ -1167,9 +1155,7 @@ namespace game_framework {
 	}
 
 	void Freeze::CallfrozenWaves() {
-		//frozenWaves[0]->SetEffectObj(direction, SpCount%10, xPos+50);
-
-		//TRACE("SpCount %d\n", SpCount);
+		
 		SpCount++;
 		if (SpCount <= 4) {
 			AnimationState = 200;

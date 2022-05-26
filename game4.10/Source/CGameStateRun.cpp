@@ -197,7 +197,24 @@ namespace game_framework {
 		characterList[1]->InputKeyUp(nChar,1);
 		if (nChar == nextV) {
 			if (mapNowID < 1) {
+				CAudio::Instance()->Stop(map[mapNowID]->GetMapID());
 				mapNowID++;
+				switch (map[mapNowID]->GetMapID()) {
+				case Forest:
+					CAudio::Instance()->Load(Forest, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
+					CAudio::Instance()->Play(Forest, true);
+					break;
+				case HKC:
+					//CAudio::Instance()->Load(HKC, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
+					//CAudio::Instance()->Play(HKC, true);
+					break;
+				case BC:
+					//CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
+					//CAudio::Instance()->Play(BC, true);
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}

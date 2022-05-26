@@ -100,7 +100,6 @@ namespace game_framework {
 		}
 		else {
 			isHitting = false;
-			//AttackAccumulator = 0;
 			return 0;
 		}
 	}
@@ -145,8 +144,6 @@ namespace game_framework {
 	}
 
 	void Woody::SetAttack(bool flag) {
-		//TRACE("Att State %d\n", AttackState);
-		//TRACE("isHit %d\n", isHitting);
 		if (flag == true) {
 			if (!isAttacking) {
 				isAttacking = true;
@@ -192,7 +189,6 @@ namespace game_framework {
 					}
 					else {
 						LastAttackState = AttackState;
-						//TRACE("LastAttackState %d\n", LastAttackState);
 						switch (LastAttackState)
 						{
 						case 1:
@@ -214,7 +210,6 @@ namespace game_framework {
 							AttackState = 1;
 							break;
 						}
-						//TRACE("AttackState %d\n", AttackState);
 					}
 				}
 			}
@@ -524,9 +519,6 @@ namespace game_framework {
 	}
 
 	void Woody::ShowKnock() {
-		//TRACE("Hit %d\n", isGettingHit);
-		//TRACE("Damage %d\n", DamageAccumulator);
-		//TRACE("Attack %d\n", AttackAccumulator);
 		KnockCount++;
 		switch (KnockState) {
 		case 1:
@@ -599,7 +591,6 @@ namespace game_framework {
 			}
 			if (KnockCount <= 3) {
 				AnimationState = 110;
-				//SetXY(xPos + KnockSpeed * 3, yPos);
 			}
 			else if (KnockCount <= 6) {
 				AnimationState = 111;
@@ -631,9 +622,7 @@ namespace game_framework {
 			//yPos Movement
 			if (KnockCount >= 3) {
 				if (isRising) {
-					//TRACE("ISRising\n");
 					if (YVelocity > 0) {
-						//SetXY(xPos, yPos - YVelocity*10);
 						yPos -= YVelocity;
 						YVelocity--;
 					}
@@ -645,12 +634,10 @@ namespace game_framework {
 				}
 				else if (!isRising) {
 					if (yPos < JumpYposTemp - 1) {
-						//SetXY(xPos, yPos + YVelocity);
 						yPos += YVelocity;
 						YVelocity++;
 					}
 					else {
-						//SetXY(xPos, JumpYposTemp - 1);
 						yPos = JumpYposTemp - 1;
 						YVelocity = InitialVelocity;
 						island = true;
@@ -706,9 +693,7 @@ namespace game_framework {
 			//yPos Movement
 			if (KnockCount >= 3) {
 				if (isRising) {
-					//TRACE("ISRising\n");
 					if (YVelocity > 0) {
-						//SetXY(xPos, yPos - YVelocity*10);
 						yPos -= YVelocity;
 						YVelocity--;
 					}
@@ -720,12 +705,10 @@ namespace game_framework {
 				}
 				else if (!isRising) {
 					if (yPos < JumpYposTemp - 1) {
-						//SetXY(xPos, yPos + YVelocity);
 						yPos += YVelocity;
 						YVelocity++;
 					}
 					else {
-						//SetXY(xPos, JumpYposTemp - 1);
 						yPos = JumpYposTemp - 1;
 						YVelocity = InitialVelocity;
 						island = true;
@@ -747,7 +730,6 @@ namespace game_framework {
 	void Woody::SetSkill(int createdTimes) {
 		auto energyBlast_Begin = energyBlast.begin();
 		auto energyBlast2_Begin = energyBlast2.begin();
-		//TRACE("Signal %d\n", this->GetSkillSignal());
 		if (this->GetSkillSignal() == 0) {
 			energyBlast.insert(energyBlast_Begin, new SkillEffect(6, createdTimes, direction, xPos, yPos));
 			skillsEffect_InFieldNumber[0] = energyBlast.size();
@@ -871,7 +853,6 @@ namespace game_framework {
 	}
 
 	void Woody::OnMove() {
-		/*TRACE("UnMove %d\n", UnMovable);*/
 		AnimationCount++;
 		if (AnimationCount == 0) {
 			UnMovable = false;
@@ -907,16 +888,8 @@ namespace game_framework {
 			DamageAccumulator = 0;
 		}
 
-		//TRACE("d %d\n", direction);
-		//TRACE("E d %d\n", hitDirection);
-		//some basic movement
-
-		/*
-		if (isGettingHit) {
-		}
-		*/
 		SetMoving();
-		//TRACE("statusTable is Empty %d\n", statusTableAll.empty());
+
 		if (specialState == 1) {
 			TRACE("Freeze\n");
 			ShowFrozen();
@@ -951,8 +924,7 @@ namespace game_framework {
 					KnockSpeed = -1;
 				}
 			}
-			//if (KnockCount ==  || KnockCount == 110) {
-			//}
+
 		}
 		if (skillSignal != -1) {
 			CallSpecial();
@@ -963,8 +935,7 @@ namespace game_framework {
 	}
 
 	void Woody::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
-		//TRACE("isAttacking %d\n", isAttacking);
-		//TRACE("YPOS %d\n", yPos);
+
 		switch (AnimationState)
 		{
 		case 0:
@@ -982,8 +953,7 @@ namespace game_framework {
 			skillSignal = -1;
 			UnMovable = false;
 			AttackState = 0;
-			//isCarryItem = false;
-			//isDropItem = false;
+
 			break;
 		case 1:
 			Animation.Walk[direction].OnMove();
@@ -1468,7 +1438,6 @@ namespace game_framework {
 	}
 
 	void Woody::CallEnergyBlast() {
-		//frozenWaves[0]->SetEffectObj(direction, SpCount%10, xPos+50);
 
 		SpCount++;
 		TRACE("SpCount %d\n", SpCount);
@@ -1517,7 +1486,7 @@ namespace game_framework {
 	}
 
 	void Woody::CallDemonFoot() {
-		//TRACE("SP %d\n", SpCount);
+
 		SetAttack(true);
 		SpCount++;
 		if (SpCount <= 10) {
@@ -1568,7 +1537,7 @@ namespace game_framework {
 
 	void Woody::CallTank() {
 		SetAttack(true);
-		//TRACE("SpCount %d\n", SpCount);
+
 		if (SpCount == 0) {
 			InitialVelocity = 10;
 			YVelocity = InitialVelocity;
@@ -1607,9 +1576,6 @@ namespace game_framework {
 		if (SpCount >= 12) {
 			if (isRising) {
 				if (YVelocity > 0) {
-					TRACE("RISING\n");
-					TRACE("Velocity %d\n", YVelocity);
-					//SetXY(xPos, yPos - YVelocity*10);
 					yPos -= YVelocity;
 					YVelocity--;
 				}
@@ -1621,12 +1587,10 @@ namespace game_framework {
 			}
 			else if (SpCount>=65) {
 				if (yPos < JumpYposTemp - 1) {
-					//SetXY(xPos, yPos + YVelocity);
 					yPos += YVelocity;
 					YVelocity++;
 				}
 				else {
-					//SetXY(xPos, JumpYposTemp - 1);
 					yPos = JumpYposTemp - 1;
 					YVelocity = InitialVelocity;
 					island = true;

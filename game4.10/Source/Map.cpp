@@ -300,7 +300,6 @@ namespace game_framework {
 	void Map::ScenesCamera(boolean mapMove, boolean IsRunning, boolean IsLeft, int walkedDistance) {
 		int direction = IsLeft  ?  1 : -1; 
 		
-		//if (mapMove && cameraEnable) {
 			StopDynamic(IsLeft, walkedDistance);
 			if (mapBordary[0]) {
 				if (mapId == Forest) {
@@ -363,7 +362,6 @@ namespace game_framework {
 					}
 				}
 			}
-		//}
 	}
 
 	void Map::PrintMap(boolean showStates) {

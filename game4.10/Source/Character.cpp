@@ -112,7 +112,6 @@ namespace game_framework {
 		if (flag == true) {
 			if (isCarryItem == false && isDropItem == false) {
 				if (itemId == -1) {
-					//TRACE("Call PickUP\n");
 					isCarryItem = true;
 					isDropItem = false;
 					itemId = Id;
@@ -120,11 +119,9 @@ namespace game_framework {
 			}
 		}
 		else if (flag == false) {
-			//TRACE("Call NOT PickUP\n");
 			isCarryItem = false;
 			isDropItem = true;
-			//itemId = -1;
-		}
+			}
 	}
 
 	void Character::Pickup(FieldObject *other) {
@@ -248,7 +245,6 @@ namespace game_framework {
 		Diff = KeyBoardInputTime - LastInputTime;
 		LastInputTime = KeyBoardInputTime;
 		if (!UnMovable) {
-			//here has a problem
 			if (isRunning) {
 				if (direction == 0) {
 					if (nChar == KEY_LEFT) {
@@ -264,7 +260,6 @@ namespace game_framework {
 			else if (!isRunning && !isWalking) {
 				//Sp
 				if (nChar == KEY_H) {
-					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
 						skillSignal = 0;
@@ -272,7 +267,6 @@ namespace game_framework {
 					}
 				}
 				else if (nChar == KEY_J) {
-					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
 						skillSignal = 1;
@@ -280,7 +274,6 @@ namespace game_framework {
 					}
 				}
 				else if (nChar == KEY_K) {
-					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
 						skillSignal = 2;
@@ -288,7 +281,6 @@ namespace game_framework {
 					}
 				}
 				else if (nChar == KEY_L) {
-					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
 						skillSignal = 3;
@@ -296,7 +288,6 @@ namespace game_framework {
 					}
 				}
 				else if (nChar == KEY_U) {
-					//TRACE("Sp \n");
 					if (Mana >= 250) {
 						Mana -= 10;
 						skillSignal = 4;
@@ -482,7 +473,6 @@ namespace game_framework {
 	}
 
 	void Character::SetMoving() {
-		//TRACE("AniState %d\n", AnimationState);
 		if (isRunning) {
 			if (isJumpping) {
 				speed = 7;
@@ -501,8 +491,6 @@ namespace game_framework {
 				isWalking = true;
 				direction = 1;
 			}
-			//L_finish = clock();
-			//leftTime = (L_finish - L_start) / 1000;
 			leftTime++;
 		}
 		if (isMovingRight) {
@@ -513,8 +501,6 @@ namespace game_framework {
 				isWalking = true;
 				direction = 0;
 			}
-			//R_finish = clock();
-			//rightTime = (R_finish - R_start) / 1000;
 			rightTime++;
 		}
 
@@ -537,7 +523,6 @@ namespace game_framework {
 
 		if (!isMovingUp && !isMovingDown && !isMovingLeft && !isMovingRight) {
 			isWalking = false;
-			//Walk[direction].Reset();
 			AnimationState = 0;
 		}
 
@@ -682,7 +667,6 @@ namespace game_framework {
 			yPos = Y > yMapBorderMax ? yMapBorderMax : Y;
 			yPos = yPos < yMapBorderMin ? yMapBorderMin : yPos;
 		}
-		//TRACE("Y %d\n", yPos);
 	}
 
 	Character::~Character() {
