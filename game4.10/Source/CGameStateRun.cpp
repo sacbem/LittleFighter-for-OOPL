@@ -399,6 +399,7 @@ namespace game_framework {
 			if (mapNowID < 1) {
 				mapNowID++;
 				for (auto &i : characterList) {
+					i->ClearSkill();
 					if (!i->GetAlive()) {
 						delete i;
 						characterList[cnt] = new  Henry(1, map[mapNowID]->GetMapID());

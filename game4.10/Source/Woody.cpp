@@ -748,6 +748,13 @@ namespace game_framework {
 		}
 	}
 
+	void Woody::ClearSkill() {
+		for (auto& i : energyBlast) {
+			delete i;
+			energyBlast.pop_back();
+		}
+	}
+
 	void Woody::InitSpecialAttack() {
 		//FrozenStorms
 		energyBlastAnimation[0][0].LoadBitmap(".\\res\\Woody\\Woody_2\\woody_2_0.bmp", RGB(0, 0, 0));

@@ -599,6 +599,21 @@ namespace game_framework {
 		}
 	}
 
+	void Freeze::ClearSkill() {
+		for (auto& i : frozenWaves) {
+			delete i;
+			frozenWaves.pop_back();
+		}
+		for (auto& i : frozenPunchs) {
+			delete i;
+			frozenPunchs.pop_back();
+		}
+		for (auto& i : frozenStorms) {
+			delete i;
+			frozenStorms.pop_back();
+		}
+	}
+
 	void Freeze::InitSpecialAttack() {
 		//Freeze Ball Attack
 		frozenWavesAnimation[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_2\\freeze_2_0.bmp", RGB(0, 0, 0));
