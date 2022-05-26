@@ -27,7 +27,7 @@ namespace game_framework {
 		map.push_back(new Map(BC));
 		map.push_back(new Map(Forest));
 		//map[mapNowID] = new Map(BC);
-		clearFlag = false;
+		clearFlag = flaG = false;
 		characterSlidePriority.reserve(2);
 
 		characterSlidePriority.push_back(-1);
@@ -461,15 +461,17 @@ namespace game_framework {
 	
 		/// 切換關卡轉場
 		if (!clearFlag) {
-			clearedTime = TimePassed;
+			clearedTime = TimePassed/1000;
 		}
-		if ((!characterList[0]->HealthPoint || !characterList[1]->HealthPoint) && clearFlag) {
+		TRACE("signal %d %d %d\n", clearFlag, clearedTime, mapNowID);
+		if ((!characterList[0]->GetAlive() || !characterList[1]->GetAlive()) && !flaG) {
 			clearFlag = true;
 			black.ShowBitmap();
-			if ((TimePassed - clearedTime) == 3) {
+			if ((TimePassed/1000 - clearedTime) == 3) {
 				clearFlag = false;
 				if (mapNowID < 1) {
 					mapNowID++; 
+					flaG = true;
 				}
 			}
 		}

@@ -41,10 +41,14 @@ namespace game_framework {
 		//Generate Time
 		time_t GenerationTime;
 		time_t CurrentTime;
+		boolean clearFlag;
+		boolean flaG;
+		int clearedTime;
 		int TimePassed;
 		int MapAniCount = 0;
 		int registSerialNumber;
 		int mapNowID = 0;
+		
 
 	};
 }
