@@ -390,6 +390,48 @@ namespace game_framework {
 		}
 	}
 	
+	void CGameStateRun::ResetGame() {
+	int cnt = 0;
+	if (!clearFlag) {
+		clearedTime = TimePassed / 1000;
+	}
+	if ((!characterList[0]->GetAlive() || !characterList[1]->GetAlive()) && !flaG) {
+		clearFlag = true;
+		black.ShowBitmap();
+		if ((TimePassed / 1000 - clearedTime) == 1) {
+			clearFlag = false;
+			if (mapNowID < 1) {
+				mapNowID++;
+				for (auto &i : characterList) {
+					i->ClearSkill();
+					if (!i->GetAlive()) {
+						delete i;
+						characterList[cnt] = new  Henry(1, map[mapNowID]->GetMapID());
+						characterList[cnt]->SetXY(400, 401);
+						characterList[cnt]->SetCharacter();
+						tables[1] = -1;
+						if (cnt == 0) { 
+							delete HealthPlayer1; 
+							HealthPlayer1 = new HealthBar();
+							HealthPlayer1->init();
+							HealthPlayer1->loadSmallImg(1);
+							HealthPlayer1->OnLoad(400, 0);
+						}
+						else {
+							delete HealthPlayer2;
+							HealthPlayer2 = new HealthBar();
+							HealthPlayer2->init();
+							HealthPlayer2->loadSmallImg(2);
+							HealthPlayer2->OnLoad(400, 0);
+						}
+					}
+					cnt++;
+				}
+				flaG = true;
+				}
+			}
+		}
+	}
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//get character
@@ -458,24 +500,7 @@ namespace game_framework {
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 	
 		/// 切換關卡轉場
-		if (!clearFlag) {
-			clearedTime = TimePassed/1000;
-		}
-		TRACE("signal %d %d %d\n", clearFlag, clearedTime, mapNowID);
-		if ((!characterList[0]->GetAlive() || !characterList[1]->GetAlive()) && !flaG) {
-			clearFlag = true;
-			black.ShowBitmap();
-			if ((TimePassed/1000 - clearedTime) == 3) {
-				clearFlag = false;
-				if (mapNowID < 1) {
-					mapNowID++; 
-					flaG = true;
-
-					//Clear Character Skill
-					characterList[0]->ClearSkill();
-				}
-			}
-		}
+		ResetGame();
 	}
 
 	CGameStateRun::~CGameStateRun(){
