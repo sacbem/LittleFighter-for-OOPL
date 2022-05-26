@@ -28,6 +28,7 @@ namespace game_framework {
 	private:
 		void DetectSkillDamage(vector<pair<int, int>> theOthersPosition);
 		bool GetCharacter = false;
+		CMovingBitmap black;
 		vector<pair<int,int>> theOthersPosition;
 		vector<Character*> characterList;
 		vector<SkillEffect*> frozenPunchList; /// ©ñ¸m±¼¸¨ª«

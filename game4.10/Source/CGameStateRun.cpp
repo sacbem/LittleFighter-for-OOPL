@@ -27,7 +27,7 @@ namespace game_framework {
 		map.push_back(new Map(BC));
 		map.push_back(new Map(Forest));
 		//map[mapNowID] = new Map(BC);
-
+		clearFlag = false;
 		characterSlidePriority.reserve(2);
 
 		characterSlidePriority.push_back(-1);
@@ -96,11 +96,8 @@ namespace game_framework {
 			CharacterMapPosOffset();
 		}
 		///
-
-		
 		CalculateDamage(theOthersPosition);
-
-		//Character NeraItem
+		//Character NearItem
 		for (auto j : characterList) {
 			for (auto i : map[mapNowID]->drops) {
 				j->NearItem(i->GetX(),i->GetY(), i->GetX()+58, i->GetY()+58);
@@ -133,6 +130,7 @@ namespace game_framework {
 			}
 			num++;
 		}
+		
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -143,6 +141,9 @@ namespace game_framework {
 		for (auto &i : map) {
 			i->Load();
 		}
+		black.LoadBitmap(BITMAP_BLACKSCREEN); // 刷新畫面用
+		black.SetTopLeft(0,0);
+
 		//map[mapNowID]->Load();
 		HealthPlayer1->init();
 		HealthPlayer2->init();
@@ -218,6 +219,7 @@ namespace game_framework {
 			}
 		}
 	}
+
 	void CGameStateRun::SetCharacterSlide() {
 		constexpr int walk [2] = { 1,1001 };
 		constexpr int run [2] = { 2,1010 };
@@ -242,6 +244,7 @@ namespace game_framework {
 			theOthersPosition[i].second = characterList[i]->GetY1();
 		}
 	}
+
 	void CGameStateRun::CharacterMapPosOffset() {
 		constexpr int resetNum (-1) ;
 		constexpr int characterMoving_dx (2);
@@ -263,6 +266,7 @@ namespace game_framework {
 			}
 		}
 	}
+
 	void  CGameStateRun::CalculateDamage(vector<pair<int, int>> theOthersPosition) {
 
 		for (int i = 0; i < 2; i++) {
@@ -298,12 +302,15 @@ namespace game_framework {
 			characterList[1]->SetCalculateDamageRequest(false);
 		}
 	}
+
 	boolean CompareC(Character* obj1, Character* obj2) {
 		return obj1->GetY1() < obj2->GetY1();
 	}
+	
 	boolean CompareF(FieldObject* obj1, FieldObject* obj2) {
 		return obj1->GetY() < obj2->GetY();
 	}
+	
 	boolean CompareFP(SkillEffect* s1, SkillEffect* s2) {
 		return s1->yPos < s2->yPos;
 	}
@@ -452,6 +459,20 @@ namespace game_framework {
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 	
+		/// 切換關卡轉場
+		if (!clearFlag) {
+			clearedTime = TimePassed;
+		}
+		if ((!characterList[0]->HealthPoint || !characterList[1]->HealthPoint) && clearFlag) {
+			clearFlag = true;
+			black.ShowBitmap();
+			if ((TimePassed - clearedTime) == 3) {
+				clearFlag = false;
+				if (mapNowID < 1) {
+					mapNowID++; 
+				}
+			}
+		}
 	}
 
 	CGameStateRun::~CGameStateRun(){
