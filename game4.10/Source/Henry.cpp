@@ -837,6 +837,37 @@ namespace game_framework {
 		}
 	}
 
+	void Henry::ClearSkill() {
+		for (auto& i : arrow) {
+			delete i;
+			arrow.pop_back();
+		}
+		for (auto& i : downArrow) {
+			delete i;
+			downArrow.pop_back();
+		}
+		for (auto& i : downArrow2) {
+			delete i;
+			downArrow2.pop_back();
+		}
+		for (auto& i : upArrow) {
+			delete i;
+			upArrow.pop_back();
+		}
+		for (auto& i : pierceArrow) {
+			delete i;
+			pierceArrow.pop_back();
+		}
+		for (auto& i : airwave) {
+			delete i;
+			airwave.pop_back();
+		}
+		for (auto& i : demonicSong) {
+			delete i;
+			demonicSong.pop_back();
+		}
+	}
+
 	void Henry::InitSpecialAttack() {
 		//airWave
 		airWaveAnimation[0][0].LoadBitmap(".\\res\\Henry\\Henry_1\\Henry_1_65.bmp", RGB(0, 0, 0));

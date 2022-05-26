@@ -51,6 +51,7 @@ namespace game_framework {
 		virtual void SetAttack(bool flag) = 0;
 		virtual void SetKnock(bool flag, int Dir, int AttState)=0;
 		virtual void SetSkill(int createdTimes) =0;
+		virtual void ClearSkill() = 0;
 		void InputKeyDown(UINT nChar, int Time , int playerID);
 		void InputKeyUp(UINT nChar, int playerID);
 		boolean IsInBorder(int mapID);
@@ -207,6 +208,7 @@ namespace game_framework {
 		virtual void ShowAttack() override;
 		virtual void SetCharacter() override;
 		virtual void SetSkill(int createdTimes) override;
+		virtual void ClearSkill() override;
 		virtual int HitEnemy(Character* enemy) override;
 		virtual bool isAttackFrame() override;
 		void EffectObjectAliveManager(int mainTime);
@@ -255,6 +257,7 @@ namespace game_framework {
 		virtual void ShowAttack() override;
 		virtual void SetCharacter() override;
 		virtual void SetSkill(int createdTimes) override;
+		virtual void ClearSkill() override;
 		virtual int HitEnemy(Character* enemy) override;
 		virtual bool isAttackFrame() override;
 		void EffectObjectAliveManager(int mainTime);
@@ -302,6 +305,7 @@ namespace game_framework {
 		virtual void ShowAttack() override;
 		virtual void SetCharacter() override;
 		virtual void SetSkill(int createdTimes) override;
+		virtual void ClearSkill() override;
 		virtual int HitEnemy(Character* enemy) override;
 		virtual bool isAttackFrame() override;
 		void EffectObjectAliveManager(int mainTime);

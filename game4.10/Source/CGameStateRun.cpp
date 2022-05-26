@@ -470,6 +470,9 @@ namespace game_framework {
 				if (mapNowID < 1) {
 					mapNowID++; 
 					flaG = true;
+
+					//Clear Character Skill
+					characterList[0]->ClearSkill();
 				}
 			}
 		}
