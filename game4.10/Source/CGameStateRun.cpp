@@ -142,10 +142,6 @@ namespace game_framework {
 		black.LoadBitmap(BITMAP_BLACKSCREEN); // 刷新畫面用
 		black.SetTopLeft(0,0);
 
-		//map[mapNowID]->Load();
-		HealthPlayer1->init();
-		HealthPlayer2->init();
-
 		HealthPlayer1->OnLoad(0, 0);
 		HealthPlayer2->OnLoad(400, 0);
 		switch (map[mapNowID]->GetMapID()) {
