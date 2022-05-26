@@ -61,14 +61,25 @@ namespace game_framework {
 		}
 
 		SetAllCharacterPosition();
-		if (characterList[0]->HitEnemy(characterList[1]) && characterList[0]->isAttacking) {
-			if (characterList[1]->HealthPoint > 0) {
-				//int hitDirection = characterList[0]->GetDir();
-				characterList[1]->SetKnock(true, characterList[0]->GetDir(), characterList[0]->AttackState);
-				characterList[1]->isGettingDamage(characterList[0]->AttackPoint);
-
+		
+		int num0 = 0;
+		int num1 = 0;
+		for (auto i : characterList) {
+			num1 = 0;
+			for (auto j : characterList) {
+				if (num0 != num1) {
+					if (i->HitEnemy(j) && i->isAttacking) {
+						if (j->HealthPoint >= 0) {
+							j->SetKnock(true, i->GetDir(), i->AttackState);
+							j->isGettingDamage(i->AttackPoint);
+						}
+					}
+				}
+				num1++;
 			}
+			num0++;
 		}
+
 		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
 		//characterList[1]->OnMove();
 		characterList[0]->DistanceAccumulatorReset();
@@ -78,17 +89,29 @@ namespace game_framework {
 		CalculateDamage(theOthersPosition);
 
 		//boxTest->Throw(true, characterList[0]->GetDir());
-		if (maps->drops[0]->HitPlayer(0, characterList[0]->GetX1(), characterList[0]->GetY1(), characterList[0]->GetX2(), characterList[0]->GetY2(), characterList[0]->isAttacking)) {
-			if (characterList[0]->isDropItem == false && characterList[0]->isCarryItem == false && characterList[0]->GetSkillSignal()==-1) {
-				if (maps->drops[0]->GetState() == 0) {
-					characterList[0]->SetPickup(true,0);
-					maps->drops[0]->SetState(1);
+		int num = 0;
+		int num2 = 0;
+		for (auto i : maps->drops) {
+			for (auto j : characterList) {
+				if (i->HitPlayer(num2, j->GetX1(), j->GetY1(), j->GetX2(), j->GetY2(), j->isAttacking)) {
+					if (j->isDropItem == false && j->isCarryItem == false && j->GetSkillSignal() == -1) {
+						if (i->GetState() == 0) {
+							j->SetPickup(true, num);
+							i->SetState(1);
+							i->SetOwner(num2);
+						}
+					}
 				}
+				if (i->GetOwner() == num2 && j->itemId == num) {
+					if (i->GetState() == 1) {
+						j->Pickup((maps->drops[num]));
+					}
+				}
+				num2++;
 			}
+			num++;
 		}
-		if (maps->drops[0]->GetState() == 1) {
-			characterList[0]->Pickup((maps->drops[0]));
-		}
+		
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -130,23 +153,23 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
-		//characterList[0]->InputKeyDown(nChar, CurrentTime,0);
+		characterList[0]->InputKeyDown(nChar, CurrentTime,0);
 		characterList[1]->InputKeyDown(nChar, CurrentTime,1);
 		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
 
-		if (characterList[0]->isDropItem == true) {
-			maps->drops[0]->liftUp(false, characterList[0]->GetX1(), characterList[0]->GetY1(), characterList[0]->GetDir());
-			//TRACE("drop state %d\n", drop[0]->GetState());
-			//TRACE("char isDrop %d\n", characterList[0]->isDropItem);
-			//TRACE("char isCarry %d\n", characterList[0]->isCarryItem);
-			characterList[0]->isCarryItem = false;
-			characterList[0]->isDropItem = false;
-			characterList[0]->itemId = -1;
+		//Reset item state
+		for (auto i : characterList) {
+			if (i->isDropItem == true) {
+				maps->drops[i->itemId]->liftUp(false, i->GetX1(), i->GetY1(), i->GetDir());
+				i->isCarryItem = false;
+				i->isDropItem = false;
+				i->itemId = -1;
+			}
 		}
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
-		//characterList[0]->InputKeyUp(nChar,0);
+		characterList[0]->InputKeyUp(nChar,0);
 		characterList[1]->InputKeyUp(nChar,1);
 	}
 
@@ -180,12 +203,6 @@ namespace game_framework {
 						characterList[1]->isGettingDamage(i.second);
 					}
 				}
-				//characterList[0]->ClearAbonormalStatus();
-				//characterList[1]->ClearAbonormalStatus();
-				//for (auto i : statusTableAll) {
-					//TRACE("All %d\n", i.first);
-				//}
-
 			}
 			if (!characterList[0]->hittedTable.empty()) {
 				pair<int, int>().swap(characterList[0]->hittedTable[0]);
@@ -196,12 +213,6 @@ namespace game_framework {
 			characterList[0]->SetCalculateDamageRequest(false);
 			characterList[1]->SetCalculateDamageRequest(false);
 		}
-		
-		//characterList[1]->isGettingDamage(player2Damage);
-
-		//boxTest->OnMove();
-		//drop[0]->OnMove();
-		//characterList[0]->Pickup(drop[0]);
 	}
 	boolean CompareC(Character* obj1, Character* obj2) {
 		return obj1->GetY1() < obj2->GetY1();
@@ -294,11 +305,8 @@ namespace game_framework {
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//get character
-		if (GetCharacter == false ){ // && characterList[1]->getCharacter == false) {
-			//boxTest = new FieldObject(0);
+		if (GetCharacter == false ){
 			maps->drops.push_back(new FieldObject(0, maps->GetMapID()));
-			//drop.push_back(new FieldObject(0));
-			//drop.push_back(new FieldObject(0));
 			switch (this->game->selectCharacterID[0]){
 			case 0:
 				characterList.push_back(new Woody(0 ,maps->GetMapID()));
@@ -364,20 +372,11 @@ namespace game_framework {
 	
 		maps->PrintMap(showStatus);
 
-		//Share statusTable
-		//for (auto i : characterList) {
-			//i->statusTable = statusTable;
-		//}
-
 		SortedShow();
 
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 	
-		//drop[0]->ShowAnimation();
-		//boxTest->ShowAnimation();
-		//TRACE("isCarry %d\n", characterList[0]->isCarryItem);
-		//TRACE("isDrop %d\n", characterList[0]->isDropItem);
 	}
 
 	CGameStateRun::~CGameStateRun(){

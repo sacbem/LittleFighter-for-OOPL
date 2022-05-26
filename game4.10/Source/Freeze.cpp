@@ -379,10 +379,10 @@ namespace game_framework {
 				else if (AttState == 3 || AttState == 4 || AttState == 6) {
 					LastKnockState = KnockState;
 					if (direction == 0 && Dir == 0) {
-						KnockState = 7;
+						KnockState = 8;
 					}
 					else if (direction == 1 && Dir == 1) {
-						KnockState = 8;
+						KnockState = 7;
 					}
 					else if (direction == 0 && Dir == 1) {
 						KnockState = 8;
@@ -676,7 +676,7 @@ namespace game_framework {
 		}
 		//Heal
 		if (AnimationCount % 150 == 0) {
-			if (HealthPoint <= InnerHealPoint) {
+			if (HealthPoint <= InnerHealPoint && InnerHealPoint > 0) {
 				HealthPoint += 30;
 				if (HealthPoint >= 1800) {
 					HealthPoint = 1800;
@@ -732,10 +732,10 @@ namespace game_framework {
 			ShowKnock();
 			if (direction == 0) {
 				if (hitDirection == 0) {
-					KnockSpeed = -1;
+					KnockSpeed = 1;
 				}
 				else if (hitDirection == 1) {
-					KnockSpeed = 1;
+					KnockSpeed = -1;
 				}
 			}
 			else if (direction == 1) {
@@ -771,6 +771,7 @@ namespace game_framework {
 	}
 
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
+		TRACE("direction %d\n",direction);
 		switch (AnimationState)
 		{
 		case 0:
@@ -1345,7 +1346,7 @@ namespace game_framework {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
 				if (h != this->serialNumber) {
 					if (this->direction == 1) {
-						if (i->xPos - 239 <= theOthersPosition[h].first + 50 && i->xPos - 60 >= theOthersPosition[h].first + 30) {
+						if (i->xPos - 149 <= theOthersPosition[h].first + 50 && i->xPos - 60 >= theOthersPosition[h].first + 30) {
 							if (i->yPos - 30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
 								int yRange1 = i->yPos - 20;
 								int yRange2 = i->yPos + 20;
@@ -1362,7 +1363,7 @@ namespace game_framework {
 						}
 					}
 					else {
-						if (i->xPos + 40 * attackDirection <= theOthersPosition[h].first + 50 && i->xPos + 229 * attackDirection >= theOthersPosition[h].first + 30) {
+						if (i->xPos + 40 * attackDirection <= theOthersPosition[h].first + 50 && i->xPos + 209 * attackDirection >= theOthersPosition[h].first + 30) {
 							if (i->yPos - 30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
 								int yRange1 = i->yPos - 20;
 								int yRange2 = i->yPos + 20;
