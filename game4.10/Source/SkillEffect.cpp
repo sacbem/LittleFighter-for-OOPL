@@ -32,7 +32,6 @@ namespace game_framework {
 		switch (skillID) {
 		case static_cast<int>(skillsIdTable::frozenWave):
 			effectObj.push_back(new GameObject(2, "Effect"));
-			//effectObj[0]->Load(".\\res\\Freeze\\Freeze_ball\\freeze_ball_0.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(0, ".\\res\\Freeze\\Freeze_ball\\freeze_ball_0.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(0, ".\\res\\Freeze\\Freeze_ball\\freeze_ball_1.bmp", RGB(0, 0, 0));
 			effectObj[0]->Load(0, ".\\res\\Freeze\\Freeze_ball\\freeze_ball_2.bmp", RGB(0, 0, 0));
@@ -118,9 +117,6 @@ namespace game_framework {
 			effectObj[3]->Load(1, ".\\res\\Freeze\\Freeze_col_reverse\\freeze_col_reverse_23.bmp", RGB(0, 0, 0));
 			effectObj[3]->Load(1, ".\\res\\Freeze\\Freeze_col_reverse\\freeze_col_reverse_22.bmp", RGB(0, 0, 0));
 			break;
-			//case static_cast<int>(skillsIdTable::frozenSword):
-			//	effectObj.push_back(new GameObject("Effect"));
-			//	break;
 		case static_cast<int>(skillsIdTable::frozenStorm):
 			effectObj.push_back(new GameObject(2,"Effect"));
 
@@ -286,6 +282,7 @@ namespace game_framework {
 	}
 
 	void SkillEffect::OnShow() {
+		
 		switch (skillID) {
 			//////////////// Freeze
 		case static_cast<int>(skillsIdTable::frozenWave):

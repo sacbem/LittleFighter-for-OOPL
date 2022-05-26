@@ -112,7 +112,6 @@ namespace game_framework {
 		if (flag == true) {
 			if (isCarryItem == false && isDropItem == false) {
 				if (itemId == -1) {
-					//TRACE("Call PickUP\n");
 					isCarryItem = true;
 					isDropItem = false;
 					itemId = Id;
@@ -120,11 +119,9 @@ namespace game_framework {
 			}
 		}
 		else if (flag == false) {
-			//TRACE("Call NOT PickUP\n");
 			isCarryItem = false;
 			isDropItem = true;
-			//itemId = -1;
-		}
+			}
 	}
 
 	void Character::Pickup(FieldObject *other) {

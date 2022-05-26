@@ -25,10 +25,6 @@ namespace game_framework {
 		demonicSong.reserve(1);
 		hittedLog.resize(4);
 		SetCalculateDamageRequest(false);
-		//frozenWaves.reserve(1);
-		//frozenPunchs.reserve(1);
-		//frozenSwords.reserve(1);
-		//frozenStorms.reserve(1);
 	}
 
 	int Henry::HitEnemy(Character* enemy) {
@@ -68,11 +64,6 @@ namespace game_framework {
 	void Henry::DetectSkillDamage(vector<pair<int, int>> theOthersPosition, int* n) {
 		pair<int, int> itr(0, 0);  // first ²Ä´X°¦¸}¦â second ¶Ë®`
 		int attackDirection = this->GetDir() ? -1 : 1;
-		//tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2
-		//enemy->GetX1() + 30, enemy->GetY1() + 20, enemy->GetX2() - 30, enemy->GetY2() - 20);
-
-		//first+80 >=xPos && fist<=xPos+80
-		//second+80 >=yPos && second<=yPos+80
 
 		for (auto& i : arrow) {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
@@ -372,12 +363,6 @@ namespace game_framework {
 	}
 
 	void Henry::ShowAttack() {
-		//TRACE("Attacl %d\n", AttackAccumulator);
-		//TRACE("Count %d\n", AttackCount);
-		TRACE("Attack %d\n", AttackState);
-		//TRACE("Last Attack %d\n", LastAttackState);
-		//TRACE("Animation %d\n", AnimationState);
-		//TRACE("Hit %d\n", isHitting);
 		AttackCount++;
 		switch (AttackState)
 		{
@@ -624,9 +609,6 @@ namespace game_framework {
 	}
 
 	void Henry::ShowKnock() {
-		//TRACE("Hit %d\n", isGettingHit);
-		//TRACE("Damage %d\n", DamageAccumulator);
-		//TRACE("Attack %d\n", AttackAccumulator);
 		KnockCount++;
 		switch (KnockState) {
 		case 1:
@@ -779,7 +761,7 @@ namespace game_framework {
 		auto pierceArrow_Begin = pierceArrow.begin();
 		auto airwave_Begin = airwave.begin();
 		auto demonicSong_Begin = demonicSong.begin();
-		//TRACE("Signal %d\n", this->GetSkillSignal());
+	
 		if (this->GetSkillSignal() == 1) {
 			pierceArrow.insert(pierceArrow_Begin, new SkillEffect(5, createdTimes, direction, xPos, yPos+20));
 			skillsEffect_InFieldNumber[1] = pierceArrow.size();
@@ -848,7 +830,6 @@ namespace game_framework {
 			}
 		}
 		for (auto& i : demonicSong) {
-			TRACE("Time m %d\n", mainTime);
 			if (mainTime - i->createdTime >= demonicSong_AliveTime) {
 				delete i;
 				demonicSong.pop_back();
@@ -911,7 +892,7 @@ namespace game_framework {
 	}
 
 	void Henry::OnMove() {
-		//TRACE("Roll %d\n", RollCount);
+		
 		AnimationCount++;
 		if (AnimationCount == 0) {
 			UnMovable = false;
@@ -949,14 +930,9 @@ namespace game_framework {
 			DamageAccumulator = 0;
 		}
 
-		//TRACE("d %d\n", direction);
-		//TRACE("E d %d\n", hitDirection);
+
 		//some basic movement
 
-		/*
-		if (isGettingHit) {
-		}
-		*/
 		SetMoving();
 		if (specialState == 1) {
 			ShowFrozen();
@@ -991,8 +967,6 @@ namespace game_framework {
 					KnockSpeed = -1;
 				}
 			}
-			//if (KnockCount ==  || KnockCount == 110) {
-			//}
 		}
 		if (skillSignal != -1) {
 			CallSpecial();
@@ -1408,9 +1382,7 @@ namespace game_framework {
 	}
 
 	void Henry::CallairWave() {
-		//frozenWaves[0]->SetEffectObj(direction, SpCount%10, xPos+50);
-
-		//TRACE("SpCount %d\n", SpCount);
+	
 		SpCount++;
 		if (SpCount <= 10) {
 			AnimationState = 200;

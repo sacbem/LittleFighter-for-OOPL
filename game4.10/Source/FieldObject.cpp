@@ -46,7 +46,6 @@ namespace game_framework {
 		{
 		case 0:
 			Obj = new GameObject(2, "Weapon");
-			//GameObject(2,"Weapon");
 			Obj->Load(".//res//Box//Box_0//box_0.bmp", RGB(0, 0, 0));
 
 			Obj->Load(0, ".//res//Box//Box_0//box_0.bmp", RGB(0, 0, 0));
@@ -154,8 +153,6 @@ namespace game_framework {
 	};
 
 	void FieldObject::ShowAnimation() {
-		//TRACE("ss %d\n", state);
-		//TRACE("AC %d\n", AnimationCount);
 		Obj->SetTopLeft(direction, AnimationState, xPos, yPos);
 		Obj->OnShow(direction, AnimationState);
 	}
