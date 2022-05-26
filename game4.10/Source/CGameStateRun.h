@@ -28,6 +28,7 @@ namespace game_framework {
 	private:
 		void DetectSkillDamage(vector<pair<int, int>> theOthersPosition);
 		bool GetCharacter = false;
+		CMovingBitmap black;
 		vector<pair<int,int>> theOthersPosition;
 		vector<Character*> characterList;
 		vector<SkillEffect*> frozenPunchList; /// ©ñ¸m±¼¸¨ª«
@@ -39,10 +40,14 @@ namespace game_framework {
 		//Generate Time
 		time_t GenerationTime;
 		time_t CurrentTime;
+		boolean clearFlag;
+		boolean flaG;
+		int clearedTime;
 		int TimePassed;
 		int MapAniCount = 0;
 		int registSerialNumber;
 		int mapNowID = 0;
+		
 
 	};
 }
