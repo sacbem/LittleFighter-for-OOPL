@@ -344,11 +344,6 @@ namespace game_framework {
 				SetPickup(false, itemId);
 			}
 		}
-		/*
-		if (nChar == KEY_TEST_SKILL1) {
-			skillSignal = 0;
-		}
-		*/
 	}
 
 	void Character::InputKeyUp(UINT nChar, int playerID) {

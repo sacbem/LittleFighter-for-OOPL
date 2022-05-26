@@ -34,6 +34,7 @@ namespace game_framework {
 		vector<int>statusTableAll;
 		vector<int> characterSlidePriority; //walk 1000 1 run 1010 2  
 		Map* maps;
+		vector <Map*> map;
 		HealthBar* HealthPlayer1;
 		HealthBar* HealthPlayer2;
 		int CleanCounter=0;
@@ -43,6 +44,7 @@ namespace game_framework {
 		int TimePassed;
 		int MapAniCount = 0;
 		int registSerialNumber;
+		int mapNowID = 0;
 
 	};
 }

@@ -24,7 +24,10 @@ namespace game_framework {
 		//characterList[1] = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
-		maps = new Map(BC);
+		map.push_back(new Map(BC));
+		map.push_back(new Map(Forest));
+		//map[mapNowID] = new Map(BC);
+
 		characterSlidePriority.reserve(2);
 
 		characterSlidePriority.push_back(-1);
@@ -40,8 +43,11 @@ namespace game_framework {
 	}
    
 	void CGameStateRun::OnMove()	{					// 移動遊戲元素
-		//maps->drops[0]->OnMove();
-		maps->drops[0]->OnMove();
+		//map[mapNowID]->drops[0]->OnMove();
+		if (! map[mapNowID]->drops.empty()) {
+			map[mapNowID]->drops[0]->OnMove();
+		}
+	
 		CleanCounter++;
 		if (CleanCounter >= 10) {
 			CleanCounter = 0;
@@ -80,23 +86,23 @@ namespace game_framework {
 			num0++;
 		}
 
-		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
-		//characterList[1]->OnMove();
+		/// 動態地圖相關
+		map[mapNowID]->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[1]->GetDistance());
 		characterList[0]->DistanceAccumulatorReset();
 		characterList[1]->DistanceAccumulatorReset();
-
-		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(), characterList[0]->isRunning, characterList[0]->GetDir(), characterList[0]->GetDistance());
-		maps->ScenesCamera(characterList[1]->DistanceAccumulatorReset(), characterList[1]->isRunning, characterList[1]->GetDir(), characterList[1]->GetDistance());
-		
-		if (maps->characterOffsetFlag) {
+		map[mapNowID]->ScenesCamera(characterList[0]->DistanceAccumulatorReset(), characterList[0]->isRunning, characterList[0]->GetDir(), characterList[0]->GetDistance());
+		map[mapNowID]->ScenesCamera(characterList[1]->DistanceAccumulatorReset(), characterList[1]->isRunning, characterList[1]->GetDir(), characterList[1]->GetDistance());
+		if (map[mapNowID]->characterOffsetFlag) {
 			CharacterMapPosOffset();
 		}
+		///
+
 		
 		CalculateDamage(theOthersPosition);
 
 		//Character NeraItem
 		for (auto j : characterList) {
-			for (auto i : maps->drops) {
+			for (auto i : map[mapNowID]->drops) {
 				j->NearItem(i->GetX(),i->GetY(), i->GetX()+58, i->GetY()+58);
 				if (j->isNearItem == true) {
 					break;
@@ -105,7 +111,7 @@ namespace game_framework {
 		}
 		int num = 0;
 		int num2 = 0;
-		for (auto i : maps->drops) {
+		for (auto i : map[mapNowID]->drops) {
 			for (auto j : characterList) {
 				if (!j->isRunning) {
 					if (i->HitPlayer(num2, j->GetX1(), j->GetY1(), j->GetX2(), j->GetY2(),j->isAttacking)) {
@@ -120,7 +126,7 @@ namespace game_framework {
 				}
 				if (i->GetOwner() == num2 && j->itemId == num) {
 					if (i->GetState() == 1) {
-						j->Pickup((maps->drops[num]));
+						j->Pickup((map[mapNowID]->drops[num]));
 					}
 				}
 				num2++;
@@ -134,14 +140,16 @@ namespace game_framework {
 		ShowInitProgress(33);	// 接個前一個狀態的進度，此處進度視為33%
 		ShowInitProgress(50);
 		Sleep(300);
-
-		maps->Load();
+		for (auto &i : map) {
+			i->Load();
+		}
+		//map[mapNowID]->Load();
 		HealthPlayer1->init();
 		HealthPlayer2->init();
 
 		HealthPlayer1->OnLoad(0, 0);
 		HealthPlayer2->OnLoad(400, 0);
-		switch (maps->GetMapID()) {
+		switch (map[mapNowID]->GetMapID()) {
 		case Forest:
 			CAudio::Instance()->Load(Forest, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
 			CAudio::Instance()->Play(Forest, true);
@@ -175,7 +183,7 @@ namespace game_framework {
 		//Reset item state
 		for (auto i : characterList) {
 			if (i->isDropItem == true) {
-				maps->drops[i->itemId]->liftUp(false, i->GetX1(), i->GetY1(), i->GetDir());
+				map[mapNowID]->drops[i->itemId]->liftUp(false, i->GetX1(), i->GetY1(), i->GetDir());
 				i->isCarryItem = false;
 				i->isDropItem = false;
 				i->itemId = -1;
@@ -184,8 +192,14 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
+		const char nextV = 0x39;
 		characterList[0]->InputKeyUp(nChar,0);
 		characterList[1]->InputKeyUp(nChar,1);
+		if (nChar == nextV) {
+			if (mapNowID < 1) {
+				mapNowID++;
+			}
+		}
 	}
 	void CGameStateRun::SetCharacterSlide() {
 		constexpr int walk [2] = { 1,1001 };
@@ -245,7 +259,7 @@ namespace game_framework {
 				static_cast<Henry*>(characterList[i])->DetectSkillDamage(theOthersPosition, tables);
 			}
 		}
-		//statusTable = characterList[0]->statusTable;
+
 		if (characterList[0]->GetCalculateDamageRequest() || characterList[1]->GetCalculateDamageRequest()) {
 			for (auto& u : characterList) {
 				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
@@ -282,11 +296,11 @@ namespace game_framework {
 		vector<Character*> characterListCopy;
 		vector<SkillEffect*> frozenPunchListCopy;
 		vector<int> showSequence(3, 0), sequenceValue_Y(3, 0);
-		boolean dropEmpty = maps->drops.empty(), characterEmpty = characterList.empty(), frozemPunchEmpty = frozenPunchList.empty();
-		int totalSize = maps->drops.size() + characterList.size() + frozenPunchList.size();
+		boolean dropEmpty = map[mapNowID]->drops.empty(), characterEmpty = characterList.empty(), frozemPunchEmpty = frozenPunchList.empty();
+		int totalSize = map[mapNowID]->drops.size() + characterList.size() + frozenPunchList.size();
 
 		if (!dropEmpty) {
-			dropCopy.assign(maps->drops.begin(), maps->drops.end());
+			dropCopy.assign(map[mapNowID]->drops.begin(), map[mapNowID]->drops.end());
 			std::sort(dropCopy.begin(), dropCopy.end(), CompareF);
 			sequenceValue_Y[0] = dropCopy[0]->GetY();
 		}
@@ -318,7 +332,7 @@ namespace game_framework {
 			switch (showingIndex) {
 			case 0:
 				dropCopy[showSequence[0]]->ShowAnimation();
-				if (showSequence[0] < maps->drops.size()-1) {
+				if (showSequence[0] < map[mapNowID]->drops.size()-1) {
 					showSequence[0] += 1;
 					sequenceValue_Y[0] = dropCopy[showSequence[0]]->GetY();
 					
@@ -358,19 +372,19 @@ namespace game_framework {
 		boolean showStatus;
 		//get character
 		if (GetCharacter == false ){
-			maps->drops.push_back(new FieldObject(0, maps->GetMapID()));
+			map[mapNowID]->drops.push_back(new FieldObject(0, map[mapNowID]->GetMapID()));
 			switch (this->game->selectCharacterID[0]){
 			case 0:
-				characterList.push_back(new Woody(0 ,maps->GetMapID()));
+				characterList.push_back(new Woody(0 ,map[mapNowID]->GetMapID()));
 				break;
 			case 1:
-				characterList.push_back(new Freeze(0, maps->GetMapID()));
+				characterList.push_back(new Freeze(0, map[mapNowID]->GetMapID()));
 				break;
 			case 2:
-				characterList.push_back(new Henry(0, maps->GetMapID()));
+				characterList.push_back(new Henry(0, map[mapNowID]->GetMapID()));
 				break;
 			default:
-				characterList.push_back(new Freeze(0, maps->GetMapID()));
+				characterList.push_back(new Freeze(0, map[mapNowID]->GetMapID()));
 
 				break;
 			}
@@ -379,23 +393,22 @@ namespace game_framework {
 
 			switch (this->game->selectCharacterID[1]) {
 			case 0:
-				characterList.push_back(new Woody(1, maps->GetMapID()));
+				characterList.push_back(new Woody(1, map[mapNowID]->GetMapID()));
 				break;
 			case 1:
-				characterList.push_back(new Freeze(1, maps->GetMapID()));
+				characterList.push_back(new Freeze(1, map[mapNowID]->GetMapID()));
 				break;
 			case 2:
-				characterList.push_back(new Henry(1, maps->GetMapID()));
+				characterList.push_back(new Henry(1, map[mapNowID]->GetMapID()));
 				break;
 			default:
-				characterList.push_back(new Freeze(1, maps->GetMapID()));
+				characterList.push_back(new Freeze(1, map[mapNowID]->GetMapID()));
 				break;
 			}
 			characterList[1]->SetXY(400, 401);
 			characterList[1]->SetCharacter();
 			
 			SetAllCharacterPosition();
-
 
 			GetCharacter = true;
 			HealthPlayer1->loadSmallImg(this->game->selectCharacterID[0]);
@@ -416,7 +429,7 @@ namespace game_framework {
 			}
 		}
 	
-		maps->PrintMap(showStatus);
+		map[mapNowID]->PrintMap(showStatus);
 		SortedShow();
 
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
@@ -425,8 +438,9 @@ namespace game_framework {
 	}
 
 	CGameStateRun::~CGameStateRun(){
-		delete maps, HealthPlayer1, HealthPlayer2;
+		delete HealthPlayer1, HealthPlayer2;
 		vector<Character*>().swap(characterList);
+		vector<Map*>().swap(map);
 	
 	}
 }
