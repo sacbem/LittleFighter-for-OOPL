@@ -70,11 +70,13 @@ namespace game_framework {
 
 			}
 		}
-		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
+		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[1]->GetDistance());
 
 		characterList[0]->DistanceAccumulatorReset();
+		characterList[1]->DistanceAccumulatorReset();
 
 		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(), characterList[0]->isRunning, characterList[0]->GetDir(), characterList[0]->GetDistance());
+		maps->ScenesCamera(characterList[1]->DistanceAccumulatorReset(), characterList[1]->isRunning, characterList[1]->GetDir(), characterList[1]->GetDistance());
 		
 		if (maps->characterOffsetFlag) {
 			CharacterMapPosOffset();
@@ -148,7 +150,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		characterList[0]->InputKeyUp(nChar,0);
-		//characterList[1]->InputKeyUp(nChar,1);
+		characterList[1]->InputKeyUp(nChar,1);
 	}
 	void CGameStateRun::SetCharacterSlide() {
 		
