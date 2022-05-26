@@ -26,7 +26,6 @@ namespace game_framework {
 
 	int Freeze::HitEnemy(Character* enemy) {
 		if (isAttackFrame()) {
-			//TRACE("enemy %d\n", enemy->GetY1());
 			int yRange1 = yPos - 20;
 			int yRange2 = yPos + 20;
 			if(yRange1<=enemy->GetY1() && enemy->GetY1() <= yRange2) {
@@ -137,7 +136,6 @@ namespace game_framework {
 					}
 					else {
 						LastAttackState = AttackState;
-						//TRACE("LastAttackState %d\n", LastAttackState);
 						switch (LastAttackState)
 						{
 						case 1:
@@ -159,7 +157,6 @@ namespace game_framework {
 							AttackState = 1;
 							break;
 						}
-						//TRACE("AttackState %d\n", AttackState);
 					}
 				}
 			}
@@ -550,7 +547,7 @@ namespace game_framework {
 		auto frozenWaves_Begin = frozenWaves.begin();
 		auto frozenPunchs_Begin = frozenPunchs.begin();
 		auto frozenStorms_Begin = frozenStorms.begin();
-		//TRACE("Signal %d\n", this->GetSkillSignal());
+		
 		if (this->GetSkillSignal() == 0) {
 			frozenWaves.insert(frozenWaves_Begin, new SkillEffect(0, createdTimes, direction, xPos, yPos));
 			skillsEffect_InFieldNumber[0] = frozenWaves.size();
@@ -576,18 +573,12 @@ namespace game_framework {
 			}
 		}
 		for (auto& i : frozenPunchs) {
-			//TRACE("Time m %d\n", mainTime);
-			//TRACE("Time c %d\n", i->createdTime);
-			//TRACE("Time %d\n", mainTime - i->createdTime);
 			if (mainTime - i->createdTime >= frozenPunchs_AliveTime) {
 				delete i;
 				frozenPunchs.pop_back();
 			}
 		}
 		for (auto& i : frozenStorms) {
-			//TRACE("Time m %d\n", mainTime);
-			//TRACE("Time c %d\n", i->createdTime);
-			//TRACE("Time %d\n", mainTime - i->createdTime);
 			if (mainTime - i->createdTime >= frozenStorms_AliveTime) {
 				delete i;
 				frozenStorms.pop_back();
@@ -663,7 +654,6 @@ namespace game_framework {
 	}
 
 	void Freeze::OnMove() {
-		/*TRACE("UnMove %d\n", UnMovable);*/
 		AnimationCount++;
 		if (AnimationCount == 0) {
 			UnMovable = false;
@@ -698,9 +688,6 @@ namespace game_framework {
 		if (DamageAccumulator >= 400) {
 			DamageAccumulator = 0;
 		}
-
-		//TRACE("d %d\n", direction);
-		//TRACE("E d %d\n", hitDirection);
 		//some basic movement
 
 		/*
@@ -1318,13 +1305,14 @@ namespace game_framework {
 	void Freeze::DetectSkillDamage(vector<pair<int, int>> theOthersPosition, int *n) {
 		pair<int, int> itr(0, 0);  // first : characterID second :damage
 		int attackDirection = this->GetDir() ? -1 : 1;
+		int yRange1 = 0, yRange2 = 0 ;
 		for (auto& i : frozenWaves) {
 			for (int h = 0; h < theOthersPosition.size(); h++) {
 				if (h != this->serialNumber) {
 					if (i->xPos+4 <= theOthersPosition[h].first+50 && i->xPos+78 >= theOthersPosition[h].first + 30) {
 						if (i->yPos+23 <= theOthersPosition[h].second+60 && i->yPos+57 >= theOthersPosition[h].second+20) {
-							int yRange1 = i->yPos - 20;
-							int yRange2 = i->yPos + 20;
+							yRange1 = i->yPos - 20;
+							yRange2 = i->yPos + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
 									itr.first = h; itr.second = 500;
@@ -1332,7 +1320,6 @@ namespace game_framework {
 									hittedTable.push_back(itr);
 									i->isHit = true;
 									this->SetCalculateDamageRequest(true);
-									//this->SetAbonormalStatus(h, true);
 									n[h] = 1;
 								}
 							}
@@ -1348,8 +1335,8 @@ namespace game_framework {
 					if (this->direction == 1) {
 						if (i->xPos - 149 <= theOthersPosition[h].first + 50 && i->xPos - 60 >= theOthersPosition[h].first + 30) {
 							if (i->yPos - 30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
-								int yRange1 = i->yPos - 20;
-								int yRange2 = i->yPos + 20;
+								yRange1 = i->yPos - 20;
+								yRange2 = i->yPos + 20;
 								if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 									if (!i->isHit) {
 										itr.first = h; itr.second = 500;
@@ -1365,8 +1352,8 @@ namespace game_framework {
 					else {
 						if (i->xPos + 40 * attackDirection <= theOthersPosition[h].first + 50 && i->xPos + 209 * attackDirection >= theOthersPosition[h].first + 30) {
 							if (i->yPos - 30 <= theOthersPosition[h].second + 60 && i->yPos + 79 >= theOthersPosition[h].second + 20) {
-								int yRange1 = i->yPos - 20;
-								int yRange2 = i->yPos + 20;
+								yRange1 = i->yPos - 20;
+								yRange2 = i->yPos + 20;
 								if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 									if (!i->isHit) {
 										itr.first = h; itr.second = 500;
@@ -1388,8 +1375,8 @@ namespace game_framework {
 				if (h != this->serialNumber) {
 					if (i->xPos - 35 <= theOthersPosition[h].first + 50 && i->xPos + 124 >= theOthersPosition[h].first + 30) {
 						if (i->yPos - 70 <= theOthersPosition[h].second + 60 && i->yPos + 89 >= theOthersPosition[h].second + 20) {
-							int yRange1 = i->yPos - 20;
-							int yRange2 = i->yPos + 20;
+							yRange1 = i->yPos - 20;
+							yRange2 = i->yPos + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
 									itr.first = h; itr.second = 900;

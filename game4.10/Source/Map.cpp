@@ -19,6 +19,7 @@ namespace game_framework {
 		mapId = mapID;
 		InitializeAllObjs();
 		cameraEnable = mapId == HKC ? false : true;
+		characterOffsetFlag = mapId == HKC ? false : true;
 	}
 	void Map::InitializeAllObjs() {
 		
@@ -201,6 +202,7 @@ namespace game_framework {
 					if (mapId == Forest) {
 						mapBordary[1] = false;
 						mapBordary[3] = false;
+						characterOffsetFlag = false;
 					}
 					mapBordary[0] = false;
 					
@@ -210,6 +212,7 @@ namespace game_framework {
 							if (mapId == Forest) {
 								mapBordary[1] = true;
 								mapBordary[3] = true;
+								characterOffsetFlag = true;
 							}
 						}
 						else if (backgroundSkyObjs[backgroundSkyObjs.size() - 1]->GetPositionXY("X") == 0 && isLeft) {
@@ -217,6 +220,7 @@ namespace game_framework {
 							if (mapId == Forest) {
 								mapBordary[1] = true;
 								mapBordary[3] = true;
+								characterOffsetFlag = true;
 							}
 						}
 					}
@@ -258,6 +262,7 @@ namespace game_framework {
 						mapBordary[0] = false;
 						mapBordary[1] = false;
 						mapBordary[2] = false;
+						characterOffsetFlag = false;
 					}
 					if (backgroundBackObjs[0]->GetPositionXY("X") == 0 && !isLeft) {
 						mapBordary[3] = true;
@@ -265,6 +270,7 @@ namespace game_framework {
 							mapBordary[0] = true;
 							mapBordary[1] = true;
 							mapBordary[2] = true;
+							characterOffsetFlag = true;
 						}
 					}
 					else if (backgroundBackObjs[backgroundBackObjs.size() - 1]->GetPositionXY("X") == BackBordary && isLeft) {
@@ -273,6 +279,7 @@ namespace game_framework {
 							mapBordary[0] = true;
 							mapBordary[1] = true;
 							mapBordary[2] = true;
+							characterOffsetFlag = true;
 						}
 					}
 				}

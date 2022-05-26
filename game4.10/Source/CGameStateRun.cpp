@@ -25,14 +25,14 @@ namespace game_framework {
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
 		maps = new Map(BC);
-		
-		//GenerationTime = clock();
+		characterSlidePriority.reserve(2);
 
+		characterSlidePriority.push_back(-1);
+		characterSlidePriority.push_back(-1);
 	}
 
 	void CGameStateRun::OnBeginState()
 	{
-		//_CrtDumpMemoryLeaks();
 		for (int i = 0; i < 2; i++) {
 			theOthersPosition.push_back(pair<int, int>(0, 0));
 		}
@@ -51,9 +51,9 @@ namespace game_framework {
 		}
 
 		SetAbonormalStatus();
-		//TRACE("OnMove %d\n",statusTableAll.empty());
 		characterList[0]->OnMove();
 		characterList[1]->OnMove();
+		SetCharacterSlide();
 		//Reset
 		int x = 0;
 		for (auto i : characterList) {
@@ -83,9 +83,15 @@ namespace game_framework {
 		maps->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[0]->GetDistance());
 		//characterList[1]->OnMove();
 		characterList[0]->DistanceAccumulatorReset();
+		characterList[1]->DistanceAccumulatorReset();
 
 		maps->ScenesCamera(characterList[0]->DistanceAccumulatorReset(), characterList[0]->isRunning, characterList[0]->GetDir(), characterList[0]->GetDistance());
-
+		maps->ScenesCamera(characterList[1]->DistanceAccumulatorReset(), characterList[1]->isRunning, characterList[1]->GetDir(), characterList[1]->GetDistance());
+		
+		if (maps->characterOffsetFlag) {
+			CharacterMapPosOffset();
+		}
+		
 		CalculateDamage(theOthersPosition);
 
 		//boxTest->Throw(true, characterList[0]->GetDir());
@@ -172,11 +178,49 @@ namespace game_framework {
 		characterList[0]->InputKeyUp(nChar,0);
 		characterList[1]->InputKeyUp(nChar,1);
 	}
+	void CGameStateRun::SetCharacterSlide() {
+		constexpr int walk [2] = { 1,1001 };
+		constexpr int run [2] = { 2,1010 };
+		constexpr int resetNum = -1;
+		int cnt = 0;
+		for (auto i : characterList) {
+			if (i->GetAnimationState() == walk[0] || i->GetAnimationState() == walk[1] || i->GetAnimationState() == run[0] || i->GetAnimationState() == run[1]) {
+				if (characterSlidePriority[cnt] == resetNum) {
+					characterSlidePriority[cnt] = TimePassed;
+				}
+			}
+			else {
+				characterSlidePriority[cnt] = resetNum;
+			}
+			cnt++;
+		}
+	}
 
 	void CGameStateRun::SetAllCharacterPosition() {
 		for (int i = 0; i < characterList.size(); i++) {
 			theOthersPosition[i].first = characterList[i]->GetX1();
 			theOthersPosition[i].second = characterList[i]->GetY1();
+		}
+	}
+	void CGameStateRun::CharacterMapPosOffset() {
+		constexpr int resetNum (-1) ;
+		constexpr int characterMoving_dx (2);
+		int index(-1);
+		if ((characterSlidePriority[0] != -1 || characterSlidePriority[1] != -1 ) && characterSlidePriority[0] != characterSlidePriority[1]) {
+			int direction; 
+			if (characterSlidePriority[0] > characterSlidePriority[1]) {
+				direction = characterList[0]->GetDir() ? 1 : -1;
+				index = 0;
+			}
+			else {
+				index = 1;
+				direction = characterList[1]->GetDir() ? 1 : -1;
+			}
+			for (auto i : characterList) {
+				if (characterList[index]->GetDistance() > characterMoving_dx) {
+					i->SetXY(i->GetX1() + 1 * direction , i->GetY1());
+				}
+			}
 		}
 	}
 	void  CGameStateRun::CalculateDamage(vector<pair<int, int>> theOthersPosition) {
@@ -265,7 +309,6 @@ namespace game_framework {
 			switch (showingIndex) {
 			case 0:
 				dropCopy[showSequence[0]]->ShowAnimation();
-				TRACE("xPos %d yPos %d \n" , dropCopy[showSequence[0]]->GetX(), dropCopy[showSequence[0]]->GetY());
 				if (showSequence[0] < maps->drops.size()-1) {
 					showSequence[0] += 1;
 					sequenceValue_Y[0] = dropCopy[showSequence[0]]->GetY();
@@ -310,19 +353,15 @@ namespace game_framework {
 			switch (this->game->selectCharacterID[0]){
 			case 0:
 				characterList.push_back(new Woody(0 ,maps->GetMapID()));
-				registSerialNumber = 0;
 				break;
 			case 1:
 				characterList.push_back(new Freeze(0, maps->GetMapID()));
-				registSerialNumber = 1;
 				break;
 			case 2:
 				characterList.push_back(new Henry(0, maps->GetMapID()));
-				registSerialNumber = 2;
 				break;
 			default:
 				characterList.push_back(new Freeze(0, maps->GetMapID()));
-				registSerialNumber = 1;
 
 				break;
 			}
@@ -331,7 +370,6 @@ namespace game_framework {
 
 			switch (this->game->selectCharacterID[1]) {
 			case 0:
-				//registSerialNumber == 0 ? 1 : 1
 				characterList.push_back(new Woody(1, maps->GetMapID()));
 				break;
 			case 1:
@@ -351,7 +389,6 @@ namespace game_framework {
 
 
 			GetCharacter = true;
-			//load HealthBar small character
 			HealthPlayer1->loadSmallImg(this->game->selectCharacterID[0]);
 			HealthPlayer2->loadSmallImg(this->game->selectCharacterID[1]);
 
@@ -371,7 +408,6 @@ namespace game_framework {
 		}
 	
 		maps->PrintMap(showStatus);
-
 		SortedShow();
 
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);

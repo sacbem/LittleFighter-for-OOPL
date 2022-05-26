@@ -949,7 +949,7 @@ namespace game_framework {
 	}
 
 	void Woody::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
-		TRACE("isAttacking %d\n", isAttacking);
+		//TRACE("isAttacking %d\n", isAttacking);
 		//TRACE("YPOS %d\n", yPos);
 		switch (AnimationState)
 		{

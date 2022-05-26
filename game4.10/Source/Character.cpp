@@ -50,7 +50,7 @@ namespace game_framework {
 		AttackPoint = 10;
 		DefencePoint = 5;
 		walkedDistance = 0;
-		SetMapBorder(0);
+		
 
 		//re
 		AnimationState = 0;
@@ -170,6 +170,10 @@ namespace game_framework {
 	
 	int Character::GetMovingTime(boolean isLeft){
 		return isLeft ? leftTime : rightTime;
+	}
+
+	int Character::GetAnimationState() {
+		return AnimationState;
 	}
 	
 	boolean Character::DistanceAccumulatorReset() {

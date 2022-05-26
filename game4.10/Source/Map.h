@@ -18,6 +18,7 @@ namespace game_framework{
 		boolean ResetCharactAccumulator(int distance1,int distance2);
 		~Map();
 		vector<FieldObject*> drops;
+		boolean characterOffsetFlag;
 	private:
 		void InitializeAllObjs();
 		void StopDynamic(boolean isLeft, int distance);

@@ -24,6 +24,7 @@ namespace game_framework {
 		int GetMovingTime(boolean isLeft);
 		int GetSkillSignal();
 		int GetMovingUp_Down();
+		int GetAnimationState();
 		boolean GetCalculateDamageRequest();
 		void Initialize();
 
