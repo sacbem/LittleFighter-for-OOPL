@@ -479,6 +479,11 @@ namespace game_framework {
 	void Woody::SetKnock(bool flag, int Dir, int AttState) {
 		if (flag == true) {
 			if (!isGettingHit) {
+				//Break Ice
+				specialState = 0;
+				FrozenCount = 400;
+				UnMovable = false;
+
 				isGettingHit = true;
 				hitDirection = Dir;
 				if (AttState == 1 || AttState == 11) {
@@ -900,7 +905,6 @@ namespace game_framework {
 			//some basic movement
 			SetMoving();
 			if (specialState == 1) {
-				TRACE("Freeze\n");
 				ShowFrozen();
 			}
 			if (isJumpping) {

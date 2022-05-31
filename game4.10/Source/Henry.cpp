@@ -568,6 +568,12 @@ namespace game_framework {
 	void Henry::SetKnock(bool flag, int Dir, int AttState) {
 		if (flag == true) {
 			if (!isGettingHit) {
+				//Break Ice
+				specialState = 0;
+				FrozenCount = 400;
+				UnMovable = false;
+
+
 				isGettingHit = true;
 				hitDirection = Dir;
 				if (AttState == 1 || AttState == 11) {

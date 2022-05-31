@@ -176,7 +176,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		characterList[0]->InputKeyDown(nChar, CurrentTime,0);
-		characterList[1]->InputKeyDown(nChar, CurrentTime,1);
+		//characterList[1]->InputKeyDown(nChar, CurrentTime,1);
 		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
 
 		//Reset item state
@@ -193,7 +193,7 @@ namespace game_framework {
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		const char nextV = 0x39;
 		characterList[0]->InputKeyUp(nChar,0);
-		characterList[1]->InputKeyUp(nChar,1);
+		//characterList[1]->InputKeyUp(nChar,1);
 		if (nChar == nextV) {
 			if (mapNowID < 1) {
 				CAudio::Instance()->Stop(map[mapNowID]->GetMapID());
@@ -283,11 +283,18 @@ namespace game_framework {
 			for (auto& u : characterList) {
 				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
 					if (i.first == 0) {
+						TRACE("damage %d\n", i.second);
 						characterList[0]->isGettingDamage(i.second);
+						//characterList[0]->SetKnock(true, u->GetDir(), 1);
 					}
 					else if (i.first == 1) {
+						TRACE("damage %d\n", i.second);
 						characterList[1]->isGettingDamage(i.second);
+						//characterList[1]->SetKnock(true, u->GetDir(), 1);
 					}
+					
+					//Might need to clear hittedTable
+					//Problem: 傷害重複偵測，導致傷害破表
 				}
 			}
 			if (!characterList[0]->hittedTable.empty()) {

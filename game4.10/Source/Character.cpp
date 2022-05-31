@@ -467,11 +467,11 @@ namespace game_framework {
 		}
 		else if (FrozenCount <= 400) {
 			AnimationState = 301;
-			if (FrozenCount >= 400) {
-				FrozenCount = 0;
-				UnMovable = true;
-				specialState = 0;
-			}
+		}
+		else if (FrozenCount >= 400) {
+			FrozenCount = 0;
+			UnMovable = false;
+			specialState = 0;
 		}
 	}
 

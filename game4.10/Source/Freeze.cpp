@@ -372,6 +372,11 @@ namespace game_framework {
 	void Freeze::SetKnock(bool flag, int Dir, int AttState) {
 		if (flag == true) {
 			if (!isGettingHit) {
+				//Break Ice
+				specialState = 0;
+				FrozenCount = 400;
+				UnMovable = false;
+
 				isGettingHit = true;
 				hitDirection = Dir;
 				if (AttState == 1 || AttState == 11) {
@@ -1343,7 +1348,7 @@ namespace game_framework {
 							yRange2 = i->yPos + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
-									itr.first = h; itr.second = 500;
+									itr.first = h; itr.second = 200;
 									hittedLog[0].push_back(h);
 									hittedTable.push_back(itr);
 									i->isHit = true;
