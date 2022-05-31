@@ -26,28 +26,30 @@ namespace game_framework {
 		HealthPlayer2 = new HealthBar();
 		map.push_back(new Map(BC));
 		map.push_back(new Map(Forest));
+		map.push_back(new Map(HKC));
+		stageTitles.push_back(new CMovingBitmap());
 		//map[mapNowID] = new Map(BC);
-		clearFlag = flaG = false;
+		clearFlag = flaG = cheat = false;
 		characterSlidePriority.reserve(2);
 
 		characterSlidePriority.push_back(-1);
 		characterSlidePriority.push_back(-1);
 	}
 
-	void CGameStateRun::OnBeginState()
-	{
+	void CGameStateRun::OnBeginState() {
+
 		for (int i = 0; i < 2; i++) {
 			theOthersPosition.push_back(pair<int, int>(0, 0));
 		}
 		TimePassed = 0;
 	}
-   
-	void CGameStateRun::OnMove()	{					// 移動遊戲元素
+
+	void CGameStateRun::OnMove() {					// 移動遊戲元素
 		//map[mapNowID]->drops[0]->OnMove();
-		if (! map[mapNowID]->drops.empty()) {
+		if (!map[mapNowID]->drops.empty()) {
 			map[mapNowID]->drops[0]->OnMove();
 		}
-	
+
 		for (auto i : characterList) {
 			if (i->GetHealth() <= 0) {
 				i->SetAlive(false);
@@ -65,7 +67,7 @@ namespace game_framework {
 		}
 
 		SetAllCharacterPosition();
-		
+
 		int num0 = 0;
 		int num1 = 0;
 		for (auto i : characterList) {
@@ -98,7 +100,7 @@ namespace game_framework {
 		//Character NearItem
 		for (auto j : characterList) {
 			for (auto i : map[mapNowID]->drops) {
-				j->NearItem(i->GetX(),i->GetY(), i->GetX()+58, i->GetY()+58);
+				j->NearItem(i->GetX(), i->GetY(), i->GetX() + 58, i->GetY() + 58);
 				if (j->isNearItem == true) {
 					break;
 				}
@@ -109,7 +111,7 @@ namespace game_framework {
 		for (auto i : map[mapNowID]->drops) {
 			for (auto j : characterList) {
 				if (!j->isRunning) {
-					if (i->HitPlayer(num2, j->GetX1(), j->GetY1(), j->GetX2(), j->GetY2(),j->isAttacking)) {
+					if (i->HitPlayer(num2, j->GetX1(), j->GetY1(), j->GetX2(), j->GetY2(), j->isAttacking)) {
 						if (j->isDropItem == false && j->isCarryItem == false && j->GetSkillSignal() == -1) {
 							if (i->GetState() == 0) {
 								j->SetPickup(true, num);
@@ -128,7 +130,7 @@ namespace game_framework {
 			}
 			num++;
 		}
-		
+
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -136,14 +138,17 @@ namespace game_framework {
 		ShowInitProgress(33);	// 接個前一個狀態的進度，此處進度視為33%
 		ShowInitProgress(50);
 		Sleep(300);
-		for (auto &i : map) {
+		for (auto& i : map) {
 			i->Load();
 		}
 		black.LoadBitmap(BITMAP_BLACKSCREEN); // 刷新畫面用
-		black.SetTopLeft(0,0);
-
+		black.SetTopLeft(0, 0);
+		stageTitles[0]->LoadBitmapA(".\\res\\sys\\stage.bmp");
+		stageTitles[0]->SetTopLeft(266, 280);
 		HealthPlayer1->OnLoad(0, 0);
 		HealthPlayer2->OnLoad(400, 0);
+		go.LoadBitmapA(".\\res\\sys\\go.bmp", RGB(0, 0, 0));
+		go.SetTopLeft(0, 200);
 		switch (map[mapNowID]->GetMapID()) {
 		case Forest:
 			CAudio::Instance()->Load(Forest, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
@@ -171,8 +176,8 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
-		characterList[0]->InputKeyDown(nChar, CurrentTime,0);
-		characterList[1]->InputKeyDown(nChar, CurrentTime,1);
+		characterList[0]->InputKeyDown(nChar, CurrentTime, 0);
+		characterList[1]->InputKeyDown(nChar, CurrentTime, 1);
 		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
 
 		//Reset item state
@@ -187,36 +192,60 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
-		const char nextV = 0x39;
-		characterList[0]->InputKeyUp(nChar,0);
-		characterList[1]->InputKeyUp(nChar,1);
+		const char nextV = 0x56;
+		characterList[0]->InputKeyUp(nChar, 0);
+		characterList[1]->InputKeyUp(nChar, 1);
 		if (nChar == nextV) {
-			if (mapNowID < 1) {
-				CAudio::Instance()->Stop(map[mapNowID]->GetMapID());
-				mapNowID++;
-				switch (map[mapNowID]->GetMapID()) {
-				case Forest:
-					CAudio::Instance()->Load(Forest, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
-					CAudio::Instance()->Play(Forest, true);
-					break;
-				case HKC:
-					//CAudio::Instance()->Load(HKC, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
-					//CAudio::Instance()->Play(HKC, true);
-					break;
-				case BC:
-					//CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
-					//CAudio::Instance()->Play(BC, true);
-					break;
-				default:
-					break;
-				}
-			}
+			cheat = true;
+		}
+		if (mapNowID < 1) {
+			/*CAudio::Instance()->Stop(map[mapNowID]->GetMapID());
+			mapNowID++;*/
+			//switch (map[mapNowID]->GetMapID()) {
+			//case Forest:
+			//	CAudio::Instance()->Load(Forest, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
+			//	CAudio::Instance()->Play(Forest, true);
+			//	break;
+			//case HKC:
+			//	//CAudio::Instance()->Load(HKC, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
+			//	//CAudio::Instance()->Play(HKC, true);
+			//	break;
+			//case BC:
+			//	//CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
+			//	//CAudio::Instance()->Play(BC, true);
+			//	break;
+			//default:
+			//	break;
+			//}
 		}
 	}
+	
 
+	void CGameStateRun::SetStageTitle() {
+		stageTitles.push_back(new CMovingBitmap());
+		if (cheat) {
+			mapNowID = 1;
+		}
+		switch (mapNowID) {
+		case 0:
+			stageTitles[1]->LoadBitmapA(".\\res\\sys\\stage2.bmp");
+			break;
+		case 1:
+			stageTitles[1]->LoadBitmapA(".\\res\\sys\\stage3.bmp");
+			break;
+		default:
+			break;
+		}
+		stageTitles[1]->SetTopLeft(455, 280);
+
+	}
+	void CGameStateRun::ClearStageTitle() {
+		delete stageTitles[1];
+		stageTitles.pop_back();
+	}
 	void CGameStateRun::SetCharacterSlide() {
-		constexpr int walk [2] = { 1,1001 };
-		constexpr int run [2] = { 2,1010 };
+		constexpr int walk[2] = { 1,1001 };
+		constexpr int run[2] = { 2,1010 };
 		constexpr int resetNum = -1;
 		int cnt = 0;
 		for (auto i : characterList) {
@@ -240,11 +269,11 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::CharacterMapPosOffset() {
-		constexpr int resetNum (-1) ;
-		constexpr int characterMoving_dx (2);
+		constexpr int resetNum(-1);
+		constexpr int characterMoving_dx(2);
 		int index(-1);
-		if ((characterSlidePriority[0] != -1 || characterSlidePriority[1] != -1 ) && characterSlidePriority[0] != characterSlidePriority[1]) {
-			int direction; 
+		if ((characterSlidePriority[0] != -1 || characterSlidePriority[1] != -1) && characterSlidePriority[0] != characterSlidePriority[1]) {
+			int direction;
 			if (characterSlidePriority[0] > characterSlidePriority[1]) {
 				direction = characterList[0]->GetDir() ? 1 : -1;
 				index = 0;
@@ -255,7 +284,7 @@ namespace game_framework {
 			}
 			for (auto i : characterList) {
 				if (characterList[index]->GetDistance() > characterMoving_dx) {
-					i->SetXY(i->GetX1() + 1 * direction , i->GetY1());
+					i->SetXY(i->GetX1() + 1 * direction, i->GetY1());
 				}
 			}
 		}
@@ -300,11 +329,11 @@ namespace game_framework {
 	boolean CompareC(Character* obj1, Character* obj2) {
 		return obj1->GetY1() < obj2->GetY1();
 	}
-	
+
 	boolean CompareF(FieldObject* obj1, FieldObject* obj2) {
 		return obj1->GetY() < obj2->GetY();
 	}
-	
+
 	boolean CompareFP(SkillEffect* s1, SkillEffect* s2) {
 		return s1->yPos < s2->yPos;
 	}
@@ -350,10 +379,10 @@ namespace game_framework {
 			switch (showingIndex) {
 			case 0:
 				dropCopy[showSequence[0]]->ShowAnimation();
-				if (showSequence[0] < map[mapNowID]->drops.size()-1) {
+				if (showSequence[0] < map[mapNowID]->drops.size() - 1) {
 					showSequence[0] += 1;
 					sequenceValue_Y[0] = dropCopy[showSequence[0]]->GetY();
-					
+
 				}
 				else {
 					sequenceValue_Y[0] = 1000;
@@ -385,20 +414,30 @@ namespace game_framework {
 
 		}
 	}
-	
+
 	void CGameStateRun::ResetGame() {
-	int cnt = 0;
-	if (!clearFlag) {
-		clearedTime = TimePassed / 1000;
-	}
-	if ((!characterList[0]->GetAlive() || !characterList[1]->GetAlive()) && !flaG) {
-		clearFlag = true;
-		black.ShowBitmap();
-		if ((TimePassed / 1000 - clearedTime) == 1) {
-			clearFlag = false;
-			if (mapNowID < 1) {
-				mapNowID++;
-				for (auto &i : characterList) {
+		//TRACE("flaG : %d characterList[1]->GetAlive() %d \n", flaG, characterList[1]->GetAlive());
+		int cnt = 0;
+		if (!clearFlag) {
+			clearedTime = TimePassed / 1000;
+		}
+
+		if (((!characterList[0]->GetAlive() || !characterList[1]->GetAlive()) && !flaG) || cheat) {
+
+			clearFlag = true;
+			black.ShowBitmap();
+			if (stageTitles.size() == 1) {
+				SetStageTitle();
+			}
+			for (auto x : stageTitles) {
+				x->ShowBitmap();
+			}
+			if ((TimePassed / 1000 - clearedTime) == 2) {
+				clearFlag = false;
+				if (mapNowID < 2) {
+					mapNowID++;
+				}
+				for (auto& i : characterList) {
 					i->ClearSkill();
 					if (!i->GetAlive()) {
 						delete i;
@@ -406,8 +445,8 @@ namespace game_framework {
 						characterList[cnt]->SetXY(400, 401);
 						characterList[cnt]->SetCharacter();
 						tables[1] = -1;
-						if (cnt == 0) { 
-							delete HealthPlayer1; 
+						if (cnt == 0) {
+							delete HealthPlayer1;
 							HealthPlayer1 = new HealthBar();
 							HealthPlayer1->loadSmallImg(1);
 							HealthPlayer1->OnLoad(400, 0);
@@ -421,11 +460,15 @@ namespace game_framework {
 					}
 					cnt++;
 				}
+				clearedTime = 0;
 				flaG = true;
-				}
+				cheat = false;
+				ClearStageTitle();
 			}
 		}
 	}
+
+
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//get character
@@ -486,20 +529,24 @@ namespace game_framework {
 				MapAniCount = 0;
 			}
 		}
-	
+
 		map[mapNowID]->PrintMap(showStatus);
 		SortedShow();
-
+		if (TimePassed < 8000) {
+			if (clearedTime % 2 == 0) {
+				go.ShowBitmap();
+			}
+		}
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 	
-		/// 切換關卡轉場與清場
 		ResetGame();
 	}
 
 	CGameStateRun::~CGameStateRun(){
-		delete HealthPlayer1, HealthPlayer2;
+		delete HealthPlayer1, HealthPlayer2, go;
 		vector<Character*>().swap(characterList);
 		vector<Map*>().swap(map);
+		vector<CMovingBitmap*>().swap(stageTitles);
 	}
 }

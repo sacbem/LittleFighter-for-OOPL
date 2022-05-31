@@ -900,7 +900,6 @@ namespace game_framework {
 			//some basic movement
 			SetMoving();
 			if (specialState == 1) {
-				TRACE("Freeze\n");
 				ShowFrozen();
 			}
 			if (isJumpping) {
@@ -1460,7 +1459,6 @@ namespace game_framework {
 	void Woody::CallEnergyBlast() {
 
 		SpCount++;
-		TRACE("SpCount %d\n", SpCount);
 		if (SpCount <= 4) {
 			AnimationState = 190;
 		}

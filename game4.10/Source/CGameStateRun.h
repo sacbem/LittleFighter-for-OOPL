@@ -19,6 +19,8 @@ namespace game_framework {
 		void CharacterMapPosOffset();
 		void SetCharacterSlide();
 		void ResetGame();
+		void SetStageTitle();
+		void ClearStageTitle();
 		friend class Freeze;
 
 		int tables[2] = {-1, -1};
@@ -29,7 +31,8 @@ namespace game_framework {
 	private:
 		void DetectSkillDamage(vector<pair<int, int>> theOthersPosition);
 		bool GetCharacter = false;
-		CMovingBitmap black;
+		CMovingBitmap black , go;
+		vector<CMovingBitmap*> stageTitles;
 		vector<pair<int,int>> theOthersPosition;
 		vector<Character*> characterList;
 		vector<SkillEffect*> frozenPunchList; /// ©ñ¸m±¼¸¨ª«
@@ -42,12 +45,13 @@ namespace game_framework {
 		time_t GenerationTime;
 		time_t CurrentTime;
 		boolean clearFlag;
-		boolean flaG;
+		boolean flaG ,cheat;
 		int clearedTime;
 		int TimePassed;
 		int MapAniCount = 0;
 		int registSerialNumber;
 		int mapNowID = 0;
+		
 		
 
 	};
