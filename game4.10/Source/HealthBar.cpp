@@ -16,7 +16,6 @@ namespace game_framework {
 		imgInnerHealth.reserve(180);
 		imgMana.reserve(180);
 		imgInnerMana.reserve(180);
-
 		init();
 	}
 
