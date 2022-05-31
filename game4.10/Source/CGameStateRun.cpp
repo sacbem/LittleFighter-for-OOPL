@@ -572,7 +572,7 @@ namespace game_framework {
 
 		map[mapNowID]->PrintMap(showStatus);
 		SortedShow();
-		if (TimePassed < 8000) {
+		if (TimePassed < 8000 && map[mapNowID]->GetMapID() != HKC) {
 			if (clearedTime % 2 == 0) {
 				go.ShowBitmap();
 			}
