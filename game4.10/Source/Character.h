@@ -81,6 +81,9 @@ namespace game_framework {
 		bool isDropItem;
 		bool isNearItem;
 
+		vector<vector<int>> allItemPositsion;
+		vector<vector<int>> GetAllItemPosition();
+
 		void NearItem(int tx1, int ty1, int tx2, int ty2);
 
 		bool isAttacking;
