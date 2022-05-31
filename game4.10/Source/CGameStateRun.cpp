@@ -286,11 +286,11 @@ namespace game_framework {
 					}
 				}
 			}
-			if (!characterList[0]->hittedTable.empty()) {
-				pair<int, int>().swap(characterList[0]->hittedTable[0]);
+			for (auto& i : characterList[0]->hittedTable) {
+				pair<int, int>().swap(i);
 			}
-			if (!characterList[1]->hittedTable.empty()) {
-				pair<int, int>().swap(characterList[1]->hittedTable[0]);
+			for (auto& i : characterList[1]->hittedTable) {
+				pair<int, int>().swap(i);
 			}
 			characterList[0]->SetCalculateDamageRequest(false);
 			characterList[1]->SetCalculateDamageRequest(false);
