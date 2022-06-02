@@ -2,13 +2,14 @@
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
-#include "audio.h"
-#include "gamelib.h"
-#include "Character.h"
-#include "time.h"
 #include <cmath>
 #include <algorithm>
 #include <time.h>
+#include <cstdlib>
+#include "audio.h"
+#include "gamelib.h"
+#include "Character.h"
+
 namespace game_framework {
 	Freeze::Freeze(int num, int mapID) {
 		CharacterID = 2;
@@ -1430,16 +1431,17 @@ namespace game_framework {
 	}
 	
 	void Freeze::EnemyAiMode(int anotherCharacterPosX, int anotherCharacterPosY, int createdTimes) {
+		int coin = createdTimes + 1 + rand() % (10 - 1 + 1);
 		int diffX = this->xPos - anotherCharacterPosX;
 		int diffY = this->yPos - anotherCharacterPosY;
-		TRACE("diffX %d diffY %d\n", diffX, diffY);
+		
 		if (diffX > 0) {
-			if (diffX > 150) {
+			if (diffX > 80) {
 				this->SetMovingRight(false);
 				this->SetMovingLeft(true);
 				SetRunning(true);
 			}
-			else if (diffX > 30 && diffX  < 90 ) {
+			else if (abs(diffX) <= 80 ) {
 
 				this->isRunning = false;
 				this->SetMovingLeft(true);
@@ -1453,12 +1455,12 @@ namespace game_framework {
 		}
 		//360
 		else if (diffX < 0) {
-			if (diffX < -150) {
+			if (abs(diffX) > 80 ) {
 				this->SetMovingLeft(false);
 				this->SetMovingRight(true);
 				SetRunning(true);
 			}
-			else  if (diffX < -30 && diffX > -90) {
+			else  if (abs(diffX) <= 80) {
 
 				this->isRunning = false;
 				this->SetMovingRight(true);
@@ -1485,18 +1487,50 @@ namespace game_framework {
 			this->SetMovingDown(false);
 		}
 
-	
-		 if (diffY == 0 && Mana >=600) {
-			if (AttackCount >= 30) {
-				this->SetAttack(false);
+		if (coin % 3 == 0  && coin % 7 == 0) {
+			if (diffY == 0 && Mana >= 600) {
+				skillSignal = 0;
+				this->SetSkill(createdTimes);
+				Mana -= 600;
 			}
-			skillSignal = 0;
-			this->SetSkill(createdTimes);
-			Mana -= 600;
+			else if (abs(diffX) <= 360 && abs(diffY) < 40 && Mana >= 900) {
+				skillSignal = 3;
+				this->SetSkill(createdTimes);
+				Mana -= 900;
+			}
+			else  if (abs(diffX) <= 30 && abs(diffY) < 30) {
+				this->SetAttack(true);
+			}
 		}
-		 else  if (abs(diffX) <= 30 && abs(diffY) < 10) {
-			 this->SetAttack(true);
-		 }
-		skillSignal = -1;
+		else if (coin % 2 == 0 && coin % 5 == 0) {
+			if (abs(diffX) <= 140 && abs(diffY) < 20 && Mana >= 450) {
+				skillSignal = 1;
+				this->SetSkill(createdTimes);
+				Mana -= 450;
+			}
+			else  if (abs(diffX) <= 30 && abs(diffY) < 30) {
+				this->SetAttack(true);
+			}
+			else if (abs(diffX) <= 360 && abs(diffY) < 30 && Mana >= 900) {
+				skillSignal = 3;
+				this->SetSkill(createdTimes);
+				Mana -= 900;
+			}
+		}
+		else {
+			if (abs(diffX) <= 30 && abs(diffY) < 30) {
+				this->SetAttack(true);
+			}
+			if (abs(diffX) <= 140 && abs(diffY) < 20 && Mana >= 450) {
+				skillSignal = 1;
+				this->SetSkill(createdTimes);
+				Mana -= 450;
+			}
+		}
+
+		//skillSignal = -1;
+		if (AttackCount >= 30) {
+			this->SetAttack(false);
+		}
 	}
 }

@@ -55,7 +55,7 @@ namespace game_framework {
 		}
 
 		SetAbonormalStatus();
-		//characterList[1]->EnemyAiMode(theOthersPosition[0].first, theOthersPosition[0].second,CurrentTime);
+		
 		characterList[0]->OnMove();
 		characterList[1]->OnMove();
 		SetCharacterSlide();
@@ -85,7 +85,7 @@ namespace game_framework {
 			num0++;
 		}
 
-		/// 動態地圖相關
+		// 動態地圖相關
 		map[mapNowID]->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[1]->GetDistance());
 		characterList[0]->DistanceAccumulatorReset();
 		characterList[1]->DistanceAccumulatorReset();
@@ -144,7 +144,6 @@ namespace game_framework {
 		}
 
 		//
-
 		//Character NearItem
 		for (auto j : characterList) {
 			for (auto i : map[mapNowID]->drops) {
@@ -171,7 +170,6 @@ namespace game_framework {
 						}
 					}
 				}
-				//
 				if (i->GetOwner() == num2 && j->itemId == num) {
 					if (i->GetState() == 1) {
 						j->Pickup((map[mapNowID]->drops[num]));
@@ -227,7 +225,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		characterList[0]->InputKeyDown(nChar, CurrentTime, 0);
-		characterList[1]->InputKeyDown(nChar, CurrentTime, 1);
+		//characterList[1]->InputKeyDown(nChar, CurrentTime, 1);
 		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
 
 		//Reset item state
@@ -244,7 +242,7 @@ namespace game_framework {
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		const char nextV = 0x56;
 		characterList[0]->InputKeyUp(nChar, 0);
-		characterList[1]->InputKeyUp(nChar, 1);
+		//characterList[1]->InputKeyUp(nChar, 1);
 		if (nChar == nextV) {
 			cheat = true;
 		}
@@ -360,13 +358,13 @@ namespace game_framework {
 				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
 					if (i.first == 0) {
 						characterList[0]->isGettingDamage(i.second);
-						if (characterList[0]->CharacterID != 2) {
+						if (characterList[1]->CharacterID != 2) {
 							characterList[0]->SetKnock(true, u->GetDir(), 1);
 						}
 					}
 					else if (i.first == 1) {
 						characterList[1]->isGettingDamage(i.second);
-						if (characterList[1]->CharacterID != 2) {
+						if (characterList[0]->CharacterID != 2) {
 							characterList[1]->SetKnock(true, u->GetDir(), 1);
 						}
 					}
@@ -378,7 +376,6 @@ namespace game_framework {
 			for (auto& i : characterList[1]->hittedTable) {
 				pair<int, int>().swap(i);
 			}
-
 
 			characterList[0]->SetCalculateDamageRequest(false);
 			characterList[1]->SetCalculateDamageRequest(false);
@@ -532,7 +529,6 @@ namespace game_framework {
 		//get character
 		if (GetCharacter == false) {
 			map[mapNowID]->drops.push_back(new FieldObject(2, map[mapNowID]->GetMapID()));
-			TRACE("Type %d\n", map[mapNowID]->drops[0]->itemType);
 			switch (this->game->selectCharacterID[0]) {
 			case 0:
 				characterList.push_back(new Woody(0, map[mapNowID]->GetMapID()));
@@ -591,6 +587,7 @@ namespace game_framework {
 
 		map[mapNowID]->PrintMap(showStatus);
 		SortedShow();
+		characterList[1]->EnemyAiMode(theOthersPosition[0].first, theOthersPosition[0].second, CurrentTime);
 		if (TimePassed < 8000 && map[mapNowID]->GetMapID() != HKC) {
 			if (clearedTime % 2 == 0) {
 				go.ShowBitmap();
