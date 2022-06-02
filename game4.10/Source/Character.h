@@ -10,6 +10,7 @@ namespace game_framework {
 		Character(Character const & other);
 		~Character();
 		int serialNumber;
+		int CharacterID;
 
 		bool GetAlive();
 		int  GetX1();					// Chracter
@@ -28,9 +29,14 @@ namespace game_framework {
 		void Initialize();
 
 		int itemId;
-		void SetPickup(bool flag, int itemId);
+		int itemType;
+		// -1 none
+		// 0 Heavy Object
+		// 1 weapon
+		void SetPickup(bool flag, int itemId, int type);
 		void Pickup(FieldObject* other);
 		void DropItem(FieldObject *other);
+		void ResetItem();
 
 		virtual void SetCharacter() = 0;
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition , int mainTime)=0;

@@ -11,6 +11,7 @@
 #include <time.h>
 namespace game_framework {
 	Freeze::Freeze(int num, int mapID) {
+		CharacterID = 2;
 		serialNumber = num;
 		SetMapBorder(mapID);
 		for (int i = 0; i < 5; i++) {
@@ -98,6 +99,9 @@ namespace game_framework {
 
 	void Freeze::SetAttack(bool flag) {
 		if (flag == true) {
+			if (isCarryItem == true) {
+				SetPickup(false, itemId, itemType);
+			}
 			if (!isAttacking) {
 				isAttacking = true;
 				if (isNearItem) {
@@ -788,11 +792,11 @@ namespace game_framework {
 		switch (AnimationState)
 		{
 		case 0:
-			if (isCarryItem) {
+			if (isCarryItem && itemType == 1) {
 				Animation.itemNormal[direction].SetTopLeft(xPos, yPos);
 				Animation.itemNormal[direction].ShowBitmap();
 			}
-			else if (!isCarryItem) {
+			else{
 				Animation.Normal[direction].OnMove();
 				Animation.Normal[direction].SetTopLeft(xPos, yPos);
 				Animation.Normal[direction].OnShow();

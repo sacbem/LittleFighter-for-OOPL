@@ -34,6 +34,7 @@ namespace game_framework {
 		KnockSpeed = 0;
 
 		itemId = -1;
+		itemType = -1;
 		isCarryItem = false;
 		isDropItem = false;
 		isNearItem = false;
@@ -108,24 +109,32 @@ namespace game_framework {
 		}
 	}
 
-	void Character::SetPickup(bool flag, int Id) {
+	void Character::SetPickup(bool flag, int Id, int type) {
 		if (flag == true) {
 			if (isCarryItem == false && isDropItem == false) {
 				if (itemId == -1) {
 					isCarryItem = true;
 					isDropItem = false;
 					itemId = Id;
+					itemType = type;
+					TRACE("Type %d\n", type);
 				}
 			}
 		}
 		else if (flag == false) {
 			isCarryItem = false;
 			isDropItem = true;
-			}
+		}
 	}
 
 	void Character::Pickup(FieldObject *other) {
 		other->liftUp(true,xPos,yPos,direction);
+		itemType = other->itemType;
+	}
+
+	void Character::ResetItem() {
+		itemId = -1;
+		itemType = -1;
 	}
 
 	bool Character::GetAlive() {
@@ -275,33 +284,32 @@ namespace game_framework {
 					}
 					else if ((nChar == KEY_J  && !playerID) || (nChar == KEY_X && playerID)) {
 						if (Mana >= 250) {
-							Mana -= 10;
+							Mana -= 250;
 							skillSignal = 1;
 							UnMovable = true;
 						}
 					}
 					else if ((nChar == KEY_K && !playerID) || (nChar == KEY_C && playerID)) {
 						if (Mana >= 250) {
-							Mana -= 10;
+							Mana -= 250;
 							skillSignal = 2;
 							UnMovable = true;
 						}
 					}
 					else if ((nChar == KEY_L && !playerID) || (nChar == KEY_V && playerID)) {
 						if (Mana >= 250) {
-							Mana -= 10;
+							Mana -= 250;
 							skillSignal = 3;
 							UnMovable = true;
 						}
 					}
 					else if ((nChar == KEY_U && !playerID) || (nChar == KEY_B && playerID)) {
 						if (Mana >= 250) {
-							Mana -= 10;
+							Mana -= 250;
 							skillSignal = 4;
 							UnMovable = true;
 						}
 					}
-				
 					SetSkill(createdTime);
 				}
 				//detect double click
@@ -338,9 +346,6 @@ namespace game_framework {
 			}
 			if (nChar == KEY_ENTER) {
 				SetAttack(true);
-				if (isCarryItem == true) {
-					SetPickup(false, itemId);
-				}
 			}
 		}
 	}
