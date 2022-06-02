@@ -339,6 +339,7 @@ public:
 	static CGame *Instance();
 	//static int SelectCharacterID[2];
 	static int selectCharacterID[2];
+	static int totalDamage[2];
 private:
 	bool			running;			// �C���O�_���b�i�椤(���QPause)
 	bool            suspended;			// �C���O�_�Qsuspended

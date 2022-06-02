@@ -358,12 +358,14 @@ namespace game_framework {
 				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
 					if (i.first == 0) {
 						characterList[0]->isGettingDamage(i.second);
+						this->game->totalDamage[0] += i.second;
 						if (characterList[1]->CharacterID != 2) {
 							characterList[0]->SetKnock(true, u->GetDir(), 1);
 						}
 					}
 					else if (i.first == 1) {
 						characterList[1]->isGettingDamage(i.second);
+						this->game->totalDamage[1] += i.second;
 						if (characterList[0]->CharacterID != 2) {
 							characterList[1]->SetKnock(true, u->GetDir(), 1);
 						}

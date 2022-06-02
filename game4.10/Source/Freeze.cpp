@@ -1441,8 +1441,7 @@ namespace game_framework {
 				this->SetMovingLeft(true);
 				SetRunning(true);
 			}
-			else if (abs(diffX) <= 80 ) {
-
+			else if (diffX <= 80 ) {
 				this->isRunning = false;
 				this->SetMovingLeft(true);
 			}
@@ -1472,15 +1471,10 @@ namespace game_framework {
 				this->isRunning = false;
 			}
 		}
-		if (diffY > 0) {
+		if (diffY != 0) {
 			
-			this->SetMovingDown(false);
-			this->SetMovingUp(true);
-		}
-		else if (diffY < 0) {
-
-			this->SetMovingUp(false);
-			this->SetMovingDown(true);
+			this->SetMovingDown(diffY > 0 ? false : true);
+			this->SetMovingUp( diffY > 0 ? true : false);
 		}
 		else {
 			this->SetMovingUp(false);
