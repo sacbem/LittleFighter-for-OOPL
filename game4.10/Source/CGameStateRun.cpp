@@ -100,6 +100,37 @@ namespace game_framework {
 		}
 		///
 		CalculateDamage(theOthersPosition);
+		//item block Character function
+		for (auto j : characterList) {
+			for (auto i : map[mapNowID]->drops) {
+				//Determine Character can't run through item
+				//in item's yPos range
+				//Still some bug need to fix, like walked into left down will teleport
+				TRACE("xxxx %d %d\n", j->GetX1(), i->GetX());
+				TRACE("yyyy %d %d\n", j->GetY1(), i->GetY());
+				if (i->GetY() - 40 <= j->GetY1() && j->GetY1() <= i->GetY()) {
+					if (j->GetX1() > i->GetX() - 48 && !(j->GetX1() >= i->GetX() + 20)) {
+						TRACE("0000\n");
+						j->SetXY(i->GetX() - 48, j->GetY1());
+					}
+					 if (j->GetX1() <= i->GetX() + 25 && !(j->GetX1() <= i->GetX() - 48)) {
+						TRACE("1111\n");
+						j->SetXY(i->GetX() + 25, j->GetY1());
+					}
+				}
+				if (i->GetX() - 40 <= j->GetX1() && j->GetX1() <= i->GetX()) {
+					if (j->GetY1() > i->GetY() - 48 && !(j->GetY1() >= i->GetY() + 5)) {
+						TRACE("0000\n");
+						j->SetXY(j->GetX1(), i->GetY()-48);
+					}
+					if (j->GetY1() <= i->GetY() + 10 && !(j->GetY1() <= i->GetY() - 48)) {
+						TRACE("1111\n");
+						j->SetXY(j->GetX1(), i->GetY()+10);
+					}
+				}
+			}
+		}
+
 		//Character NearItem
 		for (auto j : characterList) {
 			for (auto i : map[mapNowID]->drops) {
@@ -107,6 +138,7 @@ namespace game_framework {
 				if (j->isNearItem == true) {
 					break;
 				}
+
 			}
 		}
 		int num = 0;
@@ -312,11 +344,17 @@ namespace game_framework {
 			for (auto& u : characterList) {
 				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
 					if (i.first == 0) {
+						TRACE("damage %d\n", i.second);
 						characterList[0]->isGettingDamage(i.second);
+						//characterList[0]->SetKnock(true, u->GetDir(), 1);
 					}
 					else if (i.first == 1) {
+						TRACE("damage %d\n", i.second);
 						characterList[1]->isGettingDamage(i.second);
+						//characterList[1]->SetKnock(true, u->GetDir(), 1);
 					}
+					//Might need to clear hittedTable
+					//Problem: 傷害重複偵測，導致傷害破表
 				}
 			}
 			for (auto& i : characterList[0]->hittedTable) {
@@ -325,6 +363,8 @@ namespace game_framework {
 			for (auto& i : characterList[1]->hittedTable) {
 				pair<int, int>().swap(i);
 			}
+
+					
 			characterList[0]->SetCalculateDamageRequest(false);
 			characterList[1]->SetCalculateDamageRequest(false);
 		}
@@ -475,11 +515,11 @@ namespace game_framework {
 	void CGameStateRun::OnShow(){
 		boolean showStatus;
 		//get character
-		if (GetCharacter == false ){
+		if (GetCharacter == false) {
 			map[mapNowID]->drops.push_back(new FieldObject(0, map[mapNowID]->GetMapID()));
-			switch (this->game->selectCharacterID[0]){
+			switch (this->game->selectCharacterID[0]) {
 			case 0:
-				characterList.push_back(new Woody(0 ,map[mapNowID]->GetMapID()));
+				characterList.push_back(new Woody(0, map[mapNowID]->GetMapID()));
 				break;
 			case 1:
 				characterList.push_back(new Freeze(0, map[mapNowID]->GetMapID()));
@@ -511,7 +551,7 @@ namespace game_framework {
 			}
 			characterList[1]->SetXY(400, 401);
 			characterList[1]->SetCharacter();
-			
+
 			SetAllCharacterPosition();
 
 			GetCharacter = true;

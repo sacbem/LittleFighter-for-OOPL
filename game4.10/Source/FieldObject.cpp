@@ -11,6 +11,9 @@ namespace game_framework {
 	FieldObject::FieldObject(int num, int mapID) {
 		OwnerId = -1;
 		id = num;
+		if (num == 0 || num == 1) {
+			isHeavy = true;
+		}
 		Hp = 20;
 		direction = 0;
 		AnimationState = 5;

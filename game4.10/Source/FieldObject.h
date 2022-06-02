@@ -17,6 +17,7 @@ namespace game_framework {
 		//Hit Character
 		int HitPlayer(int ownerId, int tx1, int ty1, int tx2, int ty2,bool isAttacking);
 		int HitRectangle(int ownerId, int tx1, int ty1, int tx2, int ty2);
+		bool isHeavy;
 
 		void liftUp(bool flag, int x, int y, int dir);
 		void PickedUp(bool flag, int x, int y);
