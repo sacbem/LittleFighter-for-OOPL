@@ -148,9 +148,11 @@ namespace game_framework {
 	boolean Character::IsStatic() {
 		return this->AnimationState ? false : true;
 	}
+	
 	boolean Character::IsInBorder(int mapID) {
 		return xPos == 0 || xPos == 794 ? true : false;
 	}
+	
 	int Character::GetX2() {
 		return xPos + Animation.Normal[0].Width();
 	}
@@ -170,6 +172,7 @@ namespace game_framework {
 	int Character::GetDir() {
 		return direction;
 	}
+	
 	int Character::GetMovingUp_Down() {
 		if (isMovingDown) {
 			return 1;
@@ -179,6 +182,7 @@ namespace game_framework {
 		}
 		return 0;
 	}
+	
 	int Character::GetSkillSignal() {
 		return skillSignal;
 	}
@@ -215,9 +219,11 @@ namespace game_framework {
 			return true;
 		}
 	}
+	
 	void Character::SetCalculateDamageRequest(boolean val) {
 		calculateDamage_Request = val;
 	}
+	
 	void Character::isGettingDamage(int Damage) {
 		HealthPoint -= Damage;
 		InnerHealPoint -= Damage / 2;
@@ -269,35 +275,35 @@ namespace game_framework {
 				}
 				else if (!isRunning && !isWalking) {
 					//Sp
-					if (nChar == KEY_H) {
+					if ((nChar == KEY_H  && ! playerID)  || (nChar == KEY_Z && playerID)) {
 						if (Mana >= 250) {
 							Mana -= 10;
 							skillSignal = 0;
 							UnMovable = true;
 						}
 					}
-					else if (nChar == KEY_J) {
+					else if ((nChar == KEY_J  && !playerID) || (nChar == KEY_X && playerID)) {
 						if (Mana >= 250) {
 							Mana -= 250;
 							skillSignal = 1;
 							UnMovable = true;
 						}
 					}
-					else if (nChar == KEY_K) {
+					else if ((nChar == KEY_K && !playerID) || (nChar == KEY_C && playerID)) {
 						if (Mana >= 250) {
 							Mana -= 250;
 							skillSignal = 2;
 							UnMovable = true;
 						}
 					}
-					else if (nChar == KEY_L) {
+					else if ((nChar == KEY_L && !playerID) || (nChar == KEY_V && playerID)) {
 						if (Mana >= 250) {
 							Mana -= 250;
 							skillSignal = 3;
 							UnMovable = true;
 						}
 					}
-					else if (nChar == KEY_U) {
+					else if ((nChar == KEY_U && !playerID) || (nChar == KEY_B && playerID)) {
 						if (Mana >= 250) {
 							Mana -= 250;
 							skillSignal = 4;
@@ -397,9 +403,11 @@ namespace game_framework {
 	void Character::SetMovingUp(bool flag) {
 		isMovingUp = flag;
 	}
+	
 	void Character::SetAbonormalStatus(int characterID, boolean val) {
 		statusTable.push_back(pair<int, boolean>(characterID, val));
 	}
+	
 	void Character::SetMovingLeft(bool flag) {
 		if (!isRunning) {
 			if (flag == true) {
@@ -653,9 +661,11 @@ namespace game_framework {
 			}
 		}
 	}
+	
 	void Character::ClearAbonormalStatus() {
 		vector<pair<int, boolean>>().swap(statusTable);
 	}
+	
 	void Character::SetMapBorder(int mapID) {
 		xMapBorderMin = -50;
 		xMapBorderMax = 810;

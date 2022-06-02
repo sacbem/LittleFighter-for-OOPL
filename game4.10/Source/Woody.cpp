@@ -1715,4 +1715,41 @@ namespace game_framework {
 			i->OnShow();
 		}
 	}
+	
+	void Woody::EnemyAiMode(int anotherCharacterPosX, int anotherCharacterPosY, int createdTimes) {
+		int diffX = this->xPos - anotherCharacterPosX;
+		int diffY = this->yPos - anotherCharacterPosY;
+		if (diffX > 0) {
+			if (diffX > 10) {
+				this->SetMovingRight(false);
+				this->SetMovingLeft(true);
+				SetRunning(true);
+			}
+			else {
+				SetRunning(false);
+				this->SetMovingLeft(true);
+			}
+		}
+		else if (diffX < 0) {
+			if (diffX < -10) {
+				this->SetMovingLeft(false);
+				this->SetMovingRight(true);
+				SetRunning(true);
+			}
+			else {
+				SetRunning(false);
+				this->SetMovingRight(true);
+			}
+		}
+		if (diffY > 0) {
+			SetRunning(false);
+			this->SetMovingDown(false);
+			this->SetMovingUp(true);
+		}
+		else {
+			SetRunning(false);
+			this->SetMovingUp(false);
+			this->SetMovingDown(true);
+		}
+	}
 }
