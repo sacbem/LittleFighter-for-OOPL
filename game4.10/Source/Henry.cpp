@@ -11,6 +11,7 @@
 #include <time.h>
 namespace game_framework {
 	Henry::Henry(int num,int mapID) {
+		CharacterID = 3;
 		serialNumber = num;
 		SetMapBorder(mapID);
 		for (int i = 0; i < 5; i++) {
@@ -299,6 +300,9 @@ namespace game_framework {
 
 	void Henry::SetAttack(bool flag) {
 		if (flag == true) {
+			if (isCarryItem == true) {
+				SetPickup(false, itemId, itemType);
+			}
 			if (!isAttacking) {
 				isAttacking = true;
 				if (isNearItem) {

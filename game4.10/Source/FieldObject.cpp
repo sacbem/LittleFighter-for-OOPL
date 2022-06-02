@@ -11,9 +11,24 @@ namespace game_framework {
 	FieldObject::FieldObject(int num, int mapID) {
 		OwnerId = -1;
 		id = num;
-		if (num == 0 || num == 1) {
-			isHeavy = true;
+		switch (num)
+		{
+		case 0:
+			TRACE("0\n");
+			itemType = 1;
+			break;
+		case 1:
+			TRACE("1\n");
+			itemType = 1;
+			break;
+		case 2:
+			TRACE("2\n");
+			itemType = 2;
+			break;
+		default:
+			break;
 		}
+		TRACE("Get Type %d %d\n", itemType, num);
 		Hp = 20;
 		direction = 0;
 		AnimationState = 5;
@@ -65,6 +80,63 @@ namespace game_framework {
 			Obj->Load(1, ".//res//Box//Box_0_reverse//box_reverse_5.bmp", RGB(0, 0, 0));
 			Obj->Load(1, ".//res//Box//Box_0_reverse//box_reverse_6.bmp", RGB(0, 0, 0));
 			break;
+		case 1:
+			Obj = new GameObject(2, "Weapon");
+			Obj->Load(".//res//Stone//Stone_0//stone_0.bmp", RGB(0, 0, 0));
+
+			Obj->Load(0, ".//res//Stone//Stone_0//stone_0.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//Stone//Stone_0//stone_1.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//Stone//Stone_0//stone_2.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//Stone//Stone_0//stone_3.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//Stone//Stone_0//stone_4.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//Stone//Stone_0//stone_5.bmp", RGB(0, 0, 0));
+
+			Obj->Load(1, ".//res//Stone//Stone_0_reverse//stone_reverse_1.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//Stone//Stone_0_reverse//stone_reverse_2.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//Stone//Stone_0_reverse//stone_reverse_3.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//Stone//Stone_0_reverse//stone_reverse_4.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//Stone//Stone_0_reverse//stone_reverse_5.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//Stone//Stone_0_reverse//stone_reverse_6.bmp", RGB(0, 0, 0));
+			break;
+		case 2:
+			Obj = new GameObject(2, "Weapon");
+			Obj->Load(".//res//frozen_sword//frozen_sword_0//frozen_sword_20.bmp", RGB(0, 0, 0));
+
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_20.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_21.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_22.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_23.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_24.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_25.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_26.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_27.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_28.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_29.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_30.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_31.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_32.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_33.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_34.bmp", RGB(0, 0, 0));
+			Obj->Load(0, ".//res//frozen_sword//frozen_sword_0//frozen_sword_35.bmp", RGB(0, 0, 0));
+
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_29.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_28.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_27.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_26.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_25.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_24.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_23.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_22.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_21.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_20.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_39.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_38.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_37.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_36.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_35.bmp", RGB(0, 0, 0));
+			Obj->Load(1, ".//res//frozen_sword//frozen_sword_0_reverse//frozen_sword_reverse_34.bmp", RGB(0, 0, 0));
+			break;
+
 		default:
 			break;
 		}
@@ -92,6 +164,25 @@ namespace game_framework {
 			if (isAttacking) {
 				Hp -= 1;
 				return HitRectangle(ownerid, tx1 + 30, ty1 + 20, tx2 - 30, ty2 - 20);
+			}
+		}
+		else {
+			return 0;
+		}
+	}
+
+	int FieldObject::HitRectangle(int tx1, int ty1, int tx2, int ty2) {
+		int x1 = xPos;
+		int y1 = yPos;
+		int x2 = x1 + 58;
+		int y2 = y1 + 58;
+
+
+		if (tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2) {
+			int yRange1 = ty1 - 20;
+			int yRange2 = ty1 + 20;
+			if (yRange1 <= ty1 && ty1 <= yRange2) {
+				return 1;
 			}
 		}
 		else {
@@ -141,17 +232,39 @@ namespace game_framework {
 		return OwnerId;
 	}
 
+	int FieldObject::GetDir() {
+		return direction;
+	}
+
 	void FieldObject::liftUp(bool flag, int x, int y, int dir) {
-		if (flag == true) {
-			xPos = x+10;
-			yPos = y-40;
-			direction = dir;
-			state = 1;
-		}
-		else if (flag == false) {
-			spawnY = y + 22;
-			state = 3;
-			OwnerId = -1;
+		switch (itemType)
+		{
+		case 1:
+			if (flag == true) {
+				xPos = x+10;
+				yPos = y-40;
+				direction = dir;
+				state = 1;
+			}
+			else if (flag == false) {
+				spawnY = y + 22;
+				state = 3;
+			}
+			break;
+		case 2:
+			if (flag == true) {
+				xPos = x;
+				yPos = y;
+				direction = dir;
+				state = 1;
+			}
+			else if (flag == false) {
+				spawnY = y + 22;
+				state = 3;
+			}
+			break;
+		default:
+			break;
 		}
 	};
 
@@ -173,11 +286,12 @@ namespace game_framework {
 				YVelocity = InitialVelocity;
 			}
 
-			if (state == 2 || state == 3) {
+			if (state == 2 || state==3) {
 				ShowRoll();
 			}
 			else if (state == 0) {
 				ShowStatic();
+				OwnerId = -1;
 			}
 		}
 	}

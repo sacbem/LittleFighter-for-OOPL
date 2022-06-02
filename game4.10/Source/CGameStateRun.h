@@ -51,9 +51,6 @@ namespace game_framework {
 		int MapAniCount = 0;
 		int registSerialNumber;
 		int mapNowID = 0;
-		
-		
-
 	};
 }
 namespace skillTable {

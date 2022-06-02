@@ -98,35 +98,49 @@ namespace game_framework {
 		///
 		CalculateDamage(theOthersPosition);
 		//item block Character function
+		int countOwner = 0;
 		for (auto j : characterList) {
 			for (auto i : map[mapNowID]->drops) {
+				//Throw Object Hit Player
+				if (i->GetState() == 2 || i->GetState()==3) {
+					if (i->HitRectangle(j->GetX1(), j->GetY1(), j->GetX2(), j->GetY2())) {
+						int yRange1 = j->GetY1()-10;
+						int yRange2 = j->GetY1() + 20;
+						if (yRange1 <= i->GetY() && i->GetY() <= yRange2) {
+							if (i->GetOwner() != countOwner) {
+								j->isGettingDamage(100);
+								j->SetKnock(true, i->GetDir(), 6);
+							}
+						}
+					}
+				}
 				//Determine Character can't run through item
 				//in item's yPos range
 				//Still some bug need to fix, like walked into left down will teleport
-				TRACE("xxxx %d %d\n", j->GetX1(), i->GetX());
-				TRACE("yyyy %d %d\n", j->GetY1(), i->GetY());
-				if (i->GetY() - 40 <= j->GetY1() && j->GetY1() <= i->GetY()) {
-					if (j->GetX1() > i->GetX() - 48 && !(j->GetX1() >= i->GetX() + 20)) {
-						TRACE("0000\n");
-						j->SetXY(i->GetX() - 48, j->GetY1());
+				if (i->itemType == 1 && i->GetState()==0) {
+					if (i->GetY() - 40 <= j->GetY1() && j->GetY1() <= i->GetY()) {
+						if (j->GetX1() > i->GetX() - 48 && !(j->GetX1() >= i->GetX() + 20)) {
+							j->SetXY(i->GetX() - 48, j->GetY1());
+						}
+						if (j->GetX1() <= i->GetX() + 25 && !(j->GetX1() <= i->GetX() - 48)) {
+							j->SetXY(i->GetX() + 25, j->GetY1());
+						}
 					}
-					 if (j->GetX1() <= i->GetX() + 25 && !(j->GetX1() <= i->GetX() - 48)) {
-						TRACE("1111\n");
-						j->SetXY(i->GetX() + 25, j->GetY1());
-					}
-				}
-				if (i->GetX() - 40 <= j->GetX1() && j->GetX1() <= i->GetX()) {
-					if (j->GetY1() > i->GetY() - 48 && !(j->GetY1() >= i->GetY() + 5)) {
-						TRACE("0000\n");
-						j->SetXY(j->GetX1(), i->GetY()-48);
-					}
-					if (j->GetY1() <= i->GetY() + 10 && !(j->GetY1() <= i->GetY() - 48)) {
-						TRACE("1111\n");
-						j->SetXY(j->GetX1(), i->GetY()+10);
+					if (i->GetX() - 40 <= j->GetX1() && j->GetX1() <= i->GetX()) {
+						if (j->GetY1() > i->GetY() - 48 && !(j->GetY1() >= i->GetY() + 5)) {
+							j->SetXY(j->GetX1(), i->GetY() - 48);
+						}
+						if (j->GetY1() <= i->GetY() + 10 && !(j->GetY1() <= i->GetY() - 48)) {
+							j->SetXY(j->GetX1(), i->GetY() + 10);
+						}
 					}
 				}
+
 			}
+			countOwner++;
 		}
+
+		//
 
 		//Character NearItem
 		for (auto j : characterList) {
@@ -142,17 +156,19 @@ namespace game_framework {
 		int num2 = 0;
 		for (auto i : map[mapNowID]->drops) {
 			for (auto j : characterList) {
+				//
 				if (!j->isRunning) {
 					if (i->HitPlayer(num2, j->GetX1(), j->GetY1(), j->GetX2(), j->GetY2(), j->isAttacking)) {
 						if (j->isDropItem == false && j->isCarryItem == false && j->GetSkillSignal() == -1) {
 							if (i->GetState() == 0) {
-								j->SetPickup(true, num);
+								j->SetPickup(true, num, i->itemType);
 								i->SetState(1);
 								i->SetOwner(num2);
 							}
 						}
 					}
 				}
+				//
 				if (i->GetOwner() == num2 && j->itemId == num) {
 					if (i->GetState() == 1) {
 						j->Pickup((map[mapNowID]->drops[num]));
@@ -162,7 +178,6 @@ namespace game_framework {
 			}
 			num++;
 		}
-
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -218,7 +233,7 @@ namespace game_framework {
 				map[mapNowID]->drops[i->itemId]->liftUp(false, i->GetX1(), i->GetY1(), i->GetDir());
 				i->isCarryItem = false;
 				i->isDropItem = false;
-				i->itemId = -1;
+				i->ResetItem();
 			}
 		}
 	}
@@ -251,7 +266,7 @@ namespace game_framework {
 			//}
 		}
 	}
-	
+
 
 	void CGameStateRun::SetStageTitle() {
 		stageTitles.push_back(new CMovingBitmap());
@@ -342,12 +357,16 @@ namespace game_framework {
 					if (i.first == 0) {
 						TRACE("damage %d\n", i.second);
 						characterList[0]->isGettingDamage(i.second);
-						//characterList[0]->SetKnock(true, u->GetDir(), 1);
+						if (characterList[0]->CharacterID != 2) {
+							characterList[0]->SetKnock(true, u->GetDir(), 1);
+						}
 					}
 					else if (i.first == 1) {
 						TRACE("damage %d\n", i.second);
 						characterList[1]->isGettingDamage(i.second);
-						//characterList[1]->SetKnock(true, u->GetDir(), 1);
+						if (characterList[1]->CharacterID != 2) {
+							characterList[1]->SetKnock(true, u->GetDir(), 1);
+						}
 					}
 					//Might need to clear hittedTable
 					//Problem: 傷害重複偵測，導致傷害破表
@@ -360,7 +379,7 @@ namespace game_framework {
 				pair<int, int>().swap(i);
 			}
 
-					
+
 			characterList[0]->SetCalculateDamageRequest(false);
 			characterList[1]->SetCalculateDamageRequest(false);
 		}
@@ -509,11 +528,12 @@ namespace game_framework {
 	}
 
 
-	void CGameStateRun::OnShow(){
+	void CGameStateRun::OnShow() {
 		boolean showStatus;
 		//get character
 		if (GetCharacter == false) {
-			map[mapNowID]->drops.push_back(new FieldObject(0, map[mapNowID]->GetMapID()));
+			map[mapNowID]->drops.push_back(new FieldObject(2, map[mapNowID]->GetMapID()));
+			TRACE("Type %d\n", map[mapNowID]->drops[0]->itemType);
 			switch (this->game->selectCharacterID[0]) {
 			case 0:
 				characterList.push_back(new Woody(0, map[mapNowID]->GetMapID()));
@@ -579,11 +599,11 @@ namespace game_framework {
 		}
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
-	
+
 		ResetGame();
 	}
 
-	CGameStateRun::~CGameStateRun(){
+	CGameStateRun::~CGameStateRun() {
 		delete HealthPlayer1, HealthPlayer2, go;
 		vector<Character*>().swap(characterList);
 		vector<Map*>().swap(map);

@@ -11,6 +11,7 @@
 #include <time.h>
 namespace game_framework {
 	Woody::Woody(int num,int mapID) {
+		CharacterID = 1;
 		serialNumber = num;
 		SetMapBorder(mapID);
 		for (int i = 0; i < 5; i++) {
@@ -145,6 +146,9 @@ namespace game_framework {
 
 	void Woody::SetAttack(bool flag) {
 		if (flag == true) {
+			if (isCarryItem == true) {
+				SetPickup(false, itemId, itemType);
+			}
 			if (!isAttacking) {
 				isAttacking = true;
 				if (skillSignal == 1) {
