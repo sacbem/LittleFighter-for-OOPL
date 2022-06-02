@@ -60,7 +60,7 @@ namespace game_framework {
 		
 		virtual int HitEnemy(Character* enemy) = 0;
 		virtual void DetectSkillDamage(vector<pair<int, int>> theOthersPosition, int *n) = 0;
-
+		virtual void EnemyAiMode(int anotherCharacterPosX,int anotherCharacterPosY, int createdTimes) = 0;
 		vector <SkillEffect*> frozenPunchs;
 
 		//basic informtion
@@ -200,7 +200,7 @@ namespace game_framework {
 		Freeze(int num,int mapID);
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition ,int mainTime) override;
 		virtual void OnMove() override;
-
+		virtual void EnemyAiMode(int anotherCharacterPosX, int anotherCharacterPosY, int createdTimes) override;
 		//for frozenPunch
 		void ShowFrozenPunch();
 
@@ -252,7 +252,7 @@ namespace game_framework {
 		Henry(int num, int mapID);
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) override;
 		virtual void OnMove() override;
-
+		virtual void EnemyAiMode(int anotherCharacterPosX, int anotherCharacterPosY , int createdTimes) override;
 		virtual void SetAttack(bool flag) override;
 		virtual void ShowAttack() override;
 		virtual void SetCharacter() override;
@@ -300,7 +300,7 @@ namespace game_framework {
 		Woody(int num, int mapID);
 		virtual void OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) override;
 		virtual void OnMove() override;
-
+		virtual void EnemyAiMode(int anotherCharacterPosX, int anotherCharacterPosY,int createdTimes) override;
 		virtual void SetAttack(bool flag) override;
 		virtual void ShowAttack() override;
 		virtual void SetCharacter() override;

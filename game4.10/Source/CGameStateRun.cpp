@@ -21,14 +21,12 @@ namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame* g) : CGameState(g) {
 		characterList.reserve(2);
 		theOthersPosition.reserve(2);
-		//characterList[1] = new Character();
 		HealthPlayer1 = new HealthBar();
 		HealthPlayer2 = new HealthBar();
 		map.push_back(new Map(BC));
 		map.push_back(new Map(Forest));
 		map.push_back(new Map(HKC));
 		stageTitles.push_back(new CMovingBitmap());
-		//map[mapNowID] = new Map(BC);
 		clearFlag = flaG = cheat = false;
 		characterSlidePriority.reserve(2);
 
@@ -57,6 +55,7 @@ namespace game_framework {
 		}
 
 		SetAbonormalStatus();
+		//characterList[1]->EnemyAiMode(theOthersPosition[0].first, theOthersPosition[0].second,CurrentTime);
 		characterList[0]->OnMove();
 		characterList[1]->OnMove();
 		SetCharacterSlide();
@@ -90,8 +89,12 @@ namespace game_framework {
 		map[mapNowID]->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[1]->GetDistance());
 		characterList[0]->DistanceAccumulatorReset();
 		characterList[1]->DistanceAccumulatorReset();
-		map[mapNowID]->ScenesCamera(characterList[0]->DistanceAccumulatorReset(), characterList[0]->isRunning, characterList[0]->GetDir(), characterList[0]->GetDistance());
-		map[mapNowID]->ScenesCamera(characterList[1]->DistanceAccumulatorReset(), characterList[1]->isRunning, characterList[1]->GetDir(), characterList[1]->GetDistance());
+		//if (! characterList[0]->specialState) {
+			map[mapNowID]->ScenesCamera(characterList[0]->DistanceAccumulatorReset(), characterList[0]->isRunning, characterList[0]->GetDir(), characterList[0]->GetDistance());
+		//}
+		//if (! characterList[1]->specialState) {
+			map[mapNowID]->ScenesCamera(characterList[1]->DistanceAccumulatorReset(), characterList[1]->isRunning, characterList[1]->GetDir(), characterList[1]->GetDistance());
+		//}
 		if (map[mapNowID]->characterOffsetFlag) {
 			CharacterMapPosOffset();
 		}
@@ -220,7 +223,6 @@ namespace game_framework {
 		}
 	}
 	
-
 	void CGameStateRun::SetStageTitle() {
 		stageTitles.push_back(new CMovingBitmap());
 		if (cheat) {
@@ -239,10 +241,12 @@ namespace game_framework {
 		stageTitles[1]->SetTopLeft(455, 280);
 
 	}
+	
 	void CGameStateRun::ClearStageTitle() {
 		delete stageTitles[1];
 		stageTitles.pop_back();
 	}
+	
 	void CGameStateRun::SetCharacterSlide() {
 		constexpr int walk[2] = { 1,1001 };
 		constexpr int run[2] = { 2,1010 };
@@ -416,7 +420,6 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::ResetGame() {
-		//TRACE("flaG : %d characterList[1]->GetAlive() %d \n", flaG, characterList[1]->GetAlive());
 		int cnt = 0;
 		if (!clearFlag) {
 			clearedTime = TimePassed / 1000;

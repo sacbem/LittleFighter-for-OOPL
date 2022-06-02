@@ -1300,8 +1300,7 @@ namespace game_framework {
 	}
 
 	void Freeze::CallSpecial() {
-		switch (skillSignal)
-		{
+		switch (skillSignal){
 		case -1:
 			break;
 		case 0:
@@ -1343,7 +1342,7 @@ namespace game_framework {
 							yRange2 = i->yPos + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
-									itr.first = h; itr.second = 2000;
+									itr.first = h; itr.second = 500;
 									hittedLog[0].push_back(h);
 									hittedTable.push_back(itr);
 									i->isHit = true;
@@ -1419,5 +1418,76 @@ namespace game_framework {
 				}
 			}
 		}
+	}
+	
+	void Freeze::EnemyAiMode(int anotherCharacterPosX, int anotherCharacterPosY, int createdTimes) {
+		int diffX = this->xPos - anotherCharacterPosX;
+		int diffY = this->yPos - anotherCharacterPosY;
+		TRACE("diffX %d diffY %d\n", diffX, diffY);
+		if (diffX > 0) {
+			if (diffX > 150) {
+				this->SetMovingRight(false);
+				this->SetMovingLeft(true);
+				SetRunning(true);
+			}
+			else if (diffX > 30 && diffX  < 90 ) {
+
+				this->isRunning = false;
+				this->SetMovingLeft(true);
+			}
+			else {
+				this->SetMovingRight(false);
+				this->SetMovingLeft(false);
+				this->isWalking = false;
+				this->isRunning = false;
+			}
+		}
+		//360
+		else if (diffX < 0) {
+			if (diffX < -150) {
+				this->SetMovingLeft(false);
+				this->SetMovingRight(true);
+				SetRunning(true);
+			}
+			else  if (diffX < -30 && diffX > -90) {
+
+				this->isRunning = false;
+				this->SetMovingRight(true);
+			} 
+			else {
+				this->SetMovingRight(false);
+				this->SetMovingLeft(false);
+				this->isWalking = false;
+				this->isRunning = false;
+			}
+		}
+		if (diffY > 0) {
+			
+			this->SetMovingDown(false);
+			this->SetMovingUp(true);
+		}
+		else if (diffY < 0) {
+
+			this->SetMovingUp(false);
+			this->SetMovingDown(true);
+		}
+		else {
+			this->SetMovingUp(false);
+			this->SetMovingDown(false);
+		}
+
+	
+		 if (diffY == 0 && Mana >=600) {
+			if (AttackCount >= 30) {
+				this->SetAttack(false);
+			}
+			skillSignal = 0;
+			this->SetSkill(createdTimes);
+			Mana -= 600;
+		}
+		 else  if (abs(diffX) <= 30 && abs(diffY) < 10) {
+			 this->SetAttack(true);
+		 }
+		skillSignal = -1;
 	}
 }
