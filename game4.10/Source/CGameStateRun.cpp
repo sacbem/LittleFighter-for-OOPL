@@ -344,17 +344,13 @@ namespace game_framework {
 			for (auto& u : characterList) {
 				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
 					if (i.first == 0) {
-						TRACE("damage %d\n", i.second);
 						characterList[0]->isGettingDamage(i.second);
 						//characterList[0]->SetKnock(true, u->GetDir(), 1);
 					}
 					else if (i.first == 1) {
-						TRACE("damage %d\n", i.second);
 						characterList[1]->isGettingDamage(i.second);
 						//characterList[1]->SetKnock(true, u->GetDir(), 1);
 					}
-					//Might need to clear hittedTable
-					//Problem: 傷害重複偵測，導致傷害破表
 				}
 			}
 			for (auto& i : characterList[0]->hittedTable) {
