@@ -32,7 +32,6 @@ namespace game_framework {
 		default:
 			break;
 		}
-		TRACE("Get Type %d %d\n", itemType, num);
 		Hp = 20;
 		direction = 0;
 		AnimationCount = 0;
