@@ -31,6 +31,12 @@ namespace game_framework {
 		CMovingBitmap itemThrow[2][2];
 		CMovingBitmap itemRunThrow[2][2];
 		CMovingBitmap Frozen[2][2];
+		//weapon
+		CMovingBitmap weaponNormalAttack1[2][4];
+		CMovingBitmap weaponNormalAttack2[2][3];
+		CMovingBitmap weaponHeavyAttack[2][2];
+		CMovingBitmap weaponJumpAttack[2][4];
+		CMovingBitmap weaponJumpHeavyAttack[2][4];
 
 		CMovingBitmap Grab[2];
 		CMovingBitmap Dead[2][2];

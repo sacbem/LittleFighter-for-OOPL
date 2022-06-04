@@ -217,6 +217,46 @@ namespace game_framework {
 		Dead[0][1].LoadBitmap(".\\res\\Woody\\Woody_0\\woody_0_44.bmp", RGB(0, 0, 0));
 		Dead[1][0].LoadBitmap(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_35.bmp", RGB(0, 0, 0));
 		Dead[1][1].LoadBitmap(".\\res\\Woody\\Woody_0_reverse\\woody_0_reverse_45.bmp", RGB(0, 0, 0));
+
+		//weapon
+		weaponNormalAttack1[0][0].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_0.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[0][1].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_1.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[0][2].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_2.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[0][3].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_3.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[1][0].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_9.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[1][1].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_8.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[1][2].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_7.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[1][3].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_6.bmp", RGB(0, 0, 0));
+
+		weaponNormalAttack2[0][0].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_4.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[0][1].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_5.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[0][2].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_6.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[1][0].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_5.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[1][1].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_4.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[1][2].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_3.bmp", RGB(0, 0, 0));
+
+		weaponHeavyAttack[0][0].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_14.bmp", RGB(0, 0, 0));
+		weaponHeavyAttack[0][1].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_15.bmp", RGB(0, 0, 0));
+		weaponHeavyAttack[1][0].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_15.bmp", RGB(0, 0, 0));
+		weaponHeavyAttack[1][1].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_14.bmp", RGB(0, 0, 0));
+
+		weaponJumpAttack[0][0].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_10.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[0][1].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_11.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[0][2].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_12.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[0][3].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_13.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[1][0].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_19.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[1][1].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_18.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[1][2].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_17.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[1][3].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_16.bmp", RGB(0, 0, 0));
+
+		weaponJumpHeavyAttack[0][0].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_10.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[0][1].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_11.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[0][2].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_12.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[0][3].LoadBitmap(".\\res\\Woody\\Woody_1\\woody_1_13.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[1][0].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_19.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[1][1].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_18.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[1][2].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_17.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[1][3].LoadBitmap(".\\res\\Woody\\Woody_1_reverse\\woody_1_reverse_16.bmp", RGB(0, 0, 0));
 	}
 	
 	void CharacterAnimation::LoadFreeze() {
@@ -415,6 +455,45 @@ namespace game_framework {
 		Dead[0][1].LoadBitmap(".\\res\\Freeze\\Freeze_0\\freeze_0_44.bmp", RGB(0, 0, 0));
 		Dead[1][0].LoadBitmap(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_35.bmp", RGB(0, 0, 0));
 		Dead[1][1].LoadBitmap(".\\res\\Freeze\\Freeze_0_reverse\\freeze_0_reverse_45.bmp", RGB(0, 0, 0));
+		//weapon
+		weaponNormalAttack1[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_0.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[0][1].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_1.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[0][2].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_2.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[0][3].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_3.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[1][0].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_9.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[1][1].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_8.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[1][2].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_7.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[1][3].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_6.bmp", RGB(0, 0, 0));
+
+		weaponNormalAttack2[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_4.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[0][1].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_5.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[0][2].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_6.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[1][0].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_5.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[1][1].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_4.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[1][2].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_3.bmp", RGB(0, 0, 0));
+
+		weaponHeavyAttack[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_14.bmp", RGB(0, 0, 0));
+		weaponHeavyAttack[0][1].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_15.bmp", RGB(0, 0, 0));
+		weaponHeavyAttack[1][0].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_15.bmp", RGB(0, 0, 0));
+		weaponHeavyAttack[1][1].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_14.bmp", RGB(0, 0, 0));
+
+		weaponJumpAttack[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_10.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[0][1].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_11.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[0][2].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_12.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[0][3].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_13.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[1][0].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_19.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[1][1].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_18.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[1][2].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_17.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[1][3].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_16.bmp", RGB(0, 0, 0));
+
+		weaponJumpHeavyAttack[0][0].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_10.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[0][1].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_11.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[0][2].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_12.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[0][3].LoadBitmap(".\\res\\Freeze\\Freeze_1\\freeze_1_13.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[1][0].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_19.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[1][1].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_18.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[1][2].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_17.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[1][3].LoadBitmap(".\\res\\Freeze\\Freeze_1_reverse\\freeze_1_reverse_16.bmp", RGB(0, 0, 0));
 	}
 
 	void CharacterAnimation::LoadHenry() {
@@ -631,6 +710,46 @@ namespace game_framework {
 		Dead[0][1].LoadBitmapA(".\\res\\Henry\\Henry_0\\henry_0_44.bmp", RGB(0, 0, 0));
 		Dead[1][0].LoadBitmapA(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_35.bmp", RGB(0, 0, 0));
 		Dead[1][1].LoadBitmapA(".\\res\\Henry\\Henry_0_reverse\\henry_0_reverse_45.bmp", RGB(0, 0, 0));
+
+		//weapon
+		weaponNormalAttack1[0][0].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_0.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[0][1].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_1.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[0][2].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_2.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[0][3].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_3.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[1][0].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_9.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[1][1].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_8.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[1][2].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_7.bmp", RGB(0, 0, 0));
+		weaponNormalAttack1[1][3].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_6.bmp", RGB(0, 0, 0));
+
+		weaponNormalAttack2[0][0].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_4.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[0][1].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_5.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[0][2].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_6.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[1][0].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_5.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[1][1].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_4.bmp", RGB(0, 0, 0));
+		weaponNormalAttack2[1][2].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_3.bmp", RGB(0, 0, 0));
+
+		weaponHeavyAttack[0][0].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_14.bmp", RGB(0, 0, 0));
+		weaponHeavyAttack[0][1].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_15.bmp", RGB(0, 0, 0));
+		weaponHeavyAttack[1][0].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_15.bmp", RGB(0, 0, 0));
+		weaponHeavyAttack[1][1].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_14.bmp", RGB(0, 0, 0));
+
+		weaponJumpAttack[0][0].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_10.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[0][1].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_11.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[0][2].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_12.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[0][3].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_13.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[1][0].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_19.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[1][1].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_18.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[1][2].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_17.bmp", RGB(0, 0, 0));
+		weaponJumpAttack[1][3].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_16.bmp", RGB(0, 0, 0));
+
+		weaponJumpHeavyAttack[0][0].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_10.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[0][1].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_11.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[0][2].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_12.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[0][3].LoadBitmap(".\\res\\Henry\\Henry_1\\henry_1_13.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[1][0].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_19.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[1][1].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_18.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[1][2].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_17.bmp", RGB(0, 0, 0));
+		weaponJumpHeavyAttack[1][3].LoadBitmap(".\\res\\Henry\\Henry_1_reverse\\henry_1_reverse_16.bmp", RGB(0, 0, 0));
 	}
 	CharacterAnimation::~CharacterAnimation() {
 

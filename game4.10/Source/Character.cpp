@@ -88,24 +88,26 @@ namespace game_framework {
 		Initialize();
 	}
 
-	void Character::NearItem(int tx1, int ty1, int tx2, int ty2) {
+	void Character::NearItem(int tx1, int ty1, int tx2, int ty2, int owner) {
 		int yRange1 = ty1 - 20;
 		int yRange2 = ty1 + 20;
-		if (yRange1 <= ty1 && ty1 <= yRange2) {
-			int x1 = xPos;
-			int y1 = yPos;
-			int x2 = x1 + 80;
-			int y2 = y1 + 80;
+		if (owner == -1) {
+			if (yRange1 <= ty1 && ty1 <= yRange2) {
+				int x1 = xPos;
+				int y1 = yPos;
+				int x2 = x1 + 80;
+				int y2 = y1 + 80;
 
-			if (tx2-30 >= x1 && ty2-20 >= y1 && tx1+30 <= x2 && ty1+20 <= y2) {
-				isNearItem = true;
+				if (tx2-30 >= x1 && ty2-20 >= y1 && tx1+30 <= x2 && ty1+20 <= y2) {
+					isNearItem = true;
+				}
+				else {
+					isNearItem = false;
+				}
 			}
 			else {
 				isNearItem = false;
 			}
-		}
-		else {
-			isNearItem = false;
 		}
 	}
 
@@ -127,8 +129,14 @@ namespace game_framework {
 		}
 	}
 
+	int Character::GetRunCurrent() {
+		//TRACE("aaa %d\n", Animation.Run->GetCurrentBitmapNumber());
+		return Animation.Run[direction].GetCurrentBitmapNumber();
+	}
+
 	void Character::Pickup(FieldObject *other) {
-		other->liftUp(true,xPos,yPos,direction);
+		//TRACE("xPos yPos %d %d\n", xPos, yPos);
+		other->liftUp(true,xPos,yPos,direction, AnimationState, GetRunCurrent());
 		itemType = other->itemType;
 	}
 
@@ -284,21 +292,21 @@ namespace game_framework {
 					}
 					else if ((nChar == KEY_J  && !playerID) || (nChar == KEY_X && playerID)) {
 						if (Mana >= 250) {
-							Mana -= 250;
+							Mana -= 10;
 							skillSignal = 1;
 							UnMovable = true;
 						}
 					}
 					else if ((nChar == KEY_K && !playerID) || (nChar == KEY_C && playerID)) {
 						if (Mana >= 250) {
-							Mana -= 250;
+							Mana -= 10;
 							skillSignal = 2;
 							UnMovable = true;
 						}
 					}
 					else if ((nChar == KEY_L && !playerID) || (nChar == KEY_V && playerID)) {
 						if (Mana >= 250) {
-							Mana -= 250;
+							Mana -= 10;
 							skillSignal = 3;
 							UnMovable = true;
 						}
@@ -449,7 +457,7 @@ namespace game_framework {
 	}
 
 	void Character::SetJumpping(bool flag) {
-		if (!isCarryItem) {
+		if (itemType!=1) {
 			if (!isJumpping) {
 				isJumpping = flag;
 				JumpYposTemp = yPos + 1;
@@ -460,7 +468,7 @@ namespace game_framework {
 	}
 
 	void Character::SetDefense(bool flag) {
-		if (!isCarryItem) {
+		if (!(isCarryItem && itemType==1)) {
 			isDefense = flag;
 			if (flag == true) {
 				//reset
@@ -559,10 +567,10 @@ namespace game_framework {
 				AnimationState = 0;
 			}
 			else {
-				if (isCarryItem) {
+				if (isCarryItem && itemType == 1) {
 					AnimationState = 1001;
 				}
-				else if (!isCarryItem) {
+				else{
 					AnimationState = 1;
 				}
 			}
@@ -572,20 +580,20 @@ namespace game_framework {
 		}
 
 		if (isRunning) {
-			if (isCarryItem) {
+			if (isCarryItem && itemType == 1) {
 				AnimationState = 1010;
 			}
-			else if (!isCarryItem) {
+			else{
 				AnimationState = 2;
 			}
 		}
 		else if (StopRun) {
 			if (RunCount <= 10) {
 				RunCount++;
-				if (isCarryItem) {
+				if (isCarryItem && itemType == 1) {
 					AnimationState = 1000;
 				}
-				else if (!isCarryItem) {
+				else{
 					AnimationState = 3;
 				}
 			}

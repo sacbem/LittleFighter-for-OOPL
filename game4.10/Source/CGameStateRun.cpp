@@ -48,10 +48,28 @@ namespace game_framework {
 			map[mapNowID]->drops[0]->OnMove();
 		}
 
+		int count = 0;
 		for (auto i : characterList) {
+			//check frozenSword spawn
+			//TRACE("%d %d\n", i->CharacterID, i->signalSpawnSword);
+			if (i->CharacterID == 2 && i->signalSpawnSword==true) {
+				map[mapNowID]->drops.push_back(new FieldObject(2, map[mapNowID]->GetMapID()));
+				if (i->FrozenSwordMode == false) {
+					int id = map[mapNowID]->drops.size()-1;
+					//TRACE("len %d\n", id);
+					map[mapNowID]->drops[id]->SetOwner(i->serialNumber);
+					map[mapNowID]->drops[id]->SetState(1);
+					i->SetPickup(true, id, 2);
+					i->Pickup(map[mapNowID]->drops[id]);
+					i->FrozenSwordMode = true;
+				}
+				i->signalSpawnSword = false;
+			}
+
 			if (i->GetHealth() <= 0) {
 				i->SetAlive(false);
 			}
+			count++;
 		}
 
 		SetAbonormalStatus();
@@ -110,9 +128,27 @@ namespace game_framework {
 						int yRange1 = j->GetY1()-10;
 						int yRange2 = j->GetY1() + 20;
 						if (yRange1 <= i->GetY() && i->GetY() <= yRange2) {
-							if (i->GetOwner() != countOwner) {
-								j->isGettingDamage(100);
+							if (i->GetOwner() != j->serialNumber) {
+								j->isGettingDamage(50);
 								j->SetKnock(true, i->GetDir(), 6);
+							}
+						}
+					}
+				}
+				//frozen Sword Attack && Set Frozen
+				if (i->itemType == 2) {
+					if (i->HitWeapon(j->GetX1(), j->GetY1(), j->GetX2(), j->GetY2())) {
+						int yRange1 = j->GetY1() - 10;
+						int yRange2 = j->GetY1() + 20;
+						if (yRange1 <= i->GetYB() && i->GetYB() <= yRange2) {
+							if (i->isAttackFrame()) {
+								if (i->GetOwner() != j->serialNumber) {
+									j->isGettingDamage(50);
+									j->specialState = 1;
+									tables[countOwner] = 1;
+									//j->SetAbonormalStatus(countOwner,true);
+									//j->SetKnock(true, i->GetDir(), 6);
+								}
 							}
 						}
 					}
@@ -143,12 +179,10 @@ namespace game_framework {
 			countOwner++;
 		}
 
-		//
-
 		//Character NearItem
 		for (auto j : characterList) {
 			for (auto i : map[mapNowID]->drops) {
-				j->NearItem(i->GetX(), i->GetY(), i->GetX() + 58, i->GetY() + 58);
+				j->NearItem(i->GetX(), i->GetY(), i->GetX() + 58, i->GetY() + 58, i->GetOwner());
 				if (j->isNearItem == true) {
 					break;
 				}
@@ -166,13 +200,13 @@ namespace game_framework {
 							if (i->GetState() == 0) {
 								j->SetPickup(true, num, i->itemType);
 								i->SetState(1);
-								i->SetOwner(num2);
+								i->SetOwner(j->serialNumber);
 							}
 						}
 					}
 				}
 				//
-				if (i->GetOwner() == num2 && j->itemId == num) {
+				if (i->GetOwner() == j->serialNumber && j->itemId == num) {
 					if (i->GetState() == 1) {
 						j->Pickup((map[mapNowID]->drops[num]));
 					}
@@ -233,7 +267,7 @@ namespace game_framework {
 		//Reset item state
 		for (auto i : characterList) {
 			if (i->isDropItem == true) {
-				map[mapNowID]->drops[i->itemId]->liftUp(false, i->GetX1(), i->GetY1(), i->GetDir());
+				map[mapNowID]->drops[i->itemId]->liftUp(false, i->GetX1(), i->GetY1(), i->GetDir(), i->GetAnimationState(),i->GetRunCurrent());
 				i->isCarryItem = false;
 				i->isDropItem = false;
 				i->ResetItem();
@@ -361,19 +395,17 @@ namespace game_framework {
 					if (i.first == 0) {
 						TRACE("damage %d\n", i.second);
 						characterList[0]->isGettingDamage(i.second);
-						if (characterList[0]->CharacterID != 2) {
+						if (characterList[1]->CharacterID != 2) {
 							characterList[0]->SetKnock(true, u->GetDir(), 1);
 						}
 					}
 					else if (i.first == 1) {
 						TRACE("damage %d\n", i.second);
 						characterList[1]->isGettingDamage(i.second);
-						if (characterList[1]->CharacterID != 2) {
+						if (characterList[0]->CharacterID != 2) {
 							characterList[1]->SetKnock(true, u->GetDir(), 1);
 						}
 					}
-					//Might need to clear hittedTable
-					//Problem: 傷害重複偵測，導致傷害破表
 				}
 			}
 			for (auto& i : characterList[0]->hittedTable) {
@@ -535,8 +567,8 @@ namespace game_framework {
 		boolean showStatus;
 		//get character
 		if (GetCharacter == false) {
-			map[mapNowID]->drops.push_back(new FieldObject(2, map[mapNowID]->GetMapID()));
-			TRACE("Type %d\n", map[mapNowID]->drops[0]->itemType);
+			map[mapNowID]->drops.push_back(new FieldObject(1, map[mapNowID]->GetMapID()));
+			//TRACE("Type %d\n", map[mapNowID]->drops[0]->itemType);
 			switch (this->game->selectCharacterID[0]) {
 			case 0:
 				characterList.push_back(new Woody(0, map[mapNowID]->GetMapID()));

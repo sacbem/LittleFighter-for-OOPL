@@ -5,6 +5,8 @@ namespace game_framework {
 	class FieldObject {
 	public:
 		FieldObject(int num, int MapID);
+		//Spawn && Set Owner
+		FieldObject(int num, int MapID, int Owner,int x, int y);
 		//Heavy Object
 		// 0	box
 		// 1	stone
@@ -21,17 +23,23 @@ namespace game_framework {
 		void SetOwner(int id);
 		void SetXY(int x, int y);
 		void SetMapBorder(int mapID);
+		bool isAttackFrame();
 		//for weapon type function
 		void SetAnimationState(int aniState);
 		int GetAnimationState();
 
 		//Hit Character
-		int HitPlayer(int ownerId, int tx1, int ty1, int tx2, int ty2,bool isAttacking);
+		int HitPlayer(int ownerId, int tx1, int ty1, int tx2, int ty2, bool isAttacking);
 		int HitRectangle(int tx1, int ty1, int tx2, int ty2); //for map 
 		int HitRectangle(int ownerId, int tx1, int ty1, int tx2, int ty2); //for grab
+		int HitWeapon(int tx1, int ty1, int tx2, int ty2); //for weapon
 
-		void liftUp(bool flag, int x, int y, int dir);
+		void liftUp(bool flag, int x, int y, int dir, int ani, int CAniCurrent);
 		void PickedUp(bool flag, int x, int y);
+		void DetectAnimation(int x, int y, int Animation, int CAniCurrent);
+		int liftCount;
+		int fixAniCount;
+
 		int GetState();
 		int GetOwner();
 		int GetDir();
@@ -41,14 +49,18 @@ namespace game_framework {
 		void ShowRoll();
 		int GetX();
 		int GetY();
+		int GetXB();
+		int GetYB();
 		int Hp;
 		~FieldObject();
 	protected:
 		int OwnerId;
 		int id;
+		int OwnerAnimationState;
 		GameObject* Obj;
 		int spawnX, spawnY;
 		int xPos, yPos;
+		int xBitmap, yBitmap;
 		int YVelocity;
 		int InitialVelocity;
 		int direction;

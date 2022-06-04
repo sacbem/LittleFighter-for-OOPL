@@ -25,6 +25,7 @@ namespace game_framework {
 		int GetSkillSignal();
 		int GetMovingUp_Down();
 		int GetAnimationState();
+		int GetRunCurrent();
 		boolean GetCalculateDamageRequest();
 		void Initialize();
 
@@ -86,11 +87,14 @@ namespace game_framework {
 		bool isCarryItem;
 		bool isDropItem;
 		bool isNearItem;
+		//Spawn Something
+		bool signalSpawnSword;
+		bool FrozenSwordMode;
 
 		vector<vector<int>> allItemPositsion;
 		vector<vector<int>> GetAllItemPosition();
 
-		void NearItem(int tx1, int ty1, int tx2, int ty2);
+		void NearItem(int tx1, int ty1, int tx2, int ty2, int owner);
 
 		bool isAttacking;
 		bool isGettingHit;

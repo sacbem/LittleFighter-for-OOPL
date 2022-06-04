@@ -23,6 +23,8 @@ namespace game_framework {
 		frozenStorms.reserve(1);
 		hittedLog.resize(4);
 		SetCalculateDamageRequest(false);
+		FrozenSwordMode = false;
+		signalSpawnSword = false;
 	}
 
 	int Freeze::HitEnemy(Character* enemy) {
@@ -99,36 +101,78 @@ namespace game_framework {
 
 	void Freeze::SetAttack(bool flag) {
 		if (flag == true) {
-			if (isCarryItem == true) {
+			if (isCarryItem == true && itemType==1) {
 				SetPickup(false, itemId, itemType);
 			}
 			if (!isAttacking) {
 				isAttacking = true;
-				if (isNearItem) {
-					LastAttackState = AttackState;
-					AttackState = 9;
-				}
-				else if (isRunning && isJumpping) {
-					LastAttackState = AttackState;
-					AttackState = 6;
+				if (isRunning && isJumpping) {
+					if (isCarryItem && itemType == 2) {
+						LastAttackState = AttackState;
+						AttackState = 24;
+					}
+					else {
+						LastAttackState = AttackState;
+						AttackState = 6;
+					}
 				}
 				else if (isRunning) {
 					LastAttackState = AttackState;
-					if (isCarryItem) {
+					if (isCarryItem && itemType==1) {
 						LastAttackState = AttackState;
 						AttackState = 8;
+					}
+					else if (isCarryItem && itemType == 2) {
+						LastAttackState = AttackState;
+						AttackState = 22;
 					}
 					else {
 						AttackState = 4;
 					}
 				}
 				else if (isJumpping) {
-					LastAttackState = AttackState;
-					AttackState = 5;
+					if (isCarryItem && itemType == 2) {
+						LastAttackState = AttackState;
+						AttackState = 23;
+					}
+					else {
+						LastAttackState = AttackState;
+						AttackState = 5;
+					}
 				}
-				else if (isCarryItem) {
+				else if (isCarryItem && itemType == 2) {
+					if (!isHitting) {
+						LastAttackState = AttackState;
+						if (LastAttackState == 20) {
+							AttackState = 21;
+							LastAttackState = 0;
+						}
+						else {
+							AttackState = 20;
+						}
+					}
+					else {
+						LastAttackState = AttackState;
+						//TRACE("LastAttackState %d\n", LastAttackState);
+						switch (LastAttackState)
+						{
+						case 20:
+							AttackState = 21;
+							break;
+						case 21:
+							AttackState = 20;
+							break;
+						}
+					}
+				}
+				else if (isCarryItem && itemType == 1) {
+					//TRACE("Type %d\n", itemType);
 					LastAttackState = AttackState;
 					AttackState = 7;
+				}
+				else if (isNearItem) {
+					LastAttackState = AttackState;
+					AttackState = 9;
 				}
 				else {
 					if (!isHitting) {
@@ -332,6 +376,86 @@ namespace game_framework {
 				}
 			}
 			break;
+		case 20:
+			if (AttackCount <= 5) {
+				AnimationState = 1100;
+			}
+			else if (AttackCount <= 10) {
+				AnimationState = 1101;
+			}
+			else if (AttackCount <= 15) {
+				AnimationState = 1102;
+			}
+			else if (AttackCount <= 20) {
+				AnimationState = 1103;
+				if (AttackCount == 20) {
+					SetAttack(false);
+				}
+			}
+			break;
+		case 21:
+			if (AttackCount <= 5) {
+				AnimationState = 1110;
+			}
+			else if (AttackCount <= 10) {
+				AnimationState = 1111;
+			}
+			else if (AttackCount <= 15) {
+				AnimationState = 1112;
+				if (AttackCount == 15) {
+					SetAttack(false);
+				}
+			}
+			break;
+		case 22:
+			if (AttackCount <= 10) {
+				AnimationState = 1120;
+			}
+			else if (AttackCount <= 20) {
+				AnimationState = 1121;
+				if (AttackCount == 20) {
+					SetAttack(false);
+					UnMovable = false;
+					isRunning = false;
+					isWalking = isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+					AttackAccumulator = 0;
+				}
+			}
+			break;
+		case 23:
+			if (AttackCount <= 5) {
+				AnimationState = 1130;
+			}
+			else if (AttackCount <= 10) {
+				AnimationState = 1131;
+			}
+			else if (AttackCount <= 15) {
+				AnimationState = 1132;
+			}
+			else if (AttackCount <= 20) {
+				AnimationState = 1133;
+				if (AttackCount == 20) {
+					SetAttack(false);
+				}
+			}
+			break;
+		case 24:
+			if (AttackCount <= 5) {
+				AnimationState = 1140;
+			}
+			else if (AttackCount <= 10) {
+				AnimationState = 1141;
+			}
+			else if (AttackCount <= 15) {
+				AnimationState = 1142;
+			}
+			else if (AttackCount <= 20) {
+				AnimationState = 1143;
+				if (AttackCount == 20) {
+					SetAttack(false);
+				}
+			}
+			break;
 		}
 	}
 
@@ -375,6 +499,7 @@ namespace game_framework {
 
 	void Freeze::SetKnock(bool flag, int Dir, int AttState) {
 		if (flag == true) {
+			UnMovable = true;
 			if (!isGettingHit) {
 				//Break Ice
 				specialState = 0;
@@ -401,10 +526,10 @@ namespace game_framework {
 						KnockState = 8;
 					}
 					else if (direction == 1 && Dir == 1) {
-						KnockState = 7;
+						KnockState = 8;
 					}
 					else if (direction == 0 && Dir == 1) {
-						KnockState = 8;
+						KnockState = 7;
 					}
 					else if (direction == 1 && Dir == 0) {
 						KnockState = 7;
@@ -418,6 +543,7 @@ namespace game_framework {
 			isGettingHit = false;
 			KnockCount = 0;
 			LastKnockState = KnockState;
+			UnMovable = false;
 		}
 	}
 
@@ -789,6 +915,7 @@ namespace game_framework {
 	}
 
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
+		TRACE("%d\n", isJumpping);
 		switch (AnimationState)
 		{
 		case 0:
@@ -1168,6 +1295,74 @@ namespace game_framework {
 			Animation.itemRunThrow[direction][1].SetTopLeft(xPos, yPos);
 			Animation.itemRunThrow[direction][1].ShowBitmap();
 			break;
+		case 1100:
+			Animation.weaponNormalAttack1[direction][0].SetTopLeft(xPos, yPos);
+			Animation.weaponNormalAttack1[direction][0].ShowBitmap();
+			break;
+		case 1101:
+			Animation.weaponNormalAttack1[direction][1].SetTopLeft(xPos, yPos);
+			Animation.weaponNormalAttack1[direction][1].ShowBitmap();
+			break;
+		case 1102:
+			Animation.weaponNormalAttack1[direction][2].SetTopLeft(xPos, yPos);
+			Animation.weaponNormalAttack1[direction][2].ShowBitmap();
+			break;
+		case 1103:
+			Animation.weaponNormalAttack1[direction][3].SetTopLeft(xPos, yPos);
+			Animation.weaponNormalAttack1[direction][3].ShowBitmap();
+			break;
+		case 1110:
+			Animation.weaponNormalAttack2[direction][0].SetTopLeft(xPos, yPos);
+			Animation.weaponNormalAttack2[direction][0].ShowBitmap();
+			break;
+		case 1111:
+			Animation.weaponNormalAttack2[direction][1].SetTopLeft(xPos, yPos);
+			Animation.weaponNormalAttack2[direction][1].ShowBitmap();
+			break;
+		case 1112:
+			Animation.weaponNormalAttack2[direction][2].SetTopLeft(xPos, yPos);
+			Animation.weaponNormalAttack2[direction][2].ShowBitmap();
+			break;
+		case 1120:
+			Animation.weaponHeavyAttack[direction][0].SetTopLeft(xPos, yPos);
+			Animation.weaponHeavyAttack[direction][0].ShowBitmap();
+			break;
+		case 1121:
+			Animation.weaponHeavyAttack[direction][1].SetTopLeft(xPos, yPos);
+			Animation.weaponHeavyAttack[direction][1].ShowBitmap();
+			break;
+		case 1130:
+			Animation.weaponJumpAttack[direction][0].SetTopLeft(xPos, yPos);
+			Animation.weaponJumpAttack[direction][0].ShowBitmap();
+			break;
+		case 1131:
+			Animation.weaponJumpAttack[direction][1].SetTopLeft(xPos, yPos);
+			Animation.weaponJumpAttack[direction][1].ShowBitmap();
+			break;
+		case 1132:
+			Animation.weaponJumpAttack[direction][2].SetTopLeft(xPos, yPos);
+			Animation.weaponJumpAttack[direction][2].ShowBitmap();
+			break;
+		case 1133:
+			Animation.weaponJumpAttack[direction][3].SetTopLeft(xPos, yPos);
+			Animation.weaponJumpAttack[direction][3].ShowBitmap();
+			break;
+		case 1140:
+			Animation.weaponJumpHeavyAttack[direction][0].SetTopLeft(xPos, yPos);
+			Animation.weaponJumpHeavyAttack[direction][0].ShowBitmap();
+			break;
+		case 1141:
+			Animation.weaponJumpHeavyAttack[direction][1].SetTopLeft(xPos, yPos);
+			Animation.weaponJumpHeavyAttack[direction][1].ShowBitmap();
+			break;
+		case 1142:
+			Animation.weaponJumpHeavyAttack[direction][2].SetTopLeft(xPos, yPos);
+			Animation.weaponJumpHeavyAttack[direction][2].ShowBitmap();
+			break;
+		case 1143:
+			Animation.weaponJumpHeavyAttack[direction][3].SetTopLeft(xPos, yPos);
+			Animation.weaponJumpHeavyAttack[direction][3].ShowBitmap();
+			break;
 		case 2000:
 			Animation.Dead[direction][0].SetTopLeft(xPos, yPos);
 			Animation.Dead[direction][0].ShowBitmap();
@@ -1296,14 +1491,16 @@ namespace game_framework {
 		}
 		else if (SpCount <= 20) {
 			AnimationState = 234;
-		}
-		else if (SpCount <= 24) {
-			AnimationState = 235;
-			if (SpCount >= 24) {
+			if (SpCount == 20) {
 				SpCount = 0;
 				skillSignal = -1;
-
-				//need fix this one
+				if(direction==0){
+					xPos += 15;
+				}
+				else {
+					xPos -= 15;
+				}
+				signalSpawnSword = true;
 			}
 		}
 	}
