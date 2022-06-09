@@ -302,114 +302,116 @@ namespace game_framework {
 	}
 
 	void Henry::SetAttack(bool flag) {
-		if (flag == true) {
-			UnMovable = true;
-			if (isCarryItem == true && itemType == 1) {
-				SetPickup(false, itemId, itemType);
-			}
-			if (!isAttacking) {
-				isAttacking = true;
-				if (isRunning && isJumpping) {
-					if (isCarryItem && itemType == 2) {
-						LastAttackState = AttackState;
-						AttackState = 24;
-					}
-					else {
-						LastAttackState = AttackState;
-						AttackState = 6;
-					}
+		if (specialState == -1) {
+			if (flag == true) {
+				UnMovable = true;
+				if (isCarryItem == true && itemType == 1) {
+					SetPickup(false, itemId, itemType);
 				}
-				else if (isRunning) {
-					LastAttackState = AttackState;
-					if (isCarryItem && itemType == 1) {
-						LastAttackState = AttackState;
-						AttackState = 8;
-					}
-					else if (isCarryItem && itemType == 2) {
-						LastAttackState = AttackState;
-						AttackState = 22;
-					}
-					else {
-						AttackState = 4;
-					}
-				}
-				else if (isJumpping) {
-					LastAttackState = AttackState;
-					if (isCarryItem && itemType == 2) {
-						LastAttackState = AttackState;
-						AttackState = 23;
-					}
-					else {
-						LastAttackState = AttackState;
-						AttackState = 5;
-					}
-					auto downArrow_Begin = downArrow.begin();
-					if (this->AttackState == 5) {
-						TRACE("DOWN ARROW\n");
-						downArrow.insert(downArrow_Begin, new SkillEffect(9, CurrentTime, direction, xPos-10, yPos-10));
-						skillsEffect_InFieldNumber[0] = downArrow.size();
-					}
-				}
-				else if (isCarryItem && itemType == 2) {
-					if (!isHitting) {
-						LastAttackState = AttackState;
-						if (LastAttackState == 20) {
-							AttackState = 21;
-							LastAttackState = 0;
+				if (!isAttacking) {
+					isAttacking = true;
+					if (isRunning && isJumpping) {
+						if (isCarryItem && itemType == 2) {
+							LastAttackState = AttackState;
+							AttackState = 24;
 						}
 						else {
-							AttackState = 20;
+							LastAttackState = AttackState;
+							AttackState = 6;
 						}
+					}
+					else if (isRunning) {
+						LastAttackState = AttackState;
+						if (isCarryItem && itemType == 1) {
+							LastAttackState = AttackState;
+							AttackState = 8;
+						}
+						else if (isCarryItem && itemType == 2) {
+							LastAttackState = AttackState;
+							AttackState = 22;
+						}
+						else {
+							AttackState = 4;
+						}
+					}
+					else if (isJumpping) {
+						LastAttackState = AttackState;
+						if (isCarryItem && itemType == 2) {
+							LastAttackState = AttackState;
+							AttackState = 23;
+						}
+						else {
+							LastAttackState = AttackState;
+							AttackState = 5;
+						}
+						auto downArrow_Begin = downArrow.begin();
+						if (this->AttackState == 5) {
+							TRACE("DOWN ARROW\n");
+							downArrow.insert(downArrow_Begin, new SkillEffect(9, CurrentTime, direction, xPos - 10, yPos - 10));
+							skillsEffect_InFieldNumber[0] = downArrow.size();
+						}
+					}
+					else if (isCarryItem && itemType == 2) {
+						if (!isHitting) {
+							LastAttackState = AttackState;
+							if (LastAttackState == 20) {
+								AttackState = 21;
+								LastAttackState = 0;
+							}
+							else {
+								AttackState = 20;
+							}
+						}
+						else {
+							LastAttackState = AttackState;
+							//TRACE("LastAttackState %d\n", LastAttackState);
+							switch (LastAttackState)
+							{
+							case 20:
+								AttackState = 21;
+								break;
+							case 21:
+								AttackState = 20;
+								break;
+							}
+						}
+					}
+					else if (isCarryItem && itemType == 1) {
+						LastAttackState = AttackState;
+						AttackState = 7;
+					}
+					else if (isNearItem) {
+						LastAttackState = AttackState;
+						AttackState = 9;
 					}
 					else {
-						LastAttackState = AttackState;
-						//TRACE("LastAttackState %d\n", LastAttackState);
-						switch (LastAttackState)
-						{
-						case 20:
-							AttackState = 21;
-							break;
-						case 21:
-							AttackState = 20;
-							break;
+						if (!isHitting) {
+							LastAttackState = AttackState;
+							AttackState = 1;
+							auto arrow_Begin = arrow.begin();
+							if (this->AttackState == 1) {
+								arrow.insert(arrow_Begin, new SkillEffect(4, CurrentTime, direction, xPos, yPos + 20));
+								skillsEffect_InFieldNumber[0] = arrow.size();
+							}
 						}
-					}
-				}
-				else if (isCarryItem && itemType == 1) {
-					LastAttackState = AttackState;
-					AttackState = 7;
-				}
-				else if (isNearItem) {
-					LastAttackState = AttackState;
-					AttackState = 9;
-				}
-				else {
-					if (!isHitting) {
-						LastAttackState = AttackState;
-						AttackState = 1;
-						auto arrow_Begin = arrow.begin();
-						if (this->AttackState == 1) {
-							arrow.insert(arrow_Begin, new SkillEffect(4, CurrentTime, direction, xPos, yPos + 20));
-							skillsEffect_InFieldNumber[0] = arrow.size();
-						}
-					}
-					else {
-						LastAttackState = AttackState;
-						AttackState = 1;
-						auto arrow_Begin = arrow.begin();
-						if (this->AttackState == 1) {
-							arrow.insert(arrow_Begin, new SkillEffect(4, CurrentTime, direction, xPos, yPos + 20));
-							skillsEffect_InFieldNumber[0] = arrow.size();
+						else {
+							LastAttackState = AttackState;
+							AttackState = 1;
+							auto arrow_Begin = arrow.begin();
+							if (this->AttackState == 1) {
+								arrow.insert(arrow_Begin, new SkillEffect(4, CurrentTime, direction, xPos, yPos + 20));
+								skillsEffect_InFieldNumber[0] = arrow.size();
+							}
 						}
 					}
 				}
 			}
-		}
-		else if (flag == false) {
-			isAttacking = false;
-			AttackCount = 0;
-			LastAttackState = AttackState;
-			UnMovable = false;
+			else if (flag == false) {
+				isAttacking = false;
+				AttackCount = 0;
+				LastAttackState = AttackState;
+				UnMovable = false;
+			}
 		}
 	}
 
@@ -698,7 +700,7 @@ namespace game_framework {
 
 	void Henry::SetKnock(bool flag, int Dir, int AttState) {
 		if (flag == true) {
-			UnMovable = true;
+			SetRunning(false);
 			if (!isGettingHit) {
 				//Break Ice
 				specialState = 0;
@@ -810,6 +812,7 @@ namespace game_framework {
 			}
 			break;
 		case 7:
+			UnMovable = true;
 			if (KnockCount == 0) {
 				//init velocity
 				InitialVelocity = 2;
@@ -844,10 +847,12 @@ namespace game_framework {
 					KnockCount = 0;
 					LastKnockState = KnockState;
 					DamageAccumulator = 0;
+					UnMovable = false;
 				}
 			}
 			break;
 		case 8:
+			UnMovable = true;
 			if (KnockCount == 0) {
 				//init velocity
 				InitialVelocity = 2;
@@ -882,6 +887,7 @@ namespace game_framework {
 					KnockCount = 0;
 					LastKnockState = KnockState;
 					DamageAccumulator = 0;
+					UnMovable = false;
 				}
 			}
 			break;
@@ -899,30 +905,32 @@ namespace game_framework {
 		auto pierceArrow_Begin = pierceArrow.begin();
 		auto airwave_Begin = airwave.begin();
 		auto demonicSong_Begin = demonicSong.begin();
+		if(itemType!=1) {
+			if (this->GetSkillSignal() == 1) {
+				pierceArrow.insert(pierceArrow_Begin, new SkillEffect(5, createdTimes, direction, xPos, yPos+20));
+				skillsEffect_InFieldNumber[1] = pierceArrow.size();
+			}
+			else if (this->GetSkillSignal() == 0) {
+				airwave.insert(airwave_Begin, new SkillEffect(7, createdTimes, direction, xPos, yPos + 20));
+				skillsEffect_InFieldNumber[1] = airwave.size();
+			}
+			else if (this->GetSkillSignal() == 2) {
+				//call three type of Arrow
+				upArrow.insert(upArrow_Begin, new SkillEffect(10, createdTimes, direction, xPos-10, yPos + 20));
+				skillsEffect_InFieldNumber[1] = upArrow.size();
+
+				arrow.insert(arrow_Begin, new SkillEffect(4, createdTimes, direction, xPos-10, yPos + 20));
+				skillsEffect_InFieldNumber[1] = arrow.size();
+
+				downArrow2.insert(downArrow2_Begin, new SkillEffect(11, createdTimes, direction, xPos - 10, yPos + 20));
+				skillsEffect_InFieldNumber[0] = downArrow2.size();
+			}
+			else if (this->GetSkillSignal() == 3) {
+				demonicSong.insert(demonicSong_Begin, new SkillEffect(8, createdTimes, direction, xPos, yPos));
+				skillsEffect_InFieldNumber[1] = demonicSong.size();
+			}
+		}
 	
-		if (this->GetSkillSignal() == 1) {
-			pierceArrow.insert(pierceArrow_Begin, new SkillEffect(5, createdTimes, direction, xPos, yPos+20));
-			skillsEffect_InFieldNumber[1] = pierceArrow.size();
-		}
-		else if (this->GetSkillSignal() == 0) {
-			airwave.insert(airwave_Begin, new SkillEffect(7, createdTimes, direction, xPos, yPos + 20));
-			skillsEffect_InFieldNumber[1] = airwave.size();
-		}
-		else if (this->GetSkillSignal() == 2) {
-			//call three type of Arrow
-			upArrow.insert(upArrow_Begin, new SkillEffect(10, createdTimes, direction, xPos-10, yPos + 20));
-			skillsEffect_InFieldNumber[1] = upArrow.size();
-
-			arrow.insert(arrow_Begin, new SkillEffect(4, createdTimes, direction, xPos-10, yPos + 20));
-			skillsEffect_InFieldNumber[1] = arrow.size();
-
-			downArrow2.insert(downArrow2_Begin, new SkillEffect(11, createdTimes, direction, xPos - 10, yPos + 20));
-			skillsEffect_InFieldNumber[0] = downArrow2.size();
-		}
-		else if (this->GetSkillSignal() == 3) {
-			demonicSong.insert(demonicSong_Begin, new SkillEffect(8, createdTimes, direction, xPos, yPos));
-			skillsEffect_InFieldNumber[1] = demonicSong.size();
-		}
 	}
 
 	void Henry::EffectObjectAliveManager(int mainTime) {
@@ -1143,6 +1151,9 @@ namespace game_framework {
 
 		//calculate input time diff
 		KeyBoardInputTime++;
+		if (AnimationState == 0) {
+			specialState = -1;
+		}
 	}
 
 	void Henry::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {

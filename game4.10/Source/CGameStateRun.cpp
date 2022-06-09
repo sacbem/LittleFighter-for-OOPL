@@ -45,18 +45,29 @@ namespace game_framework {
 	void CGameStateRun::OnMove() {					// 移動遊戲元素
 		//map[mapNowID]->drops[0]->OnMove();
 		if (!map[mapNowID]->drops.empty()) {
-			map[mapNowID]->drops[0]->OnMove();
+			for (auto i : map[mapNowID]->drops) {
+				i->OnMove();
+			}
+		}
+		//clear drops
+		auto it = map[mapNowID]->drops.begin();
+		for (auto i : map[mapNowID]->drops) {
+			if (i->GetHp() <= 0) {
+				map[mapNowID]->drops.erase(it);
+			}
+			else {
+				it++;
+			}
+
 		}
 
 		int count = 0;
 		for (auto i : characterList) {
 			//check frozenSword spawn
-			//TRACE("%d %d\n", i->CharacterID, i->signalSpawnSword);
 			if (i->CharacterID == 2 && i->signalSpawnSword==true) {
-				map[mapNowID]->drops.push_back(new FieldObject(2, map[mapNowID]->GetMapID()));
 				if (i->FrozenSwordMode == false) {
+					map[mapNowID]->drops.push_back(new FieldObject(2, map[mapNowID]->GetMapID()));
 					int id = map[mapNowID]->drops.size()-1;
-					//TRACE("len %d\n", id);
 					map[mapNowID]->drops[id]->SetOwner(i->serialNumber);
 					map[mapNowID]->drops[id]->SetState(1);
 					i->SetPickup(true, id, 2);
@@ -73,15 +84,14 @@ namespace game_framework {
 		}
 
 		SetAbonormalStatus();
-		
 		characterList[0]->OnMove();
 		characterList[1]->OnMove();
-		SetCharacterSlide();
 		//Reset
 		int x = 0;
 		for (auto i : characterList) {
 			tables[x++] = i->specialState;
 		}
+		SetCharacterSlide();
 
 		SetAllCharacterPosition();
 
@@ -94,7 +104,7 @@ namespace game_framework {
 					if (i->HitEnemy(j) && i->isAttacking) {
 						if (j->HealthPoint >= 0) {
 							j->SetKnock(true, i->GetDir(), i->AttackState);
-							j->isGettingDamage(i->AttackPoint);
+							j->isGettingDamage(1);
 						}
 					}
 				}
@@ -182,6 +192,10 @@ namespace game_framework {
 		//
 		//Character NearItem
 		for (auto j : characterList) {
+			if (map[mapNowID]->drops.size() == 0) {
+				j->isNearItem = false;
+			}
+
 			for (auto i : map[mapNowID]->drops) {
 				j->NearItem(i->GetX(), i->GetY(), i->GetX() + 58, i->GetY() + 58, i->GetOwner());
 				if (j->isNearItem == true) {
@@ -194,9 +208,8 @@ namespace game_framework {
 		int num2 = 0;
 		for (auto i : map[mapNowID]->drops) {
 			for (auto j : characterList) {
-				//
 				if (!j->isRunning) {
-					if (i->HitPlayer(num2, j->GetX1(), j->GetY1(), j->GetX2(), j->GetY2(), j->isAttacking)) {
+					if (i->HitPlayer(num2, j->GetX1(), j->GetY1(), j->GetX2(), j->GetY2(), j->isAttacking, j->isAttackFrame())) {
 						if (j->isDropItem == false && j->isCarryItem == false && j->GetSkillSignal() == -1) {
 							if (i->GetState() == 0) {
 								j->SetPickup(true, num, i->itemType);
@@ -265,6 +278,7 @@ namespace game_framework {
 		//characterList[1]->InputKeyDown(nChar, CurrentTime, 1);
 		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
 
+		
 		//Reset item state
 		for (auto i : characterList) {
 			if (i->isDropItem == true) {
@@ -395,15 +409,16 @@ namespace game_framework {
 				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
 					if (i.first == 0) {
 						characterList[0]->isGettingDamage(i.second);
-						this->game->totalDamage[0] += i.second;
-						if (characterList[1]->CharacterID != 2) {
+						if (characterList[1]->CharacterID != 2 && i.second!=0) {
+							TRACE("Test \n");
 							characterList[0]->SetKnock(true, u->GetDir(), 1);
 						}
+						this->game->totalDamage[0] += i.second;
 					}
 					else if (i.first == 1) {
 						characterList[1]->isGettingDamage(i.second);
 						this->game->totalDamage[1] += i.second;
-						if (characterList[0]->CharacterID != 2) {
+						if (characterList[0]->CharacterID != 2 && i.second != 0) {
 							characterList[1]->SetKnock(true, u->GetDir(), 1);
 						}
 					}
@@ -533,6 +548,7 @@ namespace game_framework {
 				}
 				for (auto& i : characterList) {
 					i->ClearSkill();
+					i->ClearWeaponState();
 					if (!i->GetAlive()) {
 						delete i;
 						characterList[cnt] = new  Henry(1, map[mapNowID]->GetMapID());
@@ -584,6 +600,7 @@ namespace game_framework {
 
 				break;
 			}
+			characterList[0]->SetDir(0);
 			characterList[0]->SetXY(200, 400);
 			characterList[0]->SetCharacter();
 

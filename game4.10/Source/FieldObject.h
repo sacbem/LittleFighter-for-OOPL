@@ -29,9 +29,10 @@ namespace game_framework {
 		int GetAnimationState();
 
 		//Hit Character
-		int HitPlayer(int ownerId, int tx1, int ty1, int tx2, int ty2, bool isAttacking);
+		int HitPlayer(int ownerId, int tx1, int ty1, int tx2, int ty2, bool isAttacking, bool isAttackFrame);
 		int HitRectangle(int tx1, int ty1, int tx2, int ty2); //for map 
 		int HitRectangle(int ownerId, int tx1, int ty1, int tx2, int ty2); //for grab
+		int HitRectangle(int ownerId, int tx1, int ty1, int tx2, int ty2, bool AttackFrame); //for Attack
 		int HitWeapon(int tx1, int ty1, int tx2, int ty2); //for weapon
 
 		void liftUp(bool flag, int x, int y, int dir, int ani, int CAniCurrent);
@@ -43,6 +44,7 @@ namespace game_framework {
 		int GetState();
 		int GetOwner();
 		int GetDir();
+		int GetHp();
 		void OnMove();
 		void ShowAnimation();
 		void ShowStatic();

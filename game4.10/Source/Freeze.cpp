@@ -101,123 +101,125 @@ namespace game_framework {
 	}
 
 	void Freeze::SetAttack(bool flag) {
-		if (flag == true) {
-			if (isCarryItem == true && itemType==1) {
-				SetPickup(false, itemId, itemType);
-			}
-			if (!isAttacking) {
-				isAttacking = true;
-				if (isRunning && isJumpping) {
-					if (isCarryItem && itemType == 2) {
-						LastAttackState = AttackState;
-						AttackState = 24;
-					}
-					else {
-						LastAttackState = AttackState;
-						AttackState = 6;
-					}
+		if (specialState == -1) {
+			if (flag == true) {
+				if (isCarryItem == true && itemType == 1) {
+					SetPickup(false, itemId, itemType);
 				}
-				else if (isRunning) {
-					LastAttackState = AttackState;
-					if (isCarryItem && itemType==1) {
+				if (!isAttacking) {
+					isAttacking = true;
+					if (isRunning && isJumpping) {
+						if (isCarryItem && itemType == 2) {
+							LastAttackState = AttackState;
+							AttackState = 24;
+						}
+						else {
+							LastAttackState = AttackState;
+							AttackState = 6;
+						}
+					}
+					else if (isRunning) {
 						LastAttackState = AttackState;
-						AttackState = 8;
+						if (isCarryItem && itemType == 1) {
+							LastAttackState = AttackState;
+							AttackState = 8;
+						}
+						else if (isCarryItem && itemType == 2) {
+							LastAttackState = AttackState;
+							AttackState = 22;
+						}
+						else {
+							AttackState = 4;
+						}
+					}
+					else if (isJumpping) {
+						if (isCarryItem && itemType == 2) {
+							LastAttackState = AttackState;
+							AttackState = 23;
+						}
+						else {
+							LastAttackState = AttackState;
+							AttackState = 5;
+						}
 					}
 					else if (isCarryItem && itemType == 2) {
-						LastAttackState = AttackState;
-						AttackState = 22;
-					}
-					else {
-						AttackState = 4;
-					}
-				}
-				else if (isJumpping) {
-					if (isCarryItem && itemType == 2) {
-						LastAttackState = AttackState;
-						AttackState = 23;
-					}
-					else {
-						LastAttackState = AttackState;
-						AttackState = 5;
-					}
-				}
-				else if (isCarryItem && itemType == 2) {
-					if (!isHitting) {
-						LastAttackState = AttackState;
-						if (LastAttackState == 20) {
-							AttackState = 21;
-							LastAttackState = 0;
+						if (!isHitting) {
+							LastAttackState = AttackState;
+							if (LastAttackState == 20) {
+								AttackState = 21;
+								LastAttackState = 0;
+							}
+							else {
+								AttackState = 20;
+							}
 						}
 						else {
-							AttackState = 20;
+							LastAttackState = AttackState;
+							//TRACE("LastAttackState %d\n", LastAttackState);
+							switch (LastAttackState)
+							{
+							case 20:
+								AttackState = 21;
+								break;
+							case 21:
+								AttackState = 20;
+								break;
+							}
 						}
+					}
+					else if (isCarryItem && itemType == 1) {
+						//TRACE("Type %d\n", itemType);
+						LastAttackState = AttackState;
+						AttackState = 7;
+					}
+					else if (isNearItem) {
+						LastAttackState = AttackState;
+						AttackState = 9;
 					}
 					else {
-						LastAttackState = AttackState;
-						//TRACE("LastAttackState %d\n", LastAttackState);
-						switch (LastAttackState)
-						{
-						case 20:
-							AttackState = 21;
-							break;
-						case 21:
-							AttackState = 20;
-							break;
-						}
-					}
-				}
-				else if (isCarryItem && itemType == 1) {
-					//TRACE("Type %d\n", itemType);
-					LastAttackState = AttackState;
-					AttackState = 7;
-				}
-				else if (isNearItem) {
-					LastAttackState = AttackState;
-					AttackState = 9;
-				}
-				else {
-					if (!isHitting) {
-						LastAttackState = AttackState;
-						if (LastAttackState == 1) {
-							AttackState = 2;
-							LastAttackState = 0;
+						if (!isHitting) {
+							LastAttackState = AttackState;
+							if (LastAttackState == 1) {
+								AttackState = 2;
+								LastAttackState = 0;
+							}
+							else {
+								AttackState = 1;
+							}
 						}
 						else {
-							AttackState = 1;
-						}
-					}
-					else {
-						LastAttackState = AttackState;
-						TRACE("LastAttackState %d\n", LastAttackState);
-						switch (LastAttackState)
-						{
-						case 1:
-							AttackState = 2;
-							break;
-						case 2:
-							AttackState = 11;
-							break;
-						case 11:
-							AttackState = 12;
-							break;
-						case 12:
-							AttackState = 3;
-							break;
-						case 3:
-							AttackState = 1;
-							break;
-						default:
-							AttackState = 1;
-							break;
+							LastAttackState = AttackState;
+							TRACE("LastAttackState %d\n", LastAttackState);
+							switch (LastAttackState)
+							{
+							case 1:
+								AttackState = 2;
+								break;
+							case 2:
+								AttackState = 11;
+								break;
+							case 11:
+								AttackState = 12;
+								break;
+							case 12:
+								AttackState = 3;
+								break;
+							case 3:
+								AttackState = 1;
+								break;
+							default:
+								AttackState = 1;
+								break;
+							}
 						}
 					}
 				}
 			}
-		}
-		else if (flag == false) {
-			isAttacking = false;
-			AttackCount = 0;
-			LastAttackState = AttackState;
+			else if (flag == false) {
+				isAttacking = false;
+				AttackCount = 0;
+				LastAttackState = AttackState;
+			}
 		}
 	}
 
@@ -500,10 +502,10 @@ namespace game_framework {
 
 	void Freeze::SetKnock(bool flag, int Dir, int AttState) {
 		if (flag == true) {
-			UnMovable = true;
+			SetRunning(false);
 			if (!isGettingHit) {
 				//Break Ice
-				specialState = 0;
+				specialState = -1;
 				FrozenCount = 400;
 				UnMovable = false;
 
@@ -612,6 +614,7 @@ namespace game_framework {
 			}
 			break;
 		case 7:
+			UnMovable = true;
 			if (KnockCount == 0) {
 				//init velocity
 				InitialVelocity = 2;
@@ -646,10 +649,12 @@ namespace game_framework {
 					KnockCount = 0;
 					LastKnockState = KnockState;
 					DamageAccumulator = 0;
+					UnMovable = false;
 				}
 			}
 			break;
 		case 8:
+			UnMovable = true;
 			if (KnockCount == 0) {
 				//init velocity
 				InitialVelocity = 2;
@@ -684,6 +689,7 @@ namespace game_framework {
 					KnockCount = 0;
 					LastKnockState = KnockState;
 					DamageAccumulator = 0;
+					UnMovable = false;
 				}
 			}
 			break;
@@ -696,18 +702,19 @@ namespace game_framework {
 		auto frozenWaves_Begin = frozenWaves.begin();
 		auto frozenPunchs_Begin = frozenPunchs.begin();
 		auto frozenStorms_Begin = frozenStorms.begin();
-		
-		if (this->GetSkillSignal() == 0) {
-			frozenWaves.insert(frozenWaves_Begin, new SkillEffect(0, createdTimes, direction, xPos, yPos));
-			skillsEffect_InFieldNumber[0] = frozenWaves.size();
-		}
-		else if (this->GetSkillSignal() == 1) {
-			frozenPunchs.insert(frozenPunchs_Begin, new SkillEffect(1, createdTimes, direction, xPos, yPos));
-			skillsEffect_InFieldNumber[1] = frozenPunchs.size();
-		}
-		else if (this->GetSkillSignal() == 3) {
-			frozenStorms.insert(frozenStorms_Begin, new SkillEffect(3, createdTimes, direction, xPos, yPos));
-			skillsEffect_InFieldNumber[3] = frozenStorms.size();
+		if (itemType != 1) {
+			if (this->GetSkillSignal() == 0) {
+				frozenWaves.insert(frozenWaves_Begin, new SkillEffect(0, createdTimes, direction, xPos, yPos));
+				skillsEffect_InFieldNumber[0] = frozenWaves.size();
+			}
+			else if (this->GetSkillSignal() == 1) {
+				frozenPunchs.insert(frozenPunchs_Begin, new SkillEffect(1, createdTimes, direction, xPos, yPos));
+				skillsEffect_InFieldNumber[1] = frozenPunchs.size();
+			}
+			else if (this->GetSkillSignal() == 3) {
+				frozenStorms.insert(frozenStorms_Begin, new SkillEffect(3, createdTimes, direction, xPos, yPos));
+				skillsEffect_InFieldNumber[3] = frozenStorms.size();
+			}
 		}
 	}
 
@@ -856,6 +863,7 @@ namespace game_framework {
 		}
 		//some basic movement
 
+
 		SetMoving();
 	
 		//Frozen
@@ -900,6 +908,10 @@ namespace game_framework {
 
 		//calculate input time diff
 		KeyBoardInputTime++;
+		//Reset Frozen State
+		if (AnimationState == 0) {
+			specialState = -1;
+		}
 	}
 
 	bool mycompare(SkillEffect* s1, SkillEffect* s2) {
@@ -916,7 +928,7 @@ namespace game_framework {
 	}
 
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
-		TRACE("%d\n", isJumpping);
+		//TRACE("%d\n", isJumpping);
 		switch (AnimationState)
 		{
 		case 0:
@@ -933,6 +945,7 @@ namespace game_framework {
 			//Fool-proof mechanism
 			skillSignal = -1;
 			UnMovable = false;
+			specialState = -1;
 			break;
 		case 1:
 			Animation.Walk[direction].OnMove();
@@ -1718,6 +1731,7 @@ namespace game_framework {
 				Mana -= 450;
 			}
 		}
+		
 
 		//skillSignal = -1;
 		if (AttackCount >= 30) {

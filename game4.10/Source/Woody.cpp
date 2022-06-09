@@ -147,124 +147,126 @@ namespace game_framework {
 	}
 
 	void Woody::SetAttack(bool flag) {
-		if (flag == true) {
-			if (isCarryItem == true && itemType == 1) {
-				SetPickup(false, itemId, itemType);
-			}
-			if (!isAttacking) {
-				isAttacking = true;
-				if (skillSignal == 1) {
-					AttackState = 3;
+		if (specialState == -1) {
+			if (flag == true) {
+				if (isCarryItem == true && itemType == 1) {
+					SetPickup(false, itemId, itemType);
 				}
-				else if (isRunning && isJumpping) {
-					if (isCarryItem && itemType == 2) {
-						LastAttackState = AttackState;
-						AttackState = 24;
+				if (!isAttacking) {
+					isAttacking = true;
+					if (skillSignal == 1) {
+						AttackState = 3;
 					}
-					else {
-						LastAttackState = AttackState;
-						AttackState = 6;
+					else if (isRunning && isJumpping) {
+						if (isCarryItem && itemType == 2) {
+							LastAttackState = AttackState;
+							AttackState = 24;
+						}
+						else {
+							LastAttackState = AttackState;
+							AttackState = 6;
+						}
 					}
-				}
-				else if (isRunning) {
-					LastAttackState = AttackState;
-					if (isCarryItem && itemType == 1) {
+					else if (isRunning) {
 						LastAttackState = AttackState;
-						AttackState = 8;
+						if (isCarryItem && itemType == 1) {
+							LastAttackState = AttackState;
+							AttackState = 8;
+						}
+						else if (isCarryItem && itemType == 2) {
+							LastAttackState = AttackState;
+							AttackState = 22;
+						}
+						else {
+							AttackState = 4;
+						}
+					}
+					else if (isJumpping) {
+						if (isCarryItem && itemType == 2) {
+							LastAttackState = AttackState;
+							AttackState = 23;
+						}
+						else {
+							LastAttackState = AttackState;
+							AttackState = 5;
+						}
 					}
 					else if (isCarryItem && itemType == 2) {
-						LastAttackState = AttackState;
-						AttackState = 22;
-					}
-					else {
-						AttackState = 4;
-					}
-				}
-				else if (isJumpping) {
-					if (isCarryItem && itemType == 2) {
-						LastAttackState = AttackState;
-						AttackState = 23;
-					}
-					else {
-						LastAttackState = AttackState;
-						AttackState = 5;
-					}
-				}
-				else if (isCarryItem && itemType == 2) {
-					if (!isHitting) {
-						LastAttackState = AttackState;
-						if (LastAttackState == 20) {
-							AttackState = 21;
-							LastAttackState = 0;
+						if (!isHitting) {
+							LastAttackState = AttackState;
+							if (LastAttackState == 20) {
+								AttackState = 21;
+								LastAttackState = 0;
+							}
+							else {
+								AttackState = 20;
+							}
 						}
 						else {
-							AttackState = 20;
+							LastAttackState = AttackState;
+							//TRACE("LastAttackState %d\n", LastAttackState);
+							switch (LastAttackState)
+							{
+							case 20:
+								AttackState = 21;
+								break;
+							case 21:
+								AttackState = 20;
+								break;
+							}
 						}
+					}
+					else if (isCarryItem && itemType == 1) {
+						LastAttackState = AttackState;
+						AttackState = 7;
+					}
+					else if (isNearItem) {
+						LastAttackState = AttackState;
+						AttackState = 9;
 					}
 					else {
-						LastAttackState = AttackState;
-						//TRACE("LastAttackState %d\n", LastAttackState);
-						switch (LastAttackState)
-						{
-						case 20:
-							AttackState = 21;
-							break;
-						case 21:
-							AttackState = 20;
-							break;
-						}
-					}
-				}
-				else if (isCarryItem && itemType == 1) {
-					LastAttackState = AttackState;
-					AttackState = 7;
-				}
-				else if (isNearItem) {
-					LastAttackState = AttackState;
-					AttackState = 9;
-				}
-				else {
-					if (!isHitting) {
-						LastAttackState = AttackState;
-						if (LastAttackState == 1) {
-							AttackState = 2;
-							LastAttackState = 0;
+						if (!isHitting) {
+							LastAttackState = AttackState;
+							if (LastAttackState == 1) {
+								AttackState = 2;
+								LastAttackState = 0;
+							}
+							else {
+								AttackState = 1;
+							}
 						}
 						else {
-							AttackState = 1;
-						}
-					}
-					else {
-						LastAttackState = AttackState;
-						switch (LastAttackState)
-						{
-						case 1:
-							AttackState = 2;
-							break;
-						case 2:
-							AttackState = 11;
-							break;
-						case 11:
-							AttackState = 12;
-							break;
-						case 12:
-							AttackState = 3;
-							break;
-						case 3:
-							AttackState = 1;
-							break;
-						default:
-							AttackState = 1;
-							break;
+							LastAttackState = AttackState;
+							switch (LastAttackState)
+							{
+							case 1:
+								AttackState = 2;
+								break;
+							case 2:
+								AttackState = 11;
+								break;
+							case 11:
+								AttackState = 12;
+								break;
+							case 12:
+								AttackState = 3;
+								break;
+							case 3:
+								AttackState = 1;
+								break;
+							default:
+								AttackState = 1;
+								break;
+							}
 						}
 					}
 				}
 			}
-		}
-		else if (flag == false) {
-			isAttacking = false;
-			AttackCount = 0;
-			LastAttackState = AttackState;
+			else if (flag == false) {
+				isAttacking = false;
+				AttackCount = 0;
+				LastAttackState = AttackState;
+			}
 		}
 	}
 
@@ -605,7 +607,7 @@ namespace game_framework {
 
 	void Woody::SetKnock(bool flag, int Dir, int AttState) {
 		if (flag == true) {
-			UnMovable = true;
+			SetRunning(false);
 			if (!isGettingHit) {
 				//Break Ice
 				specialState = 0;
@@ -715,6 +717,7 @@ namespace game_framework {
 			}
 			break;
 		case 7:
+			UnMovable = true;
 			if (KnockCount == 1) {
 				//init velocity
 				InitialVelocity = 10;
@@ -747,6 +750,7 @@ namespace game_framework {
 					KnockCount = 0;
 					LastKnockState = KnockState;
 					DamageAccumulator = 0;
+					UnMovable = false;
 				}
 			}
 			if (KnockCount >= 3 && KnockCount <= 40) {
@@ -785,6 +789,7 @@ namespace game_framework {
 			}
 			break;
 		case 8:
+			UnMovable = true;
 			if (KnockCount == 1) {
 				//init velocity
 				InitialVelocity = 10;
@@ -817,6 +822,7 @@ namespace game_framework {
 					KnockCount = 0;
 					LastKnockState = KnockState;
 					DamageAccumulator = 0;
+					UnMovable = false;
 				}
 			}
 
@@ -863,12 +869,14 @@ namespace game_framework {
 	void Woody::SetSkill(int createdTimes) {
 		auto energyBlast_Begin = energyBlast.begin();
 		auto energyBlast2_Begin = energyBlast2.begin();
-		if (this->GetSkillSignal() == 0) {
-			energyBlast.insert(energyBlast_Begin, new SkillEffect(6, createdTimes, direction, xPos, yPos));
-			skillsEffect_InFieldNumber[0] = energyBlast.size();
+		if (itemType != 1) {
+			if (this->GetSkillSignal() == 0) {
+				energyBlast.insert(energyBlast_Begin, new SkillEffect(6, createdTimes, direction, xPos, yPos));
+				skillsEffect_InFieldNumber[0] = energyBlast.size();
 
-			energyBlast2.insert(energyBlast2_Begin, new SkillEffect(12, createdTimes, direction, xPos, yPos));
-			skillsEffect_InFieldNumber[0] = energyBlast2.size();
+				energyBlast2.insert(energyBlast2_Begin, new SkillEffect(12, createdTimes, direction, xPos, yPos));
+				skillsEffect_InFieldNumber[0] = energyBlast2.size();
+			}
 		}
 	}
 
@@ -1079,6 +1087,9 @@ namespace game_framework {
 
 		//calculate input time diff
 		KeyBoardInputTime++;
+		if (AnimationState == 0) {
+			specialState = -1;
+		}
 	}
 
 	void Woody::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {

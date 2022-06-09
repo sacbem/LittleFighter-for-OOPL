@@ -200,17 +200,17 @@ namespace game_framework {
 		Obj->SetTopLeft(direction, 0, spawnX, -80);
 
 		//set velocity
-		InitialVelocity = 10;
+		InitialVelocity = 1;
 		YVelocity = InitialVelocity;
 	}
 
-	int FieldObject::HitPlayer(int ownerid, int tx1, int ty1, int tx2, int ty2, bool isAttacking) {
+	int FieldObject::HitPlayer(int ownerid, int tx1, int ty1, int tx2, int ty2, bool isAttacking, bool isAttackFrame) {
 		int yRange1 = ty1 - 20;
 		int yRange2 = ty1 + 20;
 		if (yRange1 <= ty1 && ty1 <= yRange2) {
 			if (isAttacking) {
-				Hp -= 1;
-				return HitRectangle(ownerid, tx1 + 30, ty1 + 20, tx2 - 30, ty2 - 20);
+				TRACE("Object Hp %d\n", Hp);
+				return HitRectangle(ownerid, tx1 + 30, ty1 + 20, tx2 - 30, ty2 - 20, isAttackFrame);
 			}
 		}
 		else {
@@ -228,6 +228,45 @@ namespace game_framework {
 			int yRange1 = ty1 - 20;
 			int yRange2 = ty1 + 20;
 			if (yRange1 <= ty1 && ty1 <= yRange2) {
+				return 1;
+			}
+		}
+		else {
+			return 0;
+		}
+	}
+
+	int FieldObject::HitRectangle(int ownerId, int tx1, int ty1, int tx2, int ty2, bool AttackFrame) {
+		int x1 = xPos;
+		int y1 = yPos;
+		int x2 = x1 + 58;
+		int y2 = y1 + 58;
+
+		if (tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2) {
+			if (state == 0) {
+				if (AttackFrame) {
+					Hp -= 1;
+				}
+				//state = 1;
+				OwnerId = ownerId;
+				return 1;
+			}
+		}
+		else {
+			return 0;
+		}
+	}
+
+	int FieldObject::HitRectangle(int ownerId, int tx1, int ty1, int tx2, int ty2) {
+		int x1 = xPos;
+		int y1 = yPos;
+		int x2 = x1 + 58;
+		int y2 = y1 + 58;
+
+		if (tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2) {
+			if (state == 0) {
+				//state = 1;
+				OwnerId = ownerId;
 				return 1;
 			}
 		}
@@ -255,23 +294,6 @@ namespace game_framework {
 		}
 	}
 
-	int FieldObject::HitRectangle(int ownerid, int tx1, int ty1, int tx2, int ty2) {
-		int x1 = xPos;
-		int y1 = yPos;
-		int x2 = x1 + 58;
-		int y2 = y1 + 58;
-
-		if (tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2) {
-			if (state == 0) {
-				//state = 1;
-				OwnerId = ownerid;
-				return 1;
-			}
-		}
-		else {
-			return 0;
-		}
-	}
 
 	void FieldObject::SetState(int s) {
 		state = s;
@@ -301,6 +323,10 @@ namespace game_framework {
 
 	int FieldObject::GetDir() {
 		return direction;
+	}
+
+	int FieldObject::GetHp() {
+		return Hp;
 	}
 
 	void FieldObject::DetectAnimation(int x, int y, int Animation, int CAniCurrent) {
@@ -643,7 +669,7 @@ namespace game_framework {
 	}
 
 	void FieldObject::OnMove() {
-		TRACE("Owner %d\n", OwnerId);
+		//TRACE("Owner %d\n", OwnerId);
 		if (state != 1) {
 			if (yPos < spawnY) {
 				yPos += YVelocity;

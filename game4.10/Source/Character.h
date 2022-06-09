@@ -51,10 +51,12 @@ namespace game_framework {
 		void SetDefense(bool flag);
 		void SetAlive(bool flag);
 		void SetXY(int X, int Y);
+		void SetDir(int dir);
 		void SetMapBorder(int mapID);
 		void SetCalculateDamageRequest(boolean val);
 		void SetAbonormalStatus(int characterID,boolean val);
 		void ClearAbonormalStatus();
+		void ClearWeaponState();
 		virtual void SetAttack(bool flag) = 0;
 		virtual void SetKnock(bool flag, int Dir, int AttState)=0;
 		virtual void SetSkill(int createdTimes) =0;
@@ -109,6 +111,7 @@ namespace game_framework {
 
 		int AttackState = 0;
 		int specialState = 0;
+		virtual bool isAttackFrame() = 0;
 
 		int leftTime = 0;
 		int rightTime = 0;
@@ -167,7 +170,6 @@ namespace game_framework {
 
 		virtual void CallSpecial() = 0;
 
-		virtual bool isAttackFrame() = 0;
 		virtual bool AttackReach() = 0;
 
 		CharacterAnimation Animation;

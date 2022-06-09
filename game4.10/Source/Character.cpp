@@ -52,7 +52,7 @@ namespace game_framework {
 		AttackPoint = 10;
 		DefencePoint = 5;
 		walkedDistance = 0;
-		
+
 
 		//re
 		AnimationState = 0;
@@ -83,9 +83,13 @@ namespace game_framework {
 		KeyBoardInputTime = 0;
 		LastInputTime = 0;
 	}
-	
+
 	Character::Character(Character const& other) : name(other.name) {
 		Initialize();
+	}
+
+	void Character::SetDir(int dir) {
+		direction = dir;
 	}
 
 	void Character::NearItem(int tx1, int ty1, int tx2, int ty2, int owner) {
@@ -98,7 +102,7 @@ namespace game_framework {
 				int x2 = x1 + 80;
 				int y2 = y1 + 80;
 
-				if (tx2-30 >= x1 && ty2-20 >= y1 && tx1+30 <= x2 && ty1+20 <= y2) {
+				if (tx2 - 30 >= x1 && ty2 - 20 >= y1 && tx1 + 30 <= x2 && ty1 + 20 <= y2) {
 					isNearItem = true;
 				}
 				else {
@@ -134,9 +138,9 @@ namespace game_framework {
 		return Animation.Run[direction].GetCurrentBitmapNumber();
 	}
 
-	void Character::Pickup(FieldObject *other) {
+	void Character::Pickup(FieldObject* other) {
 		//TRACE("xPos yPos %d %d\n", xPos, yPos);
-		other->liftUp(true,xPos,yPos,direction, AnimationState, GetRunCurrent());
+		other->liftUp(true, xPos, yPos, direction, AnimationState, GetRunCurrent());
 		itemType = other->itemType;
 	}
 
@@ -152,15 +156,15 @@ namespace game_framework {
 	int Character::GetX1() {
 		return xPos;
 	}
-	
+
 	boolean Character::IsStatic() {
 		return this->AnimationState ? false : true;
 	}
-	
+
 	boolean Character::IsInBorder(int mapID) {
 		return xPos == 0 || xPos == 794 ? true : false;
 	}
-	
+
 	int Character::GetX2() {
 		return xPos + Animation.Normal[0].Width();
 	}
@@ -180,7 +184,7 @@ namespace game_framework {
 	int Character::GetDir() {
 		return direction;
 	}
-	
+
 	int Character::GetMovingUp_Down() {
 		if (isMovingDown) {
 			return 1;
@@ -190,34 +194,34 @@ namespace game_framework {
 		}
 		return 0;
 	}
-	
+
 	int Character::GetSkillSignal() {
 		return skillSignal;
 	}
-	
+
 	boolean Character::GetCalculateDamageRequest() {
 		return calculateDamage_Request;
 	}
-	
+
 	void Character::DistaceAccumulator() {
 		walkedDistance = (abs((GetX1() - xAccumulator) ^ 2 + (GetY1() - yAccumulator) ^ 2)) ^ (1 / 2);
-		
+
 	}
-	
+
 	int Character::GetDistance() {
 		return walkedDistance;
 	}
-	
-	int Character::GetMovingTime(boolean isLeft){
+
+	int Character::GetMovingTime(boolean isLeft) {
 		return isLeft ? leftTime : rightTime;
 	}
 
 	int Character::GetAnimationState() {
 		return AnimationState;
 	}
-	
+
 	boolean Character::DistanceAccumulatorReset() {
-		if ( walkedDistance < 5 && AnimationState != 0 ) {
+		if (walkedDistance < 5 && AnimationState != 0) {
 			return false;
 		}
 		else {
@@ -227,12 +231,13 @@ namespace game_framework {
 			return true;
 		}
 	}
-	
+
 	void Character::SetCalculateDamageRequest(boolean val) {
 		calculateDamage_Request = val;
 	}
-	
+
 	void Character::isGettingDamage(int Damage) {
+		TRACE("Damage %d\n", Damage);
 		HealthPoint -= Damage;
 		InnerHealPoint -= Damage / 2;
 		if (HealthPoint <= 0) {
@@ -246,13 +251,13 @@ namespace game_framework {
 
 	void Character::InputKeyDown(UINT nChar, int createdTime, int playerID) {
 		const char KEY_LEFT = playerID ? 0x25 : 0x41; // keyboard���b�Y 0x25
-		const char KEY_UP = playerID ? 0x26: 0x57; // keyboard�W�b�Y 0x26
+		const char KEY_UP = playerID ? 0x26 : 0x57; // keyboard�W�b�Y 0x26
 		const char KEY_RIGHT = playerID ? 0x27 : 0x44; // keyboard�k�b�Y 0x27
 		const char KEY_DOWN = playerID ? 0x28 : 0x53; // keyboard�U�b�Y 0x28
 		const char KEY_SPACE = playerID ? 0x30 : 0x20; // keyboard SPACE
 		const char KEY_CTRL = playerID ? 0x31 : 0x11; //keyboard ctrl
 		const char KEY_ENTER = playerID ? 0x32 : 0x0D; // keyboard ENTER
-		
+
 		const char KEY_H = 0x48;
 		const char KEY_J = 0x4A;
 		const char KEY_K = 0x4B;
@@ -283,14 +288,14 @@ namespace game_framework {
 				}
 				else if (!isRunning && !isWalking) {
 					//Sp
-					if ((nChar == KEY_H  && ! playerID)  || (nChar == KEY_Z && playerID)) {
+					if ((nChar == KEY_H && !playerID) || (nChar == KEY_Z && playerID)) {
 						if (Mana >= 250) {
 							Mana -= 10;
 							skillSignal = 0;
 							UnMovable = true;
 						}
 					}
-					else if ((nChar == KEY_J  && !playerID) || (nChar == KEY_X && playerID)) {
+					else if ((nChar == KEY_J && !playerID) || (nChar == KEY_X && playerID)) {
 						if (Mana >= 250) {
 							Mana -= 10;
 							skillSignal = 1;
@@ -366,7 +371,7 @@ namespace game_framework {
 
 		const char KEY_SPACE = playerID ? 0x30 : 0x20; // keyboard SPACE
 		const char KEY_ENTER = playerID ? 0x32 : 0x0D; // keyboard ENTER
-		
+
 		if (isAlive) {
 			if (nChar == KEY_LEFT) {
 				if (isRunning == false) {
@@ -405,76 +410,78 @@ namespace game_framework {
 	}
 
 	void Character::SetMovingDown(bool flag) {
-		isMovingDown = flag;
+		
+			isMovingDown = flag;
+		
 	}
 
 	void Character::SetMovingUp(bool flag) {
-		isMovingUp = flag;
+		
+			isMovingUp = flag;
+		
 	}
-	
-	void Character::SetAbonormalStatus(int characterID, boolean val) {
-		statusTable.push_back(pair<int, boolean>(characterID, val));
-	}
-	
+
+
 	void Character::SetMovingLeft(bool flag) {
 		if (!isRunning) {
-			if (flag == true) {
-				leftTime = 0;
-				isMovingLeft = flag;
-				isMovingRight = false;
-			}
-			else {
-				isMovingLeft = flag;
-			}
+				if (flag == true) {
+					leftTime = 0;
+					isMovingLeft = flag;
+					isMovingRight = false;
+				}
+				else {
+					isMovingLeft = flag;
+				}
 		}
 	}
 
 	void Character::SetMovingRight(bool flag) {
 		if (!isRunning) {
-			if (flag == true) {
-				isMovingRight = flag;
-				rightTime = 0;
-				isMovingLeft = false;
-			}
-			else {
-				isMovingRight = flag;
-			}
+				if (flag == true) {
+					isMovingRight = flag;
+					rightTime = 0;
+					isMovingLeft = false;
+				}
+				else {
+					isMovingRight = flag;
+				}
 		}
 	}
 
 	void Character::SetRunning(bool flag) {
-		if (flag == true) {
-			isRunning = flag;
-			isWalking = false;
-		}
-		else {
-			isRunning = flag;
-			isWalking = false;
-			isMovingLeft = false;
-			isMovingRight = false;
-			StopRun = true;
-		}
+			if (flag == true) {
+				isRunning = flag;
+				isWalking = false;
+			}
+			else {
+				isRunning = flag;
+				isWalking = false;
+				isMovingLeft = false;
+				isMovingRight = false;
+				StopRun = true;
+			}
 	}
 
 	void Character::SetJumpping(bool flag) {
-		if (itemType!=1) {
-			if (!isJumpping) {
-				isJumpping = flag;
-				JumpYposTemp = yPos + 1;
-				isRising = true;
-				AnimationState = 4;
+			if (itemType != 1) {
+				if (!isJumpping) {
+					isJumpping = flag;
+					JumpYposTemp = yPos + 1;
+					isRising = true;
+					AnimationState = 4;
+				}
 			}
-		}
 	}
 
 	void Character::SetDefense(bool flag) {
-		if (!(isCarryItem && itemType==1)) {
+		if (!(isCarryItem && itemType == 1)) {
 			isDefense = flag;
 			if (flag == true) {
 				//reset
 				DefenseCount = 0;
 			}
 		}
+		
 	}
 
 	void Character::ShowFrozen() {
@@ -488,11 +495,11 @@ namespace game_framework {
 		}
 		else if (FrozenCount <= 400) {
 			AnimationState = 301;
-		}
-		else if (FrozenCount >= 400) {
-			FrozenCount = 0;
-			UnMovable = false;
-			specialState = 0;
+			if (FrozenCount == 400) {
+				FrozenCount = 0;
+				UnMovable = false;
+				specialState = -1;
+			}
 		}
 	}
 
@@ -508,6 +515,15 @@ namespace game_framework {
 		}
 	}
 
+	void Character::SetAbonormalStatus(int characterID, boolean val) {
+		statusTable.push_back(pair<int, boolean>(characterID, val));
+	}
+
+	void Character::ClearWeaponState() {
+		FrozenSwordMode = false;
+		isCarryItem = false;
+		ResetItem();
+	}
 	void Character::SetMoving() {
 		if (isRunning) {
 			if (isJumpping) {
@@ -521,41 +537,41 @@ namespace game_framework {
 			speed = 2;
 		}
 		if (isMovingLeft) {
-			if ((!isDefense && !isAttacking) || isRunning) {
-				this->SetXY(xPos - speed, yPos);
-				DistaceAccumulator();
-				isWalking = true;
-				direction = 1;
+				if ((!isDefense && !isAttacking) || isRunning) {
+					this->SetXY(xPos - speed, yPos);
+					DistaceAccumulator();
+					isWalking = true;
+					direction = 1;
+				}
+				leftTime++;
 			}
-			leftTime++;
-		}
-		if (isMovingRight) {
+			if (isMovingRight) {
 			
-			if ((!isDefense && !isAttacking) || isRunning) {
-				this->SetXY(xPos + speed, yPos);
-				DistaceAccumulator();
-				isWalking = true;
-				direction = 0;
+				if ((!isDefense && !isAttacking) || isRunning) {
+					this->SetXY(xPos + speed, yPos);
+					DistaceAccumulator();
+					isWalking = true;
+					direction = 0;
+				}
+				rightTime++;
 			}
-			rightTime++;
-		}
 
-		if (isMovingUp) {
-			if (!isDefense && !isAttacking) {
-				if (!isJumpping) {
-					this->SetXY(xPos, yPos - 1);
-					isWalking = true;
+			if (isMovingUp) {
+				if (!isDefense && !isAttacking) {
+					if (!isJumpping) {
+						this->SetXY(xPos, yPos - 1);
+						isWalking = true;
+					}
 				}
 			}
-		}
-		if (isMovingDown) {
-			if (!isDefense && !isAttacking) {
-				if (!isJumpping) {
-					this->SetXY(xPos, yPos + 1);
-					isWalking = true;
+			if (isMovingDown) {
+				if (!isDefense && !isAttacking) {
+					if (!isJumpping) {
+						this->SetXY(xPos, yPos + 1);
+						isWalking = true;
+					}
 				}
 			}
-		}
 
 		if (!isMovingUp && !isMovingDown && !isMovingLeft && !isMovingRight) {
 			isWalking = false;
