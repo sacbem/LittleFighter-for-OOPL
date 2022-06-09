@@ -1,5 +1,5 @@
 /*
- * gamelib.cpp: ¥»ÀÉ®×Àx¦s¤ä´©¹CÀ¸¬ÛÃöªºclassªºimplementation
+ * gamelib.cpp: ï¿½ï¿½ï¿½É®ï¿½ï¿½xï¿½sï¿½ä´©ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½classï¿½ï¿½implementation
  * Copyright (C) 2002-2012 Woei-Kae Chen <wkc@csie.ntut.edu.tw>
  *
  * This file is part of game, a free game development framework for windows.
@@ -130,11 +130,11 @@
 namespace game_framework {
 
 /////////////////////////////////////////////////////////////////////////////
-// CAnimation: ´£¨Ñ°Êµeªº¯à¤O
-// 1. ­nÀ´±o«ç»ò©I¥s(¹B¥Î)¨ä¦UºØ¯à¤O¡A¦ý¬O¥i¥H¤£À´¤U¦Cªºµ{¦¡¬O¤°»ò·N«ä
-// 2. ¦Û¤v¼g¨ì¹B¥ÎCMovingBitmapªºµ{¦¡®É¡A¥i¥H°Ñ¦Ò¤U¦Cµ{¦¡ªº¼gªk
-// 3. ¦pªG»Ý­n­×§ï©ÎÂX¥RCAnimationªº¥\¯à®É¡A½Ð¥ÎÄ~©Ó©Îª½±µ«þ¨©ªº¤è¦¡¡A³Ì¦n
-//    ¤£­nª½±µ§ïCAnimation¡C
+// CAnimation: ï¿½ï¿½ï¿½Ñ°Êµeï¿½ï¿½ï¿½ï¿½O
+// 1. ï¿½nï¿½ï¿½ï¿½oï¿½ï¿½ï¿½Iï¿½s(ï¿½Bï¿½ï¿½)ï¿½ï¿½Uï¿½Ø¯ï¿½Oï¿½Aï¿½ï¿½ï¿½Oï¿½iï¿½Hï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½Cï¿½ï¿½ï¿½{ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½
+// 2. ï¿½Û¤vï¿½gï¿½ï¿½Bï¿½ï¿½CMovingBitmapï¿½ï¿½ï¿½{ï¿½ï¿½ï¿½É¡Aï¿½iï¿½Hï¿½Ñ¦Ò¤Uï¿½Cï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½k
+// 3. ï¿½pï¿½Gï¿½Ý­nï¿½×§ï¿½ï¿½ï¿½Xï¿½RCAnimationï¿½ï¿½ï¿½\ï¿½ï¿½É¡Aï¿½Ð¥ï¿½ï¿½~ï¿½Ó©Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¦¡ï¿½Aï¿½Ì¦n
+//    ï¿½ï¿½ï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½CAnimationï¿½C
 /////////////////////////////////////////////////////////////////////////////
 
 CAnimation::CAnimation(int count)
@@ -239,9 +239,9 @@ int CAnimation::Width()
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CInteger: ³o­Óclass´£¨ÑÅã¥Ü¾ã¼Æ¹Ï§Îªº¯à¤O
-// 1. ­nÀ´±o«ç»ò©I¥s(¹B¥Î)¨ä¦UºØ¯à¤O¡A¦ý¬O¥i¥H¤£À´¤U¦Cªºµ{¦¡¬O¤°»ò·N«ä
-// 2. ¦Û¤v¼g¨ì¹B¥ÎCMovingBitmapªºµ{¦¡®É¡A¥i¥H°Ñ¦Ò¤U¦Cµ{¦¡ªº¼gªk
+// CInteger: ï¿½oï¿½ï¿½classï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¾ï¿½Æ¹Ï§Îªï¿½ï¿½ï¿½O
+// 1. ï¿½nï¿½ï¿½ï¿½oï¿½ï¿½ï¿½Iï¿½s(ï¿½Bï¿½ï¿½)ï¿½ï¿½Uï¿½Ø¯ï¿½Oï¿½Aï¿½ï¿½ï¿½Oï¿½iï¿½Hï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½Cï¿½ï¿½ï¿½{ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½
+// 2. ï¿½Û¤vï¿½gï¿½ï¿½Bï¿½ï¿½CMovingBitmapï¿½ï¿½ï¿½{ï¿½ï¿½ï¿½É¡Aï¿½iï¿½Hï¿½Ñ¦Ò¤Uï¿½Cï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½k
 /////////////////////////////////////////////////////////////////////////////
 
 CMovingBitmap CInteger::digit[11];
@@ -265,7 +265,7 @@ int CInteger::GetInteger()
 void CInteger::LoadBitmap()
 {
 	//
-	// digit[i]¬°class varibale¡A©Ò¥H¥²¶·Á×§K­«½ÆLoadBitmap
+	// digit[i]ï¿½ï¿½class varibaleï¿½Aï¿½Ò¥Hï¿½ï¿½ï¿½ï¿½ï¿½×§Kï¿½ï¿½ï¿½ï¿½LoadBitmap
 	//
 	if (!isBmpLoaded) {
 		int d[11]={IDB_0,IDB_1,IDB_2,IDB_3,IDB_4,IDB_5,IDB_6,IDB_7,IDB_8,IDB_9,IDB_MINUS};
@@ -280,16 +280,16 @@ void CInteger::SetInteger(int i)
 	n = i;
 }
 
-void CInteger::SetTopLeft(int nx, int ny)		// ±N°Êµeªº¥ª¤W¨¤®y¼Ð²¾¦Ü (x,y)
+void CInteger::SetTopLeft(int nx, int ny)		// ï¿½Nï¿½Êµeï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½yï¿½Ð²ï¿½ï¿½ï¿½ (x,y)
 {
 	x = nx; y = ny;
 }
 
 void CInteger::ShowBitmap()
 {
-	GAME_ASSERT(isBmpLoaded, "CInteger: ½Ð¥ý°õ¦æLoadBitmap¡AµM«á¤~¯àShowBitmap");
-	int nx;		// «ÝÅã¥Ü¦ì¼Æªº x ®y¼Ð
-	int MSB;	// ³Ì¥ªÃä(§t²Å¸¹)ªº¦ì¼Æªº¼Æ­È
+	GAME_ASSERT(isBmpLoaded, "CInteger: ï¿½Ð¥ï¿½ï¿½ï¿½ï¿½ï¿½LoadBitmapï¿½Aï¿½Mï¿½ï¿½~ï¿½ï¿½ShowBitmap");
+	int nx;		// ï¿½ï¿½ï¿½ï¿½Ü¦ï¿½Æªï¿½ x ï¿½yï¿½ï¿½
+	int MSB;	// ï¿½Ì¥ï¿½ï¿½ï¿½(ï¿½tï¿½Å¸ï¿½)ï¿½ï¿½ï¿½ï¿½Æªï¿½ï¿½Æ­ï¿½
 	if (n >= 0) {
 		MSB = n;
 		nx = x+digit[0].Width()*(NUMDIGITS-1);
@@ -304,7 +304,7 @@ void CInteger::ShowBitmap()
 		digit[d].ShowBitmap();
 		nx -= digit[d].Width();
 	}
-	if (n < 0) { // ¦pªG¤p©ó0¡A«hÅã¥Ü­t¸¹
+	if (n < 0) { // ï¿½pï¿½Gï¿½pï¿½ï¿½0ï¿½Aï¿½hï¿½ï¿½Ü­tï¿½ï¿½
 		digit[10].SetTopLeft(nx, y);
 		digit[10].ShowBitmap();
 	}
@@ -312,8 +312,8 @@ void CInteger::ShowBitmap()
 
 /////////////////////////////////////////////////////////////////////////////
 // CMovingBitmap: Moving Bitmap class
-// ³o­Óclass´£¨Ñ¥i¥H²¾°Êªº¹Ï§Î
-// ­nÀ´±o«ç»ò©I¥s(¹B¥Î)¨ä¦UºØ¯à¤O¡A¦ý¬O¥i¥H¤£À´¤U¦Cªºµ{¦¡¬O¤°»ò·N«ä
+// ï¿½oï¿½ï¿½classï¿½ï¿½ï¿½Ñ¥iï¿½Hï¿½ï¿½ï¿½Êªï¿½ï¿½Ï§ï¿½
+// ï¿½nï¿½ï¿½ï¿½oï¿½ï¿½ï¿½Iï¿½s(ï¿½Bï¿½ï¿½)ï¿½ï¿½Uï¿½Ø¯ï¿½Oï¿½Aï¿½ï¿½ï¿½Oï¿½iï¿½Hï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½Cï¿½ï¿½ï¿½{ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½
 /////////////////////////////////////////////////////////////////////////////
 
 CMovingBitmap::CMovingBitmap()
@@ -415,12 +415,12 @@ int CMovingBitmap::Width()
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// ³o­Óclass¬°¹CÀ¸ªº¦UºØª¬ºA¤§Base class(¬O¤@­Óabstract class)
+// ï¿½oï¿½ï¿½classï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½Øªï¿½ï¿½Aï¿½ï¿½Base class(ï¿½Oï¿½@ï¿½ï¿½abstract class)
 /////////////////////////////////////////////////////////////////////////////
 
 CGameState::CGameState(CGame *g)
 {
-	game = g; 	// ³]©wgameªºpointer
+	game = g; 	// ï¿½]ï¿½wgameï¿½ï¿½pointer
 }
 
 void CGameState::GotoGameState(int state)
@@ -445,37 +445,37 @@ void CGameState::ShowInitProgress(int percent)
 	const int progress_y1 = y1 + pen_width;
 	const int progress_y2 = y2 - pen_width;
 
-	CDDraw::BltBackColor(DEFAULT_BG_COLOR);		// ±N Back Plain ¶î¤W¹w³]ªºÃC¦â
-	CMovingBitmap loading;						// ¶K¤Wloading¹Ï¥Ü
+	CDDraw::BltBackColor(DEFAULT_BG_COLOR);		// ï¿½N Back Plain ï¿½ï¿½Wï¿½wï¿½]ï¿½ï¿½ï¿½Cï¿½ï¿½
+	CMovingBitmap loading;						// ï¿½Kï¿½Wloadingï¿½Ï¥ï¿½
 	loading.LoadBitmap(IDB_LOADING, RGB(0,0,0));
 	loading.SetTopLeft((SIZE_X - loading.Width())/2, y1 - 2 * loading.Height());
 	loading.ShowBitmap();
 	//
-	// ¥H¤U¬°CDCªº¥Îªk
+	// ï¿½Hï¿½Uï¿½ï¿½CDCï¿½ï¿½ï¿½Îªk
 	//
-	CDC *pDC = CDDraw::GetBackCDC();			// ¨ú±o Back Plain ªº CDC 
-	CPen *pp, p(PS_NULL, 0, RGB(0,0,0));		// ²M°£pen
+	CDC *pDC = CDDraw::GetBackCDC();			// ï¿½ï¿½ï¿½o Back Plain ï¿½ï¿½ CDC 
+	CPen *pp, p(PS_NULL, 0, RGB(0,0,0));		// ï¿½Mï¿½ï¿½pen
 	pp = pDC->SelectObject(&p);
 
-	CBrush *pb, b(RGB(0,255,0));				// µeºñ¦â progress®Ø
+	CBrush *pb, b(RGB(0,255,0));				// ï¿½eï¿½ï¿½ï¿½ progressï¿½ï¿½
 	pb = pDC->SelectObject(&b);
 	pDC->Rectangle(x1,y1,x2,y2);				
 
-	CBrush b1(DEFAULT_BG_COLOR);				// µe¶Â¦â progrss¤¤¤ß
+	CBrush b1(DEFAULT_BG_COLOR);				// ï¿½eï¿½Â¦ï¿½ progrssï¿½ï¿½ï¿½ï¿½
 	pDC->SelectObject(&b1);
 	pDC->Rectangle(progress_x1,progress_y1,progress_x2_end,progress_y2);
 
-	CBrush b2(RGB(255,255,0));					// µe¶À¦â progrss¶i«×
+	CBrush b2(RGB(255,255,0));					// ï¿½eï¿½ï¿½ï¿½ï¿½ progrssï¿½iï¿½ï¿½
 	pDC->SelectObject(&b2);
 	pDC->Rectangle(progress_x1,progress_y1,progress_x2,progress_y2);
 
-	pDC->SelectObject(pp);						// ÄÀ©ñ pen
-	pDC->SelectObject(pb);						// ÄÀ©ñ brush
-	CDDraw::ReleaseBackCDC();					// ©ñ±¼ Back Plain ªº CDC
+	pDC->SelectObject(pp);						// ï¿½ï¿½ï¿½ï¿½ pen
+	pDC->SelectObject(pb);						// ï¿½ï¿½ï¿½ï¿½ brush
+	CDDraw::ReleaseBackCDC();					// ï¿½ï¿½ Back Plain ï¿½ï¿½ CDC
 	//
-	// ¦pªG¬O§Oªº¦a¤è¥Î¨ìCDCªº¸Ü¡A¤£­n§Û¥H¤U³o¦æ¡A§_«h¿Ã¹õ·|°{Ã{
+	// ï¿½pï¿½Gï¿½Oï¿½Oï¿½ï¿½ï¿½aï¿½ï¿½Î¨ï¿½CDCï¿½ï¿½ï¿½Ü¡Aï¿½ï¿½ï¿½nï¿½Û¥Hï¿½Uï¿½oï¿½ï¿½Aï¿½_ï¿½hï¿½Ã¹ï¿½ï¿½|ï¿½{ï¿½{
 	//
-	CDDraw::BltBackToPrimary();					// ±N Back Plain ¶K¨ì¿Ã¹õ
+	CDDraw::BltBackToPrimary();					// ï¿½N Back Plain ï¿½Kï¿½ï¿½Ã¹ï¿½
 }
 
 void CGameState::OnDraw() // Template Method
@@ -491,8 +491,8 @@ void CGameState::OnCycle() // Template Method
 
 /////////////////////////////////////////////////////////////////////////////
 // CGame: Game Class
-// ³o­Óclass¬O¹CÀ¸ªºfacade¡A¬OMFC»P¦U­Ó¹CÀ¸ª¬ºAªº¾ô¼Ù¡A¦pªG¤£¼W¥[©Î´î¤Ö
-// ¹CÀ¸ª¬ºAªº¸Ü¡A¥i¥H¤£¥ÎºÞ³o­Óclassªº¤¶­±»P¹ê§@¡C
+// ï¿½oï¿½ï¿½classï¿½Oï¿½Cï¿½ï¿½ï¿½ï¿½facadeï¿½Aï¿½OMFCï¿½Pï¿½Uï¿½Ó¹Cï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½Ù¡Aï¿½pï¿½Gï¿½ï¿½ï¿½Wï¿½[ï¿½Î´ï¿½ï¿½
+// ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Ü¡Aï¿½iï¿½Hï¿½ï¿½ï¿½ÎºÞ³oï¿½ï¿½classï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½ï¿½@ï¿½C
 /////////////////////////////////////////////////////////////////////////////
 
 CGame CGame::instance;
@@ -529,18 +529,18 @@ bool CGame::IsRunning()
 
 void CGame::OnDraw()
 {
-	CDDraw::BltBackColor(DEFAULT_BG_COLOR);	// ±N Back Plain ¶î¶Â
-	gameState->OnDraw();					// Åã¥Ü¹CÀ¸¤¤ªº¨C­Ó¤¸¯À
+	CDDraw::BltBackColor(DEFAULT_BG_COLOR);	// ï¿½N Back Plain ï¿½ï¿½ï¿½
+	gameState->OnDraw();					// ï¿½ï¿½Ü¹Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½Ó¤ï¿½ï¿½ï¿½
 	if (!running) {
 		//
-		// ¦pªG¦b¼È°±ª¬ºA¡A«hÅã¥ÜCtrl-Q...
+		// ï¿½pï¿½Gï¿½bï¿½È°ï¿½ï¿½ï¿½ï¿½Aï¿½Aï¿½hï¿½ï¿½ï¿½Ctrl-Q...
 		//
 		CMovingBitmap bmp;
 		bmp.LoadBitmap(IDB_CONTINUE);
 		bmp.SetTopLeft(0,0);
 		bmp.ShowBitmap();
 	}
-	CDDraw::BltBackToPrimary();				// ±N Back Plain ¶K¨ì¿Ã¹õ
+	CDDraw::BltBackToPrimary();				// ï¿½N Back Plain ï¿½Kï¿½ï¿½Ã¹ï¿½
 }
 
 void  CGame::OnFilePause()
@@ -557,50 +557,50 @@ void  CGame::OnFilePause()
 	}
 }
 
-bool CGame::OnIdle()  // ­×§ï¥\¯à¤£­n­×§ïOnIdle()¡A¦ÓÀ³­×§ïOnMove()¤ÎOnShow()
+bool CGame::OnIdle()  // ï¿½×§ï¿½\ï¿½à¤£ï¿½nï¿½×§ï¿½OnIdle()ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½×§ï¿½OnMove()ï¿½ï¿½OnShow()
 {
 	if (suspended) {
 		running = false;
 		suspended = false;
 	}
 	//
-	// ±±¨î¹CÀ¸¬O§_¼È°±
+	// ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Oï¿½_ï¿½È°ï¿½
 	//
 	if (!running)
 		return false;
 	//
-	// ¥H¤U¬O¹CÀ¸ªº¥D°j°é
+	// ï¿½Hï¿½Uï¿½Oï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Dï¿½jï¿½ï¿½
 	//
-	CDDraw::BltBackColor(DEFAULT_BG_COLOR);	// ±N Back Plain ¶î¤W¹w³]ªºÃC¦â
+	CDDraw::BltBackColor(DEFAULT_BG_COLOR);	// ï¿½N Back Plain ï¿½ï¿½Wï¿½wï¿½]ï¿½ï¿½ï¿½Cï¿½ï¿½
 	gameState->OnCycle();
-	CDDraw::BltBackToPrimary();				// ±N Back Plain ¶K¨ì¿Ã¹õ
+	CDDraw::BltBackToPrimary();				// ï¿½N Back Plain ï¿½Kï¿½ï¿½Ã¹ï¿½
 	//
-	// ¥H¤Uªºµ{¦¡±±¨î¹CÀ¸¶i¦æªº³t«×¡Aª`·N¨Æ¶µ¡G
-	// 1. ¥ÎDebug mode¥i¥HÀËµø¨C¤@¦¸°j°éªá±¼ªº®É¶¡¡A¥O¦¹®É¶¡¬°t¡C
-	// 2. ±q¤W¦¸Â÷¶}OnIdle()¦Ü¦¹¡A®É¶¡©w¬°33ms¡A¤£¥i§R°£¡A¨ä®É¶¡¤£¥i§C©ót¡C
+	// ï¿½Hï¿½Uï¿½ï¿½ï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½iï¿½æªºï¿½tï¿½×¡Aï¿½`ï¿½Nï¿½Æ¶ï¿½ï¿½G
+	// 1. ï¿½ï¿½Debug modeï¿½iï¿½Hï¿½Ëµï¿½ï¿½Cï¿½@ï¿½ï¿½ï¿½jï¿½ï¿½á±¼ï¿½ï¿½ï¿½É¶ï¿½ï¿½Aï¿½Oï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½tï¿½C
+	// 2. ï¿½qï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½}OnIdle()ï¿½Ü¦ï¿½ï¿½Aï¿½É¶ï¿½ï¿½wï¿½ï¿½33msï¿½Aï¿½ï¿½ï¿½iï¿½Rï¿½ï¿½ï¿½Aï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½iï¿½Cï¿½ï¿½tï¿½C
 	//
 	if (SHOW_GAME_CYCLE_TIME)
 		TRACE("Ellipse time for the %d th cycle=%d \n", CSpecialEffect::GetCurrentTimeCount(),CSpecialEffect::GetEllipseTime());
 	CSpecialEffect::DelayFromSetCurrentTime(GAME_CYCLE_TIME);
-	CSpecialEffect::SetCurrentTime();	// ³]©wÂ÷¶}OnIdle()ªº®É¶¡
+	CSpecialEffect::SetCurrentTime();	// ï¿½]ï¿½wï¿½ï¿½ï¿½}OnIdle()ï¿½ï¿½ï¿½É¶ï¿½
 	return true;
 }
 
-void CGame::OnInit()	// OnInit() ¥u¦bµ{¦¡¤@¶}©l®É°õ¦æ¤@¦¸
+void CGame::OnInit()	// OnInit() ï¿½uï¿½bï¿½{ï¿½ï¿½ï¿½@ï¿½}ï¿½lï¿½É°ï¿½ï¿½ï¿½@ï¿½ï¿½
 {
 	//
-	// ±Ò°Ê¶Ã¼Æ
+	// ï¿½Ò°Ê¶Ã¼ï¿½
 	//
 	srand((unsigned)time(NULL));
 	//
-	// ¶}±ÒDirectXÃ¸¹Ï¤¶­±
+	// ï¿½}ï¿½ï¿½DirectXÃ¸ï¿½Ï¤ï¿½ï¿½ï¿½
 	//
-	CDDraw::Init(SIZE_X, SIZE_Y);							// ³]©w¹CÀ¸¸ÑªR«×
+	CDDraw::Init(SIZE_X, SIZE_Y);							// ï¿½]ï¿½wï¿½Cï¿½ï¿½ï¿½ÑªRï¿½ï¿½
 	//
-	// ¶}±ÒDirectX­µ®Ä¤¶­±
+	// ï¿½}ï¿½ï¿½DirectXï¿½ï¿½ï¿½Ä¤ï¿½ï¿½ï¿½
 	//
-	if (!CAudio::Instance()->Open())						// ¶}±Ò­µ®Ä¤¶­±
-		AfxMessageBox("Audio Interface Failed (muted)");	// µL­µ®Ä¤¶­±
+	if (!CAudio::Instance()->Open())						// ï¿½}ï¿½Ò­ï¿½ï¿½Ä¤ï¿½ï¿½ï¿½
+		AfxMessageBox("Audio Interface Failed (muted)");	// ï¿½Lï¿½ï¿½ï¿½Ä¤ï¿½ï¿½ï¿½
 	//
 	// Switch to the first state
 	//
@@ -613,7 +613,7 @@ void CGame::OnInit()	// OnInit() ¥u¦bµ{¦¡¤@¶}©l®É°õ¦æ¤@¦¸
 void CGame::OnInitStates()
 {
 	//
-	// ©I¥s¨C­Óª¬ºAªºOnInitialUpdate
+	// ï¿½Iï¿½sï¿½Cï¿½Óªï¿½ï¿½Aï¿½ï¿½OnInitialUpdate
 	//
 	for (int i = 0; i < NUM_GAME_STATES; i++)
 		gameStateTable[i]->OnInit();
@@ -622,7 +622,7 @@ void CGame::OnInitStates()
 void CGame::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	if (running)
-		if ((nFlags & 0x4000) == 0) // ¥h°£auto repeat
+		if ((nFlags & 0x4000) == 0) // ï¿½hï¿½ï¿½auto repeat
 			gameState->OnKeyDown(nChar, nRepCnt, nFlags);
 #ifdef _UNITTEST					// invike unit test if _UNITTEST is defined
 	void runTest();
@@ -712,7 +712,7 @@ void CGame::SetGameState(int state)
 
 /////////////////////////////////////////////////////////////////////////////
 // CSpecialEffect: Specail Effect functions
-// ¤@¯ëªº¹CÀ¸¨Ã¤£»Ýª½±µ¾Þ§@³o­Óª«¥ó¡A¦]¦¹¥i¥H¥þ³¡²¤¹L¤£¬Ý
+// ï¿½@ï¿½ëªºï¿½Cï¿½ï¿½ï¿½Ã¤ï¿½ï¿½Ýªï¿½ï¿½ï¿½ï¿½Þ§@ï¿½oï¿½Óªï¿½ï¿½ï¿½Aï¿½]ï¿½ï¿½ï¿½iï¿½Hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½
 /////////////////////////////////////////////////////////////////////////////
 
 DWORD CSpecialEffect::ctime=0;
@@ -753,8 +753,8 @@ int CSpecialEffect::GetCurrentTimeCount()
 
 /////////////////////////////////////////////////////////////////////////////
 // CDDraw: Direct Draw Object
-// ³o­Óclass·|«Ø¥ßDirectDrawª«¥ó¡A¥H´£¨Ñ¨ä¥Lclass¨Ï¥Î
-// ³o­Óclassªº¥þ³¡µ{¦¡³£¬O§C¶¥ªºÃ¸¹Ï¤¶­±¡A¥i¥H¥þ³¡²¤¹L¤£¬Ý
+// ï¿½oï¿½ï¿½classï¿½|ï¿½Ø¥ï¿½DirectDrawï¿½ï¿½ï¿½ï¿½Aï¿½Hï¿½ï¿½ï¿½Ñ¨ï¿½Lclassï¿½Ï¥ï¿½
+// ï¿½oï¿½ï¿½classï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½ï¿½Ã¸ï¿½Ï¤ï¿½ï¿½ï¿½ï¿½Aï¿½iï¿½Hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½
 /////////////////////////////////////////////////////////////////////////////
 
 HDC							CDDraw::hdc;
