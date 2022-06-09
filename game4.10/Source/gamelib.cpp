@@ -922,7 +922,8 @@ bool CDDraw::CreateSurface()
 bool CDDraw::CreateSurfaceFullScreen()
 {
     ddrval = lpDD->SetCooperativeLevel(AfxGetMainWnd()->m_hWnd, DDSCL_EXCLUSIVE | DDSCL_FULLSCREEN);
-    CheckDDFail("Can not SetCooperativeLevel Exclusive");
+	ddrval = lpDD->SetDisplayMode(640, 480, 32, 0, 0);
+	CheckDDFail("Can not SetCooperativeLevel Exclusive");
     ddrval = lpDD->SetDisplayMode(size_x, size_y, 32, 0, 0);
 	if (ddrval != DD_OK) {
 	    ddrval = lpDD->SetCooperativeLevel(AfxGetMainWnd()->m_hWnd, DDSCL_NORMAL);
