@@ -204,7 +204,6 @@ namespace game_framework {
 						}
 						else {
 							LastAttackState = AttackState;
-							//TRACE("LastAttackState %d\n", LastAttackState);
 							switch (LastAttackState)
 							{
 							case 20:
@@ -1097,8 +1096,6 @@ namespace game_framework {
 						KnockSpeed = -1;
 					}
 				}
-				//if (KnockCount ==  || KnockCount == 110) {
-				//}
 			}
 			if (skillSignal != -1) {
 				CallSpecial();

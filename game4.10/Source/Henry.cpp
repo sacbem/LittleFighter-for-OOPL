@@ -59,7 +59,6 @@ namespace game_framework {
 		}
 		else {
 			isHitting = false;
-			//AttackAccumulator = 0;
 			return 0;
 		}
 	}
@@ -77,7 +76,7 @@ namespace game_framework {
 							int yRange2 = i->yPos + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
-									itr.first = h; itr.second = 250;
+									itr.first = h; itr.second = 100;
 									hittedLog[0].push_back(h);
 									hittedTable.push_back(itr);
 									i->isHit = true;
@@ -99,7 +98,7 @@ namespace game_framework {
 							int yRange2 = i->yPos + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
-									itr.first = h; itr.second = 250;
+									itr.first = h; itr.second = 100;
 									hittedLog[0].push_back(h);
 									hittedTable.push_back(itr);
 									i->isHit = true;
@@ -121,7 +120,7 @@ namespace game_framework {
 							int yRange2 = i->yPos + 20 + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
-									itr.first = h; itr.second = 250;
+									itr.first = h; itr.second = 100;
 									hittedLog[0].push_back(h);
 									hittedTable.push_back(itr);
 									i->isHit = true;
@@ -143,7 +142,7 @@ namespace game_framework {
 							int yRange2 = i->yPos + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
-									itr.first = h; itr.second = 250;
+									itr.first = h; itr.second = 100;
 									hittedLog[0].push_back(h);
 									hittedTable.push_back(itr);
 									i->isHit = true;
@@ -224,7 +223,7 @@ namespace game_framework {
 							int yRange2 = i->yPos + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
-									itr.first = h; itr.second = 250;
+									itr.first = h; itr.second = 100;
 									hittedLog[0].push_back(h);
 									hittedTable.push_back(itr);
 									i->isHit = true;
@@ -302,6 +301,8 @@ namespace game_framework {
 	}
 
 	void Henry::SetAttack(bool flag) {
+		TRACE("AttackState %d\n", AttackState);
+		TRACE("KnockState %d\n", KnockState);
 		if (specialState == -1 && KnockState==0) {
 			if (flag == true) {
 				UnMovable = true;
@@ -364,7 +365,6 @@ namespace game_framework {
 						}
 						else {
 							LastAttackState = AttackState;
-							//TRACE("LastAttackState %d\n", LastAttackState);
 							switch (LastAttackState)
 							{
 							case 20:
@@ -1121,7 +1121,6 @@ namespace game_framework {
 
 
 		//some basic movement
-
 		SetMoving();
 		if (specialState == 1) {
 			ShowFrozen();
@@ -1186,6 +1185,7 @@ namespace game_framework {
 			//Fool-proof mechanism
 			skillSignal = -1;
 			UnMovable = false;
+			KnockState = 0;
 			break;
 		case 1:
 			Animation.Walk[direction].OnMove();
@@ -1879,8 +1879,6 @@ namespace game_framework {
 			}
 		}
 
-
-		//skillSignal = -1;
 		if (AttackCount >= 30) {
 			this->SetAttack(false);
 		}

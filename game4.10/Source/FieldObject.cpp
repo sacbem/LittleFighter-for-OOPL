@@ -209,7 +209,6 @@ namespace game_framework {
 		int yRange2 = ty1 + 20;
 		if (yRange1 <= ty1 && ty1 <= yRange2) {
 			if (isAttacking) {
-				TRACE("Object Hp %d\n", Hp);
 				return HitRectangle(ownerid, tx1 + 30, ty1 + 20, tx2 - 30, ty2 - 20, isAttackFrame);
 			}
 		}
@@ -262,10 +261,8 @@ namespace game_framework {
 		int y1 = yPos;
 		int x2 = x1 + 58;
 		int y2 = y1 + 58;
-
 		if (tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2) {
 			if (state == 0) {
-				//state = 1;
 				OwnerId = ownerId;
 				return 1;
 			}
@@ -280,7 +277,6 @@ namespace game_framework {
 		int y1 = yBitmap;
 		int x2 = x1 + 58;
 		int y2 = y1 + 58;
-
 
 		if (tx2 >= x1 && ty2 >= y1 && tx1 <= x2 && ty1 <= y2) {
 			int yRange1 = ty1 - 20;
@@ -650,7 +646,6 @@ namespace game_framework {
 				direction = dir;
 				state = 1;
 				DetectAnimation(x,y,ani, CAniCurrent);
-				//AnimationState = 1;
 			}
 			else if (flag == false) {
 				spawnY = y + 22;
@@ -669,7 +664,6 @@ namespace game_framework {
 	}
 
 	void FieldObject::OnMove() {
-		//TRACE("Owner %d\n", OwnerId);
 		if (state != 1) {
 			if (yPos < spawnY) {
 				yPos += YVelocity;

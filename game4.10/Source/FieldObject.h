@@ -27,20 +27,17 @@ namespace game_framework {
 		//for weapon type function
 		void SetAnimationState(int aniState);
 		int GetAnimationState();
-
 		//Hit Character
 		int HitPlayer(int ownerId, int tx1, int ty1, int tx2, int ty2, bool isAttacking, bool isAttackFrame);
 		int HitRectangle(int tx1, int ty1, int tx2, int ty2); //for map 
 		int HitRectangle(int ownerId, int tx1, int ty1, int tx2, int ty2); //for grab
 		int HitRectangle(int ownerId, int tx1, int ty1, int tx2, int ty2, bool AttackFrame); //for Attack
 		int HitWeapon(int tx1, int ty1, int tx2, int ty2); //for weapon
-
 		void liftUp(bool flag, int x, int y, int dir, int ani, int CAniCurrent);
 		void PickedUp(bool flag, int x, int y);
 		void DetectAnimation(int x, int y, int Animation, int CAniCurrent);
 		int liftCount;
 		int fixAniCount;
-
 		int GetState();
 		int GetOwner();
 		int GetDir();

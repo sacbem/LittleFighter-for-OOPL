@@ -10,7 +10,6 @@
 #include <fstream>
 #include <string>
 using namespace std;
-//#include "InitalPageMenu.h"
 
 namespace game_framework {
 	CGameStateInit::CGameStateInit(CGame* g): CGameState(g){
@@ -23,13 +22,11 @@ namespace game_framework {
 	}
 
 	void CGameStateInit::OnInit(){
-		
-		ShowInitProgress(0);	// 一開始的loading進度為0%
-
+		ShowInitProgress(0);
 
 		startBtn->Load();
 		settingBtn->Load();
-		CAudio::Instance()->Load(0, "bgm\\main.wav");	// 載入編號0的聲音ding.wav
+		CAudio::Instance()->Load(0, "bgm\\main.wav");
 	
 		countDown.AddBitmap(BITMAP_COUNTDOWN_BACK, RGB(0, 0, 0));
 		for (int i = 4; i >=0 ; i--) {
@@ -143,7 +140,6 @@ namespace game_framework {
 			if (point.x >= 545 * (0.81) + 20 && point.x <= 745 * (0.81) + 20) {
 				if (point.y >= 260 * (0.94) && point.y <= 280 * (0.94)) {
 					if (nFlags == 1) {
-						//GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
 						SELECT_ENTER = true;
 						SELECTOR_ENABLE = true;
 					}
@@ -209,9 +205,6 @@ namespace game_framework {
 	void CGameStateInit::OnShow() {
 		  logo.SetTopLeft(0, 0);
 		  logo.ShowBitmap();
-		  
-		  //test
-		  //GotoGameState(GAME_STATE_RUN);
 
 		  if (!SELECT_ENTER) {
 			  startBtn->OnShow();
@@ -260,9 +253,6 @@ namespace game_framework {
 			  }
 			  SetPhotoStickers();
 		  }         
-		/*
-		 Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
-		*/
 	
 		 CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
 		 CFont f, * fp;

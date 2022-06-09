@@ -53,7 +53,6 @@ namespace game_framework {
 		DefencePoint = 5;
 		walkedDistance = 0;
 
-
 		//re
 		AnimationState = 0;
 		speed = 2;
@@ -134,12 +133,10 @@ namespace game_framework {
 	}
 
 	int Character::GetRunCurrent() {
-		//TRACE("aaa %d\n", Animation.Run->GetCurrentBitmapNumber());
 		return Animation.Run[direction].GetCurrentBitmapNumber();
 	}
 
 	void Character::Pickup(FieldObject* other) {
-		//TRACE("xPos yPos %d %d\n", xPos, yPos);
 		other->liftUp(true, xPos, yPos, direction, AnimationState, GetRunCurrent());
 		itemType = other->itemType;
 	}
@@ -250,13 +247,13 @@ namespace game_framework {
 	}
 
 	void Character::InputKeyDown(UINT nChar, int createdTime, int playerID) {
-		const char KEY_LEFT = playerID ? 0x25 : 0x41; // keyboard���b�Y 0x25
-		const char KEY_UP = playerID ? 0x26 : 0x57; // keyboard�W�b�Y 0x26
-		const char KEY_RIGHT = playerID ? 0x27 : 0x44; // keyboard�k�b�Y 0x27
-		const char KEY_DOWN = playerID ? 0x28 : 0x53; // keyboard�U�b�Y 0x28
-		const char KEY_SPACE = playerID ? 0x30 : 0x20; // keyboard SPACE
-		const char KEY_CTRL = playerID ? 0x31 : 0x11; //keyboard ctrl
-		const char KEY_ENTER = playerID ? 0x32 : 0x0D; // keyboard ENTER
+		const char KEY_LEFT = playerID ? 0x25 : 0x41;
+		const char KEY_UP = playerID ? 0x26 : 0x57;
+		const char KEY_RIGHT = playerID ? 0x27 : 0x44;
+		const char KEY_DOWN = playerID ? 0x28 : 0x53;
+		const char KEY_SPACE = playerID ? 0x30 : 0x20;
+		const char KEY_CTRL = playerID ? 0x31 : 0x11;
+		const char KEY_ENTER = playerID ? 0x32 : 0x0D;
 
 		const char KEY_H = 0x48;
 		const char KEY_J = 0x4A;
@@ -349,13 +346,12 @@ namespace game_framework {
 	}
 
 	void Character::InputKeyUp(UINT nChar, int playerID) {
-		const char KEY_LEFT = playerID ? 0x25 : 0x41; // keyboard���b�Y 0x25
-		const char KEY_UP = playerID ? 0x26 : 0x57; // keyboard�W�b�Y 0x26
-		const char KEY_RIGHT = playerID ? 0x27 : 0x44; // keyboard�k�b�Y 0x27
-		const char KEY_DOWN = playerID ? 0x28 : 0x53; // keyboard�U�b�Y 0x28
-
-		const char KEY_SPACE = playerID ? 0x30 : 0x20; // keyboard SPACE
-		const char KEY_ENTER = playerID ? 0x32 : 0x0D; // keyboard ENTER
+		const char KEY_LEFT = playerID ? 0x25 : 0x41;
+		const char KEY_UP = playerID ? 0x26 : 0x57;
+		const char KEY_RIGHT = playerID ? 0x27 : 0x44;
+		const char KEY_DOWN = playerID ? 0x28 : 0x53;
+		const char KEY_SPACE = playerID ? 0x30 : 0x20;
+		const char KEY_ENTER = playerID ? 0x32 : 0x0D;
 
 		if (isAlive) {
 			if (nChar == KEY_LEFT) {
@@ -458,7 +454,6 @@ namespace game_framework {
 		if (!(isCarryItem && itemType == 1)) {
 			isDefense = flag;
 			if (flag == true) {
-				//reset
 				DefenseCount = 0;
 			}
 		}

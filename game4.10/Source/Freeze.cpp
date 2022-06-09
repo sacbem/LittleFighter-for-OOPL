@@ -155,7 +155,6 @@ namespace game_framework {
 						}
 						else {
 							LastAttackState = AttackState;
-							//TRACE("LastAttackState %d\n", LastAttackState);
 							switch (LastAttackState)
 							{
 							case 20:
@@ -168,7 +167,6 @@ namespace game_framework {
 						}
 					}
 					else if (isCarryItem && itemType == 1) {
-						//TRACE("Type %d\n", itemType);
 						LastAttackState = AttackState;
 						AttackState = 7;
 					}
@@ -876,10 +874,7 @@ namespace game_framework {
 			DamageAccumulator = 0;
 		}
 		//some basic movement
-
-
 		SetMoving();
-	
 		//Frozen
 		if (specialState == 1) {
 			TRACE("Freeze\n");
@@ -942,7 +937,6 @@ namespace game_framework {
 	}
 
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
-		//TRACE("%d\n", isJumpping);
 		switch (AnimationState)
 		{
 		case 0:
@@ -1011,7 +1005,7 @@ namespace game_framework {
 			Animation.Roll[direction][1].SetTopLeft(xPos, yPos);
 			Animation.Roll[direction][1].ShowBitmap();
 			break;
-			//Attack
+		//Attack
 		case 11:
 			Animation.NormalAttack1[direction][0].SetTopLeft(xPos, yPos);
 			Animation.NormalAttack1[direction][0].ShowBitmap();
@@ -1084,7 +1078,7 @@ namespace game_framework {
 			Animation.JumpHeavyAttack[direction][2].SetTopLeft(xPos, yPos);
 			Animation.JumpHeavyAttack[direction][2].ShowBitmap();
 			break;
-			//Since Knock is complicated, so begin at 100
+		//Since Knock is complicated, so begin at 100
 		case 100:
 			Animation.Knock[direction][0].SetTopLeft(xPos, yPos);
 			Animation.Knock[direction][0].ShowBitmap();
@@ -1740,8 +1734,6 @@ namespace game_framework {
 			}
 		}
 		
-
-		//skillSignal = -1;
 		if (AttackCount >= 30) {
 			this->SetAttack(false);
 		}
