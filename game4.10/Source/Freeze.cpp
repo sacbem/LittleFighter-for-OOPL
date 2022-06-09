@@ -155,7 +155,6 @@ namespace game_framework {
 						}
 						else {
 							LastAttackState = AttackState;
-							//TRACE("LastAttackState %d\n", LastAttackState);
 							switch (LastAttackState)
 							{
 							case 20:
@@ -168,7 +167,6 @@ namespace game_framework {
 						}
 					}
 					else if (isCarryItem && itemType == 1) {
-						//TRACE("Type %d\n", itemType);
 						LastAttackState = AttackState;
 						AttackState = 7;
 					}
@@ -706,14 +704,28 @@ namespace game_framework {
 			if (this->GetSkillSignal() == 0) {
 				frozenWaves.insert(frozenWaves_Begin, new SkillEffect(0, createdTimes, direction, xPos, yPos));
 				skillsEffect_InFieldNumber[0] = frozenWaves.size();
+				if (Mana >= 600) {
+					Mana -= 600;
+				}
 			}
 			else if (this->GetSkillSignal() == 1) {
 				frozenPunchs.insert(frozenPunchs_Begin, new SkillEffect(1, createdTimes, direction, xPos, yPos));
 				skillsEffect_InFieldNumber[1] = frozenPunchs.size();
+				if (Mana >= 900) {
+					Mana -= 900;
+				}
+			}
+			else if (this->GetSkillSignal() == 2) {
+				if (Mana >= 500) {
+					Mana -= 500;
+				}
 			}
 			else if (this->GetSkillSignal() == 3) {
 				frozenStorms.insert(frozenStorms_Begin, new SkillEffect(3, createdTimes, direction, xPos, yPos));
 				skillsEffect_InFieldNumber[3] = frozenStorms.size();
+				if (Mana >= 1000) {
+					Mana -= 1000;
+				}
 			}
 		}
 	}
@@ -862,10 +874,7 @@ namespace game_framework {
 			DamageAccumulator = 0;
 		}
 		//some basic movement
-
-
 		SetMoving();
-	
 		//Frozen
 		if (specialState == 1) {
 			TRACE("Freeze\n");
@@ -928,7 +937,6 @@ namespace game_framework {
 	}
 
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
-		//TRACE("%d\n", isJumpping);
 		switch (AnimationState)
 		{
 		case 0:
@@ -997,7 +1005,7 @@ namespace game_framework {
 			Animation.Roll[direction][1].SetTopLeft(xPos, yPos);
 			Animation.Roll[direction][1].ShowBitmap();
 			break;
-			//Attack
+		//Attack
 		case 11:
 			Animation.NormalAttack1[direction][0].SetTopLeft(xPos, yPos);
 			Animation.NormalAttack1[direction][0].ShowBitmap();
@@ -1070,7 +1078,7 @@ namespace game_framework {
 			Animation.JumpHeavyAttack[direction][2].SetTopLeft(xPos, yPos);
 			Animation.JumpHeavyAttack[direction][2].ShowBitmap();
 			break;
-			//Since Knock is complicated, so begin at 100
+		//Since Knock is complicated, so begin at 100
 		case 100:
 			Animation.Knock[direction][0].SetTopLeft(xPos, yPos);
 			Animation.Knock[direction][0].ShowBitmap();
@@ -1562,7 +1570,7 @@ namespace game_framework {
 							yRange2 = i->yPos + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
-									itr.first = h; itr.second = 500;
+									itr.first = h; itr.second = 400;
 									hittedLog[0].push_back(h);
 									hittedTable.push_back(itr);
 									i->isHit = true;
@@ -1626,7 +1634,7 @@ namespace game_framework {
 							yRange2 = i->yPos + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
-									itr.first = h; itr.second = 900;
+									itr.first = h; itr.second = 600;
 									hittedTable.push_back(itr);
 									i->isHit = true;
 									this->SetCalculateDamageRequest(true);
@@ -1694,45 +1702,38 @@ namespace game_framework {
 			if (diffY == 0 && Mana >= 600) {
 				skillSignal = 0;
 				this->SetSkill(createdTimes);
-				Mana -= 600;
 			}
-			else if (abs(diffX) <= 360 && abs(diffY) < 40 && Mana >= 900) {
+			else if (abs(diffX) <= 360 && abs(diffY) < 40 && Mana >= 1000) {
 				skillSignal = 3;
 				this->SetSkill(createdTimes);
-				Mana -= 900;
 			}
 			else  if (abs(diffX) <= 30 && abs(diffY) < 30) {
 				this->SetAttack(true);
 			}
 		}
 		else if (coin % 2 == 0 && coin % 5 == 0) {
-			if (abs(diffX) <= 140 && abs(diffY) < 20 && Mana >= 450) {
+			if (abs(diffX) <= 140 && abs(diffY) < 20 && Mana >= 900) {
 				skillSignal = 1;
 				this->SetSkill(createdTimes);
-				Mana -= 450;
 			}
 			else  if (abs(diffX) <= 30 && abs(diffY) < 30) {
 				this->SetAttack(true);
 			}
-			else if (abs(diffX) <= 360 && abs(diffY) < 30 && Mana >= 900) {
+			else if (abs(diffX) <= 360 && abs(diffY) < 30 && Mana >= 1000) {
 				skillSignal = 3;
 				this->SetSkill(createdTimes);
-				Mana -= 900;
 			}
 		}
 		else {
 			if (abs(diffX) <= 30 && abs(diffY) < 30) {
 				this->SetAttack(true);
 			}
-			if (abs(diffX) <= 140 && abs(diffY) < 20 && Mana >= 450) {
+			if (abs(diffX) <= 140 && abs(diffY) < 20 && Mana >= 900) {
 				skillSignal = 1;
 				this->SetSkill(createdTimes);
-				Mana -= 450;
 			}
 		}
 		
-
-		//skillSignal = -1;
 		if (AttackCount >= 30) {
 			this->SetAttack(false);
 		}

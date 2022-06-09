@@ -43,7 +43,6 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnMove() {					// 移動遊戲元素
-		//map[mapNowID]->drops[0]->OnMove();
 		if (!map[mapNowID]->drops.empty()) {
 			for (auto i : map[mapNowID]->drops) {
 				i->OnMove();
@@ -104,7 +103,7 @@ namespace game_framework {
 					if (i->HitEnemy(j) && i->isAttacking) {
 						if (j->HealthPoint >= 0) {
 							j->SetKnock(true, i->GetDir(), i->AttackState);
-							j->isGettingDamage(1);
+							j->isGettingDamage(i->AttackPoint);
 						}
 					}
 				}
@@ -156,8 +155,6 @@ namespace game_framework {
 									j->isGettingDamage(50);
 									j->specialState = 1;
 									tables[countOwner] = 1;
-									//j->SetAbonormalStatus(countOwner,true);
-									//j->SetKnock(true, i->GetDir(), 6);
 								}
 							}
 						}
@@ -189,7 +186,6 @@ namespace game_framework {
 			countOwner++;
 		}
 
-		//
 		//Character NearItem
 		for (auto j : characterList) {
 			if (map[mapNowID]->drops.size() == 0) {
@@ -219,7 +215,6 @@ namespace game_framework {
 						}
 					}
 				}
-				//
 				if (i->GetOwner() == j->serialNumber && j->itemId == num) {
 					if (i->GetState() == 1) {
 						j->Pickup((map[mapNowID]->drops[num]));
@@ -228,6 +223,9 @@ namespace game_framework {
 				num2++;
 			}
 			num++;
+		}
+		if (characterList[0]->GetHealth() == 0) {
+			GotoGameState(GAME_STATE_OVER);
 		}
 	}
 
@@ -584,7 +582,6 @@ namespace game_framework {
 		//get character
 		if (GetCharacter == false) {
 			map[mapNowID]->drops.push_back(new FieldObject(1, map[mapNowID]->GetMapID()));
-			//TRACE("Type %d\n", map[mapNowID]->drops[0]->itemType);
 			switch (this->game->selectCharacterID[0]) {
 			case 0:
 				characterList.push_back(new Woody(0, map[mapNowID]->GetMapID()));
@@ -644,7 +641,7 @@ namespace game_framework {
 
 		map[mapNowID]->PrintMap(showStatus);
 		SortedShow();
-		//characterList[1]->EnemyAiMode(theOthersPosition[0].first, theOthersPosition[0].second, CurrentTime);
+		characterList[1]->EnemyAiMode(theOthersPosition[0].first, theOthersPosition[0].second, CurrentTime);
 		if (TimePassed < 8000 && map[mapNowID]->GetMapID() != HKC) {
 			if (clearedTime % 2 == 0) {
 				go.ShowBitmap();

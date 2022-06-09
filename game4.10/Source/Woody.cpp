@@ -204,7 +204,6 @@ namespace game_framework {
 						}
 						else {
 							LastAttackState = AttackState;
-							//TRACE("LastAttackState %d\n", LastAttackState);
 							switch (LastAttackState)
 							{
 							case 20:
@@ -876,6 +875,29 @@ namespace game_framework {
 
 				energyBlast2.insert(energyBlast2_Begin, new SkillEffect(12, createdTimes, direction, xPos, yPos));
 				skillsEffect_InFieldNumber[0] = energyBlast2.size();
+				if (Mana >= 300) {
+					Mana -= 300;
+				}
+			}
+			else if (this->GetSkillSignal() == 1) {
+				if (Mana >= 0) {
+					Mana -= 0;
+				}
+			}
+			else if (this->GetSkillSignal() == 2) {
+				if (Mana >= 100) {
+					Mana -= 300;
+				}
+			}
+			else if (this->GetSkillSignal() == 3) {
+				if (Mana >= 400) {
+					Mana -= 400;
+				}
+			}
+			else if (this->GetSkillSignal() == 4) {
+				if (Mana >= 100) {
+					Mana -= 100;
+				}
 			}
 		}
 	}
@@ -1074,8 +1096,6 @@ namespace game_framework {
 						KnockSpeed = -1;
 					}
 				}
-				//if (KnockCount ==  || KnockCount == 110) {
-				//}
 			}
 			if (skillSignal != -1) {
 				CallSpecial();
@@ -1717,8 +1737,8 @@ namespace game_framework {
 	}
 
 	void Woody::CallDemonFoot() {
-
 		SetAttack(true);
+		AttackPoint = 2;
 		SpCount++;
 		if (SpCount <= 10) {
 			AnimationState = 240;
@@ -1755,6 +1775,7 @@ namespace game_framework {
 		}
 		else if (SpCount > 44) {
 			SetAttack(false);
+			AttackPoint = 10;
 			SpCount = 0;
 			skillSignal = -1;
 		}
