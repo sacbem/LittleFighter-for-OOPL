@@ -1452,7 +1452,6 @@ namespace game_framework {
 				this->isRunning = false;
 			}
 		}
-		//360
 		else if (diffX < 0) {
 			if (abs(diffX) > 80 ) {
 				this->SetMovingLeft(false);
