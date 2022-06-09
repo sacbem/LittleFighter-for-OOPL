@@ -1,12 +1,9 @@
 #pragma once
 #include "GameObject.h"
 #include "FieldObject.h"
-//#include "Character.h"
 namespace game_framework{
 	class Map {
-		//friend 
 	public:
-		
 		Map(int mapID);
 		int GetScenesPos(const string type);
 		void ScenesCamera(boolean mapMove, boolean IsRunning, boolean IsLeft, int walkedDistance);
@@ -41,10 +38,7 @@ namespace game_framework{
 		/// backgroundSkyObjs:³õ´º-¤ÑªÅ
 		/// </summary>
 		/// 
-	};
-
-
-	
+	}
 }
 namespace mapConfiguration {
 	#define Forest 0
@@ -68,5 +62,4 @@ namespace mapConfiguration {
 	constexpr int bcBackScence_dx = MapWidth_BC / 1379;
 	constexpr int bcFrontScence_dx = MapWidth_BC / 1500;
 	constexpr int bcLand_dx = MapWidth_BC /1500;
-	
 }
