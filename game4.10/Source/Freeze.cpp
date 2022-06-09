@@ -916,7 +916,6 @@ namespace game_framework {
 	}
 
 	void Freeze::OnShow(vector<pair<int, int>>theOthersPosition, int mainTime) {
-		TRACE("%d\n", isJumpping);
 		switch (AnimationState)
 		{
 		case 0:

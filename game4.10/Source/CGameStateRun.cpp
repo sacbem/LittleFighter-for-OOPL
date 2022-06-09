@@ -43,15 +43,12 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnMove() {					// 移動遊戲元素
-		//map[mapNowID]->drops[0]->OnMove();
 		if (!map[mapNowID]->drops.empty()) {
 			map[mapNowID]->drops[0]->OnMove();
 		}
 
 		int count = 0;
 		for (auto i : characterList) {
-			//check frozenSword spawn
-			//TRACE("%d %d\n", i->CharacterID, i->signalSpawnSword);
 			if (i->CharacterID == 2 && i->signalSpawnSword==true) {
 				map[mapNowID]->drops.push_back(new FieldObject(2, map[mapNowID]->GetMapID()));
 				if (i->FrozenSwordMode == false) {
@@ -627,7 +624,7 @@ namespace game_framework {
 
 		map[mapNowID]->PrintMap(showStatus);
 		SortedShow();
-		characterList[1]->EnemyAiMode(theOthersPosition[0].first, theOthersPosition[0].second, CurrentTime);
+		//characterList[1]->EnemyAiMode(theOthersPosition[0].first, theOthersPosition[0].second, CurrentTime);
 		if (TimePassed < 8000 && map[mapNowID]->GetMapID() != HKC) {
 			if (clearedTime % 2 == 0) {
 				go.ShowBitmap();
