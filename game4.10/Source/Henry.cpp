@@ -302,7 +302,7 @@ namespace game_framework {
 	}
 
 	void Henry::SetAttack(bool flag) {
-		if (specialState == -1) {
+		if (specialState == -1 && KnockState==0) {
 			if (flag == true) {
 				UnMovable = true;
 				if (isCarryItem == true && itemType == 1) {
@@ -907,9 +907,9 @@ namespace game_framework {
 		auto demonicSong_Begin = demonicSong.begin();
 		if(itemType!=1) {
 			if (this->GetSkillSignal() == 1) {
-				pierceArrow.insert(pierceArrow_Begin, new SkillEffect(5, createdTimes, direction, xPos, yPos+20));
-				skillsEffect_InFieldNumber[1] = pierceArrow.size();
 				if (Mana >= 400) {
+					pierceArrow.insert(pierceArrow_Begin, new SkillEffect(5, createdTimes, direction, xPos, yPos+20));
+					skillsEffect_InFieldNumber[1] = pierceArrow.size();
 					Mana -= 400;
 				}
 			}

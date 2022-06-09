@@ -20,7 +20,7 @@ namespace game_framework {
 
 	void CGameStateOver::OnBeginState()
 	{
-		counter = 30 * 5; // 5 seconds
+		counter = 30 * 10; // 5 seconds
 	}
 
 	void CGameStateOver::OnInit()
@@ -30,14 +30,9 @@ namespace game_framework {
 		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
 		//
 		ShowInitProgress(66);	// 接個前一個狀態的進度，此處進度視為66%
-		//
-		// 開始載入資料
-		//
-		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
-		//
-		// 最終進度為100%
-		//
 		ShowInitProgress(100);
+		EndGame.LoadBitmapA(".\\res\\GameOver.bmp");
+		EndGame.SetTopLeft(0,0);
 	}
 
 	void CGameStateOver::OnShow()
@@ -53,5 +48,7 @@ namespace game_framework {
 		pDC->TextOut(240, 210, str);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+
+		EndGame.ShowBitmap();
 	}
 }

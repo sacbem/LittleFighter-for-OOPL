@@ -237,7 +237,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\audio.cpp" />
-    <ClCompile Include="Source\CEraser.cpp" />
     <ClCompile Include="Source\CGameStateInit.cpp" />
     <ClCompile Include="Source\CGameStateOver.cpp" />
     <ClCompile Include="Source\CGameStateRun.cpp" />
@@ -293,7 +292,6 @@
     <ClInclude Include="MapConfiguration.h" />
     <ClInclude Include="ShowedObject.h" />
     <ClInclude Include="Source\audio.h" />
-    <ClInclude Include="Source\CEraser.h" />
     <ClInclude Include="Source\CGameStateInit.h" />
     <ClInclude Include="Source\CGameStateOver.h" />
     <ClInclude Include="Source\CGameStateRun.h" />

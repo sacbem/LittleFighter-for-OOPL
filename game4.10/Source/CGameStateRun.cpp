@@ -229,6 +229,9 @@ namespace game_framework {
 			}
 			num++;
 		}
+		if (characterList[0]->GetHealth() == 0) {
+			GotoGameState(GAME_STATE_OVER);
+		}
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
