@@ -166,7 +166,7 @@ namespace game_framework {
 								int yRange2 = i->yPos + 20;
 								if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 									if (!i->isHit) {
-										itr.first = h; itr.second = 500;
+										itr.first = h; itr.second = 400;
 										hittedTable.push_back(itr);
 										i->isHit = true;
 										this->SetCalculateDamageRequest(true);
@@ -182,7 +182,7 @@ namespace game_framework {
 								int yRange2 = i->yPos + 20;
 								if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 									if (!i->isHit) {
-										itr.first = h; itr.second = 500;
+										itr.first = h; itr.second = 400;
 										hittedTable.push_back(itr);
 										i->isHit = true;
 										this->SetCalculateDamageRequest(true);
@@ -203,7 +203,7 @@ namespace game_framework {
 							int yRange2 = i->yPos + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
-									itr.first = h; itr.second = 900;
+									itr.first = h; itr.second = 400;
 									hittedTable.push_back(itr);
 									i->isHit = true;
 									this->SetCalculateDamageRequest(true);
@@ -224,7 +224,7 @@ namespace game_framework {
 							int yRange2 = i->yPos + 20;
 							if (yRange1 <= theOthersPosition[h].second && theOthersPosition[h].second <= yRange2) {
 								if (!i->isHit) {
-									itr.first = h; itr.second = 500;
+									itr.first = h; itr.second = 250;
 									hittedLog[0].push_back(h);
 									hittedTable.push_back(itr);
 									i->isHit = true;
@@ -243,7 +243,7 @@ namespace game_framework {
 					if (i->xPos + 4 <= theOthersPosition[h].first + 50 && i->xPos + 78 >= theOthersPosition[h].first + 30) {
 						if (i->yPos + 23 <= theOthersPosition[h].second + 60 && i->yPos + 57 >= theOthersPosition[h].second + 20) {
 							if (!i->isHit) {
-								itr.first = h; itr.second = 500;
+								itr.first = h; itr.second = 800;
 								hittedLog[0].push_back(h);
 								hittedTable.push_back(itr);
 								i->isHit = true;
@@ -909,10 +909,16 @@ namespace game_framework {
 			if (this->GetSkillSignal() == 1) {
 				pierceArrow.insert(pierceArrow_Begin, new SkillEffect(5, createdTimes, direction, xPos, yPos+20));
 				skillsEffect_InFieldNumber[1] = pierceArrow.size();
+				if (Mana >= 400) {
+					Mana -= 400;
+				}
 			}
 			else if (this->GetSkillSignal() == 0) {
 				airwave.insert(airwave_Begin, new SkillEffect(7, createdTimes, direction, xPos, yPos + 20));
 				skillsEffect_InFieldNumber[1] = airwave.size();
+				if (Mana >= 300) {
+					Mana -= 300;
+				}
 			}
 			else if (this->GetSkillSignal() == 2) {
 				//call three type of Arrow
@@ -924,10 +930,16 @@ namespace game_framework {
 
 				downArrow2.insert(downArrow2_Begin, new SkillEffect(11, createdTimes, direction, xPos - 10, yPos + 20));
 				skillsEffect_InFieldNumber[0] = downArrow2.size();
+				if (Mana >= 300) {
+					Mana -= 300;
+				}
 			}
 			else if (this->GetSkillSignal() == 3) {
 				demonicSong.insert(demonicSong_Begin, new SkillEffect(8, createdTimes, direction, xPos, yPos));
 				skillsEffect_InFieldNumber[1] = demonicSong.size();
+				if (Mana >= 1000) {
+					Mana -= 1000;
+				}
 			}
 		}
 	
@@ -1832,43 +1844,38 @@ namespace game_framework {
 		}
 
 		if (coin % 3 == 0 && coin % 7 == 0) {
-			if (diffY == 0 && Mana >= 600) {
+			if (diffY == 0 && Mana >= 400) {
 				skillSignal = 0;
 				this->SetSkill(createdTimes);
-				Mana -= 600;
 			}
-			else if (abs(diffY) < 40 && Mana >= 900) {
+			else if (abs(diffY) < 40 && Mana >= 1000) {
 				skillSignal = 3;
 				this->SetSkill(createdTimes);
-				Mana -= 900;
 			}
 			else  if  (abs(diffY) < 30) {
 				this->SetAttack(true);
 			}
 		}
 		else if (coin % 2 == 0 && coin % 5 == 0) {
-			if  abs(diffY) < 20 && Mana >= 450) {
+			if (abs(diffY) < 20 && Mana >= 300) {
 				skillSignal = 1;
 				this->SetSkill(createdTimes);
-				Mana -= 450;
 			}
 			else  if ( abs(diffY) < 30) {
 				this->SetAttack(true);
 			}
-			else if ( abs(diffY) < 30 && Mana >= 900) {
+			else if ( abs(diffY) < 30 && Mana >= 1000) {
 				skillSignal = 3;
 				this->SetSkill(createdTimes);
-				Mana -= 900;
 			}
 		}
 		else {
 			if (abs(diffY) < 30) {
 				this->SetAttack(true);
 			}
-			if (abs(diffY) < 20 && Mana >= 450) {
+			if (abs(diffY) < 20 && Mana >= 300) {
 				skillSignal = 1;
 				this->SetSkill(createdTimes);
-				Mana -= 450;
 			}
 		}
 

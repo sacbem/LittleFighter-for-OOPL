@@ -289,39 +289,24 @@ namespace game_framework {
 				else if (!isRunning && !isWalking) {
 					//Sp
 					if ((nChar == KEY_H && !playerID) || (nChar == KEY_Z && playerID)) {
-						if (Mana >= 250) {
-							Mana -= 10;
-							skillSignal = 0;
-							UnMovable = true;
-						}
+						skillSignal = 0;
+						UnMovable = true;
 					}
 					else if ((nChar == KEY_J && !playerID) || (nChar == KEY_X && playerID)) {
-						if (Mana >= 250) {
-							Mana -= 10;
-							skillSignal = 1;
-							UnMovable = true;
-						}
+						skillSignal = 1;
+						UnMovable = true;
 					}
 					else if ((nChar == KEY_K && !playerID) || (nChar == KEY_C && playerID)) {
-						if (Mana >= 250) {
-							Mana -= 10;
-							skillSignal = 2;
-							UnMovable = true;
-						}
+						skillSignal = 2;
+						UnMovable = true;
 					}
 					else if ((nChar == KEY_L && !playerID) || (nChar == KEY_V && playerID)) {
-						if (Mana >= 250) {
-							Mana -= 10;
-							skillSignal = 3;
-							UnMovable = true;
-						}
+						skillSignal = 3;
+						UnMovable = true;
 					}
 					else if ((nChar == KEY_U && !playerID) || (nChar == KEY_B && playerID)) {
-						if (Mana >= 250) {
-							Mana -= 250;
-							skillSignal = 4;
-							UnMovable = true;
-						}
+						skillSignal = 4;
+						UnMovable = true;
 					}
 					SetSkill(createdTime);
 				}
@@ -410,28 +395,24 @@ namespace game_framework {
 	}
 
 	void Character::SetMovingDown(bool flag) {
-		
-			isMovingDown = flag;
-		
+		isMovingDown = flag;
 	}
 
 	void Character::SetMovingUp(bool flag) {
-		
-			isMovingUp = flag;
-		
+		isMovingUp = flag;
 	}
 
 
 	void Character::SetMovingLeft(bool flag) {
 		if (!isRunning) {
-				if (flag == true) {
-					leftTime = 0;
-					isMovingLeft = flag;
-					isMovingRight = false;
-				}
-				else {
-					isMovingLeft = flag;
-				}
+			if (flag == true) {
+				leftTime = 0;
+				isMovingLeft = flag;
+				isMovingRight = false;
+			}
+			else {
+				isMovingLeft = flag;
+			}
 		}
 	}
 

@@ -104,7 +104,7 @@ namespace game_framework {
 					if (i->HitEnemy(j) && i->isAttacking) {
 						if (j->HealthPoint >= 0) {
 							j->SetKnock(true, i->GetDir(), i->AttackState);
-							j->isGettingDamage(1);
+							j->isGettingDamage(i->AttackPoint);
 						}
 					}
 				}
@@ -644,7 +644,7 @@ namespace game_framework {
 
 		map[mapNowID]->PrintMap(showStatus);
 		SortedShow();
-		//characterList[1]->EnemyAiMode(theOthersPosition[0].first, theOthersPosition[0].second, CurrentTime);
+		characterList[1]->EnemyAiMode(theOthersPosition[0].first, theOthersPosition[0].second, CurrentTime);
 		if (TimePassed < 8000 && map[mapNowID]->GetMapID() != HKC) {
 			if (clearedTime % 2 == 0) {
 				go.ShowBitmap();
