@@ -442,6 +442,7 @@ namespace game_framework {
 		case static_cast<int>(skillsIdTable::normalArrow):
 			if (!isHit) {
 				if (timeCount >= 20) {
+					TRACE("TimeCount %d\n", timeCount);
 					effectObj[0]->SetTopLeft(direction, 1, xPos, yPos);
 					effectObj[0]->OnShow(direction, 1);
 					AnimationCount[0]++;

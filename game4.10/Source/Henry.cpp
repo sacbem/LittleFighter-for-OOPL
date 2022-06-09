@@ -934,10 +934,10 @@ namespace game_framework {
 	}
 
 	void Henry::EffectObjectAliveManager(int mainTime) {
-		const int arrow_AliveTime = 10000;
-		const int downArrow_AliveTime = 10000;
-		const int pierceArrow_AliveTime = 10000;
-		const int airwave_AliveTime = 10000;
+		const int arrow_AliveTime = 3000;
+		const int downArrow_AliveTime = 3000;
+		const int pierceArrow_AliveTime = 3000;
+		const int airwave_AliveTime = 3000;
 		const int demonicSong_AliveTime = 6000;
 		for (auto& i : arrow) {
 			if (mainTime - i->createdTime >= arrow_AliveTime) {
