@@ -10,9 +10,9 @@ namespace game_framework{
 		void Load();
 		void GenerateLand();
 		void PrintMap(boolean showStates);
-		void DynamicScence(boolean IsLeft,int walkedDistance);
+		void DynamicScence(boolean IsLeft, int walkedDistance);
 		int GetMapID();
-		boolean ResetCharactAccumulator(int distance1,int distance2);
+		boolean ResetCharactAccumulator(int distance1, int distance2);
 		~Map();
 		vector<FieldObject*> drops;
 		boolean characterOffsetFlag;
@@ -27,7 +27,7 @@ namespace game_framework{
 		pair <int, int> gameScencePos; // first -> ScenceMinPosition; second -> ScenceMaxPosition 
 		vector<boolean>mapBordary;//1:sky 2:tree 3:land 4: mountain
 		vector<vector<int>> map;  // 2400*600 80*60 per blank;  30 * 10
-		
+
 		vector<boolean> characterInBorder;
 		vector<GameObject*> floors, floorObjs, backgroundFrontObjs, backgroundBackObjs, backgroundSkyObjs;
 		/// <summary>
@@ -38,7 +38,7 @@ namespace game_framework{
 		/// backgroundSkyObjs:³õ´º-¤ÑªÅ
 		/// </summary>
 		/// 
-	}
+	};
 }
 namespace mapConfiguration {
 	#define Forest 0

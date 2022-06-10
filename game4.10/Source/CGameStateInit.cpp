@@ -39,7 +39,7 @@ namespace game_framework {
 		logo.LoadBitmap(IDB_BITMAP3);
 		selectCharacterMenu->Load(BITMAP_SELECTMENU);
 		photoSticker_seclecter->Load(picStickers,picIDs,picNames);
-		//CAudio::Instance()->Play(0, true);
+		CAudio::Instance()->Play(0, true);
 		Sleep(300);				
 
 	}
@@ -203,50 +203,50 @@ namespace game_framework {
 	}
   
 	void CGameStateInit::OnShow() {
-		  logo.SetTopLeft(0, 0);
-		  logo.ShowBitmap();
+		logo.SetTopLeft(0, 0);
+		logo.ShowBitmap();
 
-		  if (!SELECT_ENTER) {
-			  startBtn->OnShow();
-			  settingBtn->OnShow();
-			  if (MOUSE_ENABLE) {
-				  if (cursorXY[0] >= 545*(0.81) + 20 && cursorXY[0] <= 745 * (0.81) + 20) {
-					  if (cursorXY[1] >= 260 * (0.94) && cursorXY[1] <= 280 * (0.94)) {
-						  startBtn->buttonTouch();
-						  settingBtn->OnShow();
-					  }
-				  }
-				  if (cursorXY[0] >= 525 * (0.81) + 20 && cursorXY[0] <= 765 * (0.81) + 20) {
-					  if (cursorXY[1] >= 300 * (0.94) && cursorXY[1] <= 320 * (0.94)) {
-						  settingBtn->buttonTouch();
-						  startBtn->OnShow();
-					  }
-				  }
-			  }
-			  else {
-				  switch (keyCount % 2) {
-				  case 0:
-					  startBtn->buttonTouch();
-					  settingBtn->OnShow();
-					  break;
-				  case 1:
-					  settingBtn->buttonTouch();
-					  startBtn->OnShow();
-					  break;
-				  }
-			  }
-		  }
-		  else {
-			  ScreenClear();
-			  selectCharacterMenu->OnShow();
-			  if (!SELECTOR_ENABLE) {  //結束選角
-				  SetCountdownAni();
-				  if (countDown.IsFinalBitmap()){
-					  this->game->selectCharacterID[0] = characterID[0];
-					  this->game->selectCharacterID[1] = characterID[1];
-					 // CAudio::Instance()->Stop(0);
-					  GotoGameState(GAME_STATE_RUN);
-				  }
+		if (!SELECT_ENTER) {
+		startBtn->OnShow();
+		settingBtn->OnShow();
+		if (MOUSE_ENABLE) {
+			if (cursorXY[0] >= 545*(0.81) + 20 && cursorXY[0] <= 745 * (0.81) + 20) {
+				if (cursorXY[1] >= 260 * (0.94) && cursorXY[1] <= 280 * (0.94)) {
+					startBtn->buttonTouch();
+					settingBtn->OnShow();
+				}
+			}
+			if (cursorXY[0] >= 525 * (0.81) + 20 && cursorXY[0] <= 765 * (0.81) + 20) {
+				if (cursorXY[1] >= 300 * (0.94) && cursorXY[1] <= 320 * (0.94)) {
+					settingBtn->buttonTouch();
+					startBtn->OnShow();
+				}
+			}
+		}
+			else {
+				switch (keyCount % 2) {
+				case 0:
+					startBtn->buttonTouch();
+					settingBtn->OnShow();
+				break;
+				case 1:
+					settingBtn->buttonTouch();
+					startBtn->OnShow();
+				break;
+				}
+			}
+		}
+		else {
+			ScreenClear();
+			selectCharacterMenu->OnShow();
+			if (!SELECTOR_ENABLE) {  //結束選角
+				SetCountdownAni();
+				if (countDown.IsFinalBitmap()){
+					this->game->selectCharacterID[0] = characterID[0];
+					this->game->selectCharacterID[1] = characterID[1];
+					CAudio::Instance()->Stop(0);
+					GotoGameState(GAME_STATE_RUN);
+				}
 			  }
 			  else { 
 				  SetAnimation();

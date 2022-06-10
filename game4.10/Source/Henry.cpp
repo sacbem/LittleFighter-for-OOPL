@@ -1804,7 +1804,7 @@ namespace game_framework {
 				this->SetMovingLeft(true);
 				SetRunning(true);
 			}
-			else if (diffX <= 200) {
+			else if (diffX <= 100) {
 				this->isRunning = false;
 				this->SetMovingLeft(true);
 			}
@@ -1821,8 +1821,7 @@ namespace game_framework {
 				this->SetMovingRight(true);
 				SetRunning(true);
 			}
-			else  if (abs(diffX) <= 200) {
-
+			else  if (abs(diffX) <= 100) {
 				this->isRunning = false;
 				this->SetMovingRight(true);
 			}

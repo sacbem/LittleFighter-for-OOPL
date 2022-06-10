@@ -40,6 +40,19 @@ namespace game_framework {
 			theOthersPosition.push_back(pair<int, int>(0, 0));
 		}
 		TimePassed = 0;
+		switch (map[mapNowID]->GetMapID()) {
+		case Forest:
+			CAudio::Instance()->Play(Forest + 3, true);
+			break;
+		case HKC:
+			CAudio::Instance()->Play(HKC + 3, true);
+			break;
+		case BC:
+			CAudio::Instance()->Play(BC + 3, true);
+			break;
+		default:
+			break;
+		}
 	}
 
 	void CGameStateRun::OnMove() {					// 移動遊戲元素
@@ -116,12 +129,12 @@ namespace game_framework {
 		map[mapNowID]->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[1]->GetDistance());
 		characterList[0]->DistanceAccumulatorReset();
 		characterList[1]->DistanceAccumulatorReset();
-		//if (! characterList[0]->specialState) {
+		if (! characterList[0]->specialState) {
 			map[mapNowID]->ScenesCamera(characterList[0]->DistanceAccumulatorReset(), characterList[0]->isRunning, characterList[0]->GetDir(), characterList[0]->GetDistance());
-		//}
-		//if (! characterList[1]->specialState) {
+		}
+		if (! characterList[1]->specialState) {
 			map[mapNowID]->ScenesCamera(characterList[1]->DistanceAccumulatorReset(), characterList[1]->isRunning, characterList[1]->GetDir(), characterList[1]->GetDistance());
-		//}
+		}
 		if (map[mapNowID]->characterOffsetFlag) {
 			CharacterMapPosOffset();
 		}
@@ -132,9 +145,9 @@ namespace game_framework {
 		for (auto j : characterList) {
 			for (auto i : map[mapNowID]->drops) {
 				//Throw Object Hit Player
-				if (i->GetState() == 2 || i->GetState()==3) {
+				if (i->GetState() == 2 || i->GetState() == 3) {
 					if (i->HitRectangle(j->GetX1(), j->GetY1(), j->GetX2(), j->GetY2())) {
-						int yRange1 = j->GetY1()-10;
+						int yRange1 = j->GetY1() - 10;
 						int yRange2 = j->GetY1() + 20;
 						if (yRange1 <= i->GetY() && i->GetY() <= yRange2) {
 							if (i->GetOwner() != j->serialNumber) {
@@ -160,6 +173,7 @@ namespace game_framework {
 						}
 					}
 				}
+
 				//Determine Character can't run through item
 				//in item's yPos range
 				//Still some bug need to fix, like walked into left down will teleport
@@ -245,22 +259,10 @@ namespace game_framework {
 		HealthPlayer2->OnLoad(400, 0);
 		go.LoadBitmapA(".\\res\\sys\\go.bmp", RGB(0, 0, 0));
 		go.SetTopLeft(0, 200);
-		switch (map[mapNowID]->GetMapID()) {
-		case Forest:
-			CAudio::Instance()->Load(Forest, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
-			CAudio::Instance()->Play(Forest, true);
-			break;
-		case HKC:
-			//CAudio::Instance()->Load(HKC, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
-			//CAudio::Instance()->Play(HKC, true);
-			break;
-		case BC:
-			//CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
-			//CAudio::Instance()->Play(BC, true);
-			break;
-		default:
-			break;
-		}
+		CAudio::Instance()->Load(Forest + 3, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
+		CAudio::Instance()->Load(HKC + 3, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
+		CAudio::Instance()->Load(BC + 3, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
+
 
 	}
 
@@ -291,43 +293,28 @@ namespace game_framework {
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		const char nextV = 0x56;
 		characterList[0]->InputKeyUp(nChar, 0);
-		//characterList[1]->InputKeyUp(nChar, 1);
 		if (nChar == nextV) {
 			cheat = true;
-		}
-		if (mapNowID < 1) {
-			/*CAudio::Instance()->Stop(map[mapNowID]->GetMapID());
-			mapNowID++;*/
-			//switch (map[mapNowID]->GetMapID()) {
-			//case Forest:
-			//	CAudio::Instance()->Load(Forest, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
-			//	CAudio::Instance()->Play(Forest, true);
-			//	break;
-			//case HKC:
-			//	//CAudio::Instance()->Load(HKC, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
-			//	//CAudio::Instance()->Play(HKC, true);
-			//	break;
-			//case BC:
-			//	//CAudio::Instance()->Load(BC, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
-			//	//CAudio::Instance()->Play(BC, true);
-			//	break;
-			//default:
-			//	break;
-			//}
 		}
 	}
 	
 	void CGameStateRun::SetStageTitle() {
 		stageTitles.push_back(new CMovingBitmap());
 		if (cheat) {
+			CAudio::Instance()->Stop(map[mapNowID]->GetMapID() + 3);
 			mapNowID = 1;
 		}
 		switch (mapNowID) {
 		case 0:
+			CAudio::Instance()->Stop(map[mapNowID]->GetMapID() + 3);
 			stageTitles[1]->LoadBitmapA(".\\res\\sys\\stage2.bmp");
+			CAudio::Instance()->Play(Forest + 3, true);
+			break;
 			break;
 		case 1:
+			CAudio::Instance()->Stop(map[mapNowID]->GetMapID() + 3);
 			stageTitles[1]->LoadBitmapA(".\\res\\sys\\stage3.bmp");
+			CAudio::Instance()->Play(HKC + 3, true);
 			break;
 		default:
 			break;
@@ -339,6 +326,7 @@ namespace game_framework {
 	void CGameStateRun::ClearStageTitle() {
 		delete stageTitles[1];
 		stageTitles.pop_back();
+
 	}
 	
 	void CGameStateRun::SetCharacterSlide() {
@@ -408,7 +396,6 @@ namespace game_framework {
 					if (i.first == 0) {
 						characterList[0]->isGettingDamage(i.second);
 						if (characterList[1]->CharacterID != 2 && i.second!=0) {
-							TRACE("Test \n");
 							characterList[0]->SetKnock(true, u->GetDir(), 1);
 						}
 						this->game->totalDamage[0] += i.second;
