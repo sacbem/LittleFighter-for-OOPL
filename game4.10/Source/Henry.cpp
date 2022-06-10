@@ -301,8 +301,6 @@ namespace game_framework {
 	}
 
 	void Henry::SetAttack(bool flag) {
-		TRACE("AttackState %d\n", AttackState);
-		TRACE("KnockState %d\n", KnockState);
 		if (specialState == -1 && KnockState==0) {
 			if (flag == true) {
 				UnMovable = true;

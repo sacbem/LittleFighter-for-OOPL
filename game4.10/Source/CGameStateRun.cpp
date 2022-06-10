@@ -32,6 +32,7 @@ namespace game_framework {
 
 		characterSlidePriority.push_back(-1);
 		characterSlidePriority.push_back(-1);
+		secrestSkillsTrigger = false;
 	}
 
 	void CGameStateRun::OnBeginState() {
@@ -292,9 +293,13 @@ namespace game_framework {
 		const char nextV = 0x56;
 		characterList[0]->InputKeyUp(nChar, 0);
 		//characterList[1]->InputKeyUp(nChar, 1);
-		if (nChar == nextV) {
-			cheat = true;
+		if (secrestSkillsTrigger ==false) {
+			secrestSkillsTrigger = true;
+			if (nChar == nextV) {
+				cheat = true;
+			}
 		}
+
 		if (mapNowID < 1) {
 			/*CAudio::Instance()->Stop(map[mapNowID]->GetMapID());
 			mapNowID++;*/

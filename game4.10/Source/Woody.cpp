@@ -1789,6 +1789,7 @@ namespace game_framework {
 
 	void Woody::CallTank() {
 		SetAttack(true);
+		TRACE("ypos %d\n",yPos);
 
 		if (SpCount == 0) {
 			InitialVelocity = 10;
