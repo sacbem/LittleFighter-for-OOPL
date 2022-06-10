@@ -6,7 +6,6 @@ namespace  game_framework {
         virtual void OnShow();
         void Load(int);
         void Initialize();
-      
         void SetSeclectedID(int id);
         ~SelectCharacterMenu();
     protected:

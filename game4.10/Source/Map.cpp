@@ -407,10 +407,4 @@ namespace game_framework {
 		vector<GameObject*>().swap(backgroundBackObjs);
 		vector<FieldObject*>().swap(drops);
 	}
-   
 }
-	/// <summary> friend int GetScenesPos(Map &map,const string type);
-	/// GameObject :   
-	/// </summary>
-	/// <param name="type"></param>
-

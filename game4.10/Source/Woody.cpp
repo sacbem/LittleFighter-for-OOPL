@@ -1943,39 +1943,89 @@ namespace game_framework {
 	}
 	
 	void Woody::EnemyAiMode(int anotherCharacterPosX, int anotherCharacterPosY, int createdTimes) {
+		int coin = createdTimes + 1 + rand() % (10 - 1 + 1);
 		int diffX = this->xPos - anotherCharacterPosX;
 		int diffY = this->yPos - anotherCharacterPosY;
+
 		if (diffX > 0) {
-			if (diffX > 10) {
+			if (diffX > 80) {
 				this->SetMovingRight(false);
 				this->SetMovingLeft(true);
 				SetRunning(true);
 			}
-			else {
-				SetRunning(false);
+			else if (diffX <= 80) {
+				this->isRunning = false;
 				this->SetMovingLeft(true);
+			}
+			else {
+				this->SetMovingRight(false);
+				this->SetMovingLeft(false);
+				this->isWalking = false;
+				this->isRunning = false;
 			}
 		}
 		else if (diffX < 0) {
-			if (diffX < -10) {
+			if (abs(diffX) > 80) {
 				this->SetMovingLeft(false);
 				this->SetMovingRight(true);
 				SetRunning(true);
 			}
-			else {
-				SetRunning(false);
+			else  if (abs(diffX) <= 80) {
+
+				this->isRunning = false;
 				this->SetMovingRight(true);
 			}
+			else {
+				this->SetMovingRight(false);
+				this->SetMovingLeft(false);
+				this->isWalking = false;
+				this->isRunning = false;
+			}
 		}
-		if (diffY > 0) {
-			SetRunning(false);
-			this->SetMovingDown(false);
-			this->SetMovingUp(true);
+		if (diffY != 0) {
+
+			this->SetMovingDown(diffY > 0 ? false : true);
+			this->SetMovingUp(diffY > 0 ? true : false);
 		}
 		else {
-			SetRunning(false);
 			this->SetMovingUp(false);
-			this->SetMovingDown(true);
+			this->SetMovingDown(false);
+		}
+
+		if (coin % 3 == 0 && coin % 7 == 0) {
+			if (diffY == 0 && Mana >= 600) {
+				skillSignal = 0;
+				this->SetSkill(createdTimes);
+			}
+			else if (abs(diffX) <= 360 && abs(diffY) < 40 && Mana >= 1000) {
+				skillSignal = 3;
+				this->SetSkill(createdTimes);
+			}
+			else  if (abs(diffX) <= 30 && abs(diffY) < 30) {
+				this->SetAttack(true);
+			}
+		}
+		else if (coin % 2 == 0 && coin % 5 == 0) {
+			if (abs(diffX) <= 140 && abs(diffY) < 20 && Mana >= 900) {
+				skillSignal = 1;
+				this->SetSkill(createdTimes);
+			}
+			else  if (abs(diffX) <= 30 && abs(diffY) < 30) {
+				this->SetAttack(true);
+			}
+			else if (abs(diffX) <= 360 && abs(diffY) < 30 && Mana >= 1000) {
+				skillSignal = 3;
+				this->SetSkill(createdTimes);
+			}
+		}
+		else {
+			if (abs(diffX) <= 30 && abs(diffY) < 30) {
+				this->SetAttack(true);
+			}
+			if (abs(diffX) <= 140 && abs(diffY) < 20 && Mana >= 900) {
+				skillSignal = 1;
+				this->SetSkill(createdTimes);
+			}
 		}
 	}
 }

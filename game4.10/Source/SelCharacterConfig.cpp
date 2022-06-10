@@ -136,6 +136,5 @@ namespace game_framework {
     PhotoSticker::~PhotoSticker() {
         TRACE("~PhotoSticker");
     }
-
 }
 
