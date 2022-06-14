@@ -187,7 +187,6 @@ namespace game_framework {
 						}
 						else {
 							LastAttackState = AttackState;
-							TRACE("LastAttackState %d\n", LastAttackState);
 							switch (LastAttackState)
 							{
 							case 1:

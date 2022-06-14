@@ -33,6 +33,7 @@ namespace game_framework {
 		characterSlidePriority.push_back(-1);
 		characterSlidePriority.push_back(-1);
 		secrestSkillsTrigger = false;
+		lastInput = 0x00;
 	}
 
 	void CGameStateRun::OnBeginState() {
@@ -240,6 +241,22 @@ namespace game_framework {
 			num++;
 		}
 		if (characterList[0]->GetHealth() == 0) {
+			/*
+			characterList[0]->HealthPoint = 1800;
+			characterList[0]->InnerHealPoint = 1800;
+			characterList[0]->Mana = 900;
+			characterList[0]->InnerMana = 1800;
+
+			characterList[1]->HealthPoint = 1800;
+			characterList[1]->InnerHealPoint = 1800;
+			characterList[1]->Mana = 900;
+			characterList[1]->InnerMana = 1800;
+
+			characterList[0]->SetXY(200, 400);
+			characterList[1]->SetXY(400, 401);
+			vector<Character*>().swap(characterList);
+			*/
+			this->game->isEnd = true;
 			GotoGameState(GAME_STATE_OVER);
 		}
 	}
@@ -275,6 +292,23 @@ namespace game_framework {
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
+		const char nextV = 0x56;
+		const char ctrl = 0x11;
+		if (lastInput == ctrl) {
+			TRACE("Ctrl\n");
+		}
+		if (lastInput == nextV) {
+			TRACE("V\n");
+		}
+		if (lastInput == ctrl && nChar == nextV) {
+			if (secrestSkillsTrigger ==false) {
+				secrestSkillsTrigger = true;
+				TRACE("Cheat\n");
+				cheat = true;
+			}
+		}
+		lastInput = nChar;
+
 		characterList[0]->InputKeyDown(nChar, CurrentTime, 0);
 		//characterList[1]->InputKeyDown(nChar, CurrentTime, 1);
 		frozenPunchList.insert(frozenPunchList.begin(), characterList[0]->frozenPunchs.begin(), characterList[0]->frozenPunchs.end());
@@ -289,18 +323,11 @@ namespace game_framework {
 				i->ResetItem();
 			}
 		}
+
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
-		const char nextV = 0x56;
 		characterList[0]->InputKeyUp(nChar, 0);
-		//characterList[1]->InputKeyUp(nChar, 1);
-		if (secrestSkillsTrigger ==false) {
-			secrestSkillsTrigger = true;
-			if (nChar == nextV) {
-				cheat = true;
-			}
-		}
 	}
 	
 	void CGameStateRun::SetStageTitle() {
@@ -571,8 +598,16 @@ namespace game_framework {
 
 	void CGameStateRun::OnShow() {
 		boolean showStatus;
+		if (this->game->isEndRun == true) {
+			this->game->isEndRun = false;
+			GetCharacter = false;
+		}
 		//get character
 		if (GetCharacter == false) {
+			vector<Character*>().swap(characterList);
+			delete HealthPlayer1, HealthPlayer2;
+			HealthPlayer1 = new HealthBar();
+			HealthPlayer2 = new HealthBar();
 			map[mapNowID]->drops.push_back(new FieldObject(1, map[mapNowID]->GetMapID()));
 			switch (this->game->selectCharacterID[0]) {
 			case 0:
@@ -590,8 +625,8 @@ namespace game_framework {
 				break;
 			}
 			characterList[0]->SetDir(0);
-			characterList[0]->SetXY(200, 400);
 			characterList[0]->SetCharacter();
+			characterList[0]->SetXY(200, 400);
 
 			switch (this->game->selectCharacterID[1]) {
 			case 0:
@@ -607,14 +642,32 @@ namespace game_framework {
 				characterList.push_back(new Freeze(1, map[mapNowID]->GetMapID()));
 				break;
 			}
-			characterList[1]->SetXY(400, 401);
+			TRACE("len %d\n", characterList.size());
 			characterList[1]->SetCharacter();
+			characterList[1]->SetXY(400, 401);
+
+			characterList[0]->HealthPoint = 1800;
+			characterList[0]->InnerHealPoint = 1800;
+			characterList[0]->Mana = 900;
+			characterList[0]->InnerMana = 1800;
+
+			characterList[1]->HealthPoint = 1800;
+			characterList[1]->InnerHealPoint = 1800;
+			characterList[1]->Mana = 900;
+			characterList[1]->InnerMana = 1800;
+
+			characterList[0]->SetXY(200, 400);
+			characterList[1]->SetXY(400, 401);
+
+			HealthPlayer1->loadSmallImg(this->game->selectCharacterID[0]);
+			HealthPlayer2->loadSmallImg(this->game->selectCharacterID[1]);
+			HealthPlayer1->OnLoad(0, 0);
+			HealthPlayer2->OnLoad(400, 0);
 
 			SetAllCharacterPosition();
 
+
 			GetCharacter = true;
-			HealthPlayer1->loadSmallImg(this->game->selectCharacterID[0]);
-			HealthPlayer2->loadSmallImg(this->game->selectCharacterID[1]);
 
 			GenerationTime = clock();
 		}

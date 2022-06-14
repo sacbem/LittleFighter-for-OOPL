@@ -24,6 +24,7 @@ namespace game_framework {
 		friend class Freeze;
 
 		int tables[2] = {-1, -1};
+		UINT lastInput;
 	protected:
 		void OnMove();									
 		void OnShow();		

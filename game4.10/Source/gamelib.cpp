@@ -498,6 +498,8 @@ void CGameState::OnCycle() // Template Method
 CGame CGame::instance;
 int CGame::selectCharacterID[] = {-1,-1};
 int CGame::totalDamage[] = { 0, 0 };
+bool CGame::isEnd = false;
+bool CGame::isEndRun = false;
 
 CGame::CGame()
 : NUM_GAME_STATES(3)

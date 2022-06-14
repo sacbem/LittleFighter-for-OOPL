@@ -234,7 +234,6 @@ namespace game_framework {
 	}
 
 	void Character::isGettingDamage(int Damage) {
-		TRACE("Damage %d\n", Damage);
 		HealthPoint -= Damage;
 		InnerHealPoint -= Damage / 2;
 		if (HealthPoint <= 0) {

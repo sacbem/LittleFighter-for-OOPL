@@ -54,11 +54,12 @@ namespace game_framework {
 
 	}
 	void CGameStateInit::OnBeginState(){
+		isAbout = isKey = false;
 		keyCount = cursorClickLift = 0;;     
 		loadedImg = characterIsSeclected = enterCounter = 0;
 		//countDown.SetDelayCount(50);
 		MOUSE_ENABLE = SELECT_ENTER = SELECTOR_ENABLE = false;
-		for (int i = 0; i < 3;i++) {
+		for (int i = 0; i < 2;i++) {
 			characterID[i] = 0;
 		}
 		
@@ -106,12 +107,24 @@ namespace game_framework {
 				  ++keyCount;
 				  break;
 			  case KEY_ENTER:
-				  if ((keyCount % 2) == 0) {
+				  if ((keyCount % 4) == 0) {
 					  SELECT_ENTER = true;
 					  SELECTOR_ENABLE = true;
+					  isAbout = false;
+					  isKey = false;
 				  }
-				  if ((keyCount % 2) == 1) {
+				  else if ((keyCount % 4) == 1) {
+					  isAbout = false;
+					  isKey = false;
 					  PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+				  }
+				  else if ((keyCount % 4) == 2) {
+					  isAbout = true;
+					  isKey = false;
+				  }
+				  else if ((keyCount % 4) == 3) {
+					  isAbout = false;
+					  isKey = true;
 				  }
 				  break;
 			  default:
@@ -119,7 +132,7 @@ namespace game_framework {
 			  }
 		  }
 		else {
-			if (SELECT_ENTER) { 
+			if (SELECT_ENTER) {
 				switch (nChar) {
 				    case KEY_W:
 						characterID[characterIsSeclected]++;
@@ -237,6 +250,27 @@ namespace game_framework {
 	}
   
 	void CGameStateInit::OnShow() {
+		if (this->game->isEnd == true) {
+			this->game->selectCharacterID[0] = -1;
+			this->game->selectCharacterID[1] = -1;
+			this->game->isEnd = false;
+			this->game->isEndRun = true;
+			delete photoSticker_1P, photoSticker_2P, photoSticker_seclecter;
+
+			photoSticker_1P = new PhotoSticker(0);
+			photoSticker_2P = new PhotoSticker(1);
+			photoSticker_seclecter = new Seclecter(0);
+			photoSticker_seclecter->Load(picStickers, picIDs, picNames);
+
+			isAbout = isKey = false;
+			keyCount = cursorClickLift = 0;;
+			loadedImg = characterIsSeclected = enterCounter = 0;
+			//countDown.SetDelayCount(50);
+			MOUSE_ENABLE = SELECT_ENTER = SELECTOR_ENABLE = false;
+			for (int i = 0; i < 2; i++) {
+				characterID[i] = 0;
+			}
+		}
 		logo.SetTopLeft(0, 0);
 		logo.ShowBitmap();
 
@@ -290,19 +324,19 @@ namespace game_framework {
 			}
 		}
 			else {
-				switch (keyCount % 2) {
+				switch (keyCount % 4) {
 				case 0:
 					startBtn->buttonTouch();
 					settingBtn->OnShow();
 					aboutBtn->OnShow();
 					keyBtn->OnShow();
-				break;
+					break;
 				case 1:
 					settingBtn->buttonTouch();
 					startBtn->OnShow();
 					aboutBtn->OnShow();
 					keyBtn->OnShow();
-				break;
+					break;
 				case 2:
 					settingBtn->OnShow();
 					startBtn->OnShow();
