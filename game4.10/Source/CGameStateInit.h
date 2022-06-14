@@ -19,9 +19,14 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap logo,black;	// csie的logo
+		CMovingBitmap AboutInfo,KeyInfo;
+		bool isAbout;
+		bool isKey;
 		CAnimation attackScreen,countDown; //需改名 還沒選角的動畫 
 		StartBtn * startBtn;
 		SettingBtn * settingBtn;
+		AboutBtn * aboutBtn;
+		KeyBtn * keyBtn;
 		SelectCharacterMenu* selectCharacterMenu;
 		PhotoSticker *photoSticker_1P, *photoSticker_2P;
 		Seclecter* photoSticker_seclecter;

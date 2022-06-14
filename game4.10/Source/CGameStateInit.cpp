@@ -15,17 +15,27 @@ namespace game_framework {
 	CGameStateInit::CGameStateInit(CGame* g): CGameState(g){
 		startBtn = new StartBtn();
 		settingBtn = new SettingBtn();
+		aboutBtn = new AboutBtn();
+		keyBtn = new KeyBtn();
 		selectCharacterMenu = new SelectCharacterMenu();
 		photoSticker_1P = new PhotoSticker(0);
 		photoSticker_2P = new PhotoSticker(1);
 		photoSticker_seclecter = new Seclecter(0);
+
+		isKey = false;
+		isAbout = false;
 	}
 
 	void CGameStateInit::OnInit(){
 		ShowInitProgress(0);
 
+		AboutInfo.LoadBitmapA(".\\res\\AboutPanel.bmp");
+		KeyInfo.LoadBitmapA(".\\res\\KeyPanel.bmp");
+
 		startBtn->Load();
 		settingBtn->Load();
+		aboutBtn->Load();
+		keyBtn->Load();
 		CAudio::Instance()->Load(0, "bgm\\main.wav");
 	
 		countDown.AddBitmap(BITMAP_COUNTDOWN_BACK, RGB(0, 0, 0));
@@ -81,6 +91,11 @@ namespace game_framework {
 		  const char KEY_A = 65;
 		  const char KEY_S = 83;
 		  const char KEY_D = 68;
+		  if (nChar == KEY_ESC) {
+			  isAbout = false;
+			  isKey = false;
+		  }
+
 		  MOUSE_ENABLE = false;
 		  if (!SELECT_ENTER) {
 			  switch (nChar) {
@@ -142,14 +157,33 @@ namespace game_framework {
 					if (nFlags == 1) {
 						SELECT_ENTER = true;
 						SELECTOR_ENABLE = true;
+						isAbout = false;
+						isKey = false;
 					}
 				}
 			}
 			if (point.x >= 525 * (0.81) + 20 && point.x <= 765 * (0.81) + 20) {
 				if (point.y >= 300 * (0.94) && point.y <= 320 * (0.94)) {
 					if (nFlags == 1) {
-
+						isAbout = false;
+						isKey = false;
 						PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+					}
+				}
+			}
+			if (point.x >= 545 * (0.81) + 20 && point.x <= 745 * (0.81) + 20) {
+				if (point.y >= 340 * (0.94) && point.y <= 360 * (0.94)) {
+					if (nFlags == 1) {
+						isAbout = true;
+						isKey = false;
+					}
+				}
+			}
+			if (point.x >= 525 * (0.81) + 20 && point.x <= 765 * (0.81) + 20) {
+				if (point.y >= 385 * (0.94) && point.y <= 405 * (0.94)) {
+					if (nFlags == 1) {
+						isAbout = false;
+						isKey = true;
 					}
 				}
 			}
@@ -209,17 +243,49 @@ namespace game_framework {
 		if (!SELECT_ENTER) {
 		startBtn->OnShow();
 		settingBtn->OnShow();
+		aboutBtn->OnShow();
+		keyBtn->OnShow();
+
+		if (isAbout) {
+			AboutInfo.SetTopLeft(0, 0);
+			AboutInfo.ShowBitmap();
+		}
+		if (isKey) {
+			KeyInfo.SetTopLeft(0,0);
+			KeyInfo.ShowBitmap();
+		}
+
 		if (MOUSE_ENABLE) {
 			if (cursorXY[0] >= 545*(0.81) + 20 && cursorXY[0] <= 745 * (0.81) + 20) {
 				if (cursorXY[1] >= 260 * (0.94) && cursorXY[1] <= 280 * (0.94)) {
 					startBtn->buttonTouch();
 					settingBtn->OnShow();
+					aboutBtn->OnShow();
+					keyBtn->OnShow();
 				}
 			}
 			if (cursorXY[0] >= 525 * (0.81) + 20 && cursorXY[0] <= 765 * (0.81) + 20) {
 				if (cursorXY[1] >= 300 * (0.94) && cursorXY[1] <= 320 * (0.94)) {
 					settingBtn->buttonTouch();
 					startBtn->OnShow();
+					aboutBtn->OnShow();
+					keyBtn->OnShow();
+				}
+			}
+			if (cursorXY[0] >= 525 * (0.81) + 20 && cursorXY[0] <= 765 * (0.81) + 20) {
+				if (cursorXY[1] >= 340 * (0.94) && cursorXY[1] <= 360 * (0.94)) {
+					settingBtn->OnShow();
+					startBtn->OnShow();
+					aboutBtn->buttonTouch();
+					keyBtn->OnShow();
+				}
+			}
+			if (cursorXY[0] >= 525 * (0.81) + 20 && cursorXY[0] <= 765 * (0.81) + 20) {
+				if (cursorXY[1] >= 385 * (0.94) && cursorXY[1] <= 405 * (0.94)) {
+					settingBtn->OnShow();
+					startBtn->OnShow();
+					aboutBtn->OnShow();
+					keyBtn->buttonTouch();
 				}
 			}
 		}
@@ -228,11 +294,27 @@ namespace game_framework {
 				case 0:
 					startBtn->buttonTouch();
 					settingBtn->OnShow();
+					aboutBtn->OnShow();
+					keyBtn->OnShow();
 				break;
 				case 1:
 					settingBtn->buttonTouch();
 					startBtn->OnShow();
+					aboutBtn->OnShow();
+					keyBtn->OnShow();
 				break;
+				case 2:
+					settingBtn->OnShow();
+					startBtn->OnShow();
+					aboutBtn->buttonTouch();
+					keyBtn->OnShow();
+					break;
+				case 3:
+					settingBtn->OnShow();
+					startBtn->OnShow();
+					aboutBtn->OnShow();
+					keyBtn->buttonTouch();
+					break;
 				}
 			}
 		}
@@ -268,6 +350,8 @@ namespace game_framework {
 	CGameStateInit::~CGameStateInit(){
 		delete startBtn;
 		delete settingBtn;
+		delete aboutBtn;
+		delete keyBtn;
 		delete selectCharacterMenu ;
 		delete photoSticker_1P ;
 		delete photoSticker_2P ;

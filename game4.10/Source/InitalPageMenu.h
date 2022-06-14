@@ -34,4 +34,22 @@ namespace game_framework {
 		virtual void OnShow() override;
 		~SettingBtn();
 	};
+	/////////////////////////////////////// AboutBtn(Derived) ///////////////////////////////////////
+	class AboutBtn :public MenuBtn {
+	public:
+		AboutBtn();
+		virtual void buttonTouch() override;
+		virtual void Load() override;
+		virtual void OnShow() override;
+		~AboutBtn();
+	};
+	/////////////////////////////////////// KeyBtn(Derived) ///////////////////////////////////////
+	class KeyBtn :public MenuBtn {
+	public:
+		KeyBtn();
+		virtual void buttonTouch() override;
+		virtual void Load() override;
+		virtual void OnShow() override;
+		~KeyBtn();
+	};
 }
