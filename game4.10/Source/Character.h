@@ -11,6 +11,7 @@ namespace game_framework {
 		~Character();
 		int serialNumber;
 		int CharacterID;
+		bool isAi;
 
 		bool GetAlive();
 		int  GetX1();					// Chracter
@@ -115,7 +116,7 @@ namespace game_framework {
 
 		int leftTime = 0;
 		int rightTime = 0;
-		vector<int>skillsEffect_InFieldNumber; // 統計各技能物件存活數量 index 對應 skill ID
+		vector<int>skillsEffect_InFieldNumber;
 		vector<pair<int, int>> hittedTable;
 		vector<pair<int,boolean>> statusTable;
 		vector<vector<int>> hittedLog;
@@ -206,7 +207,7 @@ namespace game_framework {
 		//keyInput
 		int LastInputTime;
 		int Diff;
-		UINT LastInput;									//�W�@�ӿ�J
+		UINT LastInput;
 	};
 	
 	class Freeze:public Character {

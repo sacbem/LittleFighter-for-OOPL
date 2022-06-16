@@ -65,7 +65,7 @@ namespace game_framework {
 		
 	}
 	void CGameStateInit::ScreenClear() {
-		black.SetTopLeft(0, 0);   //清除畫面用
+		black.SetTopLeft(0, 0);   //
 		black.ShowBitmap();       //
 	}
 	void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point) {
@@ -76,12 +76,12 @@ namespace game_framework {
 	   
 		if (cursorXY[0] >= 545 * (0.81) + 20 && cursorXY[0] <= 745 * (0.81) + 20) {
 			if (cursorXY[1] >= 260 * (0.94) && cursorXY[1] <= 280 * (0.94)) {
-			keyCount = 0;                   //回歸正常計數
+			keyCount = 0;                  
 			}
 		}
 		if (cursorXY[0] >= 525 * (0.81) + 20 && cursorXY[0] <= 765 * (0.81) + 20) {
 			if (cursorXY[1] >= 300 * (0.94) && cursorXY[1] <= 320 * (0.94)) {
-			keyCount = 1;                   //回歸正常計數
+			keyCount = 1;                  
 			}
 		}
 		}
@@ -116,7 +116,7 @@ namespace game_framework {
 				  else if ((keyCount % 4) == 1) {
 					  isAbout = false;
 					  isKey = false;
-					  PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+					  PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);
 				  }
 				  else if ((keyCount % 4) == 2) {
 					  isAbout = true;
@@ -180,7 +180,7 @@ namespace game_framework {
 					if (nFlags == 1) {
 						isAbout = false;
 						isKey = false;
-						PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+						PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);
 					}
 				}
 			}
@@ -355,11 +355,12 @@ namespace game_framework {
 		else {
 			ScreenClear();
 			selectCharacterMenu->OnShow();
-			if (!SELECTOR_ENABLE) {  //結束選角
+			if (!SELECTOR_ENABLE) {  
 				SetCountdownAni();
 				if (countDown.IsFinalBitmap()){
 					this->game->selectCharacterID[0] = characterID[0];
 					this->game->selectCharacterID[1] = characterID[1];
+					this->game->isWin = false;
 					CAudio::Instance()->Stop(0);
 					GotoGameState(GAME_STATE_RUN);
 				}
@@ -370,15 +371,15 @@ namespace game_framework {
 			  SetPhotoStickers();
 		  }         
 	
-		 CDC* pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+		 CDC* pDC = CDDraw::GetBackCDC();			
 		 CFont f, * fp;
-		 f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-		 fp = pDC->SelectObject(&f);					// 選用 font f
+		 f.CreatePointFont(160, "Times New Roman");	
+		 fp = pDC->SelectObject(&f);					
 		 pDC->SetBkColor(RGB(0, 0, 0));
 		 pDC->SetTextColor(RGB(255, 255, 0));
 
-		 pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		 CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		 pDC->SelectObject(fp);						
+		 CDDraw::ReleaseBackCDC();					
 	}
 
 	CGameStateInit::~CGameStateInit(){

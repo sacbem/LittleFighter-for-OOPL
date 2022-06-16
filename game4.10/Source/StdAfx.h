@@ -1,15 +1,3 @@
-// stdafx.h : include file for standard system include files,
-//  or project specific include files that are used frequently, but
-//      are changed infrequently
-//
-/*
- *   2010-02-23 V4.5
- *      1. Add #define _WIN32_WINNT 0x0500 to work with VS2008
- *   2016-02-26 V4.9
- *      1. Remove #define _WIN32_WINNT and Preprocessor Definitions (WINVER=0x500)
- *      2. Include SDKDDKVER.h, the file automatic setting WINVER and _WIN32_WINNT in latest version
-*/
-
 #include <sdkddkver.h>
 
 #if !defined(AFX_STDAFX_H__243A7A47_6962_11D3_9B4D_BAD1A91E5344__INCLUDED_)

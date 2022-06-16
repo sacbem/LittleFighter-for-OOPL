@@ -29,10 +29,17 @@ namespace game_framework {
 		ShowInitProgress(100);
 		EndGame.LoadBitmapA(".\\res\\GameOver.bmp");
 		EndGame.SetTopLeft(0,0);
+		EndGame2.LoadBitmapA(".\\res\\win.bmp");
+		EndGame2.SetTopLeft(0, 0);
 	}
 
 	void CGameStateOver::OnShow()
 	{
-		EndGame.ShowBitmap();
+		if (this->game->isWin == true) {
+			EndGame2.ShowBitmap();
+		}
+		else {
+			EndGame.ShowBitmap();
+		}
 	}
 }

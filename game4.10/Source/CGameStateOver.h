@@ -10,5 +10,6 @@ namespace game_framework {
 	private:
 		int counter;	// 倒數之計數器
 		CMovingBitmap EndGame;
+		CMovingBitmap EndGame2;
 	};
 }

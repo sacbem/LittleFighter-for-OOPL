@@ -57,7 +57,7 @@ namespace game_framework {
 		}
 	}
 
-	void CGameStateRun::OnMove() {					// 移動遊戲元素
+	void CGameStateRun::OnMove() {					//
 		if (!map[mapNowID]->drops.empty()) {
 			for (auto i : map[mapNowID]->drops) {
 				i->OnMove();
@@ -77,6 +77,10 @@ namespace game_framework {
 
 		int count = 0;
 		for (auto i : characterList) {
+			if (i->GetHealth() <= 0) {
+				TRACE("%d KILL\n",count);
+				i->SetAlive(false);
+			}
 			//check frozenSword spawn
 			if (i->CharacterID == 2 && i->signalSpawnSword==true) {
 				if (i->FrozenSwordMode == false) {
@@ -91,9 +95,6 @@ namespace game_framework {
 				i->signalSpawnSword = false;
 			}
 
-			if (i->GetHealth() <= 0) {
-				i->SetAlive(false);
-			}
 			count++;
 		}
 
@@ -127,7 +128,6 @@ namespace game_framework {
 			num0++;
 		}
 
-		// 動態地圖相關
 		map[mapNowID]->ResetCharactAccumulator(characterList[0]->GetDistance(), characterList[1]->GetDistance());
 		characterList[0]->DistanceAccumulatorReset();
 		characterList[1]->DistanceAccumulatorReset();
@@ -241,35 +241,20 @@ namespace game_framework {
 			num++;
 		}
 		if (characterList[0]->GetHealth() == 0) {
-			/*
-			characterList[0]->HealthPoint = 1800;
-			characterList[0]->InnerHealPoint = 1800;
-			characterList[0]->Mana = 900;
-			characterList[0]->InnerMana = 1800;
-
-			characterList[1]->HealthPoint = 1800;
-			characterList[1]->InnerHealPoint = 1800;
-			characterList[1]->Mana = 900;
-			characterList[1]->InnerMana = 1800;
-
-			characterList[0]->SetXY(200, 400);
-			characterList[1]->SetXY(400, 401);
-			vector<Character*>().swap(characterList);
-			*/
 			this->game->isEnd = true;
 			GotoGameState(GAME_STATE_OVER);
 		}
 	}
 
-	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
+	void CGameStateRun::OnInit()
 	{
-		ShowInitProgress(33);	// 接個前一個狀態的進度，此處進度視為33%
+		ShowInitProgress(33);
 		ShowInitProgress(50);
 		Sleep(300);
 		for (auto& i : map) {
 			i->Load();
 		}
-		black.LoadBitmap(BITMAP_BLACKSCREEN); // 刷新畫面用
+		black.LoadBitmap(BITMAP_BLACKSCREEN);
 		black.SetTopLeft(0, 0);
 		stageTitles[0]->LoadBitmapA(".\\res\\sys\\stage.bmp");
 		stageTitles[0]->SetTopLeft(266, 280);
@@ -277,9 +262,9 @@ namespace game_framework {
 		HealthPlayer2->OnLoad(400, 0);
 		go.LoadBitmapA(".\\res\\sys\\go.bmp", RGB(0, 0, 0));
 		go.SetTopLeft(0, 200);
-		CAudio::Instance()->Load(Forest + 3, "bgm\\stage1.wav");	// 載入編號0的聲音ding.wav
-		CAudio::Instance()->Load(HKC + 3, "bgm\\stage3.wav");	// 載入編號0的聲音ding.wav
-		CAudio::Instance()->Load(BC + 3, "bgm\\stage2.wav");	// 載入編號0的聲音ding.wav
+		CAudio::Instance()->Load(Forest + 3, "bgm\\stage1.wav");
+		CAudio::Instance()->Load(HKC + 3, "bgm\\stage3.wav");
+		CAudio::Instance()->Load(BC + 3, "bgm\\stage2.wav");
 
 
 	}
@@ -424,7 +409,7 @@ namespace game_framework {
 
 		if (characterList[0]->GetCalculateDamageRequest() || characterList[1]->GetCalculateDamageRequest()) {
 			for (auto& u : characterList) {
-				for (auto& i : u->hittedTable) { /// issue :可能不會改 !!!
+				for (auto& i : u->hittedTable) {
 					if (i.first == 0) {
 						characterList[0]->isGettingDamage(i.second);
 						if (characterList[1]->CharacterID != 2 && i.second!=0) {
@@ -548,8 +533,14 @@ namespace game_framework {
 			clearedTime = TimePassed / 1000;
 		}
 
-		if (((!characterList[0]->GetAlive() || !characterList[1]->GetAlive()) && !flaG) || cheat) {
-
+		if (((!characterList[1]->GetAlive()) && !flaG) || cheat) {
+			if (mapNowID == 2) {
+				this->game->isWin = true;
+				this->game->isEnd = true;
+				mapNowID = 0;
+				GotoGameState(GAME_STATE_OVER);
+				return;
+			}
 			clearFlag = true;
 			black.ShowBitmap();
 			if (stageTitles.size() == 1) {
@@ -588,7 +579,7 @@ namespace game_framework {
 					cnt++;
 				}
 				clearedTime = 0;
-				flaG = true;
+				flaG = false;
 				cheat = false;
 				ClearStageTitle();
 			}
@@ -695,6 +686,9 @@ namespace game_framework {
 		HealthPlayer1->OnShow(characterList[0]->HealthPoint, characterList[0]->InnerHealPoint, characterList[0]->Mana, characterList[0]->InnerMana);
 		HealthPlayer2->OnShow(characterList[1]->HealthPoint, characterList[1]->InnerHealPoint, characterList[1]->Mana, characterList[1]->InnerMana);
 
+		TRACE("1 %d %d\n", characterList[0]->HealthPoint, characterList[0]->GetAlive());
+		TRACE("2 %d %d\n", characterList[1]->HealthPoint, characterList[1]->GetAlive());
+		TRACE("Len %d\n", characterList.size());
 		ResetGame();
 	}
 

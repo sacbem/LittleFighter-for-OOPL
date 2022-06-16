@@ -12,7 +12,9 @@
 #include <time.h>
 namespace game_framework {
 	Character::Character() {
+		isAi = true;
 		Initialize();
+		isAlive = true;
 	}
 	void Character::Initialize() {
 		DelayCounter = 50;
@@ -49,7 +51,13 @@ namespace game_framework {
 		Mana = 900;
 		InnerMana = 1800;
 
-		AttackPoint = 10;
+		if (isAi == false) {
+			AttackPoint = 10;
+		}
+		else if(isAi==true) {
+			AttackPoint = 1;
+		}
+
 		DefencePoint = 5;
 		walkedDistance = 0;
 
@@ -246,6 +254,7 @@ namespace game_framework {
 	}
 
 	void Character::InputKeyDown(UINT nChar, int createdTime, int playerID) {
+		isAi = false;
 		const char KEY_LEFT = playerID ? 0x25 : 0x41;
 		const char KEY_UP = playerID ? 0x26 : 0x57;
 		const char KEY_RIGHT = playerID ? 0x27 : 0x44;
@@ -265,6 +274,12 @@ namespace game_framework {
 		const char KEY_C = 0x43;
 		const char KEY_V = 0x56;
 		const char KEY_B = 0x42;
+		if (isAi == false) {
+			AttackPoint = 10;
+		}
+		else if (isAi == true) {
+			AttackPoint = 1;
+		}
 
 		Diff = KeyBoardInputTime - LastInputTime;
 		LastInputTime = KeyBoardInputTime;
