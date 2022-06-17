@@ -1,6 +1,6 @@
 #define SIZE_X				 800//990		
 #define SIZE_Y				 600//640		
-#define OPEN_AS_FULLSCREEN	 false		
+#define OPEN_AS_FULLSCREEN	 true		
 #define SHOW_LOAD_PROGRESS   true		
 #define DEFAULT_BG_COLOR	 RGB(0,0,0)	
 #define GAME_CYCLE_TIME		 10		    
